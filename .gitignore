@@ -367,3 +367,4 @@ midres.vcxproj.filters
 
 *.lbl
 *.txt
+exe/
