@@ -22,7 +22,7 @@ PROGRAMNAME := midres
 #  - c64ovl: overlayed executable for Commodore 64 (named on disk: "midres")
 #  - vic20: single executable for 24K VIC 20 (named on disk: "midres-single")
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
-TARGETS := c64 c16
+TARGETS := c64 vic20 c16
 
 ###############################################################################
 ###############################################################################
