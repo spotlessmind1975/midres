@@ -364,3 +364,6 @@ FodyWeavers.xsd
 midres.sln
 midres.vcxproj
 midres.vcxproj.filters
+
+*.lbl
+*.txt
