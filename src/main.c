@@ -43,6 +43,8 @@ unsigned char filename[16] = { 0 };
 
 void main(void) {
 
+#ifdef __DEMO_SLIDESHOW__
+
     FILE* slideshow = fopen("slideshow", "rb");
 
     if (slideshow == NULL) {
@@ -82,5 +84,13 @@ void main(void) {
     getchar();
 
     mr_cleanup();
+
+#endif
+
+#ifdef __DEMO_DRAWING__
+
+    demo_drawing();
+
+#endif
 
 }

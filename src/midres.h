@@ -49,6 +49,10 @@
 	#define mr_pixel_on			0x01
 	#define mr_pixel_invert		0x02
 
+	// Define the bitmask for the given pixel position
+
+	#define mr_mixel_bits(_x,_y) RENDERED_MIXEL_BITS[((_x&1)<<1)|(_y&1)]
+
 	typedef unsigned char mr_pop;
 
 	// The position of the pixel on the screen is represented by a specific 
@@ -93,6 +97,9 @@
 	// to give the screen as parameter).
 	extern mr_screen ENABLED_SCREEN;
 
+	// Precalculated values for positions.
+	extern unsigned char RENDERED_MIXEL_BITS[4];
+
 	// Precalculated values for mixels.
 	extern unsigned char RENDERED_MIXELS[16];
 
@@ -129,9 +136,16 @@
 	
 	// To be called before using screen save/compress/pack functions.
 	#ifdef __OVERLAY__MIDRES__
-		#define mr_use_screen2() load_overlay("mr3", _OVERLAY1_LOAD__, _OVERLAY1_SIZE__)
+		#define mr_use_screen2() load_overlay("mr3", _OVERLAY3_LOAD__, _OVERLAY3_SIZE__)
 	#else
 		#define mr_use_screen2() 
+	#endif
+
+	// To be called before using drawing functions.
+	#ifdef __OVERLAY__MIDRES__
+		#define mr_use_drawing2() load_overlay("mr4", _OVERLAY4_LOAD__, _OVERLAY4_SIZE__)
+	#else
+		#define mr_use_drawing2() 
 	#endif
 
 /*-----------------------------------------------------------------------
@@ -182,7 +196,7 @@
 	void mr_unpack(mr_screen _source, mr_screen _destination, mr_half_screen _half_screen);
 
 	/*-----------------------------------------------------------------------
-	 --- DRAWING PRIMITIVES
+	 --- DRAWING PRIMITIVES [v1.0]
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the given screen, with the given logical operation.
@@ -195,7 +209,7 @@
 	void mr_ink(mr_screen _screen, mr_color _color);
 
 	/*-----------------------------------------------------------------------
-	 --- DRAWING DERIVATED (EXPLICIT SCREEN)
+	 --- DRAWING DERIVATED (EXPLICIT SCREEN) [v1.0]
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the given screen
@@ -214,7 +228,7 @@
 	#define mr_psetc(_screen, _x, _y) mr_pcolorop((mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, SCREEN_INK[_screen]); mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), _x, _y, mr_pixel_on);
 
 	/*-----------------------------------------------------------------------
-	 --- DRAWING DERIVATED (IMPLICIT SCREEN [VISIBLE])
+	 --- DRAWING DERIVATED (IMPLICIT SCREEN [VISIBLE]) [v1.0]
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the visible screen
@@ -233,7 +247,7 @@
 	#define mr_psetcv(_x, _y) mr_pcolorop((mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, SCREEN_INK[VISIBLE_SCREEN]); mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), _x, _y, mr_pixel_on);
 
 	/*-----------------------------------------------------------------------
-	 --- DRAWING DERIVATED (IMPLICIT SCREEN [ENABLED])
+	 --- DRAWING DERIVATED (IMPLICIT SCREEN [ENABLED]) [v1.0]
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the enabled screen
@@ -253,6 +267,154 @@
 
 	// Draw a box on the enabled screen, with the given logical operation.
 	#define mr_boxe(_screen, _x0, _y0, _x1, _y1) mr_boxop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), _x0, _y0, _x1, _y1);
+
+	/*-----------------------------------------------------------------------
+	 --- DRAWING PRIMITIVES [v1.1]
+	 -----------------------------------------------------------------------*/
+
+	// Clears the bitmap to color BLACK.
+	void _mr_clear_bitmap(mr_mixel * _screen, mr_color * _colormap);
+
+	// Clears the bitmap to the specified color.
+	void _mr_clear_to_color(mr_mixel* _screen, mr_color *_colormap, mr_color _color);
+
+	// Writes a pixel into a bitmap.
+	void _mr_putpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_color _color);
+
+	// Reads a pixel from a bitmap.
+	mr_color _mr_getpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y);
+
+	// Draws a vertical line onto the bitmap.
+	void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_color _color );
+
+	// Draws a horizontal line onto the bitmap.
+	void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _x2, mr_position _y, mr_color _color);
+
+	// Draws a line onto the bitmap.
+	void _mr_line(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color);
+
+	// Draws a triangle.
+	void _mr_triangle(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_position _x3, mr_position _y3, mr_color _color);
+
+	// Draws a polygon.
+	void _mr_polygon(mr_mixel* _screen, mr_color* _colormap, mr_position _vertices, mr_position _points[], mr_color _color);
+
+	// Draws an outline rectangle.
+	void _mr_rect(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color);
+
+	// Draws a circle.
+	void _mr_circle(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_position _radius, mr_color _color);
+
+	/*-----------------------------------------------------------------------
+	 --- DRAWING PRIMITIVES (explicit screen) [v1.1]
+	 -----------------------------------------------------------------------*/
+
+	// Clears the bitmap to color BLACK.
+	#define mr_clear_bitmap(_screen) _mr_clear_bitmap((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS );
+
+	// Clears the bitmap to the specified color.
+	#define mr_clear_to_color(_screen, _color) _mr_clear_to_color((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _color);
+
+	// Writes a pixel into a bitmap.
+	#define mr_putpixel(_screen, _x, _y, _color) _mr_putpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color );
+
+	// Reads a pixel from a bitmap.
+	#define mr_getpixel(_screen, _x, _y) _mr_getpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y) ;
+
+	// Draws a vertical line onto the bitmap.
+	#define mr_vline(_screen, _x, _y1, _y2, _color) _mr_vline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y1, _y2, _color);
+
+	// Draws a horizontal line onto the bitmap.
+	#define mr_hline(_screen, _x1, _x2, _y, _color) _mr_hline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _x2, _y, _color);
+
+	// Draws a line onto the bitmap.
+	#define mr_line(_screen, _x1, _y1, _x2, _y2, _color) _mr_line((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+
+	// Draws a triangle.
+	#define mr_triangle(_screen, _x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _x3, _y3, _color);
+
+	// Draws a polygon.
+	#define mr_polygon(_screen, _vertices, _points, _color) _mr_polygon((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _vertices, _points, _color);
+
+	// Draws an outline rectangle.
+	#define mr_rect(_screen, _x1, _y1, _x2, _y2, _color) _mr_rect((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+
+	// Draws a circle.
+	#define mr_circle(_screen, _x, _y, _radius, _color) _mr_circle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _radius, _color);
+
+	/*-----------------------------------------------------------------------
+	 --- DRAWING PRIMITIVES (implicit screen [visible]) [v1.1]
+	 -----------------------------------------------------------------------*/
+
+	 // Clears the bitmap to color BLACK.
+	#define mr_clear_bitmapv() _mr_clear_bitmap((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS );
+
+	// Clears the bitmap to the specified color.
+	#define mr_clear_to_colorv(_color) _mr_clear_to_color((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _color);
+
+	// Writes a pixel into a bitmap.
+	#define mr_putpixelv(_x, _y, _color) _mr_putpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color );
+
+	// Reads a pixel from a bitmap.
+	#define mr_getpixelv(_x, _y) _mr_getpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y) ;
+
+	// Draws a vertical line onto the bitmap.
+	#define mr_vlinev(_x, _y1, _y2, _color) _mr_vline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y1, _y2, _color);
+
+	// Draws a horizontal line onto the bitmap.
+	#define mr_hlinev(_x1, _x2, _y, _color) _mr_hline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _x2, _y, _color);
+
+	// Draws a line onto the bitmap.
+	#define mr_linev(_x1, _y1, _x2, _y2, _color) _mr_line((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+
+	// Draws a triangle.
+	#define mr_trianglev(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _x3, _y3, _color);
+
+	// Draws a polygon.
+	#define mr_polygonv(_vertices, _points, _color) _mr_polygon((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _vertices, _points, _color);
+
+	// Draws an outline rectangle.
+	#define mr_rectv(_x1, _y1, _x2, _y2, _color) _mr_rect((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+
+	// Draws a circle.
+	#define mr_circlev(_screen, _x, _y, _radius, _color) _mr_circle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _radius, _color);
+
+	/*-----------------------------------------------------------------------
+	 --- DRAWING PRIMITIVES (implicit screen [enabled]) [v1.1]
+	 -----------------------------------------------------------------------*/
+
+	 // Clears the bitmap to color BLACK.
+	#define mr_clear_bitmape() _mr_clear_bitmap((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS );
+
+	// Clears the bitmap to the specified color.
+	#define mr_clear_to_colore(_color) _mr_clear_to_color((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _color);
+
+	// Writes a pixel into a bitmap.
+	#define mr_putpixele(_x, _y, _color) _mr_putpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color );
+
+	// Reads a pixel from a bitmap.
+	#define mr_getpixele(_x, _y) _mr_getpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y) ;
+
+	// Draws a vertical line onto the bitmap.
+	#define mr_vlinee(_x, _y1, _y2, _color) _mr_vline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y1, _y2, _color);
+
+	// Draws a horizontal line onto the bitmap.
+	#define mr_hlinee(_x1, _x2, _y, _color) _mr_hline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _x2, _y, _color);
+
+	// Draws a line onto the bitmap.
+	#define mr_linee(_x1, _y1, _x2, _y2, _color) _mr_line((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+
+	// Draws a triangle.
+	#define mr_trianglee(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _x3, _y3, _color);
+
+	// Draws a polygon.
+	#define mr_polygone(_vertices, _points, _color) _mr_polygon((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _vertices, _points, _color);
+
+	// Draws an outline rectangle.
+	#define mr_recte(_x1, _y1, _x2, _y2, _color) _mr_rect((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+
+	// Draws a circle.
+	#define mr_circlee(_screen, _x, _y, _radius, _color) _mr_circle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _radius, _color);
 
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"

@@ -38,34 +38,6 @@
  // module has been loaded into memory. On the other hand, they can call any 
  // function declared at the resident module level.
 
-mr_mixel calculate_mixel(mr_mixel _current, mr_mixelbits _abcd, mr_pop _pop) {
-
-    mr_mixelbits currentMixelbits = MIXEL_THRESHOLD;
-    int i = 0;
-
-    currentMixelbits = get_mixel_bits(_current);
-
-    if (currentMixelbits != MIXEL_THRESHOLD) {
-        switch (_pop) {
-        case mr_pixel_on:
-            currentMixelbits = currentMixelbits | (1 << _abcd);
-            break;
-        case mr_pixel_off:
-            currentMixelbits = currentMixelbits & ~(1 << _abcd);
-            break;
-        case mr_pixel_invert:
-            currentMixelbits = currentMixelbits ^ (1 << _abcd);
-            break;
-        }
-        return RENDERED_MIXELS[currentMixelbits];
-    }
-    else {
-        return _current;
-    }
-
-
-}
-
 void mr_psetop(mr_mixel* _screen, mr_position _x, mr_position _y, mr_pop _pop) {
 
     mr_position mx, my;

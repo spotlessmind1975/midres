@@ -34,5 +34,6 @@
      ************************************************************************/
 
     mr_mixel get_mixel_bits(mr_mixel _current);
+    mr_mixel calculate_mixel(mr_mixel _current, mr_mixelbits _abcd, mr_pop _pop);
 
 #endif

@@ -26,12 +26,12 @@
 #endif
 
 // RESIDENT FUNCTIONS
+void demo_drawing();
 
 // OVERLAYED FUNCTIONS (MODULE 1)
 #include "midres.h"
 
 // OVERLAYED FUNCTIONS (MODULE 2)
-void animation();
 
 // OVERLAYED FUNCTIONS (MODULE 3)
 
