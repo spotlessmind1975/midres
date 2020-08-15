@@ -38,52 +38,11 @@
 // functions present in the modules, taking care to load the relevant 
 // code / data into memory(in the "overlay" area).
 
-unsigned char mode = 0xff;
-unsigned char filename[16] = { 0 };
-
 void main(void) {
 
 #ifdef __DEMO_SLIDESHOW__
 
-    FILE* slideshow = fopen("slideshow", "rb");
-
-    if (slideshow == NULL) {
-        return;
-    }
-
-    mr_init();
-
-    mr_use_screen();
-
-    mr_show(DEFAULT_SCREEN);
-
-    while (mode) {
-        // In this way, we are reading directly into mode and filename.
-        // This save space in MAIN segment!
-        mode = 0;
-        fread(&mode, 1, 1, slideshow);
-        fread(filename, 16, 1, slideshow);
-        switch (mode) {
-            case 1:
-                mr_load(filename, DEFAULT_SCREEN);
-                break;
-            case 2:
-                mr_load_color(filename, DEFAULT_SCREEN);
-                break;
-            case 3:
-                mr_load(filename, 5);
-                mr_uncompress(5, DEFAULT_SCREEN);
-                break;
-            default:
-                break;
-        }
-    }
-
-    fclose(slideshow);
-
-    getchar();
-
-    mr_cleanup();
+    do_slideshow();
 
 #endif
 
