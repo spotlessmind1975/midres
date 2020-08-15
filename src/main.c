@@ -71,8 +71,8 @@ void main(void) {
                 mr_load_color(filename, DEFAULT_SCREEN);
                 break;
             case 3:
-                mr_load(filename, 11);
-                mr_uncompress(11, DEFAULT_SCREEN);
+                mr_load(filename, 5);
+                mr_uncompress(5, DEFAULT_SCREEN);
                 break;
             default:
                 break;
