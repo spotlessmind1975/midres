@@ -197,7 +197,6 @@ void _mr_line(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_positi
     int dx = iabs(x2 - x1), sx = _x1 < _x2 ? 1 : -1;
     int dy = -iabs(y2 - y1), sy = _y1 < _y2 ? 1 : -1;
     int err = dx + dy, e2; /* error value e_xy */
-    getchar();
     for (;;) {  /* loop */
         _mr_putpixel(_screen, _colormap, (mr_position)x1, (mr_position)y1, _color);
         if (x1 == _x2 && y1 == _y2) break;
