@@ -17,12 +17,19 @@
 PROGRAMNAME := midres
 
 # Allowed targets:
-# (currently "vic20" target cannot be selected due to memory limits)
 #  - c64: single executable for Commodore 64 (named on disk: "midres-single")
 #  - c64ovl: overlayed executable for Commodore 64 (named on disk: "midres")
-#  - vic20: single executable for 24K VIC 20 (named on disk: "midres-single")
+#  - vic20: single executable for unexpanded VIC 20 (named on disk: "midres-single")
+#  - vic2024: single executable for 24K VIC 20 (named on disk: "midres-single")
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
-TARGETS := c64 vic20 c16
+#  - plus4: single executable for Plus 4 (named on disk: "midres-single")
+TARGETS := c16
+
+# Given demonstrations:
+#  - SLIDESHOW - a slideshow with some images converted using img2midres
+#  - DRAWING - an animation using drawing primitives (v1.1)
+#  - BITBLIT - an animation using bit blits primivites (v1.2)
+DEMO := SLIDESHOW
 
 ###############################################################################
 ###############################################################################
@@ -85,7 +92,7 @@ endif
 ## COMPILATION / LINKING OPTIONS
 ###############################################################################
 
-CFLAGS := -D__DEMO_DRAWING__
+CFLAGS := -D__DEMO_$(DEMO)__
 LDFLAGS := 
 CRT :=
 REMOVES :=
@@ -170,7 +177,7 @@ obj/c64/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/c64/,src/,$(@:.o=.c))
 
 $(EXEDIR)/$(PROGRAMNAME).c64:	$(subst PLATFORM,c64,$(OBJS))
-	$(CC) -Ln demo64.lbl -t c64 $(LDFLAGS) -o $(EXEDIR)/$(PROGRAMNAME).c64 $(subst PLATFORM,c64,$(OBJS))
+	$(CC) -Ln demo64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).c64.map -o $(EXEDIR)/$(PROGRAMNAME).c64 $(subst PLATFORM,c64,$(OBJS))
 	$(CC1541) -f $(PROGRAMNAME)-single -w $(EXEDIR)/$(PROGRAMNAME).c64 $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f slideshow -w $(DATADIR)/slideshow64.dat $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f image6401.mpic -w $(DATADIR)/image6401.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -182,16 +189,17 @@ $(EXEDIR)/$(PROGRAMNAME).c64:	$(subst PLATFORM,c64,$(OBJS))
 # Moreover, all the executable files will be put on a D64 1541 image, 
 # along with the single file version.
 obj/c64ovl/%.o:	$(SOURCES)
-	$(CC) -t c64 -c $(CFLAGS) -D__CBM__ -D__OVERLAY__ -D__OVERLAY__MIDRES__ -o $@ $(subst obj/c64ovl/,src/,$(@:.o=.c)) 
+	$(CC) -t c64 -T -l $(@:.o=.asm) -c $(CFLAGS) -D__CBM__ -D__OVERLAY__ -D__OVERLAY__MIDRES__ -o $@ $(subst obj/c64ovl/,src/,$(@:.o=.c)) 
 
 # This rule will produce the final binary file for C=64 platform.
 $(EXEDIR)/$(PROGRAMNAME).c64ovl:	$(subst PLATFORM,c64ovl,$(OBJS))
-	$(CC) -Ln demo64.lbl -t c64 $(LDFLAGS) -C cfg/c64-overlay.cfg  -o $(EXEDIR)/$(PROGRAMNAME).c64ovl $(subst PLATFORM,c64ovl,$(OBJS))
+	$(CC) -Ln demo64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).c64ovl.map -C cfg/c64-overlay.cfg  -o $(EXEDIR)/$(PROGRAMNAME).c64ovl $(subst PLATFORM,c64ovl,$(OBJS))
 	$(CC1541) -f $(PROGRAMNAME) -w $(EXEDIR)/$(PROGRAMNAME).c64ovl $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f mr1 -w $(EXEDIR)/$(PROGRAMNAME).c64ovl.screen $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f mr2 -w $(EXEDIR)/$(PROGRAMNAME).c64ovl.drawing $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f mr3 -w $(EXEDIR)/$(PROGRAMNAME).c64ovl.screen2 $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f mr4 -w $(EXEDIR)/$(PROGRAMNAME).c64ovl.drawing2 $(EXEDIR)/$(PROGRAMNAME).c64.d64  
+	$(CC1541) -f mr5 -w $(EXEDIR)/$(PROGRAMNAME).c64ovl.bitblit $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f slideshow -w $(DATADIR)/slideshow64.dat $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f image6401.mpic -w $(DATADIR)/image6401.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f image6402.mpic -w $(DATADIR)/image6402.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -207,16 +215,30 @@ $(EXEDIR)/$(PROGRAMNAME).c64ovl:	$(subst PLATFORM,c64ovl,$(OBJS))
 # Let's define rules to compile the demo under VIC 20 as a one and single 
 # executable file. This compilation will fails since there is no enough RAM.
 obj/vic20/%.o:	$(SOURCES)
-	$(CC) -t vic20 -c $(CFLAGS) -Osir -Cl -T -l $(@:.o=.map) -D__24K__ -D__CBM__ -C cfg/vic20-32k.cfg -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
+	$(CC) -t vic20 -c $(CFLAGS) -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/vic20.cfg -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
 
 $(EXEDIR)/$(PROGRAMNAME).vic20:	$(subst PLATFORM,vic20,$(OBJS))
-	$(CC) -Ln demo20.lbl -t vic20 $(LDFLAGS) -C cfg/vic20-32k.cfg -o $(EXEDIR)/$(PROGRAMNAME).vic20 $(subst PLATFORM,vic20,$(OBJS))
+	$(CC) -Ln demo20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).vic20.map -C cfg/vic20.cfg -o $(EXEDIR)/$(PROGRAMNAME).vic20 $(subst PLATFORM,vic20,$(OBJS))
 	$(CC1541) -f $(PROGRAMNAME)-single -w $(EXEDIR)/$(PROGRAMNAME).vic20 $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f slideshow -w $(DATADIR)/slideshow20.dat $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2001.mpic -w $(DATADIR)/image2001.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
+
+# Let's define rules to compile the demo under VIC 20 as a one and single 
+# executable file. This compilation will fails since there is no enough RAM.
+obj/vic2024/%.o:	$(SOURCES)
+	$(CC) -t vic20 -c $(CFLAGS) -Osir -Cl -T -l $(@:.o=.map) -D__24K__ -D__CBM__ -C cfg/vic20-32k.cfg -o $@ $(subst obj/vic2024/,src/,$(@:.o=.c))
+
+$(EXEDIR)/$(PROGRAMNAME).vic2024:	$(subst PLATFORM,vic2024,$(OBJS))
+	$(CC) -Ln demo20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/$(PROGRAMNAME).vic2024 $(subst PLATFORM,vic2024,$(OBJS))
+	$(CC1541) -f $(PROGRAMNAME)-single -w $(EXEDIR)/$(PROGRAMNAME).vic2024 $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f slideshow -w $(DATADIR)/slideshow20.dat $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f image2001.mpic -w $(DATADIR)/image2001.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 
 # Let's define rules to compile the demo under VIC20 as the overlay version.
 # This is the only way to compile this program in order to be able to be 
@@ -226,12 +248,13 @@ obj/vic20ovl/%.o:	$(SOURCES)
 	$(CC) -t vic20 -c $(CFLAGS) -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -D__OVERLAY__ -D__OVERLAY__MIDRES__ -C cfg/vic20-overlay.cfg -o $@ $(subst obj/vic20ovl/,src/,$(@:.o=.c))
 
 $(EXEDIR)/$(PROGRAMNAME).vic20ovl:	$(subst PLATFORM,vic20ovl,$(OBJS))
-	$(CC) -Ln demo20.lbl -t vic20 $(LDFLAGS) -C cfg/vic20-overlay.cfg  -o $(EXEDIR)/$(PROGRAMNAME).vic20ovl $(subst PLATFORM,vic20ovl,$(OBJS))
+	$(CC) -Ln demo20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).vic20ovl.map -C cfg/vic20-overlay.cfg  -o $(EXEDIR)/$(PROGRAMNAME).vic20ovl $(subst PLATFORM,vic20ovl,$(OBJS))
 	$(CC1541) -f $(PROGRAMNAME) -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f mr1 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.screen $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f mr2 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.drawing $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f mr3 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.screen2 $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f mr4 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.drawing2 $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
+	$(CC1541) -f mr5 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.bitblit $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f slideshow -w $(DATADIR)/slideshow20.dat $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2001.mpic -w $(DATADIR)/image2001.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
@@ -249,13 +272,32 @@ obj/c16/%.o:	$(SOURCES)
 	$(CC) -t c16 -c $(CFLAGS) -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/c16.cfg -o $@ $(subst obj/c16/,src/,$(@:.o=.c))
 
 $(EXEDIR)/$(PROGRAMNAME).c16:	$(subst PLATFORM,c16,$(OBJS))
-	$(CC) -Ln demo16.lbl -t c16 $(LDFLAGS) -C cfg/c16.cfg -o $(EXEDIR)/$(PROGRAMNAME).c16 $(subst PLATFORM,c16,$(OBJS))
+	$(CC) -Ln demo16.lbl -t c16 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).c16.map -C cfg/c16.cfg -o $(EXEDIR)/$(PROGRAMNAME).c16 $(subst PLATFORM,c16,$(OBJS))
 	$(CC1541) -f $(PROGRAMNAME)-single -w $(EXEDIR)/$(PROGRAMNAME).c16 $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f slideshow -w $(DATADIR)/slideshow16.dat $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f image1601.mpic -w $(DATADIR)/image1601.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f image1602.mpic -w $(DATADIR)/image1602.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f image1603.mpic -w $(DATADIR)/image1603.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f image1604.mpic -w $(DATADIR)/image1604.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
+
+## PLUS4 ------------------------------------------------------------------------
+
+# Let's define rules to compile the demo under C16 as a one and single 
+# executable file. This compilation is used as a "functional check", to
+# be sure that the source implementation is correct. Moreover, the executable 
+# file will be put on a D64 1541 image, along with the overlay version
+# generated by other rules.
+obj/plus4/%.o:	$(SOURCES)
+	$(CC) -t plus4 -c $(CFLAGS) -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/plus4.cfg -o $@ $(subst obj/plus4/,src/,$(@:.o=.c))
+
+$(EXEDIR)/$(PROGRAMNAME).plus4:	$(subst PLATFORM,plus4,$(OBJS))
+	$(CC) -Ln demo4.lbl -t plus4 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).plus4.map -C cfg/plus4.cfg -o $(EXEDIR)/$(PROGRAMNAME).plus4 $(subst PLATFORM,plus4,$(OBJS))
+	$(CC1541) -f $(PROGRAMNAME)-single -w $(EXEDIR)/$(PROGRAMNAME).plus4 $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f slideshow -w $(DATADIR)/slideshow16.dat $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f image1601.mpic -w $(DATADIR)/image1601.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f image1602.mpic -w $(DATADIR)/image1602.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f image1603.mpic -w $(DATADIR)/image1603.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f image1604.mpic -w $(DATADIR)/image1604.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 
 ###############################################################################
 ## FINAL RULES
@@ -275,11 +317,15 @@ all: $(EXEDIR) $(TARGETOBJDIR) $(EXES)
 clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic20.d64)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic2024.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16.d64)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64ovl*)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic20)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic2024)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic20ovl*)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))
 	$(foreach OBJECT,$(OBJECTS),$(call RMFILES,$(OBJECT)))

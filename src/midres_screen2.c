@@ -64,13 +64,13 @@ unsigned char mr_save(char* _filename, mr_screen _screen) {
     if (f == NULL) {
         return 0;
     }
-    fwrite((unsigned char*)SCREEN_RAM_START_ADDRESS + _screen * SCREEN_RAM_SIZE, (unsigned)SCREEN_RAM_SIZE, 1, f);
+    fwrite(SM(_screen), (unsigned)SCREEN_RAM_SIZE, 1, f);
     fclose(f);
     return 1;
 
 #else
 
-    return cbm_save(_filename, getcurrentdevice(), (unsigned char*)SCREEN_RAM_START_ADDRESS + _screen * SCREEN_RAM_SIZE, SCREEN_RAM_SIZE);
+    return cbm_save(_filename, getcurrentdevice(), SM(_screen), SCREEN_RAM_SIZE);
 
 #endif
 
@@ -85,13 +85,13 @@ unsigned char mr_save_color(char* _filename, mr_screen _screen) {
     if (f == NULL) {
         return 0;
     }
-    fwrite((unsigned char*)COLOUR_RAM_START_ADDRESS, (unsigned)SCREEN_RAM_SIZE, 1, f);
+    fwrite(CM(_screen), (unsigned)SCREEN_RAM_SIZE, 1, f);
     fclose(f);
     return 1;
 
 #else
 
-    return cbm_save(_filename, getcurrentdevice(), (unsigned char*)COLOUR_RAM_START_ADDRESS, SCREEN_RAM_SIZE);
+    return cbm_save(_filename, getcurrentdevice(), CM(_screen), SCREEN_RAM_SIZE);
 
 #endif
 
@@ -99,9 +99,9 @@ unsigned char mr_save_color(char* _filename, mr_screen _screen) {
 
 void mr_compress(mr_screen _source, mr_screen _destination) {
 
-    mr_mixel* source = (mr_mixel*)(SCREEN_RAM_START_ADDRESS + _source * SCREEN_RAM_SIZE);
-    mr_mixel* destination = (mr_mixel*)(SCREEN_RAM_START_ADDRESS + _destination * SCREEN_RAM_SIZE);
-    mr_color* sourceColor = (mr_color*)COLOUR_RAM_START_ADDRESS;
+    mr_mixel* source = SM(_source);
+    mr_mixel* destination = SM(_destination);
+    mr_color* sourceColor = CM(_source);
 
     int i;
     for (i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; ++i) {
@@ -113,8 +113,8 @@ void mr_compress(mr_screen _source, mr_screen _destination) {
 void mr_pack(mr_screen _source, mr_screen _destination, mr_half_screen _half_screen) {
 
     int i;
-    mr_mixel* source = (mr_mixel*)(SCREEN_RAM_START_ADDRESS + _source * SCREEN_RAM_SIZE);
-    mr_mixel* destination = (mr_mixel*)(SCREEN_RAM_START_ADDRESS + _destination * SCREEN_RAM_SIZE);
+    mr_mixel* source = SM(_source);
+    mr_mixel* destination = SM(_destination);
 
     if (_half_screen == mr_half_up) {
         destination += SCREEN_RAM_SIZE / 2;

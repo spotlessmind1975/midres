@@ -42,13 +42,23 @@ void main(void) {
 
 #ifdef __DEMO_SLIDESHOW__
 
-    do_slideshow();
+    demo_slideshow();
 
 #endif
 
 #ifdef __DEMO_DRAWING__
 
     demo_drawing();
+
+#endif
+
+#ifdef __DEMO_BITBLIT__
+
+    #ifndef __OVERLAY__MIDRES__
+
+        demo_bitblit();
+
+    #endif
 
 #endif
 

@@ -20,15 +20,23 @@
 		#define SCREEN_WIDTH				40
 		#define SCREEN_HEIGHT				25
 
-		// Luminance data (on/off pixel) is stored starting from 0x0000 and
+		// Luminance data (on/off pixel) is stored starting from 0x8000 and
 		// each screen occupy 1.024 bytes. The colour data, instead, is
 		// stored in one single space ad 0xd800.
-		#define SCREEN_RAM_START_ADDRESS	0x0000
+		#define SCREEN_RAM_START_ADDRESS	0x8000
 		#define SCREEN_RAM_SIZE				0x0400
 		#define COLOUR_RAM_START_ADDRESS	0xd800
+		#define COLOUR_RAM_SIZE_MASK		0x0000
 
 		// The startup (BASIC) screen is 1.
 		#define		DEFAULT_SCREEN			 1
+
+		// The memory area useful as an auxiliary screen
+		#define		AUXILIARY_SCREEN		5
+
+		// The four screens used for double buffering
+		#define		SCREEN_DB1				0
+		#define		SCREEN_DB2				1
 
 		// There is space for 16 screens.
 		#define		MAX_SCREENS				16
@@ -73,6 +81,10 @@
 			#define SCREEN_RAM_START_ADDRESS	0x1000
 			#define SCREEN_RAM_SIZE				0x0200
 			#define COLOUR_RAM_START_ADDRESS	0x9400
+			#define COLOUR_RAM_SIZE_MASK		0x0000
+
+			// The memory area useful as an auxiliary screen
+			#define		AUXILIARY_SCREEN			10
 
 		#else
 
@@ -82,14 +94,22 @@
 			#define SCREEN_RAM_START_ADDRESS	0x1e00
 			#define SCREEN_RAM_SIZE				0x0200
 			#define COLOUR_RAM_START_ADDRESS	0x9600
+			#define COLOUR_RAM_SIZE_MASK		0x0000
+
+			// The memory area useful as an auxiliary screen
+			#define		AUXILIARY_SCREEN		16
 
 		#endif
 
 		// The startup (BASIC) screen is 0.
 		#define		DEFAULT_SCREEN			 0
 
-		// There is space for 16 screens.
-		#define		MAX_SCREENS				 16
+		// There is space for 1 screens.
+		#define		MAX_SCREENS				 1
+
+		// The four screens used for double buffering
+		#define		SCREEN_DB1				0
+		#define		SCREEN_DB2				0
 
 		// Offset for correct brightness.
 		#define COLOR_BRIGHTNESS			 0
@@ -117,7 +137,7 @@
 	#elif __C16__
 
 		/******************************************************************
-		 * ------ COMMODORE 64 PLATFORM
+		 * ------ COMMODORE 16 PLATFORM
 		 ******************************************************************/
 
 		// The maximum resolution is 80 x 50 pixels, equivalent to 
@@ -128,15 +148,23 @@
 		// Luminance data (on/off pixel) is stored starting from 0x0000 and
 		// each screen occupy 1.024 bytes. The colour data, instead, is
 		// stored in one single space ad 0xd800.
-		#define SCREEN_RAM_START_ADDRESS	0x0C00
-		#define SCREEN_RAM_SIZE				0x0400
-		#define COLOUR_RAM_START_ADDRESS	0x0800
+		#define SCREEN_RAM_START_ADDRESS	0x0400
+		#define SCREEN_RAM_SIZE				0x0800
+		#define COLOUR_RAM_START_ADDRESS	0x0000
+		#define COLOUR_RAM_SIZE_MASK		0xff00
 
 		// The startup (BASIC) screen is 1.
-		#define		DEFAULT_SCREEN			 0
+		#define		DEFAULT_SCREEN			 1
+
+		// The memory area useful as an auxiliary screen
+		#define		AUXILIARY_SCREEN		 3
 
 		// There is space for 16 screens.
-		#define		MAX_SCREENS				 1
+		#define		MAX_SCREENS				 4
+
+		// The four screens used for double buffering
+		#define		SCREEN_DB1				1
+		#define		SCREEN_DB2				2
 
 		// Offset for correct brightness.
 		#define COLOR_BRIGHTNESS			6<<4
@@ -170,11 +198,14 @@
 		#define SCREEN_RAM_START_ADDRESS	0x0000
 		#define SCREEN_RAM_SIZE				0x0000
 		#define COLOUR_RAM_START_ADDRESS	0x0000
+		#define COLOUR_RAM_SIZE_MASK		0x0000
 
 		#define	DEFAULT_SCREEN				0
+		#define AUXILIARY_SCREEN			0
 		#define	MAX_SCREENS					1
 		#define COLOR_BRIGHTNESS			0
-
+		#define	SCREEN_DB1					0
+		#define	SCREEN_DB2					1
 
 		#define MR_COLOR_BLACK				0
 		#define MR_COLOR_WHITE				0
@@ -208,5 +239,12 @@
 
 	// Hardware dependent cleanup.
 	void mr_cleanup_hd();
+
+	// Hardware dependend waiting for VBL
+	void mr_wait_vbl();
+
+	// Hardware dependent double buffer switch
+	void mr_doublebuffer_switch_hd(unsigned char _screen);
+
 
 #endif

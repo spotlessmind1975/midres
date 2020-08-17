@@ -25,14 +25,16 @@
     // In order to save space, both of these segments are moved to the 
     // overlay segment, so that both the code and the data it uses are 
     // removed from the resident module.
-#pragma code-name ("OVERLAY3");
-#pragma rodata-name ("OVERLAY3");
+    #pragma code-name ("OVERLAY4");
+    #pragma rodata-name ("OVERLAY4");
 
 #endif
 
 /****************************************************************************
  ** OVERLAYED FUNCTIONS SECTION
  ****************************************************************************/
+
+#if !defined(__OVERLAY__MIDRES__) && !defined(__VIC20__)
 
  // The functions defined at this level can only be called up if the current
  // module has been loaded into memory. On the other hand, they can call any 
@@ -64,7 +66,6 @@ void _mr_clear_bitmap(mr_mixel* _screen, mr_color* _colormap) {
 
     for (i = 0; i < WIDTH * HEIGHT; ++i) {
         _screen[i] = RENDERED_MIXELS[0];
-        _colormap[i] = MR_COLOR_BLACK;
     }
 
 }
@@ -240,3 +241,5 @@ void _mr_circle(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_posit
         if (_radius > x || err > y) err += ++x * 2 + 1; /* e_xy+e_x > 0 or no 2nd y-step */
     } while (x < 0);
 }
+
+#endif

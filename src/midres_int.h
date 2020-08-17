@@ -17,6 +17,8 @@
         extern void _OVERLAY1_LOAD__[], _OVERLAY1_SIZE__[];
         extern void _OVERLAY2_LOAD__[], _OVERLAY2_SIZE__[];
         extern void _OVERLAY3_LOAD__[], _OVERLAY3_SIZE__[];
+        extern void _OVERLAY4_LOAD__[], _OVERLAY4_SIZE__[];
+        extern void _OVERLAY4_LOAD__[], _OVERLAY4_SIZE__[];
 
         unsigned char load_overlay(char* module_name, void* overlay_address,
             void* overlay_size);

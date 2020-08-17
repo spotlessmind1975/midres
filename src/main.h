@@ -26,7 +26,9 @@
 #endif
 
 // RESIDENT FUNCTIONS
+void demo_slideshow();
 void demo_drawing();
+void demo_bitblit();
 
 // OVERLAYED FUNCTIONS (MODULE 1)
 #include "midres.h"
