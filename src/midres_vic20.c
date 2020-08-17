@@ -91,6 +91,7 @@
         unsigned char _other = (_screen == DB1) ? DB2 : DB1;
 
         memcpy(SM(_screen), SM(_other), SCREEN_RAM_SIZE);
+        memcpy(CM(_screen), CM(_other), SCREEN_RAM_SIZE);
     }
 
 #endif

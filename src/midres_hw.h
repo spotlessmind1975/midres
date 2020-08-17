@@ -157,7 +157,7 @@
 		#define		DEFAULT_SCREEN			 1
 
 		// The memory area useful as an auxiliary screen
-		#define		AUXILIARY_SCREEN		 3
+		#define		AUXILIARY_SCREEN		 10
 
 		// There is space for 16 screens.
 		#define		MAX_SCREENS				 4

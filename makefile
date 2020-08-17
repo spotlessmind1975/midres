@@ -23,13 +23,13 @@ PROGRAMNAME := midres
 #  - vic2024: single executable for 24K VIC 20 (named on disk: "midres-single")
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
-TARGETS := plus4
+TARGETS := c64
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
 #  - DRAWING - an animation using drawing primitives (v1.1)
 #  - BITBLIT - an animation using bit blits primivites (v1.2)
-DEMO := DRAWING
+DEMO := BITBLIT
 
 ###############################################################################
 ###############################################################################

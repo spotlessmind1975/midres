@@ -34,7 +34,7 @@
  ** OVERLAYED FUNCTIONS SECTION
  ****************************************************************************/
 
-#if !defined(__OVERLAY__MIDRES__) && !defined(__VIC20__)
+#if !defined(__OVERLAY__MIDRES__) || !defined(__VIC20__)
 
  // The functions defined at this level can only be called up if the current
  // module has been loaded into memory. On the other hand, they can call any 
