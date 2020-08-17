@@ -1,3 +1,5 @@
+#ifdef __DEMO_DRAWING__
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -23,6 +25,30 @@
 // All variables defined as global within the resident body of the code are 
 // accessible from all modules, both resident and changing ones.
 
+// Number of buildings to draw in a screen (it depends on width)
+#define BUILDINGS_COUNT         (WIDTH>30?6:3)
+
+// Offset from the borders (in mixels)
+#define BUILDINGS_OFFSET        4
+
+// Height of the root of the buildings (from the top of the screen)
+#define BUILDINGS_HEIGHT        5
+
+// Distance (in mixels) between buildings
+#define BUILDINGS_DISTANCE      ( WIDTH*2 - (BUILDINGS_OFFSET*2) ) / BUILDINGS_COUNT
+
+// Width of a building (in mixels)
+#define BUILDINGS_WIDTH         BUILDINGS_DISTANCE * 7 / 12
+
+// Width and height of a window (in mixels)
+#define BUILDINGS_WINDOW_SIZE   2
+
+// Number of windows on a single building.
+#define BUILDINGS_WINDOWS       ( HEIGHT*2 - BUILDINGS_HEIGHT ) / (BUILDINGS_WINDOW_SIZE*3)
+
+// Half a width and the height of a door (in mixels)
+#define BUILDINGS_DOOR_SIZE     2
+
 /****************************************************************************
 ** RESIDENT FUNCTIONS SECTION
 ****************************************************************************/
@@ -30,62 +56,34 @@
 // All the functions defined within the resident body of the code are 
 // accessible from all modules, both resident and changing ones.
 
-/****************************************************************************
-** RESIDENT MAIN FUNCTION
-****************************************************************************/
-
-// This is the main function body. The purpose is to call the various 
-// functions present in the modules, taking care to load the relevant 
-// code / data into memory(in the "overlay" area).
-
-#define BUILDINGS_COUNT         (WIDTH>30?6:3)
-#define BUILDINGS_OFFSET        4
-#define BUILDINGS_HEIGHT        5
-#define BUILDINGS_DISTANCE      ( WIDTH*2 - (BUILDINGS_OFFSET*2) ) / BUILDINGS_COUNT
-#define BUILDINGS_WIDTH         BUILDINGS_DISTANCE * 7 / 12
-#define BUILDINGS_WINDOW_SIZE   2
-#define BUILDINGS_WINDOWS       ( HEIGHT*2 - BUILDINGS_HEIGHT ) / (BUILDINGS_WINDOW_SIZE*3)
-#define BUILDINGS_DOOR_SIZE     2
-
+// Draw the _number-nth building.
 void draw_building(mr_position _number) {
+    
+    // Used as index
     mr_position j = 0;
-    for (j = 0; j < (BUILDINGS_WIDTH+1); ++j) {
-        mr_vline(DEFAULT_SCREEN, BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + j, BUILDINGS_HEIGHT, HEIGHT * 2 - 1, MR_COLOR_CYAN);
-    }
-    for (j = 0; j < BUILDINGS_WINDOWS; ++j) {
-        mr_rect(DEFAULT_SCREEN, 
-                BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + 
-                BUILDINGS_WINDOW_SIZE + (j & 1) * BUILDINGS_WINDOW_SIZE, 
-                j * (3*BUILDINGS_WINDOW_SIZE) + BUILDINGS_HEIGHT + BUILDINGS_WINDOW_SIZE+1,
-                BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + 
-                BUILDINGS_WINDOW_SIZE+1 + (j & 1) * BUILDINGS_WINDOW_SIZE, 
-                j * (3 * BUILDINGS_WINDOW_SIZE) + BUILDINGS_HEIGHT + BUILDINGS_WINDOW_SIZE + 1,
-                MR_COLOR_BLACK);
-    }
-    mr_rect(DEFAULT_SCREEN, 
-        BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_DOOR_SIZE,
-        HEIGHT * 2 - BUILDINGS_DOOR_SIZE,
-        BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + 2*BUILDINGS_DOOR_SIZE,
-        HEIGHT * 2 - 1, 
-        MR_COLOR_BLACK);
-}
 
-void destroy_building(mr_position _number) {
-    mr_position j;
-    for (j = BUILDINGS_HEIGHT; j < HEIGHT * 2 - 2*BUILDINGS_DOOR_SIZE; ++j) {
-        mr_hline(DEFAULT_SCREEN, 
-            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE, 
-            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_WIDTH, 
-            j, 
+    // Draw as many vertical lines as the width of the building.
+    // Each line is as long as the height of the building.
+    for (j = 0; j < (BUILDINGS_WIDTH + 1); ++j) {
+        mr_vline( DEFAULT_SCREEN, 
+                    BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + j,  BUILDINGS_HEIGHT, 
+                    HEIGHT * 2 - 1, 
+                    MR_COLOR_CYAN);
+    }
+
+    // Draw each window.
+    for (j = 0; j < BUILDINGS_WINDOWS; ++j) {
+        mr_rect(DEFAULT_SCREEN,
+            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE +
+            BUILDINGS_WINDOW_SIZE + (j & 1) * BUILDINGS_WINDOW_SIZE,
+            j * (3 * BUILDINGS_WINDOW_SIZE) + BUILDINGS_HEIGHT + BUILDINGS_WINDOW_SIZE + 1,
+            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE +
+            BUILDINGS_WINDOW_SIZE + 1 + (j & 1) * BUILDINGS_WINDOW_SIZE,
+            j * (3 * BUILDINGS_WINDOW_SIZE) + BUILDINGS_HEIGHT + BUILDINGS_WINDOW_SIZE + 1,
             MR_COLOR_BLACK);
     }
-    for (; j < HEIGHT * 2 - 1; ++j) {
-        mr_hline(DEFAULT_SCREEN, 
-            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE, 
-            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_WIDTH, 
-            j, 
-            _number + 2);
-    }
+
+    // Finally, draw the door.
     mr_rect(DEFAULT_SCREEN,
         BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_DOOR_SIZE,
         HEIGHT * 2 - BUILDINGS_DOOR_SIZE,
@@ -94,26 +92,85 @@ void destroy_building(mr_position _number) {
         MR_COLOR_BLACK);
 }
 
+// Destroy the _number-nth building.
+void destroy_building(mr_position _number) {
+
+    // Used as index
+    mr_position j;
+
+    // We destroy the building starting from the top, by drawing
+    // an horizontal line that is as long as its width.
+    for (j = BUILDINGS_HEIGHT; j < HEIGHT * 2 - 2 * BUILDINGS_DOOR_SIZE; ++j) {
+        mr_hline(DEFAULT_SCREEN,
+            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE,
+            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_WIDTH,
+            j,
+            MR_COLOR_BLACK);
+    }
+
+    // The last pixels will be coloured by an index _number based.
+    for (; j < HEIGHT * 2 - 1; ++j) {
+        mr_hline(DEFAULT_SCREEN,
+            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE,
+            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_WIDTH,
+            j,
+            _number + 2);
+    }
+
+    // Draw the door again, finally.
+    mr_rect(DEFAULT_SCREEN,
+        BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_DOOR_SIZE,
+        HEIGHT * 2 - BUILDINGS_DOOR_SIZE,
+        BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + 2 * BUILDINGS_DOOR_SIZE,
+        HEIGHT * 2 - 1,
+        MR_COLOR_BLACK);
+}
+
+/****************************************************************************
+ ** RESIDENT MAIN FUNCTION
+ ****************************************************************************/
+
+// This is the main function body. The purpose is to call the various 
+// functions present in the modules, taking care to load the relevant 
+// code / data into memory(in the "overlay" area).
+
 void demo_drawing() {
 
+    // Used as index.
     int i = 0, j = 0;
 
+    // Initialize the graphical subsystem.
     mr_init();
 
+    // We are going to use a "drawing2" (drawing v1.1) function.
+    // [needed for overlay support]
     mr_use_screen();
 
+    // Clear the current screen and show it.
     mr_show(DEFAULT_SCREEN);
 
+    // We are going to use a "drawing2" (drawing v1.1) function.
+    // [needed for overlay support]
+    mr_use_drawing2();
+
+    // Endless loop
     while (1) {
+
+        // Clear the bitmap.
         mr_clear_bitmap(DEFAULT_SCREEN);
+
+        // Draw each building.
         for (i = 0; i < BUILDINGS_COUNT; ++i) {
             draw_building(i);
         }
+
+        // Destroy each building.
         for (i = 0; i < BUILDINGS_COUNT; ++i) {
             destroy_building(i);
         }
+
     }
 
-    mr_cleanup();
-
 }
+
+#endif
