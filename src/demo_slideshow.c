@@ -1,3 +1,5 @@
+#ifdef __DEMO_SLIDESHOW__
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -39,8 +41,6 @@ unsigned char filename[16] = { 0 };
 // This is the main function body. The purpose is to call the various 
 // functions present in the modules, taking care to load the relevant 
 // code / data into memory(in the "overlay" area).
-
-#ifdef __DEMO_SLIDESHOW__
 
 void demo_slideshow() {
 
