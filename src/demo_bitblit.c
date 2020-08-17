@@ -60,7 +60,6 @@ int px = 0, py = 0;
 void create_sprite() {
 	mr_recte(0, 0, SPRITE_WIDTH-1, SPRITE_HEIGHT-1, MR_COLOR_YELLOW);
 	mr_linee(0, 0, SPRITE_WIDTH - 1, SPRITE_HEIGHT - 1, MR_COLOR_RED);
-	getchar();
 	mr_linee(SPRITE_WIDTH - 1, 0, 0, SPRITE_HEIGHT - 1, MR_COLOR_RED);
 	mr_blit_from_screene(0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, AUXILIARY_SCREEN, 0, 0, SPRITE_COLOR);
 	mr_clear_bitmape();
