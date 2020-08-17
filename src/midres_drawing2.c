@@ -192,16 +192,18 @@ void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_posit
 
 // Draws a line onto the bitmap.
 void _mr_line(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color) {
-    int dx = iabs(_x2 - _x1), sx = _x1 < _x2 ? 1 : -1;
-    int dy = -iabs(_y2 - _y1), sy = _y1 < _y2 ? 1 : -1;
+    int x1 = _x1, y1 = _y1;
+    int x2 = _x2, y2 = _y2;
+    int dx = iabs(x2 - x1), sx = _x1 < _x2 ? 1 : -1;
+    int dy = -iabs(y2 - y1), sy = _y1 < _y2 ? 1 : -1;
     int err = dx + dy, e2; /* error value e_xy */
 
     for (;;) {  /* loop */
-        _mr_putpixel(_screen, _colormap, _x1, _y1, _color);
-        if (_x1 == _x2 && _y1 == _y2) break;
+        // _mr_putpixel(_screen, _colormap, (mr_position)x1, (mr_position)y1, _color);
+        if (x1 == _x2 && y1 == _y2) break;
         e2 = 2 * err;
-        if (e2 >= dy) { err += dy; _x1 += sx; } /* e_xy+e_x > 0 */
-        if (e2 <= dx) { err += dx; _y1 += sy; } /* e_xy+e_y < 0 */
+        if (e2 >= dy) { err += dy; x1 += sx; } /* e_xy+e_x > 0 */
+        if (e2 <= dx) { err += dx; y1 += sy; } /* e_xy+e_y < 0 */
     }
 }
 
