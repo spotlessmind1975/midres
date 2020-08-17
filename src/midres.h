@@ -51,7 +51,8 @@
 
 	// Define the bitmask for the given pixel position
 
-	#define mr_mixel_bits(_x,_y) RENDERED_MIXEL_BITS[((_x&1)<<1)|(_y&1)]
+	#define mr_mixel_combination(_x,_y) ((_x&1)<<1)|(_y&1)
+	#define mr_mixel_bits(_x,_y) RENDERED_MIXEL_BITS[mr_mixel_combination(_x,_y)]
 
 	typedef unsigned char mr_pop;
 
@@ -80,8 +81,24 @@
 
 	typedef unsigned char mr_color;
 
+	// This type of data allows you to choose the blit operation to do.
+
+	#define mr_blitop_set		0x00
+	#define mr_blitop_trans		0x01
+	#define mr_blitop_and		0x02
+	#define mr_blitop_or		0x04
+	#define mr_blitop_xor		0x08
+	
+	#define mr_blitop_mixels	0x0f
+	#define mr_blitop_color		0x10
+
+	typedef unsigned char mr_blitop;
+
 	// We include some hardware-dependent data type and constants.
 	#include "midres_hw.h"
+
+	#define SM(_screen)	((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE* (_screen))))
+	#define CM(_screen)	((mr_color*)(COLOUR_RAM_START_ADDRESS+((SCREEN_RAM_SIZE* (_screen))&COLOUR_RAM_SIZE_MASK)))
 
 	/************************************************************************
 	 * ------ ACCESSIBLE DATA
@@ -111,6 +128,12 @@
 
 	// Offset brightness for colors
 	extern mr_color BRIGHTNESS;
+
+	// First screen for double buffering
+	extern mr_screen DB1;
+
+	// Second screen for double buffering
+	extern mr_screen DB2;
 
 	/************************************************************************
 	 * ------ FUNCTIONS
@@ -148,7 +171,14 @@
 		#define mr_use_drawing2() 
 	#endif
 
-/*-----------------------------------------------------------------------
+	// To be called before using drawing functions.
+	#ifdef __OVERLAY__MIDRES__
+		#define mr_use_bitblit() load_overlay("mr5", _OVERLAY5_LOAD__, _OVERLAY5_SIZE__)
+	#else
+		#define mr_use_bitblit() 
+	#endif
+
+	/*-----------------------------------------------------------------------
 	 --- LIBRARY MANAGEMENT
 	 -----------------------------------------------------------------------*/
 
@@ -170,6 +200,12 @@
 
 	// Enable the screen for graphical operations.
 	void mr_enable(mr_screen _screen);
+
+	// Setup the double buffer (using screens SCREEN_DB1 and SCREEN_DB2)
+	void mr_doublebuffer_init();
+
+	// Switch double buffering
+	void mr_doublebuffer_switch();
 
 	// Load a (luminance) screen from a file to a specific screen
 	unsigned char mr_load(char *_filename, mr_screen _screen);
@@ -196,6 +232,80 @@
 	void mr_unpack(mr_screen _source, mr_screen _destination, mr_half_screen _half_screen);
 
 	/*-----------------------------------------------------------------------
+	 --- SCREEN MANAGEMENT (implicit [visible screen])
+	 -----------------------------------------------------------------------*/
+
+	// Clear the given screen.
+	#define mr_clearv() mr_clear(VISIBLE_SCREEN);
+
+	// Show and enable the given screen for graphical operations.
+	// void mr_showv(mr_screen _screen);
+
+	// Enable the screen for graphical operations.
+	#define mr_enablev() mr_enable(VISIBLE_SCREEN);
+
+	// Load a (luminance) screen from a file to a specific screen
+	#define mr_loadv(_filename) mr_load(_filename, VISIBLE_SCREEN);
+
+	// Save a specific (luminance) screen to a file
+	#define mr_savev(_filename) mr_save(_filename, VISIBLE_SCREEN);
+
+	// Load a (color) screen from a file to a specific screen
+	#define mr_load_colorv(_filename) mr_load_color(_filename, VISIBLE_SCREEN);
+
+	// Save a specific (color) screen to a file
+	#define mr_save_colorv(_filename) mr_save_color(_filename, VISIBLE_SCREEN);
+
+	// Compress luminance and color in a single mixel screen
+	#define mr_compressv(_destination) mr_compress(VISIBLE_SCREEN, _destination);
+
+	// Uncompress luminance and color from a single mixel screen
+	#define mr_uncompressv(_source) mr_uncompress(_source, VISIBLE_SCREEN);
+
+	// Pack luminance in an half screen
+	#define mr_packv(_destination, _half_screen) mr_pack(VISIBLE_SCREEN, _destination, _half_screen);
+
+	// Unpack luminance in an half screen
+	#define mr_unpackv(_source, _half_screen) mr_unpack(_source, VISIBLE_SCREEN, _half_screen);
+
+	/*-----------------------------------------------------------------------
+	 --- SCREEN MANAGEMENT (implicit [enabled screen])
+	 -----------------------------------------------------------------------*/
+
+	 // Clear the given screen.
+	#define mr_cleare() mr_clear(ENABLED_SCREEN);
+
+	// Show and enable the given screen for graphical operations.
+	#define mr_showe() mr_show(ENABLED_SCREEN);
+
+	// Enable the screen for graphical operations.
+	// #define mr_enablev() mr_enable(ENABLED_SCREEN);
+
+	// Load a (luminance) screen from a file to a specific screen
+	#define mr_loade(_filename) mr_load(_filename, ENABLED_SCREEN);
+
+	// Save a specific (luminance) screen to a file
+	#define mr_savee(_filename) mr_save(_filename, ENABLED_SCREEN);
+
+	// Load a (color) screen from a file to a specific screen
+	#define mr_load_colore(_filename) mr_load_color(_filename, ENABLED_SCREEN);
+
+	// Save a specific (color) screen to a file
+	#define mr_save_colore(_filename) mr_save_color(_filename, ENABLED_SCREEN);
+
+	// Compress luminance and color in a single mixel screen
+	#define mr_compresse(_destination) mr_compress(ENABLED_SCREEN, _destination);
+
+	// Uncompress luminance and color from a single mixel screen
+	#define mr_uncompresse(_source) mr_uncompress(_source, ENABLED_SCREEN);
+
+	// Pack luminance in an half screen
+	#define mr_packe(_destination, _half_screen) mr_pack(ENABLED_SCREEN, _destination, _half_screen);
+
+	// Unpack luminance in an half screen
+	#define mr_unpacke(_source, _half_screen) mr_unpack(_source, ENABLED_SCREEN, _half_screen);
+
+	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES [v1.0]
 	 -----------------------------------------------------------------------*/
 
@@ -213,60 +323,60 @@
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the given screen
-	#define mr_pset(_screen, _x, _y) mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), _x, _y, mr_pixel_on);
+	#define mr_pset(_screen, _x, _y) mr_psetop(SM(_screen), _x, _y, mr_pixel_on);
 
 	// Clear a pixel on the given screen
-	#define mr_pclear(_screen, _x, _y) mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), _x, _y, mr_pixel_off);
+	#define mr_pclear(_screen, _x, _y) mr_psetop(SM(_screen), _x, _y, mr_pixel_off);
 
 	// Invert a pixel on the given screen
-	#define mr_pinvert(_screen, _x, _y) mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), _x, _y, mr_pixel_invert);
+	#define mr_pinvert(_screen, _x, _y) mr_psetop(SM(_screen), _x, _y, mr_pixel_invert);
 
 	// Color a pixel on the given screen
-	#define mr_pcolor(_screen, _x, _y, _color) (mr_screen)_screen; mr_pcolorop((mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color);
+	#define mr_pcolor(_screen, _x, _y, _color) mr_pcolorop(CM(_screen), _x, _y, _color);
 
 	// Draw and color a pixel on the given screen
-	#define mr_psetc(_screen, _x, _y) mr_pcolorop((mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, SCREEN_INK[_screen]); mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), _x, _y, mr_pixel_on);
+	#define mr_psetc(_screen, _x, _y) mr_pcolorop(CM(_screen), _x, _y, SCREEN_INK[_screen]); mr_psetop(SM(_screen), _x, _y, mr_pixel_on);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING DERIVATED (IMPLICIT SCREEN [VISIBLE]) [v1.0]
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the visible screen
-	#define mr_psetv(_x, _y) mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), _x, _y, mr_pixel_on);
+	#define mr_psetv(_x, _y) mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_on);
 
 	// Clear a pixel on the visible screen
-	#define mr_pclearv(_x, _y) mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), _x, _y, mr_pixel_off);
+	#define mr_pclearv(_x, _y) mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_off);
 
 	// Invert a pixel on the visible screen
-	#define mr_pinvertv(_x, _y) mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), _x, _y, mr_pixel_invert);
+	#define mr_pinvertv(_x, _y) mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_invert);
 
 	// Color a pixel on the visible screen
-	#define mr_pcolorv(_x, _y, _color) mr_pcolorop((mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color);
+	#define mr_pcolorv(_x, _y, _color) mr_pcolorop(CM(VISIBLE_SCREEN), _x, _y, _color);
 
 	// Draw and color a pixel on the visible screen
-	#define mr_psetcv(_x, _y) mr_pcolorop((mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, SCREEN_INK[VISIBLE_SCREEN]); mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), _x, _y, mr_pixel_on);
+	#define mr_psetcv(_x, _y) mr_pcolorop(CM(VISIBLE_SCREEN), _x, _y, SCREEN_INK[VISIBLE_SCREEN]); mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_on);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING DERIVATED (IMPLICIT SCREEN [ENABLED]) [v1.0]
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the enabled screen
-	#define mr_psete(_x, _y) mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), _x, _y, mr_pixel_on);
+	#define mr_psete(_x, _y) mr_psetop(SM(ENABLED_SCREEN), _x, _y, mr_pixel_on);
 
 	// Clear a pixel on the enabled screen
-	#define mr_pcleare(_x, _y) { mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), _x, _y, mr_pixel_off);
+	#define mr_pcleare(_x, _y) mr_psetop(SM(ENABLED_SCREEN), _x, _y, mr_pixel_off);
 
 	// Invert a pixel on the enabled screen
-	#define mr_pinverte(_x, _y) { mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), _x, _y, mr_pixel_invert);
+	#define mr_pinverte(_x, _y) mr_psetop(SM(ENABLED_SCREEN), _x, _y, mr_pixel_invert);
 
 	// Color a pixel on the enabled screen
-	#define mr_pcolore(_x, _y, _color) { mr_pcolorop((mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color);
+	#define mr_pcolore(_x, _y, _color) mr_pcolorop(CM(ENABLED_SCREEN), _x, _y, _color);
 	
 	// Draw and color a pixel on the enabled screen
-	#define mr_psetce(_x, _y) { mr_pcolorop((mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, SCREEN_INK[ENABLED_SCREEN]); mr_psetop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), _x, _y, mr_pixel_on);
+	#define mr_psetce(_x, _y) mr_pcolorop(CM(ENABLED_SCREEN), _x, _y, SCREEN_INK[ENABLED_SCREEN]); mr_psetop(SM(ENABLED_SCREEN), _x, _y, mr_pixel_on);
 
 	// Draw a box on the enabled screen, with the given logical operation.
-	#define mr_boxe(_screen, _x0, _y0, _x1, _y1) mr_boxop((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), _x0, _y0, _x1, _y1);
+	#define mr_boxe(_x0, _y0, _x1, _y1) mr_boxop(SM(ENABLED_SCREEN), _x0, _y0, _x1, _y1);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES [v1.1]
@@ -310,111 +420,151 @@
 	 -----------------------------------------------------------------------*/
 
 	// Clears the bitmap to color BLACK.
-	#define mr_clear_bitmap(_screen) _mr_clear_bitmap((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS );
+	#define mr_clear_bitmap(_screen) _mr_clear_bitmap(SM(_screen), CM(_screen));
 
 	// Clears the bitmap to the specified color.
-	#define mr_clear_to_color(_screen, _color) _mr_clear_to_color((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _color);
+	#define mr_clear_to_color(_screen, _color) _mr_clear_to_color(SM(_screen), CM(_screen), _color);
 
 	// Writes a pixel into a bitmap.
-	#define mr_putpixel(_screen, _x, _y, _color) _mr_putpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color );
+	#define mr_putpixel(_screen, _x, _y, _color) _mr_putpixel(SM(_screen), CM(_screen), _x, _y, _color );
 
 	// Reads a pixel from a bitmap.
-	#define mr_getpixel(_screen, _x, _y) _mr_getpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y) ;
+	#define mr_getpixel(_screen, _x, _y) _mr_getpixel(SM(_screen), CM(_screen), _x, _y) ;
 
 	// Draws a vertical line onto the bitmap.
-	#define mr_vline(_screen, _x, _y1, _y2, _color) _mr_vline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y1, _y2, _color);
+	#define mr_vline(_screen, _x, _y1, _y2, _color) _mr_vline(SM(_screen), CM(_screen), _x, _y1, _y2, _color);
 
 	// Draws a horizontal line onto the bitmap.
-	#define mr_hline(_screen, _x1, _x2, _y, _color) _mr_hline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _x2, _y, _color);
+	#define mr_hline(_screen, _x1, _x2, _y, _color) _mr_hline(SM(_screen), CM(_screen), _x1, _x2, _y, _color);
 
 	// Draws a line onto the bitmap.
-	#define mr_line(_screen, _x1, _y1, _x2, _y2, _color) _mr_line((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+	#define mr_line(_screen, _x1, _y1, _x2, _y2, _color) _mr_line(SM(_screen), CM(_screen), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a triangle.
-	#define mr_triangle(_screen, _x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _x3, _y3, _color);
+	#define mr_triangle(_screen, _x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle(SM(_screen), CM(_screen), _x1, _y1, _x2, _y2, _x3, _y3, _color);
 
 	// Draws a polygon.
-	#define mr_polygon(_screen, _vertices, _points, _color) _mr_polygon((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _vertices, _points, _color);
+	#define mr_polygon(_screen, _vertices, _points, _color) _mr_polygon(SM(_screen), CM(_screen), _vertices, _points, _color);
 
 	// Draws an outline rectangle.
-	#define mr_rect(_screen, _x1, _y1, _x2, _y2, _color) _mr_rect((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+	#define mr_rect(_screen, _x1, _y1, _x2, _y2, _color) _mr_rect(SM(_screen), CM(_screen), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a circle.
-	#define mr_circle(_screen, _x, _y, _radius, _color) _mr_circle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * _screen), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _radius, _color);
+	#define mr_circle(_screen, _x, _y, _radius, _color) _mr_circle(SM(_screen), CM(_screen), _x, _y, _radius, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES (implicit screen [visible]) [v1.1]
 	 -----------------------------------------------------------------------*/
 
 	 // Clears the bitmap to color BLACK.
-	#define mr_clear_bitmapv() _mr_clear_bitmap((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS );
+	#define mr_clear_bitmapv() _mr_clear_bitmap(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN) );
 
 	// Clears the bitmap to the specified color.
-	#define mr_clear_to_colorv(_color) _mr_clear_to_color((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _color);
+	#define mr_clear_to_colorv(_color) _mr_clear_to_color(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _color);
 
 	// Writes a pixel into a bitmap.
-	#define mr_putpixelv(_x, _y, _color) _mr_putpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color );
+	#define mr_putpixelv(_x, _y, _color) _mr_putpixel(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _color );
 
 	// Reads a pixel from a bitmap.
-	#define mr_getpixelv(_x, _y) _mr_getpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y) ;
+	#define mr_getpixelv(_x, _y) _mr_getpixel(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y) ;
 
 	// Draws a vertical line onto the bitmap.
-	#define mr_vlinev(_x, _y1, _y2, _color) _mr_vline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y1, _y2, _color);
+	#define mr_vlinev(_x, _y1, _y2, _color) _mr_vline(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y1, _y2, _color);
 
 	// Draws a horizontal line onto the bitmap.
-	#define mr_hlinev(_x1, _x2, _y, _color) _mr_hline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _x2, _y, _color);
+	#define mr_hlinev(_x1, _x2, _y, _color) _mr_hline(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _x2, _y, _color);
 
 	// Draws a line onto the bitmap.
-	#define mr_linev(_x1, _y1, _x2, _y2, _color) _mr_line((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+	#define mr_linev(_x1, _y1, _x2, _y2, _color) _mr_line(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a triangle.
-	#define mr_trianglev(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _x3, _y3, _color);
+	#define mr_trianglev(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle(SM(VISIBLE_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _x3, _y3, _color);
 
 	// Draws a polygon.
-	#define mr_polygonv(_vertices, _points, _color) _mr_polygon((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _vertices, _points, _color);
+	#define mr_polygonv(_vertices, _points, _color) _mr_polygon(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _vertices, _points, _color);
 
 	// Draws an outline rectangle.
-	#define mr_rectv(_x1, _y1, _x2, _y2, _color) _mr_rect((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+	#define mr_rectv(_x1, _y1, _x2, _y2, _color) _mr_rect(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a circle.
-	#define mr_circlev(_screen, _x, _y, _radius, _color) _mr_circle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * VISIBLE_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _radius, _color);
+	#define mr_circlev(_screen, _x, _y, _radius, _color) _mr_circle(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _radius, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES (implicit screen [enabled]) [v1.1]
 	 -----------------------------------------------------------------------*/
 
 	 // Clears the bitmap to color BLACK.
-	#define mr_clear_bitmape() _mr_clear_bitmap((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS );
+	#define mr_clear_bitmape() _mr_clear_bitmap(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN) );
 
 	// Clears the bitmap to the specified color.
-	#define mr_clear_to_colore(_color) _mr_clear_to_color((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _color);
+	#define mr_clear_to_colore(_color) _mr_clear_to_color(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _color);
 
 	// Writes a pixel into a bitmap.
-	#define mr_putpixele(_x, _y, _color) _mr_putpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _color );
+	#define mr_putpixele(_x, _y, _color) _mr_putpixel(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _color );
 
 	// Reads a pixel from a bitmap.
-	#define mr_getpixele(_x, _y) _mr_getpixel((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y) ;
+	#define mr_getpixele(_x, _y) _mr_getpixel(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y) ;
 
 	// Draws a vertical line onto the bitmap.
-	#define mr_vlinee(_x, _y1, _y2, _color) _mr_vline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y1, _y2, _color);
+	#define mr_vlinee(_x, _y1, _y2, _color) _mr_vline(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y1, _y2, _color);
 
 	// Draws a horizontal line onto the bitmap.
-	#define mr_hlinee(_x1, _x2, _y, _color) _mr_hline((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _x2, _y, _color);
+	#define mr_hlinee(_x1, _x2, _y, _color) _mr_hline(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _x2, _y, _color);
 
 	// Draws a line onto the bitmap.
-	#define mr_linee(_x1, _y1, _x2, _y2, _color) _mr_line((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+	#define mr_linee(_x1, _y1, _x2, _y2, _color) _mr_line(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a triangle.
-	#define mr_trianglee(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _x3, _y3, _color);
+	#define mr_trianglee(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _x3, _y3, _color);
 
 	// Draws a polygon.
-	#define mr_polygone(_vertices, _points, _color) _mr_polygon((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _vertices, _points, _color);
+	#define mr_polygone(_vertices, _points, _color) _mr_polygon(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _vertices, _points, _color);
 
 	// Draws an outline rectangle.
-	#define mr_recte(_x1, _y1, _x2, _y2, _color) _mr_rect((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x1, _y1, _x2, _y2, _color);
+	#define mr_recte(_x1, _y1, _x2, _y2, _color) _mr_rect(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a circle.
-	#define mr_circlee(_screen, _x, _y, _radius, _color) _mr_circle((mr_mixel*)(SCREEN_RAM_START_ADDRESS+(SCREEN_RAM_SIZE) * ENABLED_SCREEN), (mr_color*)COLOUR_RAM_START_ADDRESS, _x, _y, _radius, _color);
+	#define mr_circlee(_screen, _x, _y, _radius, _color) _mr_circle(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _radius, _color);
+
+	/*-----------------------------------------------------------------------
+	 --- BIT BLITS
+	 -----------------------------------------------------------------------*/
+
+	// Copy a rectangular region from a screen / memory to another screen / memory
+	void _mr_copy(mr_mixel* _source, mr_color* _source_color, mr_position _xs, mr_position _ys, mr_position _ws, mr_position _hs, mr_position _displs, mr_mixel* _destination, mr_color* _destination_color, mr_position _xd, mr_position _yd, mr_position _displd, mr_blitop _blitop);
+
+	/*-----------------------------------------------------------------------
+	 --- BIT BLITS (explicit screen)
+	 -----------------------------------------------------------------------*/
+
+	// Copy a rectangular region from a screen / memory to another screen / memory
+	#define mr_copy(_source, _xs, _ys, _ws, _hs, _displs, _destination, _xd, _yd, _displd, _blitop) _mr_copy(SM(_source), CM(_source), _xs, _ys, _ws, _hs, _displs, SM(_destination), CM(_destination), _xd, _yd, _displd, _blitop);
+
+	// Copy a rectangular region from screen to memory
+	#define mr_blit_from_screen(_source, _xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(_source), CM(_source), _xs, _ys, _ws, _hs, SCREEN_WIDTH, SM(_destination), SM(_destination+1), _xd, _yd, SCREEN_WIDTH, _blitop);
+
+	// Copy a rectangular region from memory to screen
+	#define mr_blit_to_screen(_source, _xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(_source), SM(_source+1), _xs, _ys, _ws, _hs, SCREEN_WIDTH, SM(_destination), CM(_destination), _xd, _yd, SCREEN_WIDTH, _blitop);
+
+	/*-----------------------------------------------------------------------
+	 --- BIT BLITS (implicit screen [visible])
+	 -----------------------------------------------------------------------*/
+
+	// Copy a rectangular region from screen to memory
+	#define mr_blit_from_screenv(_xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _xs, _ys, _ws, _hs, SCREEN_WIDTH, SM(_destination), SM(_destination+1), _xd, _yd, SCREEN_WIDTH, _blitop);
+
+	// Copy a rectangular region from memory to screen
+	#define mr_blit_to_screenv(_source, _xs, _ys, _ws, _hs, _xd, _yd, _blitop) _mr_copy(SM(_source), SM(_source+1), _xs, _ys, _ws, _hs, SCREEN_WIDTH, SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _xd, _yd, SCREEN_WIDTH, _blitop);
+
+	/*-----------------------------------------------------------------------
+	 --- BIT BLITS (implicit screen [visible])
+	 -----------------------------------------------------------------------*/
+
+	 // Copy a rectangular region from screen to memory
+	#define mr_blit_from_screene(_xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _xs, _ys, _ws, _hs, SCREEN_WIDTH, SM(_destination), SM(_destination+1), _xd, _yd, SCREEN_WIDTH, _blitop);
+
+	// Copy a rectangular region from memory to screen
+	#define mr_blit_to_screene(_source, _xs, _ys, _ws, _hs, _xd, _yd, _blitop) _mr_copy(SM(_source), SM(_source+1), _xs, _ys, _ws, _hs, SCREEN_WIDTH, SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _xd, _yd, SCREEN_WIDTH, _blitop);
 
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"
