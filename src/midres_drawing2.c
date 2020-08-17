@@ -105,6 +105,23 @@ void _mr_putpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_pos
 
 }
 
+// Clear a pixel into a bitmap.
+void _mr_clearpixel(mr_mixel* _screen, mr_position _x, mr_position _y) {
+
+    mr_position mx, my;
+    mr_mixelbits abcd;
+    int offset;
+
+    mx = _x >> 1;
+    my = _y >> 1;
+    offset = my * WIDTH + mx;
+
+    abcd = mr_mixel_bits(_x, _y);
+
+    _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
+
+}
+
 // Reads a pixel from a bitmap.
 mr_color _mr_getpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y) {
 
@@ -229,6 +246,29 @@ void _mr_rect(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_positi
     _mr_vline(_screen, _colormap, _x2, _y1, _y2, _color);
 }
 
+// Draws a filled rectangle.
+void _mr_rectfill(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color) {
+    mr_position w = (_x2 - _x1);
+    mr_position h = (_y2 - _y1);
+    if (w > h) {
+        for (--h; h != 255; --h) {
+            _mr_hline(_screen, _colormap,
+                _x1, _x2,
+                _y1 + h,
+                _color);
+        }
+    } else {
+        for (--w; w != 255; --w) {
+            _mr_vline(_screen, _colormap,
+                _x1 + w,
+                _y1, _y2,
+                _color);
+        }
+
+    }
+
+}
+
 // Draws a circle.
 void _mr_circle(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_position _radius, mr_color _color) {
     int x = -_radius, y = 0, err = 2 - 2 * _radius; /* II. Quadrant */
@@ -241,6 +281,24 @@ void _mr_circle(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_posit
         if (_radius <= y) err += ++y * 2 + 1;           /* e_xy+e_y < 0 */
         if (_radius > x || err > y) err += ++x * 2 + 1; /* e_xy+e_x > 0 or no 2nd y-step */
     } while (x < 0);
+}
+
+// Color a rectangle.
+void _mr_colorfill(mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color) {
+    mr_position x1b = (_x1 >> 1), y1b = (_y1 >> 1);
+    mr_position wb = (( _x2>>1) -x1b );
+    mr_position hb = ((_y2 >> 1) - y1b );
+    _colormap += (_y1 >> 1) * SCREEN_WIDTH + _x1 >> 1;
+
+    for (; hb != 255; --hb) {
+        mr_position w = wb;
+        for (--w; w != 255; --w) {
+            *_colormap = _color;
+            ++_colormap;
+        }
+        _colormap += SCREEN_WIDTH - wb;
+    }
+
 }
 
 #endif

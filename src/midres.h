@@ -391,6 +391,9 @@
 	// Writes a pixel into a bitmap.
 	void _mr_putpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_color _color);
 
+	// Clear a pixel into a bitmap.
+	void _mr_clearpixel(mr_mixel* _screen, mr_position _x, mr_position _y);
+
 	// Reads a pixel from a bitmap.
 	mr_color _mr_getpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y);
 
@@ -412,8 +415,14 @@
 	// Draws an outline rectangle.
 	void _mr_rect(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color);
 
+	// Draws a filled rectangle.
+	void _mr_rectfill(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color);
+
 	// Draws a circle.
 	void _mr_circle(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_position _radius, mr_color _color);
+
+	// Color a rectangle.
+	void _mr_colorfill(mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES (explicit screen) [v1.1]
@@ -427,6 +436,9 @@
 
 	// Writes a pixel into a bitmap.
 	#define mr_putpixel(_screen, _x, _y, _color) _mr_putpixel(SM(_screen), CM(_screen), _x, _y, _color );
+
+	// Clear a pixel into a bitmap.
+	#define mr_clearpixel(_screen, _x, _y) _mr_clearpixel(SM(_screen), _x, _y );
 
 	// Reads a pixel from a bitmap.
 	#define mr_getpixel(_screen, _x, _y) _mr_getpixel(SM(_screen), CM(_screen), _x, _y) ;
@@ -449,8 +461,14 @@
 	// Draws an outline rectangle.
 	#define mr_rect(_screen, _x1, _y1, _x2, _y2, _color) _mr_rect(SM(_screen), CM(_screen), _x1, _y1, _x2, _y2, _color);
 
+	// Draws a filled rectangle.
+	#define mr_rectfill(_screen, _x1, _y1, _x2, _y2, _color) _mr_rectfill(SM(_screen), CM(_screen), _x1, _y1, _x2, _y2, _color);
+
 	// Draws a circle.
 	#define mr_circle(_screen, _x, _y, _radius, _color) _mr_circle(SM(_screen), CM(_screen), _x, _y, _radius, _color);
+
+	// Color a filled rectangle.
+	#define mr_colorfill(_screen, _x1, _y1, _x2, _y2, _color) _mr_colorfill(CM(_screen), _x1, _y1, _x2, _y2, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES (implicit screen [visible]) [v1.1]
@@ -464,6 +482,9 @@
 
 	// Writes a pixel into a bitmap.
 	#define mr_putpixelv(_x, _y, _color) _mr_putpixel(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _color );
+
+	// Clear a pixel into a bitmap.
+	#define mr_clearpixelv(_screen, _x, _y) _mr_clearpixel(SM(VISIBLE_SCREEN), _x, _y );
 
 	// Reads a pixel from a bitmap.
 	#define mr_getpixelv(_x, _y) _mr_getpixel(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y) ;
@@ -486,8 +507,14 @@
 	// Draws an outline rectangle.
 	#define mr_rectv(_x1, _y1, _x2, _y2, _color) _mr_rect(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
 
+	// Draws a filled rectangle.
+	#define mr_rectfillv(_screen, _x1, _y1, _x2, _y2, _color) _mr_rectfill(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
+
 	// Draws a circle.
 	#define mr_circlev(_screen, _x, _y, _radius, _color) _mr_circle(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _radius, _color);
+
+	// Color a filled rectangle.
+	#define mr_colorfillv(_screen, _x1, _y1, _x2, _y2, _color) _mr_colorfill(CM(_screen), _x1, _y1, _x2, _y2, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES (implicit screen [enabled]) [v1.1]
@@ -501,6 +528,9 @@
 
 	// Writes a pixel into a bitmap.
 	#define mr_putpixele(_x, _y, _color) _mr_putpixel(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _color );
+
+	// Clear a pixel into a bitmap.
+	#define mr_clearpixele(_screen, _x, _y) _mr_clearpixel(SM(ENABLED_SCREEN), _x, _y );
 
 	// Reads a pixel from a bitmap.
 	#define mr_getpixele(_x, _y) _mr_getpixel(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y) ;
@@ -523,8 +553,14 @@
 	// Draws an outline rectangle.
 	#define mr_recte(_x1, _y1, _x2, _y2, _color) _mr_rect(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
 
+	// Draws a filled rectangle.
+	#define mr_rectfille(_screen, _x1, _y1, _x2, _y2, _color) _mr_rectfill(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
+
 	// Draws a circle.
 	#define mr_circlee(_screen, _x, _y, _radius, _color) _mr_circle(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _radius, _color);
+
+	// Color a filled rectangle.
+	#define mr_colorfille(_screen, _x1, _y1, _x2, _y2, _color) _mr_colorfill(CM(_screen), _x1, _y1, _x2, _y2, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- BIT BLITS
