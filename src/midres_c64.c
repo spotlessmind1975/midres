@@ -95,4 +95,29 @@
         memcpy(SM(_screen), SM(_other), SCREEN_RAM_SIZE);
     }
 
+    void mr_tileset_visible_hd(unsigned char _tileset) {
+
+        /* Address 53272 ($D018)is a VIC - II register that generally tells the graphics 
+            chip where to "look for graphics", in conjunction with both the text screenand with 
+            bitmap graphics.
+
+            When in text screen mode, the VIC - II looks to 53272 for information on where 
+            the character setand text screen character RAM is located :
+
+            The four most significant bits form a 4 - bit number in the range 0 thru 15 : 
+                Multiplied with 1024 this gives the start address for the screen character RAM.
+            Bits 1 thru 3 (weights 2 thru 8) form a 3 - bit number in the range 0 thru 7 : 
+                Multiplied with 2048 this gives the start address for the character set.*/
+
+        if (_tileset == 15) {
+            _tileset = 4;
+        }
+        else {
+            _tileset = 2;
+        }
+
+        *((unsigned char*)0xd018) = (*((unsigned char*)0xd018) & 0xf1) | (( _tileset & 0x07 )<<1);
+
+    }
+
 #endif

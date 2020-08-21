@@ -64,7 +64,7 @@ void _mr_clear_bitmap(mr_mixel* _screen, mr_color* _colormap) {
 
     int i;
 
-    for (i = 0; i < WIDTH * HEIGHT; ++i) {
+    for (i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; ++i) {
         _screen[i] = RENDERED_MIXELS[0];
     }
 
@@ -75,7 +75,7 @@ void _mr_clear_to_color(mr_mixel* _screen, mr_color* _colormap, mr_color _color)
 
     int i;
 
-    for (i = 0; i < WIDTH * HEIGHT; ++i) {
+    for (i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; ++i) {
         _screen[i] = RENDERED_MIXELS[15];
         _colormap[i] = _color;
     }
@@ -91,7 +91,7 @@ void _mr_putpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_pos
 
     mx = _x >> 1;
     my = _y >> 1;
-    offset = my * WIDTH + mx;
+    offset = my * SCREEN_WIDTH + mx;
 
     // x1 * y1 + ( (x1 - 1) * y1) * 2+ ( x1 * (y1-1)) * 4 + ( (x1 - 1 ) * (y1-1)) * 8;
     // x1 * y1 + ((x1 - 1) * y1) * 2 + (x1 * (y1 - 1)) * 4 + ((x1 - 1) * (y1 - 1)) * 8;
@@ -114,7 +114,7 @@ void _mr_clearpixel(mr_mixel* _screen, mr_position _x, mr_position _y) {
 
     mx = _x >> 1;
     my = _y >> 1;
-    offset = my * WIDTH + mx;
+    offset = my * SCREEN_WIDTH + mx;
 
     abcd = mr_mixel_bits(_x, _y);
 
@@ -132,7 +132,7 @@ mr_color _mr_getpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr
     mx = _x >> 1;
     my = _y >> 1;
     abcd = mr_mixel_bits(_x, _y);
-    offset = my * WIDTH + mx;
+    offset = my * SCREEN_WIDTH + mx;
 
     if ( ( _screen[offset] & abcd ) == abcd) {
         return _colormap[offset];
@@ -152,13 +152,13 @@ void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_positi
 
     mx = _x >> 1;
     my = _y1 >> 1;
-    offset = my * WIDTH + mx;
+    offset = my * SCREEN_WIDTH + mx;
 
     if (y1 & 1) {
         abcd = mr_mixel_bits(_x, y1);
         _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
         _colormap[offset] = _color;
-        offset += WIDTH;
+        offset += SCREEN_WIDTH;
         ++y1;
     }
     for (; y1 <= _y2; y1 += 2) {
@@ -169,7 +169,7 @@ void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_positi
         }
         _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset])|abcd];
         _colormap[offset] = _color;
-        offset += WIDTH;
+        offset += SCREEN_WIDTH;
     }
 
 }
@@ -184,7 +184,7 @@ void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_posit
 
     mx = _x1 >> 1;
     my = _y >> 1;
-    offset = my * WIDTH + mx;
+    offset = my * SCREEN_WIDTH + mx;
 
     if (x1 & 1) {
         abcd = mr_mixel_bits(x1, _y);

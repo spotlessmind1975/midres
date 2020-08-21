@@ -41,6 +41,14 @@
 		// There is space for 16 screens.
 		#define		MAX_SCREENS				16
 
+		// The startup tileset
+		#define		DEFAULT_TILESET			0
+
+		// Maximum number of tilesets
+		#define		MAX_TILESETS			4
+
+		#define TM(_tileset) ((mr_mixel*)( ( _tileset ) == 15 ? 0xA000 : 0x9000 ))
+
 		// Offset for correct brightness.
 		#define COLOR_BRIGHTNESS			 0
 
@@ -101,6 +109,8 @@
 
 		#endif
 
+		#define TM(_tileset) ((mr_mixel*)( _tileset < 8 ? (0x8000 + _tileset * 0x400) : ((_tileset-8) * 0x400) ) )
+
 		// The startup (BASIC) screen is 0.
 		#define		DEFAULT_SCREEN			 0
 
@@ -110,6 +120,12 @@
 		// The four screens used for double buffering
 		#define		SCREEN_DB1				0
 		#define		SCREEN_DB2				0
+
+		// The startup tileset
+		#define		DEFAULT_TILESET			0
+
+		// Maximum number of tilesets
+		#define		MAX_TILESETS			4
 
 		// Offset for correct brightness.
 		#define COLOR_BRIGHTNESS			 0
@@ -169,6 +185,12 @@
 		// Offset for correct brightness.
 		#define COLOR_BRIGHTNESS			6<<4
 
+		// The startup tileset
+		#define		DEFAULT_TILESET			0
+
+		// Maximum number of tilesets
+		#define		MAX_TILESETS			4
+
 		// Default palette.
 		#define MR_COLOR_BLACK				 0
 		#define MR_COLOR_WHITE				 1
@@ -206,6 +228,11 @@
 		#define COLOR_BRIGHTNESS			0
 		#define	SCREEN_DB1					0
 		#define	SCREEN_DB2					1
+		#define	DEFAULT_TILESET				0
+		#define	MAX_TILESETS				4
+
+		#define TM(_tileset) ((mr_mixel*)( (_tileset) < 8 ? (0x8000 + (_tileset) * 0x400) : (((_tileset)-8) * 0x400) ) )
+
 
 		#define MR_COLOR_BLACK				0
 		#define MR_COLOR_WHITE				0
@@ -246,5 +273,7 @@
 	// Hardware dependent double buffer switch
 	void mr_doublebuffer_switch_hd(unsigned char _screen);
 
+	// Hardware dependent tile set
+	void mr_tileset_visible_hd(unsigned char _tileset);
 
 #endif

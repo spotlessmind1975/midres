@@ -62,4 +62,14 @@ void main(void) {
 
 #endif
 
+#ifdef __DEMO_TILE__
+
+#ifndef __OVERLAY__MIDRES__
+
+        demo_tile();
+
+#endif
+
+#endif
+
 }

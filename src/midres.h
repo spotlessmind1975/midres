@@ -94,6 +94,16 @@
 
 	typedef unsigned char mr_blitop;
 
+	// This type of data allows to represent a "tileset", that is
+	// a set of "tiles".
+
+	typedef unsigned char mr_tileset;
+
+	// This type of data allows to represent a "tile", that is
+	// a redefined matrix used in place of a matrix of 4 mixel.
+
+	typedef unsigned char mr_tile;
+
 	// We include some hardware-dependent data type and constants.
 	#include "midres_hw.h"
 
@@ -520,7 +530,7 @@
 	 --- DRAWING PRIMITIVES (implicit screen [enabled]) [v1.1]
 	 -----------------------------------------------------------------------*/
 
-	 // Clears the bitmap to color BLACK.
+	// Clears the bitmap to color BLACK.
 	#define mr_clear_bitmape() _mr_clear_bitmap(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN) );
 
 	// Clears the bitmap to the specified color.
@@ -596,11 +606,117 @@
 	 --- BIT BLITS (implicit screen [visible])
 	 -----------------------------------------------------------------------*/
 
-	 // Copy a rectangular region from screen to memory
+	// Copy a rectangular region from screen to memory
 	#define mr_blit_from_screene(_xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _xs, _ys, _ws, _hs, SCREEN_WIDTH, SM(_destination), SM(_destination+1), _xd, _yd, SCREEN_WIDTH, _blitop);
 
 	// Copy a rectangular region from memory to screen
 	#define mr_blit_to_screene(_source, _xs, _ys, _ws, _hs, _xd, _yd, _blitop) _mr_copy(SM(_source), SM(_source+1), _xs, _ys, _ws, _hs, SCREEN_WIDTH, SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _xd, _yd, SCREEN_WIDTH, _blitop);
+
+	/*-----------------------------------------------------------------------
+	 --- TILES
+	 -----------------------------------------------------------------------*/
+
+	// Set the visible tilesect.
+	void mr_tileset_visible(mr_tileset _tileset);
+
+	// Copy a tileset over another.
+	void mr_tileset_copy(mr_tileset _source, mr_tileset _destination);
+
+	// Redefine a tile using the given data.
+	void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data);
+
+	// Redefine a subset of N tiles by "shifting" horizontally a tile
+	void mr_tile_hshift(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	void _mr_puttile_h(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);
+
+	// Redefine a subset of N tiles by "shifting" vertically a tile
+	void mr_tile_vshift(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+
+	// Writes a tile into a bitmap at *precise* vertical position.
+	void _mr_puttile_v(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);
+
+	// Redefine a subset of N tiles by "rolling" horizontally a tile
+	void mr_tile_hrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+
+	// Redefine a subset of N tiles by "rolling" vertically a tile
+	void mr_tile_vrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+
+	// Writes a tile into a bitmap.
+	void _mr_puttile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);
+
+	// Clear a tile of a bitmap.
+	void _mr_cleartile(mr_mixel* _screen, mr_position _x, mr_position _y);
+
+	// Reads a tile from a bitmap.
+	mr_color _mr_gettile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y);
+
+	// Load a tileset (or part of it)
+	void mr_tileset_load(unsigned char *_filename, mr_tileset _tileset, mr_tile _starting, mr_tile _count);
+
+	/*-----------------------------------------------------------------------
+	 --- TILES (explicit screen)
+	 -----------------------------------------------------------------------*/
+
+	// Writes a tile into a bitmap.
+	#define mr_puttile(_screen, _x, _y, _tile, _color) _mr_puttile(SM(_screen), CM(_screen), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_puttile_h(_screen, _x, _y, _tile, _color) _mr_puttile_h(SM(_screen), CM(_screen), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_puttile_v(_screen, _x, _y, _tile, _color) _mr_puttile_v(SM(_screen), CM(_screen), _x, _y, _tile, _color );
+
+	// Clear a tile of a bitmap.
+	#define mr_cleartile(_screen, _x, _y, _tile, _color) _mr_cleartile(SM(_screen), _x, _y, _tile );
+
+	// Reads a tile from a bitmap.
+	#define mr_gettile(_screen, _x, _y, _tile, _color) _mr_gettile(SM(_screen), CM(_screen), _x, _y, _tile );
+
+	/*-----------------------------------------------------------------------
+	 --- TILES (implicit screen [VISIBLE])
+	 -----------------------------------------------------------------------*/
+
+	 // Writes a tile into a bitmap.
+	#define mr_puttilev(_x, _y, _tile, _color) _mr_puttile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_puttile_hv(_screen, _x, _y, _tile, _color) _mr_puttile_h(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_puttile_vv(_screen, _x, _y, _tile, _color) _mr_puttile_v(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+
+	// Clear a tile of a bitmap.
+	#define mr_cleartilev(_x, _y, _tile, _color) _mr_cleartile(SM(VISIBLE_SCREEN), _x, _y, _tile );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_puttilehe(_screen, _x, _y, _tile, _color) _mr_puttileh(SM(_screen), CM(_screen), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_puttileve(_screen, _x, _y, _tile, _color) _mr_puttilev(SM(_screen), CM(_screen), _x, _y, _tile, _color );
+
+	// Reads a tile from a bitmap.
+	#define mr_gettilev(_x, _y, _tile, _color) _mr_gettile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile );
+
+	/*-----------------------------------------------------------------------
+	 --- TILES (implicit screen [ENABLED])
+	 -----------------------------------------------------------------------*/
+
+	 // Writes a tile into a bitmap.
+	#define mr_puttilee(_x, _y, _tile, _color) _mr_puttile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_puttile_he(_screen, _x, _y, _tile, _color) _mr_puttile_h(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_puttile_ve(_screen, _x, _y, _tile, _color) _mr_puttile_v(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
+
+	// Clear a tile of a bitmap.
+	#define mr_cleartilee(_x, _y, _tile, _color) _mr_cleartile(SM(ENABLED_SCREEN), _x, _y, _tile );
+
+	// Reads a tile from a bitmap.
+	#define mr_gettilee(_x, _y, _tile, _color) _mr_gettile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile );
 
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"

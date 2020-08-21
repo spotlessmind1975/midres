@@ -63,4 +63,8 @@
         memcpy(CM(_screen), CM(_other), SCREEN_RAM_SIZE>>1);
     }
 
+    void mr_tileset_visible_hd(unsigned char _tileset) {
+
+    }
+
 #endif

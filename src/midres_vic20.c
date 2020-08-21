@@ -94,4 +94,45 @@
         memcpy(CM(_screen), CM(_other), SCREEN_RAM_SIZE);
     }
 
+    void mr_tileset_visible_hd(unsigned char _tileset) {
+
+        /*
+            CHARACTER TABLE / SCREEN MEMORY ADDRESSES
+
+            $9002 : Y------ -
+            $9005 : YYYYXXXX
+
+            X = chartable address
+            Y = screen memory address
+
+
+            The following table shows how the bottom four bits of memory location $9005
+            specify the character table address.
+
+            X       Location                  Contents
+            Value  HEX     Decimal
+
+            0    $8000   32768       Upper case normal characters
+            1    $8400   33792       Upper case reversed characters
+            2    $8800   34816       Lower case normal character
+            3    $8C00   35840       Lower case reversed characters
+            4    $9000   36864       unavailable
+            5    $9400   37888       unavailable
+            6    $9800   38912       unavailable
+            7    $9C00   39936       unavailable
+            8    $0000       0       unavailable
+            9    $0400    1024       3K expansion
+            10    $0800    2048       3K expansion
+            11    $0C00    3072       3K expansion
+            12    $1000    4096       RAM
+            13    $1400    5120       RAM
+            14    $1800    6144       RAM
+            15    $1C00    7168       RAM
+
+            */
+
+        *((unsigned char*)0x9005) = (*((unsigned char*)0x9005) & 0xf0) | ( ( _tileset ) & 0xf );
+
+    }
+
 #endif

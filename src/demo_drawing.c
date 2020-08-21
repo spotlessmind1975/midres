@@ -26,7 +26,7 @@
 // accessible from all modules, both resident and changing ones.
 
 // Number of buildings to draw in a screen (it depends on width)
-#define BUILDINGS_COUNT         (WIDTH>30?6:3)
+#define BUILDINGS_COUNT         (SCREEN_WIDTH>30?6:3)
 
 // Offset from the borders (in mixels)
 #define BUILDINGS_OFFSET        4
@@ -35,7 +35,7 @@
 #define BUILDINGS_HEIGHT        5
 
 // Distance (in mixels) between buildings
-#define BUILDINGS_DISTANCE      ( WIDTH*2 - (BUILDINGS_OFFSET*2) ) / BUILDINGS_COUNT
+#define BUILDINGS_DISTANCE      ( SCREEN_WIDTH*2 - (BUILDINGS_OFFSET*2) ) / BUILDINGS_COUNT
 
 // Width of a building (in mixels)
 #define BUILDINGS_WIDTH         BUILDINGS_DISTANCE * 7 / 12
@@ -44,7 +44,7 @@
 #define BUILDINGS_WINDOW_SIZE   2
 
 // Number of windows on a single building.
-#define BUILDINGS_WINDOWS       ( HEIGHT*2 - BUILDINGS_HEIGHT ) / (BUILDINGS_WINDOW_SIZE*3)
+#define BUILDINGS_WINDOWS       ( SCREEN_HEIGHT*2 - BUILDINGS_HEIGHT ) / (BUILDINGS_WINDOW_SIZE*3)
 
 // Half a width and the height of a door (in mixels)
 #define BUILDINGS_DOOR_SIZE     2
