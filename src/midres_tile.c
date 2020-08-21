@@ -69,29 +69,25 @@ void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
 // Redefine a subset of N tiles by "shifting" horizontally a tile
 void mr_tile_hshift(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_mixel* source = (mr_mixel*)(TM(_tileset) + _source*8);
-    
+    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+
     mr_position i, b;
     
     for (i = 0; i < 8; ++i) {
-        mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination*8);
         for (b = 0; b < 8; ++b, ++source, ++destination) {
-            // mr_mixel d = *((mr_mixel*)source);
-            // mr_mixel m = d; // >> i;
-            // *destination = m;
-            *destination = *source;
+            mr_mixel d = *((mr_mixel*)source);
+            mr_mixel m = d >> i;
+            *destination = m;
         }
-        ++_destination;
-        source = source - 8;
+        source -= 8;
     }
 
     for (i = 0; i < 8; ++i) {
-        mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination*8);
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = *((mr_mixel*)source);
-            mr_mixel n = d; // 7  &(0xff >> (8 - i));
-            *destination = n; // (n << (8 - i));
+            mr_mixel n = d & (0xff >> (8 - i));
+            *destination = (n << (8 - i));
         }
-        ++_destination;
         source -= 8;
     }
 
@@ -180,8 +176,8 @@ void _mr_puttile_h(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_po
 
     offset = (_y>>3) * SCREEN_WIDTH + (_x>>3);
 
-    _screen[offset] = _tile + ( _x & 0x07 );
-    _screen[offset+1] = _tile + (_x & 0x07) + 8;
+    _screen[offset] = _tile + (_x & 0x07);
+    _screen[offset + 1] = _tile + (_x & 0x07) + 8;
     _colormap[offset] = _color;
     _colormap[offset+1] = _color;
 

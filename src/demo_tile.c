@@ -60,21 +60,15 @@ void demo_tile() {
 	mr_init();
 
 	mr_clear_bitmap(DEFAULT_SCREEN);
-/*	mr_tileset_copy(2, 15);
-	mr_tileset_load("heart.tiles", 15, 0, 1);*/
+	mr_tileset_copy(2, 15);
+	mr_tileset_load("heart.tiles", 15, 0, 1);
 	mr_tile_redefine(15, 0, data);
 	mr_tile_hshift(15, 0, 1);
 	mr_tileset_visible(15);
 
-	for (i = 0; i < 17; ++i) {
-		mr_puttile(DEFAULT_SCREEN, i, 0, i, MR_COLOR_YELLOW + ( i & 1 ) );
-	}
-
-	getchar();
-
 	while (1) {
 		for (i = 0; i < SCREEN_WIDTH*8; ++i) {
-			mr_puttile_h(DEFAULT_SCREEN, i, 1, 3, MR_COLOR_GREEN);
+			mr_puttile_h(DEFAULT_SCREEN, i, i&0x1f, 1, MR_COLOR_GREEN);
 			for (j = 0; j < 10000; ++j) { (int)j; }
 		}
 	}
