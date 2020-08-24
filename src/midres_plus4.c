@@ -29,42 +29,43 @@
     // module has been loaded into memory. On the other hand, they can call any 
     // function declared at the resident module level.
 
-#ifdef __C16__
+#ifdef __PLUS4__
+#ifndef __C16__
 
-    void mr_init_hd() {
+void mr_init_hd() {
 
-        *((unsigned char*)0xff15) = MR_COLOR_BLACK;
-        *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07 ) | ( (MR_SCREEN_DEFAULT) << 3 );
+    *((unsigned char*)0xff15) = MR_COLOR_BLACK;
+    *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07) | ((MR_SCREEN_DEFAULT) << 3);
 
-    }
+}
 
-    void mr_show_hd(unsigned char _screen) {
+void mr_show_hd(unsigned char _screen) {
 
-        VISIBLE_SCREEN = _screen;
-        ENABLED_SCREEN = _screen;
-        *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07) | ( (_screen) << 3);
+    VISIBLE_SCREEN = _screen;
+    ENABLED_SCREEN = _screen;
+    *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07) | ((_screen) << 3);
 
-    }
+}
 
-    void mr_cleanup_hd() {
+void mr_cleanup_hd() {
 
-        *((unsigned char*)0xff15) = MR_COLOR_WHITE;
+    *((unsigned char*)0xff15) = MR_COLOR_WHITE;
 
-    }
+}
 
-    void mr_wait_vbl() {
-        while ((*(unsigned char*)0xff1c) & 1 == 0) { }
-    }
+void mr_wait_vbl() {
+    while ((*(unsigned char*)0xff1c) & 1 == 0) {}
+}
 
-    void mr_doublebuffer_switch_hd(unsigned char _screen) {
-        unsigned char _other = (_screen == DB1) ? DB2 : DB1;
+void mr_doublebuffer_switch_hd(unsigned char _screen) {
+    unsigned char _other = (_screen == DB1) ? DB2 : DB1;
 
-        memcpy(SM(_screen), SM(_other), MR_SCREEN_RAM_SIZE>>1);
-        memcpy(CM(_screen), CM(_other), MR_SCREEN_RAM_SIZE>>1);
-    }
+    memcpy(SM(_screen), SM(_other), MR_SCREEN_RAM_SIZE >> 1);
+    memcpy(CM(_screen), CM(_other), MR_SCREEN_RAM_SIZE >> 1);
+}
 
-    void mr_tileset_visible_hd(unsigned char _tileset) {
+void mr_tileset_visible_hd(unsigned char _tileset) {
 
-    }
-
+}
+#endif
 #endif

@@ -54,11 +54,11 @@ void main(void) {
 
 #ifdef __DEMO_BITBLIT__
 
-    #ifndef __OVERLAY__MIDRES__
+#ifndef __OVERLAY__MIDRES__
 
-        demo_bitblit();
+    demo_bitblit();
 
-    #endif
+#endif
 
 #endif
 
@@ -66,7 +66,7 @@ void main(void) {
 
 #ifndef __OVERLAY__MIDRES__
 
-        demo_tile();
+    demo_tile();
 
 #endif
 

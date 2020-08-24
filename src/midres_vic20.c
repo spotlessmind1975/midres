@@ -20,32 +20,93 @@
  ** RESIDENT VARIABLES SECTION
  ****************************************************************************/
 
- /****************************************************************************
-  ** RESIDENT FUNCTIONS SECTION
-  ****************************************************************************/
+/****************************************************************************
+ ** RESIDENT FUNCTIONS SECTION
+ ****************************************************************************/
 
-  // The functions defined at this level can only be called up if the current
-  // module has been loaded into memory. On the other hand, they can call any 
-  // function declared at the resident module level.
+// The functions defined at this level can only be called up if the current
+// module has been loaded into memory. On the other hand, they can call any 
+// function declared at the resident module level.
 
 #ifdef __VIC20__
 
-    void mr_init_hd() {
+/*
+    The following table shows how the bottom four bits of memory
+    location $9005 specify the character table address.
+
+        X       Location        TILESET_xx
+        Value  HEX     Decimal
+
+        0    $8000   32768      32  Upper case normal characters
+        1    $8400   33792      33  Upper case reversed characters
+        2    $8800   34816      34  Lower case normal character
+        3    $8C00   35840      35  Lower case reversed characters
+        4    $9000   36864      36  unavailable
+        5    $9400   37888      37  unavailable
+        6    $9800   38912      38  unavailable
+        7    $9C00   39936      39  unavailable
+        8    $0000       0       0  unavailable
+        9    $0400    1024       1  3K expansion
+        10    $0800    2048       2  3K expansion
+        11    $0C00    3072       3  3K expansion
+        12    $1000    4096       4  RAM
+        13    $1400    5120       5  RAM
+        14    $1800    6144       6  RAM
+        15    $1C00    7168       7  RAM
+*/
+#define SET_CHARSET( _tileset ) \
+    *((unsigned char*)0x9005) = (*((unsigned char*)0x9005) & 0xf0) | \
+        ( ( (_tileset) < 8 ? ((_tileset)+ 8) : ((_tileset)-32) ) & 0xf );
+
+/*
+    The following table shows how the top four bits of location $9005
+    and the top bit of location $9002 are used to give the address of
+    screen memory. The top bit of location $9005 will almost always
+    be 1, so for this reason I have ignored this bit in the table below.
+
+        Y1 = ($9005) AND 112
+        Y2 = ($9002) AND 128
+        Address = 4*Y2 + 64*Y1
+
+        Y1       Y2        Address      SCREEN_xx
+
+        128       0             0          0
+        128     128          $200          1
+        144       0          $400          2
+        144     128          $600          3
+        160       0          $800          4
+        160     128          $A00          5
+        176       0          $C00          6
+        176     128          $E00          7
+        192       0         $1000          8
+        192     128         $1200          9
+        208       0         $1400         10
+        208     128         $1600         11
+        224       0         $1800         12
+        224     128         $1A00         13
+        240       0         $1C00         14
+        240     128         $1E00         15
+
+*/
+#define SET_VIDEO( _screen ) \
+        *((unsigned char*)0x9002) = (*((unsigned char*)0x9002) & 0x7f) | (((_screen) & 1) << 7); \
+        *((unsigned char*)0x9005) = (*((unsigned char*)0x9005) & 0x8f) | ((((_screen) >> 1) & 0x7) << 4);
+
+#define SET_BACKGROUND_COLOR( _color ) \
+        *((unsigned char*)0x900f) = (*((unsigned char*)0x900f) & 0x0f) | ( _color << 4 );
+
+#define WAIT_VBL( ) \
+    while (*((unsigned char*)0x9004) < 27) { };
+
+void mr_init_hd() {
 
         int i = 0;
+        
+        SET_CHARSET(MR_TILESET_DEFAULT);
+        SET_VIDEO(MR_SCREEN_DEFAULT);
+        SET_BACKGROUND_COLOR(MR_COLOR_BLACK);
 
-        *((unsigned char*)0x900f) = (*((unsigned char*)0x900f) & 0x0f) | ( MR_COLOR_BLACK << 4 );
-        // bit 7 is part of screen address
-        *((unsigned char*)0x9002) = (*((unsigned char*)0x9002) & 0x7f) | ( (DEFAULT_SCREEN & 1) << 8 );
-        // bits 4 - 7 is rest of video address
-        *((unsigned char*)0x9005) = (*((unsigned char*)0x9005) & 0xcf) | (((DEFAULT_SCREEN >> 1) & 0x3) << 4);
-
-        // *((unsigned char*)0x0288) = ((SCREEN_RAM_START_ADDRESS + DEFAULT_SCREEN * SCREEN_RAM_SIZE) & 0xff00) >> 8;
-
-        //*((unsigned char*)0x0288)= 0x80;
-        //*((unsigned char*)0x900f)= 8;
-
-        for (i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; ++i) {
+        for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
             putchar(' ');
         }
 
@@ -56,83 +117,33 @@
         VISIBLE_SCREEN = _screen;
         ENABLED_SCREEN = _screen;
 
-        /*
-            B 7-4   Bit 7   Screen Map	Colour Map
-            1100	0	    $1000 (4096)	$9400 (37888)
-            1100	1	    $1200 (4608)	$9600 (38400)
-            1101	0	    $1400 (5120)	$9400 (37888)
-            1101	1	    $1600 (5632)	$9600 (38400)
-            1110	0	    $1800 (6144)	$9400 (37888)
-            1110	1	    $1A00 (6656)	$9600 (38400)
-            1111	0	    $1C00 (7168)	$9400 (37888)
-            1111	1	    $1E00 (7680)	$9600 (38400)
-        */
-
-        // bit 7 is part of screen address
-        *((unsigned char*)0x9002) = (*((unsigned char*)0x9002) & 0x7f) | ((_screen & 1) << 8);
-        // bits 4 - 7 is rest of video address
-        *((unsigned char*)0x9005) = ( *((unsigned char*)0x9005) & 0xcf ) | ( ( ( _screen >> 1 ) & 0x3 ) << 4 );
-
-        // *((unsigned char*)0x0288) = ( ( SCREEN_RAM_START_ADDRESS + _screen * SCREEN_RAM_SIZE ) & 0xff00 ) >> 8;
+        SET_VIDEO(_screen);
 
     }
 
     void mr_cleanup_hd() {
 
-        *((unsigned char*)0x900f) = (*((unsigned char*)0x900f) & 0x0f) | (MR_COLOR_WHITE << 4);
+        SET_CHARSET(MR_TILESET_DEFAULT);
+        SET_VIDEO(MR_SCREEN_DEFAULT);
+        SET_BACKGROUND_COLOR(MR_COLOR_WHITE);
 
     }
 
     void mr_wait_vbl() {
-        while (*((unsigned char*)0x9004) < 27) {}
+
+        WAIT_VBL();
+
     }
 
     void mr_doublebuffer_switch_hd(unsigned char _screen) {
         unsigned char _other = (_screen == DB1) ? DB2 : DB1;
 
-        memcpy(SM(_screen), SM(_other), SCREEN_RAM_SIZE);
-        memcpy(CM(_screen), CM(_other), SCREEN_RAM_SIZE);
+        memcpy(SM(_screen), SM(_other), MR_SCREEN_RAM_SIZE);
+
     }
 
     void mr_tileset_visible_hd(unsigned char _tileset) {
-
-        /*
-            CHARACTER TABLE / SCREEN MEMORY ADDRESSES
-
-            $9002 : Y------ -
-            $9005 : YYYYXXXX
-
-            X = chartable address
-            Y = screen memory address
-
-
-            The following table shows how the bottom four bits of memory location $9005
-            specify the character table address.
-
-            X       Location                  Contents
-            Value  HEX     Decimal
-
-            0    $8000   32768       Upper case normal characters
-            1    $8400   33792       Upper case reversed characters
-            2    $8800   34816       Lower case normal character
-            3    $8C00   35840       Lower case reversed characters
-            4    $9000   36864       unavailable
-            5    $9400   37888       unavailable
-            6    $9800   38912       unavailable
-            7    $9C00   39936       unavailable
-            8    $0000       0       unavailable
-            9    $0400    1024       3K expansion
-            10    $0800    2048       3K expansion
-            11    $0C00    3072       3K expansion
-            12    $1000    4096       RAM
-            13    $1400    5120       RAM
-            14    $1800    6144       RAM
-            15    $1C00    7168       RAM
-
-            */
-
-        *((unsigned char*)0x9005) = (*((unsigned char*)0x9005) & 0xf0) | ( ( _tileset ) & 0xf );
-
+        SET_CHARSET(_tileset);
     }
 
 #endif

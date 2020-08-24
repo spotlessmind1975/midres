@@ -47,7 +47,7 @@
         *vicRegister = ((*vicRegister) & 0x0f) | (1 << 4); // screen 1
         *basicRegister = 0x80;
 
-        for (i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; ++i) {
+        for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
             *(dst + i) = *(src + i);
         }
 
@@ -74,7 +74,7 @@
         int i;
         unsigned char* dst = (unsigned char*)0xd800, * src = (unsigned char*)0x8c00;
 
-        for (i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; ++i) {
+        for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
             *(dst + i) = *(src + i);
         }
 
@@ -92,7 +92,7 @@
     void mr_doublebuffer_switch_hd(unsigned char _screen) {
         unsigned char _other = (_screen == DB1) ? DB2 : DB1;
 
-        memcpy(SM(_screen), SM(_other), SCREEN_RAM_SIZE);
+        memcpy(SM(_screen), SM(_other), 0x400);
     }
 
     void mr_tileset_visible_hd(unsigned char _tileset) {
