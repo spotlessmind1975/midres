@@ -52,8 +52,8 @@ void demo_slideshow() {
     mr_use_screen();
 
     // Clear the current screen and show it.
-    mr_clear(DEFAULT_SCREEN);
-    mr_show(DEFAULT_SCREEN);
+    mr_clear(MR_SCREEN_DEFAULT);
+    mr_show(MR_SCREEN_DEFAULT);
 
     // Endless loop.
     while (1) {
@@ -80,16 +80,16 @@ void demo_slideshow() {
             switch (mode) {
                 // ... load the luminance bitmap.
                 case 1:
-                    mr_load(filename, DEFAULT_SCREEN);
+                    mr_load(filename, MR_SCREEN_DEFAULT);
                     break;
                 // ... load the color bitmap.
                 case 2:
-                    mr_load_color(filename, DEFAULT_SCREEN);
+                    mr_load_color(filename, MR_SCREEN_DEFAULT);
                     break;
                 // ... load the compressed bitmap.
                 case 3:
-                    mr_load(filename, AUXILIARY_SCREEN);
-                    mr_uncompress(AUXILIARY_SCREEN, DEFAULT_SCREEN);
+                    mr_load(filename, MR_AUX_DEFAULT);
+                    mr_uncompress(MR_AUX_DEFAULT, MR_SCREEN_DEFAULT);
                     break;
                 // ... does nothing, unknown mode.
                 default:
