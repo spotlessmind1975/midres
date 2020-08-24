@@ -36,11 +36,11 @@ unsigned char RENDERED_MIXEL_BITS[4] = {
 
 #define MIXEL_THRESHOLD	0xff
 
-mr_color SCREEN_INK[MAX_SCREENS];
+mr_color SCREEN_INK[MR_SCREEN_COUNT];
 
-mr_screen VISIBLE_SCREEN = DEFAULT_SCREEN;
+mr_screen VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
 
-mr_screen ENABLED_SCREEN = DEFAULT_SCREEN;
+mr_screen ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
 mr_mixel get_mixel_bits(mr_mixel _current) {
 
@@ -91,6 +91,6 @@ mr_position HEIGHT;
 
 mr_color BRIGHTNESS;
 
-mr_screen DB1 = SCREEN_DB1;
+mr_screen DB1 = MR_SCREEN_DB1;
 
-mr_screen DB2 = SCREEN_DB2;
+mr_screen DB2 = MR_SCREEN_DB2;

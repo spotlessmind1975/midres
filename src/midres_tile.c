@@ -14,6 +14,8 @@
 
 #include "midres.h"
 
+#if ( !defined(__OVERLAY__MIDRES__) && defined(MIDRES_STANDALONE_TILE) ) || defined(__OVERLAY__MIDRES__)
+
   // Overlay management is driven by the definition of the appropriate 
   // compilation symbol (__OVERLAY__). In this case, we enable or disable the 
   // compilation of the relevant code.
@@ -33,8 +35,6 @@
 /****************************************************************************
  ** OVERLAYED FUNCTIONS SECTION
  ****************************************************************************/
-
-#if !defined(__OVERLAY__MIDRES__) || !defined(__VIC20__)
 
  // The functions defined at this level can only be called up if the current
  // module has been loaded into memory. On the other hand, they can call any 
@@ -67,7 +67,7 @@ void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
 }
 
 // Redefine a subset of N tiles by "shifting" horizontally a tile
-void mr_tile_hshift(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_mixel* source = (mr_mixel*)(TM(_tileset) + _source*8);
     mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
 
@@ -94,45 +94,47 @@ void mr_tile_hshift(mr_tileset _tileset, mr_tile _source, mr_tile _destination) 
 }
 
 // Redefine a subset of N tiles by "shifting" vertically a tile
-void mr_tile_vshift(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source*8);
+    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
-    for (i = 0; i < 8; ++i) {
-        mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination*8);
-        for (b = 0; b < (8-i); ++b, ++source, ++destination) {
-            *destination = *(source+i);
+    for (i = 1; i < 8; ++i) {
+        for (b = 0; b < i; ++b, ++destination) {
+            *destination = 0x00;
         }
-        source -= b;
-        ++_destination;
-    }
-
-    for (i = 0; i < 8; ++i) {
-        mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination*8);
-        for (b = 0; b < i; ++b, ++source, ++destination) {
+        for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
             *destination = *(source);
         }
         source -= b;
-        ++_destination;
+    }
+
+    for (i = 8; i != 255; --i) {
+        for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
+            *destination = *(source + i);
+        }
+        source -= b;
+        for (; b < 8; ++b, ++destination) {
+            *destination = 0x00;
+        }
     }
 }
 
 // Redefine a subset of N tiles by "rolling" horizontally a tile
 void mr_tile_hrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
     for (i = 0; i < 8; ++i) {
-        mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = *((mr_tile*)source);
             mr_mixel m = d >> i, n = d & (0xff >> (8 - i));
             *destination = m | (n << (8 - i));
         }
         source -= 8;
-        ++_destination;
     }
 
 }
@@ -140,11 +142,11 @@ void mr_tile_hrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
 // Redefine a subset of N tiles by "rolling" vertically a tile
 void mr_tile_vrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
     for (i = 0; i < 8; ++i) {
-        mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
         for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
             *destination = *(source + i);
         }
@@ -153,7 +155,6 @@ void mr_tile_vrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
             *destination = *(source);
         }
         source -= b;
-        ++_destination;
     }
 }
 
@@ -162,7 +163,7 @@ void _mr_puttile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_posi
 
     int offset;
 
-    offset = _y * SCREEN_WIDTH + _x;
+    offset = _y * MR_SCREEN_WIDTH + _x;
 
     _screen[offset] = _tile;
     _colormap[offset] = _color;
@@ -170,11 +171,11 @@ void _mr_puttile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_posi
 }
 
 // Writes a tile into a bitmap at *precise* horizontal position.
-void _mr_puttile_h(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
+void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
 
     int offset;
 
-    offset = (_y>>3) * SCREEN_WIDTH + (_x>>3);
+    offset = (_y>>3) * MR_SCREEN_WIDTH + (_x>>3);
 
     _screen[offset] = _tile + (_x & 0x07);
     _screen[offset + 1] = _tile + (_x & 0x07) + 8;
@@ -184,16 +185,16 @@ void _mr_puttile_h(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_po
 }
 
 // Writes a tile into a bitmap at *precise* vertical position.
-void _mr_puttile_v(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
+void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
 
     int offset;
 
-    offset = (_y >> 3) * SCREEN_WIDTH + (_x >> 3);
+    offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
 
     _screen[offset] = _tile + (_y & 0x07);
-    _screen[offset + SCREEN_WIDTH] = _tile + (_y & 0x07) + 8;
+    _screen[offset + MR_SCREEN_WIDTH] = _tile + (_y & 0x07) + 8;
     _colormap[offset] = _color;
-    _colormap[offset + SCREEN_WIDTH] = _color;
+    _colormap[offset + MR_SCREEN_WIDTH] = _color;
 
 }
 
@@ -202,7 +203,7 @@ void _mr_cleartile(mr_mixel* _screen, mr_position _x, mr_position _y) {
 
     int offset;
 
-    offset = _y * SCREEN_WIDTH + _x;
+    offset = _y * MR_SCREEN_WIDTH + _x;
 
     _screen[offset] = RENDERED_MIXELS[0];
 
@@ -213,7 +214,7 @@ mr_color _mr_gettile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_
 
     int offset;
 
-    offset = _y * SCREEN_WIDTH + _x;
+    offset = _y * MR_SCREEN_WIDTH + _x;
 
     return _screen[offset];
 

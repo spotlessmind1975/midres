@@ -14,6 +14,8 @@
 
 #include "midres.h"
 
+#if ( !defined(__OVERLAY__MIDRES__) && defined(MIDRES_STANDALONE_DRAWING) ) || defined(__OVERLAY__MIDRES__)
+
   // Overlay management is driven by the definition of the appropriate 
   // compilation symbol (__OVERLAY__). In this case, we enable or disable the 
   // compilation of the relevant code.
@@ -73,3 +75,5 @@ void mr_ink(mr_screen _screen, mr_color _color) {
     SCREEN_INK[_screen] = _color + BRIGHTNESS;
 
 }
+
+#endif

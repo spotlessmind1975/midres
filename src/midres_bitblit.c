@@ -14,7 +14,9 @@
 
 #include "midres.h"
 
-// Overlay management is driven by the definition of the appropriate 
+#if ( !defined(__OVERLAY__MIDRES__) && defined(MIDRES_STANDALONE_BITBLIT) ) || defined(__OVERLAY__MIDRES__)
+
+  // Overlay management is driven by the definition of the appropriate 
 // compilation symbol (__OVERLAY__). In this case, we enable or disable the 
 // compilation of the relevant code.
 
@@ -33,8 +35,6 @@
 /****************************************************************************
  ** OVERLAYED FUNCTIONS SECTION
  ****************************************************************************/
-
-#if !defined(__OVERLAY__MIDRES__) || !defined(__VIC20__)
 
  // The functions defined at this level can only be called up if the current
  // module has been loaded into memory. On the other hand, they can call any 
