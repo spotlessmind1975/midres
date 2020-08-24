@@ -61,7 +61,7 @@ void create_sprite() {
 	mr_recte(0, 0, SPRITE_WIDTH-1, SPRITE_HEIGHT-1, MR_COLOR_YELLOW);
 	mr_linee(0, 0, SPRITE_WIDTH - 1, SPRITE_HEIGHT - 1, MR_COLOR_RED);
 	mr_linee(SPRITE_WIDTH - 1, 0, 0, SPRITE_HEIGHT - 1, MR_COLOR_RED);
-	mr_blit_from_screene(0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, AUXILIARY_SCREEN, 0, 0, SPRITE_COLOR);
+	mr_blit_from_screene(0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, MR_AUX_DEFAULT, 0, 0, SPRITE_COLOR);
 	mr_clear_bitmape();
 }
 
@@ -71,18 +71,18 @@ void draw_sprite() {
 	// If needed, restore the screen. The saved background is
 	// at position (SPRITE_WIDTH+1,0).
 	if (p > 0) {
-		mr_blit_to_screene(AUXILIARY_SCREEN, 
+		mr_blit_to_screene(MR_AUX_DEFAULT,
 				SPRITE_WIDTH+1, 0, SPRITE_WIDTH, SPRITE_HEIGHT, 
 				px, py, mr_blitop_set | mr_blitop_color);
 	}
 
 	// Save the background.
 	mr_blit_from_screene( x, y, SPRITE_WIDTH, SPRITE_HEIGHT, 
-				AUXILIARY_SCREEN, SPRITE_WIDTH+1, 0, 
+		MR_AUX_DEFAULT, SPRITE_WIDTH+1, 0,
 				mr_blitop_set | mr_blitop_color);
 	
 	// Draw the sprite.
-	mr_blit_to_screene(AUXILIARY_SCREEN, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, 
+	mr_blit_to_screene(MR_AUX_DEFAULT, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT,
 			x, y, 
 			SPRITE_COLOR);
 
@@ -110,7 +110,7 @@ void demo_bitblit() {
 	mr_doublebuffer_init();
 
 	// Clear all involved screens.
-	mr_clear_bitmap(AUXILIARY_SCREEN);
+	mr_clear_bitmap(MR_AUX_DEFAULT);
 	mr_clear_bitmapv();
 	mr_clear_bitmape();
 
