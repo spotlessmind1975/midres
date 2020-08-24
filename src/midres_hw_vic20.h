@@ -33,7 +33,8 @@
 #define MR_TILESET_ROM_1				1
 #define MR_TILESET_ROM_2				2
 #define MR_TILESET_ROM_3				3
-#define MR_TILESET_COUNT				4
+#define MR_TILESET_0					15
+#define MR_TILESET_COUNT				5
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_2
 
 // List of available bitblits:
@@ -72,5 +73,6 @@
 // #define MIDRES_STANDALONE_DRAWING2		1
 #define MIDRES_STANDALONE_SCREEN		1
 // #define MIDRES_STANDALONE_SCREEN2		1
+#define MIDRES_STANDALONE_TILE			1
 
 #endif

@@ -59,22 +59,30 @@ void demo_tile() {
 
 	mr_init();
 
-	mr_clear_bitmap(DEFAULT_SCREEN);
-	mr_tileset_copy(2, 15);
-	mr_tileset_load("heart.tiles", 15, 0, 1);
-	mr_tile_redefine(15, 0, data);
-	mr_tile_hshift(15, 0, 1);
-	mr_tileset_visible(15);
+	mr_clear_bitmap(MR_SCREEN_DEFAULT);
+	mr_tileset_copy(MR_TILESET_DEFAULT, MR_TILESET_0);
+	mr_tileset_load("heart.tiles", MR_TILESET_0, 0, 1);
+	mr_tile_redefine(MR_TILESET_0, 0, data);
+	mr_tile_prepare_horizontal(15, 0, 1);
+	mr_tile_prepare_vertical(15, 0, 40);
+	mr_tileset_visible(MR_TILESET_0);
+
+	for (i = 0; i < 16; ++i) {
+		mr_puttile(MR_SCREEN_DEFAULT, i, 1, 40+i, MR_COLOR_YELLOW+(i&1));
+	}
+
+	getchar();
 
 	while (1) {
-		for (i = 0; i < SCREEN_WIDTH*8; ++i) {
-			mr_puttile_h(DEFAULT_SCREEN, i, i&0x1f, 1, MR_COLOR_GREEN);
+		for (i = 0; i < MR_SCREEN_HEIGHT*8; ++i) {
+			// mr_tile_moveto_horizontal(MR_SCREEN_DEFAULT, i, 1, 1, MR_COLOR_GREEN);
+			mr_tile_moveto_vertical(MR_SCREEN_DEFAULT, 0, i, 40, MR_COLOR_YELLOW);
 			for (j = 0; j < 10000; ++j) { (int)j; }
 		}
 	}
 
 	getchar();
-	mr_tileset_visible(0);
+	mr_tileset_visible(MR_TILESET_DEFAULT);
 
 }
 

@@ -44,20 +44,14 @@
 #define	MR_SCREEN_DB2				MR_SCREEN_1
 
 // List of available tilesets:
-#define MR_TILESET_ROM_0				0
-#define MR_TILESET_ROM_1				1
-#define MR_TILESET_ROM_2				2
-#define MR_TILESET_ROM_3				3
+#define MR_TILESET_ROM_0				2
+#define MR_TILESET_ROM_1				3
 #define MR_TILESET_0					4
 #define MR_TILESET_1					5
 #define MR_TILESET_2					6
 #define MR_TILESET_3					7
-#define MR_TILESET_4					8
-#define MR_TILESET_5					9
-#define MR_TILESET_6					10
-#define MR_TILESET_7					11
-#define MR_TILESET_COUNT				12
-#define MR_TILESET_DEFAULT				MR_TILESET_ROM_2
+#define MR_TILESET_COUNT				6
+#define MR_TILESET_DEFAULT				MR_TILESET_ROM_1
 
 // List of available areas for bit blits:
 #define MR_AUX_0						2
@@ -101,12 +95,13 @@
 #define SM(_screen)						((mr_mixel*)(0x8000+(0x0400*(_screen))))
 #define CM(_screen)						((mr_color*)(0xd800))
 #define AM(_screen)						((mr_mixel*)(0x8000+(0x0400*(_screen))))
-#define TM(_tileset)					((mr_mixel*)(0x9000+(0x0400*(_tileset))))
+#define TM(_tileset)					((mr_mixel*)(0x8000+(0x0800*(_tileset))))
 
 #define MIDRES_STANDALONE_BITBLIT		1
 #define MIDRES_STANDALONE_DRAWING		1
 #define MIDRES_STANDALONE_DRAWING2		1
 #define MIDRES_STANDALONE_SCREEN		1
 #define MIDRES_STANDALONE_SCREEN2		1
+#define MIDRES_STANDALONE_TILE			1
 
 #endif

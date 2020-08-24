@@ -109,13 +109,6 @@
             Bits 1 thru 3 (weights 2 thru 8) form a 3 - bit number in the range 0 thru 7 : 
                 Multiplied with 2048 this gives the start address for the character set.*/
 
-        if (_tileset == 15) {
-            _tileset = 4;
-        }
-        else {
-            _tileset = 2;
-        }
-
         *((unsigned char*)0xd018) = (*((unsigned char*)0xd018) & 0xf1) | (( _tileset & 0x07 )<<1);
 
     }
