@@ -69,7 +69,7 @@
 #define		DROP_COUNT			( MR_SCREEN_WIDTH - 2 )
 
 // Vertical position of each drop on the screen.
-mr_position_tile drops[DROP_COUNT];
+mr_tile_position drops[DROP_COUNT];
 
 // Color assigned to each drop on the screen.
 mr_color dropsColor[DROP_COUNT];

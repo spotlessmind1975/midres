@@ -36,9 +36,9 @@
 #define	MR_SCREEN_DB2					MR_SCREEN_1
 
 // List of available tilesets:
-#define MR_TILESET_0					7
-#define MR_TILESET_1					1
-#define MR_TILESET_2					2
+#define MR_TILESET_0					5
+#define MR_TILESET_1					6
+#define MR_TILESET_2					7
 #define MR_TILESET_ROM_0				32
 #define MR_TILESET_ROM_1				33
 #define MR_TILESET_ROM_2				34
