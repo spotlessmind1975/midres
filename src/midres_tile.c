@@ -73,7 +73,7 @@ void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _d
 
     mr_position i, b;
     
-    for (i = 0; i < 8; ++i) {
+    for (i = 0; i < 9; ++i) {
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = *((mr_mixel*)source);
             mr_mixel m = d >> i;
@@ -82,7 +82,7 @@ void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _d
         source -= 8;
     }
 
-    for (i = 0; i < 8; ++i) {
+    for (i = 1; i < 9; ++i) {
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = *((mr_mixel*)source);
             mr_mixel n = d & (0xff >> (8 - i));
@@ -100,7 +100,7 @@ void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _des
 
     mr_position i, b;
 
-    for (i = 1; i < 8; ++i) {
+    for (i = 0; i < 9; ++i) {
         for (b = 0; b < i; ++b, ++destination) {
             *destination = 0x00;
         }
@@ -171,31 +171,34 @@ void _mr_puttile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_posi
 }
 
 // Writes a tile into a bitmap at *precise* horizontal position.
-void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
+void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color) {
 
     int offset;
 
     offset = (_y>>3) * MR_SCREEN_WIDTH + (_x>>3);
 
-    _screen[offset] = _tile + (_x & 0x07);
-    _screen[offset + 1] = _tile + (_x & 0x07) + 8;
+    _screen[offset] = _tile + (_x & 0x07) + 1;
     _colormap[offset] = _color;
-    _colormap[offset+1] = _color;
+    if (( (_x>>3) + 1 ) < MR_SCREEN_WIDTH) {
+        _screen[offset + 1] = _tile + (_x & 0x07) + 9;
+        _colormap[offset + 1] = _color;
+    }
 
 }
 
 // Writes a tile into a bitmap at *precise* vertical position.
-void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
+void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color) {
 
     int offset;
 
     offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
 
-    _screen[offset] = _tile + (_y & 0x07);
-    _screen[offset + MR_SCREEN_WIDTH] = _tile + (_y & 0x07) + 8;
+    _screen[offset] = _tile + (_y & 0x07) + 1;
     _colormap[offset] = _color;
-    _colormap[offset + MR_SCREEN_WIDTH] = _color;
-
+    if (( offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
+        _colormap[offset + MR_SCREEN_WIDTH] = _color;
+        _screen[offset + MR_SCREEN_WIDTH] = _tile + (_y & 0x07) + 10;
+    }
 }
 
 // Clear a tile of a bitmap.

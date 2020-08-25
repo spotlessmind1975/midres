@@ -44,6 +44,9 @@ void mr_wait_vbl();
 // Hardware dependent double buffer switch
 void mr_doublebuffer_switch_hd(unsigned char _screen);
 
+// Hardware dependent tile copy
+void mr_tileset_copy_hd(unsigned char _source, unsigned char _destination);
+
 // Hardware dependent tile set
 void mr_tileset_visible_hd(unsigned char _tileset);
 

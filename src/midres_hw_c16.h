@@ -35,10 +35,11 @@
 #define MR_TILESET_ROM_1				35
 #define MR_TILESET_ROM_2				36
 #define MR_TILESET_ROM_3				37
-#define MR_TILESET_0					3
-#define MR_TILESET_1					12
-#define MR_TILESET_2					15
-#define MR_TILESET_COUNT				7
+#define MR_TILESET_0					12
+#define MR_TILESET_1					13
+#define MR_TILESET_2					14
+#define MR_TILESET_3					15
+#define MR_TILESET_COUNT				10
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_1
 
 // List of available areas for bit blits:
@@ -73,11 +74,11 @@
 #define AM(_screen)						((mr_mixel*)((0x0800*(_screen))))
 #define TM(_tileset)					((mr_mixel*)((0x0400*(_tileset))))
 
-#define MIDRES_STANDALONE_BITBLIT		1
-#define MIDRES_STANDALONE_DRAWING		1
+// #define MIDRES_STANDALONE_BITBLIT		1
+// #define MIDRES_STANDALONE_DRAWING		1
 #define MIDRES_STANDALONE_DRAWING2		1
 #define MIDRES_STANDALONE_SCREEN		1
 // #define MIDRES_STANDALONE_SCREEN2		1
-// #define MIDRES_STANDALONE_TILE			1
+#define MIDRES_STANDALONE_TILE			1
 
 #endif

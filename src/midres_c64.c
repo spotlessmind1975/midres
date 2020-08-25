@@ -31,86 +31,85 @@
 
 #ifdef __C64__
 
-    void mr_init_hd() {
+#define SET_BACKGROUND_COLOR( _color ) \
+    *((unsigned char*)0xd021) = _color;
 
-        unsigned char* vicRegister2 = (unsigned char*)0xd021;
-        unsigned char* vicRegister3 = (unsigned char*)0xdd00;
-        unsigned char* vicRegister4 = (unsigned char*)0xdd02;
-        unsigned char* vicRegister = (unsigned char*)0xd018;
-        unsigned char* basicRegister = (unsigned char*)0x0288;
-        int i;
-        unsigned char* dst = (unsigned char* )0x8c00, * src = (unsigned char*)0xd800;
+#define SET_DATA_DIRECTION( ) \
+    *((unsigned char*)0xdd02) = ((*((unsigned char*)0xdd02)) ) | 3;
 
-        *vicRegister2 = MR_COLOR_BLACK;
-        *vicRegister4 = (*vicRegister4) | 3;
-        *vicRegister3 = ((*vicRegister3) & 0xfc) | 1; // bank 2
-        *vicRegister = ((*vicRegister) & 0x0f) | (1 << 4); // screen 1
-        *basicRegister = 0x80;
+#define SET_BANK( _bank ) \
+    *((unsigned char*)0xdd00) = ((*((unsigned char*)0xdd00)) & 0xfc) | (3 - _bank); // bank 2
 
-        for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-            *(dst + i) = *(src + i);
-        }
+#define SET_VIDEO( _video ) \
+    *((unsigned char*)0xd018) = ((*((unsigned char*)0xd018))& 0x0f) | (_video << 4);
 
+#define SET_BASIC_VIDEO( _video ) \
+    *((unsigned char*)0x0288) = ( (int)(SM(_video)) >> 8 ) & 0xff;
+
+#define SET_CHARSET( _tileset ) \
+    *((unsigned char*)0xd018) = (*((unsigned char*)0xd018) & 0xf1) | (( _tileset & 0x07 )<<1);
+
+void mr_init_hd() {
+
+    int i;
+    unsigned char* dst = (unsigned char* )0x8c00, * src = (unsigned char*)0xd800;
+
+    SET_DATA_DIRECTION();
+    SET_BANK(2);
+    SET_BACKGROUND_COLOR( MR_COLOR_BLACK );
+    SET_VIDEO(MR_SCREEN_DEFAULT);
+    SET_BASIC_VIDEO(MR_SCREEN_DEFAULT);
+    SET_CHARSET(MR_TILESET_DEFAULT);
+
+    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
+        *(dst + i) = *(src + i);
     }
 
-    void mr_show_hd(unsigned char _screen) {
+}
+
+void mr_show_hd(unsigned char _screen) {
         
-        unsigned char* vicRegister = (unsigned char*)0xd018;
-        unsigned char* vicRegister3 = (unsigned char*)0xdd00;
-        unsigned char* basicRegister = (unsigned char*)0x0288;
-        
-        VISIBLE_SCREEN = _screen;
-        ENABLED_SCREEN = _screen;
+    VISIBLE_SCREEN = _screen;
+    ENABLED_SCREEN = _screen;
 
-        *vicRegister = ((*vicRegister) & 0x0f) | (_screen << 4);
-        *basicRegister = _screen << 2;
+    SET_VIDEO(_screen);
+    SET_BASIC_VIDEO(_screen);
 
+}
+
+void mr_cleanup_hd() {
+
+    int i;
+    unsigned char* dst = (unsigned char*)0xd800, * src = (unsigned char*)0x8c00;
+
+    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
+        *(dst + i) = *(src + i);
     }
 
-    void mr_cleanup_hd() {
+    SET_BACKGROUND_COLOR(MR_COLOR_BLUE);
+    SET_DATA_DIRECTION();
+    SET_BANK(0);
+    SET_VIDEO(MR_SCREEN_DEFAULT);
+    SET_BASIC_VIDEO(MR_SCREEN_DEFAULT);
+    SET_CHARSET(MR_TILESET_DEFAULT);
 
-        unsigned char* vicRegister2 = (unsigned char*)0xd021;
-        unsigned char* vicRegister3 = (unsigned char*)0xdd00;
-        int i;
-        unsigned char* dst = (unsigned char*)0xd800, * src = (unsigned char*)0x8c00;
+    VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
+    ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
-        for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-            *(dst + i) = *(src + i);
-        }
+}
 
-        *vicRegister2 = MR_COLOR_BLUE;
-        *vicRegister3 = ((*vicRegister3) & 0xfc); // bank 3
+void mr_wait_vbl() {
+    while (*((unsigned char*)0xd012) != 0xff) {}
+}
 
-        mr_show(1);
+void mr_doublebuffer_switch_hd(unsigned char _screen) {
+    unsigned char _other = (_screen == DB1) ? DB2 : DB1;
 
-    }
+    memcpy(SM(_screen), SM(_other), 0x400);
+}
 
-    void mr_wait_vbl() {
-        while (*((unsigned char*)0xd012) != 0xff) {}
-    }
-
-    void mr_doublebuffer_switch_hd(unsigned char _screen) {
-        unsigned char _other = (_screen == DB1) ? DB2 : DB1;
-
-        memcpy(SM(_screen), SM(_other), 0x400);
-    }
-
-    void mr_tileset_visible_hd(unsigned char _tileset) {
-
-        /* Address 53272 ($D018)is a VIC - II register that generally tells the graphics 
-            chip where to "look for graphics", in conjunction with both the text screenand with 
-            bitmap graphics.
-
-            When in text screen mode, the VIC - II looks to 53272 for information on where 
-            the character setand text screen character RAM is located :
-
-            The four most significant bits form a 4 - bit number in the range 0 thru 15 : 
-                Multiplied with 1024 this gives the start address for the screen character RAM.
-            Bits 1 thru 3 (weights 2 thru 8) form a 3 - bit number in the range 0 thru 7 : 
-                Multiplied with 2048 this gives the start address for the character set.*/
-
-        *((unsigned char*)0xd018) = (*((unsigned char*)0xd018) & 0xf1) | (( _tileset & 0x07 )<<1);
-
-    }
+void mr_tileset_visible_hd(unsigned char _tileset) {
+    SET_CHARSET(_tileset);
+}
 
 #endif

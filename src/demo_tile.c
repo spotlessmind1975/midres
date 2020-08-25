@@ -8,81 +8,145 @@
  * RESIDENT MODULE                                                          *
  ****************************************************************************/
 
- /****************************************************************************
-  ** INCLUDE SECTION
-  ****************************************************************************/
+/****************************************************************************
+ ** INCLUDE SECTION
+ ****************************************************************************/
 
 #include <stdio.h>
 #include <cc65.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "main.h"
 #include "midres.h"
 
-  /****************************************************************************
-  ** RESIDENT VARIABLES SECTION
-  ****************************************************************************/
+/****************************************************************************
+ ** RESIDENT VARIABLES SECTION
+ ****************************************************************************/
 
-  // All variables defined as global within the resident body of the code are 
-  // accessible from all modules, both resident and changing ones.
+// All variables defined as global within the resident body of the code are 
+// accessible from all modules, both resident and changing ones.
 
-  /****************************************************************************
-  ** RESIDENT FUNCTIONS SECTION
-  ****************************************************************************/
+/****************************************************************************
+ ** RESIDENT FUNCTIONS SECTION
+ ****************************************************************************/
 
-  // All the functions defined within the resident body of the code are 
-  // accessible from all modules, both resident and changing ones.
+// All the functions defined within the resident body of the code are 
+// accessible from all modules, both resident and changing ones.
 
 /****************************************************************************
  ** RESIDENT MAIN FUNCTION
  ****************************************************************************/
 
- // This is the main function body. The purpose is to call the various 
- // functions present in the modules, taking care to load the relevant 
- // code / data into memory(in the "overlay" area).
+// Tile with the ground dawing in "tiles.bin" (currently not used)
+#define		TILE_GROUND			0
 
-int x = 0, j=0;
+// Tile with the first frame of rotating wheel
+#define		TILE_WHEEL_BEGIN	1
 
-mr_mixel data[8] = {
-	0xaa,
-	0x55,
-	0xaa,
-	0x55,
-	0x00,
-	0x0f,
-	0xf0,
-	0xff
-};
+// Tile with the last frame of rotating wheel
+#define		TILE_WHEEL_END		4
+
+// Tile with the dawing of a small drop in "tiles.bin"
+#define		TILE_DROP			5
+
+// Tiles with the dawing of a large drop in "tiles.bin" (currently not used)
+#define		TILE_BDROP_TL		6
+#define		TILE_BDROP_TR		7
+#define		TILE_BDROP_BL		8
+#define		TILE_BDROP_BR		9
+
+// Number of tiles available on "tiles.bin"
+#define		TILE_COUNT			10
+
+// First tile for drop movement: it starts from the last
+// used, and move forward of one tile.
+#define		TILE_DROP_VERTICAL	TILE_COUNT + 1
+
+// Number of drops to animate -- currently, there is
+// space for one drop for column. The first and last
+// column is occupied by "in place" animation of wheel.
+#define		DROP_COUNT			( MR_SCREEN_WIDTH - 2 )
+
+// Vertical position of each drop on the screen.
+mr_position_tile drops[DROP_COUNT];
+
+// Color assigned to each drop on the screen.
+mr_color dropsColor[DROP_COUNT];
+
+// Index of the animation of the frame.
+mr_tile wheels[4];
+
+// This is the main function body. The purpose is to call the various 
+// functions present in the modules, taking care to load the relevant 
+// code / data into memory(in the "overlay" area).
 
 void demo_tile() {
-	
+
+	// Used as iterator.
 	mr_tileset i;
 
+	// Initialize random number generator
+	srand(clock());
+
+	// Initialize graphical subsystem
 	mr_init();
 
+	// Clear screen bitmap.
 	mr_clear_bitmap(MR_SCREEN_DEFAULT);
-	mr_tileset_copy(MR_TILESET_DEFAULT, MR_TILESET_0);
-	mr_tileset_load("heart.tiles", MR_TILESET_0, 0, 1);
-	mr_tile_redefine(MR_TILESET_0, 0, data);
-	mr_tile_prepare_horizontal(15, 0, 1);
-	mr_tile_prepare_vertical(15, 0, 40);
+
+	// Load the tiles from the disk on the first tileset space.
+	// We load all tiles (TILE_COUNT) from first position (0).
+	mr_tileset_load("tiles.bin", MR_TILESET_0, 0, TILE_COUNT);
+
+	// Precalculate the vertical movement for drop tile.
+	mr_tile_prepare_vertical(MR_TILESET_0, TILE_DROP, TILE_DROP_VERTICAL);
+
+	// Enable custom font.
 	mr_tileset_visible(MR_TILESET_0);
 
-	for (i = 0; i < 16; ++i) {
-		mr_puttile(MR_SCREEN_DEFAULT, i, 1, 40+i, MR_COLOR_YELLOW+(i&1));
+	// Initialize the frames for animation of each wheel.
+	for (i = 0; i < 4; ++i) {
+		wheels[i] = TILE_WHEEL_BEGIN + i;
 	}
 
-	getchar();
+	// Initialize the vertical position of each drop, and its color.
+	for (i = 0; i < DROP_COUNT; ++i) {
+		drops[i] = ( rand() & 0x1f ) + ( rand() & 0x1f );
+		dropsColor[i] = (rand() & 0x03)+(rand() & 0x03);
+	}
 
+	// Endless loop...
 	while (1) {
-		for (i = 0; i < MR_SCREEN_HEIGHT*8; ++i) {
-			// mr_tile_moveto_horizontal(MR_SCREEN_DEFAULT, i, 1, 1, MR_COLOR_GREEN);
-			mr_tile_moveto_vertical(MR_SCREEN_DEFAULT, 0, i, 40, MR_COLOR_YELLOW);
-			for (j = 0; j < 10000; ++j) { (int)j; }
+
+		// Update frames for wheels.
+		for (i = 0; i < 4; ++i) {
+			++wheels[i];
+			if (wheels[i] >= TILE_WHEEL_END) {
+				wheels[i] = TILE_WHEEL_BEGIN;
+			}
+		}
+
+		// Draw rotating wheels at the angles of the screen.
+		mr_puttile(MR_SCREEN_DEFAULT, 0, 0, wheels[0], MR_COLOR_RED);
+		mr_puttile(MR_SCREEN_DEFAULT, MR_SCREEN_WIDTH-1, 0, wheels[1], MR_COLOR_RED);
+		mr_puttile(MR_SCREEN_DEFAULT, 0, MR_SCREEN_HEIGHT-1, wheels[2], MR_COLOR_RED);
+		mr_puttile(MR_SCREEN_DEFAULT, MR_SCREEN_WIDTH-1, MR_SCREEN_HEIGHT-1, wheels[3], MR_COLOR_RED);
+
+		// For each drop...
+		for (i = 1; i < DROP_COUNT; ++i) {
+
+			// Move drop on the screen.
+			mr_tile_moveto_vertical(MR_SCREEN_DEFAULT, i*8, drops[i], TILE_DROP_VERTICAL, MR_COLOR_WHITE+dropsColor[i]);
+
+			// Update drop's vertical position. If the drop arrives to
+			// the bottom of the screen, let's move it on the top.
+			++drops[i];
+			if (drops[i] >= MR_SCREEN_HEIGHT * 8 ) {
+				drops[i] = 0;
+			}
 		}
 	}
-
-	getchar();
-	mr_tileset_visible(MR_TILESET_DEFAULT);
 
 }
 

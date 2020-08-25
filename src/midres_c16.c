@@ -31,29 +31,48 @@
 
 #ifdef __C16__
 
+#define SET_VIDEO( _screen ) \
+        *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07 ) | ( (_screen) << 3 );
+
+#define SET_BACKGROUND_COLOR( _color ) \
+        *((unsigned char*)0xff15) = _color;
+
+#define WAIT_VBL( ) \
+    while ((*(unsigned char*)0xff1c) & 1 == 0) {}
+
+#define SET_CHARSET( _tileset ) \
+    /* *((unsigned char *)0xff12) = *((unsigned char *)0xff12) & 0xfb; */ \
+    *((unsigned char *)0xff13) = ( *((unsigned char *)0xff13) & 0x03 ) | ( (_tileset) << 2 );
+
     void mr_init_hd() {
 
-        *((unsigned char*)0xff15) = MR_COLOR_BLACK;
-        *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07 ) | ( (MR_SCREEN_DEFAULT) << 3 );
+        SET_BACKGROUND_COLOR( MR_COLOR_BLACK );
+        SET_VIDEO(MR_SCREEN_DEFAULT);
+        SET_CHARSET(MR_TILESET_DEFAULT);
+
+        VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
+        ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
     }
 
     void mr_show_hd(unsigned char _screen) {
 
+        SET_VIDEO(_screen);
+
         VISIBLE_SCREEN = _screen;
         ENABLED_SCREEN = _screen;
-        *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07) | ( (_screen) << 3);
 
     }
 
     void mr_cleanup_hd() {
 
-        *((unsigned char*)0xff15) = MR_COLOR_WHITE;
+        SET_BACKGROUND_COLOR(MR_COLOR_WHITE);
+        SET_VIDEO(MR_SCREEN_DEFAULT);
 
     }
 
     void mr_wait_vbl() {
-        while ((*(unsigned char*)0xff1c) & 1 == 0) { }
+        WAIT_VBL();
     }
 
     void mr_doublebuffer_switch_hd(unsigned char _screen) {
@@ -64,7 +83,7 @@
     }
 
     void mr_tileset_visible_hd(unsigned char _tileset) {
-
+        SET_CHARSET(_tileset);
     }
 
 #endif

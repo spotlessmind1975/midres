@@ -62,6 +62,10 @@
 
 	typedef unsigned char mr_position;
 
+	// The position of the tile on the screen at maximum resolution.
+
+	typedef int mr_tile_position;
+
 	// The library manages a certain number of screens, and it is possible to
 	// indicate them with this type of data.
 
@@ -626,13 +630,13 @@
 	void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);
+	void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color);
 
 	// Redefine a subset of N tiles by "shifting" vertically a tile
 	void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 
 	// Writes a tile into a bitmap at *precise* vertical position.
-	void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);
+	void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color);
 
 	// Redefine a subset of N tiles by "rolling" horizontally a tile
 	void mr_tile_hrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination);

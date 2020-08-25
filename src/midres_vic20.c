@@ -100,50 +100,53 @@
 
 void mr_init_hd() {
 
-        int i = 0;
+    int i = 0;
         
-        SET_CHARSET(MR_TILESET_DEFAULT);
-        SET_VIDEO(MR_SCREEN_DEFAULT);
-        SET_BACKGROUND_COLOR(MR_COLOR_BLACK);
+    SET_CHARSET(MR_TILESET_DEFAULT);
+    SET_VIDEO(MR_SCREEN_DEFAULT);
+    SET_BACKGROUND_COLOR(MR_COLOR_BLACK);
 
-        for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-            putchar(' ');
-        }
+    VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
+    ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
+    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
+        putchar(' ');
     }
 
-    void mr_show_hd(unsigned char _screen) {
+}
 
-        VISIBLE_SCREEN = _screen;
-        ENABLED_SCREEN = _screen;
+void mr_show_hd(unsigned char _screen) {
 
-        SET_VIDEO(_screen);
+    VISIBLE_SCREEN = _screen;
+    ENABLED_SCREEN = _screen;
 
-    }
+    SET_VIDEO(_screen);
 
-    void mr_cleanup_hd() {
+}
 
-        SET_CHARSET(MR_TILESET_DEFAULT);
-        SET_VIDEO(MR_SCREEN_DEFAULT);
-        SET_BACKGROUND_COLOR(MR_COLOR_WHITE);
+void mr_cleanup_hd() {
 
-    }
+    SET_CHARSET(MR_TILESET_DEFAULT);
+    SET_VIDEO(MR_SCREEN_DEFAULT);
+    SET_BACKGROUND_COLOR(MR_COLOR_WHITE);
 
-    void mr_wait_vbl() {
+}
 
-        WAIT_VBL();
+void mr_wait_vbl() {
 
-    }
+    WAIT_VBL();
 
-    void mr_doublebuffer_switch_hd(unsigned char _screen) {
-        unsigned char _other = (_screen == DB1) ? DB2 : DB1;
+}
 
-        memcpy(SM(_screen), SM(_other), MR_SCREEN_RAM_SIZE);
+void mr_doublebuffer_switch_hd(unsigned char _screen) {
+    unsigned char _other = (_screen == DB1) ? DB2 : DB1;
 
-    }
+    memcpy(SM(_screen), SM(_other), MR_SCREEN_RAM_SIZE);
 
-    void mr_tileset_visible_hd(unsigned char _tileset) {
-        SET_CHARSET(_tileset);
-    }
+}
+
+void mr_tileset_visible_hd(unsigned char _tileset) {
+    SET_CHARSET(_tileset);
+}
 
 #endif

@@ -24,7 +24,7 @@ PROGRAMNAME := midres
 #  - vic2024: single executable for 24K VIC 20 (named on disk: "midres-single")
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
-TARGETS := c64 c64ovl vic20 vic20ovl vic2024 plus4
+TARGETS := c64 vic2024 plus4
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
@@ -186,6 +186,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64:	$(subst PLATFORM,c64,$(OBJS))
 	$(CC1541) -f image6402.mpic -w $(DATADIR)/image6402.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f image6403.mpic -w $(DATADIR)/image6403.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f image6404.mpic -w $(DATADIR)/image6404.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 
 # Let's define rules to compile the demo under C=64 as the overlay version.
 # Moreover, all the executable files will be put on a D64 1541 image, 
@@ -204,9 +205,10 @@ $(EXEDIR)/$(PROGRAMNAME).c64ovl:	$(subst PLATFORM,c64ovl,$(OBJS))
 	$(CC1541) -f mr5 -w $(EXEDIR)/$(PROGRAMNAME).c64ovl.bitblit $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f slideshow -w $(DATADIR)/slideshow64.dat $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f image6401.mpic -w $(DATADIR)/image6401.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
-	$(CC1541) -f image6402.mpic -w $(DATADIR)/image6402.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
-	$(CC1541) -f image6403.mpic -w $(DATADIR)/image6403.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
-	$(CC1541) -f image6404.mpic -w $(DATADIR)/image6404.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
+	$(CC1541) -f image6402.mpic -w $(DATADIR)/image6402.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
+	$(CC1541) -f image6403.mpic -w $(DATADIR)/image6403.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
+	$(CC1541) -f image6404.mpic -w $(DATADIR)/image6404.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 
 #$(CC1541) -f test.pic -w $(DATADIR)/test.pic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -227,6 +229,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20:	$(subst PLATFORM,vic20,$(OBJS))
 	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 
 # Let's define rules to compile the demo under VIC 20 as a one and single 
 # executable file. This compilation will fails since there is no enough RAM.
@@ -242,6 +245,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic2024:	$(subst PLATFORM,vic2024,$(OBJS))
 	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 
 # Let's define rules to compile the demo under VIC20 as the overlay version.
 # This is the only way to compile this program in order to be able to be 
@@ -252,17 +256,18 @@ obj/vic20ovl/%.o:	$(SOURCES)
 
 $(EXEDIR)/$(PROGRAMNAME).vic20ovl:	$(subst PLATFORM,vic20ovl,$(OBJS))
 	$(CC) -Ln demo20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).vic20ovl.map -C cfg/vic20-overlay.cfg  -o $(EXEDIR)/$(PROGRAMNAME).vic20ovl $(subst PLATFORM,vic20ovl,$(OBJS))
-	$(CC1541) -f $(PROGRAMNAME) -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f mr1 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.screen $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f mr2 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.drawing $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f mr3 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.screen2 $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f mr4 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.drawing2 $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f mr5 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.bitblit $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f slideshow -w $(DATADIR)/slideshow20.dat $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f image2001.mpic -w $(DATADIR)/image2001.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
+	$(CC1541) -f $(PROGRAMNAME) -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f mr1 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.screen $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f mr2 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.drawing $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f mr3 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.screen2 $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f mr4 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.drawing2 $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f mr5 -w $(EXEDIR)/$(PROGRAMNAME).vic20ovl.bitblit $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f slideshow -w $(DATADIR)/slideshow20.dat $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f image2001.mpic -w $(DATADIR)/image2001.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 
 ## C16 ------------------------------------------------------------------------
 
@@ -282,6 +287,7 @@ $(EXEDIR)/$(PROGRAMNAME).c16:	$(subst PLATFORM,c16,$(OBJS))
 	$(CC1541) -f image1602.mpic -w $(DATADIR)/image1602.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f image1603.mpic -w $(DATADIR)/image1603.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f image1604.mpic -w $(DATADIR)/image1604.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 
 ## PLUS4 ------------------------------------------------------------------------
 
@@ -302,6 +308,7 @@ $(EXEDIR)/$(PROGRAMNAME).plus4:	$(subst PLATFORM,plus4,$(OBJS))
 	$(CC1541) -f image1602.mpic -w $(DATADIR)/image1602.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f image1603.mpic -w $(DATADIR)/image1603.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f image1604.mpic -w $(DATADIR)/image1604.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 
 ###############################################################################
 ## FINAL RULES
