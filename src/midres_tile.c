@@ -93,6 +93,51 @@ void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _d
 
 }
 
+// Redefine a subset of N tiles by "shifting" horizontally a tile
+void mr_tile_prepare_horizontal_extended(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
+    mr_mixel* source = (mr_mixel*)(TM(_tileset) + _source * 8);
+    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+
+    mr_position i, b;
+
+    mr_position j, k;
+
+    for (j = 0; j < _h; ++j) {
+        for (i = 0; i < 9; ++i) {
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                mr_mixel e = *((mr_mixel*)source);
+                mr_mixel m = e >> i;
+                *destination = m;
+            }
+            source -= 8;
+        }
+
+        for (k = 0; k < (_w - 1); ++k) {
+            for (i = 0; i < 9; ++i) {
+                for (b = 0; b < 8; ++b, ++source, ++destination) {
+                    mr_mixel d = *((mr_mixel*)source);
+                    mr_mixel e = *((mr_mixel*)source+8);
+                    mr_mixel m = ( e >> i ) | ( d << ( 8 - i ));
+                    *destination = m;
+                }
+                source -= 8;
+            }
+            source += 8;
+        }
+
+        for (i = 0; i < 9; ++i) {
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                mr_mixel d = *((mr_mixel*)source);
+                mr_mixel n = d & (0xff >> (8 - i));
+                *destination = (n << (8 - i));
+            }
+            source -= 8;
+        }
+        source += 8;
+    }
+
+}
+
 // Redefine a subset of N tiles by "shifting" vertically a tile
 void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source*8);
@@ -186,6 +231,35 @@ void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_tile_
 
 }
 
+// Writes a tile into a bitmap at *precise* horizontal position.
+void _mr_tile_moveto_horizontal_extended(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color) {
+
+    int offset;
+
+    mr_position i, j;
+
+    offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
+
+    for (i = 0; i < _h; ++i) {
+        for (j = 0; j < _w+1; ++j) {
+            if (((_x >> 3) + j) >= 0 && (((_x >> 3) + j) < MR_SCREEN_WIDTH)) {
+                _screen[offset] = _tile + (_x & 0x07) + 1;
+                _colormap[offset] = _color;
+            }
+            ++offset;
+            _tile += 9;
+        }
+        /*if (((_x >> 3) + j + 1) < MR_SCREEN_WIDTH) {
+            _screen[offset + 1] = _tile + (_x & 0x07) + 1;
+            _colormap[offset + 1] = _color;
+            _tile += 9;
+        }*/
+        offset += MR_SCREEN_WIDTH - (_w + 1);
+    }
+
+}
+
+
 // Writes a tile into a bitmap at *precise* vertical position.
 void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color) {
 
@@ -195,10 +269,11 @@ void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_tile_po
 
     _screen[offset] = _tile + (_y & 0x07) + 1;
     _colormap[offset] = _color;
-    if (( offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
+    if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
         _colormap[offset + MR_SCREEN_WIDTH] = _color;
         _screen[offset + MR_SCREEN_WIDTH] = _tile + (_y & 0x07) + 10;
     }
+
 }
 
 // Clear a tile of a bitmap.
@@ -234,4 +309,46 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
     fclose(f);
 
 }
+
+void _mr_puttiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color) {
+
+    int offset;
+
+    offset = _y * MR_SCREEN_WIDTH + _x;
+
+    for (; _tile_count != 255; --_tile_count, ++_tile_start) {
+        _screen[offset] = _tile_start;
+        _colormap[offset] = _color;
+    }
+
+}
+
+// Draws a vertical line onto the bitmap.
+void _mr_vtiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color) {
+
+    mr_position y1 = _y1;
+    int offset = _y1 * MR_SCREEN_WIDTH + _x;
+
+    for (; y1 <= _y2; ++y1) {
+        _screen[offset] = _tile;
+        _colormap[offset] = _color;
+        offset += MR_SCREEN_WIDTH;
+    }
+
+}
+
+// Draws a horizontal line onto the bitmap.
+void _mr_htiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _x2, mr_position _y, mr_tile _tile, mr_color _color) {
+
+    mr_position x1 = _x1;
+    int offset = _y * MR_SCREEN_WIDTH + x1;
+
+    for (; x1 <= _x2; ++x1 ) {
+        _screen[offset] = _tile;
+        _colormap[offset] = _color;
+        ++offset;
+    }
+
+}
+
 #endif

@@ -35,7 +35,7 @@
 #define BUILDINGS_HEIGHT        5
 
 // Distance (in mixels) between buildings
-#define BUILDINGS_DISTANCE      ( MR_SCREEN_WIDTH*2 - (BUILDINGS_OFFSET*2) ) / BUILDINGS_COUNT
+#define BUILDINGS_DISTANCE      ( MR_SCREEN_WIDTH ) / BUILDINGS_COUNT
 
 // Width of a building (in mixels)
 #define BUILDINGS_WIDTH         BUILDINGS_DISTANCE * 7 / 12

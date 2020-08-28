@@ -86,4 +86,7 @@
         SET_CHARSET(_tileset);
     }
 
+    unsigned char mr_key_pressed_hd() {
+
+    }
 #endif

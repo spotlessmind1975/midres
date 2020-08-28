@@ -72,4 +72,10 @@ void main(void) {
 
 #endif
 
+#ifdef __GAME_AIR_ATTACK__
+
+    game_air_attack();
+
+#endif
+
 }
