@@ -35,11 +35,13 @@
 // All the functions defined within the resident body of the code are 
 // accessible from all modules, both resident and changing ones.
 
-// Number of buildings to draw in a screen (it depends on width)
-#define BUILDINGS_COUNT         13
-
-// Height of the root of the buildings (from the top of the screen)
-#define BUILDINGS_HEIGHT        5
+#ifdef __VIC20__
+	// Number of buildings to draw in a screen (it depends on width)
+	#define BUILDINGS_COUNT         7
+#else
+	// Number of buildings to draw in a screen (it depends on width)
+	#define BUILDINGS_COUNT         13
+#endif
 
 // Width of a building
 #define BUILDINGS_WIDTH         3
@@ -430,6 +432,11 @@ void gameloop() {
 
 		// Avoid flickering -- wait for VBL before continue
 		mr_wait_vbl();
+#ifdef __VIC20__
+		for (j = 0; j < 200; ++j) { j; };
+		for (j = 0; j < 200; ++j) { j; };
+#endif
+
 	}
 
 }
@@ -453,7 +460,28 @@ void game_air_attack() {
 	// Clear screen bitmap.
 	mr_clear_bitmap(MR_SCREEN_DEFAULT);
 
+	mr_load("aaintro.mpic", MR_AUX_DEFAULT);
+
+	mr_uncompress(MR_AUX_DEFAULT, MR_SCREEN_DEFAULT);
+
 	prepare_graphics();
+
+	mr_clear_bitmap(MR_SCREEN_DEFAULT);
+
+	while (!mr_key_pressed()) {
+		i = i ^ 1;
+		if (i == 0) {
+			mr_puttiles(MR_SCREEN_DEFAULT, ( MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH ) >> 1, ( MR_SCREEN_HEIGHT - 1 ) >> 1, TILE_PRESSANYKEY, TILE_PRESSANYKEY_WIDTH, MR_COLOR_WHITE);
+		}
+		else {
+			for (j = 0; j < TILE_PRESSANYKEY_WIDTH; ++j) {
+				mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1 ) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
+			}
+		}
+		mr_wait_vbl();
+	}
+
+	mr_clear_bitmap(MR_SCREEN_DEFAULT);
 
 	draw_random_buildings();
 
@@ -461,9 +489,19 @@ void game_air_attack() {
 
 	mr_clear_bitmap(MR_SCREEN_DEFAULT);
 
-	mr_puttiles(MR_SCREEN_DEFAULT, ( 40 - TILE_GAMEOVER_WIDTH ) >> 1, 12, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, MR_COLOR_WHITE);
-
-	getchar();
+	i = 0;
+	while (!mr_key_pressed()) {
+		i = i ^ 1;
+		if (i == 0) {
+			mr_puttiles(MR_SCREEN_DEFAULT, ( MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH ) >> 1, ( MR_SCREEN_HEIGHT - 1 ) >> 1, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, MR_COLOR_WHITE);
+		}
+		else {
+			for (j = 0; j < TILE_GAMEOVER_WIDTH; ++j) {
+				mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1 ) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
+			}
+		}
+		mr_wait_vbl();
+	}
 
 }
 
