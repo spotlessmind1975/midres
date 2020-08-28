@@ -24,7 +24,7 @@ PROGRAMNAME := midres
 #  - vic2024: single executable for 24K VIC 20 (named on disk: "midres-single")
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
-TARGETS := vic2024
+TARGETS := plus4
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres

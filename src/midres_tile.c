@@ -316,9 +316,10 @@ void _mr_puttiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_pos
 
     offset = _y * MR_SCREEN_WIDTH + _x;
 
-    for (; _tile_count != 255; --_tile_count, ++_tile_start) {
+    for (; _tile_count != 0; --_tile_count, ++_tile_start) {
         _screen[offset] = _tile_start;
         _colormap[offset] = _color;
+        ++offset;
     }
 
 }

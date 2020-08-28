@@ -682,7 +682,7 @@
 	#define mr_puttile(_screen, _x, _y, _tile, _color) _mr_puttile(SM(_screen), CM(_screen), _x, _y, _tile, _color );
 
 	// Writes a tile into a bitmap.
-	#define mr_puttiles(_screen, _x, _y, _tile, _count, _color) _mr_puttile(SM(_screen), CM(_screen), _x, _y, _tile, _count, _color );
+	#define mr_puttiles(_screen, _x, _y, _tile, _count, _color) _mr_puttiles(SM(_screen), CM(_screen), _x, _y, _tile, _count, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_horizontal(_screen, _x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(_screen), CM(_screen), _x, _y, _tile, _color );
@@ -694,10 +694,10 @@
 	#define mr_tile_moveto_vertical(_screen, _x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(_screen), CM(_screen), _x, _y, _tile, _color );
 
 	// Clear a tile of a bitmap.
-	#define mr_cleartile(_screen, _x, _y, _tile, _color) _mr_cleartile(SM(_screen), _x, _y, _tile );
+	#define mr_cleartile(_screen, _x, _y) _mr_cleartile(SM(_screen), _x, _y);
 
 	// Reads a tile from a bitmap.
-	#define mr_gettile(_screen, _x, _y, _tile, _color) _mr_gettile(SM(_screen), CM(_screen), _x, _y, _tile );
+	#define mr_gettile(_screen, _x, _y) _mr_gettile(SM(_screen), CM(_screen), _x, _y)
 
 	// Draws a vertical line of tiles on the bitmap.
 	#define mr_vtiles(_screen, _x, _y1, _y2, _tile, _color) _mr_vtiles(SM(_screen), CM(_screen), _x, _y1, _y2, _tile, _color);
@@ -725,7 +725,7 @@
 	#define mr_tile_moveto_verticalv(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Clear a tile of a bitmap.
-	#define mr_cleartilev(_x, _y, _tile, _color) _mr_cleartile(SM(VISIBLE_SCREEN), _x, _y, _tile );
+	#define mr_cleartilev(_x, _y) _mr_cleartile(SM(VISIBLE_SCREEN), _x, _y);
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_puttilehv(_x, _y, _tile, _color) _mr_puttile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
@@ -734,7 +734,7 @@
 	#define mr_puttilevv(_x, _y, _tile, _color) _mr_puttile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Reads a tile from a bitmap.
-	#define mr_gettilev(_x, _y, _tile, _color) _mr_gettile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile );
+	#define mr_gettilev(_x, _y) _mr_gettile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y)
 
 	// Draws a vertical line of tiles on the bitmap.
 	#define mr_vtilesv(_screen, _x, _y1, _y2, _tile, _color) _mr_vtiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y1, _y2, _tile, _color);
@@ -762,10 +762,10 @@
 	#define mr_tile_moveto_verticale(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
 
 	// Clear a tile of a bitmap.
-	#define mr_cleartilee(_x, _y, _tile, _color) _mr_cleartile(SM(ENABLED_SCREEN), _x, _y, _tile );
+	#define mr_cleartilee(_x, _y, _tile) _mr_cleartile(SM(ENABLED_SCREEN), _x, _y);
 
 	// Reads a tile from a bitmap.
-	#define mr_gettilee(_x, _y, _tile, _color) _mr_gettile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile );
+	#define mr_gettilee(_x, _y, _tile, _color) _mr_gettile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile )
 
 	// Draws a vertical line of tiles on the bitmap.
 	#define mr_vtilese(_screen, _x, _y1, _y2, _tile, _color) _mr_vtiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y1, _y2, _tile, _color);
