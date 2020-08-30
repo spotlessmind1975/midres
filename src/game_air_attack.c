@@ -76,6 +76,9 @@ unsigned char buildingMap[MR_SCREEN_WIDTH];
 // Index of animating frame for the roofs' flaming.
 unsigned char buildingFlaming[BUILDINGS_COUNT];
 
+// Count the buildings destroyed.
+unsigned char buildingsDestroyedCount = 0;
+
 // Used as temporary indexes.
 mr_position i = 0;
 mr_position j = 0;
@@ -282,8 +285,22 @@ void gameloop() {
 
 		// First of all, animate the airplane. This means that
 		// we have to move and draw the airplane orizontally.
-		// Move to right of 1 pixel.
-		++airplane_x;
+		// If buildings are all destroyed, move faster!
+		if (buildingsDestroyedCount >= BUILDINGS_COUNT) {
+			mr_cleartile(MR_SCREEN_DEFAULT, ( airplane_x >> 3)-1, airplane_y >> 3);
+			mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3), airplane_y >> 3);
+			mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3) +1, airplane_y >> 3);
+			if (TILE_AIRPLANE_STATIC_HEIGHT > 1) {
+				mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3) -1, (airplane_y >> 3) + 1);
+				mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3), (airplane_y >> 3) + 1);
+				mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3), (airplane_y >> 3) + 1);
+			}
+			airplane_x += 10;
+		}
+		else {
+			// Move to right of 1 pixel normally.
+			++airplane_x;
+		}
 
 		// If the airplane reached the end of the screen, we have
 		// to move it down of one row (and outside of the visible area).
@@ -357,6 +374,7 @@ void gameloop() {
 
 					if (buildingHeights[building] >= MR_SCREEN_HEIGHT - 1) {
 						buildingHeights[building] = MR_SCREEN_HEIGHT - 1;
+						buildingsDestroyedCount++;
 					}
 
 					// Activate the flaming effect!
