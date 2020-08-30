@@ -238,7 +238,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20:	$(subst PLATFORM,vic20,$(OBJS))
 	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
+	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro64.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 
 # Let's define rules to compile the demo under VIC 20 as a one and single 
@@ -256,7 +256,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic2024:	$(subst PLATFORM,vic2024,$(OBJS))
 	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
-	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro64.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 
 # Let's define rules to compile the demo under VIC20 as the overlay version.
@@ -280,7 +280,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20ovl:	$(subst PLATFORM,vic20ovl,$(OBJS))
 	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
-	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro64.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 
 ## C16 ------------------------------------------------------------------------

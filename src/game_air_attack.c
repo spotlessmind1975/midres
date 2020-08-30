@@ -21,6 +21,8 @@
 #include "midres.h"
 #ifdef __PLUS4__
 #include "game_air_attack_tiles4.h"
+#elif __VIC20__
+#include "game_air_attack_tiles20.h"
 #else
 #include "game_air_attack_tiles.h"
 #endif
