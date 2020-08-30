@@ -102,7 +102,7 @@ mr_position score[4];
 mr_position drops[4];
 
 // Store the level
-mr_position level[2] = { 0, 0 };
+mr_position level[2] = { 1, 0 };
 
 // Draw the _number-nth building of _height bricks, using
 // the a specific tile for wall and roof.
@@ -186,7 +186,13 @@ void draw_random_buildings() {
 		// we use the bitmask tecnique, by splitting the
 		// number generation in a sum of smaller random numbers,
 		// obtained by masking the given result for the call.
-		buildingHeights[i] = 4 + (rand() & 0x0f) + (rand() & 0x03);
+		// The offset is given by the level number.
+		buildingHeights[i] = (rand() & 0x0f) + (rand() & 0x03) - (level[0] + 10 * level[1]);
+
+		// The maximum height of a building is MR_SCREEN_HEIGHT - 3!
+		if (buildingHeights[i] > MR_SCREEN_HEIGHT || buildingHeights[i] < 3 ) {
+			buildingHeights[i] = 3;
+		}
 
 #ifdef TILE_WALL2
 		// Let's choose the kind of wall and roof.
@@ -298,8 +304,9 @@ void gameloop() {
 			airplane_x += 10;
 		}
 		else {
-			// Move to right of 1 pixel normally.
-			++airplane_x;
+			// Move to right of a number of pixel related to the current
+			// level of difficulty.
+			airplane_x += ( level[1] + 1 );
 		}
 
 		// If the airplane reached the end of the screen, we have
