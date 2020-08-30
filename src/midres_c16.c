@@ -30,6 +30,7 @@
     // function declared at the resident module level.
 
 #ifdef __C16__
+#ifndef __PLUS4__
 
 #define SET_VIDEO( _screen ) \
         *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07 ) | ( (_screen) << 3 );
@@ -89,4 +90,5 @@ void mr_tileset_visible_hd(unsigned char _tileset) {
 unsigned char mr_key_pressed_hd() {
     return (*(unsigned char*)0x00c5) != 0x40;
 }
+#endif
 #endif

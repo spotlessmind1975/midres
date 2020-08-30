@@ -35,10 +35,7 @@
 #define	MR_SCREEN_DB2					MR_SCREEN_1
 
 // List of available tilesets:
-#define MR_TILESET_ROM_0				34
-#define MR_TILESET_ROM_1				35
-#define MR_TILESET_ROM_2				36
-#define MR_TILESET_ROM_3				37
+#define MR_TILESET_ROM_0				52
 #define MR_TILESET_0					5
 #define MR_TILESET_1					6
 #define MR_TILESET_2					7
@@ -49,7 +46,7 @@
 #define MR_TILESET_9					12
 #define MR_TILESET_A					13
 #define MR_TILESET_COUNT				14
-#define MR_TILESET_DEFAULT				MR_TILESET_ROM_1
+#define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
 
 // List of available areas for bit blits:
 #define MR_AUX_0						2

@@ -40,7 +40,7 @@
 #define MR_TILESET_2					14
 #define MR_TILESET_3					15
 #define MR_TILESET_COUNT				10
-#define MR_TILESET_DEFAULT				MR_TILESET_ROM_1
+#define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
 
 // List of available areas for bit blits:
 #define MR_AUX_0						6

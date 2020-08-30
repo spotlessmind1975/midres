@@ -30,7 +30,6 @@
     // function declared at the resident module level.
 
 #ifdef __PLUS4__
-#ifndef __C16__
 
 #define SET_VIDEO( _screen ) \
         *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07 ) | ( (_screen) << 3 );
@@ -42,15 +41,16 @@
     while ((*(unsigned char*)0xff1c) & 1 == 0) {}
 
 #define SET_CHARSET( _tileset ) \
-    *((unsigned char *)0xff12) = (*((unsigned char*)0xff12) | 0xfb ) \
-    *((unsigned char *)0xff07) = (*((unsigned char*)0xff07) | 0x80 ) \
+    /* *((unsigned char *)0xff12) = (*((unsigned char*)0xff12) & 0xfb ); */ \
+    /* *((unsigned char *)0xff07) = (*((unsigned char*)0xff07) | 0x80 ); */\
     *((unsigned char *)0xff13) = ( *((unsigned char *)0xff13) & 0x03 ) | ( (_tileset) << 2 );
 
 void mr_init_hd() {
 
-    //SET_BACKGROUND_COLOR(MR_COLOR_BLACK);
-    //SET_VIDEO(MR_SCREEN_DEFAULT);
-    //SET_CHARSET(MR_TILESET_DEFAULT);
+    SET_BACKGROUND_COLOR(MR_COLOR_BLACK);
+    SET_VIDEO(MR_SCREEN_DEFAULT);
+
+    // SET_CHARSET(MR_TILESET_DEFAULT);
 
     VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
     ENABLED_SCREEN = MR_SCREEN_DEFAULT;
@@ -85,12 +85,11 @@ void mr_doublebuffer_switch_hd(unsigned char _screen) {
 }
 
 void mr_tileset_visible_hd(unsigned char _tileset) {
-    //SET_CHARSET(_tileset);
+    SET_CHARSET(_tileset);
 }
 
 unsigned char mr_key_pressed_hd() {
-    return (*(unsigned char*)0x00c5) != 0x40;
+    return (*(unsigned char*)0xfd30) != 0x00;
 }
 
-#endif
 #endif
