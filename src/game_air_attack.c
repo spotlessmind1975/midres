@@ -19,7 +19,11 @@
 
 #include "main.h"
 #include "midres.h"
+#ifdef __PLUS4__
+#include "game_air_attack_tiles4.h"
+#else
 #include "game_air_attack_tiles.h"
+#endif
 
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION
@@ -46,10 +50,20 @@
 // Width of a building
 #define BUILDINGS_WIDTH         3
 
+#ifdef TILE_AIRPLANE
+	#define TILE_AIRPLANE_STATIC		TILE_AIRPLANE
+	#define TILE_AIRPLANE_STATIC_WIDTH	TILE_AIRPLANE_WIDTH
+	#define TILE_AIRPLANE_STATIC_HEIGHT	TILE_AIRPLANE_HEIGHT
+#else
+	#define TILE_AIRPLANE_STATIC		TILE_SMALLAIRPLANE
+	#define TILE_AIRPLANE_STATIC_WIDTH	TILE_SMALLAIRPLANE_WIDTH
+	#define TILE_AIRPLANE_STATIC_HEIGHT	TILE_SMALLAIRPLANE_HEIGHT
+#endif
+
 // Starting of scratch area to generate animated tiles
 #define TILE_SPARE_AREA			TILE_COUNT + 1
 #define TILE_MOVING_AIRPLANE	TILE_SPARE_AREA
-#define TILE_MOVING_BOMB		TILE_MOVING_AIRPLANE + mr_calculate_prepared_tile_size( TILE_AIRPLANE_WIDTH, TILE_AIRPLANE_HEIGHT )
+#define TILE_MOVING_BOMB		TILE_MOVING_AIRPLANE + mr_calculate_prepared_tile_size( TILE_AIRPLANE_STATIC_WIDTH, TILE_AIRPLANE_STATIC_HEIGHT )
 
 // Height of each building, in tiles.
 unsigned char buildingHeights[BUILDINGS_COUNT];
@@ -128,17 +142,17 @@ void prepare_graphics() {
 	mr_tileset_load("aatiles.bin", MR_TILESET_0, TILE_START, TILE_COUNT);
 
 	// Prepare animation for airplane.
-	mr_tile_prepare_horizontal_extended(MR_TILESET_0, TILE_AIRPLANE, TILE_AIRPLANE_WIDTH, TILE_AIRPLANE_HEIGHT, TILE_MOVING_AIRPLANE);
+	mr_tile_prepare_horizontal_extended(MR_TILESET_0, TILE_AIRPLANE_STATIC, TILE_AIRPLANE_STATIC_WIDTH, TILE_AIRPLANE_STATIC_HEIGHT, TILE_MOVING_AIRPLANE);
 
 	// Prepare animation for the bomb.
 	mr_tile_prepare_vertical(MR_TILESET_0, TILE_BOMB, TILE_MOVING_BOMB);
 
 	// Replace the "empty" tile of midres with the one redefined.
-	RENDERED_MIXELS[0] = 0xf0;
+	RENDERED_MIXELS[0] = TILE_EMPTY;
 
 	// Enable the custom tileset for viewing.
 	mr_tileset_visible(MR_TILESET_0);
-
+	
 }
 
 // This method will draw a set of random buildings on the playfield, and
@@ -169,6 +183,7 @@ void draw_random_buildings() {
 		// obtained by masking the given result for the call.
 		buildingHeights[i] = 4 + (rand() & 0x0f) + (rand() & 0x03);
 
+#ifdef TILE_WALL2
 		// Let's choose the kind of wall and roof.
 		// There are 3 kind of walls and 2 kind of roof.
 		// So, by generating a random number between 0 and 6,
@@ -199,7 +214,10 @@ void draw_random_buildings() {
 				r = TILE_ROOF2;
 				break;
 		}
-
+#else
+		w = TILE_WALL1;
+		r = TILE_ROOF1;
+#endif
 		// Let's draw the building.
 		draw_building(i, buildingHeights[i], w, r);
 	}
@@ -254,7 +272,7 @@ void gameloop() {
 
 	// Set the airplane starting position: it is on the top
 	// of the screen and OUTSIDE the screen itself.
-	airplane_x = - ( TILE_AIRPLANE_WIDTH * 8 );
+	airplane_x = - ( TILE_AIRPLANE_STATIC_WIDTH * 8 );
 	airplane_y = 8;
 
 	// Endless loop...
@@ -269,11 +287,11 @@ void gameloop() {
 		// to move it down of one row (and outside of the visible area).
 		if (airplane_x >= MR_SCREEN_WIDTH * 8) {
 			airplane_y += 8;
-			airplane_x = -(TILE_AIRPLANE_WIDTH * 8);
+			airplane_x = -(TILE_AIRPLANE_STATIC_WIDTH * 8);
 			
 			// If the airplane has reached the bottom line of the
 			// screen, we can just stop: the player wins!
-			if (airplane_y >= (MR_SCREEN_HEIGHT - TILE_AIRPLANE_HEIGHT) * 8) {
+			if (airplane_y >= (MR_SCREEN_HEIGHT - TILE_AIRPLANE_STATIC_HEIGHT) * 8) {
 				break;
 			}
 		}
@@ -282,13 +300,13 @@ void gameloop() {
 		mr_tile_moveto_horizontal_extended(MR_SCREEN_DEFAULT,
 				airplane_x, airplane_y, 
 				TILE_MOVING_AIRPLANE, 
-				TILE_AIRPLANE_WIDTH, TILE_AIRPLANE_HEIGHT, 
+				TILE_AIRPLANE_STATIC_WIDTH, TILE_AIRPLANE_STATIC_HEIGHT,
 				MR_COLOR_YELLOW);
 
 		// If the airplane ordinate is greater than 16, it means that
 		// it could touch buildings.
 		if (airplane_y > 16) {
-			mr_position building = buildingMap[(airplane_x >> 3)+TILE_AIRPLANE_WIDTH];
+			mr_position building = buildingMap[(airplane_x >> 3)+ TILE_AIRPLANE_STATIC_WIDTH];
 			mr_position building_height = buildingHeights[building];
 
 			// Does the airplane hit a building?
@@ -370,8 +388,8 @@ void gameloop() {
 			if (mr_key_pressed()) {
 
 				// DROP THE BOMB!
-				bomb_y = airplane_y + TILE_AIRPLANE_HEIGHT * 8 + 1 ;
-				bomb_x = airplane_x + (8 * (TILE_AIRPLANE_WIDTH >> 1));
+				bomb_y = airplane_y + TILE_AIRPLANE_STATIC_HEIGHT * 8 + 1 ;
+				bomb_x = airplane_x + (8 * (TILE_AIRPLANE_STATIC_WIDTH >> 1));
 				bomb_building = buildingMap[(bomb_x>>3)];
 
 				increase(drops);
@@ -397,6 +415,7 @@ void gameloop() {
 			// Used to store the current height of the building.
 			mr_position h;
 			
+#ifdef TILE_FLAME2 
 			// Select the flame animation frame.
 			switch (buildingFlaming[building_index]) {
 				case 1:
@@ -409,6 +428,9 @@ void gameloop() {
 					t = TILE_FLAME3;
 					break;
 			}
+#else
+			t = TILE_FLAME1;
+#endif
 
 			// Select the random colors.
 			c1 = rand() & 0x01 ? MR_COLOR_RED : MR_COLOR_LIGHT_RED;
@@ -433,6 +455,11 @@ void gameloop() {
 		// Avoid flickering -- wait for VBL before continue
 		mr_wait_vbl();
 #ifdef __VIC20__
+		for (j = 0; j < 200; ++j) { j; };
+		for (j = 0; j < 200; ++j) { j; };
+#endif
+#ifdef __PLUS4__
+		for (j = 0; j < 200; ++j) { j; };
 		for (j = 0; j < 200; ++j) { j; };
 		for (j = 0; j < 200; ++j) { j; };
 #endif
@@ -468,6 +495,8 @@ void game_air_attack() {
 
 	mr_clear_bitmap(MR_SCREEN_DEFAULT);
 
+#ifdef TILE_PRESSANYKEY
+
 	while (!mr_key_pressed()) {
 		i = i ^ 1;
 		if (i == 0) {
@@ -483,11 +512,15 @@ void game_air_attack() {
 
 	mr_clear_bitmap(MR_SCREEN_DEFAULT);
 
+#endif
+
 	draw_random_buildings();
 
 	gameloop();
 
 	mr_clear_bitmap(MR_SCREEN_DEFAULT);
+
+#ifdef TILE_GAMEOVER
 
 	i = 0;
 	while (!mr_key_pressed()) {
@@ -502,6 +535,8 @@ void game_air_attack() {
 		}
 		mr_wait_vbl();
 	}
+
+#endif
 
 }
 
