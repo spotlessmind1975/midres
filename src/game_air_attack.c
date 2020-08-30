@@ -79,6 +79,9 @@ unsigned char buildingFlaming[BUILDINGS_COUNT];
 // Count the buildings destroyed.
 unsigned char buildingsDestroyedCount = 0;
 
+// Flag to know if player wins.
+unsigned char playerWin = 0;
+
 // Used as temporary indexes.
 mr_position i = 0;
 mr_position j = 0;
@@ -168,6 +171,9 @@ void draw_random_buildings() {
 	mr_tile w = 0;
 	mr_tile r = 0;
 
+	// Set to zero the number of building destroyed.
+	buildingsDestroyedCount = 0;
+
 	// For each building...
 	for (i = 0; i < BUILDINGS_COUNT; ++i) {
 
@@ -187,10 +193,11 @@ void draw_random_buildings() {
 		// number generation in a sum of smaller random numbers,
 		// obtained by masking the given result for the call.
 		// The offset is given by the level number.
-		buildingHeights[i] = (rand() & 0x0f) + (rand() & 0x03) - (level[0] + 10 * level[1]);
+		buildingHeights[i] = 5 + (rand() & 0x0f) + (rand() & 0x03) - (level[0] + 10 * level[1]);
 
-		// The maximum height of a building is MR_SCREEN_HEIGHT - 3!
-		if (buildingHeights[i] > MR_SCREEN_HEIGHT || buildingHeights[i] < 3 ) {
+		if (buildingHeights[i] > MR_SCREEN_HEIGHT ) {
+			buildingHeights[i] = MR_SCREEN_HEIGHT - 5;
+		} else if (buildingHeights[i] < 3) {
 			buildingHeights[i] = 3;
 		}
 
@@ -263,13 +270,13 @@ void draw_scores() {
 	}
 }
 
-void draw_level() {
+void draw_level(mr_position _y) {
 	
 	mr_position ofs = ( MR_SCREEN_WIDTH - ((TILE_LEVEL_WIDTH + 3)) ) >> 1;
 
-	mr_puttiles(MR_SCREEN_DEFAULT, ofs, 0, TILE_LEVEL, TILE_LEVEL_WIDTH, MR_COLOR_WHITE);
+	mr_puttiles(MR_SCREEN_DEFAULT, ofs, _y, TILE_LEVEL, TILE_LEVEL_WIDTH, MR_COLOR_WHITE);
 	for (i = 0; i < 2; ++i) {
-		mr_puttile(MR_SCREEN_DEFAULT, ofs + TILE_LEVEL_WIDTH + 3 - i, 0, TILE_DIGIT0 + level[i], MR_COLOR_WHITE);
+		mr_puttile(MR_SCREEN_DEFAULT, ofs + TILE_LEVEL_WIDTH + 3 - i, _y, TILE_DIGIT0 + level[i], MR_COLOR_WHITE);
 	}
 
 }
@@ -278,7 +285,9 @@ void draw_level() {
 // end condition is met.
 void gameloop() {
 
-	draw_level( );
+	playerWin = 0;
+
+	draw_level(0);
 	draw_scores();
 
 	// Set the airplane starting position: it is on the top
@@ -318,6 +327,7 @@ void gameloop() {
 			// If the airplane has reached the bottom line of the
 			// screen, we can just stop: the player wins!
 			if (airplane_y >= (MR_SCREEN_HEIGHT - TILE_AIRPLANE_STATIC_HEIGHT) * 8) {
+				playerWin = 1;
 				break;
 			}
 		}
@@ -337,6 +347,7 @@ void gameloop() {
 
 			// Does the airplane hit a building?
 			if (((airplane_y >> 3) + 1) >= building_height) {
+				playerWin = 0;
 				break;
 			}
 		}
@@ -474,7 +485,7 @@ void gameloop() {
 
 			// Increase the animation frame.
 			++buildingFlaming[building_index];
-			if (buildingFlaming[building_index] >= 3) {
+			if (buildingFlaming[building_index] > 3) {
 				buildingFlaming[building_index] = 1;
 			}
 		}
@@ -495,14 +506,6 @@ void gameloop() {
 
 }
 
-void titles() {
-
-}
-
-void playfield() {
-
-}
-
 void game_air_attack() {
 
 	// Initialize random number generator
@@ -514,56 +517,91 @@ void game_air_attack() {
 	// Clear screen bitmap.
 	mr_clear_bitmap(MR_SCREEN_DEFAULT);
 
+	// Load compressed screen on the auxiliary space
 	mr_load("aaintro.mpic", MR_AUX_DEFAULT);
 
+	// Show titles.
 	mr_uncompress(MR_AUX_DEFAULT, MR_SCREEN_DEFAULT);
 
+	// Prepare graphics (it can take some time).
 	prepare_graphics();
 
-	mr_clear_bitmap(MR_SCREEN_DEFAULT);
+	// Endless loop...
+	while (1) {
+
+		// Clear the screen.
+		mr_clear_bitmap(MR_SCREEN_DEFAULT);
+
+		// Show the "press any key" interstitial screen:
+		// this screen is available only where the relative
+		// "press any key" tile is available.
 
 #ifdef TILE_PRESSANYKEY
 
-	while (!mr_key_pressed()) {
-		i = i ^ 1;
-		if (i == 0) {
-			mr_puttiles(MR_SCREEN_DEFAULT, ( MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH ) >> 1, ( MR_SCREEN_HEIGHT - 1 ) >> 1, TILE_PRESSANYKEY, TILE_PRESSANYKEY_WIDTH, MR_COLOR_WHITE);
-		}
-		else {
-			for (j = 0; j < TILE_PRESSANYKEY_WIDTH; ++j) {
-				mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1 ) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
+		while (!mr_key_pressed()) {
+			i = i ^ 1;
+			if (i == 0) {
+				mr_puttiles(MR_SCREEN_DEFAULT, (MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1, (MR_SCREEN_HEIGHT - 1) >> 1, TILE_PRESSANYKEY, TILE_PRESSANYKEY_WIDTH, MR_COLOR_WHITE);
 			}
+			else {
+				for (j = 0; j < TILE_PRESSANYKEY_WIDTH; ++j) {
+					mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
+				}
+			}
+			mr_wait_vbl();
 		}
-		mr_wait_vbl();
-	}
-
-	mr_clear_bitmap(MR_SCREEN_DEFAULT);
 
 #endif
 
-	draw_random_buildings();
+		// Repeat the loop while player win.
+		do {
 
-	gameloop();
+			// Clear the screen.
+			mr_clear_bitmap(MR_SCREEN_DEFAULT);
 
-	mr_clear_bitmap(MR_SCREEN_DEFAULT);
+			// Show level
+			draw_level(MR_SCREEN_HEIGHT >> 1);
 
+			mr_wait(2);
+
+			// Clear the screen.
+			mr_clear_bitmap(MR_SCREEN_DEFAULT);
+
+			// Draw the playfield
+			draw_random_buildings();
+
+			// Play the game.
+			gameloop();
+
+			if (playerWin) {
+				increase(level);
+			}
+
+		} while (playerWin);
+
+		// Show "GAME OVER" only if the relative tile is present.
 #ifdef TILE_GAMEOVER
 
-	i = 0;
-	while (!mr_key_pressed()) {
-		i = i ^ 1;
-		if (i == 0) {
-			mr_puttiles(MR_SCREEN_DEFAULT, ( MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH ) >> 1, ( MR_SCREEN_HEIGHT - 1 ) >> 1, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, MR_COLOR_WHITE);
-		}
-		else {
-			for (j = 0; j < TILE_GAMEOVER_WIDTH; ++j) {
-				mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1 ) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
+		mr_clear_bitmap(MR_SCREEN_DEFAULT);
+
+		i = 0;
+		while (!mr_key_pressed()) {
+			i = i ^ 1;
+			if (i == 0) {
+				mr_puttiles(MR_SCREEN_DEFAULT, (MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1, (MR_SCREEN_HEIGHT - 1) >> 1, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, MR_COLOR_WHITE);
 			}
+			else {
+				for (j = 0; j < TILE_GAMEOVER_WIDTH; ++j) {
+					mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
+				}
+			}
+			mr_wait_vbl();
 		}
-		mr_wait_vbl();
-	}
 
 #endif
+
+	}
+
 
 }
 
