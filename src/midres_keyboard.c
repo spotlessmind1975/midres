@@ -11,6 +11,8 @@
   ****************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "midres.h"
 
@@ -42,6 +44,12 @@
 
 unsigned char mr_key_pressed() {
     return mr_key_pressed_hd();
+}
+
+void mr_wait(unsigned char _seconds) {
+
+    mr_wait_hd(_seconds);
+
 }
 
 #endif

@@ -774,11 +774,13 @@
 	#define mr_htilese(_screen, _x1, _x2, _y, _tile, _color) _mr_htiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _x2, _y, _tile, _color);
 
 	/*-----------------------------------------------------------------------
-	 --- KEYBOARD
+	 --- KEYBOARD & OTHER
 	 -----------------------------------------------------------------------*/
 
 	unsigned char mr_key_pressed();
 	
+	void mr_wait(unsigned char _seconds);
+
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"
 

@@ -92,4 +92,14 @@ unsigned char mr_key_pressed_hd() {
     return (*(unsigned char*)0xfd30) != 0x00;
 }
 
+void mr_wait_hd(unsigned char _seconds) {
+
+    unsigned char now = *((unsigned char*)0xa4);
+
+    while ((*((unsigned char*)0xa4) - now) < _seconds) {
+        ; // nop!
+    }
+
+}
+
 #endif

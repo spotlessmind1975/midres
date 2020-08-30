@@ -90,5 +90,9 @@ void mr_tileset_visible_hd(unsigned char _tileset) {
 unsigned char mr_key_pressed_hd() {
     return (*(unsigned char*)0x00c5) != 0x40;
 }
+
+void mr_wait_hd(unsigned char _seconds) {
+
+}
 #endif
 #endif
