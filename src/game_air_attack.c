@@ -92,17 +92,14 @@ mr_tile_position airplane_x, airplane_y;
 // Position of the bomb on the screen.
 mr_tile_position bomb_x, bomb_y;
 
-// Which building has been hit by bomb?
-mr_position bomb_building;
-
 // Which building we are refreshing?
 mr_position building_index = 0;
 
 // Store the score of the player
-mr_position score[4];
+mr_position score[4] = { 0, 0, 0, 0 };
 
 // Store the bombs dropped by the player
-mr_position drops[4];
+mr_position drops[4] = { 0, 0, 0, 0 };
 
 // Store the level
 mr_position level[2] = { 1, 0 };
@@ -233,16 +230,19 @@ void draw_random_buildings() {
 				break;
 		}
 #else
+		// There is only one tile per element: use it.
 		w = TILE_WALL1;
 		r = TILE_ROOF1;
 #endif
+
 		// Let's draw the building.
 		draw_building(i, buildingHeights[i], w, r);
 	}
 
 }
 
-void increase(mr_position *points) {
+// Increase the given multibyte (max size = 4 bytes) by 1.
+void increase(unsigned char *points) {
 	mr_position carry = 1, index = 0;
 	while (carry) {
 		carry = 0;
@@ -252,43 +252,85 @@ void increase(mr_position *points) {
 			carry = 1;
 		}
 		++index;
-		if (index > 3) {
+		if (index > 4) {
 			break;
 		}
 	}
 }
 
-void draw_scores() {
-	mr_puttile(MR_SCREEN_DEFAULT, 0, 0, TILE_BOMB, MR_COLOR_WHITE);
-	for (i = 0; i < 4; ++i) {
-		mr_puttile(MR_SCREEN_DEFAULT, 1 + ( 4 - i ), 0, TILE_DIGIT0 + drops[i], MR_COLOR_WHITE);
+// Decrease the given multibyte (max size = 4 bytes) by 1,
+// and return 1 if the value is zero.
+unsigned char decrease(unsigned char* points) {
+	mr_position carry = 1, index = 0, zero = 0;
+	while (carry) {
+		zero = 0;
+		carry = 0;
+		--points[index];
+		if (points[index] == 255) {
+			points[index] = 9;
+			carry = 1;
+			zero = 0;
+		}
+		else if (points[index] == 0 && index == 0) {
+			zero = 1;
+		}
+		++index;
+		if (index > 4) {
+			break;
+		}
 	}
+	return zero;
+}
 
-	mr_puttile(MR_SCREEN_DEFAULT, MR_SCREEN_WIDTH - 6, 0, TILE_SCORE, MR_COLOR_WHITE);
+// Returns 1 if the multibyte value is 0.
+unsigned char zero(unsigned char* _points, unsigned char _size) {
+	mr_position i;
+	for (i = 0; i < _size; ++i) {
+		if (_points[i] != 0) return 0;
+	}
+	return 1;
+}
+
+// Draw the number of bombs dropped at specific position.
+void draw_bombs(mr_position _x, mr_position _y) {
+	mr_puttile(MR_SCREEN_DEFAULT, _x, _y, TILE_BOMB, MR_COLOR_WHITE);
 	for (i = 0; i < 4; ++i) {
-		mr_puttile(MR_SCREEN_DEFAULT, MR_SCREEN_WIDTH - 1 - i, 0, TILE_DIGIT0 + score[i], MR_COLOR_WHITE);
+		mr_puttile(MR_SCREEN_DEFAULT, _x + 1 + (4 - i), _y, TILE_DIGIT0 + drops[i], MR_COLOR_WHITE);
 	}
 }
 
-void draw_level(mr_position _y) {
-	
-	mr_position ofs = ( MR_SCREEN_WIDTH - ((TILE_LEVEL_WIDTH + 3)) ) >> 1;
+// Draw the score at specific position.
+void draw_score(mr_position _x, mr_position _y) {
+	mr_puttile(MR_SCREEN_DEFAULT, _x, _y, TILE_SCORE, MR_COLOR_WHITE);
+	for (i = 0; i < 4; ++i) {
+		mr_puttile(MR_SCREEN_DEFAULT, _x + 1 + (4 - i), _y, TILE_DIGIT0 + score[i], MR_COLOR_WHITE);
+	}
+}
 
+// Draw the current level at specific position.
+void draw_level(mr_position _y) {
+	mr_position ofs = ( MR_SCREEN_WIDTH - ((TILE_LEVEL_WIDTH + 3)) ) >> 1;
 	mr_puttiles(MR_SCREEN_DEFAULT, ofs, _y, TILE_LEVEL, TILE_LEVEL_WIDTH, MR_COLOR_WHITE);
 	for (i = 0; i < 2; ++i) {
 		mr_puttile(MR_SCREEN_DEFAULT, ofs + TILE_LEVEL_WIDTH + 3 - i, _y, TILE_DIGIT0 + level[i], MR_COLOR_WHITE);
 	}
-
 }
 
 // This is the main gameloop. We repeat the loop until an
 // end condition is met.
 void gameloop() {
 
+	// When starts, the player has not won.
 	playerWin = 0;
 
+	// Update level on the screen.
 	draw_level(0);
-	draw_scores();
+
+	// Update bomb number on the screen.
+	draw_bombs(0, 0);
+
+	// Update score on the screen.
+	draw_score(MR_SCREEN_WIDTH-6,0);
 
 	// Set the airplane starting position: it is on the top
 	// of the screen and OUTSIDE the screen itself.
@@ -311,8 +353,7 @@ void gameloop() {
 				mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3), (airplane_y >> 3) + 1);
 			}
 			airplane_x += 10;
-		}
-		else {
+		} else {
 			// Move to right of a number of pixel related to the current
 			// level of difficulty.
 			airplane_x += ( level[1] + 1 );
@@ -339,16 +380,25 @@ void gameloop() {
 				TILE_AIRPLANE_STATIC_WIDTH, TILE_AIRPLANE_STATIC_HEIGHT,
 				MR_COLOR_YELLOW);
 
-		// If the airplane ordinate is greater than 16, it means that
-		// it could touch buildings.
-		if (airplane_y > 16) {
-			mr_position building = buildingMap[(airplane_x >> 3)+ TILE_AIRPLANE_STATIC_WIDTH];
-			mr_position building_height = buildingHeights[building];
+		if (buildingsDestroyedCount < BUILDINGS_COUNT) {
+			// If the airplane ordinate is greater or equal than 16, it means that
+			// it could touch buildings.
+			if (airplane_y >= 16) {
 
-			// Does the airplane hit a building?
-			if (((airplane_y >> 3) + 1) >= building_height) {
-				playerWin = 0;
-				break;
+				// Retrieve the building's index by ascissa.
+				mr_position building = buildingMap[(airplane_x >> 3) + TILE_AIRPLANE_STATIC_WIDTH];
+
+				// Retrieve the building's height.
+				mr_position building_height = buildingHeights[building];
+
+				// Does the airplane hit a building?
+				if (((airplane_y >> 3) + ( TILE_AIRPLANE_STATIC_HEIGHT - 1 ) ) >= building_height) {
+
+					// Yes, so: player has lost!
+					playerWin = 0;
+
+					break;
+				}
 			}
 		}
 
@@ -356,26 +406,37 @@ void gameloop() {
 		// it has been dropped. 
 		if (bomb_y > 0) {
 
+			// Retrieve the building's index by ascissa.
 			mr_position building = buildingMap[(bomb_x >> 3)];
+
+			// Retrieve the building's height.
 			mr_position building_height = buildingHeights[building];
 
 			// Does the bomb hit a building?
 			if (( (bomb_y >>3) + 1 ) >= building_height) {
-				
+
+				mr_sound_stop();
+
 				// Clear the bomb.
 				mr_cleartile(MR_SCREEN_DEFAULT, (bomb_x >> 3), (bomb_y >> 3));
+				mr_cleartile(MR_SCREEN_DEFAULT, (bomb_x >> 3), (bomb_y >> 3) + 1);
 
 				// Reset its position.
 				bomb_y = 0;
 
+				// If the building is not destroyed...
 				if (buildingHeights[building] < MR_SCREEN_HEIGHT - 1) {
 
+					// Calculate the number of floors destroyed (1..4).
 					mr_position floors_destroyed = 1 + (rand() & 0x3);
 
+					// Update the current building's heigth.
 					buildingHeights[building] += floors_destroyed;
 
-					// Remove from 1 to 3 floors.
+					// Remove from 1 to 4 floors.
 					for (; floors_destroyed != 0; --floors_destroyed, ++building_height) {
+
+						// Avoid to go over the video buffer!
 						if (building_height < MR_SCREEN_HEIGHT) {
 							mr_cleartile(MR_SCREEN_DEFAULT,
 								building * BUILDINGS_WIDTH,
@@ -387,10 +448,16 @@ void gameloop() {
 								building * BUILDINGS_WIDTH + 2,
 								building_height);
 						}
+
+						// Increase the score, accordingly.
 						increase(score);
+
 					}
 
+					// If the building has been destroyed
 					if (buildingHeights[building] >= MR_SCREEN_HEIGHT - 1) {
+						// ... update heigth and increase the 
+						// count of destroyed building.
 						buildingHeights[building] = MR_SCREEN_HEIGHT - 1;
 						buildingsDestroyedCount++;
 					}
@@ -398,13 +465,19 @@ void gameloop() {
 					// Activate the flaming effect!
 					buildingFlaming[buildingMap[(bomb_x >> 3)]] = 1 + (rand() & 0x1);
 
-					draw_scores();
+					// Update bomb drops' count.
+					draw_bombs(0, 0);
+
+					// Update score.
+					draw_score(MR_SCREEN_WIDTH - 6, 0);
 
 				}
 
 			} else if ( ( bomb_y >> 3 ) < MR_SCREEN_HEIGHT ) {
 
-				// Continue to move the bomb vertically.
+				mr_sound_change(( MR_SCREEN_HEIGHT * 8 - bomb_y ) * 16);
+
+				// Continue to move the bomb vertically (by two steps).
 				bomb_y += 2;
 				mr_tile_moveto_vertical(MR_SCREEN_DEFAULT,
 						bomb_x, bomb_y, 
@@ -415,9 +488,15 @@ void gameloop() {
 				if (bomb_y >= MR_SCREEN_HEIGHT * 8) {
 					bomb_y = 0;
 				}
+
 			} else {
+
+				mr_sound_stop();
+
+				// Disable the bomb.
 				bomb_y = 0;
 			}
+
 		}
 
 		// If the player did not drop a bomb, 
@@ -428,10 +507,14 @@ void gameloop() {
 				// DROP THE BOMB!
 				bomb_y = airplane_y + TILE_AIRPLANE_STATIC_HEIGHT * 8 + 1 ;
 				bomb_x = airplane_x + (8 * (TILE_AIRPLANE_STATIC_WIDTH >> 1));
-				bomb_building = buildingMap[(bomb_x>>3)];
 
+				// Increase the 
 				increase(drops);
-				draw_scores();
+				draw_bombs(0, 0);
+				draw_score(MR_SCREEN_WIDTH - 6, 0);
+
+				mr_sound_start(0);
+
 			}
 		}
 
@@ -493,16 +576,15 @@ void gameloop() {
 		// Avoid flickering -- wait for VBL before continue
 		mr_wait_vbl();
 #ifdef __VIC20__
-		for (j = 0; j < 200; ++j) { j; };
-		for (j = 0; j < 200; ++j) { j; };
+		mr_wait_jiffies(1);
 #endif
 #ifdef __PLUS4__
-		for (j = 0; j < 200; ++j) { j; };
-		for (j = 0; j < 200; ++j) { j; };
-		for (j = 0; j < 200; ++j) { j; };
+		mr_wait_jiffies(1);
 #endif
 
 	}
+
+	mr_sound_stop();
 
 }
 
@@ -548,6 +630,7 @@ void game_air_attack() {
 					mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
 				}
 			}
+			mr_wait_jiffies(4);
 			mr_wait_vbl();
 		}
 
@@ -575,6 +658,47 @@ void game_air_attack() {
 
 			if (playerWin) {
 				increase(level);
+
+				// Clear the screen.
+				mr_clear_bitmap(MR_SCREEN_DEFAULT);
+
+				// Show bombs
+				draw_bombs((MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) - 1);
+
+				// Show score
+				draw_score((MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) + 1);
+
+				while (zero(drops, 4)==0) {
+
+					decrease(drops);
+
+					// Show bombs
+					draw_bombs((MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) - 1);
+
+					// Show score
+					draw_score((MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) + 1);
+
+					if (zero(score,4) == 0) {
+
+						decrease(score);
+
+						// Show score
+						draw_score((MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) + 1);
+
+						for (j = 0; j < 200; ++j) { j; };
+						for (j = 0; j < 200; ++j) { j; };
+						for (j = 0; j < 200; ++j) { j; };
+
+					} else {
+						break;
+					}
+
+				}
+
+				drops[0] = 0; drops[1] = 0;
+
+				mr_wait(2);
+
 			}
 
 		} while (playerWin);
@@ -583,6 +707,9 @@ void game_air_attack() {
 #ifdef TILE_GAMEOVER
 
 		mr_clear_bitmap(MR_SCREEN_DEFAULT);
+
+		// Show score
+		draw_score(( MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) + 2);
 
 		i = 0;
 		while (!mr_key_pressed()) {

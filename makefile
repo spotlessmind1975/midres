@@ -192,7 +192,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64:	$(subst PLATFORM,c64,$(OBJS))
 	$(CC1541) -f image6404.mpic -w $(DATADIR)/image6404.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 
 # Let's define rules to compile the demo under C=64 as the overlay version.
 # Moreover, all the executable files will be put on a D64 1541 image, 
@@ -216,7 +216,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64ovl:	$(subst PLATFORM,c64ovl,$(OBJS))
 	$(CC1541) -f image6404.mpic -w $(DATADIR)/image6404.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 
 #$(CC1541) -f test.pic -w $(DATADIR)/test.pic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -239,7 +239,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20:	$(subst PLATFORM,vic20,$(OBJS))
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro64.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 
 # Let's define rules to compile the demo under VIC 20 as a one and single 
 # executable file. This compilation will fails since there is no enough RAM.
@@ -257,7 +257,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic2024:	$(subst PLATFORM,vic2024,$(OBJS))
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro64.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 
 # Let's define rules to compile the demo under VIC20 as the overlay version.
 # This is the only way to compile this program in order to be able to be 
@@ -281,7 +281,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20ovl:	$(subst PLATFORM,vic20ovl,$(OBJS))
 	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro64.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 
 ## C16 ------------------------------------------------------------------------
 
@@ -302,7 +302,7 @@ $(EXEDIR)/$(PROGRAMNAME).c16:	$(subst PLATFORM,c16,$(OBJS))
 	$(CC1541) -f image1603.mpic -w $(DATADIR)/image1603.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f image1604.mpic -w $(DATADIR)/image1604.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro16.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	
 ## PLUS4 ------------------------------------------------------------------------
 
@@ -325,7 +325,7 @@ $(EXEDIR)/$(PROGRAMNAME).plus4:	$(subst PLATFORM,plus4,$(OBJS))
 	$(CC1541) -f image1604.mpic -w $(DATADIR)/image1604.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles4.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/air_attack_intro16.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 
 ###############################################################################
 ## FINAL RULES
