@@ -94,5 +94,13 @@
 	#define TILE_EMPTY_WIDTH                            1
 	#define TILE_EMPTY_HEIGHT                           1
 
-	#define TILE_COUNT                                           42
+	#define TILE_GAMEOVER                              42
+	#define TILE_GAMEOVER_WIDTH                         8
+	#define TILE_GAMEOVER_HEIGHT                        1
+
+	#define TILE_PRESSANYKEY                           50
+	#define TILE_PRESSANYKEY_WIDTH                      7
+	#define TILE_PRESSANYKEY_HEIGHT                     1
+
+	#define TILE_COUNT                                           57
 #endif
