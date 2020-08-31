@@ -162,4 +162,35 @@ void mr_wait_hd(unsigned char _seconds) {
     }
 
 }
+
+void mr_wait_jiffies_hd(unsigned char _jiffies) {
+    unsigned char now = *((unsigned char*)0xa2);
+
+    while ((*((unsigned char*)0xa2) - now) < _jiffies) {
+        ; // nop!
+    }
+
+}
+
+// Hardware dependent sound library
+void mr_sound_start_hd(unsigned char _number) {
+
+    *((unsigned char*)0x900e) = 10;
+
+}
+
+// Hardware dependent sound library
+void mr_sound_change_hd(int _parameter) {
+
+    *((unsigned char*)0x900a) = 128 + ( _parameter >> 9 );
+
+}
+
+// Hardware dependent sound library
+void mr_sound_stop_hd() {
+
+    *((unsigned char*)0x900e) = 0;
+
+}
+
 #endif

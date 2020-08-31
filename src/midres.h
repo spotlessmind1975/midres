@@ -781,6 +781,14 @@
 	
 	void mr_wait(unsigned char _seconds);
 
+	void mr_wait_jiffies(unsigned char _jiffies);
+
+	void mr_sound_start(unsigned char _number);
+
+	void mr_sound_change(int _parameter);
+
+	void mr_sound_stop();
+
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"
 

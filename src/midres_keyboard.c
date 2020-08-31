@@ -52,4 +52,23 @@ void mr_wait(unsigned char _seconds) {
 
 }
 
+void mr_wait_jiffies(unsigned char _jiffies) {
+
+    mr_wait_jiffies_hd(_jiffies);
+
+}
+
+void mr_sound_start(unsigned char _number) {
+    mr_sound_start_hd(_number);
+};
+
+void mr_sound_change(int _parameter) {
+    mr_sound_change_hd(_parameter);
+}
+
+void mr_sound_stop() {
+    mr_sound_stop_hd();
+};
+
+
 #endif

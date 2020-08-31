@@ -53,4 +53,16 @@ unsigned char mr_key_pressed_hd();
 // Hardware dependent time wait
 void mr_wait_hd(unsigned char _seconds);
 
+// Hardware dependent jiffies
+void mr_wait_jiffies_hd(unsigned char _jiffies);
+
+// Hardware dependent sound library
+void mr_sound_start_hd(unsigned char _number);
+
+// Hardware dependent sound library
+void mr_sound_change_hd(int _parameter);
+
+// Hardware dependent sound library
+void mr_sound_stop_hd();
+
 #endif
