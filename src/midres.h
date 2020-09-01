@@ -713,13 +713,13 @@
 	#define mr_puttilev(_x, _y, _tile, _color) _mr_puttile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a set of tiles into a bitmap.
-	#define mr_puttilesv(_x, _y, _tile, _count, _color) _mr_puttile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _count, _color );
+	#define mr_puttilesv(_x, _y, _tile, _count, _color) _mr_puttiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _count, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_horizontalv(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_horizontal_extendedv(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_horizontal_extended(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _w, _h, _color );
+	#define mr_tile_moveto_horizontal_extendedv(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_horizontal_extended(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_verticalv(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
@@ -737,10 +737,10 @@
 	#define mr_gettilev(_x, _y) _mr_gettile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y)
 
 	// Draws a vertical line of tiles on the bitmap.
-	#define mr_vtilesv(_screen, _x, _y1, _y2, _tile, _color) _mr_vtiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y1, _y2, _tile, _color);
+	#define mr_vtilesv(_x, _y1, _y2, _tile, _color) _mr_vtiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y1, _y2, _tile, _color);
 
 	// Draws a horizontal line of tiles onto the bitmap.
-	#define mr_htilesv(_screen, _x1, _x2, _y, _tile, _color) _mr_htiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _x2, _y, _tile, _color);
+	#define mr_htilesv(_x1, _x2, _y, _tile, _color) _mr_htiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _x2, _y, _tile, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- TILES (implicit screen [ENABLED])
@@ -768,10 +768,10 @@
 	#define mr_gettilee(_x, _y, _tile, _color) _mr_gettile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile )
 
 	// Draws a vertical line of tiles on the bitmap.
-	#define mr_vtilese(_screen, _x, _y1, _y2, _tile, _color) _mr_vtiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y1, _y2, _tile, _color);
+	#define mr_vtilese(_x, _y1, _y2, _tile, _color) _mr_vtiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y1, _y2, _tile, _color);
 
 	// Draws a horizontal line of tiles onto the bitmap.
-	#define mr_htilese(_screen, _x1, _x2, _y, _tile, _color) _mr_htiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _x2, _y, _tile, _color);
+	#define mr_htilese(_x1, _x2, _y, _tile, _color) _mr_htiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _x2, _y, _tile, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- KEYBOARD & OTHER
