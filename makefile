@@ -36,6 +36,8 @@ TARGETS := c64 vic2024 plus4
 #  - TILE - an animation using tiles primivites (v1.3)
 DEMO := 
 
+ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4
+
 ###############################################################################
 ###############################################################################
 ###############################################################################
@@ -160,7 +162,7 @@ EXEDIR := exe
 
 # Similarly, we expand the set of executables that are required.
 EXES := $(foreach TARGET,$(TARGETS),$(EXEDIR)/$(PROGRAMNAME).$(TARGET))
-EXES += $(foreach ATARGET,$(ATARGETS),$(EXEDIR)/$(TARGET))
+EXES += $(foreach ATARGET,$(ATARGETS),$(EXEDIR)/$(ATARGET))
 
 # This is the path where all data will be put.
 DATADIR := data
@@ -375,7 +377,7 @@ $(TARGETOBJDIR):
 $(DATADIR):
 	$(call MKDIR,$@)
 
-all: $(EXEDIR) $(TARGETOBJDIR) $(EXES) $(EXEDIR)/airattack.c64 $(EXEDIR)/airattack.vic2024 $(EXEDIR)/airattack.plus4
+all: $(EXEDIR) $(TARGETOBJDIR) $(EXES)
 
 clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64.d64)
