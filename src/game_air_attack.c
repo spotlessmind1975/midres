@@ -112,26 +112,26 @@ void draw_building(mr_position _number, mr_position _height, mr_tile _tile_wall,
 	mr_position start = _number * BUILDINGS_WIDTH;
 
 	// Draw the roof.
-	mr_puttile(MR_SCREEN_DEFAULT, start, _height, _tile_roof, MR_COLOR_LIGHT_RED);
-	mr_puttile(MR_SCREEN_DEFAULT, start+1, _height, _tile_roof +1, MR_COLOR_RED);
-	mr_puttile(MR_SCREEN_DEFAULT, start+2, _height, _tile_roof + 2, MR_COLOR_RED);
+	mr_puttilev(start, _height, _tile_roof, MR_COLOR_LIGHT_RED);
+	mr_puttilev(start+1, _height, _tile_roof +1, MR_COLOR_RED);
+	mr_puttilev(start+2, _height, _tile_roof + 2, MR_COLOR_RED);
 
 	// Draw the walls.
-	mr_vtiles(MR_SCREEN_DEFAULT,
+	mr_vtilesv(
 		start, 
 		_height+1,
 		MR_SCREEN_HEIGHT - 1,
 		_tile_wall,
 		MR_COLOR_LIGHT_GREY);
 
-	mr_vtiles(MR_SCREEN_DEFAULT,
+	mr_vtilesv(
 		start +1,
 		_height+1,
 		MR_SCREEN_HEIGHT - 1,
 		_tile_wall + 1,
 		MR_COLOR_GREY);
 
-	mr_vtiles(MR_SCREEN_DEFAULT,
+	mr_vtilesv(
 		start +2,
 		_height+1,
 		MR_SCREEN_HEIGHT - 1,
@@ -293,26 +293,26 @@ unsigned char zero(unsigned char* _points, unsigned char _size) {
 
 // Draw the number of bombs dropped at specific position.
 void draw_bombs(mr_position _x, mr_position _y) {
-	mr_puttile(MR_SCREEN_DEFAULT, _x, _y, TILE_BOMB, MR_COLOR_WHITE);
+	mr_puttilev(_x, _y, TILE_BOMB, MR_COLOR_WHITE);
 	for (i = 0; i < 4; ++i) {
-		mr_puttile(MR_SCREEN_DEFAULT, _x + 1 + (4 - i), _y, TILE_DIGIT0 + drops[i], MR_COLOR_WHITE);
+		mr_puttilev(_x + 1 + (4 - i), _y, TILE_DIGIT0 + drops[i], MR_COLOR_WHITE);
 	}
 }
 
 // Draw the score at specific position.
 void draw_score(mr_position _x, mr_position _y) {
-	mr_puttile(MR_SCREEN_DEFAULT, _x, _y, TILE_SCORE, MR_COLOR_WHITE);
+	mr_puttilev(_x, _y, TILE_SCORE, MR_COLOR_WHITE);
 	for (i = 0; i < 4; ++i) {
-		mr_puttile(MR_SCREEN_DEFAULT, _x + 1 + (4 - i), _y, TILE_DIGIT0 + score[i], MR_COLOR_WHITE);
+		mr_puttilev(_x + 1 + (4 - i), _y, TILE_DIGIT0 + score[i], MR_COLOR_WHITE);
 	}
 }
 
 // Draw the current level at specific position.
 void draw_level(mr_position _y) {
 	mr_position ofs = ( MR_SCREEN_WIDTH - ((TILE_LEVEL_WIDTH + 3)) ) >> 1;
-	mr_puttiles(MR_SCREEN_DEFAULT, ofs, _y, TILE_LEVEL, TILE_LEVEL_WIDTH, MR_COLOR_WHITE);
+	mr_puttilesv( ofs, _y, TILE_LEVEL, TILE_LEVEL_WIDTH, MR_COLOR_WHITE);
 	for (i = 0; i < 2; ++i) {
-		mr_puttile(MR_SCREEN_DEFAULT, ofs + TILE_LEVEL_WIDTH + 3 - i, _y, TILE_DIGIT0 + level[i], MR_COLOR_WHITE);
+		mr_puttilev(ofs + TILE_LEVEL_WIDTH + 3 - i, _y, TILE_DIGIT0 + level[i], MR_COLOR_WHITE);
 	}
 }
 
@@ -344,13 +344,13 @@ void gameloop() {
 		// we have to move and draw the airplane orizontally.
 		// If buildings are all destroyed, move faster!
 		if (buildingsDestroyedCount >= BUILDINGS_COUNT) {
-			mr_cleartile(MR_SCREEN_DEFAULT, ( airplane_x >> 3)-1, airplane_y >> 3);
-			mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3), airplane_y >> 3);
-			mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3) +1, airplane_y >> 3);
+			mr_cleartilev(( airplane_x >> 3)-1, airplane_y >> 3);
+			mr_cleartilev((airplane_x >> 3), airplane_y >> 3);
+			mr_cleartilev((airplane_x >> 3) +1, airplane_y >> 3);
 			if (TILE_AIRPLANE_STATIC_HEIGHT > 1) {
-				mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3) -1, (airplane_y >> 3) + 1);
-				mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3), (airplane_y >> 3) + 1);
-				mr_cleartile(MR_SCREEN_DEFAULT, (airplane_x >> 3), (airplane_y >> 3) + 1);
+				mr_cleartilev((airplane_x >> 3) -1, (airplane_y >> 3) + 1);
+				mr_cleartilev((airplane_x >> 3), (airplane_y >> 3) + 1);
+				mr_cleartilev((airplane_x >> 3), (airplane_y >> 3) + 1);
 			}
 			airplane_x += 10;
 		} else {
@@ -374,7 +374,7 @@ void gameloop() {
 		}
 
 		// Draw the airplane.
-		mr_tile_moveto_horizontal_extended(MR_SCREEN_DEFAULT,
+		mr_tile_moveto_horizontal_extendedv(
 				airplane_x, airplane_y, 
 				TILE_MOVING_AIRPLANE, 
 				TILE_AIRPLANE_STATIC_WIDTH, TILE_AIRPLANE_STATIC_HEIGHT,
@@ -418,8 +418,8 @@ void gameloop() {
 				mr_sound_stop();
 
 				// Clear the bomb.
-				mr_cleartile(MR_SCREEN_DEFAULT, (bomb_x >> 3), (bomb_y >> 3));
-				mr_cleartile(MR_SCREEN_DEFAULT, (bomb_x >> 3), (bomb_y >> 3) + 1);
+				mr_cleartilev((bomb_x >> 3), (bomb_y >> 3));
+				mr_cleartilev((bomb_x >> 3), (bomb_y >> 3) + 1);
 
 				// Reset its position.
 				bomb_y = 0;
@@ -438,13 +438,13 @@ void gameloop() {
 
 						// Avoid to go over the video buffer!
 						if (building_height < MR_SCREEN_HEIGHT) {
-							mr_cleartile(MR_SCREEN_DEFAULT,
+							mr_cleartilev(
 								building * BUILDINGS_WIDTH,
 								building_height);
-							mr_cleartile(MR_SCREEN_DEFAULT,
+							mr_cleartilev(
 								building * BUILDINGS_WIDTH + 1,
 								building_height);
-							mr_cleartile(MR_SCREEN_DEFAULT,
+							mr_cleartilev(
 								building * BUILDINGS_WIDTH + 2,
 								building_height);
 						}
@@ -479,7 +479,7 @@ void gameloop() {
 
 				// Continue to move the bomb vertically (by two steps).
 				bomb_y += 2;
-				mr_tile_moveto_vertical(MR_SCREEN_DEFAULT,
+				mr_tile_moveto_verticalv(
 						bomb_x, bomb_y, 
 						TILE_MOVING_BOMB, 
 						MR_COLOR_YELLOW);
@@ -562,9 +562,9 @@ void gameloop() {
 			h = buildingHeights[building_index];
 
 			// Draw the flame effect.
-			mr_puttile(MR_SCREEN_DEFAULT, building_index * BUILDINGS_WIDTH, h, t, c1);
-			mr_puttile(MR_SCREEN_DEFAULT, building_index * BUILDINGS_WIDTH + 1, h, t + 1, c2);
-			mr_puttile(MR_SCREEN_DEFAULT, building_index * BUILDINGS_WIDTH + 2, h, t + 2, c3);
+			mr_puttilev(building_index * BUILDINGS_WIDTH, h, t, c1);
+			mr_puttilev(building_index * BUILDINGS_WIDTH + 1, h, t + 1, c2);
+			mr_puttilev(building_index * BUILDINGS_WIDTH + 2, h, t + 2, c3);
 
 			// Increase the animation frame.
 			++buildingFlaming[building_index];
@@ -597,13 +597,13 @@ void game_air_attack() {
 	mr_init();
 
 	// Clear screen bitmap.
-	mr_clear_bitmap(MR_SCREEN_DEFAULT);
+	mr_clear_bitmapv();
 
 	// Load compressed screen on the auxiliary space
 	mr_load("aaintro.mpic", MR_AUX_DEFAULT);
 
 	// Show titles.
-	mr_uncompress(MR_AUX_DEFAULT, MR_SCREEN_DEFAULT);
+	mr_uncompressv(MR_AUX_DEFAULT);
 
 	// Prepare graphics (it can take some time).
 	prepare_graphics();
@@ -612,7 +612,7 @@ void game_air_attack() {
 	while (1) {
 
 		// Clear the screen.
-		mr_clear_bitmap(MR_SCREEN_DEFAULT);
+		mr_clear_bitmapv();
 
 		// Show the "press any key" interstitial screen:
 		// this screen is available only where the relative
@@ -623,11 +623,11 @@ void game_air_attack() {
 		while (!mr_key_pressed()) {
 			i = i ^ 1;
 			if (i == 0) {
-				mr_puttiles(MR_SCREEN_DEFAULT, (MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1, (MR_SCREEN_HEIGHT - 1) >> 1, TILE_PRESSANYKEY, TILE_PRESSANYKEY_WIDTH, MR_COLOR_WHITE);
+				mr_puttilesv((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1, (MR_SCREEN_HEIGHT - 1) >> 1, TILE_PRESSANYKEY, TILE_PRESSANYKEY_WIDTH, MR_COLOR_WHITE);
 			}
 			else {
 				for (j = 0; j < TILE_PRESSANYKEY_WIDTH; ++j) {
-					mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
+					mr_cleartilev(((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
 				}
 			}
 			mr_wait_jiffies(4);
@@ -640,7 +640,7 @@ void game_air_attack() {
 		do {
 
 			// Clear the screen.
-			mr_clear_bitmap(MR_SCREEN_DEFAULT);
+			mr_clear_bitmapv();
 
 			// Show level
 			draw_level(MR_SCREEN_HEIGHT >> 1);
@@ -648,7 +648,7 @@ void game_air_attack() {
 			mr_wait(2);
 
 			// Clear the screen.
-			mr_clear_bitmap(MR_SCREEN_DEFAULT);
+			mr_clear_bitmapv();
 
 			// Draw the playfield
 			draw_random_buildings();
@@ -660,7 +660,7 @@ void game_air_attack() {
 				increase(level);
 
 				// Clear the screen.
-				mr_clear_bitmap(MR_SCREEN_DEFAULT);
+				mr_clear_bitmapv();
 
 				// Show bombs
 				draw_bombs((MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) - 1);
@@ -706,7 +706,7 @@ void game_air_attack() {
 		// Show "GAME OVER" only if the relative tile is present.
 #ifdef TILE_GAMEOVER
 
-		mr_clear_bitmap(MR_SCREEN_DEFAULT);
+		mr_clear_bitmapv();
 
 		// Show score
 		draw_score(( MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) + 2);
@@ -715,11 +715,11 @@ void game_air_attack() {
 		while (!mr_key_pressed()) {
 			i = i ^ 1;
 			if (i == 0) {
-				mr_puttiles(MR_SCREEN_DEFAULT, (MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1, (MR_SCREEN_HEIGHT - 1) >> 1, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, MR_COLOR_WHITE);
+				mr_puttilesv((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1, (MR_SCREEN_HEIGHT - 1) >> 1, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, MR_COLOR_WHITE);
 			}
 			else {
 				for (j = 0; j < TILE_GAMEOVER_WIDTH; ++j) {
-					mr_cleartile(MR_SCREEN_DEFAULT, ((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
+					mr_cleartilev(((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
 				}
 			}
 			mr_wait_vbl();
