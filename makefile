@@ -17,6 +17,8 @@
 PROGRAMNAME := midres
 
 # Allowed targets:
+
+#  MIDRES LIBRARY (with DEMO, see below)
 #  - c64: single executable for Commodore 64 (named on disk: "midres-single")
 #  - c64ovl: overlayed executable for Commodore 64 (named on disk: "midres")
 #  - vic20: single executable for unexpanded VIC 20 (named on disk: "midres-single")
@@ -24,6 +26,7 @@ PROGRAMNAME := midres
 #  - vic2024: single executable for 24K VIC 20 (named on disk: "midres-single")
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
+
 TARGETS := c64 vic2024 plus4
 
 # Given demonstrations:
@@ -32,10 +35,6 @@ TARGETS := c64 vic2024 plus4
 #  - BITBLIT - an animation using bit blits primivites (v1.2)
 #  - TILE - an animation using tiles primivites (v1.3)
 DEMO := 
-
-# Given games:
-#  - AIR_ATTACK
-GAME := AIR_ATTACK
 
 ###############################################################################
 ###############################################################################
@@ -154,12 +153,14 @@ OBJECTS := $(foreach TARGET,$(TARGETS),$(subst PLATFORM,$(TARGET),$(OBJS)))
 # We generate the list of paths where the object files for each target will 
 # end, so that we can generate them in advance (as paths).
 TARGETOBJDIR := $(foreach TARGET,$(TARGETS),obj/$(TARGET))
+TARGETOBJDIR += $(foreach ATARGET,$(ATARGETS),obj/$(ATARGET))
 
 # This is the path where all executables will be put.
 EXEDIR := exe
 
 # Similarly, we expand the set of executables that are required.
 EXES := $(foreach TARGET,$(TARGETS),$(EXEDIR)/$(PROGRAMNAME).$(TARGET))
+EXES += $(foreach ATARGET,$(ATARGETS),$(EXEDIR)/$(TARGET))
 
 # This is the path where all data will be put.
 DATADIR := data
@@ -328,6 +329,40 @@ $(EXEDIR)/$(PROGRAMNAME).plus4:	$(subst PLATFORM,plus4,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 
 ###############################################################################
+##
+###############################################################################
+
+obj/airattack.c64/%.o:	$(SOURCES)
+	$(CC) -t c64 -c -D__GAME_AIR_ATTACK__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/airattack.c64/,src/,$(@:.o=.c))
+
+$(EXEDIR)/airattack.c64:	$(subst PLATFORM,airattack.c64,$(OBJS))
+	$(CC) -t c64 $(LDFLAGS) -o $(EXEDIR)/airattack.c64 $(subst PLATFORM,airattack.c64,$(OBJS))
+	$(CC1541) -f airattack -w $(EXEDIR)/airattack.c64 $(EXEDIR)/airattack.c64.d64  
+	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/airattack.c64.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/airattack.c64.d64  
+
+obj/airattack.vic2024/%.o:	$(SOURCES)
+	$(CC) -t vic20 -c -D__GAME_AIR_ATTACK__ -D__24K__ -C cfg/vic20-32k.cfg -Osir -Cl -D__CBM__ -o $@ $(subst obj/airattack.vic2024/,src/,$(@:.o=.c))
+
+$(EXEDIR)/airattack.vic2024:	$(subst PLATFORM,airattack.vic2024,$(OBJS))
+	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/airattack.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/airattack.vic2024 $(subst PLATFORM,airattack.vic2024,$(OBJS))
+	$(CC1541) -f loader -w $(DATADIR)/airattack_loader2024.prg $(EXEDIR)/airattack.vic2024.d64  
+	$(CC1541) -f airattack -w $(EXEDIR)/airattack.vic2024 $(EXEDIR)/airattack.vic2024.d64  
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/airattack.vic2024.d64  
+	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/airattack.vic2024.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/airattack.vic2024.d64  
+
+obj/airattack.plus4/%.o:	$(SOURCES)
+	$(CC) -t plus4 -c -D__GAME_AIR_ATTACK__ -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/plus4.cfg -o $@ $(subst obj/airattack.plus4/,src/,$(@:.o=.c))
+
+$(EXEDIR)/airattack.plus4:	$(subst PLATFORM,airattack.plus4,$(OBJS))
+	$(CC) -t plus4 $(LDFLAGS) -m $(EXEDIR)/airattack.plus4.map -C cfg/plus4.cfg -o $(EXEDIR)/airattack.plus4 $(subst PLATFORM,airattack.plus4,$(OBJS))
+	$(CC1541) -f loader -w $(DATADIR)/airattack_loader4.prg $(EXEDIR)/airattack.plus4.d64  
+	$(CC1541) -f airattack -w $(EXEDIR)/airattack.plus4 $(EXEDIR)/airattack.plus4.d64  
+	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles4.bin $(EXEDIR)/airattack.plus4.d64  
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/airattack.plus4.d64  
+
+###############################################################################
 ## FINAL RULES
 ###############################################################################
 
@@ -340,7 +375,7 @@ $(TARGETOBJDIR):
 $(DATADIR):
 	$(call MKDIR,$@)
 
-all: $(EXEDIR) $(TARGETOBJDIR) $(EXES)
+all: $(EXEDIR) $(TARGETOBJDIR) $(EXES) $(EXEDIR)/airattack.c64 $(EXEDIR)/airattack.vic2024 $(EXEDIR)/airattack.plus4
 
 clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64.d64)
@@ -355,5 +390,8 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic20ovl*)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4)
+	$(call RMFILES,$(EXEDIR)/airattack.c64)
+	$(call RMFILES,$(EXEDIR)/airattack.vic2024)
+	$(call RMFILES,$(EXEDIR)/airattack.plus4)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))
 	$(foreach OBJECT,$(OBJECTS),$(call RMFILES,$(OBJECT)))
