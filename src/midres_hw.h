@@ -21,6 +21,8 @@
 #include "midres_hw_plus4.h"
 #elif __C16__
 #include "midres_hw_c16.h"
+#elif __C128__
+#include "midres_hw_c128_40.h"
 #else
 #include "midres_hw_vanilla.h"
 #endif
