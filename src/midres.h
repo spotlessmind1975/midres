@@ -646,6 +646,8 @@
 
 	// Calculate che number of frames needed to store the preparation
 	#define mr_calculate_prepared_tile_size( _w, _h )	( ( ( _w + 1 ) * _h ) * 9 )
+	#define mr_calculate_prepared_tile_size_horizontal( _w, _h )	mr_calculate_prepared_tile_size( _w, _h )
+	#define mr_calculate_prepared_tile_size_vertical( _w, _h )	( ( ( _w * ( _h + 1 ) ) ) * 9 )
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color);
@@ -656,8 +658,14 @@
 	// Redefine a subset of N tiles by "shifting" vertically a tile
 	void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 
+	// Redefine a subset of N tiles by "shifting" vertically a tile
+	void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination);
+
 	// Writes a tile into a bitmap at *precise* vertical position.
 	void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color);
+
+	// Writes a tile into a bitmap at *precise* vertical position.
+	void _mr_tile_moveto_vertical_extended(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color);
 
 	// Redefine a subset of N tiles by "rolling" horizontally a tile
 	void mr_tile_prepare_roll_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
@@ -676,6 +684,9 @@
 
 	// Writes a set of tiles into a bitmap.
 	void _mr_puttiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color);
+
+	// Writes a set of tiles into a bitmap.
+	void _mr_putetiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
 
 	// Clear a tile of a bitmap.
 	void _mr_cleartile(mr_mixel* _screen, mr_position _x, mr_position _y);
@@ -702,6 +713,9 @@
 	// Writes a tile into a bitmap.
 	#define mr_puttiles(_screen, _x, _y, _tile, _count, _color) _mr_puttiles(SM(_screen), CM(_screen), _x, _y, _tile, _count, _color );
 
+	// Writes a tile into a bitmap.
+	#define mr_putetiles(_screen, _x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(_screen), CM(_screen), _x, _y, _tile, _w, _h, _color );
+
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_horizontal(_screen, _x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(_screen), CM(_screen), _x, _y, _tile, _color );
 
@@ -710,6 +724,9 @@
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_vertical(_screen, _x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(_screen), CM(_screen), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_tile_moveto_vertical_extended(_screen, _x, _y, _tile, _w, _h, _color) _mr_tile_moveto_vertical_extended(SM(_screen), CM(_screen), _x, _y, _tile, _w, _h, _color );
 
 	// Clear a tile of a bitmap.
 	#define mr_cleartile(_screen, _x, _y) _mr_cleartile(SM(_screen), _x, _y);
@@ -733,6 +750,9 @@
 	// Writes a set of tiles into a bitmap.
 	#define mr_puttilesv(_x, _y, _tile, _count, _color) _mr_puttiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _count, _color );
 
+	// Writes a set of tiles into a bitmap.
+	#define mr_putetilesv(_x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
+
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_horizontalv(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
 
@@ -741,6 +761,9 @@
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_verticalv(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_tile_moveto_vertical_extendedv(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_vertical_extended(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Clear a tile of a bitmap.
 	#define mr_cleartilev(_x, _y) _mr_cleartile(SM(VISIBLE_SCREEN), _x, _y);
@@ -770,6 +793,9 @@
 	// Writes a set of tiles into a bitmap.
 	#define mr_puttilese(_x, _y, _tile, _count, _color) _mr_puttile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _count, _color );
 
+	// Writes a set of tiles into a bitmap.
+	#define mr_putetilese(_x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
+
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_horizontale(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
 
@@ -778,6 +804,9 @@
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_verticale(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
+
+	// Writes a tile into a bitmap at *precise* horizontal position.
+	#define mr_tile_moveto_vertical_extendede(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_vertical_extended(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Clear a tile of a bitmap.
 	#define mr_cleartilee(_x, _y, _tile) _mr_cleartile(SM(ENABLED_SCREEN), _x, _y);

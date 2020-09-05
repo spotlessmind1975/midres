@@ -167,6 +167,52 @@ void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _des
     }
 }
 
+// Redefine a subset of N tiles by "shifting" vertically a tile
+void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination) {
+    mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
+
+    mr_position i, b;
+    mr_position w = _w, k = 0;
+
+    for (; w != 0; --w) {
+        for (i = 0; i < 9; ++i) {
+            for (b = 0; b < i; ++b, ++destination) {
+                *destination = 0x00;
+            }
+            for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
+                *destination = *(source);
+            }
+            source -= b;
+        }
+
+        for (k = 0; k < (_h - 1); ++k) {
+            for (i = 0; i < 9; ++i) {
+                for (b = 0; b < i; ++b, ++destination,++source) {
+                    *destination = *(source + (k * _w * 8));
+                }
+                source -= b;
+                for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
+                    *destination = *(source + ((k + 1) * _w * 8));
+                }
+                source -= b;
+            }
+        }
+
+        for (i = 0; i < 9; ++i) {
+            for (b = 0; b < i; ++b, ++destination, ++source) {
+                *destination = *(source + ((k+1) * _w * 8));
+            }
+            source -= b;
+            for (b = 0; b < (8 - i); ++b, ++destination) {
+                *destination = 0;
+            }
+        }
+        source += 8;
+    }
+
+}
+
 // Redefine a subset of N tiles by "rolling" horizontally a tile
 void mr_tile_prepare_roll_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
@@ -385,6 +431,31 @@ void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_tile_po
 
 }
 
+// Writes a tile into a bitmap at *precise* vertical position.
+void _mr_tile_moveto_vertical_extended(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color) {
+
+    int offset;
+
+    mr_position w = _w;
+    mr_position i, j;
+
+    offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
+
+    for (j = 0; j < _w; ++j) {
+        for (i = 0; i <= _h; ++i) {
+            if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
+                _screen[offset] = _tile + (_y & 0x07);
+                _colormap[offset] = _color;
+            }
+            offset += MR_SCREEN_WIDTH;
+            _tile += 9;
+        }
+        offset -= (( _h + 1) * MR_SCREEN_WIDTH);
+        ++offset;
+    }
+
+}
+
 // Clear a tile of a bitmap.
 void _mr_cleartile(mr_mixel* _screen, mr_position _x, mr_position _y) {
 
@@ -416,6 +487,26 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
     }
     fread(TM(_tileset) + 8 * _starting, _count * 8, 1, f);
     fclose(f);
+
+}
+
+void _mr_putetiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color) {
+
+    int offset;
+    mr_position w;
+
+    offset = _y * MR_SCREEN_WIDTH + _x;
+    w = _w;
+
+    for (; _h != 0; --_h) {
+        mr_position w = _w;
+        for (; w != 0; --w, ++_tile_start) {
+            _screen[offset] = _tile_start;
+            _colormap[offset] = _color;
+            ++offset;
+        }
+        offset += MR_SCREEN_WIDTH - _w;
+    }
 
 }
 
