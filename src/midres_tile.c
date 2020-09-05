@@ -36,6 +36,7 @@
  ** OVERLAYED FUNCTIONS SECTION
  ****************************************************************************/
 
+
  // The functions defined at this level can only be called up if the current
  // module has been loaded into memory. On the other hand, they can call any 
  // function declared at the resident module level.
@@ -167,7 +168,7 @@ void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _des
 }
 
 // Redefine a subset of N tiles by "rolling" horizontally a tile
-void mr_tile_hrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+void mr_tile_prepare_roll_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
     mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
 
@@ -184,8 +185,62 @@ void mr_tile_hrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
 
 }
 
+mr_mixel rollBuffer[8];
+
+// Roll horizontally a tile
+void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _destination, mr_direction _direction ) {
+
+    mr_mixel* source;
+    mr_mixel* destination;
+    mr_mixel* temp = &rollBuffer[0];
+    mr_position i, b;
+
+    if (_direction == mr_direction_right) {
+        source = (mr_mixel*)(TM(_tileset) + (_destination + 1) * 8);
+        destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+
+        for (b = 0; b < 8; ++b, ++source, ++temp) {
+            mr_mixel d = *((mr_mixel*)source - 8);
+            *temp = d;
+        }
+        temp -= 8;
+        source -= 8;
+        for (i = 0; i < 6; ++i) {
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                mr_mixel d = *((mr_mixel*)source);
+                *destination = d;
+            }
+        }
+        for (b = 0; b < 8; ++b, ++destination, ++temp) {
+            *((mr_mixel*)destination) = *temp;
+        }
+    } else {
+        source = (mr_mixel*)(TM(_tileset) + (_destination + 6) * 8);
+        destination = (mr_mixel*)(TM(_tileset) + ( _destination + 7 ) * 8);
+        for (b = 0; b < 8; ++b, ++destination, ++temp) {
+            mr_mixel d = *((mr_mixel*)destination);
+            *temp = d;
+        }
+        temp -= 8;
+        destination -= 8;
+        for (i = 0; i < 7; ++i) {
+            //printf("%i) source = %x dest = %x\n", i, source, destination);
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                mr_mixel d = *((mr_mixel*)source);
+                *destination = d;
+            }
+            source -= 16;
+            destination -= 16;
+        }
+        for (b = 0; b < 8; ++b, ++destination, ++temp) {
+            *((mr_mixel*)destination) = *temp;
+        }
+    }
+
+}
+
 // Redefine a subset of N tiles by "rolling" vertically a tile
-void mr_tile_vrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+void mr_tile_prepare_roll_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
     mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
 
@@ -201,6 +256,60 @@ void mr_tile_vrol(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
         }
         source -= b;
     }
+}
+
+// Roll vertically a tile
+void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _destination, mr_direction _direction) {
+
+    mr_mixel* source;
+    mr_mixel* destination;
+    mr_mixel* temp = &rollBuffer[0];
+    mr_position i, b;
+
+    if (_direction == mr_direction_up) {
+        source = (mr_mixel*)(TM(_tileset) + (_destination + 1) * 8);
+        destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+
+        for (b = 0; b < 8; ++b, ++source, ++temp) {
+            mr_mixel d = *((mr_mixel*)source - 8);
+            *temp = d;
+        }
+        temp -= 8;
+        source -= 8;
+        for (i = 0; i < 6; ++i) {
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                mr_mixel d = *((mr_mixel*)source);
+                *destination = d;
+            }
+        }
+        for (b = 0; b < 8; ++b, ++destination, ++temp) {
+            *((mr_mixel*)destination) = *temp;
+        }
+    }
+    else {
+        source = (mr_mixel*)(TM(_tileset) + (_destination + 6) * 8);
+        destination = (mr_mixel*)(TM(_tileset) + (_destination + 7) * 8);
+        for (b = 0; b < 8; ++b, ++destination, ++temp) {
+            mr_mixel d = *((mr_mixel*)destination);
+            *temp = d;
+        }
+        temp -= 8;
+        destination -= 8;
+        for (i = 0; i < 7; ++i) {
+            //printf("%i) source = %x dest = %x\n", i, source, destination);
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                mr_mixel d = *((mr_mixel*)source);
+                *destination = d;
+            }
+            source -= 16;
+            destination -= 16;
+        }
+        for (b = 0; b < 8; ++b, ++destination, ++temp) {
+            *((mr_mixel*)destination) = *temp;
+        }
+    }
+
+
 }
 
 // Writes a tile into a bitmap.
