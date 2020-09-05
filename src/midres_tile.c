@@ -189,7 +189,7 @@ void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_
         for (k = 0; k < (_h - 1); ++k) {
             for (i = 0; i < 9; ++i) {
                 for (b = 0; b < i; ++b, ++destination,++source) {
-                    *destination = *(source + (k * _w * 8));
+                    *destination = *(source + (k * _w * 8) + (8-i));
                 }
                 source -= b;
                 for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
@@ -201,7 +201,7 @@ void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_
 
         for (i = 0; i < 9; ++i) {
             for (b = 0; b < i; ++b, ++destination, ++source) {
-                *destination = *(source + ((k+1) * _w * 8));
+                *destination = *(source + ((k + 2) * _w * 8) + (8 - i));
             }
             source -= b;
             for (b = 0; b < (8 - i); ++b, ++destination) {
@@ -210,7 +210,6 @@ void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_
         }
         source += 8;
     }
-
 }
 
 // Redefine a subset of N tiles by "rolling" horizontally a tile
@@ -270,7 +269,6 @@ void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _destination, mr_direc
         temp -= 8;
         destination -= 8;
         for (i = 0; i < 7; ++i) {
-            //printf("%i) source = %x dest = %x\n", i, source, destination);
             for (b = 0; b < 8; ++b, ++source, ++destination) {
                 mr_mixel d = *((mr_mixel*)source);
                 *destination = d;
@@ -342,7 +340,6 @@ void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _destination, mr_directi
         temp -= 8;
         destination -= 8;
         for (i = 0; i < 7; ++i) {
-            //printf("%i) source = %x dest = %x\n", i, source, destination);
             for (b = 0; b < 8; ++b, ++source, ++destination) {
                 mr_mixel d = *((mr_mixel*)source);
                 *destination = d;
@@ -440,7 +437,6 @@ void _mr_tile_moveto_vertical_extended(mr_mixel* _screen, mr_color* _colormap, m
     mr_position i, j;
 
     offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
-
     for (j = 0; j < _w; ++j) {
         for (i = 0; i <= _h; ++i) {
             if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
