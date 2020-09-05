@@ -46,6 +46,10 @@ unsigned char mr_key_pressed() {
     return mr_key_pressed_hd();
 }
 
+unsigned char mr_get_key_pressed() {
+    return mr_get_key_pressed_hd();
+}
+
 void mr_wait(unsigned char _seconds) {
 
     mr_wait_hd(_seconds);

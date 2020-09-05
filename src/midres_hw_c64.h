@@ -92,6 +92,9 @@
 #define MR_COLOR_LIGHT_BLUE				14
 #define MR_COLOR_LIGHT_GREY				15
 
+#define MR_KEY_UP						9
+#define MR_KEY_DOWN						12
+
 #define SM(_screen)						((mr_mixel*)(0x8000+(0x0400*(_screen))))
 #define CM(_screen)						((mr_color*)(0xd800))
 #define AM(_screen)						((mr_mixel*)(0x8000+(0x0400*(_screen))))

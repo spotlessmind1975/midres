@@ -117,6 +117,10 @@ unsigned char mr_key_pressed_hd() {
     return (*(unsigned char*)0x00d4) != 0x58;
 }
 
+unsigned char mr_get_key_pressed_hd() {
+    return (*(unsigned char*)0x00d4);
+}
+
 void mr_wait_hd(unsigned char _seconds) {
 
     unsigned char now = *((unsigned char*)0xa1);

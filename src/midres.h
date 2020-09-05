@@ -826,6 +826,8 @@
 
 	unsigned char mr_key_pressed();
 	
+	unsigned char mr_get_key_pressed();
+
 	void mr_wait(unsigned char _seconds);
 
 	void mr_wait_jiffies(unsigned char _jiffies);

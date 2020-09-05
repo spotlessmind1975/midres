@@ -92,6 +92,10 @@ unsigned char mr_key_pressed_hd() {
     return (*(unsigned char*)0xfd30) != 0x00;
 }
 
+unsigned char mr_get_key_pressed_hd() {
+    return (*(unsigned char*)0xfd30);
+}
+
 void mr_wait_hd(unsigned char _seconds) {
 
     unsigned char now = *((unsigned char*)0xa4);

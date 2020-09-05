@@ -55,6 +55,9 @@ void mr_tileset_visible_hd(unsigned char _tileset);
 // Hardware dependent key press listener
 unsigned char mr_key_pressed_hd();
 
+// Hardware dependent get key pressed
+unsigned char mr_get_key_pressed_hd();
+
 // Hardware dependent time wait
 void mr_wait_hd(unsigned char _seconds);
 
