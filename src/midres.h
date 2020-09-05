@@ -251,6 +251,9 @@
 	// Unpack luminance in an half screen
 	void mr_unpack(mr_screen _source, mr_screen _destination, mr_half_screen _half_screen);
 
+	// Set the background color of all screens
+	void mr_set_background_color(mr_color _color);
+
 	/*-----------------------------------------------------------------------
 	 --- SCREEN MANAGEMENT (implicit [visible screen])
 	 -----------------------------------------------------------------------*/

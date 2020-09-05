@@ -193,4 +193,8 @@ void mr_sound_stop_hd() {
 
 }
 
+void mr_set_background_color_hd(unsigned char _color) {
+    SET_BACKGROUND_COLOR(_color);
+}
+
 #endif

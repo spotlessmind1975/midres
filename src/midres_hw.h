@@ -34,6 +34,9 @@
 // Hardware dependent initialization.
 void mr_init_hd();
 
+// Hardware dependent set screen background color
+void mr_set_background_color_hd(unsigned char _color);
+
 // Hardware dependent screen management.
 void mr_show_hd(unsigned char _screen);
 
