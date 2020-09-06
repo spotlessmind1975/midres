@@ -117,6 +117,24 @@
 	#define mr_direction_up		3
 	#define mr_direction_down	4
 
+	// The speed of an object can be easily represented by this
+	// type, that has been added for commodity.
+
+	typedef signed char mr_speed;
+
+	// The acceleration of an object can be easily represented by this
+	// type, that has been added for commodity.
+
+	typedef signed char mr_acceleration;
+
+	// The boolean can be easily represented by this type, 
+	// that has been added for commodity.
+
+	typedef unsigned char mr_boolean;
+
+	#define mr_false		0
+	#define mr_true			1
+
 	// We include some hardware-dependent data type and constants.
 	#include "midres_hw.h"
 
