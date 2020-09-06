@@ -172,8 +172,8 @@ void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
     mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
 
-    mr_position i, b;
-    mr_position w = _w, k = 0;
+    int i, b;
+    int w = _w, k = 0;
 
     for (; w != 0; --w) {
         for (i = 0; i < 9; ++i) {
@@ -201,7 +201,7 @@ void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_
 
         for (i = 0; i < 9; ++i) {
             for (b = 0; b < i; ++b, ++destination, ++source) {
-                *destination = *(source + ((k + 2) * _w * 8) + (8 - i));
+                *destination = *(source + ((_h - 1) * _w * 8) + (8 - i));
             }
             source -= b;
             for (b = 0; b < (8 - i); ++b, ++destination) {
@@ -437,6 +437,7 @@ void _mr_tile_moveto_vertical_extended(mr_mixel* _screen, mr_color* _colormap, m
     mr_position i, j;
 
     offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
+
     for (j = 0; j < _w; ++j) {
         for (i = 0; i <= _h; ++i) {
             if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
