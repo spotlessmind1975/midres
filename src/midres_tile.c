@@ -370,17 +370,19 @@ void _mr_puttile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_posi
 // Writes a tile into a bitmap at *precise* horizontal position.
 void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color) {
 
-    int offset;
+    if (((_x >> 3)) < MR_SCREEN_WIDTH) {
 
-    offset = (_y>>3) * MR_SCREEN_WIDTH + (_x>>3);
+        int offset;
 
-    _screen[offset] = _tile + (_x & 0x07) + 1;
-    _colormap[offset] = _color;
-    if (( (_x>>3) + 1 ) < MR_SCREEN_WIDTH) {
-        _screen[offset + 1] = _tile + (_x & 0x07) + 9;
-        _colormap[offset + 1] = _color;
+        offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
+
+        _screen[offset] = _tile + (_x & 0x07) + 1;
+        _colormap[offset] = _color;
+        if (((_x >> 3) + 1) < MR_SCREEN_WIDTH) {
+            _screen[offset + 1] = _tile + (_x & 0x07) + 9;
+            _colormap[offset + 1] = _color;
+        }
     }
-
 }
 
 // Writes a tile into a bitmap at *precise* horizontal position.
