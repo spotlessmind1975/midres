@@ -83,11 +83,11 @@ void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _d
         source -= 8;
     }
 
-    for (i = 1; i < 9; ++i) {
+    for (i = 0; i < 8; ++i) {
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = *((mr_mixel*)source);
-            mr_mixel n = d & (0xff >> (8 - i));
-            *destination = (n << (8 - i));
+            mr_mixel n = d & (0xff >> (7 - i));
+            *destination = (n << (7 - i));
         }
         source -= 8;
     }
@@ -376,10 +376,10 @@ void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_tile_
 
         offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
 
-        _screen[offset] = _tile + (_x & 0x07) + 1;
+        _screen[offset] = _tile + (_x & 0x07);
         _colormap[offset] = _color;
         if (((_x >> 3) + 1) < MR_SCREEN_WIDTH) {
-            _screen[offset + 1] = _tile + (_x & 0x07) + 9;
+            _screen[offset + 1] = _tile + (_x & 0x07) + 8;
             _colormap[offset + 1] = _color;
         }
     }
