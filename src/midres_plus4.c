@@ -41,9 +41,9 @@
     while ((*(unsigned char*)0xff1c) & 1 == 0) {}
 
 #define SET_CHARSET( _tileset ) \
-    *((unsigned char *)0xff13) = ( *((unsigned char *)0xff13) & 0x03 ) | ( (_tileset) << 2 ); \
-    *((unsigned char *)0xff12) = (*((unsigned char*)0xff12) & 0xfb ); \
-    /* *((unsigned char *)0xff07) = (*((unsigned char*)0xff07) | 0x80 ); */
+    *((unsigned char*)0xff12) = 0; \
+    *((unsigned char *)0xff13) = ( (_tileset) << 2 ); \
+    *((unsigned char *)0xff07) = (*((unsigned char*)0xff07) | 0x80);
 
 void mr_init_hd() {
 

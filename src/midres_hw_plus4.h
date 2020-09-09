@@ -36,16 +36,12 @@
 
 // List of available tilesets:
 #define MR_TILESET_ROM_0				52
-#define MR_TILESET_0					5
-#define MR_TILESET_1					6
-#define MR_TILESET_2					7
-#define MR_TILESET_3					8
-#define MR_TILESET_4					9
-#define MR_TILESET_7					10
-#define MR_TILESET_8					11
-#define MR_TILESET_9					12
-#define MR_TILESET_A					13
-#define MR_TILESET_COUNT				14
+#define MR_TILESET_0					6
+#define MR_TILESET_1					8
+#define MR_TILESET_2					10
+#define MR_TILESET_3					12
+#define MR_TILESET_4					14
+#define MR_TILESET_COUNT				6
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
 
 // List of available areas for bit blits:
@@ -59,9 +55,9 @@
 #define MR_AUX_DEFAULT					MR_AUX_0
 
 // Offset for correct brightness.
-#define MR_COLOR_LOWBRIGHTNESS			3<<4
-#define MR_COLOR_BRIGHTNESS				5<<4
-#define MR_COLOR_HIGHBRIGHTNESS			7<<4
+#define MR_COLOR_LOWBRIGHTNESS			1<<4
+#define MR_COLOR_BRIGHTNESS				3<<4
+#define MR_COLOR_HIGHBRIGHTNESS			5<<4
 
 // Default palette.
 #define MR_COLOR_BLACK					(0|MR_COLOR_BRIGHTNESS)
