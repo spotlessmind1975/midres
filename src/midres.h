@@ -112,10 +112,10 @@
 
 	typedef unsigned char mr_direction;
 
-	#define mr_direction_right	1
-	#define mr_direction_left	2
-	#define mr_direction_up		3
-	#define mr_direction_down	4
+	#define mr_direction_left	1
+	#define mr_direction_right	2
+	#define mr_direction_up		1
+	#define mr_direction_down	2
 
 	// The speed of an object can be easily represented by this
 	// type, that has been added for commodity.
@@ -691,11 +691,17 @@
 	// Roll horizontally a tile
 	void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _tile, mr_direction _direction);
 
+	// Roll horizontally a tile
+	void mr_tile_roll_horizontal_on_place(mr_tileset _tileset, mr_tile _tile, mr_direction _direction, mr_tile _place, mr_position *_index);
+
 	// Redefine a subset of N tiles by "rolling" vertically a tile
 	void mr_tile_prepare_roll_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 
 	// Roll vertically a tile
 	void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _tile, mr_direction _direction);
+
+	// Roll vertically a tile
+	void mr_tile_roll_vertical_on_place(mr_tileset _tileset, mr_tile _tile, mr_direction _direction, mr_tile _place, mr_position* _index);
 
 	// Writes a tile into a bitmap.
 	void _mr_puttile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);

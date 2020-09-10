@@ -283,6 +283,34 @@ void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _destination, mr_direc
 
 }
 
+// Roll horizontally a tile
+void mr_tile_roll_horizontal_on_place(mr_tileset _tileset, mr_tile _destination, mr_direction _direction, mr_tile _place, mr_position *_index) {
+
+    mr_mixel* source;
+    mr_mixel* destination;
+    mr_position b;
+
+    source = (mr_mixel*)(TM(_tileset) + ( _destination * 8 ) + (*_index) * 8);
+    destination = (mr_mixel*)(TM(_tileset) + _place * 8);
+    if (_direction == mr_direction_right) {
+        ++(*_index);
+        if ((*_index) > 8) {
+            *_index = 0;
+        }
+    }
+    else {
+        --(*_index);
+        if ((*_index) == 255) {
+            *_index = 7;
+        }
+    }
+    for (b = 0; b < 8; ++b, ++source, ++destination) {
+        mr_mixel d = *((mr_mixel*)source);
+        *destination = d;
+    }
+
+}
+
 // Redefine a subset of N tiles by "rolling" vertically a tile
 void mr_tile_prepare_roll_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
@@ -353,6 +381,11 @@ void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _destination, mr_directi
     }
 
 
+}
+
+// Roll vertically a tile
+void mr_tile_roll_vertical_on_place(mr_tileset _tileset, mr_tile _destination, mr_direction _direction, mr_tile _place, mr_position *_index) {
+    mr_tile_roll_horizontal_on_place(_tileset, _destination, _direction, _place, _index);
 }
 
 // Writes a tile into a bitmap.
