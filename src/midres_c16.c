@@ -144,5 +144,21 @@ void mr_set_background_color_hd(unsigned char _color) {
     SET_BACKGROUND_COLOR(_color);
 }
 
+unsigned char storedJiffy = 0;
+
+void mr_start_frame_hd() {
+    
+    storedJiffy = *((unsigned char*)0xa5);
+
+}
+
+void mr_end_frame_hd(unsigned char _jiffies) {
+
+    while ((*((unsigned char*)0xa5) - storedJiffy) < _jiffies) {
+        ; // nop!
+    }
+
+}
+
 #endif
 #endif

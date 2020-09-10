@@ -73,4 +73,8 @@ void mr_sound_change_hd(int _parameter);
 // Hardware dependent sound library
 void mr_sound_stop_hd();
 
+void mr_start_frame_hd();
+
+void mr_end_frame_hd(unsigned char _jiffies);
+
 #endif

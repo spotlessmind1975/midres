@@ -862,6 +862,10 @@
 
 	void mr_sound_stop();
 
+	void mr_start_frame();
+
+	void mr_end_frame(unsigned char _jiffies);
+
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"
 
