@@ -430,7 +430,7 @@ void _mr_tile_moveto_horizontal_extended(mr_mixel* _screen, mr_color* _colormap,
     for (i = 0; i < _h; ++i) {
         for (j = 0; j < _w+1; ++j) {
             if (((_x >> 3) + j) >= 0 && (((_x >> 3) + j) < MR_SCREEN_WIDTH)) {
-                _screen[offset] = _tile + (_x & 0x07) + 1;
+                _screen[offset] = _tile + (_x & 0x07);
                 _colormap[offset] = _color;
             }
             ++offset;

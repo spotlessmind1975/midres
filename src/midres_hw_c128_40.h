@@ -92,6 +92,12 @@
 #define MR_COLOR_LIGHT_BLUE				14
 #define MR_COLOR_LIGHT_GREY				15
 
+#define MR_COLOR_DARK_BLUE				6
+
+#define MR_NEXT_COLOR( c )				( ( ( ( c & 0x0f ) + 1 ) & 0x0f ) )
+
+#define MR_COLOR_COUNT					16
+
 #define MR_COLOR_VIOLET					MR_COLOR_PURPLE
 
 #define SM(_screen)						((mr_mixel*)(0x8000+(0x0400*(_screen))))

@@ -59,6 +59,8 @@
 #define MR_COLOR_LIGHT_BLUE				0
 #define MR_COLOR_LIGHT_GREY				0	
 
+#define MR_COLOR_COUNT					16
+
 #define SM(_screen)						((mr_mixel*)((0x0000*(_screen))))
 #define CM(_screen)						((mr_color*)((0x0000*(_screen))))
 #define AM(_screen)						((mr_mixel*)((0x0000*(_screen))))

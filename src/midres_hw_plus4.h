@@ -55,9 +55,9 @@
 #define MR_AUX_DEFAULT					MR_AUX_0
 
 // Offset for correct brightness.
-#define MR_COLOR_LOWBRIGHTNESS			1<<4
-#define MR_COLOR_BRIGHTNESS				3<<4
-#define MR_COLOR_HIGHBRIGHTNESS			5<<4
+#define MR_COLOR_LOWBRIGHTNESS			(3<<4)
+#define MR_COLOR_BRIGHTNESS				(5<<4)
+#define MR_COLOR_HIGHBRIGHTNESS			(7<<4)
 
 // Default palette.
 #define MR_COLOR_BLACK					(0|MR_COLOR_BRIGHTNESS)
@@ -82,6 +82,10 @@
 #define MR_COLOR_DARK_GREY				1
 #define MR_COLOR_GREY					(1|MR_COLOR_BRIGHTNESS)
 #define MR_COLOR_LIGHT_GREY				(1|MR_COLOR_HIGHBRIGHTNESS)
+
+#define MR_NEXT_COLOR( c )				( c & 0xf0 | ( ( ( c & 0x0f ) + 1 ) & 0x0f ) )
+
+#define MR_COLOR_COUNT					16
 
 #define SM(_screen)						((mr_mixel*)((0x0800*(_screen))+0x0400))
 #define CM(_screen)						((mr_color*)((0x0800*(_screen))))

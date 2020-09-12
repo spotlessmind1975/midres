@@ -78,6 +78,12 @@
 #define MR_COLOR_LIGHT_BLUE		 		MR_COLOR_BLUE
 #define MR_COLOR_LIGHT_GREY				MR_COLOR_WHITE
 
+#define MR_COLOR_DARK_BLUE				6
+
+#define MR_NEXT_COLOR( c )				( ( ( ( c & 0x0f ) + 1 ) & 0x0f ) )
+
+#define MR_COLOR_COUNT					16
+
 #define SM(_screen)						((mr_mixel*)(0x0200*(_screen)))
 #define CM(_screen)						((mr_mixel*)(0x9400))
 #define TM(_tileset)					((mr_mixel*)( _tileset > 16 ? (0x8000 + ((_tileset)-16) * 0x0400) : ((_tileset) * 0x400) ) )
