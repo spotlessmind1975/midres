@@ -37,13 +37,12 @@
 
 // List of available tilesets:
 #define MR_TILESET_0					5
-#define MR_TILESET_1					6
-#define MR_TILESET_2					7
+#define MR_TILESET_1					7
 #define MR_TILESET_ROM_0				32
 #define MR_TILESET_ROM_1				33
 #define MR_TILESET_ROM_2				34
 #define MR_TILESET_ROM_3				35
-#define MR_TILESET_COUNT				7
+#define MR_TILESET_COUNT				6
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_2
 
 // List of available bit blits:
@@ -80,7 +79,7 @@
 
 #define MR_COLOR_DARK_BLUE				6
 
-#define MR_NEXT_COLOR( c )				( ( ( ( c & 0x0f ) + 1 ) & 0x0f ) )
+#define MR_NEXT_COLOR( c )				( ( ( ( c & 0x07 ) + 1 ) & 0x07 ) )
 
 #define MR_COLOR_COUNT					16
 

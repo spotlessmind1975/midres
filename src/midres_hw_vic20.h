@@ -67,7 +67,7 @@
 
 #define MR_COLOR_DARK_BLUE				6
 
-#define MR_NEXT_COLOR( c )				( ( ( ( c & 0x0f ) + 1 ) & 0x0f ) )
+#define MR_NEXT_COLOR( c )				( ( ( ( c & 0x07 ) + 1 ) & 0x07 ) )
 
 #define MR_COLOR_COUNT					16
 
