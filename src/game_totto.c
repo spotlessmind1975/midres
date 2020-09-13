@@ -179,6 +179,7 @@ mr_position level[2] = { 1, 0 };
 // Index of the forest ground.
 mr_position columnCount = 0;
 
+// This is the (maximum) height of the gaps.
 mr_position holeHeight = HOLE_HEIGHT;
 
 // Sound duration counter (in jiffies)
@@ -381,41 +382,33 @@ void prepare_playfield() {
 		columnHoleAt[i] = 2 + (rand() & 0x02) + (rand() & 0x02);
 	}
 
+	// Setup the heiht of each column.
 	holeHeight = HOLE_HEIGHT - ((level[1]>>1) < 3 ? (level[1] >> 1) : 3);
 
 }
 
+// Show the "game over" screen.
 void show_game_over() {
 
-	mr_tile_position i;
-	mr_position j;
-	mr_boolean exitLoop = mr_false;
-
-	// Since we do not need midres, we redefine characters, in order to avoid
-	// side effects in using the drawing primitives.
-	for (i = 0; i < 16; ++i) {
-		RENDERED_MIXELS[0] = TILE1_EMPTY;
-	}
-	RENDERED_MIXELS[15] = TILE1_FILLER;
-
-	// Set the backgroubnd to the blue sky.
+	// Set the background to the blue sky.
 	mr_set_background_color(SKY_COLOR);
 
+	// Clear the bitmap
 	mr_clear_bitmapv();
 
+	// "GAME OVER"
 	mr_putetilesv((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1, (MR_SCREEN_HEIGHT - TILE_GAMEOVER_HEIGHT)>>1, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, TILE_GAMEOVER_HEIGHT, MR_COLOR_YELLOW);
 
+	// Draw score (on left)
 	draw_score(( (MR_SCREEN_WIDTH) >> 1 ) -8, ( (MR_SCREEN_HEIGHT)>>1 ) + 2 );
+
+	// Draw hi score (on right)
 	draw_hiscore(((MR_SCREEN_WIDTH) >> 1) +2, ((MR_SCREEN_HEIGHT) >> 1) + 2);
+
+	// Draw level reached
 	draw_level(( (MR_SCREEN_HEIGHT) >> 1 ) + 4);
 
-	for (j = 0; j < 4; ++j) {
-		birdTitleY[j] = j * 8 * TILE1_BIRD1_HEIGHT;
-	}
-	for (; j < 8; ++j) {
-		birdTitleY[j] = MR_SCREEN_HEIGHT * 8 - (j - 5) * 8 * (TILE1_MINIBIRD_HEIGHT + 1);
-	}
-
+	// Wait for two seconds.
 	mr_wait(2);
 
 }
@@ -426,28 +419,44 @@ void gameloop() {
 
 	mr_position j,t;
 
+	// Prepare a fresh new playfield.
 	prepare_playfield();
 
+	// Game is not over (yet!).
 	gameOver = mr_false;
+
+	// Bird is not playing (yet!).
 	birdPlaying = mr_false;
+
+	// The player will win, normally.
 	playerWin = mr_true;
+
+	// Offset of the first column (outside the screen)
 	columnX = MR_SCREEN_WIDTH * 8;
+
+	// Starting vertical position of the bird is
+	// the center of the screen
 	birdY = (MR_SCREEN_HEIGHT >> 1) * 8;
+
+	// Bird has an initial speed and acceleration.
 	birdVY = BIRD_INIT_SPEED;
 	birdAY = BIRD_INIT_ACCELERATION;
 
+	// Draw hi score (on left) and score (on right)
 	draw_hiscore(0, 0);
 	draw_score(MR_SCREEN_WIDTH - 6, 0);
 	
+	// "PRESS ANY KEY"
 	mr_putetilesv(PRESSANYKEY_CENTER_X, MR_SCREEN_HEIGHT - TILE_PRESSANYKEY_HEIGHT - 8, TILE_PRESSANYKEY, TILE_PRESSANYKEY_WIDTH, TILE_PRESSANYKEY_HEIGHT, MR_COLOR_WHITE);
 
 	// Endless loop...
 	while (1) {
 
+		// Track the start time of frame drawing. This is needed
+		// since the drawing time is variable.
 		mr_start_frame();
 
 		// Draw the animated bird.
-
 		switch (birdFrame) {
 			case 0:
 				t = TILE_MOVING_BIRD1;
@@ -456,14 +465,13 @@ void gameloop() {
 				t = TILE_MOVING_BIRD3;
 				break;
 		}
-
 		mr_tile_moveto_vertical_extendedv(
 			BIRD_X, birdY,
 			t,
 			TILE_BIRD1_WIDTH, TILE_BIRD1_HEIGHT,
 			MR_COLOR_WHITE);
 
-		// Animate the forest and the ground. We call once the forest's one and
+		// Animate the forest and the ground. We call twice the forest's one and
 		// three times the ground's one since we have to simulate the "parallax"
 		// effect.
 		mr_tile_roll_horizontal_on_place(MR_TILESET_0, TILE_ROLLING_FOREST1, mr_direction_left, TILE_FOREST1, &forestFrame);
@@ -479,7 +487,7 @@ void gameloop() {
 			for (j = 0; j < columnCount; ++j) {
 
 				// Calculate x position of the column and the
-				// position of the hole.
+				// (starting) position of the hole.
 				mr_tile_position x = columnX + j * COLUMN_SPACING * 8;
 				mr_position h = columnHoleAt[j];
 
@@ -490,22 +498,32 @@ void gameloop() {
 					// border has touched the column.
 					if ( BIRD_X_BORDER >= x && BIRD_X <= ( x + 8 ) ) {
 
+						// Track if the bird changed column.
 						if (enterColumn != j) {
+
+							// Bird passed the pipe. Now, we can start a "beep"
+							// that will last for 24 jiffies.
 							mr_sound_start(0);
 							mr_sound_change(2000);
 							soundDuration = 24;
 
-							enterColumn = j;
+							// Increase (and draw) the score.
 							increase(score);
 							draw_score(MR_SCREEN_WIDTH - 6, 0);
+
+							// Update the last passed column.
+							enterColumn = j;
+
 						}
 
 						// Next, we need to check if the bird has passed
 						// inside the hole or if it has touched the upper
 						// or lower border of the column.
 						if ( ( BIRD_Y_BORDER >= (( h+ holeHeight + 1) * 8) ) || ( birdY <= (h * 8) ) ) {
-							mr_clear_bitmap(MR_SCREEN_DEFAULT);
-							// TOUCHED! Game over.
+
+							mr_clear_bitmapv();
+
+							// OUCH! Game over and player loses.
 							gameOver = mr_true;
 							playerWin = mr_false;
 							break;
@@ -516,7 +534,9 @@ void gameloop() {
 					// Let's draw the column on the screen.
 					draw_column(x, h, 8);
 
+					// Is last column outside the screen?
 					if (x < 0 && j == (columnCount - 1)) {
+						// Game over and go to next level.
 						playerWin = mr_true;
 						gameOver = mr_true;
 						break;
@@ -542,6 +562,7 @@ void gameloop() {
 		// If any key has been pressed...		
 		if (mr_key_pressed()) {
 
+			// remove "PRESS ANY KEY".
 			if (!birdPlaying) {
 				mr_htilesv(PRESSANYKEY_CENTER_X, PRESSANYKEY_CENTER_X + TILE_PRESSANYKEY_WIDTH, MR_SCREEN_HEIGHT - TILE_PRESSANYKEY_HEIGHT - 8, TILE_EMPTY, MR_COLOR_WHITE);
 			}
@@ -571,7 +592,7 @@ void gameloop() {
 			}
 
 			// If the bird reachs the lower side of the screen,
-			// then... GAME OVER.
+			// then... "GAME OVER".
 			if ((birdY + (TILE_BIRD1_HEIGHT*8)) > (MR_SCREEN_HEIGHT - 7) * 8) {
 				gameOver = mr_true;
 				playerWin = mr_false;
@@ -593,8 +614,10 @@ void gameloop() {
 				birdAY = 0;
 			}
 		}
+
 		// If the player is *NOT* playing...
 		else {
+			// Oscillation here.
 			if (birdVY >= BIRD_MAX_SPEED ) {
 				birdAY = -1;
 			} else if (birdVY <= -BIRD_MAX_SPEED) {
@@ -615,6 +638,7 @@ void gameloop() {
 		birdY += birdVY;
 		birdVY += birdAY;
 
+		// Stop sound if duration passed.
 		if (soundDuration > 0) {
 			soundDuration -= 4;
 			if (soundDuration <= 0) {
@@ -623,24 +647,34 @@ void gameloop() {
 			}
 		}
 
+		// Wait for up to 4 jiffies before continuing.
 		mr_end_frame(4);
 
 	}
 
+	// Stop sound if playing.
 	mr_sound_stop();
 
 }
 
+// Show the "titles" screen.
 void show_titles() {
 
+	// Used to exit the loop.
 	mr_boolean exitLoop = mr_false;
+
+	// Used to alternate the titles (western/eastern)
 	mr_boolean titleAlternate = mr_false;
+
+	// Used as indexes.
 	mr_tile_position i;
 	mr_position j;
-	mr_color c = MR_COLOR_YELLOW + MR_COLOR_BRIGHTNESS;
-	mr_position bx;
 
-	mr_tile_position x = 0, y = 0;
+	// Last bird color.
+	mr_color c = MR_COLOR_YELLOW + MR_COLOR_BRIGHTNESS;
+
+	// Used to maintain the horizontal position of animated bird.
+	mr_position bx;
 
 	// Since we do not need midres, we redefine characters, in order to avoid
 	// side effects in using the drawing primitives.
@@ -648,14 +682,15 @@ void show_titles() {
 		RENDERED_MIXELS[0] = TILE1_EMPTY;
 	}
 	RENDERED_MIXELS[15] = TILE1_FILLER;
-
 	mr_clear_bitmapv();
 
 	// Enable the custom tileset for viewing.
 	mr_tileset_visible(MR_TILESET_1);
 
-	// Set the backgroubnd to the blue sky.
+	// Set the background to the blue sky.
 	mr_set_background_color(SKY_COLOR);
+
+	// Initialize birds' positions.
 	for (j = 0; j < 4; ++j) {
 		birdTitleY[j] = j * 8 * ( TILE1_MINIBIRD_HEIGHT + 1 );
 	}
@@ -663,16 +698,21 @@ void show_titles() {
 		birdTitleY[j] = MR_SCREEN_HEIGHT * 8 - (j-2) * 8 * ( TILE1_MINIBIRD_HEIGHT + 1 );
 	}
 
+	// "PRESS ANY KEY"
 	mr_putetilesv(PRESSANYKEY_CENTER_X, MR_SCREEN_HEIGHT - TILE1_PRESSANYKEY_HEIGHT - 1, TILE1_PRESSANYKEY, TILE1_PRESSANYKEY_WIDTH, TILE1_PRESSANYKEY_HEIGHT, MR_COLOR_WHITE);
 
 	while (!exitLoop) {
 
-		// Move the bird horizzontally
+		// Move the birds horizzontally
 		for (i = -2 * TILE1_BIRD1_WIDTH; i < (MR_SCREEN_WIDTH * 8 + 4 * 8 * TILE1_BIRD1_WIDTH); i+=2) {
+
+			// Exit if a key is pressed.
 			if (mr_key_pressed()) {
 				exitLoop = mr_true;
 				break;
 			}
+
+			// Move big birds.
 			for (j = 0; j < 4; ++j) {
 				bx = (i >> 3) - (j * TILE1_BIRD1_WIDTH) - 1;
 				if ((bx < MR_SCREEN_WIDTH) && (bx >= 0)) {
@@ -685,6 +725,8 @@ void show_titles() {
 					TILE1_BIRD1_WIDTH, TILE1_BIRD1_HEIGHT,
 					c);
 			}
+
+			// Move small birds.
 			for (j = 4; j < 8; ++j) {
 				bx = (j * TILE1_MINIBIRD_WIDTH) - (i >> 3) + 1;
 				if ((bx < MR_SCREEN_WIDTH)&&(bx>=0)) {
@@ -696,6 +738,7 @@ void show_titles() {
 					c);
 			}
 
+			// Alternate titles on timing condition.
 			if ( i == 160 ) {
 				if (titleAlternate) {
 					mr_putetilesv(TITLES_CENTER_X, TITLES_CENTER_Y, TILE1_TOTTO, TILE1_TOTTO_WIDTH, TILE1_TOTTO_HEIGHT, MR_COLOR_WHITE);
@@ -708,6 +751,7 @@ void show_titles() {
 
 		}
 
+		// Pass to next color.
 		c = MR_NEXT_COLOR(c);
 
 	}
@@ -718,8 +762,6 @@ void show_titles() {
 		RENDERED_MIXELS[0] = TILE_EMPTY;
 	}
 	RENDERED_MIXELS[15] = TILE_FILLER;
-
-	// Clear the screen.
 	mr_clear_bitmapv();
 
 	// Enable the custom tileset for viewing.
@@ -727,6 +769,7 @@ void show_titles() {
 
 }
 
+// Show the "level" screen.
 void show_level() {
 
 	// Clear the screen.
@@ -739,10 +782,11 @@ void show_level() {
 
 }
 
+// Show the "winning" screen.
 void show_winning_screen() {
 
+	// Choose a random screen.
 	switch (rand() & 0x03) {
-
 		case 0:
 			mr_load("ttfinal1.mpic", MR_AUX_DEFAULT);
 			break;
@@ -756,10 +800,11 @@ void show_winning_screen() {
 			mr_load("ttfinal4.mpic", MR_AUX_DEFAULT);
 			break;
 	}
-
 	mr_uncompressv(MR_AUX_DEFAULT);
+
 }
 
+// 
 void game_totto() {
 
 	// Initialize random number generator
@@ -771,38 +816,51 @@ void game_totto() {
 	// Clear screen bitmap.
 	mr_clear_bitmapv();
 
+	// Prepare the graphics.
 	prepare_graphics();
 
+	// Endless loop...
 	while (1) {
 
+		// Show titles.
 		show_titles();
 
+		// Reset score.
 		score[0] = 0;
 		score[1] = 0;
 		score[2] = 0;
 		score[3] = 0;
 
+		// Reset level.
 		level[0] = 1;
 		level[1] = 0;
 
+		// Endless loop...
 		while (1) {
 
+			// Show the level screen.
 			show_level();
 
+			// Play the game.
 			gameloop();
 
+			// Game finished: exit if player lose it.
 			if (!playerWin) {
 				break;
 			}
 
+			// Increase the level.
 			increase(level);
 
+			// Level 100 (= 00) is "END OF GAME", and we can
+			// show to the player the winning screen.
 			if ( ( level[0] == 0) && (level[1] == 0) ) {
 				show_winning_screen();
 				break;
 			}
 		}
 
+		// Update the hi score.
 		if (*((long*)&score[0]) > * ((long*)&hiscore[0])) {
 			hiscore[0] = score[0];
 			hiscore[1] = score[1];
@@ -810,6 +868,7 @@ void game_totto() {
 			hiscore[3] = score[3];
 		}
 		
+		// Show "game over" screen.
 		show_game_over();
 
 	}
