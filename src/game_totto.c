@@ -77,7 +77,7 @@
 #define COLUMN_SPACING			8
 
 // Max hole height, in tiles.
-#define HOLE_HEIGHT				7
+#define HOLE_HEIGHT				6
 
 // Starting speed of the bird.
 #define BIRD_INIT_SPEED			1
@@ -89,7 +89,7 @@
 #define BIRD_INIT_ACCELERATION	1
 
 // Fixed horizontal position of the bird
-#define BIRD_X					( ( MR_SCREEN_WIDTH >> 1 ) * 8 + ( TILE_BIRD1_WIDTH >> 2 ) * 8 )
+#define BIRD_X					( ( ( MR_SCREEN_WIDTH >> 1 ) * 8 ) - ( ( TILE_BIRD1_WIDTH >> 2 ) * 8 ) ) 
 
 // Fixed right border for collision detection.
 #define BIRD_X_BORDER			( BIRD_X + ( TILE_BIRD1_WIDTH * 8 ) - ( TILE_BIRD1_WIDTH >> 2 ) * 2 )
@@ -107,7 +107,7 @@
 #define TITLES_CENTER_X			( ( MR_SCREEN_WIDTH - TILE1_TOTTO_WIDTH ) >> 1 )
 #define TITLES_CENTER_Y			( ( MR_SCREEN_HEIGHT - TILE1_TOTTO_HEIGHT ) >> 1 )
 
-#define PRESSANYKEY_CENTER_X	( ( MR_SCREEN_WIDTH - TILE1_PRESSANYKEY_WIDTH ) >> 1 )
+#define PRESSANYKEY_CENTER_X	( ( MR_SCREEN_WIDTH >> 1 ) - ( TILE1_PRESSANYKEY_WIDTH >> 1 ) )
 
 #ifdef __PLUS4__
 #define SKY_COLOR			MR_COLOR_BLACK
@@ -368,17 +368,17 @@ void prepare_playfield() {
 	// Finally, let's draw the moving forest.
 	mr_htilesv(0, MR_SCREEN_WIDTH - 1, MR_SCREEN_HEIGHT - 7, TILE_FOREST1, MR_COLOR_GREEN);
 
-	columnCount = 1 + ( ( level[0] + 10 * level[1] ) >> 1 );
+	columnCount = 5 + ( ( level[0] + 10 * level[1] ) >> 1 );
 	if (columnCount > COLUMN_COUNT) {
 		columnCount = COLUMN_COUNT;
 	}
 
 	// Initialize the holes inside the various columns.
 	for (i = 0; i < columnCount; ++i) {
-		columnHoleAt[i] = (rand() & 0x03) + (rand() & 0x01) + (rand() & 0x01);
+		columnHoleAt[i] = 2 + (rand() & 0x02) + (rand() & 0x02);
 	}
 
-	holeHeight = HOLE_HEIGHT - (level[1] < 3 ? level[1] : 3);
+	holeHeight = HOLE_HEIGHT - ((level[1]>>1) < 3 ? (level[1] >> 1) : 3);
 
 }
 
@@ -435,6 +435,8 @@ void gameloop() {
 
 	draw_hiscore(0, 0);
 	draw_score(MR_SCREEN_WIDTH - 6, 0);
+	
+	mr_putetilesv(PRESSANYKEY_CENTER_X, MR_SCREEN_HEIGHT - TILE_PRESSANYKEY_HEIGHT - 8, TILE_PRESSANYKEY, TILE_PRESSANYKEY_WIDTH, TILE_PRESSANYKEY_HEIGHT, MR_COLOR_WHITE);
 
 	// Endless loop...
 	while (1) {
@@ -533,14 +535,19 @@ void gameloop() {
 		// If any key has been pressed...		
 		if (mr_key_pressed()) {
 
+			if (!birdPlaying) {
+				mr_htilesv(PRESSANYKEY_CENTER_X, PRESSANYKEY_CENTER_X + TILE_PRESSANYKEY_WIDTH, MR_SCREEN_HEIGHT - TILE_PRESSANYKEY_HEIGHT - 8, TILE_EMPTY, MR_COLOR_WHITE);
+			}
+
 			// Start the game, if not already playing.
-			birdPlaying = 1;
+			birdPlaying = mr_true;
 
 			// Set vertical acceleration to move 2 px/s^2 to up.
 			birdAY = -2;
 
 			// Decrease the actual vertical speed of the bird.
 			--birdVY;
+
 		}
 		
 		// BIRD PHYSICS

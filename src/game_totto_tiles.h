@@ -90,5 +90,9 @@
 	#define TILE_HISCORE_WIDTH                          1
 	#define TILE_HISCORE_HEIGHT                         1
 
-	#define TILE_COUNT                                           37
+	#define TILE_PRESSANYKEY                           37
+	#define TILE_PRESSANYKEY_WIDTH                      7
+	#define TILE_PRESSANYKEY_HEIGHT                     1
+
+	#define TILE_COUNT                                           44
 #endif
