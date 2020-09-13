@@ -181,6 +181,9 @@ mr_position columnCount = 0;
 
 mr_position holeHeight = HOLE_HEIGHT;
 
+// Sound duration counter (in jiffies)
+signed char soundDuration = 0;
+
 /****************************************************************************
  ** RESIDENT FUNCTIONS SECTION
  ****************************************************************************/
@@ -488,6 +491,10 @@ void gameloop() {
 					if ( BIRD_X_BORDER >= x && BIRD_X <= ( x + 8 ) ) {
 
 						if (enterColumn != j) {
+							mr_sound_start(0);
+							mr_sound_change(2000);
+							soundDuration = 24;
+
 							enterColumn = j;
 							increase(score);
 							draw_score(MR_SCREEN_WIDTH - 6, 0);
@@ -608,9 +615,19 @@ void gameloop() {
 		birdY += birdVY;
 		birdVY += birdAY;
 
+		if (soundDuration > 0) {
+			soundDuration -= 4;
+			if (soundDuration <= 0) {
+				mr_sound_stop();
+				soundDuration = 0;
+			}
+		}
+
 		mr_end_frame(4);
 
 	}
+
+	mr_sound_stop();
 
 }
 
@@ -764,6 +781,9 @@ void game_totto() {
 		score[1] = 0;
 		score[2] = 0;
 		score[3] = 0;
+
+		level[0] = 1;
+		level[1] = 0;
 
 		while (1) {
 
