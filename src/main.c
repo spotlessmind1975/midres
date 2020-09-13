@@ -78,4 +78,10 @@ void main(void) {
 
 #endif
 
+#ifdef __GAME_TOTTO__
+
+    game_totto();
+
+#endif
+
 }

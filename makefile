@@ -27,7 +27,8 @@ PROGRAMNAME := midres
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
 
-TARGETS := c64 c16 plus4 c128
+#TARGETS := c64 c16 plus4 c128
+TARGETS := 
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
@@ -37,6 +38,7 @@ TARGETS := c64 c16 plus4 c128
 DEMO := 
 
 ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128
+ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128
 
 ###############################################################################
 ###############################################################################
@@ -151,6 +153,7 @@ OBJS := $(addsuffix .o,$(basename $(addprefix obj/PLATFORM/,$(SOURCES:src/%=%)))
 # compiled separately, each according to the compiler suitable for that 
 # environment.
 OBJECTS := $(foreach TARGET,$(TARGETS),$(subst PLATFORM,$(TARGET),$(OBJS)))
+OBJECTS += $(foreach ATARGET,$(ATARGETS),$(subst PLATFORM,$(ATARGET),$(OBJS)))
 
 # We generate the list of paths where the object files for each target will 
 # end, so that we can generate them in advance (as paths).
@@ -231,6 +234,9 @@ $(EXEDIR)/$(PROGRAMNAME).c64ovl:	$(subst PLATFORM,c64ovl,$(OBJS))
 # executable file. This compilation will fails since there is no enough RAM.
 obj/vic20/%.o:	$(SOURCES)
 	$(CC) -t vic20 -c $(CFLAGS) -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/vic20.cfg -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
+
+obj/vic20/midres_vic20s.o:	$(SOURCES)
+	$(CA) -t vic20 -o $@ $(subst obj/vic20/,src/,$(@:.o=.s))
 
 $(EXEDIR)/$(PROGRAMNAME).vic20:	$(subst PLATFORM,vic20,$(OBJS))
 	$(CC) -Ln demo20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).vic20.map -C cfg/vic20.cfg -o $(EXEDIR)/$(PROGRAMNAME).vic20 $(subst PLATFORM,vic20,$(OBJS))
@@ -401,7 +407,6 @@ $(EXEDIR)/airattack.vic2024:	$(subst PLATFORM,airattack.vic2024,$(OBJS))
 	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/airattack.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/airattack.vic2024 $(subst PLATFORM,airattack.vic2024,$(OBJS))
 	$(CC1541) -f loader -w $(DATADIR)/airattack_loader2024.prg $(EXEDIR)/airattack.vic2024.d64  
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.vic2024 $(EXEDIR)/airattack.vic2024.d64  
-	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/airattack.vic2024.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/airattack.vic2024.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/airattack.vic2024.d64  
 
@@ -423,6 +428,64 @@ $(EXEDIR)/airattack.c128:	$(subst PLATFORM,airattack.c128,$(OBJS))
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.c128 $(EXEDIR)/airattack.c128.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/airattack.c128.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/airattack.c128.d64  
+
+###############################################################################
+##
+###############################################################################
+
+obj/totto.c64/%.o:	$(SOURCES)
+	$(CC) -t c64 -c -D__GAME_TOTTO__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/totto.c64/,src/,$(@:.o=.c))
+
+$(EXEDIR)/totto.c64:	$(subst PLATFORM,totto.c64,$(OBJS))
+	$(CC) -t c64 $(LDFLAGS) -o $(EXEDIR)/totto.c64 $(subst PLATFORM,totto.c64,$(OBJS))
+	$(CC1541) -f totto -w $(EXEDIR)/totto.c64 $(EXEDIR)/totto.c64.d64  
+	$(CC1541) -f tttiles.bin -w $(DATADIR)/tttiles.bin $(EXEDIR)/totto.c64.d64  
+	$(CC1541) -f tttiles1.bin -w $(DATADIR)/tttiles1.bin $(EXEDIR)/totto.c64.d64  
+	$(CC1541) -f ttfinal1.mpic -w $(DATADIR)/ttfinal164.mpic $(EXEDIR)/totto.c64.d64  
+	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal264.mpic $(EXEDIR)/totto.c64.d64  
+	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal364.mpic $(EXEDIR)/totto.c64.d64  
+	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal464.mpic $(EXEDIR)/totto.c64.d64  
+
+obj/totto.vic2024/%.o:	$(SOURCES)
+	$(CC) -t vic20 -c -D__GAME_TOTTO__ -D__24K__ -C cfg/vic20-32k.cfg -Osir -Cl -D__CBM__ -o $@ $(subst obj/totto.vic2024/,src/,$(@:.o=.c))
+
+$(EXEDIR)/totto.vic2024:	$(subst PLATFORM,totto.vic2024,$(OBJS))
+	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/totto.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/totto.vic2024 $(subst PLATFORM,totto.vic2024,$(OBJS))
+	$(CC1541) -f loader -w $(DATADIR)/totto_loader2024.prg $(EXEDIR)/totto.vic2024.d64  
+	$(CC1541) -f totto -w $(EXEDIR)/totto.vic2024 $(EXEDIR)/totto.vic2024.d64  
+	$(CC1541) -f tttiles.bin -w $(DATADIR)/tttiles.bin $(EXEDIR)/totto.vic2024.d64  
+	$(CC1541) -f tttiles1.bin -w $(DATADIR)/tttiles1.bin $(EXEDIR)/totto.vic2024.d64  
+	$(CC1541) -f ttfinal1.mpic -w $(DATADIR)/ttfinal120.mpic $(EXEDIR)/totto.vic2024.d64  
+	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal220.mpic $(EXEDIR)/totto.vic2024.d64  
+	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal320.mpic $(EXEDIR)/totto.vic2024.d64  
+	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal420.mpic $(EXEDIR)/totto.vic2024.d64  
+
+obj/totto.plus4/%.o:	$(SOURCES)
+	$(CC) -t plus4 -c -D__GAME_TOTTO__ -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/plus4.cfg -o $@ $(subst obj/totto.plus4/,src/,$(@:.o=.c))
+
+$(EXEDIR)/totto.plus4:	$(subst PLATFORM,totto.plus4,$(OBJS))
+	$(CC) -t plus4 $(LDFLAGS) -m $(EXEDIR)/totto.plus4.map -C cfg/plus4.cfg -o $(EXEDIR)/totto.plus4 $(subst PLATFORM,totto.plus4,$(OBJS))
+	$(CC1541) -f loader -w $(DATADIR)/totto_loader4.prg $(EXEDIR)/totto.plus4.d64  
+	$(CC1541) -f totto -w $(EXEDIR)/totto.plus4 $(EXEDIR)/totto.plus4.d64  
+	$(CC1541) -f tttiles.bin -w $(DATADIR)/tttiles.bin $(EXEDIR)/totto.plus4.d64  
+	$(CC1541) -f tttiles1.bin -w $(DATADIR)/tttiles1.bin $(EXEDIR)/totto.plus4.d64  
+	$(CC1541) -f ttfinal1.mpic -w $(DATADIR)/ttfinal116.mpic $(EXEDIR)/totto.plus4.d64  
+	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal216.mpic $(EXEDIR)/totto.plus4.d64  
+	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal316.mpic $(EXEDIR)/totto.plus4.d64  
+	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal416.mpic $(EXEDIR)/totto.plus4.d64  
+
+obj/totto.c128/%.o:	$(SOURCES)
+	$(CC) -t c128 -c -D__GAME_TOTTO__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/totto.c128/,src/,$(@:.o=.c))
+
+$(EXEDIR)/totto.c128:	$(subst PLATFORM,totto.c128,$(OBJS))
+	$(CC) -t c128 $(LDFLAGS) -o $(EXEDIR)/totto.c128 $(subst PLATFORM,totto.c128,$(OBJS))
+	$(CC1541) -f totto -w $(EXEDIR)/totto.c128 $(EXEDIR)/totto.c128.d64  
+	$(CC1541) -f tttiles.bin -w $(DATADIR)/tttiles.bin $(EXEDIR)/totto.c128.d64  
+	$(CC1541) -f tttiles1.bin -w $(DATADIR)/tttiles1.bin $(EXEDIR)/totto.c128.d64  
+	$(CC1541) -f ttfinal1.mpic -w $(DATADIR)/ttfinal164.mpic $(EXEDIR)/totto.c128.d64  
+	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal264.mpic $(EXEDIR)/totto.c128.d64  
+	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal364.mpic $(EXEDIR)/totto.c128.d64  
+	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal464.mpic $(EXEDIR)/totto.c128.d64  
 
 ###############################################################################
 ## FINAL RULES
@@ -453,8 +516,18 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4)
 	$(call RMFILES,$(EXEDIR)/airattack.c64)
+	$(call RMFILES,$(EXEDIR)/airattack.c64.d64)
 	$(call RMFILES,$(EXEDIR)/airattack.vic2024)
+	$(call RMFILES,$(EXEDIR)/airattack.vic2024.d64)
 	$(call RMFILES,$(EXEDIR)/airattack.plus4)
+	$(call RMFILES,$(EXEDIR)/airattack.plus4.d64)
 	$(call RMFILES,$(EXEDIR)/airattack.c128)
+	$(call RMFILES,$(EXEDIR)/airattack.c128.d64)
+	$(call RMFILES,$(EXEDIR)/totto.c64)
+	$(call RMFILES,$(EXEDIR)/totto.c64.d64)
+	$(call RMFILES,$(EXEDIR)/totto.plus4)
+	$(call RMFILES,$(EXEDIR)/totto.plus4.d64)
+	$(call RMFILES,$(EXEDIR)/totto.vic2024)
+	$(call RMFILES,$(EXEDIR)/totto.vic2024.d64)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))
 	$(foreach OBJECT,$(OBJECTS),$(call RMFILES,$(OBJECT)))

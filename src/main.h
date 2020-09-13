@@ -30,7 +30,10 @@ void demo_slideshow();
 void demo_drawing();
 void demo_bitblit();
 void demo_tile();
+void demo_charmap();
+
 void game_air_attack();
+void game_totto();
 
 // OVERLAYED FUNCTIONS (MODULE 1)
 #include "midres.h"
