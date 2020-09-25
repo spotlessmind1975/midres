@@ -38,30 +38,40 @@
  ** RESIDENT MAIN FUNCTION
  ****************************************************************************/
 
+#ifdef __CBM__
+
+#define		TILE_START			0
+
+#elif __ATARI__
+
+#define		TILE_START			16
+
+#endif
+
 // Tile with the ground dawing in "tiles.bin" (currently not used)
-#define		TILE_GROUND			0
+#define		TILE_GROUND			TILE_START
 
 // Tile with the first frame of rotating wheel
-#define		TILE_WHEEL_BEGIN	1
+#define		TILE_WHEEL_BEGIN	TILE_START+1
 
 // Tile with the last frame of rotating wheel
-#define		TILE_WHEEL_END		4
+#define		TILE_WHEEL_END		TILE_START+4
 
 // Tile with the dawing of a small drop in "tiles.bin"
-#define		TILE_DROP			5
+#define		TILE_DROP			TILE_START+5
 
 // Tiles with the dawing of a large drop in "tiles.bin" (currently not used)
-#define		TILE_BDROP_TL		6
-#define		TILE_BDROP_TR		7
-#define		TILE_BDROP_BL		8
-#define		TILE_BDROP_BR		9
+#define		TILE_BDROP_TL		TILE_START+6
+#define		TILE_BDROP_TR		TILE_START+7
+#define		TILE_BDROP_BL		TILE_START+8
+#define		TILE_BDROP_BR		TILE_START+9
 
 // Number of tiles available on "tiles.bin"
 #define		TILE_COUNT			10
 
 // First tile for drop movement: it starts from the last
 // used, and move forward of one tile.
-#define		TILE_DROP_VERTICAL	TILE_COUNT + 1
+#define		TILE_DROP_VERTICAL	TILE_START + TILE_COUNT + 1
 
 // Number of drops to animate -- currently, there is
 // space for one drop for column. The first and last
@@ -97,7 +107,7 @@ void demo_tile() {
 
 	// Load the tiles from the disk on the first tileset space.
 	// We load all tiles (TILE_COUNT) from first position (0).
-	mr_tileset_load("tiles.bin", MR_TILESET_0, 0, TILE_COUNT);
+	mr_tileset_load("tiles.bin", MR_TILESET_0, TILE_START, TILE_COUNT);
 
 	// Precalculate the vertical movement for drop tile.
 	mr_tile_prepare_vertical(MR_TILESET_0, TILE_DROP, TILE_DROP_VERTICAL);
