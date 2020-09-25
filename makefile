@@ -26,9 +26,9 @@ PROGRAMNAME := midres
 #  - vic2024: single executable for 24K VIC 20 (named on disk: "midres-single")
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
+#  - atari: single executable for ATARI 800 (named on disk: "midres.exe")
 
-#TARGETS := c64 c16 plus4 c128
-TARGETS := 
+TARGETS := c64 c16 plus4 c128 atari
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
@@ -37,7 +37,7 @@ TARGETS :=
 #  - TILE - an animation using tiles primivites (v1.3)
 DEMO := 
 
-ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128
+ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128 airattack.atari
 ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128
 
 ###############################################################################
@@ -69,8 +69,8 @@ ifeq ($(shell echo),)
   COPYFILES = cp $1 $2
 else
   MKDIR = mkdir $(subst /,\,$1)
-  RMDIR = rmdir $(subst /,\,$1)
-  RMFILES = $(if exist $(subst /,\,$1), del /f $(subst /,\,$1))
+  RMDIR = $(if exist $(subst /,\,$1),rmdir $(subst /,\,$1))
+  RMFILES = $(if exist $(subst /,\,$1), del /f /q $(subst /,\,$1))
   COPYFILES = copy $(subst /,\,$1) $(subst /,\,$2)
 endif
 COMMA := ,
@@ -95,6 +95,14 @@ ifdef CC1541_HOME
   CC1541 := $(CC1541_HOME)/cc1541
 else
   CC1541 := cc1541
+endif
+
+# On Windows it is mandatory to have DIR2ATR_HOME set. So do not unnecessarily
+# rely on being added to the PATH in this scenario.
+ifdef DIR2ATR_HOME
+  DIR2ATR := $(DIR2ATR_HOME)/dir2atr
+else
+  DIR2ATR := dir2atr
 endif
 
 ###############################################################################
@@ -386,6 +394,21 @@ $(EXEDIR)/$(PROGRAMNAME).c128ovl:	$(subst PLATFORM,c128ovl,$(OBJS))
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.cpic -w $(DATADIR)/test.cpic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 
+# Let's define rules to compile the demo under ATARI as a one and single 
+# executable file. This compilation is used as a "functional check", to
+# be sure that the source implementation is correct.
+obj/atari/%.o:	$(SOURCES)
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -o $@ $(subst obj/atari/,src/,$(@:.o=.c))
+
+$(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
+	$(CC) -Ln demoatari.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atari.map -C cfg/atari.cfg -o $(EXEDIR)/$(PROGRAMNAME).atari $(subst PLATFORM,atari,$(OBJS))
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
+	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).atari,$(EXEDIR)/atr/$(PROGRAMNAME).sys)
+	$(call COPYFILES,$(DATADIR)/mtiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
 
 ###############################################################################
 ##
@@ -428,6 +451,20 @@ $(EXEDIR)/airattack.c128:	$(subst PLATFORM,airattack.c128,$(OBJS))
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.c128 $(EXEDIR)/airattack.c128.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/airattack.c128.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/airattack.c128.d64  
+
+obj/airattack.atari/%.o:	$(SOURCES)
+	$(CC) -t atari -c -D__GAME_AIR_ATTACK__ -Osir -Cl -o $@ $(subst obj/airattack.atari/,src/,$(@:.o=.c))
+
+$(EXEDIR)/airattack.atari:	$(subst PLATFORM,airattack.atari,$(OBJS))
+	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/airattack.atari $(subst PLATFORM,airattack.atari,$(OBJS))
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
+	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.bin)
+	$(call COPYFILES,$(DATADIR)/mtiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/aatiles4.bin,$(EXEDIR)/atr/zztiles.bin)
+	$(call COPYFILES,$(DATADIR)/aaintro64.mpic,$(EXEDIR)/atr/zzintro.pic)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 
 ###############################################################################
 ##
@@ -494,13 +531,16 @@ $(EXEDIR)/totto.c128:	$(subst PLATFORM,totto.c128,$(OBJS))
 $(EXEDIR):
 	$(call MKDIR,$@)
 
+$(EXEDIR)/atr:
+	$(call MKDIR,$@)
+
 $(TARGETOBJDIR):
 	$(call MKDIR,$@)
 
 $(DATADIR):
 	$(call MKDIR,$@)
 
-all: $(EXEDIR) $(TARGETOBJDIR) $(EXES)
+all: $(EXEDIR) $(EXEDIR)/atr $(TARGETOBJDIR) $(EXES)
 
 clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64.d64)
@@ -508,6 +548,7 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic2024.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4.d64)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).atari.atr)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64ovl*)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic20)
@@ -515,6 +556,7 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic20ovl*)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).atari)
 	$(call RMFILES,$(EXEDIR)/airattack.c64)
 	$(call RMFILES,$(EXEDIR)/airattack.c64.d64)
 	$(call RMFILES,$(EXEDIR)/airattack.vic2024)
@@ -523,6 +565,8 @@ clean:
 	$(call RMFILES,$(EXEDIR)/airattack.plus4.d64)
 	$(call RMFILES,$(EXEDIR)/airattack.c128)
 	$(call RMFILES,$(EXEDIR)/airattack.c128.d64)
+	$(call RMFILES,$(EXEDIR)/airattack.atari)
+	$(call RMFILES,$(EXEDIR)/airattack.atari.atr)
 	$(call RMFILES,$(EXEDIR)/totto.c64)
 	$(call RMFILES,$(EXEDIR)/totto.c64.d64)
 	$(call RMFILES,$(EXEDIR)/totto.plus4)

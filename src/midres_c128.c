@@ -14,7 +14,6 @@
 #include <cc65.h>
 #include <string.h>
 
-#include "midres_hw.h"
 #include "midres.h"
 
 /****************************************************************************
