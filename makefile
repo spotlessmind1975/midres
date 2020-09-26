@@ -29,17 +29,17 @@ PROGRAMNAME := midres
 #  - c128: single executable for Commodore 128 (named on disk: "midres-single")
 #  - atari: single executable for ATARI 800 (named on disk: "midres.exe")
 
-TARGETS := c64 vic2024 plus4 c128 atari
+TARGETS := c64
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
 #  - DRAWING - an animation using drawing primitives (v1.1)
 #  - BITBLIT - an animation using bit blits primivites (v1.2)
 #  - TILE - an animation using tiles primivites (v1.3)
-DEMO := 
+DEMO := TILE
 
 ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128 airattack.atari
-ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128 totto.atari
+ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128
 
 ###############################################################################
 ###############################################################################
@@ -412,7 +412,7 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/imagea02.pic,$(EXEDIR)/atr/imagea02.pic)
 	$(call COPYFILES,$(DATADIR)/imagea03.pic,$(EXEDIR)/atr/imagea03.pic)
 	$(call COPYFILES,$(DATADIR)/imagea04.pic,$(EXEDIR)/atr/imagea04.pic)
-	$(call COPYFILES,$(DATADIR)/mtiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
 
@@ -426,8 +426,8 @@ obj/airattack.c64/%.o:	$(SOURCES)
 $(EXEDIR)/airattack.c64:	$(subst PLATFORM,airattack.c64,$(OBJS))
 	$(CC) -t c64 $(LDFLAGS) -o $(EXEDIR)/airattack.c64 $(subst PLATFORM,airattack.c64,$(OBJS))
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.c64 $(EXEDIR)/airattack.c64.d64  
-	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/airattack.c64.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/airattack.c64.d64  
+	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/airattack.c64.d64  
+	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/airattack.c64.d64  
 
 obj/airattack.vic2024/%.o:	$(SOURCES)
 	$(CC) -t vic20 -c -D__GAME_AIR_ATTACK__ -D__24K__ -C cfg/vic20-32k.cfg -Osir -Cl -D__CBM__ -o $@ $(subst obj/airattack.vic2024/,src/,$(@:.o=.c))
@@ -436,8 +436,8 @@ $(EXEDIR)/airattack.vic2024:	$(subst PLATFORM,airattack.vic2024,$(OBJS))
 	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/airattack.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/airattack.vic2024 $(subst PLATFORM,airattack.vic2024,$(OBJS))
 	$(CC1541) -f loader -w $(DATADIR)/airattack_loader2024.prg $(EXEDIR)/airattack.vic2024.d64  
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.vic2024 $(EXEDIR)/airattack.vic2024.d64  
-	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/airattack.vic2024.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/airattack.vic2024.d64  
+	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/airattack.vic2024.d64  
+	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/airattack.vic2024.d64  
 
 obj/airattack.plus4/%.o:	$(SOURCES)
 	$(CC) -t plus4 -c -D__GAME_AIR_ATTACK__ -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/plus4.cfg -o $@ $(subst obj/airattack.plus4/,src/,$(@:.o=.c))
@@ -446,8 +446,8 @@ $(EXEDIR)/airattack.plus4:	$(subst PLATFORM,airattack.plus4,$(OBJS))
 	$(CC) -t plus4 $(LDFLAGS) -m $(EXEDIR)/airattack.plus4.map -C cfg/plus4.cfg -o $(EXEDIR)/airattack.plus4 $(subst PLATFORM,airattack.plus4,$(OBJS))
 	$(CC1541) -f loader -w $(DATADIR)/airattack_loader4.prg $(EXEDIR)/airattack.plus4.d64  
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.plus4 $(EXEDIR)/airattack.plus4.d64  
-	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles4.bin $(EXEDIR)/airattack.plus4.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/airattack.plus4.d64  
+	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles4.bin $(EXEDIR)/airattack.plus4.d64  
+	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/airattack.plus4.d64  
 
 obj/airattack.c128/%.o:	$(SOURCES)
 	$(CC) -t c128 -c -D__GAME_AIR_ATTACK__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/airattack.c128/,src/,$(@:.o=.c))
@@ -455,8 +455,8 @@ obj/airattack.c128/%.o:	$(SOURCES)
 $(EXEDIR)/airattack.c128:	$(subst PLATFORM,airattack.c128,$(OBJS))
 	$(CC) -t c128 $(LDFLAGS) -o $(EXEDIR)/airattack.c128 $(subst PLATFORM,airattack.c128,$(OBJS))
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.c128 $(EXEDIR)/airattack.c128.d64  
-	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/airattack.c128.d64  
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/airattack.c128.d64  
+	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/airattack.c128.d64  
+	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/airattack.c128.d64  
 
 obj/airattack.atari/%.o:	$(SOURCES)
 	$(CC) -t atari -c -D__GAME_AIR_ATTACK__ -Osir -Cl -o $@ $(subst obj/airattack.atari/,src/,$(@:.o=.c))
@@ -466,10 +466,10 @@ $(EXEDIR)/airattack.atari:	$(subst PLATFORM,airattack.atari,$(OBJS))
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
-	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.bin)
+	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.exe)
 	$(call COPYFILES,$(DATADIR)/mtiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/aatiles4.bin,$(EXEDIR)/atr/zztiles.bin)
-	$(call COPYFILES,$(DATADIR)/aaintroa.mpic,$(EXEDIR)/atr/zzintro.pic)
+	$(call COPYFILES,$(DATADIR)/aaintroa.pic,$(EXEDIR)/atr/zzintro.pic)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 
 ###############################################################################
@@ -529,24 +529,6 @@ $(EXEDIR)/totto.c128:	$(subst PLATFORM,totto.c128,$(OBJS))
 	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal264.mpic $(EXEDIR)/totto.c128.d64  
 	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal364.mpic $(EXEDIR)/totto.c128.d64  
 	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal464.mpic $(EXEDIR)/totto.c128.d64  
-
-obj/totto.atari/%.o:	$(SOURCES)
-	$(CC) -t atari -c -D__GAME_TOTTO__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/totto.atari/,src/,$(@:.o=.c))
-
-$(EXEDIR)/totto.atari:	$(subst PLATFORM,totto.atari,$(OBJS))
-	$(CC) -t atari $(LDFLAGS) -m $(EXEDIR)/totto.atari.map -C cfg/atari.cfg -o $(EXEDIR)/totto.atari $(subst PLATFORM,totto.atari,$(OBJS))
-	$(call RMFILES,$(EXEDIR)/atr/*.*)
-	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
-	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
-	$(call COPYFILES,$(EXEDIR)/totto.atari,$(EXEDIR)/atr/game.bin)
-	$(call COPYFILES,$(DATADIR)/mtiles.bin,$(EXEDIR)/atr/ztiles.bin)
-	$(call COPYFILES,$(DATADIR)/tttiles.bin,$(EXEDIR)/atr/tttiles.bin)
-	$(call COPYFILES,$(DATADIR)/tttiles1.bin,$(EXEDIR)/atr/tttiles1.bin)
-	$(call COPYFILES,$(DATADIR)/ttfinal1.mpic,$(EXEDIR)/atr/ttfinal1.pic)
-	$(call COPYFILES,$(DATADIR)/ttfinal2.mpic,$(EXEDIR)/atr/ttfinal2.pic)
-	$(call COPYFILES,$(DATADIR)/ttfinal3.mpic,$(EXEDIR)/atr/ttfinal3.pic)
-	$(call COPYFILES,$(DATADIR)/ttfinal4.mpic,$(EXEDIR)/atr/ttfinal4.pic)
-	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 
 ###############################################################################
 ## FINAL RULES

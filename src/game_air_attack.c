@@ -21,6 +21,8 @@
 #include "midres.h"
 #ifdef __PLUS4__
 #include "game_air_attack_tiles4.h"
+#elif __ATARI__
+#include "game_air_attack_tiles4.h"
 #elif __VIC20__
 #include "game_air_attack_tiles20.h"
 #else
@@ -48,6 +50,9 @@
 	// Number of buildings to draw in a screen (it depends on width)
 	#define BUILDINGS_COUNT         13
 #endif
+
+#define FILENAME_TILES_BIN			"zztiles.bin"
+#define FILENAME_INTRO_MPIC			"zzintro.pic"
 
 // Width of a building
 #define BUILDINGS_WIDTH         3
@@ -144,7 +149,7 @@ void draw_building(mr_position _number, mr_position _height, mr_tile _tile_wall,
 void prepare_graphics() {
 
 	// Load the tileset from disk.
-	mr_tileset_load("aatiles.bin", MR_TILESET_0, TILE_START, TILE_COUNT);
+	mr_tileset_load(FILENAME_TILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
 
 	// Prepare animation for airplane.
 	mr_tile_prepare_horizontal_extended(MR_TILESET_0, TILE_AIRPLANE_STATIC, TILE_AIRPLANE_STATIC_WIDTH, TILE_AIRPLANE_STATIC_HEIGHT, TILE_MOVING_AIRPLANE);
@@ -339,6 +344,8 @@ void gameloop() {
 
 	// Endless loop...
 	while (1) {
+
+		mr_start_frame();
 
 		// First of all, animate the airplane. This means that
 		// we have to move and draw the airplane orizontally.
@@ -573,14 +580,7 @@ void gameloop() {
 			}
 		}
 
-		// Avoid flickering -- wait for VBL before continue
-		mr_wait_vbl();
-#ifdef __VIC20__
-		mr_wait_jiffies(1);
-#endif
-#ifdef __PLUS4__
-		mr_wait_jiffies(1);
-#endif
+		mr_end_frame(1);
 
 	}
 
@@ -599,11 +599,22 @@ void game_air_attack() {
 	// Clear screen bitmap.
 	mr_clear_bitmapv();
 
+#ifdef __ATARI__
+
 	// Load compressed screen on the auxiliary space
-	mr_load("aaintro.mpic", MR_AUX_DEFAULT);
+	mr_load(FILENAME_INTRO_MPIC, MR_SCREEN_DEFAULT);
+
+	mr_wait(2);
+
+#else
+
+	// Load compressed screen on the auxiliary space
+	mr_load(FILENAME_INTRO_MPIC, MR_AUX_DEFAULT);
 
 	// Show titles.
 	mr_uncompressv(MR_AUX_DEFAULT);
+
+#endif
 
 	// Prepare graphics (it can take some time).
 	prepare_graphics();
@@ -633,6 +644,10 @@ void game_air_attack() {
 			mr_wait_jiffies(4);
 			mr_wait_vbl();
 		}
+
+#else
+
+		mr_wait(2);
 
 #endif
 
