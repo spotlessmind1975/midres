@@ -44,7 +44,7 @@
 
 #elif __ATARI__
 
-#define		TILE_START			16
+#define		TILE_START			8
 
 #endif
 
