@@ -9,6 +9,8 @@
 #ifndef _MIDRES_HW_ATARI_H_
 #define _MIDRES_HW_ATARI_H_
 
+#define RENDERED_MIXELS RENDERED_MIXELS_ATARI
+
  /******************************************************************
   * ------ COMMODORE 64 PLATFORM
   ******************************************************************/

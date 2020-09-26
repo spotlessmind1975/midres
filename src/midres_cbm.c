@@ -1,5 +1,3 @@
-#ifdef __CBM__
-
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -18,7 +16,9 @@
    ** RESIDENT VARIABLES SECTION
    ****************************************************************************/
 
-unsigned char RENDERED_MIXELS[16] = {
+#if defined(__IMG2MIDRES__) || defined(__CBM__)
+
+unsigned char RENDERED_MIXELS_CBM[16] = {
    0x20, 0x6c, 0x7b, 0x62,
    0x7c, 0xe1, 0xff, 0xfe,
    0x7e, 0x7f, 0x61, 0xfc,

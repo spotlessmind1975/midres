@@ -11,7 +11,6 @@
   ****************************************************************************/
 
 #include <stdio.h>
-#include <cc65.h>
 #include <string.h>
 
 #include "midres.h"
@@ -28,14 +27,18 @@
     // module has been loaded into memory. On the other hand, they can call any 
     // function declared at the resident module level.
 
-#ifdef __ATARI__
+#if defined(__IMG2MIDRES__) || defined(__ATARI__)
 
-unsigned char RENDERED_MIXELS[16] = {
+unsigned char RENDERED_MIXELS_ATARI[16] = {
    0x00, 0x01, 0x02, 0x03,
    0x04, 0x05, 0x06, 0x07,
    0x08, 0x09, 0x10, 0x11,
    0x12, 0x13, 0x14, 0x15
 };
+
+#endif
+
+#ifdef __ATARI__
 
 mr_mixel* screenRam = NULL;
 

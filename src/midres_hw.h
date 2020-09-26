@@ -10,18 +10,24 @@
 #define _MIDRES_HW_H_
 
 #ifdef __C64__
+#include "midres_hw_cbm.h"
 #include "midres_hw_c64.h"
 #elif __VIC20__
 #ifdef __24K__
+#include "midres_hw_cbm.h"
 #include "midres_hw_vic20_32k.h"
 #else
+#include "midres_hw_cbm.h"
 #include "midres_hw_vic20.h"
 #endif
 #elif __PLUS4__
+#include "midres_hw_cbm.h"
 #include "midres_hw_plus4.h"
 #elif __C16__
+#include "midres_hw_cbm.h"
 #include "midres_hw_c16.h"
 #elif __C128__
+#include "midres_hw_cbm.h"
 #include "midres_hw_c128_40.h"
 #elif __ATARI__
 #include "midres_hw_atari.h"
