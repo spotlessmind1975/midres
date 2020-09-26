@@ -32,8 +32,8 @@
 unsigned char RENDERED_MIXELS_ATARI[16] = {
    0x00, 0x01, 0x02, 0x03,
    0x04, 0x05, 0x06, 0x07,
-   0x08, 0x09, 0x10, 0x11,
-   0x12, 0x13, 0x14, 0x15
+   0x87, 0x86, 0x85, 0x84,
+   0x83, 0x82, 0x81, 0x80
 };
 
 #endif
@@ -47,15 +47,17 @@ void mr_init_hd() {
     unsigned char* dlist = (unsigned char*)(*((unsigned char*)(560)) + (*((unsigned char*)(561))*256) );
     
     dlist += 4;
-
-    screenRam = *(dlist)+( *(dlist + 1) * 256 );
+    screenRam = *(dlist)+(*(dlist + 1) * 256);
 
     *(unsigned char*)(0x2E5) = 0xb0;
 
     memset(TM(MR_TILESET_0), 0, 0x400);
-
-    mr_tileset_load("ztiles.bin", MR_TILESET_0, 0, 16);
+         
+    mr_tileset_load("ztiles.bin", MR_TILESET_0, 0, 8);
     mr_tileset_visible(MR_TILESET_0);
+    mr_show_hd(MR_SCREEN_0);
+
+    (*(unsigned char*)0x02fc) = 0x09;
 
 }
 
@@ -66,10 +68,9 @@ void mr_show_hd(unsigned char _screen) {
     VISIBLE_SCREEN = _screen;
     ENABLED_SCREEN = _screen;
     
-    dlist += 5;
+    dlist += 4;
 
-    /*dlist += 5;
-    *(dlist) = ( (int)(SM(_screen)) & 0xff );
+    /* *(dlist) = ( (int)(SM(_screen)) & 0xff );
     ++dlist;
     *(dlist) = ( ( (int)(SM(_screen)) >> 8 ) & 0xff );*/
 
@@ -124,17 +125,18 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _number) {
-
+    *((unsigned char*)0xd200) = 0xff-_number;
+    *((unsigned char*)0xd201) = 15;
 }
 
 // Hardware dependent sound library
 void mr_sound_change_hd(int _parameter) {
-
+    *((unsigned char*)0xd200) = 0xff-(_parameter>>8);
 }
 
 // Hardware dependent sound library
 void mr_sound_stop_hd() {
-
+    *((unsigned char*)0xd201) = 0;
 }
 
 void mr_set_background_color_hd(unsigned char _color) {

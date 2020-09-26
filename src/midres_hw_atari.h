@@ -81,9 +81,9 @@
 
 extern mr_mixel* screenRam;
 
-#define SM(_screen)						((mr_mixel*)(screenRam+(0x0400*(_screen))))
+#define SM(_screen)						((mr_mixel*)(screenRam))
 #define CM(_screen)						((mr_color*)(screenRam+0x400))
-#define AM(_screen)						((mr_mixel*)(screenRam+(0x0400*(_screen))))
+#define AM(_screen)						((mr_mixel*)((0x0400*(_screen))))
 #define TM(_tileset)					((mr_mixel*)((0x0400*(_tileset))))
 
 #define MIDRES_STANDALONE_BITBLIT		1
