@@ -26,19 +26,20 @@ PROGRAMNAME := midres
 #  - vic2024: single executable for 24K VIC 20 (named on disk: "midres-single")
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
+#  - c128: single executable for Commodore 128 (named on disk: "midres-single")
 #  - atari: single executable for ATARI 800 (named on disk: "midres.exe")
 
-TARGETS := c64 c16 plus4 c128 atari
+TARGETS := c64 vic2024 plus4 c128 atari
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
 #  - DRAWING - an animation using drawing primitives (v1.1)
 #  - BITBLIT - an animation using bit blits primivites (v1.2)
 #  - TILE - an animation using tiles primivites (v1.3)
-DEMO := BITBLIT
+DEMO := 
 
 ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128 airattack.atari
-ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128
+ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128 totto.atari
 
 ###############################################################################
 ###############################################################################
@@ -406,6 +407,11 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).atari,$(EXEDIR)/atr/$(PROGRAMNAME).exe)
+	$(call COPYFILES,$(DATADIR)/slideshowa.dat,$(EXEDIR)/atr/slideshow)
+	$(call COPYFILES,$(DATADIR)/imagea01.pic,$(EXEDIR)/atr/imagea01.pic)
+	$(call COPYFILES,$(DATADIR)/imagea02.pic,$(EXEDIR)/atr/imagea02.pic)
+	$(call COPYFILES,$(DATADIR)/imagea03.pic,$(EXEDIR)/atr/imagea03.pic)
+	$(call COPYFILES,$(DATADIR)/imagea04.pic,$(EXEDIR)/atr/imagea04.pic)
 	$(call COPYFILES,$(DATADIR)/mtiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
@@ -463,7 +469,7 @@ $(EXEDIR)/airattack.atari:	$(subst PLATFORM,airattack.atari,$(OBJS))
 	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.bin)
 	$(call COPYFILES,$(DATADIR)/mtiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/aatiles4.bin,$(EXEDIR)/atr/zztiles.bin)
-	$(call COPYFILES,$(DATADIR)/aaintro64.mpic,$(EXEDIR)/atr/zzintro.pic)
+	$(call COPYFILES,$(DATADIR)/aaintroa.mpic,$(EXEDIR)/atr/zzintro.pic)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 
 ###############################################################################
@@ -523,6 +529,24 @@ $(EXEDIR)/totto.c128:	$(subst PLATFORM,totto.c128,$(OBJS))
 	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal264.mpic $(EXEDIR)/totto.c128.d64  
 	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal364.mpic $(EXEDIR)/totto.c128.d64  
 	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal464.mpic $(EXEDIR)/totto.c128.d64  
+
+obj/totto.atari/%.o:	$(SOURCES)
+	$(CC) -t atari -c -D__GAME_TOTTO__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/totto.atari/,src/,$(@:.o=.c))
+
+$(EXEDIR)/totto.atari:	$(subst PLATFORM,totto.atari,$(OBJS))
+	$(CC) -t atari $(LDFLAGS) -m $(EXEDIR)/totto.atari.map -C cfg/atari.cfg -o $(EXEDIR)/totto.atari $(subst PLATFORM,totto.atari,$(OBJS))
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
+	$(call COPYFILES,$(EXEDIR)/totto.atari,$(EXEDIR)/atr/game.bin)
+	$(call COPYFILES,$(DATADIR)/mtiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/tttiles.bin,$(EXEDIR)/atr/tttiles.bin)
+	$(call COPYFILES,$(DATADIR)/tttiles1.bin,$(EXEDIR)/atr/tttiles1.bin)
+	$(call COPYFILES,$(DATADIR)/ttfinal1.mpic,$(EXEDIR)/atr/ttfinal1.pic)
+	$(call COPYFILES,$(DATADIR)/ttfinal2.mpic,$(EXEDIR)/atr/ttfinal2.pic)
+	$(call COPYFILES,$(DATADIR)/ttfinal3.mpic,$(EXEDIR)/atr/ttfinal3.pic)
+	$(call COPYFILES,$(DATADIR)/ttfinal4.mpic,$(EXEDIR)/atr/ttfinal4.pic)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 
 ###############################################################################
 ## FINAL RULES
