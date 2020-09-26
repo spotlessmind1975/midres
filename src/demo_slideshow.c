@@ -95,6 +95,8 @@ void demo_slideshow() {
                 default:
                     break;
             }
+
+            mr_wait(1);
         }
 
         // Close the file.
