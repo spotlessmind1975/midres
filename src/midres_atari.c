@@ -65,6 +65,14 @@ void mr_init_multicolor_hd() {
 
 }
 
+void mr_tile_setcolor_hd(unsigned char _index, unsigned char _color) {
+
+}
+
+void mr_tile_setcolors_hd(unsigned char _colors[4]) {
+
+}
+
 void mr_show_hd(unsigned char _screen) {
 
     unsigned char* dlist = (unsigned char*)(*((unsigned char*)(560)) + (*((unsigned char*)(561)) * 256));

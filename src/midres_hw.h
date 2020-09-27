@@ -48,6 +48,12 @@ void mr_init_multicolor_hd();
 // Hardware dependent set screen background color
 void mr_set_background_color_hd(unsigned char _color);
 
+// Hardware dependent set a single color for multicolor tiles
+void mr_tile_setcolor_hd(unsigned char _index, unsigned char _color);
+
+// Hardware dependent set a set of colors for multicolor tiles
+void mr_tile_setcolors_hd(unsigned char _colors[4]);
+
 // Hardware dependent screen management.
 void mr_show_hd(unsigned char _screen);
 
