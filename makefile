@@ -29,7 +29,7 @@ PROGRAMNAME := midres
 #  - c128: single executable for Commodore 128 (named on disk: "midres-single")
 #  - atari: single executable for ATARI 800 (named on disk: "midres.exe")
 
-TARGETS := c64 vic2024 plus4 c128 atari
+TARGETS := c64
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
