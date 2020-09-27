@@ -45,20 +45,34 @@
     *((unsigned char *)0xff13) = ( (_tileset) << 2 ); \
     *((unsigned char *)0xff07) = (*((unsigned char*)0xff07) | 0x80);
 
-void mr_init_hd() {
+#define SET_MULTICOLOR_MODE( ) \
+    *((unsigned char*)0xff07) = (*((unsigned char*)0xff07) | 0x10);
 
-    SET_BACKGROUND_COLOR( MR_COLOR_BLACK );
+#define SET_MONOCOLOR_MODE( ) \
+    *((unsigned char*)0xff07) = (*((unsigned char*)0xff07) & ~0x10);
+
+void mr_init_base_hd() {
+
+    SET_BACKGROUND_COLOR(MR_COLOR_BLACK);
     SET_VIDEO(MR_SCREEN_DEFAULT);
-    SET_CHARSET(MR_TILESET_DEFAULT);
+
+    // SET_CHARSET(MR_TILESET_DEFAULT);
 
     VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
     ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
 }
 
-void mr_init_multicolor_hd() {
-
+void mr_init_hd() {
+    mr_init_base_hd();
+    SET_MONOCOLOR_MODE();
 }
+
+void mr_init_multicolor_hd() {
+    mr_init_base_hd();
+    SET_MULTICOLOR_MODE();
+}
+
 
 void mr_tile_setcolor_hd(unsigned char _index, unsigned char _color) {
 
