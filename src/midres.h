@@ -662,6 +662,12 @@
 	// Redefine a tile using the given data.
 	void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data);
 
+	// Set a single color for multicolor tiles
+	void mr_tile_setcolor(mr_position _index, mr_color _color);
+
+	// Set a set of colors for multicolor tiles
+	void mr_tile_setcolors(mr_color _colors[4]);
+
 	// Redefine a subset of N tiles by "shifting" horizontally a tile
 	void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 

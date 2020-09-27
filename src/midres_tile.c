@@ -46,6 +46,16 @@ void mr_tileset_visible(mr_tileset _tileset) {
     mr_tileset_visible_hd(_tileset);
 }
 
+// Set a single color for multicolor tiles
+void mr_tile_setcolor(mr_position _index, mr_color _color) {
+    mr_tile_setcolor_hd(_index, _color);
+}
+
+// Set a set of colors for multicolor tiles
+void mr_tile_setcolors(mr_color _colors[4]) {
+    mr_tile_setcolors_hd(_colors);
+}
+
 // Copy a tileset over another.
 void mr_tileset_copy(mr_tileset _source, mr_tileset _destination) {
     mr_position w = 255, b = 0;
