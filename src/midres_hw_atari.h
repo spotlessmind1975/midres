@@ -54,21 +54,31 @@
 
 // Default palette.
 #define MR_COLOR_BLACK					0
-#define MR_COLOR_WHITE					1
-#define MR_COLOR_RED					2
-#define MR_COLOR_CYAN					3
-#define MR_COLOR_VIOLET					4
-#define MR_COLOR_GREEN					5
-#define MR_COLOR_BLUE					6
-#define MR_COLOR_YELLOW					7
-#define MR_COLOR_ORANGE					8
-#define MR_COLOR_BROWN					9
+#define MR_COLOR_WHITE					14
+#define MR_COLOR_RED					66
+#define MR_COLOR_VIOLET					96
+#define MR_COLOR_GREEN					196
+#define MR_COLOR_BLUE					116
+#define MR_COLOR_YELLOW					24
+#define MR_COLOR_ORANGE					54
+#define MR_COLOR_BROWN					34
 #define MR_COLOR_LIGHT_RED				10
-#define MR_COLOR_DARK_GREY				11
-#define MR_COLOR_GREY					12
-#define MR_COLOR_LIGHT_GREEN			13
-#define MR_COLOR_LIGHT_BLUE				14
+#define MR_COLOR_DARK_GREY				4
+#define MR_COLOR_GREY					6
+#define MR_COLOR_LIGHT_GREEN			200
+#define MR_COLOR_LIGHT_BLUE				120
 #define MR_COLOR_LIGHT_GREY				15
+#define MR_COLOR_MAGENTA				82
+#define MR_COLOR_PURPLE					MR_COLOR_VIOLET
+#define MR_COLOR_LAVENDER       		102
+#define MR_COLOR_GOLD       			20
+#define MR_COLOR_TURQUOISE       		164
+#define MR_COLOR_TAN       		        36
+#define MR_COLOR_YELLOW_GREEN       	214
+#define MR_COLOR_OLIVE_GREEN       		228
+#define MR_COLOR_PINK       			72
+#define MR_COLOR_PEACH       			246
+#define MR_COLOR_CYAN					MR_COLOR_TURQUOISE
 
 #define MR_COLOR_DARK_BLUE				6
 
@@ -78,6 +88,11 @@
 
 #define MR_KEY_UP						9
 #define MR_KEY_DOWN						12
+
+#define MR_TILE_BACKGROUND				0
+#define MR_TILE_COLOR0					1
+#define MR_TILE_COLOR1					2
+#define MR_TILE_COLOR2					3
 
 extern mr_mixel* screenRam;
 

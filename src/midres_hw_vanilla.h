@@ -59,6 +59,12 @@
 #define MR_COLOR_LIGHT_BLUE				0
 #define MR_COLOR_LIGHT_GREY				0	
 
+#define MR_COLOR_MAGENTA				MR_COLOR_RED
+#define MR_COLOR_PURPLE					MR_COLOR_VIOLET
+#define MR_COLOR_TAN       		        MR_COLOR_BROWN
+#define MR_COLOR_OLIVE_GREEN       		MR_COLOR_GREEN
+#define MR_COLOR_PEACH       			MR_COLOR_PINK
+
 #define MR_COLOR_COUNT					16
 
 #define SM(_screen)						((mr_mixel*)((0x0000*(_screen))))

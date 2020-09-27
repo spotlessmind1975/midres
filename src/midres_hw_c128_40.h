@@ -79,7 +79,7 @@
 #define MR_COLOR_WHITE					1
 #define MR_COLOR_RED					2
 #define MR_COLOR_CYAN					3
-#define MR_COLOR_PURPLE					4
+#define MR_COLOR_VIOLET					4
 #define MR_COLOR_GREEN					5
 #define MR_COLOR_BLUE					6
 #define MR_COLOR_YELLOW					7
@@ -93,6 +93,16 @@
 #define MR_COLOR_LIGHT_GREY				15
 
 #define MR_COLOR_DARK_BLUE				6
+#define MR_COLOR_MAGENTA				MR_COLOR_RED
+#define MR_COLOR_PURPLE					MR_COLOR_VIOLET
+#define MR_COLOR_LAVENDER       		MR_COLOR_VIOLET
+#define MR_COLOR_GOLD       			MR_COLOR_YELLOW
+#define MR_COLOR_TURQUOISE       		MR_COLOR_LIGHT_BLUE
+#define MR_COLOR_TAN       		        MR_COLOR_BROWN
+#define MR_COLOR_YELLOW_GREEN       	MR_COLOR_YELLOW
+#define MR_COLOR_OLIVE_GREEN       		MR_COLOR_GREEN
+#define MR_COLOR_PINK       			MR_COLOR_LIGHT_RED
+#define MR_COLOR_PEACH       			MR_COLOR_PINK
 
 #define MR_NEXT_COLOR( c )				( ( ( ( c & 0x0f ) + 1 ) & 0x0f ) )
 
