@@ -42,17 +42,29 @@ unsigned char RENDERED_MIXELS_ATARI[16] = {
 
 mr_mixel* screenRam = NULL;
 
-void mr_init_hd() {
+void mr_init_base_hd(unsigned char _mode) {
 
-    unsigned char* dlist = (unsigned char*)(*((unsigned char*)(560)) + (*((unsigned char*)(561))*256) );
-    
-    dlist += 4;
+    unsigned char* dlist = (unsigned char*)(*((unsigned char*)(560)) + (*((unsigned char*)(561)) * 256));
+    unsigned char i;
+
+    dlist += 3;
+    *(dlist) = _mode;
+
+    ++dlist;
     screenRam = *(dlist)+(*(dlist + 1) * 256);
+
+    dlist += 2;
+
+    i = MR_SCREEN_HEIGHT;
+
+    for (; i != 0; --i, ++dlist) {
+        *dlist = _mode - 64;
+    }
 
     *(unsigned char*)(0x2E5) = 0xb0;
 
     memset(TM(MR_TILESET_0), 0, 0x400);
-         
+
     mr_tileset_load("ztiles.bin", MR_TILESET_0, 0, 8);
     mr_tileset_visible(MR_TILESET_0);
     mr_show_hd(MR_SCREEN_0);
@@ -61,8 +73,12 @@ void mr_init_hd() {
 
 }
 
-void mr_init_multicolor_hd() {
+void mr_init_hd() {
+    mr_init_base_hd(66);
+}
 
+void mr_init_multicolor_hd() {
+    mr_init_base_hd(68);
 }
 
 void mr_tile_setcolor_hd(unsigned char _index, unsigned char _color) {

@@ -49,7 +49,13 @@
 #define SET_CHARSET( _tileset ) \
     *((unsigned char*)0xd018) = (*((unsigned char*)0xd018) & 0xf1) | (( _tileset & 0x07 )<<1);
 
-void mr_init_hd() {
+#define SET_MULTICOLOR_MODE( ) \
+    *((unsigned char*)0xd016) = (*((unsigned char*)0xd016) | 0x10);
+
+#define SET_MONOCOLOR_MODE( ) \
+    *((unsigned char*)0xd016) = (*((unsigned char*)0xd016) & ~0x10);
+
+void mr_init_base_hd() {
 
     int i;
     unsigned char* dst = (unsigned char*)0x8c00, * src = (unsigned char*)0xd800;
@@ -61,14 +67,20 @@ void mr_init_hd() {
     SET_BASIC_VIDEO(MR_SCREEN_DEFAULT);
     SET_CHARSET(MR_TILESET_DEFAULT);
 
-    /* for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
+    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
         *(dst + i) = *(src + i);
-    }*/
+    }
 
 }
 
-void mr_init_multicolor_hd() {
+void mr_init_hd() {
+    mr_init_base_hd();
+    SET_MONOCOLOR_MODE();
+}
 
+void mr_init_multicolor_hd() {
+    mr_init_base_hd();
+    SET_MULTICOLOR_MODE();
 }
 
 void mr_tile_setcolor_hd(unsigned char _index, unsigned char _color) {
