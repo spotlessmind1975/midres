@@ -83,18 +83,21 @@
 #define MR_COLOR_GREY					(1|MR_COLOR_BRIGHTNESS)
 #define MR_COLOR_LIGHT_GREY				(1|MR_COLOR_HIGHBRIGHTNESS)
 #define MR_COLOR_MAGENTA				MR_COLOR_RED
-#define MR_COLOR_PURPLE					MR_COLOR_VIOLET
 #define MR_COLOR_LAVENDER       		MR_COLOR_VIOLET
 #define MR_COLOR_GOLD       			MR_COLOR_YELLOW
 #define MR_COLOR_TURQUOISE       		MR_COLOR_LIGHT_BLUE
 #define MR_COLOR_TAN       		        MR_COLOR_BROWN
 #define MR_COLOR_OLIVE_GREEN       		MR_COLOR_GREEN
-#define MR_COLOR_PINK       			MR_COLOR_LIGHT_RED
 #define MR_COLOR_PEACH       			MR_COLOR_PINK
 
 #define MR_NEXT_COLOR( c )				( c & 0xf0 | ( ( ( c & 0x0f ) + 1 ) & 0x0f ) )
 
 #define MR_COLOR_COUNT					16
+
+#define MR_TILE_BACKGROUND				3
+#define MR_TILE_COLOR0					0
+#define MR_TILE_COLOR1					1
+#define MR_TILE_COLOR2					2
 
 #define SM(_screen)						((mr_mixel*)((0x0800*(_screen))+0x0400))
 #define CM(_screen)						((mr_color*)((0x0800*(_screen))))

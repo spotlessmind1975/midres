@@ -93,6 +93,11 @@
 
 #define MR_COLOR_COUNT					16
 
+#define MR_TILE_BACKGROUND				3
+#define MR_TILE_COLOR0					0
+#define MR_TILE_COLOR1					1
+#define MR_TILE_COLOR2					2
+
 #define SM(_screen)						((mr_mixel*)(0x0200*(_screen)))
 #define CM(_screen)						((mr_mixel*)(0x9400))
 #define TM(_tileset)					((mr_mixel*)( _tileset > 16 ? (0x8000 + ((_tileset)-16) * 0x0400) : ((_tileset) * 0x400) ) )

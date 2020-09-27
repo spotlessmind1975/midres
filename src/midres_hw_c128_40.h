@@ -110,6 +110,11 @@
 
 #define MR_COLOR_VIOLET					MR_COLOR_PURPLE
 
+#define MR_TILE_BACKGROUND				3
+#define MR_TILE_COLOR0					0
+#define MR_TILE_COLOR1					1
+#define MR_TILE_COLOR2					2
+
 #define SM(_screen)						((mr_mixel*)(0x8000+(0x0400*(_screen))))
 #define CM(_screen)						((mr_color*)(0xd800))
 #define AM(_screen)						((mr_mixel*)(0x8000+(0x0400*(_screen))))

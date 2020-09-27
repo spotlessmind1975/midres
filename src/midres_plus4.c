@@ -73,11 +73,27 @@ void mr_init_multicolor_hd() {
 }
 
 void mr_tile_setcolor_hd(unsigned char _index, unsigned char _color) {
-
+    switch (_index) {
+    case MR_TILE_BACKGROUND:
+        // currently ignored!
+        break;
+    case MR_TILE_COLOR0:
+        *((unsigned char*)0xff16) = _color;
+        break;
+    case MR_TILE_COLOR1:
+        *((unsigned char*)0xff17) = _color;
+        break;
+    case MR_TILE_COLOR2:
+        *((unsigned char*)0xff18) = _color;
+        break;
+    }
 }
 
 void mr_tile_setcolors_hd(unsigned char _colors[4]) {
-
+    // *((unsigned char*)0x0000) = _colors[MR_TILE_BACKGROUND];
+    *((unsigned char*)0xff16) = _colors[MR_TILE_COLOR0];
+    *((unsigned char*)0xff17) = _colors[MR_TILE_COLOR1];
+    *((unsigned char*)0xff18) = _colors[MR_TILE_COLOR2];
 }
 
 void mr_show_hd(unsigned char _screen) {
