@@ -173,6 +173,9 @@
 	// Second screen for double buffering
 	extern mr_screen DB2;
 
+	// Flag to know if we are in single or multicolor mode
+	extern mr_boolean MULTICOLOR;
+
 	/************************************************************************
 	 * ------ FUNCTIONS
 	 ************************************************************************/

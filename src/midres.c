@@ -92,6 +92,8 @@
 
 void mr_init() {
 
+    MULTICOLOR = mr_false;
+
     WIDTH = MR_SCREEN_WIDTH;
     HEIGHT = MR_SCREEN_HEIGHT;
     BRIGHTNESS = MR_COLOR_BRIGHTNESS;
@@ -101,6 +103,8 @@ void mr_init() {
 }
 
 void mr_init_multicolor() {
+
+    MULTICOLOR = mr_true;
 
     WIDTH = MR_SCREEN_WIDTH;
     HEIGHT = MR_SCREEN_HEIGHT;
