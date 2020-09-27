@@ -100,6 +100,15 @@ void mr_init() {
 
 }
 
+void mr_init_multicolor() {
+
+    WIDTH = MR_SCREEN_WIDTH;
+    HEIGHT = MR_SCREEN_HEIGHT;
+    BRIGHTNESS = MR_COLOR_BRIGHTNESS;
+
+    mr_init_multicolor_hd();
+
+}
 
 void mr_cleanup() {
 
