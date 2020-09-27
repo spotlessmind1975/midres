@@ -59,18 +59,6 @@ int iabs(int _a) {
 }
 
 
-// Clears the bitmap to color BLACK.
-void _mr_clear_bitmap(mr_mixel* _screen, mr_color* _colormap) {
-
-    int i;
-
-    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-        _screen[i] = RENDERED_MIXELS[0];
-        _colormap[i] = 0;
-    }
-
-}
-
 // Clears the bitmap to the specified color.
 void _mr_clear_to_color(mr_mixel* _screen, mr_color* _colormap, mr_color _color) {
 
