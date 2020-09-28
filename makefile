@@ -46,6 +46,8 @@ TUTORIAL := $(tutorial)
 #ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128 airattack.atari
 #ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128
 
+ATARGETS := $(game).$(target)
+
 ###############################################################################
 ###############################################################################
 ###############################################################################
