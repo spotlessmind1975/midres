@@ -84,4 +84,10 @@ void main(void) {
 
 #endif
 
+#ifdef __TUTORIAL_MCTILE__
+
+    tutorial_mctile();
+
+#endif
+
 }
