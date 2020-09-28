@@ -107,7 +107,9 @@ extern mr_mixel* screenRam;
 #define MIDRES_STANDALONE_SCREEN			1
 #define MIDRES_STANDALONE_SCREEN2			1
 #define MIDRES_STANDALONE_TILE				1
+#ifdef __ATARICOL__
 #define MIDRES_STANDALONE_TILE_MULTICOLOR	1
+#endif
 #define MIDRES_STANDALONE_KEYBOARD			1
 
 #endif
