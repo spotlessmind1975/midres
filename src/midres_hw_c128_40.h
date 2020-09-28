@@ -108,8 +108,6 @@
 
 #define MR_COLOR_COUNT					16
 
-#define MR_COLOR_VIOLET					MR_COLOR_PURPLE
-
 #define MR_TILE_BACKGROUND				3
 #define MR_TILE_COLOR0					0
 #define MR_TILE_COLOR1					1
