@@ -98,7 +98,13 @@
 #define WAIT_VBL( ) \
     while (*((unsigned char*)0x9004) < 27) { };
 
-void mr_init_hd() {
+#define SET_MULTICOLOR_MODE( ) \
+    *((unsigned char*)0xd016) = (*((unsigned char*)0xd016) | 0x10);
+
+#define SET_MONOCOLOR_MODE( ) \
+    *((unsigned char*)0xd016) = (*((unsigned char*)0xd016) & ~0x10);
+
+void mr_init_base_hd() {
 
     int i = 0;
         
@@ -115,8 +121,14 @@ void mr_init_hd() {
 
 }
 
-void mr_init_multicolor_hd() {
+void mr_init_hd() {
+    mr_init_base_hd();
+    SET_MONOCOLOR_MODE();
+}
 
+void mr_init_multicolor_hd() {
+    mr_init_base_hd();
+    SET_MULTICOLOR_MODE();
 }
 
 void mr_tile_setcolor_hd(unsigned char _index, unsigned char _color) {
