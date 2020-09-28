@@ -28,18 +28,23 @@ PROGRAMNAME := midres
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
 #  - c128: single executable for Commodore 128 (named on disk: "midres-single")
 #  - atari: single executable for ATARI 800 (named on disk: "midres.exe")
+#  - ataricol: single executable for ATARI XL (named on disk: "midres.exe")
 
-TARGETS := c64
+TARGETS := $(target)
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
 #  - DRAWING - an animation using drawing primitives (v1.1)
 #  - BITBLIT - an animation using bit blits primivites (v1.2)
 #  - TILE - an animation using tiles primivites (v1.3)
-DEMO := TILE
+DEMO := $(demo)
 
-ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128 airattack.atari
-ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128
+# Given tutorials:
+#  - MCTILE
+TUTORIAL := $(tutorial)
+
+#ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128 airattack.atari
+#ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128
 
 ###############################################################################
 ###############################################################################
@@ -110,7 +115,7 @@ endif
 ## COMPILATION / LINKING OPTIONS
 ###############################################################################
 
-CFLAGS := -D__DEMO_$(DEMO)__ -D__GAME_$(GAME)__
+CFLAGS := -D__DEMO_$(DEMO)__ -D__GAME_$(GAME)__ -D__TUTORIAL_$(TUTORIAL)__
 LDFLAGS := 
 CRT :=
 REMOVES :=
@@ -208,6 +213,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64:	$(subst PLATFORM,c64,$(OBJS))
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 
 # Let's define rules to compile the demo under C=64 as the overlay version.
 # Moreover, all the executable files will be put on a D64 1541 image, 
@@ -232,6 +238,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64ovl:	$(subst PLATFORM,c64ovl,$(OBJS))
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 
 #$(CC1541) -f test.pic -w $(DATADIR)/test.pic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -276,6 +283,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic2024:	$(subst PLATFORM,vic2024,$(OBJS))
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 
 # Let's define rules to compile the demo under VIC20 as the overlay version.
 # This is the only way to compile this program in order to be able to be 
@@ -300,6 +308,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20ovl:	$(subst PLATFORM,vic20ovl,$(OBJS))
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 
 ## C16 ------------------------------------------------------------------------
 
@@ -321,7 +330,8 @@ $(EXEDIR)/$(PROGRAMNAME).c16:	$(subst PLATFORM,c16,$(OBJS))
 	$(CC1541) -f image1604.mpic -w $(DATADIR)/image1604.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
-	
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
+
 ## PLUS4 ------------------------------------------------------------------------
 
 # Let's define rules to compile the demo under C16 as a one and single 
@@ -344,6 +354,7 @@ $(EXEDIR)/$(PROGRAMNAME).plus4:	$(subst PLATFORM,plus4,$(OBJS))
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles4.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 
 ## C128 ------------------------------------------------------------------------
 
@@ -366,6 +377,7 @@ $(EXEDIR)/$(PROGRAMNAME).c128:	$(subst PLATFORM,c128,$(OBJS))
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c128.d64  
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 
 # Let's define rules to compile the demo under C=128 as the overlay version.
 # Moreover, all the executable files will be put on a D64 1541 image, 
@@ -390,6 +402,7 @@ $(EXEDIR)/$(PROGRAMNAME).c128ovl:	$(subst PLATFORM,c128ovl,$(OBJS))
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 
 #$(CC1541) -f test.pic -w $(DATADIR)/test.pic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -414,7 +427,30 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/imagea04.pic,$(EXEDIR)/atr/imagea04.pic)
 	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
+	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
+
+# Let's define rules to compile the demo under ATARI XL as a one and single 
+# executable file. This compilation is used as a "functional check", to
+# be sure that the source implementation is correct.
+obj/ataricol/%.o:	$(SOURCES)
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -D__ATARICOL__ -o $@ $(subst obj/ataricol/,src/,$(@:.o=.c))
+
+$(EXEDIR)/$(PROGRAMNAME).ataricol:	$(subst PLATFORM,ataricol,$(OBJS))
+	$(CC) -Ln demoataricol.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).ataricol.map -D__ATARICOL__ -C cfg/atari.cfg -o $(EXEDIR)/$(PROGRAMNAME).ataricol $(subst PLATFORM,ataricol,$(OBJS))
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
+	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).ataricol,$(EXEDIR)/atr/$(PROGRAMNAME).exe)
+	$(call COPYFILES,$(DATADIR)/slideshowa.dat,$(EXEDIR)/atr/slideshow)
+	$(call COPYFILES,$(DATADIR)/imagea01.pic,$(EXEDIR)/atr/imagea01.pic)
+	$(call COPYFILES,$(DATADIR)/imagea02.pic,$(EXEDIR)/atr/imagea02.pic)
+	$(call COPYFILES,$(DATADIR)/imagea03.pic,$(EXEDIR)/atr/imagea03.pic)
+	$(call COPYFILES,$(DATADIR)/imagea04.pic,$(EXEDIR)/atr/imagea04.pic)
+	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
+	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).ataricol.atr $(EXEDIR)/atr
 
 ###############################################################################
 ##
@@ -555,6 +591,7 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).atari.atr)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).ataricol.atr)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64ovl*)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic20)
@@ -563,6 +600,7 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).atari)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).ataricol)
 	$(call RMFILES,$(EXEDIR)/airattack.c64)
 	$(call RMFILES,$(EXEDIR)/airattack.c64.d64)
 	$(call RMFILES,$(EXEDIR)/airattack.vic2024)
