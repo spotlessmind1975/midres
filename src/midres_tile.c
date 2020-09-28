@@ -70,6 +70,17 @@ void mr_tileset_copy(mr_tileset _source, mr_tileset _destination) {
     }
 }
 
+// Downgrade a tileset from multicolor to monocolor.
+void mr_tileset_multicolor_to_monocolor(mr_tileset _source, mr_position _starting, mr_position _count) {
+    mr_position w = _count, b = 0;
+    mr_mixel* source = TM(_source)+_starting*8;
+    for (--w; w != 255; --w) {
+        for (b = 0; b < 8; ++b, ++source) {
+            *source = (*source) | (*source >> 1);
+        }
+    }
+}
+
 // Redefine a tile using the given data.
 void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
     mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _tile*8);
@@ -635,6 +646,11 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
     fread(TM(_tileset) + 8 * _starting, _count * 8, 1, f);
     fclose(f);
 
+#ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
+    if (MULTICOLOR) {
+        mr_tileset_multicolor_to_monocolor(_tileset, _starting, _count);
+    }
+#endif
 }
 
 void _mr_putetiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color) {
@@ -748,6 +764,16 @@ void _mr_htiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_posi
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
     }
 #endif
+}
+
+// Set a single color for multicolor tiles
+void mr_tile_setcolor(mr_position _index, mr_color _color) {
+    mr_tile_setcolor_hd(_index, _color);
+}
+
+// Set a set of colors for multicolor tiles
+void mr_tile_setcolors(mr_color _colors[4]) {
+    mr_tile_setcolors_hd(_colors);
 }
 
 #endif

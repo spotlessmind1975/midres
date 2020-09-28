@@ -40,16 +40,6 @@
  // module has been loaded into memory. On the other hand, they can call any 
  // function declared at the resident module level.
 
-// Set a single color for multicolor tiles
-void mr_tile_setcolor(mr_position _index, mr_color _color) {
-    mr_tile_setcolor_hd(_index, _color);
-}
-
-// Set a set of colors for multicolor tiles
-void mr_tile_setcolors(mr_color _colors[4]) {
-    mr_tile_setcolors_hd(_colors);
-}
-
 void mr_tile_prepare_horizontal_multicolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_mixel* source = (mr_mixel*)(TM(_tileset) + _source * 8);
     mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
