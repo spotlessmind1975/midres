@@ -89,6 +89,13 @@
 #define MR_KEY_UP						9
 #define MR_KEY_DOWN						12
 
+#ifdef __ATARICOL__
+#define MR_TILE_WIDTH_IN_PIXEL			4
+#define MR_TILE_WIDTH_FACTOR			2
+#else
+#define MR_TILE_WIDTH_IN_PIXEL			8
+#define MR_TILE_WIDTH_FACTOR			3
+#endif
 #define MR_TILE_BACKGROUND				0
 #define MR_TILE_COLOR0					1
 #define MR_TILE_COLOR1					2
