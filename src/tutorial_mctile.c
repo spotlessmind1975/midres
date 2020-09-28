@@ -50,8 +50,8 @@ void tutorial_mctile() {
 		// Move drop on the screen.
 		mr_tile_moveto_horizontal_extended(MR_SCREEN_DEFAULT, x, MR_SCREEN_HEIGHT >> 1, TILE_GHOST_MOVING, TILE_GHOST_WIDTH, TILE_GHOST_HEIGHT, MR_COLOR_LIGHT_BLUE);
 
-		if ((x >> 2) > MR_SCREEN_WIDTH) {
-			x = -TILE_GHOST_WIDTH*4;
+		if ((x >> MR_TILE_WIDTH_FACTOR) > MR_SCREEN_WIDTH) {
+			x = -TILE_GHOST_WIDTH*MR_TILE_WIDTH_IN_PIXEL;
 		}
 
 		mr_end_frame(4);
