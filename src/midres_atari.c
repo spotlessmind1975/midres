@@ -59,13 +59,11 @@ void mr_init_base_hd(unsigned char _mode) {
 
     dlist += 2;
 
-    i = MR_SCREEN_HEIGHT;
+    i = MR_SCREEN_HEIGHT-1;
 
     for (; i != 0; --i, ++dlist) {
         *dlist = _mode - 64;
     }
-
-    
 
     memset(TM(MR_TILESET_0), 0, 0x400);
 
