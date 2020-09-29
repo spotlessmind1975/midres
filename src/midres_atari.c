@@ -47,6 +47,10 @@ void mr_init_base_hd(unsigned char _mode) {
     unsigned char* dlist = (unsigned char*)(*((unsigned char*)(560)) + (*((unsigned char*)(561)) * 256));
     unsigned char i;
 
+    *((unsigned char*)0xd301) = *((unsigned char*)0xd301) | 0x02;
+    *(unsigned char*)(0x2E4) = 0xc0;
+    *(unsigned char*)(0x6a) = 0xc0;
+
     dlist += 3;
     *(dlist) = _mode;
 
@@ -61,7 +65,7 @@ void mr_init_base_hd(unsigned char _mode) {
         *dlist = _mode - 64;
     }
 
-    *(unsigned char*)(0x2E5) = 0xb0;
+    
 
     memset(TM(MR_TILESET_0), 0, 0x400);
 
