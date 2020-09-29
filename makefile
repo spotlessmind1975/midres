@@ -113,6 +113,14 @@ else
   DIR2ATR := dir2atr
 endif
 
+# On Windows it is mandatory to have ATRAUTORUN_HOME set. So do not unnecessarily
+# rely on being added to the PATH in this scenario.
+ifdef ATRAUTORUN_HOME
+  ATRAUTORUN := $(ATRAUTORUN_HOME)/atrautorun
+else
+  ATRAUTORUN := atrautorun
+endif
+
 ###############################################################################
 ## COMPILATION / LINKING OPTIONS
 ###############################################################################
@@ -420,7 +428,6 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(CC) -Ln demoatari.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atari.map -C cfg/atari.cfg -o $(EXEDIR)/$(PROGRAMNAME).atari $(subst PLATFORM,atari,$(OBJS))
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
-	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).atari,$(EXEDIR)/atr/$(PROGRAMNAME).exe)
 	$(call COPYFILES,$(DATADIR)/slideshowa.dat,$(EXEDIR)/atr/slideshow)
 	$(call COPYFILES,$(DATADIR)/imagea01.pic,$(EXEDIR)/atr/imagea01.pic)
@@ -431,6 +438,7 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atari.atr -o $(EXEDIR)/$(PROGRAMNAME).atari.atr -f $(PROGRAMNAME).exe
 
 # Let's define rules to compile the demo under ATARI XL as a one and single 
 # executable file. This compilation is used as a "functional check", to
@@ -442,7 +450,6 @@ $(EXEDIR)/$(PROGRAMNAME).ataricol:	$(subst PLATFORM,ataricol,$(OBJS))
 	$(CC) -Ln demoataricol.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).ataricol.map -D__ATARICOL__ -C cfg/atari.cfg -o $(EXEDIR)/$(PROGRAMNAME).ataricol $(subst PLATFORM,ataricol,$(OBJS))
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
-	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).ataricol,$(EXEDIR)/atr/$(PROGRAMNAME).exe)
 	$(call COPYFILES,$(DATADIR)/slideshowa.dat,$(EXEDIR)/atr/slideshow)
 	$(call COPYFILES,$(DATADIR)/imagea01.pic,$(EXEDIR)/atr/imagea01.pic)
@@ -453,6 +460,7 @@ $(EXEDIR)/$(PROGRAMNAME).ataricol:	$(subst PLATFORM,ataricol,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).ataricol.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atari.atr -o $(EXEDIR)/$(PROGRAMNAME).atari.atr -f $(PROGRAMNAME).exe
 
 ###############################################################################
 ##
@@ -503,12 +511,12 @@ $(EXEDIR)/airattack.atari:	$(subst PLATFORM,airattack.atari,$(OBJS))
 	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/airattack.atari $(subst PLATFORM,airattack.atari,$(OBJS))
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
-	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dup.sys,$(EXEDIR)/atr/dup.sys)
 	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.exe)
 	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/aatiles4.bin,$(EXEDIR)/atr/zztiles.bin)
 	$(call COPYFILES,$(DATADIR)/aaintroa.pic,$(EXEDIR)/atr/zzintro.pic)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atari.atr -o $(EXEDIR)/$(PROGRAMNAME).atari.atr -f game.exe
 
 ###############################################################################
 ##
