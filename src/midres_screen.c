@@ -111,7 +111,7 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
     if (f == NULL) {
         return 0;
     }
-    fread(SM(_screen), MR_SCREEN_RAM_SIZE, 1, f);
+    fread(SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT, 1, f);
     fclose(f);
     return 1;
 
@@ -131,7 +131,7 @@ unsigned char mr_load_color(char* _filename, mr_screen _screen) {
     if (f == NULL) {
         return 0;
     }
-    fread(CM(_screen), MR_SCREEN_RAM_SIZE, 1, f);
+    fread(CM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT, 1, f);
     fclose(f);
     return 1;
 
