@@ -162,8 +162,11 @@ void mr_wait_hd(unsigned char _seconds) {
 }
 
 void mr_wait_jiffies_hd(unsigned char _jiffies) {
-    unsigned char now = *((unsigned char*)0x14);
 
+    unsigned char now = 0;
+    
+    *((unsigned char*)0x14) = 0;
+    
     while ((*((unsigned char*)0x14) - now) < _jiffies) {
         ; // nop!
     }
