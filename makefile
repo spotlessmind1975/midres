@@ -460,7 +460,7 @@ $(EXEDIR)/$(PROGRAMNAME).ataricol:	$(subst PLATFORM,ataricol,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).ataricol.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atari.atr -o $(EXEDIR)/$(PROGRAMNAME).atari.atr -f $(PROGRAMNAME).exe
+	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).ataricol.atr -o $(EXEDIR)/$(PROGRAMNAME).ataricol.atr -f $(PROGRAMNAME).exe
 
 ###############################################################################
 ##
@@ -517,6 +517,20 @@ $(EXEDIR)/airattack.atari:	$(subst PLATFORM,airattack.atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/aaintroa.pic,$(EXEDIR)/atr/zzintro.pic)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/airattack.atari.atr -o $(EXEDIR)/airattack.atari.atr -f game.exe
+
+obj/airattack.ataricol/%.o:	$(SOURCES)
+	$(CC) -t atari -c -D__GAME_AIR_ATTACK__ -Osir -Cl -o $@ $(subst obj/airattack.ataricol/,src/,$(@:.o=.c))
+
+$(EXEDIR)/airattack.ataricol:	$(subst PLATFORM,airattack.ataricol,$(OBJS))
+	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/airattack.atari $(subst PLATFORM,airattack.ataricol,$(OBJS))
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.exe)
+	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/aatiles4.bin,$(EXEDIR)/atr/zztiles.bin)
+	$(call COPYFILES,$(DATADIR)/aaintroa.pic,$(EXEDIR)/atr/zzintro.pic)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.ataricol.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/airattack.ataricol.atr -o $(EXEDIR)/airattack.ataricol.atr -f game.exe
 
 ###############################################################################
 ##
