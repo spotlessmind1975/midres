@@ -27,26 +27,39 @@ PROGRAMNAME := midres
 #  - c16: single executable for Commodore 16 (named on disk: "midres-single")
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
 #  - c128: single executable for Commodore 128 (named on disk: "midres-single")
-#  - atari: single executable for ATARI 800 (named on disk: "midres.exe")
-#  - ataricol: single executable for ATARI XL (named on disk: "midres.exe")
-
-TARGETS := $(target)
+#  - atari: single executable for ATARI
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
 #  - DRAWING - an animation using drawing primitives (v1.1)
 #  - BITBLIT - an animation using bit blits primivites (v1.2)
 #  - TILE - an animation using tiles primivites (v1.3)
+
+ifdef demo
 DEMO := $(demo)
+ifdef target
+TARGETS ?= $(target)
+endif
+endif
 
 # Given tutorials:
 #  - MCTILE
+ifdef tutorial
 TUTORIAL := $(tutorial)
+ifdef target
+TARGETS ?= $(target)
+endif
+endif
 
-#ATARGETS := airattack.c64 airattack.vic2024 airattack.plus4 airattack.c128 airattack.atari
-#ATARGETS += totto.c64 totto.vic2024 totto.plus4 totto.c128
+# Given GAMES:
+#  - totto
+#  - airattack
 
-ATARGETS := $(game).$(target)
+ifdef game
+ifdef target
+ATARGETS ?= $(game).$(target)
+endif
+endif
 
 ###############################################################################
 ###############################################################################
@@ -440,28 +453,6 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atari.atr -o $(EXEDIR)/$(PROGRAMNAME).atari.atr -f $(PROGRAMNAME).exe
 
-# Let's define rules to compile the demo under ATARI XL as a one and single 
-# executable file. This compilation is used as a "functional check", to
-# be sure that the source implementation is correct.
-obj/ataricol/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -D__ATARICOL__ -o $@ $(subst obj/ataricol/,src/,$(@:.o=.c))
-
-$(EXEDIR)/$(PROGRAMNAME).ataricol:	$(subst PLATFORM,ataricol,$(OBJS))
-	$(CC) -Ln demoataricol.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).ataricol.map -D__ATARICOL__ -C cfg/atari.cfg -o $(EXEDIR)/$(PROGRAMNAME).ataricol $(subst PLATFORM,ataricol,$(OBJS))
-	$(call RMFILES,$(EXEDIR)/atr/*.*)
-	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
-	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).ataricol,$(EXEDIR)/atr/$(PROGRAMNAME).exe)
-	$(call COPYFILES,$(DATADIR)/slideshowa.dat,$(EXEDIR)/atr/slideshow)
-	$(call COPYFILES,$(DATADIR)/imagea01.pic,$(EXEDIR)/atr/imagea01.pic)
-	$(call COPYFILES,$(DATADIR)/imagea02.pic,$(EXEDIR)/atr/imagea02.pic)
-	$(call COPYFILES,$(DATADIR)/imagea03.pic,$(EXEDIR)/atr/imagea03.pic)
-	$(call COPYFILES,$(DATADIR)/imagea04.pic,$(EXEDIR)/atr/imagea04.pic)
-	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
-	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
-	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
-	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).ataricol.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).ataricol.atr -o $(EXEDIR)/$(PROGRAMNAME).ataricol.atr -f $(PROGRAMNAME).exe
-
 ###############################################################################
 ##
 ###############################################################################
@@ -517,20 +508,6 @@ $(EXEDIR)/airattack.atari:	$(subst PLATFORM,airattack.atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/aaintroa.pic,$(EXEDIR)/atr/zzintro.pic)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/airattack.atari.atr -o $(EXEDIR)/airattack.atari.atr -f game.exe
-
-obj/airattack.ataricol/%.o:	$(SOURCES)
-	$(CC) -t atari -c -D__GAME_AIR_ATTACK__ -Osir -Cl -o $@ $(subst obj/airattack.ataricol/,src/,$(@:.o=.c))
-
-$(EXEDIR)/airattack.ataricol:	$(subst PLATFORM,airattack.ataricol,$(OBJS))
-	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/airattack.atari $(subst PLATFORM,airattack.ataricol,$(OBJS))
-	$(call RMFILES,$(EXEDIR)/atr/*.*)
-	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
-	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.exe)
-	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
-	$(call COPYFILES,$(DATADIR)/aatiles4.bin,$(EXEDIR)/atr/zztiles.bin)
-	$(call COPYFILES,$(DATADIR)/aaintroa.pic,$(EXEDIR)/atr/zzintro.pic)
-	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.ataricol.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/airattack.ataricol.atr -o $(EXEDIR)/airattack.ataricol.atr -f game.exe
 
 ###############################################################################
 ##
@@ -615,7 +592,6 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4.d64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).atari.atr)
-	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).ataricol.atr)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c64ovl*)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).vic20)
@@ -624,7 +600,6 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).atari)
-	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).ataricol)
 	$(call RMFILES,$(EXEDIR)/airattack.c64)
 	$(call RMFILES,$(EXEDIR)/airattack.c64.d64)
 	$(call RMFILES,$(EXEDIR)/airattack.vic2024)
