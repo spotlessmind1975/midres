@@ -328,6 +328,10 @@ void gameloop() {
 	// When starts, the player has not won.
 	playerWin = 0;
 
+	// The bomb has not dropped
+	bomb_x = 0;
+	bomb_y = 0;
+
 	// Update level on the screen.
 	draw_level(0);
 
@@ -508,7 +512,7 @@ void gameloop() {
 
 		// If the player did not drop a bomb, 
 		// let's see if it has pressed a key.
-		if (bomb_y == 0) {
+		if ( (bomb_y == 0) && (airplane_x>0) && ((airplane_x>>3)<(MR_SCREEN_WIDTH-10)) ) {
 			if (mr_key_pressed()) {
 
 				// DROP THE BOMB!
