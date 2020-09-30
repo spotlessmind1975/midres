@@ -89,13 +89,9 @@
 #define MR_KEY_UP						9
 #define MR_KEY_DOWN						12
 
-#ifdef __ATARICOL__
-#define MR_TILE_WIDTH_IN_PIXEL			4
-#define MR_TILE_WIDTH_FACTOR			2
-#else
-#define MR_TILE_WIDTH_IN_PIXEL			8
-#define MR_TILE_WIDTH_FACTOR			3
-#endif
+#define MR_TILE_WIDTH_IN_PIXEL			(8>>(MULTICOLOR))
+#define MR_TILE_WIDTH_FACTOR			(3-(MULTICOLOR))
+
 #define MR_TILE_BACKGROUND				0
 #define MR_TILE_COLOR0					1
 #define MR_TILE_COLOR1					2
@@ -114,9 +110,7 @@ extern mr_mixel* screenRam;
 #define MIDRES_STANDALONE_SCREEN			1
 #define MIDRES_STANDALONE_SCREEN2			1
 #define MIDRES_STANDALONE_TILE				1
-#ifdef __ATARICOL__
 #define MIDRES_STANDALONE_TILE_MULTICOLOR	1
-#endif
 #define MIDRES_STANDALONE_KEYBOARD			1
 
 #endif
