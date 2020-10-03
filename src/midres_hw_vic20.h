@@ -36,6 +36,7 @@
 #define MR_TILESET_0					15
 #define MR_TILESET_COUNT				5
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_2
+#define MR_TILESET_TILE_COUNT			256
 
 // List of available bitblits:
 #define MR_AUX_0						15

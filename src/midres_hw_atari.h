@@ -11,12 +11,12 @@
 
 #define RENDERED_MIXELS RENDERED_MIXELS_ATARI
 
- /******************************************************************
-  * ------ COMMODORE 64 PLATFORM
-  ******************************************************************/
+/******************************************************************
+ * ------ COMMODORE 64 PLATFORM
+ ******************************************************************/
 
-  // The maximum resolution is 80 x 50 pixels, equivalent to 
-  // 40 x 25 mixels.
+// The maximum resolution is 80 x 50 pixels, equivalent to 
+// 40 x 25 mixels.
 #define MR_SCREEN_WIDTH				40
 #define MR_SCREEN_HEIGHT			24
 #define MR_SCREEN_RAM_SIZE				0x0400
@@ -40,6 +40,7 @@
 #define MR_TILESET_2					50
 #define MR_TILESET_COUNT				4
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
+#define MR_TILESET_TILE_COUNT			128
 
 // List of available areas for bit blits:
 #define MR_AUX_0						1

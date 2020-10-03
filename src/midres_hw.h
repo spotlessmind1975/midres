@@ -94,4 +94,6 @@ void mr_start_frame_hd();
 
 void mr_end_frame_hd(unsigned char _jiffies);
 
+#define mr_assert_max_tiles( x ) if ( x > MR_TILESET_TILE_COUNT ) { puts("Maximum number of tiles for tileset exceeded."); return; }
+
 #endif
