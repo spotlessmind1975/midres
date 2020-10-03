@@ -567,6 +567,25 @@ $(EXEDIR)/totto.c128:	$(subst PLATFORM,totto.c128,$(OBJS))
 	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal364.mpic $(EXEDIR)/totto.c128.d64  
 	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal464.mpic $(EXEDIR)/totto.c128.d64  
 
+obj/totto.atari/%.o:	$(SOURCES)
+	$(CC) -t atari -c -D__GAME_TOTTO__ -Osir -Cl -o $@ $(subst obj/totto.atari/,src/,$(@:.o=.c))
+
+$(EXEDIR)/totto.atari:	$(subst PLATFORM,totto.atari,$(OBJS))
+	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/totto.atari $(subst PLATFORM,totto.atari,$(OBJS))
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(EXEDIR)/totto.atari,$(EXEDIR)/atr/game.exe)
+	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/tttiles.bin,$(EXEDIR)/atr/tttiles.bin)
+	$(call COPYFILES,$(DATADIR)/tttiles1.bin,$(EXEDIR)/atr/tttiles1.bin)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/totto.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/totto.atari.atr -o $(EXEDIR)/totto.atari.atr -f game.exe
+
+#	$(call COPYFILES,$(DATADIR)/ttfinal1.mpic,$(EXEDIR)/atr/ttfinal1.pic)
+#	$(call COPYFILES,$(DATADIR)/ttfinal2.mpic,$(EXEDIR)/atr/ttfinal1.pic)
+#	$(call COPYFILES,$(DATADIR)/ttfinal3.mpic,$(EXEDIR)/atr/ttfinal1.pic)
+#	$(call COPYFILES,$(DATADIR)/ttfinal4.mpic,$(EXEDIR)/atr/ttfinal1.pic)
+
 ###############################################################################
 ## FINAL RULES
 ###############################################################################
@@ -616,5 +635,6 @@ clean:
 	$(call RMFILES,$(EXEDIR)/totto.plus4.d64)
 	$(call RMFILES,$(EXEDIR)/totto.vic2024)
 	$(call RMFILES,$(EXEDIR)/totto.vic2024.d64)
+	$(call RMFILES,$(EXEDIR)/totto.atari.atr)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))
 	$(foreach OBJECT,$(OBJECTS),$(call RMFILES,$(OBJECT)))
