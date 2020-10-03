@@ -453,6 +453,15 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atari.atr -o $(EXEDIR)/$(PROGRAMNAME).atari.atr -f $(PROGRAMNAME).exe
 
+# Let's define rules to compile the demo under ATARI as a one and single 
+# executable file. This compilation is used as a "functional check", to
+# be sure that the source implementation is correct.
+obj/atmos/%.o:	$(SOURCES)
+	$(CC) -T -l $(@:.o=.asm) -t atmos -c $(CFLAGS) -Osir -Cl -o $@ $(subst obj/atmos/,src/,$(@:.o=.c))
+
+$(EXEDIR)/$(PROGRAMNAME).atmos:	$(subst PLATFORM,atmos,$(OBJS))
+	$(CC) -Ln demoatmos.lbl -t atmos $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atmos.map -C cfg/atmos.cfg -o $(EXEDIR)/$(PROGRAMNAME).atmos $(subst PLATFORM,atmos,$(OBJS))
+
 ###############################################################################
 ##
 ###############################################################################

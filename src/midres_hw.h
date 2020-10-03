@@ -31,6 +31,8 @@
 #include "midres_hw_c128_40.h"
 #elif __ATARI__
 #include "midres_hw_atari.h"
+#elif __ATMOS__
+#include "midres_hw_atmos.h"
 #else
 #include "midres_hw_vanilla.h"
 #endif

@@ -10,7 +10,7 @@
  ** INCLUDE SECTION
  ****************************************************************************/
 
-#include <stdio.h>
+#include <conio.h>
 #include <cc65.h>
 
 #include "main.h"

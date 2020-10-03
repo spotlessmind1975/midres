@@ -105,7 +105,7 @@ void mr_doublebuffer_switch() {
 
 unsigned char mr_load(char* _filename, mr_screen _screen) {
 
-#ifndef __CBM__
+#if __ATARI__
 
     FILE* f = fopen(_filename, "rb");
     if (f == NULL) {
@@ -115,7 +115,7 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
     fclose(f);
     return 1;
 
-#else
+#elif __CBM__
 
     return cbm_load(_filename, getcurrentdevice(), SM(_screen));
 
@@ -125,7 +125,7 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
 
 unsigned char mr_load_color(char* _filename, mr_screen _screen) {
 
-#ifndef __CBM__
+#if __ATARI__
 
     FILE* f = fopen(_filename, "rb");
     if (f == NULL) {
@@ -135,7 +135,7 @@ unsigned char mr_load_color(char* _filename, mr_screen _screen) {
     fclose(f);
     return 1;
 
-#else
+#elif __CBM__
 
     return cbm_load(_filename, getcurrentdevice(), CM(_screen));
 
