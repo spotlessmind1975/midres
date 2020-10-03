@@ -54,7 +54,7 @@
 
 unsigned char mr_save(char* _filename, mr_screen _screen) {
 
-#ifndef __CBM__
+#ifdef __ATARI__
 
     FILE* f = fopen(_filename, "wb");
     if (f == NULL) {
@@ -64,7 +64,7 @@ unsigned char mr_save(char* _filename, mr_screen _screen) {
     fclose(f);
     return 1;
 
-#else
+#elif __CBM__
 
     return cbm_save(_filename, getcurrentdevice(), SM(_screen), MR_SCREEN_RAM_SIZE);
 
@@ -75,7 +75,7 @@ unsigned char mr_save(char* _filename, mr_screen _screen) {
 
 unsigned char mr_save_color(char* _filename, mr_screen _screen) {
 
-#ifndef __CBM__
+#ifdef __ATARI__
 
     FILE* f = fopen(_filename, "wb");
     if (f == NULL) {
@@ -85,7 +85,7 @@ unsigned char mr_save_color(char* _filename, mr_screen _screen) {
     fclose(f);
     return 1;
 
-#else
+#elif __CBM__
 
     return cbm_save(_filename, getcurrentdevice(), CM(_screen), MR_SCREEN_RAM_SIZE);
 

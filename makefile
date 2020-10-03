@@ -134,6 +134,14 @@ else
   ATRAUTORUN := atrautorun
 endif
 
+# On Windows it is mandatory to have FILE2INCLUDE_HOME set. So do not unnecessarily
+# rely on being added to the PATH in this scenario.
+ifdef FILE2INCLUDE_HOME
+  FILE2INCLUDE := $(FILE2INCLUDE_HOME)/file2include
+else
+  FILE2INCLUDE := file2include
+endif
+
 ###############################################################################
 ## COMPILATION / LINKING OPTIONS
 ###############################################################################
@@ -456,6 +464,10 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 # Let's define rules to compile the demo under ATARI as a one and single 
 # executable file. This compilation is used as a "functional check", to
 # be sure that the source implementation is correct.
+obj/atmos/rawdata.o:	$(DATADIR)/tutorial_mctile.bin
+	$(FILE2INCLUDE) -i $(DATADIR)/tutorial_mctile.bin -c src/rawdata.c -h src/rawdata.h
+	$(CC) -T -t c64 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o obj/atmos/rawdata.o src/rawdata.c
+
 obj/atmos/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atmos -c $(CFLAGS) -Osir -Cl -o $@ $(subst obj/atmos/,src/,$(@:.o=.c))
 

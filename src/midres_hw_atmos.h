@@ -29,7 +29,8 @@
 #define MR_TILESET_ROM_1				1
 #define MR_TILESET_ROM_2				2
 #define MR_TILESET_ROM_3				3
-#define MR_TILESET_COUNT				4
+#define MR_TILESET_0					4
+#define MR_TILESET_COUNT				5
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_2
 #define MR_TILESET_TILE_COUNT			256
 
@@ -67,6 +68,11 @@
 #define MR_COLOR_COUNT					16
 #define MR_TILE_WIDTH_IN_PIXEL			(8>>(MULTICOLOR))
 #define MR_TILE_WIDTH_FACTOR			(3-(MULTICOLOR))
+
+#define MR_TILE_BACKGROUND				0
+#define MR_TILE_COLOR0					1
+#define MR_TILE_COLOR1					2
+#define MR_TILE_COLOR2					3
 
 #define SM(_screen)						((mr_mixel*)((0x0000*(_screen))))
 #define CM(_screen)						((mr_color*)((0x0000*(_screen))))

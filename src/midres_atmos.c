@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "rawdata.h"
 #include "midres.h"
 
 /****************************************************************************
@@ -126,7 +127,7 @@ unsigned char* mr_translate_file_hd(mr_file _file) {
 }
 
 void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
-
+    memcpy(_dest, &_includedFiles[_file]+_offset, _size);
 }
 
 
