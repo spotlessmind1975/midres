@@ -653,9 +653,11 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
         mr_tileset_multicolor_to_monocolor(_tileset, _starting, _count);
     }
 #endif
+
+#endif
 }
 
-void mr_load_tileset_file(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
+void mr_tileset_load_file(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
 
     mr_read_file(_index, TM(_tileset) + 8 * _starting, _count * 8);
 

@@ -203,8 +203,14 @@ unsigned char* mr_translate_file_hd(mr_file _file) {
     return mr_translate_file_user(_file);
 }
 
-void mr_read_file(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
-
+void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
+    FILE* f = fopen(mr_translate_file_hd(_file), "rb");
+    if (f == NULL) {
+        return;
+    }
+    fseek(f, _offset, SEEK_SET);
+    fread(_dest, _size, 1, f);
+    fclose(f);
 }
 
 #endif
