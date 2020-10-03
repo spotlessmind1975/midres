@@ -904,6 +904,8 @@
 
 	void mr_end_frame(unsigned char _jiffies);
 
+	unsigned char *mr_translate_file(mr_file _file);
+
 	void mr_read_file(mr_file _file, unsigned char* _dest, unsigned int _size);
 
 	void mr_read_file_from_offset(mr_file _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);

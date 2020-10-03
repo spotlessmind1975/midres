@@ -21,6 +21,10 @@
  // module has been loaded into memory. On the other hand, they can call any 
  // function declared at the resident module level.
 
+unsigned char* mr_translate_file(mr_file _file) {
+	return mr_translate_file_hd(_file);
+}
+
 void mr_read_file(mr_file _file, unsigned char* _dest, unsigned int _size) {
 	mr_read_file_hd(_file, 0, _dest, _size);
 }

@@ -200,6 +200,10 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 
 }
 
+unsigned char* mr_translate_file_hd(mr_file _file) {
+    return mr_translate_file_user(_file);
+}
+
 void mr_read_file(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
 
 }
