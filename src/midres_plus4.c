@@ -199,4 +199,8 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 
 }
 
+void mr_read_file(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
+
+}
+
 #endif

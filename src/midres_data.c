@@ -12,6 +12,8 @@
 
 #include "midres.h"
 
+#if ( !defined(__OVERLAY__MIDRES__) && defined(MIDRES_STANDALONE) ) || defined(__OVERLAY__MIDRES__)
+
   /****************************************************************************
    ** RESIDENT VARIABLES SECTION
    ****************************************************************************/
@@ -89,3 +91,5 @@ mr_screen DB1 = MR_SCREEN_DB1;
 mr_screen DB2 = MR_SCREEN_DB2;
 
 mr_boolean MULTICOLOR = mr_false;
+
+#endif

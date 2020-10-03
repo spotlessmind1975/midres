@@ -135,6 +135,11 @@
 	#define mr_false		0
 	#define mr_true			1
 
+	// This type can be used to indicate a specific external data file,
+	// like tiles, images and so on. 
+
+	typedef unsigned int mr_file;
+
 	// We include some hardware-dependent data type and constants.
 	#include "midres_hw.h"
 
@@ -254,11 +259,17 @@
 	// Load a (luminance) screen from a file to a specific screen
 	unsigned char mr_load(char *_filename, mr_screen _screen);
 
+	// Load a (luminance) screen from a file to a specific screen
+	unsigned char mr_load_screen(mr_file _file, mr_screen _screen);
+
 	// Save a specific (luminance) screen to a file
 	unsigned char mr_save(char* _filename, mr_screen _screen);
 
 	// Load a (color) screen from a file to a specific screen
 	unsigned char mr_load_color(char* _filename, mr_screen _screen);
+
+	// Load a (color) screen from a file to a specific screen
+	unsigned char mr_load_screen_color(mr_file _file, mr_screen _screen);
 
 	// Save a specific (color) screen to a file
 	unsigned char mr_save_color(char* _filename, mr_screen _screen);
@@ -294,11 +305,17 @@
 	// Load a (luminance) screen from a file to a specific screen
 	#define mr_loadv(_filename) mr_load(_filename, VISIBLE_SCREEN);
 
+	// Load a (luminance) screen from a file to a specific screen
+	#define mr_load_screenv(_file) mr_load_screen(_file, VISIBLE_SCREEN);
+
 	// Save a specific (luminance) screen to a file
 	#define mr_savev(_filename) mr_save(_filename, VISIBLE_SCREEN);
 
 	// Load a (color) screen from a file to a specific screen
 	#define mr_load_colorv(_filename) mr_load_color(_filename, VISIBLE_SCREEN);
+
+	// Load a (color) screen from a file to a specific screen
+	#define mr_load_screen_colorv(_file) mr_load_screen_color(_file, VISIBLE_SCREEN);
 
 	// Save a specific (color) screen to a file
 	#define mr_save_colorv(_filename) mr_save_color(_filename, VISIBLE_SCREEN);
@@ -331,8 +348,14 @@
 	// Load a (luminance) screen from a file to a specific screen
 	#define mr_loade(_filename) mr_load(_filename, ENABLED_SCREEN);
 
+	// Load a (luminance) screen from a file to a specific screen
+	#define mr_load_screene(_file) mr_load_screen(_file, ENABLED_SCREEN);
+
 	// Save a specific (luminance) screen to a file
 	#define mr_savee(_filename) mr_save(_filename, ENABLED_SCREEN);
+
+	// Load a (luminance) screen from a file to a specific screen
+	#define mr_load_screen_colore(_file) mr_load_color(_file, ENABLED_SCREEN);
 
 	// Load a (color) screen from a file to a specific screen
 	#define mr_load_colore(_filename) mr_load_color(_filename, ENABLED_SCREEN);
@@ -733,6 +756,9 @@
 	// Load a tileset (or part of it)
 	void mr_tileset_load(unsigned char *_filename, mr_tileset _tileset, mr_tile _starting, mr_tile _count);
 
+	// Load a tileset (or part of it)
+	void mr_tileset_load_file(mr_file _file, mr_tileset _tileset, mr_tile _starting, mr_tile _count);
+
 	// Draws a vertical line onto the bitmap.
 	void _mr_vtiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color);
 
@@ -877,6 +903,10 @@
 	void mr_start_frame();
 
 	void mr_end_frame(unsigned char _jiffies);
+
+	void mr_read_file(mr_file _file, unsigned char* _dest, unsigned int _size);
+
+	void mr_read_file_from_offset(mr_file _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);
 
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"

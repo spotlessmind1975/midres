@@ -22,7 +22,7 @@
  // compilation symbol (__OVERLAY__). In this case, we enable or disable the 
  // compilation of the relevant code.
 
-#ifdef __OVERLAY__MIDRES__
+#if defined(__OVERLAY__MIDRES__)
 
     /************************************************************************
      ** OVERLAY MANAGEMENT SECTION
@@ -90,6 +90,8 @@
 
 #endif
 
+#if ( !defined(__OVERLAY__MIDRES__) && defined(MIDRES_STANDALONE) ) || defined(__OVERLAY__MIDRES__)
+
 void mr_init() {
 
     MULTICOLOR = mr_false;
@@ -128,3 +130,5 @@ void mr_cleanup() {
     mr_cleanup_hd();
 
 }
+
+#endif

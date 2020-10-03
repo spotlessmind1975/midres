@@ -653,6 +653,17 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
 #endif
 }
 
+void mr_load_tileset_file(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
+
+    mr_read_file(_index, TM(_tileset) + 8 * _starting, _count * 8);
+
+#ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
+    if (MULTICOLOR) {
+        mr_tileset_multicolor_to_monocolor(_tileset, _starting, _count);
+    }
+#endif
+}
+
 void _mr_putetiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color) {
 
     int offset;

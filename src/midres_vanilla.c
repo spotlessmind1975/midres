@@ -36,4 +36,8 @@ unsigned char RENDERED_MIXELS_VANILLA[16] = {
    0x12, 0x13, 0x14, 0x15
 };
 
+void mr_read_file(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
+
+}
+
 #endif

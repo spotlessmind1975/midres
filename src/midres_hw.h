@@ -96,6 +96,9 @@ void mr_start_frame_hd();
 
 void mr_end_frame_hd(unsigned char _jiffies);
 
+// Hardware dependent read external data
+void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);
+
 #define mr_assert_max_tiles( x ) if ( x > MR_TILESET_TILE_COUNT ) { puts("Maximum number of tiles for tileset exceeded."); return; }
 
 #endif

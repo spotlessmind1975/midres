@@ -123,6 +123,10 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
 
 }
 
+unsigned char mr_load_screen(mr_file _index, mr_screen _screen) {
+    mr_read_file(_index, SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+}
+
 unsigned char mr_load_color(char* _filename, mr_screen _screen) {
 
 #if __ATARI__
@@ -141,6 +145,10 @@ unsigned char mr_load_color(char* _filename, mr_screen _screen) {
 
 #endif
 
+}
+
+unsigned char mr_load_screen_color(mr_file _index, mr_screen _screen) {
+    mr_read_file(_index, CM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
 }
 
 void mr_uncompress(mr_screen _source, mr_screen _destination) {

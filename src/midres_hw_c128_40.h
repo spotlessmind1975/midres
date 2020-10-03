@@ -121,6 +121,7 @@
 #define AM(_screen)						((mr_mixel*)(0x8000+(0x0400*(_screen))))
 #define TM(_tileset)					((mr_mixel*)(0x8000+(0x0800*(_tileset))))
 
+#define MIDRES_STANDALONE					1
 #define MIDRES_STANDALONE_BITBLIT			1
 #define MIDRES_STANDALONE_DRAWING			1
 #define MIDRES_STANDALONE_DRAWING2			1
@@ -129,5 +130,6 @@
 #define MIDRES_STANDALONE_TILE				1
 #define MIDRES_STANDALONE_TILE_MULTICOLOR	1
 #define MIDRES_STANDALONE_KEYBOARD			1
+#define MIDRES_STANDALONE_FILE				1
 
 #endif
