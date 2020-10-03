@@ -368,3 +368,5 @@ midres.vcxproj.filters
 *.lbl
 *.txt
 exe/
+src/rawdata.c
+src/rawdata.h
