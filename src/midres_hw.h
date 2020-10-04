@@ -97,7 +97,7 @@ void mr_start_frame_hd();
 void mr_end_frame_hd(unsigned char _jiffies);
 
 // Hardware dependent translate filename (if needed)
-unsigned char* mr_translate_file_hd(usigned int _file);
+unsigned char* mr_translate_file_hd(unsigned int _file);
 
 // Hardware dependent read external data
 void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);
