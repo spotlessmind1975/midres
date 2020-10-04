@@ -31,7 +31,7 @@
 #if defined(__IMG2MIDRES__) || defined(__ATMOS__)
 
 unsigned char RENDERED_MIXELS_ATMOS[16] = {
-   0x00, 0x01, 0x02, 0x03,
+   0x20, 0x01, 0x02, 0x03,
    0x04, 0x05, 0x06, 0x07,
    0x08, 0x09, 0x10, 0x11,
    0x12, 0x13, 0x14, 0x15
@@ -127,7 +127,7 @@ unsigned char* mr_translate_file_hd(mr_file _file) {
 }
 
 void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
-    memcpy(_dest, &_includedFiles[_file]+_offset, _size);
+    memcpy(_dest, (&_includedFiles[_file][0])+_offset, _size);
 }
 
 
