@@ -12,7 +12,7 @@
 #define RENDERED_MIXELS RENDERED_MIXELS_ATMOS
 
 #define MR_SCREEN_WIDTH					40
-#define MR_SCREEN_HEIGHT				25
+#define MR_SCREEN_HEIGHT				28
 #define MR_SCREEN_RAM_SIZE				0x0400
 
   // List of available screens:
@@ -32,7 +32,7 @@
 #define MR_TILESET_0					4
 #define MR_TILESET_COUNT				5
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_2
-#define MR_TILESET_TILE_COUNT			256
+#define MR_TILESET_TILE_COUNT			128
 
 // List of available bitblits:
 #define MR_AUX_COUNT					0
@@ -74,10 +74,10 @@
 #define MR_TILE_COLOR1					2
 #define MR_TILE_COLOR2					3
 
-#define SM(_screen)						((mr_mixel*)((0x0000*(_screen))))
-#define CM(_screen)						((mr_color*)((0x0000*(_screen))))
-#define AM(_screen)						((mr_mixel*)((0x0000*(_screen))))
-#define TM(_tileset)					((mr_mixel*)((0x0000*(_tileset))))
+#define SM(_screen)						((mr_mixel*)((0xbb80)))
+#define CM(_screen)						((mr_color*)((0x9800)))
+#define AM(_screen)						((mr_mixel*)((0x9c00)))
+#define TM(_tileset)					((mr_mixel*)((0xb400)))
 
 #define MIDRES_STANDALONE					1
 #define MIDRES_STANDALONE_BITBLIT			1

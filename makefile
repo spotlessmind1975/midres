@@ -472,7 +472,7 @@ obj/atmos/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atmos -c $(CFLAGS) -Osir -Cl -o $@ $(subst obj/atmos/,src/,$(@:.o=.c))
 
 $(EXEDIR)/$(PROGRAMNAME).atmos:	$(subst PLATFORM,atmos,$(OBJS))
-	$(CC) -Ln demoatmos.lbl -t atmos $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atmos.map -C cfg/atmos.cfg -o $(EXEDIR)/$(PROGRAMNAME).atmos $(subst PLATFORM,atmos,$(OBJS))
+	$(CC) -Ln demoatmos.lbl -t atmos $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atmos.map -C cfg/atmos.cfg -o $(EXEDIR)/$(PROGRAMNAME).atmos.tap $(subst PLATFORM,atmos,$(OBJS))
 
 ###############################################################################
 ##
@@ -640,6 +640,7 @@ clean:
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).c16)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).plus4)
 	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).atari)
+	$(call RMFILES,$(EXEDIR)/$(PROGRAMNAME).atmos.tap)
 	$(call RMFILES,$(EXEDIR)/airattack.c64)
 	$(call RMFILES,$(EXEDIR)/airattack.c64.d64)
 	$(call RMFILES,$(EXEDIR)/airattack.vic2024)
