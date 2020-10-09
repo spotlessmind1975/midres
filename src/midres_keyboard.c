@@ -51,15 +51,49 @@ unsigned char mr_get_key_pressed() {
 }
 
 void mr_wait(unsigned char _seconds) {
-
     mr_wait_hd(_seconds);
-
 }
 
 void mr_wait_jiffies(unsigned char _jiffies) {
-
     mr_wait_jiffies_hd(_jiffies);
+}
 
+mr_boolean mr_wait_or_keypress(unsigned char _seconds) {
+    int jiffies = _seconds * 60;
+    while (jiffies) {
+        mr_wait_jiffies(10);
+        jiffies -= 10;
+        if (mr_key_pressed_hd()) {
+            return mr_true;
+        }
+    }
+    return mr_false;
+}
+
+
+mr_boolean mr_wait_or_get_keypressed(unsigned char _seconds) {
+    int jiffies = _seconds * 60;
+    unsigned char key = MR_KEY_NONE;
+    while (jiffies) {
+        mr_wait_jiffies(10);
+        jiffies -= 10;
+        key = mr_get_key_pressed_hd();
+        if (key != MR_KEY_NONE) {
+            return key;
+        }
+    }
+    return MR_KEY_NONE;
+}
+
+mr_boolean mr_wait_jiffies_or_keypress(unsigned char _jiffies) {
+    while (_jiffies) {
+        mr_wait_jiffies(10);
+        _jiffies -= 10;
+        if (mr_key_pressed_hd()) {
+            return mr_true;
+        }
+    }
+    return mr_false;
 }
 
 void mr_sound_start(unsigned char _number) {

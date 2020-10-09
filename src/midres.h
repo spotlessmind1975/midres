@@ -912,6 +912,12 @@
 
 	void mr_wait_jiffies(unsigned char _jiffies);
 
+	mr_boolean mr_wait_or_keypress(unsigned char _seconds);
+
+	unsigned char mr_wait_or_get_keypressed(unsigned char _seconds);
+
+	mr_boolean mr_wait_jiffies_or_keypress(unsigned char _jiffies);
+
 	void mr_sound_start(unsigned char _number);
 
 	void mr_sound_change(int _parameter);
