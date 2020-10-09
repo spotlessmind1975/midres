@@ -33,6 +33,7 @@ void demo_tile();
 
 void game_air_attack();
 void game_totto();
+void game_alien_storm();
 
 void tutorial_mctile();
 

@@ -10,7 +10,6 @@
  ** INCLUDE SECTION
  ****************************************************************************/
 
-#include <conio.h>
 #include <cc65.h>
 
 #include "main.h"
@@ -87,6 +86,12 @@ void main(void) {
 #ifdef __TUTORIAL_MCTILE__
 
     tutorial_mctile();
+
+#endif
+
+#ifdef __GAME_ALIEN_STORM__
+
+    game_alien_storm();
 
 #endif
 
