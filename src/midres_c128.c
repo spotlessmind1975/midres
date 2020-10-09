@@ -33,6 +33,9 @@
 #define SET_BACKGROUND_COLOR( _color ) \
     *((unsigned char*)0xd021) = _color;
 
+#define SET_BORDER_COLOR( _color ) \
+    *((unsigned char*)0xd020) = _color;
+
 #define SET_DATA_DIRECTION( ) \
     *((unsigned char*)0x00d8) = 0xff; \
     *((unsigned char*)0xdd02) = ((*((unsigned char*)0xdd02)) ) | 3;
@@ -204,7 +207,7 @@ void mr_set_background_color_hd(unsigned char _color) {
 }
 
 void mr_set_border_color_hd(unsigned char _color) {
-
+    SET_BORDER_COLOR(_color);
 }
 
 unsigned char storedJiffy = 0;

@@ -189,11 +189,11 @@ void mr_sound_stop_hd() {
 }
 
 void mr_set_background_color_hd(unsigned char _color) {
-
+    *((unsigned char*)0x2c8) = _color;
 }
 
 void mr_set_border_color_hd(unsigned char _color) {
-
+    *((unsigned char*)0x2c8) = _color;
 }
 
 unsigned char storedJiffy = 0;

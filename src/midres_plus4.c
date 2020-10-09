@@ -36,6 +36,9 @@
 #define SET_BACKGROUND_COLOR( _color ) \
         *((unsigned char*)0xff15) = _color;
 
+#define SET_BORDER_COLOR( _color ) \
+        *((unsigned char*)0xff19) = _color;
+
 #define WAIT_VBL( ) \
     while ((*(unsigned char*)0xff1c) & 1 == 0) {}
 
@@ -184,7 +187,7 @@ void mr_set_background_color_hd(unsigned char _color) {
 }
 
 void mr_set_border_color_hd(unsigned char _color) {
-
+    SET_BORDER_COLOR(_color);
 }
 
 unsigned char storedJiffy = 0;
