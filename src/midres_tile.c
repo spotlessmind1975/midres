@@ -46,6 +46,7 @@ void mr_tile_prepare_roll_horizontal_multicolor(mr_tileset _tileset, mr_tile _so
 void _mr_puttile_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);
 void _mr_puttiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color);
 void _mr_putetiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
+void _mr_putftiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
 void _mr_vtiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color);
 void _mr_htiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _x2, mr_position _y, mr_tile _tile, mr_color _color);
 
@@ -695,6 +696,39 @@ void _mr_putetiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_po
     } else {
 #endif
         _mr_putetiles_monocolor(_screen, _colormap, _x, _y, _tile_start, _w, _h, _color);
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    }
+#endif
+}
+
+void _mr_putftiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color) {
+
+    int offset;
+    mr_position w;
+
+    offset = _y * MR_SCREEN_WIDTH + _x;
+    w = _w;
+
+    for (; _h != 0; --_h) {
+        mr_position w = _w;
+        for (; w != 0; --w) {
+            _screen[offset] = _tile_start;
+            _colormap[offset] = _color;
+            ++offset;
+        }
+        offset += MR_SCREEN_WIDTH - _w;
+    }
+
+}
+
+void _mr_putftiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color) {
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    if (MULTICOLOR) {
+        _mr_putftiles_multicolor(_screen, _colormap, _x, _y, _tile_start, _w, _h, _color);
+    }
+    else {
+#endif
+        _mr_putftiles_monocolor(_screen, _colormap, _x, _y, _tile_start, _w, _h, _color);
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
     }
 #endif

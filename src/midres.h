@@ -753,6 +753,9 @@
 	// Writes a set of tiles into a bitmap.
 	void _mr_putetiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
 
+	// Writes a set of tiles into a bitmap.
+	void _mr_putftiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
+
 	// Clear a tile of a bitmap.
 	void _mr_cleartile(mr_mixel* _screen, mr_position _x, mr_position _y);
 
@@ -783,6 +786,9 @@
 
 	// Writes a tile into a bitmap.
 	#define mr_putetiles(_screen, _x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(_screen), CM(_screen), _x, _y, _tile, _w, _h, _color );
+
+	// Writes a set of tiles into a bitmap.
+	#define mr_putftiles(_screen, _x, _y, _tile_start, _w, _h, _color) _mr_putftiles(SM(_screen), CM(_screen), mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_horizontal(_screen, _x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(_screen), CM(_screen), _x, _y, _tile, _color );
@@ -820,6 +826,9 @@
 
 	// Writes a set of tiles into a bitmap.
 	#define mr_putetilesv(_x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
+
+	// Writes a set of tiles into a bitmap.
+	#define mr_putftilesv(_x, _y, _tile_start, _w, _h, _color) _mr_putftiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile_start, _w, _h, _color);
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_horizontalv(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
@@ -863,6 +872,9 @@
 
 	// Writes a set of tiles into a bitmap.
 	#define mr_putetilese(_x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
+
+	// Writes a set of tiles into a bitmap.
+	#define mr_putftilese(_x, _y, _tile_start, _w, _h, _color) _mr_putftiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
 	#define mr_tile_moveto_horizontale(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
