@@ -289,6 +289,9 @@
 	// Set the background color of all screens
 	void mr_set_background_color(mr_color _color);
 
+	// Set the border color of all screens
+	void mr_set_border_color(mr_color _color);
+
 	/*-----------------------------------------------------------------------
 	 --- SCREEN MANAGEMENT (implicit [visible screen])
 	 -----------------------------------------------------------------------*/

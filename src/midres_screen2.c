@@ -126,4 +126,8 @@ void mr_set_background_color(mr_color _color) {
     mr_set_background_color_hd(_color);
 }
 
+void mr_set_border_color(mr_color _color) {
+    mr_set_border_color_hd(_color);
+}
+
 #endif

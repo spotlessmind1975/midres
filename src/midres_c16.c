@@ -184,6 +184,11 @@ void mr_set_background_color_hd(unsigned char _color) {
     SET_BACKGROUND_COLOR(_color);
 }
 
+void mr_set_border_color_hd(unsigned char _color) {
+
+}
+
+
 unsigned char storedJiffy = 0;
 
 void mr_start_frame_hd() {
