@@ -9,12 +9,12 @@
 #ifndef _MIDRES_HW_C64_H_
 #define _MIDRES_HW_C64_H_
 
-/******************************************************************
- * ------ COMMODORE 64 PLATFORM
- ******************************************************************/
+ /******************************************************************
+  * ------ COMMODORE 64 PLATFORM
+  ******************************************************************/
 
-// The maximum resolution is 80 x 50 pixels, equivalent to 
-// 40 x 25 mixels.
+  // The maximum resolution is 80 x 50 pixels, equivalent to 
+  // 40 x 25 mixels.
 #define MR_SCREEN_WIDTH				40
 #define MR_SCREEN_HEIGHT			25
 #define MR_SCREEN_RAM_SIZE				0x0400

@@ -62,6 +62,8 @@ void mr_init_base_hd() {
     int i;
     unsigned char* dst = (unsigned char* )0x8c00, * src = (unsigned char*)0xd800;
 
+    memset(SM(MR_SCREEN_DEFAULT), 32, 0x400);
+
     SET_DATA_DIRECTION();
     SET_BANK(2);
     SET_BACKGROUND_COLOR( MR_COLOR_BLACK );
