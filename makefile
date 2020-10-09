@@ -54,6 +54,7 @@ endif
 # Given GAMES:
 #  - totto
 #  - airattack
+#  - alienstorm
 
 ifdef game
 ifdef target
@@ -663,6 +664,67 @@ $(EXEDIR)/totto.atari:	$(subst PLATFORM,totto.atari,$(OBJS))
 #	$(call COPYFILES,$(DATADIR)/ttfinal4.mpic,$(EXEDIR)/atr/ttfinal1.pic)
 
 ###############################################################################
+##
+###############################################################################
+
+obj/alienstorm.c64/%.o:	$(SOURCES)
+	$(CC) -t c64 -c -D__GAME_ALIEN_STORM__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/alienstorm.c64/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.c64: $(LIBDIR)/midres.c64.lib $(subst PLATFORM,alienstorm.c64,$(OBJS))
+	$(CC) -t c64 $(LDFLAGS) -o $(EXEDIR)/alienstorm.c64 $(subst PLATFORM,alienstorm.c64,$(OBJS)) $(LIBDIR)/midres.c64.lib 
+	$(CC1541) -f alienstorm -w $(EXEDIR)/alienstorm.c64 $(EXEDIR)/alienstorm.c64.d64  
+	$(CC1541) -f zstiles.bin -w $(DATADIR)/astiles.bin $(EXEDIR)/alienstorm.c64.d64  
+	$(CC1541) -f zstiles1.bin -w $(DATADIR)/astiles1.bin $(EXEDIR)/alienstorm.c64.d64  
+	$(CC1541) -f zstiles2.bin -w $(DATADIR)/astiles2.bin $(EXEDIR)/alienstorm.c64.d64  
+
+obj/alienstorm.vic2024/%.o:	$(SOURCES)
+	$(CC) -t vic20 -c -D__GAME_ALIEN_STORM__ -D__24K__ -C cfg/vic20-32k.cfg -Osir -Cl -D__CBM__ -o $@ $(subst obj/alienstorm.vic2024/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.vic2024:	$(subst PLATFORM,alienstorm.vic2024,$(OBJS))
+	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/alienstorm.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/alienstorm.vic2024 $(subst PLATFORM,alienstorm.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
+	$(CC1541) -f loader -w $(DATADIR)/alienstorm_loader2024.prg $(EXEDIR)/alienstorm.vic2024.d64  
+	$(CC1541) -f alienstorm -w $(EXEDIR)/alienstorm.vic2024 $(EXEDIR)/alienstorm.vic2024.d64  
+	$(CC1541) -f zstiles.bin -w $(DATADIR)/astiles.bin $(EXEDIR)/alienstorm.vic2024.d64  
+	$(CC1541) -f zstiles1.bin -w $(DATADIR)/astiles1.bin $(EXEDIR)/alienstorm.vic2024.d64  
+	$(CC1541) -f zstiles2.bin -w $(DATADIR)/astiles2.bin $(EXEDIR)/alienstorm.vic2024.d64  
+
+obj/alienstorm.plus4/%.o:	$(SOURCES)
+	$(CC) -t plus4 -c -D__GAME_ALIEN_STORM__ -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/plus4.cfg -o $@ $(subst obj/alienstorm.plus4/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.plus4:	$(subst PLATFORM,alienstorm.plus4,$(OBJS))
+	$(CC) -t plus4 $(LDFLAGS) -m $(EXEDIR)/alienstorm.plus4.map -C cfg/plus4.cfg -o $(EXEDIR)/alienstorm.plus4 $(subst PLATFORM,alienstorm.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
+	$(CC1541) -f loader -w $(DATADIR)/alienstorm_loader4.prg $(EXEDIR)/alienstorm.plus4.d64  
+	$(CC1541) -f alienstorm -w $(EXEDIR)/alienstorm.plus4 $(EXEDIR)/alienstorm.plus4.d64  
+	$(CC1541) -f zstiles.bin -w $(DATADIR)/astiles.bin $(EXEDIR)/alienstorm.plus4.d64  
+	$(CC1541) -f zstiles1.bin -w $(DATADIR)/astiles1.bin $(EXEDIR)/alienstorm.plus4.d64  
+	$(CC1541) -f zstiles2.bin -w $(DATADIR)/astiles2.bin $(EXEDIR)/alienstorm.plus4.d64  
+
+obj/alienstorm.c128/%.o:	$(SOURCES)
+	$(CC) -t c128 -c -D__GAME_ALIEN_STORM__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/alienstorm.c128/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.c128:	$(subst PLATFORM,alienstorm.c128,$(OBJS))
+	$(CC) -t c128 $(LDFLAGS) -o $(EXEDIR)/alienstorm.c128 $(subst PLATFORM,alienstorm.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
+	$(CC1541) -f alienstorm -w $(EXEDIR)/alienstorm.c128 $(EXEDIR)/alienstorm.c128.d64  
+	$(CC1541) -f zstiles.bin -w $(DATADIR)/astiles.bin $(EXEDIR)/alienstorm.c128.d64  
+	$(CC1541) -f zstiles1.bin -w $(DATADIR)/astiles1.bin $(EXEDIR)/alienstorm.c128.d64  
+	$(CC1541) -f zstiles2.bin -w $(DATADIR)/astiles2.bin $(EXEDIR)/alienstorm.c128.d64  
+
+obj/alienstorm.atari/%.o:	$(SOURCES)
+	$(CC) -t atari -c -D__GAME_ALIEN_STORM__ -Osir -Cl -o $@ $(subst obj/alienstorm.atari/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.atari:	$(subst PLATFORM,alienstorm.atari,$(OBJS))
+	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/alienstorm.atari $(subst PLATFORM,alienstorm.atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(EXEDIR)/alienstorm.atari,$(EXEDIR)/atr/game.exe)
+	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/astiles.bin,$(EXEDIR)/atr/zstiles.bin)
+	$(call COPYFILES,$(DATADIR)/astiles1.bin,$(EXEDIR)/atr/zstiles1.bin)
+	$(call COPYFILES,$(DATADIR)/astiles2.bin,$(EXEDIR)/atr/zstiles2.bin)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/alienstorm.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/alienstorm.atari.atr -o $(EXEDIR)/alienstorm.atari.atr -f game.exe
+
+###############################################################################
 ## FINAL RULES
 ###############################################################################
 
@@ -716,6 +778,14 @@ clean:
 	$(call RMFILES,$(EXEDIR)/totto.vic2024)
 	$(call RMFILES,$(EXEDIR)/totto.vic2024.d64)
 	$(call RMFILES,$(EXEDIR)/totto.atari.atr)
+	$(call RMFILES,$(EXEDIR)/alienstorm.c64)
+	$(call RMFILES,$(EXEDIR)/alienstorm.c64.d64)
+	$(call RMFILES,$(EXEDIR)/alienstorm.plus4)
+	$(call RMFILES,$(EXEDIR)/alienstorm.plus4.d64)
+	$(call RMFILES,$(EXEDIR)/alienstorm.vic2024)
+	$(call RMFILES,$(EXEDIR)/alienstorm.vic2024.d64)
+	$(call RMFILES,$(EXEDIR)/alienstorm.atari.atr)
+	$(call RMFILES,$(LIBDIR)/midres.c64.lib)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))
 	$(foreach LIB,$(LIBS),$(call RMFILES,$(LIB)))
 	$(foreach OBJECT,$(OBJECTS),$(call RMFILES,$(OBJECT)))
