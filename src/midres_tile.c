@@ -791,4 +791,11 @@ void mr_tile_setcolors(mr_color _colors[4]) {
     mr_tile_setcolors_hd(_colors);
 }
 
+void mr_tile_redefine_fill(mr_tileset _tileset, mr_tile _tile, mr_mixel _data) {
+    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _tile * 8);
+    unsigned char b = 0;
+    for (b = 0; b < 8; ++destination, ++b) {
+        *destination = _data;
+    }
+}
 #endif

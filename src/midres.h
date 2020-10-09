@@ -688,6 +688,9 @@
 	// Redefine a tile using the given data.
 	void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data);
 
+	// Redefine a tile filling the tile with the given data.
+	void mr_tile_redefine_fill(mr_tileset _tileset, mr_tile _tile, mr_mixel _data);
+
 	// Set a single color for multicolor tiles
 	void mr_tile_setcolor(mr_position _index, mr_color _color);
 
