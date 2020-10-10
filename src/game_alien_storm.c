@@ -147,6 +147,9 @@ signed char alienDX = 1;
 mr_position alienY = 1;
 mr_position alienPY = 1;
 
+// This is the number of the note of the soundtrack.
+unsigned char alienSoundtrack = 0;
+
 ////////////////////////////////// MISTERY //////////////////////////////////
 
 // This is the offset from the top edge of the mistery alien.
@@ -207,7 +210,7 @@ mr_position fireX = 0;
 
 // This flag keeps the information as to whether the 
 // player's gun has been hit or not.
-mr_boolean cannonHit = mr_false;
+unsigned char cannonHit = 0;
 
 //////////////////////////////// GAMEPLAY /////////////////////////////////
 
@@ -742,10 +745,7 @@ void initialize_level() {
 	alienDX = 1;
 	alienY = 1;
 	alienPY = 1;
-	--alienDelayFrameCount;
-	if (alienDelayFrameCount == 0) {
-		alienDelayFrameCount = 1;
-	}
+	alienDelayFrameCount = ALIEN_DELAY_FRAME_COUNT;
 	alienFireDelayFrameCount = ALIEN_FIRE_DELAY_FRAME_COUNT;
 	alienRowBitmap = 0;
 	for (i = 0; i < ALIEN_ROW_COUNT; ++i) {
@@ -771,9 +771,14 @@ void clear_cannon_row() {
 // Draw the player's cannon
 void draw_cannon() {
 	// If cannon has been hit, we clear the previous explosion first.
-	if (cannonHit) {
+	if (cannonHit > 1) {
+		--cannonHit;
+		mr_sound_start_channel(0, 0);
+		mr_sound_change_channel(0, 500+100*(cannonHit&0x03));
+	} else if (cannonHit==1) {
 		clear_cannon_row();
-		cannonHit = mr_false;
+		mr_sound_stop_channel(0);
+		--cannonHit;
 	// Otherwise, we draw it
 	} else {
 		mr_tile_moveto_horizontal_extendedv( cannonX, CANNON_START_Y * 8,
@@ -1011,7 +1016,7 @@ void check_player_fire() {
 	if (fireY == 2) {
 		mr_puttilev(fireX, fireY + 1, TILE_EMPTY, MR_COLOR_BLACK);
 		fireY = 0;
-
+		mr_sound_stop_channel(0);
 	// Otherwise, if it's still moving ...
 	} else if (fireY > 0) {
 
@@ -1038,12 +1043,20 @@ void check_player_fire() {
 			mr_puttilev(fireX, fireY, TILE_EMPTY, MR_COLOR_BLACK);
 			fireY = 0;
 			misteryX = 0;
+
+			--alienDelayFrameCount;
+			if (alienDelayFrameCount == 0) {
+				alienDelayFrameCount = 1;
+			}
+
+			mr_sound_stop_channel(0);
 		}
 		// Let's see if it hit a bunker.
 		else if ((tile >= TILE_DEFENSE) && (tile < (TILE_DEFENSE + (TILE_DEFENSE_WIDTH * TILE_DEFENSE_HEIGHT)))) {
 			// Clear the space occupied and stop fire.
 			mr_puttilev(fireX, fireY, TILE_EMPTY, MR_COLOR_BLACK);
 			fireY = 0;
+			mr_sound_stop_channel(0);
 		}
 		// Let's see if it hit an alien.
 		else if ((tile >= TILE_ALIEN1A) && (tile < (TILE_ALIEN3B + (TILE_ALIEN3B_WIDTH * TILE_ALIEN3B_HEIGHT)))) {
@@ -1086,6 +1099,7 @@ void check_player_fire() {
 			// Explode the alien and stop fire.
 			explode_alien(j, i);
 			fireY = 0;
+			mr_sound_stop_channel(0);
 		}
 
 		// Let's animate the shot.
@@ -1137,7 +1151,7 @@ void check_alien_fire() {
 					else if ((tile >= TILE_MOVING_CANNON) && (tile < (TILE_MOVING_CANNON + mr_calculate_prepared_tile_size_horizontal(TILE_CANNON_WIDTH, TILE_CANNON_HEIGHT)))) {
 
 						// Player has been hit: explode the cannon and decrease the cannons.
-						cannonHit = mr_true;
+						cannonHit = 20;
 						clear_cannon();
 						--cannonLives[currentPlayer];
 						draw_cannons();
@@ -1156,8 +1170,8 @@ void check_alien_fire() {
 					}
 					// Otherwise, stop & clear.
 					else {
-						alienFireY[i] = 0;
 						mr_puttilev(alienFireX[i], alienFireY[i], TILE_EMPTY, MR_COLOR_BLACK);
+						alienFireY[i] = 0;
 					}
 				}
 			}
@@ -1191,12 +1205,27 @@ void control_cannon() {
 	}
 }
 
+void play_alien_note() {
+	mr_sound_start_channel(1, 0);
+	mr_sound_change_channel(1, 1000 + (3 - alienSoundtrack) * 100);
+	++alienSoundtrack;
+	if (alienSoundtrack > 3) alienSoundtrack = 0;
+}
+
+void stop_alien_note() {
+	mr_sound_stop_channel(1);
+}
+
 // This routine takes care of moving the aliens, if necessary.
 void move_aliens() {
 
 	unsigned char i;
 
 	++alienFrameCounts;
+
+	if (alienFrameCounts == (alienDelayFrameCount >> 1)) {
+		stop_alien_note();
+	}
 
 	if (alienFrameCounts == alienDelayFrameCount) {
 
@@ -1240,6 +1269,7 @@ void move_aliens() {
 
 		draw_aliens();
 
+		play_alien_note();
 	}
 
 }
@@ -1257,18 +1287,20 @@ void move_mistery() {
 	}
 
 	if (misteryX == 0) {
-		if ((rand() & 0xff) > 250) {
+		if ((rand() & 0xff) > 254) {
 			misteryX = 1;
 		}
 	}
 }
 
 void move_fire() {
-	if (fireY > 0) {
+	if (fireY > 2) {
 		--fireDelayFrameCount;
 		if (fireDelayFrameCount == 0) {
 			fireDelayFrameCount = FIRE_DELAY_FRAME_COUNT;
 			--fireY;
+			mr_sound_start_channel(0, 0);
+			mr_sound_change_channel(0, 2000 + (MR_SCREEN_HEIGHT - fireY) * 300);
 		}
 	}
 }
@@ -1386,6 +1418,9 @@ void gameloop() {
 
 			mr_end_frame(2);
 		}
+
+		mr_sound_stop_channel(0);
+		mr_sound_stop_channel(1);
 
 		if (!gameOver) {
 			player_screen();
