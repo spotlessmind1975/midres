@@ -229,7 +229,7 @@ void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
 // Hardware dependent sound library
 void mr_sound_change_hd(unsigned char _channel, int _parameter) {
 
-    switch ((channel & 0x03)) {
+    switch ((_channel & 0x03)) {
         case 0: case 3:
             *((unsigned char*)0x900a) = 128 + (_parameter >> 9);
             break;
@@ -248,7 +248,7 @@ void mr_sound_stop_hd(unsigned char _channel) {
 
     // *((unsigned char*)0x900e) = 0;
 
-    switch ((channel & 0x03)) {
+    switch ((_channel & 0x03)) {
     case 0: case 3:
         *((unsigned char*)0x900a) = 0;
         break;
