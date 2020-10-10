@@ -44,7 +44,7 @@
 #define BUNKER_OFFSET				( ( MR_SCREEN_WIDTH - ( BUNKER_COUNT * BUNKER_WIDTH ) ) >> 1 )
 
 // Coordinates of each bunker
-#define BUNKER_X(n)			(n * BUNKER_WIDTH + BUNKER_OFFSET)
+#define BUNKER_X(n)			(( n * BUNKER_WIDTH ) + BUNKER_OFFSET)
 #define BUNKER_Y			(MR_SCREEN_HEIGHT - TILE_CANNON_HEIGHT - 2 - TILE_DEFENSE_HEIGHT)
 
 ////////////////////////////////// ALIENS //////////////////////////////////
@@ -443,7 +443,9 @@ void prepare_graphics() {
 	// Load tiles from mass memory.
 	mr_tileset_load("zstiles.bin", MR_TILESET_0, TILE_START, TILE_COUNT);
 	mr_tileset_load("zstiles1.bin", MR_TILESET_1, TILE1_START, TILE1_COUNT);
+#ifdef MR_TILESET_2
 	mr_tileset_load("zstiles2.bin", MR_TILESET_2, TILE2_START, TILE2_COUNT);
+#endif
 
 	// Let's prepare the cannon animation.
 	mr_tile_prepare_horizontal_extended( MR_TILESET_0, TILE_CANNON, 
@@ -475,6 +477,7 @@ void welcome_screen() {
 	// Endless loop (until a valid key is pressed).
 	while (1) {
 
+#ifdef MR_TILESET_2
 		//---------------------------------------------- FIRST SCREEN:
 		// We suggest to insert the coin to play:
 		//		1 player = 1 coin
@@ -542,6 +545,8 @@ void welcome_screen() {
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(3)) return;
+
+#endif
 
 		//------------------------------------------- SECOND SCREEN:
 		// We suggest the scores that can be obtained 
@@ -965,6 +970,8 @@ void draw_aliens() {
 // player 1 or by player 2.
 void player_screen() {
 
+#ifdef MR_TILESET_2
+
 	clear_welcome_screen();
 
 	clear_cannons();
@@ -987,6 +994,8 @@ void player_screen() {
 
 	// We set the proper tileset to play.
 	mr_tileset_visible(MR_TILESET_0);
+
+#endif
 
 }
 

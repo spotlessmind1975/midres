@@ -122,12 +122,4 @@ void mr_pack(mr_screen _source, mr_screen _destination, mr_half_screen _half_scr
 
 }
 
-void mr_set_background_color(mr_color _color) {
-    mr_set_background_color_hd(_color);
-}
-
-void mr_set_border_color(mr_color _color) {
-    mr_set_border_color_hd(_color);
-}
-
 #endif
