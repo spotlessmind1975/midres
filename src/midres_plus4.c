@@ -131,11 +131,11 @@ void mr_tileset_visible_hd(unsigned char _tileset) {
 }
 
 unsigned char mr_key_pressed_hd() {
-    return (*(unsigned char*)0xfd30) != 0x00;
+    return (*(unsigned char*)0xc6) != 0x40;
 }
 
 unsigned char mr_get_key_pressed_hd() {
-    return (*(unsigned char*)0xfd30);
+    return (*(unsigned char*)0xc6);
 }
 
 void mr_wait_hd(unsigned char _seconds) {
