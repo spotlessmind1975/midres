@@ -35,9 +35,9 @@
 
 // List of available tilesets:
 #define MR_TILESET_ROM_0				56
-#define MR_TILESET_0					46
-#define MR_TILESET_1					48
-#define MR_TILESET_2					50
+#define MR_TILESET_0					42
+#define MR_TILESET_1					44
+#define MR_TILESET_2					46
 #define MR_TILESET_COUNT				4
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
 #define MR_TILESET_TILE_COUNT			128
