@@ -71,7 +71,7 @@ void mr_init_base_hd(unsigned char _mode) {
     mr_tileset_visible(MR_TILESET_0);
     mr_show_hd(MR_SCREEN_0);
 
-    (*(unsigned char*)0x02fc) = 0x09;
+    (*(unsigned char*)0x02fc) = 0xff;
 
 }
 
@@ -141,15 +141,16 @@ void mr_tileset_visible_hd(unsigned char _tileset) {
 }
 
 unsigned char mr_key_pressed_hd() {
-    unsigned char k = (*(unsigned char*)0x02fc);
-    (*(unsigned char*)0x02fc) = 0x09;
-    return k != 0x09;
+    return (((*(unsigned char*)0xd20f)) & 0x04) != 0x04;
 }
 
 unsigned char mr_get_key_pressed_hd() {
-    unsigned char k = (*(unsigned char*)0x02fc);
-    (*(unsigned char*)0x02fc) = 0x09;
-    return k;
+    if (mr_key_pressed_hd()) {
+        unsigned char k = (*(unsigned char*)0x02f2);
+        return k;
+    } else {
+        return MR_KEY_NONE;
+    }
 }
 
 void mr_wait_hd(unsigned char _seconds) {
