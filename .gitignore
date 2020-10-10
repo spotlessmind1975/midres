@@ -370,3 +370,5 @@ midres.vcxproj.filters
 exe/
 src/rawdata.c
 src/rawdata.h
+lib/
+
