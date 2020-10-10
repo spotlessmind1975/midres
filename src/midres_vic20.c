@@ -267,7 +267,7 @@ void mr_set_background_color_hd(unsigned char _color) {
 }
 
 void mr_set_border_color_hd(unsigned char _color) {
-
+    SET_BORDER_COLOR(_color);
 }
 
 unsigned char storedJiffy = 0;
