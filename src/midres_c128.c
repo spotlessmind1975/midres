@@ -158,7 +158,7 @@ void mr_tileset_visible_hd(unsigned char _tileset) {
 }
 
 unsigned char mr_key_pressed_hd() {
-    return (*(unsigned char*)0x00d4) != 0x58;
+    return (*(unsigned char*)0x00d4) != 88;
 }
 
 unsigned char mr_get_key_pressed_hd() {
