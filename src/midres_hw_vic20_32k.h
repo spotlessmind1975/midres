@@ -172,6 +172,12 @@
 #define TM(_tileset)					((mr_mixel*)( _tileset > 16 ? (0x8000 + ((_tileset)-16) * 0x0400) : ((_tileset) * 0x400) ) )
 #define AM(_bitblit)					((mr_mixel*)(0x0200*(_bitblit)))
 
+#define WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
+		_screen[(_offset)] = (_tile); \
+		_colormap[(offset)] = (_color);
+
+#define READ_TILE(_screen, _offset) _screen[(_offset)]
+
 #define MIDRES_STANDALONE					1
 //#define MIDRES_STANDALONE_BITBLIT		1
 #define MIDRES_STANDALONE_DRAWING			1

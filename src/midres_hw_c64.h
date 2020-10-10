@@ -199,6 +199,8 @@
 		_screen[(_offset)] = (_tile); \
 		_colormap[(offset)] = (_color);
 
+#define READ_TILE(_screen, _offset) _screen[(_offset)]
+
 #define MIDRES_STANDALONE					1
 #define MIDRES_STANDALONE_BITBLIT			1
 #define MIDRES_STANDALONE_DRAWING			1
