@@ -698,7 +698,7 @@ obj/alienstorm.plus4/%.o:	$(SOURCES)
 
 $(EXEDIR)/alienstorm.plus4:	$(subst PLATFORM,alienstorm.plus4,$(OBJS))
 	$(CC) -t plus4 $(LDFLAGS) -m $(EXEDIR)/alienstorm.plus4.map -C cfg/plus4.cfg -o $(EXEDIR)/alienstorm.plus4 $(subst PLATFORM,alienstorm.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
-	$(CC1541) -f loader -w $(DATADIR)/alienstorm_loader4.prg $(EXEDIR)/alienstorm.plus4.d64  
+	$(CC1541) -f loader -w $(DATADIR)/asloader4.prg $(EXEDIR)/alienstorm.plus4.d64  
 	$(CC1541) -f alienstorm -w $(EXEDIR)/alienstorm.plus4 $(EXEDIR)/alienstorm.plus4.d64  
 	$(CC1541) -f zstiles.bin -w $(DATADIR)/astiles.bin $(EXEDIR)/alienstorm.plus4.d64  
 	$(CC1541) -f zstiles1.bin -w $(DATADIR)/astiles1.bin $(EXEDIR)/alienstorm.plus4.d64  
