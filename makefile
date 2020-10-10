@@ -761,7 +761,7 @@ $(EXEDIR)/alienstorm.atari:	$(subst PLATFORM,alienstorm.atari,$(OBJS))
 obj/alienstorm.atarilo/%.o:	$(SOURCES)
 	$(CC) -t atari -c -D__GAME_ALIEN_STORM__ -Osir -Cl -o $@ -D__LORES__ $(subst obj/alienstorm.atarilo/,src/,$(@:.o=.c))
 
-$(EXEDIR)/alienstorm.atari:	$(subst PLATFORM,alienstorm.atarilo,$(OBJS))
+$(EXEDIR)/alienstorm.atarilo:	$(subst PLATFORM,alienstorm.atarilo,$(OBJS))
 	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/alienstorm.atarilo $(subst PLATFORM,alienstorm.atarilo,$(OBJS)) $(LIBDIR)/midres.atarilo.lib
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
