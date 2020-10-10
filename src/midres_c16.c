@@ -160,27 +160,26 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 }
 
 // Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _number) {
+void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
 
-    *((unsigned char*)0xff0e) = 769 & 0xff;
-    *((unsigned char*)0xff10) = (int)(((int)769 & 0x100) >> 8);
-    *((unsigned char*)0xff11) = 0x14;
-
-}
-
-// Hardware dependent sound library
-void mr_sound_change_hd(int _parameter) {
-
-    *((unsigned char*)0xff0e) = _parameter & 0xff;
-    *((unsigned char*)0xff10) = ((_parameter & 0x100) >> 8);
+    *((unsigned char*)0xff0e+(_channel & 0x01)) = 769 & 0xff;
+    *((unsigned char*)0xff10 + ((1-(_channel & 0x01))<<1) ) = (int)(((int)769 & 0x100) >> 8);
+    *((unsigned char*)0xff11) = *((unsigned char*)0xff11) && (1 << (4 + (_channel & 0x01)));
+    // *((unsigned char*)0xff11) = 0x14;
 
 }
 
 // Hardware dependent sound library
-void mr_sound_stop_hd() {
+void mr_sound_change_hd(unsigned char _channel, int _parameter) {
 
-    *((unsigned char*)0xff11) = 0x00;
+    *((unsigned char*)0xff0e + (_channel & 0x01)) = _parameter & 0xff;
+    *((unsigned char*)0xff10 + ((1 - (_channel & 0x01)) << 1)) = ((_parameter & 0x100) >> 8);
 
+}
+
+// Hardware dependent sound library
+void mr_sound_stop_hd(unsigned char _channel) {
+    *((unsigned char*)0xff11) = *((unsigned char*)0xff11) && ~( 1<<(4+(_channel & 0x01)));
 }
 
 void mr_set_background_color_hd(unsigned char _color) {

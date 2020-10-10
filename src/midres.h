@@ -924,6 +924,12 @@
 
 	void mr_sound_stop();
 
+	void mr_sound_start_channel(unsigned char _channel, unsigned char _number);
+
+	void mr_sound_change_channel(unsigned char _channel, int _parameter);
+
+	void mr_sound_stop_channel(unsigned char _channel);
+
 	void mr_start_frame();
 
 	void mr_end_frame(unsigned char _jiffies);

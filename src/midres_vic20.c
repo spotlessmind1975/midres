@@ -220,23 +220,45 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 }
 
 // Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _number) {
+void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
 
     *((unsigned char*)0x900e) = 10;
 
 }
 
 // Hardware dependent sound library
-void mr_sound_change_hd(int _parameter) {
+void mr_sound_change_hd(unsigned char _channel, int _parameter) {
 
-    *((unsigned char*)0x900a) = 128 + ( _parameter >> 9 );
+    switch ((channel & 0x03)) {
+        case 0: case 3:
+            *((unsigned char*)0x900a) = 128 + (_parameter >> 9);
+            break;
+        case 1:
+            *((unsigned char*)0x900b) = 128 + (_parameter >> 9);
+            break;
+        case 2:
+            *((unsigned char*)0x900c) = 128 + (_parameter >> 9);
+            break;
+    }
 
 }
 
 // Hardware dependent sound library
-void mr_sound_stop_hd() {
+void mr_sound_stop_hd(unsigned char _channel) {
 
-    *((unsigned char*)0x900e) = 0;
+    // *((unsigned char*)0x900e) = 0;
+
+    switch ((channel & 0x03)) {
+    case 0: case 3:
+        *((unsigned char*)0x900a) = 0;
+        break;
+    case 1:
+        *((unsigned char*)0x900b) = 0;
+        break;
+    case 2:
+        *((unsigned char*)0x900c) = 0;
+        break;
+    }
 
 }
 

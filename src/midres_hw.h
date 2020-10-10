@@ -87,13 +87,13 @@ void mr_wait_hd(unsigned char _seconds);
 void mr_wait_jiffies_hd(unsigned char _jiffies);
 
 // Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _number);
+void mr_sound_start_hd(unsigned char _channel, unsigned char _number);
 
 // Hardware dependent sound library
-void mr_sound_change_hd(int _parameter);
+void mr_sound_change_hd(unsigned char _channel, int _parameter);
 
 // Hardware dependent sound library
-void mr_sound_stop_hd();
+void mr_sound_stop_hd(unsigned char _channel);
 
 void mr_start_frame_hd();
 

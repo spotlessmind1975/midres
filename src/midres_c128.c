@@ -180,25 +180,66 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 }
 
 // Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _number) {
+void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
+
+    switch ((_channel & 0x03)) {
+    case 0: case 3:
+        *((unsigned char*)0xd405) = 97;
+        *((unsigned char*)0xd406) = 200;
+        *((unsigned char*)0xd404) = 33; // 65, 129
+        break;
+    case 1:
+        *((unsigned char*)0xd40c) = 97;
+        *((unsigned char*)0xd40d) = 200;
+        *((unsigned char*)0xd40b) = 33; // 65, 129
+        break;
+    case 2:
+        *((unsigned char*)0xd413) = 97;
+        *((unsigned char*)0xd414) = 200;
+        *((unsigned char*)0xd412) = 33; // 65, 129
+        break;
+    }
+
     *((unsigned char*)0xd418) = 15;
-    *((unsigned char*)0xd405) = 97;
-    *((unsigned char*)0xd406) = 200;
-    *((unsigned char*)0xd404) = 33; // 65, 129
-}
-
-// Hardware dependent sound library
-void mr_sound_change_hd(int _parameter) {
-
-    *((unsigned char*)0xd400) = _parameter & 0xff;
-    *((unsigned char*)0xd401) = _parameter >> 8;
 
 }
 
 // Hardware dependent sound library
-void mr_sound_stop_hd() {
+void mr_sound_change_hd(unsigned char _channel, int _parameter) {
 
-    *((unsigned char*)0xd418) = 0;
+    switch ((_channel & 0x03)) {
+    case 0: case 3:
+        *((unsigned char*)0xd400) = _parameter & 0xff;
+        *((unsigned char*)0xd401) = _parameter >> 8;
+        break;
+    case 1:
+        *((unsigned char*)0xd407) = _parameter & 0xff;
+        *((unsigned char*)0xd408) = _parameter >> 8;
+        break;
+    case 2:
+        *((unsigned char*)0xd40e) = _parameter & 0xff;
+        *((unsigned char*)0xd40f) = _parameter >> 8;
+        break;
+    }
+
+}
+
+// Hardware dependent sound library
+void mr_sound_stop_hd(unsigned char _channel) {
+
+    switch ((_channel & 0x03)) {
+    case 0: case 3:
+        *((unsigned char*)0xd404) = *((unsigned char*)0xd404) & (~1);
+        break;
+    case 1:
+        *((unsigned char*)0xd40b) = *((unsigned char*)0xd40b) & (~1);
+        break;
+    case 2:
+        *((unsigned char*)0xd412) = *((unsigned char*)0xd412) & (~1);
+        break;
+    }
+
+    // *((unsigned char*)0xd418) = 0;
 
 }
 

@@ -173,19 +173,19 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 }
 
 // Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _number) {
-    *((unsigned char*)0xd200) = 0xff-_number;
-    *((unsigned char*)0xd201) = 15;
+void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
+    *((unsigned char*)0xd200+(_channel & 0x03)) = 0xff-_number;
+    *((unsigned char*)0xd201+(_channel & 0x03)) = 15;
 }
 
 // Hardware dependent sound library
-void mr_sound_change_hd(int _parameter) {
-    *((unsigned char*)0xd200) = 0xff-(_parameter>>8);
+void mr_sound_change_hd(unsigned char _channel, int _parameter) {
+    *((unsigned char*)0xd200+(_channel & 0x03)) = 0xff-(_parameter>>8);
 }
 
 // Hardware dependent sound library
-void mr_sound_stop_hd() {
-    *((unsigned char*)0xd201) = 0;
+void mr_sound_stop_hd(unsigned char _channel) {
+    *((unsigned char*)0xd201+(_channel & 0x03)) = 0;
 }
 
 void mr_set_background_color_hd(unsigned char _color) {
