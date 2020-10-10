@@ -779,6 +779,7 @@ void draw_cannon() {
 		clear_cannon_row();
 		mr_sound_stop_channel(0);
 		--cannonHit;
+		cannonX = CANNON_START_X;
 	// Otherwise, we draw it
 	} else {
 		mr_tile_moveto_horizontal_extendedv( cannonX, CANNON_START_Y * 8,
@@ -1148,20 +1149,18 @@ void check_alien_fire() {
 					}
 
 					// Check if the alien hit the player.
-					else if ((tile >= TILE_MOVING_CANNON) && (tile < (TILE_MOVING_CANNON + mr_calculate_prepared_tile_size_horizontal(TILE_CANNON_WIDTH, TILE_CANNON_HEIGHT)))) {
-
-						// Player has been hit: explode the cannon and decrease the cannons.
-						cannonHit = 20;
-						clear_cannon();
-						--cannonLives[currentPlayer];
-						draw_cannons();
-
-						// Restart the cannon positions.
-						cannonX = CANNON_START_X;
+					else if (( alienFireX[i] == (cannonX>>3) || alienFireX[i] == ((cannonX >> 3)+1) ) && alienFireY[i] == CANNON_START_Y) {
 
 						// Reset and stop the shot.
 						mr_puttilev(alienFireX[i], alienFireY[i], TILE_EMPTY, MR_COLOR_BLACK);
 						alienFireY[i] = 0;
+
+						// Player has been hit: explode the cannon and decrease the cannons.
+						cannonHit = 40;
+						clear_cannon();
+						--cannonLives[currentPlayer];
+						draw_cannons();
+
 					}
 
 					// If the shot can still move.
@@ -1182,26 +1181,28 @@ void check_alien_fire() {
 }
 
 void control_cannon() {
-	switch (mr_get_key_pressed()) {
-	case MR_KEY_A:
-		if (cannonX > 0) {
-			--cannonX;
+	if (cannonHit == 0) {
+		switch (mr_get_key_pressed()) {
+			case MR_KEY_A:
+				if (cannonX > 0) {
+					--cannonX;
+				}
+				break;
+			case MR_KEY_D:
+				if (cannonX < (MR_SCREEN_WIDTH - TILE_CANNON_WIDTH) * 8) {
+					++cannonX;
+				}
+				break;
+			case MR_KEY_SPACE:
+				// The player has an unlimited number of bullets 
+				// but can only fire one shot at a time.
+				if (fireY == 0) {
+					fireY = MR_SCREEN_HEIGHT - 4;
+					mr_tile_redefine_fill(MR_TILESET_0, TILE_LASER, 1 << (0x07 - (cannonX & 0x07)));
+					fireX = (cannonX >> 3) + 1;
+				}
+				break;
 		}
-		break;
-	case MR_KEY_D:
-		if (cannonX < (MR_SCREEN_WIDTH - TILE_CANNON_WIDTH)*8) {
-			++cannonX;
-		}
-		break;
-	case MR_KEY_SPACE:
-		// The player has an unlimited number of bullets 
-		// but can only fire one shot at a time.
-		if (fireY == 0) {
-			fireY = MR_SCREEN_HEIGHT - 4;
-			mr_tile_redefine_fill(MR_TILESET_0, TILE_LASER, 1 << (0x07 - (cannonX & 0x07)));
-			fireX = (cannonX >> 3) + 1;
-		}
-		break;
 	}
 }
 
@@ -1316,7 +1317,7 @@ void check_end_conditions() {
 		gameOver = mr_true;
 	}
 
-	if (cannonLives[currentPlayer] == 0) {
+	if (cannonLives[currentPlayer] == 0 && cannonHit==0) {
 		levelFinished = mr_true;
 		if (players == 1 || (players == 2 && currentPlayer == 1)) {
 			gameOver = mr_true;
