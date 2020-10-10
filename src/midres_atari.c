@@ -76,7 +76,11 @@ void mr_init_base_hd(unsigned char _mode) {
 }
 
 void mr_init_hd() {
+#ifdef __LORES__
+    mr_init_base_hd(70);
+#else
     mr_init_base_hd(66);
+#endif
 }
 
 void mr_init_multicolor_hd() {

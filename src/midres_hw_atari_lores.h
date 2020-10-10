@@ -6,18 +6,18 @@
  * INCLUDE FILE                                                             *
  ****************************************************************************/
 
-#ifndef _MIDRES_HW_ATARI_H_
-#define _MIDRES_HW_ATARI_H_
+#ifndef _MIDRES_HW_ATARI_LORES_H_
+#define _MIDRES_HW_ATARI_LORES_H_
 
 #define RENDERED_MIXELS RENDERED_MIXELS_ATARI
 
-/******************************************************************
- * ------ COMMODORE 64 PLATFORM
- ******************************************************************/
+ /******************************************************************
+  * ------ COMMODORE 64 PLATFORM
+  ******************************************************************/
 
-// The maximum resolution is 80 x 50 pixels, equivalent to 
-// 40 x 25 mixels.
-#define MR_SCREEN_WIDTH				40
+  // The maximum resolution is 80 x 50 pixels, equivalent to 
+  // 40 x 25 mixels.
+#define MR_SCREEN_WIDTH				20
 #define MR_SCREEN_HEIGHT			24
 #define MR_SCREEN_RAM_SIZE				0x0400
 
@@ -158,8 +158,7 @@ extern mr_mixel* screenRam;
 #define TM(_tileset)					((mr_mixel*)((0x0400*(_tileset))))
 
 #define WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-		_screen[(_offset)] = (_tile); \
-		_colormap[(offset)] = (_color);
+		_screen[(_offset)] = (_tile) | ((_color & 0x03)<<6);
 
 #define MIDRES_STANDALONE					1
 #define MIDRES_STANDALONE_BITBLIT			1	

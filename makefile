@@ -28,6 +28,7 @@ PROGRAMNAME := midres
 #  - plus4: single executable for Plus 4 (named on disk: "midres-single")
 #  - c128: single executable for Commodore 128 (named on disk: "midres-single")
 #  - atari: single executable for ATARI
+#  - atarilo: single executable for ATARI (low res)
 
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
@@ -525,6 +526,34 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 # Let's define rules to compile the demo under ATARI as a one and single 
 # executable file. This compilation is used as a "functional check", to
 # be sure that the source implementation is correct.
+obj/atarilo/%.o:	$(LIB_SOURCES)
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ -D__LORES__ $(subst obj/atarilo/,src/,$(@:.o=.c))
+
+$(LIBDIR)/midres.atarilo.lib:	$(subst PLATFORM,atarilo,$(LIB_OBJS))
+	$(AR) r $(LIBDIR)/midres.atarilo.lib $(subst PLATFORM,atarilo,$(LIB_OBJS))
+
+obj/atarilo/%.o:	$(SOURCES)
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -o $@ -D__LORES__ $(subst obj/atarilo/,src/,$(@:.o=.c))
+
+$(EXEDIR)/$(PROGRAMNAME).atarilo:	$(subst PLATFORM,atarilo,$(OBJS))
+	$(CC) -Ln demoatari.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atarilo.map -C cfg/atari.cfg -D__LORES__ -o $(EXEDIR)/$(PROGRAMNAME).atarilo $(subst PLATFORM,atarilo,$(OBJS)) $(LIBDIR)/midres.atarilo.lib
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).atarilo,$(EXEDIR)/atr/$(PROGRAMNAME).exe)
+	$(call COPYFILES,$(DATADIR)/slideshowa.dat,$(EXEDIR)/atr/slideshow)
+	$(call COPYFILES,$(DATADIR)/imagea01.pic,$(EXEDIR)/atr/imagea01.pic)
+	$(call COPYFILES,$(DATADIR)/imagea02.pic,$(EXEDIR)/atr/imagea02.pic)
+	$(call COPYFILES,$(DATADIR)/imagea03.pic,$(EXEDIR)/atr/imagea03.pic)
+	$(call COPYFILES,$(DATADIR)/imagea04.pic,$(EXEDIR)/atr/imagea04.pic)
+	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
+	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atarilo.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atarilo.atr -o $(EXEDIR)/$(PROGRAMNAME).atarilo.atr -f $(PROGRAMNAME).exe
+
+# Let's define rules to compile the demo under ATARI as a one and single 
+# executable file. This compilation is used as a "functional check", to
+# be sure that the source implementation is correct.
 obj/atmos/rawdata.o:	$(DATADIR)/tutorial_mctile.bin
 	$(FILE2INCLUDE) -i $(DATADIR)/tutorial_mctile.bin -c src/rawdata.c -h src/rawdata.h
 	$(CC) -T -t c64 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o obj/atmos/rawdata.o src/rawdata.c
@@ -728,6 +757,21 @@ $(EXEDIR)/alienstorm.atari:	$(subst PLATFORM,alienstorm.atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/astiles2.bin,$(EXEDIR)/atr/zstiles2.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/alienstorm.atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/alienstorm.atari.atr -o $(EXEDIR)/alienstorm.atari.atr -f game.exe
+
+obj/alienstorm.atarilo/%.o:	$(SOURCES)
+	$(CC) -t atari -c -D__GAME_ALIEN_STORM__ -Osir -Cl -o $@ -D__LORES__ $(subst obj/alienstorm.atarilo/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.atari:	$(subst PLATFORM,alienstorm.atarilo,$(OBJS))
+	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/alienstorm.atarilo $(subst PLATFORM,alienstorm.atarilo,$(OBJS)) $(LIBDIR)/midres.atarilo.lib
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(EXEDIR)/alienstorm.atarilo,$(EXEDIR)/atr/game.exe)
+	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
+	$(call COPYFILES,$(DATADIR)/astiles.bin,$(EXEDIR)/atr/zstiles.bin)
+	$(call COPYFILES,$(DATADIR)/astiles1.bin,$(EXEDIR)/atr/zstiles1.bin)
+	$(call COPYFILES,$(DATADIR)/astiles2.bin,$(EXEDIR)/atr/zstiles2.bin)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/alienstorm.atarilo.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/alienstorm.atarilo.atr -o $(EXEDIR)/alienstorm.atarilo.atr -f game.exe
 
 ###############################################################################
 ## FINAL RULES

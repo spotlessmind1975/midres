@@ -30,7 +30,11 @@
 #include "midres_hw_cbm.h"
 #include "midres_hw_c128_40.h"
 #elif __ATARI__
+#ifdef __LORES__
+#include "midres_hw_atari_lores.h"
+#else
 #include "midres_hw_atari.h"
+#endif
 #elif __ATMOS__
 #include "midres_hw_atmos.h"
 #else
