@@ -96,7 +96,7 @@
         *((unsigned char*)0x900f) = (*((unsigned char*)0x900f) & 0x0f) | ( _color << 4 );
 
 #define SET_BORDER_COLOR( _color ) \
-        *((unsigned char*)0x900f) = (*((unsigned char*)0x900f) & 0xf0) | (_color & 0x0f ) ;
+        *((unsigned char*)0x900f) = (*((unsigned char*)0x900f) & 0xf0) | 0x08 | (_color & 0x08 ) ;
 
 #define WAIT_VBL( ) \
     while (*((unsigned char*)0x9004) < 27) { };
