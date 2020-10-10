@@ -847,7 +847,7 @@ void draw_cannons() {
 	unsigned char i;
 	clear_cannons();
 	mr_puttilev(CANNONS_X, CANNONS_Y, TILE_DIGIT0 + cannonLives[currentPlayer], MR_COLOR_WHITE);
-	for (i = 0; i < 3; ++i) {
+	for (i = 0; i < cannonLives[currentPlayer]; ++i) {
 		mr_putetilesv(	CANNONS_X + 1 + ((i + 1) * TILE_CANNON_WIDTH), 
 						CANNONS_Y, 
 						TILE_CANNON, 
@@ -1314,6 +1314,16 @@ void gameloop() {
 	cannonLives[0] = MAX_LIFES;
 	cannonLives[1] = MAX_LIFES;
 
+	// Reset scores.
+	score[0][0] = 0;
+	score[0][1] = 0;
+	score[0][2] = 0;
+	score[0][3] = 0;
+	score[1][0] = 0;
+	score[1][1] = 0;
+	score[1][2] = 0;
+	score[1][3] = 0;
+
 	// By default, the game has not over 
 	// and the level is not finished, yet.
 	gameOver = mr_false;
@@ -1384,12 +1394,19 @@ void gameloop() {
 
 	// Update the hi score.
 	if (*((long*)&score[0][0]) > * ((long*)&hiscore[0])) {
-		hiscore[0] = score[currentPlayer][0];
-		hiscore[1] = score[currentPlayer][1];
-		hiscore[2] = score[currentPlayer][2];
-		hiscore[3] = score[currentPlayer][3];
+		hiscore[0] = score[0][0];
+		hiscore[1] = score[0][1];
+		hiscore[2] = score[0][2];
+		hiscore[3] = score[0][3];
 	}
 	
+	if (*((long*)&score[1][0]) > * ((long*)&hiscore[0])) {
+		hiscore[0] = score[1][0];
+		hiscore[1] = score[1][1];
+		hiscore[2] = score[1][2];
+		hiscore[3] = score[1][3];
+	}
+
 }
 
 void game_alien_storm() {
