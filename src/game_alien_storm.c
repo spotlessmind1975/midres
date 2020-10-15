@@ -1,5 +1,8 @@
 #ifdef __GAME_ALIEN_STORM__
 
+// midresIde.makeCommandLine:game=alienstorm;
+// midresIde.executableName:alienstorm.{target}.d64;
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -258,7 +261,7 @@ mr_position score[2][4] = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 mr_position hiscore[4] = { 0, 0, 0, 0 };
 
 // Store the credit available.
-mr_position credit[2] = { 0, 0 };
+mr_position credit = 0;
 
 // Number of players.
 unsigned char players = 1;
@@ -308,6 +311,10 @@ unsigned char addendum[4] = { 0, 0, 0, 0 };
 
 unsigned char* mr_translate_file_user(mr_file _file) {
 
+    _file = 0;
+
+    return NULL;
+
 }
 
 // Add to the given multibyte (max size = 4 bytes) of a value.
@@ -352,17 +359,13 @@ void draw_hiscore() {
 // Draw available credit
 void draw_credit() {
 
-	unsigned char i;
-
 	mr_putetilesv(CREDIT_X, CREDIT_Y,
 		TILE_CREDIT,
 		TILE_CREDIT_WIDTH,
 		TILE_CREDIT_HEIGHT,
 		MR_COLOR_WHITE);
 
-	for (i = 0; i < 2; ++i) {
-		mr_puttilev(MR_SCREEN_WIDTH - 2 + i, MR_SCREEN_HEIGHT - 1, TILE_DIGIT0 + credit[1 - i], MR_COLOR_WHITE);
-	}
+	mr_puttilev(MR_SCREEN_WIDTH - 2, MR_SCREEN_HEIGHT - 1, TILE_DIGIT0 + credit, MR_COLOR_WHITE);
 }
 
 // This function contains the functional logic for managing the 
@@ -386,18 +389,20 @@ mr_boolean keyboard_controller(unsigned char _seconds) {
 
 		// (C) coin
 	case MR_KEY_C:
-		// increase the credit by 1 coin
-		++(*(unsigned int*)(&credit[0]));
-		// update credit on the screen
-		draw_credit();
+		if (credit < 9) {
+			// increase the credit by 1 coin
+			++credit;
+			// update credit on the screen
+			draw_credit();
+		}
 		break;
 
 		// (1) 1 PLAYER GAME
 	case MR_KEY_1:
 		// if enough credit...
-		if ((*(unsigned int*)(&credit[0])) > 0) {
+		if (credit > 0) {
 			// decrease the credit by 1 coin
-			--(*(unsigned int*)(&credit[0]));
+			--credit;
 			// update credit on the screen
 			draw_credit();
 			// set the game for 1 player
@@ -410,9 +415,9 @@ mr_boolean keyboard_controller(unsigned char _seconds) {
 		// (1) 2 PLAYER GAME
 	case MR_KEY_2:
 		// if enough credit...
-		if ((*(unsigned int*)(&credit[0])) > 1) {
+		if (credit > 1) {
 			// decrease the credit by 2 coins
-			(*(unsigned int*)(&credit[0])) -= 2;
+			credit -= 2;
 			// update credit on the screen
 			draw_credit();
 			// set the game for 2 players
