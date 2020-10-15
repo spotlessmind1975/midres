@@ -41,7 +41,7 @@
         *((unsigned char*)0xff19) = _color;
 
 #define WAIT_VBL( ) \
-    while ((*(unsigned char*)0xff1c) & 1 == 0) {}
+    while ((*((unsigned char*)0xff1c) & 1) == 0) {}
 
 #define SET_CHARSET( _tileset ) \
     *((unsigned char*)0xff12) = 0; \
@@ -162,6 +162,7 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
 
+    _number = 0;
     *((unsigned char*)0xff0e+(_channel & 0x01)) = 769 & 0xff;
     *((unsigned char*)0xff10 + ((1-(_channel & 0x01))<<1) ) = (int)(((int)769 & 0x100) >> 8);
     *((unsigned char*)0xff11) = *((unsigned char*)0xff11) && (1 << (4 + (_channel & 0x01)));
