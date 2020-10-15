@@ -510,14 +510,16 @@ void _mr_tile_moveto_horizontal_extended_monocolor(mr_mixel* _screen, mr_color* 
 
     int offset;
 
-    mr_position i, j;
+    signed char i, j;
 
     offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
 
     for (i = 0; i < _h; ++i) {
         for (j = 0; j < _w+1; ++j) {
-            if (((_x >> 3) + j) >= 0 && (((_x >> 3) + j) < MR_SCREEN_WIDTH)) {
-                WRITE_TILE(_screen, _colormap, offset, _tile + (_x & 0x07), _color);
+            if (((_x >> 3) + j) >= 0) {
+                if (((_x >> 3) + j) < MR_SCREEN_WIDTH) {
+                    WRITE_TILE(_screen, _colormap, offset, _tile + (_x & 0x07), _color);
+                }
             }
             ++offset;
             _tile += 9;
@@ -626,6 +628,8 @@ mr_color _mr_gettile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_
     int offset;
 
     offset = _y * MR_SCREEN_WIDTH + _x;
+
+    _colormap = 0;
 
     return READ_TILE( _screen, offset );
 
