@@ -837,6 +837,5 @@ clean:
 	$(call RMFILES,$(LIBDIR)/midres.c64.lib)
 	$(call RMFILES,$(LIBDIR)/midres.vic2024.lib)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))
-	$(foreach LIB,$(LIBS),$(call RMFILES,$(LIB)))
 	$(foreach OBJECT,$(OBJECTS),$(call RMFILES,$(OBJECT)))
 	$(foreach OBJECT,$(LIB_OBJECTS),$(call RMFILES,$(OBJECT)))
