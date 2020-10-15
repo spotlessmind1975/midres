@@ -123,10 +123,14 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
 
 }
 
+#ifdef MIDRES_STANDALONE_FILE
+
 unsigned char mr_load_screen(mr_file _index, mr_screen _screen) {
     mr_read_file(_index, SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
     return 0;
 }
+
+#endif
 
 unsigned char mr_load_color(char* _filename, mr_screen _screen) {
 
@@ -142,16 +146,22 @@ unsigned char mr_load_color(char* _filename, mr_screen _screen) {
 
 #elif __CBM__
 
+    _screen = 0;
     return cbm_load(_filename, getcurrentdevice(), CM(_screen));
 
 #endif
 
 }
 
+#ifdef MIDRES_STANDALONE_FILE
+
 unsigned char mr_load_screen_color(mr_file _index, mr_screen _screen) {
     mr_read_file(_index, CM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    _screen=0;
     return 0;
 }
+
+#endif
 
 void mr_uncompress(mr_screen _source, mr_screen _destination) {
 

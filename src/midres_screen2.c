@@ -87,6 +87,7 @@ unsigned char mr_save_color(char* _filename, mr_screen _screen) {
 
 #elif __CBM__
 
+    _screen = 0;
     return cbm_save(_filename, getcurrentdevice(), CM(_screen), MR_SCREEN_RAM_SIZE);
 
 #endif
