@@ -186,6 +186,9 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
 
+    //@todo: manage _number in mr_sound_start_hd on C64
+    _number = 0;
+
     switch ((_channel & 0x03)) {
         case 0: case 3:
             *((unsigned char*)0xd405) = 97;
