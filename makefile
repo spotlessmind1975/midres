@@ -151,7 +151,7 @@ endif
 ## COMPILATION / LINKING OPTIONS
 ###############################################################################
 
-CFLAGS := -D__DEMO_$(DEMO)__ -D__GAME_$(GAME)__ -D__TUTORIAL_$(TUTORIAL)__
+CFLAGS := -D__DEMO_$(DEMO)__ -D__GAME_$(GAME)__ -D__TUTORIAL_$(TUTORIAL)__ -W -const-comparison
 LDFLAGS := 
 CRT :=
 REMOVES :=
@@ -262,8 +262,8 @@ $(LIBDIR)/midres.c64.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c64,$(LIB_OBJS))
 obj/c64/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/c64/,src/,$(@:.o=.c))
 
-(EXEDIR)/$(PROGRAMNAME).c64:	$(subst PLATFORM,c64,$(OBJS))
-	$(CC) -Ln demo64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).c64.map -o $(EXEDIR)/$(PROGRAMNAME).c64 $(subst PLATFORM,c64,$(OBJS)) $(LIBDIR)/midres.lib.c64
+$(EXEDIR)/$(PROGRAMNAME).c64: $(subst PLATFORM,c64,$(OBJS))
+	$(CC) -Ln demo64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).c64.map -o $(EXEDIR)/$(PROGRAMNAME).c64 $(subst PLATFORM,c64,$(OBJS)) $(LIBDIR)/midres.c64.lib
 	$(CC1541) -f $(PROGRAMNAME)-single -w $(EXEDIR)/$(PROGRAMNAME).c64 $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f slideshow -w $(DATADIR)/slideshow64.dat $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f image6401.mpic -w $(DATADIR)/image6401.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
