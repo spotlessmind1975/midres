@@ -40,7 +40,7 @@
         *((unsigned char*)0xff19) = _color;
 
 #define WAIT_VBL( ) \
-    while ((*(unsigned char*)0xff1c) & 1 == 0) {}
+    while ((*((unsigned char*)0xff1c) & 1 ) == 0) {}
 
 #define SET_CHARSET( _tileset ) \
     *((unsigned char*)0xff12) = 0; \
@@ -161,6 +161,9 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
 
+    //@todo: support _number under plus4 for mr_sound_start_hd
+    _number = 0;
+
     switch ((_channel & 0x01)) {
         case 0:
             *((unsigned char*)0xff0e) = 769 & 0xff;
@@ -219,6 +222,8 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 
 }
 
+#ifdef MIDRES_STANDALONE_FILE
+
 unsigned char* mr_translate_file_hd(mr_file _file) {
     return mr_translate_file_user(_file);
 }
@@ -243,5 +248,7 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     fread(_dest, _size, 1, f);
     fclose(f);
 }
+
+#endif
 
 #endif
