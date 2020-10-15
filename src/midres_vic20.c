@@ -56,7 +56,11 @@
 */
 #define SET_CHARSET( _tileset ) \
     *((unsigned char*)0x9005) = (*((unsigned char*)0x9005) & 0xf0) | \
-        ( ( (_tileset) < 8 ? ((_tileset)+ 8) : ((_tileset)-32) ) & 0xf );
+        ( \
+            ( (_tileset) < 8 ) ?  \
+              ( (_tileset) + 8 ) : \
+              ( (_tileset) - 32 ) \
+        ) & 0x0f;
 
 /*
     The following table shows how the top four bits of location $9005
@@ -221,6 +225,9 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
+
+    _channel = 0;
+    _number = 0;
 
     *((unsigned char*)0x900e) = 10;
 
