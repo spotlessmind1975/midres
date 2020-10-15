@@ -163,7 +163,7 @@ void _mr_tile_moveto_horizontal_extended_multicolor(mr_mixel* _screen, mr_color*
 
     int offset;
 
-    mr_position i, j;
+    signed char i, j;
 
     offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 2);
 
