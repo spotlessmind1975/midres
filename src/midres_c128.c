@@ -124,7 +124,6 @@ void mr_show_hd(unsigned char _screen) {
 
 void mr_cleanup_hd() {
 
-    int i;
     unsigned char* dst = (unsigned char*)0xd800, * src = (unsigned char*)0x8c00;
 
     /*for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
@@ -183,6 +182,9 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
+
+    //@todo: implement support for _number of mr_sound_start_hd of c128
+    _number = 0;
 
     switch ((_channel & 0x03)) {
     case 0: case 3:
@@ -269,6 +271,8 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 
 }
 
+#ifdef MIDRES_STANDALONE_FILE
+
 unsigned char* mr_translate_file_hd(mr_file _file) {
     return mr_translate_file_user(_file);
 }
@@ -294,5 +298,7 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     fclose(f);
 
 }
+
+#endif
 
 #endif
