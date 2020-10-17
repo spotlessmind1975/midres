@@ -179,7 +179,7 @@
 	extern mr_screen DB2;
 
 	// Flag to know if we are in single or multicolor mode
-	extern mr_boolean MULTICOLOR;
+	extern mr_boolean MR_MULTICOLOR;
 
 	/************************************************************************
 	 * ------ FUNCTIONS

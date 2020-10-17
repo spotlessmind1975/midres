@@ -67,8 +67,8 @@
 #define MR_COLOR_PEACH       			MR_COLOR_PINK
 
 #define MR_COLOR_COUNT					16
-#define MR_TILE_WIDTH_IN_PIXEL			(8>>(MULTICOLOR))
-#define MR_TILE_WIDTH_FACTOR			(3-(MULTICOLOR))
+#define MR_TILE_WIDTH_IN_PIXEL			(8>>(MR_MULTICOLOR))
+#define MR_TILE_WIDTH_FACTOR			(3-(MR_MULTICOLOR))
 
 #define SM(_screen)						((mr_mixel*)((0x0000*(_screen))))
 #define CM(_screen)						((mr_color*)((0x0000*(_screen))))

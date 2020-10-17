@@ -90,6 +90,6 @@ mr_screen DB1 = MR_SCREEN_DB1;
 
 mr_screen DB2 = MR_SCREEN_DB2;
 
-mr_boolean MULTICOLOR = mr_false;
+mr_boolean MR_MULTICOLOR = mr_false;
 
 #endif

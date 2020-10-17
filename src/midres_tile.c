@@ -121,7 +121,7 @@ void mr_tile_prepare_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, 
 void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         mr_tile_prepare_horizontal_multicolor(_tileset, _source, _destination);
     } else {
 #endif
@@ -179,7 +179,7 @@ void mr_tile_prepare_horizontal_extended_monocolor(mr_tileset _tileset, mr_tile 
 
 void mr_tile_prepare_horizontal_extended(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         mr_tile_prepare_horizontal_extended_multicolor(_tileset, _source, _w, _h, _destination);
     } else {
 #endif
@@ -283,7 +283,7 @@ void mr_tile_prepare_roll_horizontal_monocolor(mr_tileset _tileset, mr_tile _sou
 // Redefine a subset of N tiles by "rolling" horizontally a tile
 void mr_tile_prepare_roll_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         mr_tile_prepare_roll_horizontal_multicolor(_tileset, _source, _destination);
     } else {
 #endif
@@ -466,7 +466,7 @@ void _mr_puttile_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _
 // Writes a tile into a bitmap.
 void _mr_puttile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_puttile_multicolor(_screen, _colormap, _x, _y, _tile, _color);
     } else {
 #endif
@@ -495,7 +495,7 @@ void _mr_tile_moveto_horizontal_monocolor(mr_mixel* _screen, mr_color* _colormap
 // Writes a tile into a bitmap at *precise* horizontal position.
 void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_tile_moveto_horizontal_multicolor(_screen, _colormap, _x, _y, _tile, _color);
     } else {
 #endif
@@ -537,7 +537,7 @@ void _mr_tile_moveto_horizontal_extended_monocolor(mr_mixel* _screen, mr_color* 
 // Writes a tile into a bitmap at *precise* horizontal position.
 void _mr_tile_moveto_horizontal_extended(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_tile_moveto_horizontal_extended_multicolor(_screen, _colormap, _x, _y, _tile, _w, _h, _color);
     } else {
 #endif
@@ -564,7 +564,7 @@ void _mr_tile_moveto_vertical_monocolor(mr_mixel* _screen, mr_color* _colormap, 
 
 void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_tile_moveto_vertical_multicolor(_screen, _colormap, _x, _y, _tile, _color);
     } else {
 #endif
@@ -601,7 +601,7 @@ void _mr_tile_moveto_vertical_extended_monocolor(mr_mixel* _screen, mr_color* _c
 // Writes a tile into a bitmap at *precise* vertical position.
 void _mr_tile_moveto_vertical_extended(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_tile_moveto_vertical_extended_multicolor(_screen, _colormap, _x, _y, _tile, _w, _h, _color);
     } else {
 #endif
@@ -648,7 +648,7 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
     fclose(f);
 
 #ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         mr_tileset_multicolor_to_monocolor(_tileset, _starting, _count);
     }
 #endif
@@ -663,7 +663,7 @@ void mr_tileset_load_file(mr_file _index, mr_tileset _tileset, mr_tile _starting
 #endif
 
 #ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         mr_tileset_multicolor_to_monocolor(_tileset, _starting, _count);
     }
 #endif
@@ -694,7 +694,7 @@ void _mr_putetiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position
 
 void _mr_putetiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_putetiles_multicolor(_screen, _colormap, _x, _y, _tile_start, _w, _h, _color);
     } else {
 #endif
@@ -725,7 +725,7 @@ void _mr_putftiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position
 
 void _mr_putftiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_putftiles_multicolor(_screen, _colormap, _x, _y, _tile_start, _w, _h, _color);
     }
     else {
@@ -751,7 +751,7 @@ void _mr_puttiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position 
 
 void _mr_puttiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_puttiles_multicolor(_screen, _colormap, _x, _y, _tile_start, _tile_count, _color);
     } else {
 #endif
@@ -778,7 +778,7 @@ void _mr_vtiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x
 // Draws a vertical line onto the bitmap.
 void _mr_vtiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_vtiles_multicolor(_screen, _colormap, _x, _y1, _y2, _tile, _color);
     } else {
 #endif
@@ -804,7 +804,7 @@ void _mr_htiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x
 // Draws a horizontal line onto the bitmap.
 void _mr_htiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _x2, mr_position _y, mr_tile _tile, mr_color _color) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
-    if (MULTICOLOR) {
+    if (MR_MULTICOLOR) {
         _mr_htiles_multicolor(_screen, _colormap, _x1, _x2, _y, _tile, _color);
     } else {
 #endif

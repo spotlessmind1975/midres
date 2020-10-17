@@ -142,8 +142,8 @@
 #define MR_KEY_S						62
 #define MR_KEY_A						63
 
-#define MR_TILE_WIDTH_IN_PIXEL			(8>>(MULTICOLOR))
-#define MR_TILE_WIDTH_FACTOR			(3-(MULTICOLOR))
+#define MR_TILE_WIDTH_IN_PIXEL			(8>>(MR_MULTICOLOR))
+#define MR_TILE_WIDTH_FACTOR			(3-(MR_MULTICOLOR))
 
 #define MR_TILE_BACKGROUND				0
 #define MR_TILE_COLOR0					1

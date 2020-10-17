@@ -94,7 +94,7 @@
 
 void mr_init() {
 
-    MULTICOLOR = mr_false;
+    MR_MULTICOLOR = mr_false;
 
     WIDTH = MR_SCREEN_WIDTH;
     HEIGHT = MR_SCREEN_HEIGHT;
@@ -108,7 +108,7 @@ void mr_init_multicolor() {
 
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR 
 
-    MULTICOLOR = mr_true;
+    MR_MULTICOLOR = mr_true;
 
     WIDTH = MR_SCREEN_WIDTH;
     HEIGHT = MR_SCREEN_HEIGHT;
