@@ -704,9 +704,7 @@ void game_air_attack() {
 						// Show score
 						draw_score((MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) + 1);
 
-						for (j = 0; j < 200; ++j) { j; };
-						for (j = 0; j < 200; ++j) { j; };
-						for (j = 0; j < 200; ++j) { j; };
+						mr_wait_jiffies(10);
 
 					} else {
 						break;
