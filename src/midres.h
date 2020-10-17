@@ -148,7 +148,7 @@
 	 ************************************************************************/
 
 	 // Set of colors assigned for each screen.
-	extern mr_color SCREEN_INK[MR_SCREEN_COUNT];
+	extern mr_color MR_SCREEN_INK[MR_SCREEN_COUNT];
 
 	// Screen visible to the user.
 	extern mr_screen VISIBLE_SCREEN;
