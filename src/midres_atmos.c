@@ -30,7 +30,7 @@
 
 #if defined(__IMG2MIDRES__) || defined(__ATMOS__)
 
-unsigned char RENDERED_MIXELS_ATMOS[16] = {
+unsigned char MR_RENDERED_MIXELS_ATMOS[16] = {
    0x20, 0x01, 0x02, 0x03,
    0x04, 0x05, 0x06, 0x07,
    0x08, 0x09, 0x10, 0x11,

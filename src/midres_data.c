@@ -18,7 +18,7 @@
    ** RESIDENT VARIABLES SECTION
    ****************************************************************************/
 
-unsigned char RENDERED_MIXEL_BITS[4] = {
+unsigned char MR_RENDERED_MIXEL_BITS[4] = {
     0x08,
     0x02,
     0x04,
@@ -42,7 +42,7 @@ mr_mixel get_mixel_bits(mr_mixel _current) {
     register unsigned char i = 0;
 
     for (i = 0; i < sizeof(RENDERED_MIXELS); ++i) {
-        if (RENDERED_MIXELS[i] == _current) {
+        if (MR_RENDERED_MIXELS[i] == _current) {
             return i;
         }
     }
@@ -70,7 +70,7 @@ mr_mixel calculate_mixel(mr_mixel _current, mr_mixelbits _abcd, mr_pop _pop) {
             currentMixelbits = currentMixelbits ^ (1 << _abcd);
             break;
         }
-        return RENDERED_MIXELS[currentMixelbits];
+        return MR_RENDERED_MIXELS[currentMixelbits];
     }
     else {
         return _current;

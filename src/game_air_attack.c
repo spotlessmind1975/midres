@@ -158,7 +158,7 @@ void prepare_graphics() {
 	mr_tile_prepare_vertical(MR_TILESET_0, TILE_BOMB, TILE_MOVING_BOMB);
 
 	// Replace the "empty" tile of midres with the one redefined.
-	RENDERED_MIXELS[0] = TILE_EMPTY;
+	MR_RENDERED_MIXELS[0] = TILE_EMPTY;
 
 	// Enable the custom tileset for viewing.
 	mr_tileset_visible(MR_TILESET_0);

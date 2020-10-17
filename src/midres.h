@@ -52,7 +52,7 @@
 	// Define the bitmask for the given pixel position
 
 	#define mr_mixel_combination(_x,_y) ((_x&1)<<1)|(_y&1)
-	#define mr_mixel_bits(_x,_y) RENDERED_MIXEL_BITS[mr_mixel_combination(_x,_y)]
+	#define mr_mixel_bits(_x,_y) MR_RENDERED_MIXEL_BITS[mr_mixel_combination(_x,_y)]
 
 	typedef unsigned char mr_pop;
 
@@ -158,10 +158,10 @@
 	extern mr_screen MR_ENABLED_SCREEN;
 
 	// Precalculated values for positions.
-	extern unsigned char RENDERED_MIXEL_BITS[4];
+	extern unsigned char MR_RENDERED_MIXEL_BITS[4];
 
 	// Precalculated values for mixels.
-	extern unsigned char RENDERED_MIXELS[16];
+	extern unsigned char MR_RENDERED_MIXELS[16];
 
 	// Screen width
 	extern mr_position MR_WIDTH;

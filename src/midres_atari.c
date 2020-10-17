@@ -29,7 +29,7 @@
 
 #if defined(__IMG2MIDRES__) || defined(__ATARI__)
 
-unsigned char RENDERED_MIXELS_ATARI[16] = {
+unsigned char MR_RENDERED_MIXELS_ATARI[16] = {
    0x00, 0x01, 0x02, 0x03,
    0x04, 0x05, 0x06, 0x07,
    0x87, 0x86, 0x85, 0x84,

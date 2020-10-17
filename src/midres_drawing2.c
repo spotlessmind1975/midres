@@ -65,7 +65,7 @@ void _mr_clear_to_color(mr_mixel* _screen, mr_color* _colormap, mr_color _color)
     int i;
 
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-        _screen[i] = RENDERED_MIXELS[15];
+        _screen[i] = MR_RENDERED_MIXELS[15];
         _colormap[i] = _color;
     }
 
@@ -89,7 +89,7 @@ void _mr_putpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_pos
 
     abcd = mr_mixel_bits(_x, _y);
 
-    _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset])| abcd];
+    _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset])| abcd];
     _colormap[offset] = _color;
 
 }
@@ -107,7 +107,7 @@ void _mr_clearpixel(mr_mixel* _screen, mr_position _x, mr_position _y) {
 
     abcd = mr_mixel_bits(_x, _y);
 
-    _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
+    _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
 
 }
 
@@ -156,7 +156,7 @@ void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_positi
         } else {
             abcd = mr_mixel_bits(_x, y1);
         }
-        _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset])|abcd];
+        _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset])|abcd];
         _colormap[offset] = _color;
         offset += MR_SCREEN_WIDTH;
     }
@@ -177,7 +177,7 @@ void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_posit
 
     if (x1 & 1) {
         abcd = mr_mixel_bits(x1, _y);
-        _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
+        _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
         _colormap[offset] = _color;
         ++offset;
         ++x1;
@@ -189,7 +189,7 @@ void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_posit
         else {
             abcd = mr_mixel_bits(x1, _y);
         }
-        _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
+        _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
         _colormap[offset] = _color;
         ++offset;
     }

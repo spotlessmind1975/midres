@@ -60,7 +60,7 @@ void mr_clear(mr_screen _screen) {
     mr_color* color = CM(_screen);
 
     for (i = 0; i < MR_SCREEN_HEIGHT * MR_SCREEN_WIDTH; ++i) {
-        screen[i] = RENDERED_MIXELS[0];
+        screen[i] = MR_RENDERED_MIXELS[0];
         color[i] = MR_COLOR_BLACK;
     }
 }
@@ -171,7 +171,7 @@ void mr_uncompress(mr_screen _source, mr_screen _destination) {
 
     int i;
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-        destination[i] = RENDERED_MIXELS[mr_unpack_pmixel_lo(source[i])];
+        destination[i] = MR_RENDERED_MIXELS[mr_unpack_pmixel_lo(source[i])];
         destinationColor[i] = mr_unpack_pmixel_hi(source[i]) + MR_BRIGHTNESS;
     }
 
@@ -188,8 +188,8 @@ void mr_unpack(mr_screen _source, mr_screen _destination, mr_half_screen _half_s
     }
 
     for (i = 0; i < MR_SCREEN_WIDTH * ( MR_SCREEN_HEIGHT >> 1 ); ++i) {
-        destination[(i << 1)] = RENDERED_MIXELS[mr_unpack_pmixel_lo(source[i])];
-        destination[(i << 1) + 1] = RENDERED_MIXELS[mr_unpack_pmixel_hi(source[i])];
+        destination[(i << 1)] = MR_RENDERED_MIXELS[mr_unpack_pmixel_lo(source[i])];
+        destination[(i << 1) + 1] = MR_RENDERED_MIXELS[mr_unpack_pmixel_hi(source[i])];
     }
 
 }

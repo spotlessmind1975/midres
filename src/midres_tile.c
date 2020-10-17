@@ -618,7 +618,7 @@ void _mr_cleartile(mr_mixel* _screen, mr_position _x, mr_position _y) {
 
     offset = _y * MR_SCREEN_WIDTH + _x;
 
-    _screen[offset] = RENDERED_MIXELS[0];
+    _screen[offset] = MR_RENDERED_MIXELS[0];
 
 }
 

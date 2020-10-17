@@ -65,7 +65,7 @@ void _mr_copy(mr_mixel* _source, mr_color* _source_color, mr_position _xs, mr_po
             switch (_blitop & mr_blitop_mixels) {
                 case mr_blitop_set:
                     if (source) {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_destination) | destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_destination) | destination];
                         if ((_blitop & mr_blitop_color) == mr_blitop_color) {
                             *_destination_color = *_source_color;
                         }
@@ -74,12 +74,12 @@ void _mr_copy(mr_mixel* _source, mr_color* _source_color, mr_position _xs, mr_po
                         }
                     }
                     else {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_destination) & ~destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_destination) & ~destination];
                     }
                     break;
                 case mr_blitop_trans:
                     if (*_source_color != MR_COLOR_BLACK && source != 0) {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_destination) | destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_destination) | destination];
                         if ((_blitop & mr_blitop_color) == mr_blitop_color) {
                             *_destination_color = *_source_color;
                         } else {
@@ -95,10 +95,10 @@ void _mr_copy(mr_mixel* _source, mr_color* _source_color, mr_position _xs, mr_po
                         *_destination_color = MR_COLOR_WHITE;
                     }
                     if ((source & destination) != 0) {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_source) | destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_source) | destination];
                     }
                     else {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_source) & ~destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_source) & ~destination];
                     }
                     break;
                 case mr_blitop_or:
@@ -109,7 +109,7 @@ void _mr_copy(mr_mixel* _source, mr_color* _source_color, mr_position _xs, mr_po
                         *_destination_color = MR_COLOR_WHITE;
                     }
                     if ((source | destination)!=0) {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_source) | destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_source) | destination];
                     }
                     else {
                         *_destination = RENDERED_MIXELS[get_mixel_bits(*_source) & ~destination];
@@ -123,10 +123,10 @@ void _mr_copy(mr_mixel* _source, mr_color* _source_color, mr_position _xs, mr_po
                         *_destination_color = MR_COLOR_WHITE;
                     }
                     if (( source ^ destination) != 0) {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_source) | destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_source) | destination];
                     }
                     else {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_source) & ~destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_source) & ~destination];
                     }
                     break;
             }

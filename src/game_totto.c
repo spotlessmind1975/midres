@@ -272,9 +272,9 @@ void prepare_graphics() {
 	// Since we do not need midres, we redefine characters, in order to avoid
 	// side effects in using the drawing primitives.
 	for (i = 0; i < 16; ++i) {
-		RENDERED_MIXELS[0] = TILE_EMPTY;
+		MR_RENDERED_MIXELS[0] = TILE_EMPTY;
 	}
-	RENDERED_MIXELS[15] = TILE_FILLER;
+	MR_RENDERED_MIXELS[15] = TILE_FILLER;
 
 	mr_clear_bitmapv();
 
@@ -679,9 +679,9 @@ void show_titles() {
 	// Since we do not need midres, we redefine characters, in order to avoid
 	// side effects in using the drawing primitives.
 	for (i = 0; i < 16; ++i) {
-		RENDERED_MIXELS[0] = TILE1_EMPTY;
+		MR_RENDERED_MIXELS[0] = TILE1_EMPTY;
 	}
-	RENDERED_MIXELS[15] = TILE1_FILLER;
+	MR_RENDERED_MIXELS[15] = TILE1_FILLER;
 	mr_clear_bitmapv();
 
 	// Enable the custom tileset for viewing.
@@ -759,9 +759,9 @@ void show_titles() {
 	// Since we do not need midres, we redefine characters, in order to avoid
 	// side effects in using the drawing primitives.
 	for (i = 0; i < 16; ++i) {
-		RENDERED_MIXELS[0] = TILE_EMPTY;
+		MR_RENDERED_MIXELS[0] = TILE_EMPTY;
 	}
-	RENDERED_MIXELS[15] = TILE_FILLER;
+	MR_RENDERED_MIXELS[15] = TILE_FILLER;
 	mr_clear_bitmapv();
 
 	// Enable the custom tileset for viewing.
