@@ -164,7 +164,7 @@
 	extern unsigned char RENDERED_MIXELS[16];
 
 	// Screen width
-	extern mr_position WIDTH;
+	extern mr_position MR_WIDTH;
 
 	// Screen height
 	extern mr_position MR_HEIGHT;
