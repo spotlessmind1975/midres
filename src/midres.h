@@ -167,7 +167,7 @@
 	extern mr_position WIDTH;
 
 	// Screen height
-	extern mr_position HEIGHT;
+	extern mr_position MR_HEIGHT;
 
 	// Offset brightness for colors
 	extern mr_color MR_BRIGHTNESS;
