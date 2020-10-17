@@ -172,7 +172,7 @@ void mr_uncompress(mr_screen _source, mr_screen _destination) {
     int i;
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
         destination[i] = RENDERED_MIXELS[mr_unpack_pmixel_lo(source[i])];
-        destinationColor[i] = mr_unpack_pmixel_hi(source[i]) + BRIGHTNESS;
+        destinationColor[i] = mr_unpack_pmixel_hi(source[i]) + MR_BRIGHTNESS;
     }
 
 }

@@ -66,13 +66,13 @@ void mr_pcolorop(mr_color* _screen, mr_position _x, mr_position _y, mr_color _co
     mx = _x >> 1;
     my = _y >> 1;
 
-    _screen[my * WIDTH + mx] = _color + BRIGHTNESS;
+    _screen[my * WIDTH + mx] = _color + MR_BRIGHTNESS;
 
 }
 
 void mr_ink(mr_screen _screen, mr_color _color) {
 
-    SCREEN_INK[_screen] = _color + BRIGHTNESS;
+    SCREEN_INK[_screen] = _color + MR_BRIGHTNESS;
 
 }
 

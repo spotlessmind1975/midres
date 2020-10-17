@@ -170,7 +170,7 @@
 	extern mr_position HEIGHT;
 
 	// Offset brightness for colors
-	extern mr_color BRIGHTNESS;
+	extern mr_color MR_BRIGHTNESS;
 
 	// First screen for double buffering
 	extern mr_screen DB1;

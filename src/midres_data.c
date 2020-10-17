@@ -84,7 +84,7 @@ mr_position WIDTH;
 
 mr_position HEIGHT;
 
-mr_color BRIGHTNESS;
+mr_color MR_BRIGHTNESS;
 
 mr_screen DB1 = MR_SCREEN_DB1;
 
