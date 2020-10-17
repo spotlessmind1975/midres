@@ -60,8 +60,8 @@ void mr_init_base_hd() {
 
     // SET_CHARSET(MR_TILESET_DEFAULT);
 
-    VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
-    ENABLED_SCREEN = MR_SCREEN_DEFAULT;
+    MR_VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
+    MR_ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
 }
 
@@ -103,8 +103,8 @@ void mr_show_hd(unsigned char _screen) {
 
     SET_VIDEO(_screen);
 
-    VISIBLE_SCREEN = _screen;
-    ENABLED_SCREEN = _screen;
+    MR_VISIBLE_SCREEN = _screen;
+    MR_ENABLED_SCREEN = _screen;
 
 }
 

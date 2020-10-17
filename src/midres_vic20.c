@@ -119,8 +119,8 @@ void mr_init_base_hd() {
     SET_VIDEO(MR_SCREEN_DEFAULT);
     SET_BACKGROUND_COLOR(MR_COLOR_BLACK);
 
-    VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
-    ENABLED_SCREEN = MR_SCREEN_DEFAULT;
+    MR_VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
+    MR_ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
         putchar(' ');
@@ -164,8 +164,8 @@ void mr_tile_setcolors_hd(unsigned char _colors[4]) {
 
 void mr_show_hd(unsigned char _screen) {
 
-    VISIBLE_SCREEN = _screen;
-    ENABLED_SCREEN = _screen;
+    MR_VISIBLE_SCREEN = _screen;
+    MR_ENABLED_SCREEN = _screen;
 
     SET_VIDEO(_screen);
 

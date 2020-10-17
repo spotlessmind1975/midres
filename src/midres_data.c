@@ -33,9 +33,9 @@ unsigned char RENDERED_MIXEL_BITS[4] = {
 
 mr_color MR_SCREEN_INK[MR_SCREEN_COUNT];
 
-mr_screen VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
+mr_screen MR_VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
 
-mr_screen ENABLED_SCREEN = MR_SCREEN_DEFAULT;
+mr_screen MR_ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
 mr_mixel get_mixel_bits(mr_mixel _current) {
 

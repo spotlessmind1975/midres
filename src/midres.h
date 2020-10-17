@@ -151,11 +151,11 @@
 	extern mr_color MR_SCREEN_INK[MR_SCREEN_COUNT];
 
 	// Screen visible to the user.
-	extern mr_screen VISIBLE_SCREEN;
+	extern mr_screen MR_VISIBLE_SCREEN;
 
 	// Screen selected for graphic output (for primitives that do not plan 
 	// to give the screen as parameter).
-	extern mr_screen ENABLED_SCREEN;
+	extern mr_screen MR_ENABLED_SCREEN;
 
 	// Precalculated values for positions.
 	extern unsigned char RENDERED_MIXEL_BITS[4];
@@ -173,10 +173,10 @@
 	extern mr_color MR_BRIGHTNESS;
 
 	// First screen for double buffering
-	extern mr_screen DB1;
+	extern mr_screen MR_DB1;
 
 	// Second screen for double buffering
-	extern mr_screen DB2;
+	extern mr_screen MR_DB2;
 
 	// Flag to know if we are in single or multicolor mode
 	extern mr_boolean MR_MULTICOLOR;
@@ -297,86 +297,86 @@
 	 -----------------------------------------------------------------------*/
 
 	// Clear the given screen.
-	#define mr_clearv() mr_clear(VISIBLE_SCREEN);
+	#define mr_clearv() mr_clear(MR_VISIBLE_SCREEN);
 
 	// Show and enable the given screen for graphical operations.
 	// void mr_showv(mr_screen _screen);
 
 	// Enable the screen for graphical operations.
-	#define mr_enablev() mr_enable(VISIBLE_SCREEN);
+	#define mr_enablev() mr_enable(MR_VISIBLE_SCREEN);
 
 	// Load a (luminance) screen from a file to a specific screen
-	#define mr_loadv(_filename) mr_load(_filename, VISIBLE_SCREEN);
+	#define mr_loadv(_filename) mr_load(_filename, MR_VISIBLE_SCREEN);
 
 	// Load a (luminance) screen from a file to a specific screen
-	#define mr_load_screenv(_file) mr_load_screen(_file, VISIBLE_SCREEN);
+	#define mr_load_screenv(_file) mr_load_screen(_file, MR_VISIBLE_SCREEN);
 
 	// Save a specific (luminance) screen to a file
-	#define mr_savev(_filename) mr_save(_filename, VISIBLE_SCREEN);
+	#define mr_savev(_filename) mr_save(_filename, MR_VISIBLE_SCREEN);
 
 	// Load a (color) screen from a file to a specific screen
-	#define mr_load_colorv(_filename) mr_load_color(_filename, VISIBLE_SCREEN);
+	#define mr_load_colorv(_filename) mr_load_color(_filename, MR_VISIBLE_SCREEN);
 
 	// Load a (color) screen from a file to a specific screen
-	#define mr_load_screen_colorv(_file) mr_load_screen_color(_file, VISIBLE_SCREEN);
+	#define mr_load_screen_colorv(_file) mr_load_screen_color(_file, MR_VISIBLE_SCREEN);
 
 	// Save a specific (color) screen to a file
-	#define mr_save_colorv(_filename) mr_save_color(_filename, VISIBLE_SCREEN);
+	#define mr_save_colorv(_filename) mr_save_color(_filename, MR_VISIBLE_SCREEN);
 
 	// Compress luminance and color in a single mixel screen
-	#define mr_compressv(_destination) mr_compress(VISIBLE_SCREEN, _destination);
+	#define mr_compressv(_destination) mr_compress(MR_VISIBLE_SCREEN, _destination);
 
 	// Uncompress luminance and color from a single mixel screen
-	#define mr_uncompressv(_source) mr_uncompress(_source, VISIBLE_SCREEN);
+	#define mr_uncompressv(_source) mr_uncompress(_source, MR_VISIBLE_SCREEN);
 
 	// Pack luminance in an half screen
-	#define mr_packv(_destination, _half_screen) mr_pack(VISIBLE_SCREEN, _destination, _half_screen);
+	#define mr_packv(_destination, _half_screen) mr_pack(MR_VISIBLE_SCREEN, _destination, _half_screen);
 
 	// Unpack luminance in an half screen
-	#define mr_unpackv(_source, _half_screen) mr_unpack(_source, VISIBLE_SCREEN, _half_screen);
+	#define mr_unpackv(_source, _half_screen) mr_unpack(_source, MR_VISIBLE_SCREEN, _half_screen);
 
 	/*-----------------------------------------------------------------------
 	 --- SCREEN MANAGEMENT (implicit [enabled screen])
 	 -----------------------------------------------------------------------*/
 
 	 // Clear the given screen.
-	#define mr_cleare() mr_clear(ENABLED_SCREEN);
+	#define mr_cleare() mr_clear(MR_ENABLED_SCREEN);
 
 	// Show and enable the given screen for graphical operations.
-	#define mr_showe() mr_show(ENABLED_SCREEN);
+	#define mr_showe() mr_show(MR_ENABLED_SCREEN);
 
 	// Enable the screen for graphical operations.
-	// #define mr_enablev() mr_enable(ENABLED_SCREEN);
+	// #define mr_enablev() mr_enable(MR_ENABLED_SCREEN);
 
 	// Load a (luminance) screen from a file to a specific screen
-	#define mr_loade(_filename) mr_load(_filename, ENABLED_SCREEN);
+	#define mr_loade(_filename) mr_load(_filename, MR_ENABLED_SCREEN);
 
 	// Load a (luminance) screen from a file to a specific screen
-	#define mr_load_screene(_file) mr_load_screen(_file, ENABLED_SCREEN);
+	#define mr_load_screene(_file) mr_load_screen(_file, MR_ENABLED_SCREEN);
 
 	// Save a specific (luminance) screen to a file
-	#define mr_savee(_filename) mr_save(_filename, ENABLED_SCREEN);
+	#define mr_savee(_filename) mr_save(_filename, MR_ENABLED_SCREEN);
 
 	// Load a (luminance) screen from a file to a specific screen
-	#define mr_load_screen_colore(_file) mr_load_color(_file, ENABLED_SCREEN);
+	#define mr_load_screen_colore(_file) mr_load_color(_file, MR_ENABLED_SCREEN);
 
 	// Load a (color) screen from a file to a specific screen
-	#define mr_load_colore(_filename) mr_load_color(_filename, ENABLED_SCREEN);
+	#define mr_load_colore(_filename) mr_load_color(_filename, MR_ENABLED_SCREEN);
 
 	// Save a specific (color) screen to a file
-	#define mr_save_colore(_filename) mr_save_color(_filename, ENABLED_SCREEN);
+	#define mr_save_colore(_filename) mr_save_color(_filename, MR_ENABLED_SCREEN);
 
 	// Compress luminance and color in a single mixel screen
-	#define mr_compresse(_destination) mr_compress(ENABLED_SCREEN, _destination);
+	#define mr_compresse(_destination) mr_compress(MR_ENABLED_SCREEN, _destination);
 
 	// Uncompress luminance and color from a single mixel screen
-	#define mr_uncompresse(_source) mr_uncompress(_source, ENABLED_SCREEN);
+	#define mr_uncompresse(_source) mr_uncompress(_source, MR_ENABLED_SCREEN);
 
 	// Pack luminance in an half screen
-	#define mr_packe(_destination, _half_screen) mr_pack(ENABLED_SCREEN, _destination, _half_screen);
+	#define mr_packe(_destination, _half_screen) mr_pack(MR_ENABLED_SCREEN, _destination, _half_screen);
 
 	// Unpack luminance in an half screen
-	#define mr_unpacke(_source, _half_screen) mr_unpack(_source, ENABLED_SCREEN, _half_screen);
+	#define mr_unpacke(_source, _half_screen) mr_unpack(_source, MR_ENABLED_SCREEN, _half_screen);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES [v1.0]
@@ -415,44 +415,44 @@
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the visible screen
-	#define mr_psetv(_x, _y) mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_on);
+	#define mr_psetv(_x, _y) mr_psetop(SM(MR_VISIBLE_SCREEN), _x, _y, mr_pixel_on);
 
 	// Clear a pixel on the visible screen
-	#define mr_pclearv(_x, _y) mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_off);
+	#define mr_pclearv(_x, _y) mr_psetop(SM(MR_VISIBLE_SCREEN), _x, _y, mr_pixel_off);
 
 	// Invert a pixel on the visible screen
-	#define mr_pinvertv(_x, _y) mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_invert);
+	#define mr_pinvertv(_x, _y) mr_psetop(SM(MR_VISIBLE_SCREEN), _x, _y, mr_pixel_invert);
 
 	// Color a pixel on the visible screen
-	#define mr_pcolorv(_x, _y, _color) mr_pcolorop(CM(VISIBLE_SCREEN), _x, _y, _color);
+	#define mr_pcolorv(_x, _y, _color) mr_pcolorop(CM(MR_VISIBLE_SCREEN), _x, _y, _color);
 
 	// Draw and color a pixel on the visible screen
-	#define mr_psetcv(_x, _y) mr_pcolorop(CM(VISIBLE_SCREEN), _x, _y, SCREEN_INK[VISIBLE_SCREEN]); mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_on);
+	#define mr_psetcv(_x, _y) mr_pcolorop(CM(MR_VISIBLE_SCREEN), _x, _y, SCREEN_INK[MR_VISIBLE_SCREEN]); mr_psetop(SM(MR_VISIBLE_SCREEN), _x, _y, mr_pixel_on);
 
 	// Draw a box on the visible screen, with the given logical operation.
-	#define mr_boxv(_x0, _y0, _x1, _y1) mr_boxop(SM(ENABLED_SCREEN), _x0, _y0, _x1, _y1);
+	#define mr_boxv(_x0, _y0, _x1, _y1) mr_boxop(SM(MR_ENABLED_SCREEN), _x0, _y0, _x1, _y1);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING DERIVATED (IMPLICIT SCREEN [ENABLED]) [v1.0]
 	 -----------------------------------------------------------------------*/
 
 	 // Draw a pixel on the enabled screen
-	#define mr_psete(_x, _y) mr_psetop(SM(ENABLED_SCREEN), _x, _y, mr_pixel_on);
+	#define mr_psete(_x, _y) mr_psetop(SM(MR_ENABLED_SCREEN), _x, _y, mr_pixel_on);
 
 	// Clear a pixel on the enabled screen
-	#define mr_pcleare(_x, _y) mr_psetop(SM(ENABLED_SCREEN), _x, _y, mr_pixel_off);
+	#define mr_pcleare(_x, _y) mr_psetop(SM(MR_ENABLED_SCREEN), _x, _y, mr_pixel_off);
 
 	// Invert a pixel on the enabled screen
-	#define mr_pinverte(_x, _y) mr_psetop(SM(ENABLED_SCREEN), _x, _y, mr_pixel_invert);
+	#define mr_pinverte(_x, _y) mr_psetop(SM(MR_ENABLED_SCREEN), _x, _y, mr_pixel_invert);
 
 	// Color a pixel on the enabled screen
-	#define mr_pcolore(_x, _y, _color) mr_pcolorop(CM(ENABLED_SCREEN), _x, _y, _color);
+	#define mr_pcolore(_x, _y, _color) mr_pcolorop(CM(MR_ENABLED_SCREEN), _x, _y, _color);
 	
 	// Draw and color a pixel on the enabled screen
-	#define mr_psetce(_x, _y) mr_pcolorop(CM(ENABLED_SCREEN), _x, _y, SCREEN_INK[ENABLED_SCREEN]); mr_psetop(SM(ENABLED_SCREEN), _x, _y, mr_pixel_on);
+	#define mr_psetce(_x, _y) mr_pcolorop(CM(MR_ENABLED_SCREEN), _x, _y, SCREEN_INK[MR_ENABLED_SCREEN]); mr_psetop(SM(MR_ENABLED_SCREEN), _x, _y, mr_pixel_on);
 
 	// Draw a box on the enabled screen, with the given logical operation.
-	#define mr_boxe(_x0, _y0, _x1, _y1) mr_boxop(SM(ENABLED_SCREEN), _x0, _y0, _x1, _y1);
+	#define mr_boxe(_x0, _y0, _x1, _y1) mr_boxop(SM(MR_ENABLED_SCREEN), _x0, _y0, _x1, _y1);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES [v1.1]
@@ -551,43 +551,43 @@
 	 -----------------------------------------------------------------------*/
 
 	 // Clears the bitmap to color BLACK.
-	#define mr_clear_bitmapv() _mr_clear_bitmap(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN) );
+	#define mr_clear_bitmapv() _mr_clear_bitmap(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN) );
 
 	// Clears the bitmap to the specified color.
-	#define mr_clear_to_colorv(_color) _mr_clear_to_color(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _color);
+	#define mr_clear_to_colorv(_color) _mr_clear_to_color(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _color);
 
 	// Writes a pixel into a bitmap.
-	#define mr_putpixelv(_x, _y, _color) _mr_putpixel(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _color );
+	#define mr_putpixelv(_x, _y, _color) _mr_putpixel(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _color );
 
 	// Clear a pixel into a bitmap.
-	#define mr_clearpixelv(_screen, _x, _y) _mr_clearpixel(SM(VISIBLE_SCREEN), _x, _y );
+	#define mr_clearpixelv(_screen, _x, _y) _mr_clearpixel(SM(MR_VISIBLE_SCREEN), _x, _y );
 
 	// Reads a pixel from a bitmap.
-	#define mr_getpixelv(_x, _y) _mr_getpixel(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y) ;
+	#define mr_getpixelv(_x, _y) _mr_getpixel(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y) ;
 
 	// Draws a vertical line onto the bitmap.
-	#define mr_vlinev(_x, _y1, _y2, _color) _mr_vline(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y1, _y2, _color);
+	#define mr_vlinev(_x, _y1, _y2, _color) _mr_vline(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y1, _y2, _color);
 
 	// Draws a horizontal line onto the bitmap.
-	#define mr_hlinev(_x1, _x2, _y, _color) _mr_hline(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _x2, _y, _color);
+	#define mr_hlinev(_x1, _x2, _y, _color) _mr_hline(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x1, _x2, _y, _color);
 
 	// Draws a line onto the bitmap.
-	#define mr_linev(_x1, _y1, _x2, _y2, _color) _mr_line(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
+	#define mr_linev(_x1, _y1, _x2, _y2, _color) _mr_line(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a triangle.
-	#define mr_trianglev(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle(SM(VISIBLE_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _x3, _y3, _color);
+	#define mr_trianglev(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle(SM(MR_VISIBLE_SCREEN), CM(MR_ENABLED_SCREEN), _x1, _y1, _x2, _y2, _x3, _y3, _color);
 
 	// Draws a polygon.
-	#define mr_polygonv(_vertices, _points, _color) _mr_polygon(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _vertices, _points, _color);
+	#define mr_polygonv(_vertices, _points, _color) _mr_polygon(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _vertices, _points, _color);
 
 	// Draws an outline rectangle.
-	#define mr_rectv(_x1, _y1, _x2, _y2, _color) _mr_rect(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
+	#define mr_rectv(_x1, _y1, _x2, _y2, _color) _mr_rect(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a filled rectangle.
-	#define mr_rectfillv(_screen, _x1, _y1, _x2, _y2, _color) _mr_rectfill(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
+	#define mr_rectfillv(_screen, _x1, _y1, _x2, _y2, _color) _mr_rectfill(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a circle.
-	#define mr_circlev(_screen, _x, _y, _radius, _color) _mr_circle(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _radius, _color);
+	#define mr_circlev(_screen, _x, _y, _radius, _color) _mr_circle(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _radius, _color);
 
 	// Color a filled rectangle.
 	#define mr_colorfillv(_screen, _x1, _y1, _x2, _y2, _color) _mr_colorfill(CM(_screen), _x1, _y1, _x2, _y2, _color);
@@ -597,43 +597,43 @@
 	 -----------------------------------------------------------------------*/
 
 	// Clears the bitmap to color BLACK.
-	#define mr_clear_bitmape() _mr_clear_bitmap(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN) );
+	#define mr_clear_bitmape() _mr_clear_bitmap(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN) );
 
 	// Clears the bitmap to the specified color.
-	#define mr_clear_to_colore(_color) _mr_clear_to_color(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _color);
+	#define mr_clear_to_colore(_color) _mr_clear_to_color(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _color);
 
 	// Writes a pixel into a bitmap.
-	#define mr_putpixele(_x, _y, _color) _mr_putpixel(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _color );
+	#define mr_putpixele(_x, _y, _color) _mr_putpixel(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _color );
 
 	// Clear a pixel into a bitmap.
-	#define mr_clearpixele(_screen, _x, _y) _mr_clearpixel(SM(ENABLED_SCREEN), _x, _y );
+	#define mr_clearpixele(_screen, _x, _y) _mr_clearpixel(SM(MR_ENABLED_SCREEN), _x, _y );
 
 	// Reads a pixel from a bitmap.
-	#define mr_getpixele(_x, _y) _mr_getpixel(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y) ;
+	#define mr_getpixele(_x, _y) _mr_getpixel(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y) ;
 
 	// Draws a vertical line onto the bitmap.
-	#define mr_vlinee(_x, _y1, _y2, _color) _mr_vline(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y1, _y2, _color);
+	#define mr_vlinee(_x, _y1, _y2, _color) _mr_vline(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y1, _y2, _color);
 
 	// Draws a horizontal line onto the bitmap.
-	#define mr_hlinee(_x1, _x2, _y, _color) _mr_hline(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _x2, _y, _color);
+	#define mr_hlinee(_x1, _x2, _y, _color) _mr_hline(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x1, _x2, _y, _color);
 
 	// Draws a line onto the bitmap.
-	#define mr_linee(_x1, _y1, _x2, _y2, _color) _mr_line(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
+	#define mr_linee(_x1, _y1, _x2, _y2, _color) _mr_line(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a triangle.
-	#define mr_trianglee(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _x3, _y3, _color);
+	#define mr_trianglee(_x1, _y1, _x2, _y2, _x3, _y3, _color) _mr_triangle(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x1, _y1, _x2, _y2, _x3, _y3, _color);
 
 	// Draws a polygon.
-	#define mr_polygone(_vertices, _points, _color) _mr_polygon(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _vertices, _points, _color);
+	#define mr_polygone(_vertices, _points, _color) _mr_polygon(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _vertices, _points, _color);
 
 	// Draws an outline rectangle.
-	#define mr_recte(_x1, _y1, _x2, _y2, _color) _mr_rect(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
+	#define mr_recte(_x1, _y1, _x2, _y2, _color) _mr_rect(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a filled rectangle.
-	#define mr_rectfille(_screen, _x1, _y1, _x2, _y2, _color) _mr_rectfill(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
+	#define mr_rectfille(_screen, _x1, _y1, _x2, _y2, _color) _mr_rectfill(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	// Draws a circle.
-	#define mr_circlee(_screen, _x, _y, _radius, _color) _mr_circle(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _radius, _color);
+	#define mr_circlee(_screen, _x, _y, _radius, _color) _mr_circle(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _radius, _color);
 
 	// Color a filled rectangle.
 	#define mr_colorfille(_screen, _x1, _y1, _x2, _y2, _color) _mr_colorfill(CM(_screen), _x1, _y1, _x2, _y2, _color);
@@ -663,20 +663,20 @@
 	 -----------------------------------------------------------------------*/
 
 	// Copy a rectangular region from screen to memory
-	#define mr_blit_from_screenv(_xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _xs, _ys, _ws, _hs, MR_SCREEN_WIDTH, SM(_destination), SM(_destination+1), _xd, _yd, MR_SCREEN_WIDTH, _blitop);
+	#define mr_blit_from_screenv(_xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _xs, _ys, _ws, _hs, MR_SCREEN_WIDTH, SM(_destination), SM(_destination+1), _xd, _yd, MR_SCREEN_WIDTH, _blitop);
 
 	// Copy a rectangular region from memory to screen
-	#define mr_blit_to_screenv(_source, _xs, _ys, _ws, _hs, _xd, _yd, _blitop) _mr_copy(SM(_source), SM(_source+1), _xs, _ys, _ws, _hs, MR_SCREEN_WIDTH, SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _xd, _yd, MR_SCREEN_WIDTH, _blitop);
+	#define mr_blit_to_screenv(_source, _xs, _ys, _ws, _hs, _xd, _yd, _blitop) _mr_copy(SM(_source), SM(_source+1), _xs, _ys, _ws, _hs, MR_SCREEN_WIDTH, SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _xd, _yd, MR_SCREEN_WIDTH, _blitop);
 
 	/*-----------------------------------------------------------------------
 	 --- BIT BLITS (implicit screen [visible])
 	 -----------------------------------------------------------------------*/
 
 	// Copy a rectangular region from screen to memory
-	#define mr_blit_from_screene(_xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _xs, _ys, _ws, _hs, MR_SCREEN_WIDTH, SM(_destination), SM(_destination+1), _xd, _yd, MR_SCREEN_WIDTH, _blitop);
+	#define mr_blit_from_screene(_xs, _ys, _ws, _hs, _destination, _xd, _yd, _blitop) _mr_copy(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _xs, _ys, _ws, _hs, MR_SCREEN_WIDTH, SM(_destination), SM(_destination+1), _xd, _yd, MR_SCREEN_WIDTH, _blitop);
 
 	// Copy a rectangular region from memory to screen
-	#define mr_blit_to_screene(_source, _xs, _ys, _ws, _hs, _xd, _yd, _blitop) _mr_copy(SM(_source), SM(_source+1), _xs, _ys, _ws, _hs, MR_SCREEN_WIDTH, SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _xd, _yd, MR_SCREEN_WIDTH, _blitop);
+	#define mr_blit_to_screene(_source, _xs, _ys, _ws, _hs, _xd, _yd, _blitop) _mr_copy(SM(_source), SM(_source+1), _xs, _ys, _ws, _hs, MR_SCREEN_WIDTH, SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _xd, _yd, MR_SCREEN_WIDTH, _blitop);
 
 	/*-----------------------------------------------------------------------
 	 --- TILES
@@ -822,86 +822,86 @@
 	 -----------------------------------------------------------------------*/
 
 	// Writes a tile into a bitmap.
-	#define mr_puttilev(_x, _y, _tile, _color) _mr_puttile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+	#define mr_puttilev(_x, _y, _tile, _color) _mr_puttile(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a set of tiles into a bitmap.
-	#define mr_puttilesv(_x, _y, _tile, _count, _color) _mr_puttiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _count, _color );
+	#define mr_puttilesv(_x, _y, _tile, _count, _color) _mr_puttiles(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _count, _color );
 
 	// Writes a set of tiles into a bitmap.
-	#define mr_putetilesv(_x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
+	#define mr_putetilesv(_x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Writes a set of tiles into a bitmap.
-	#define mr_putftilesv(_x, _y, _tile_start, _w, _h, _color) _mr_putftiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile_start, _w, _h, _color);
+	#define mr_putftilesv(_x, _y, _tile_start, _w, _h, _color) _mr_putftiles(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile_start, _w, _h, _color);
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_horizontalv(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+	#define mr_tile_moveto_horizontalv(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_horizontal_extendedv(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_horizontal_extended(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
+	#define mr_tile_moveto_horizontal_extendedv(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_horizontal_extended(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_verticalv(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+	#define mr_tile_moveto_verticalv(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_vertical_extendedv(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_vertical_extended(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
+	#define mr_tile_moveto_vertical_extendedv(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_vertical_extended(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Clear a tile of a bitmap.
-	#define mr_cleartilev(_x, _y) _mr_cleartile(SM(VISIBLE_SCREEN), _x, _y);
+	#define mr_cleartilev(_x, _y) _mr_cleartile(SM(MR_VISIBLE_SCREEN), _x, _y);
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_puttilehv(_x, _y, _tile, _color) _mr_puttile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+	#define mr_puttilehv(_x, _y, _tile, _color) _mr_puttile(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_puttilevv(_x, _y, _tile, _color) _mr_puttile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y, _tile, _color );
+	#define mr_puttilevv(_x, _y, _tile, _color) _mr_puttile(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y, _tile, _color );
 
 	// Reads a tile from a bitmap.
-	#define mr_gettilev(_x, _y) _mr_gettile(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y)
+	#define mr_gettilev(_x, _y) _mr_gettile(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y)
 
 	// Draws a vertical line of tiles on the bitmap.
-	#define mr_vtilesv(_x, _y1, _y2, _tile, _color) _mr_vtiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x, _y1, _y2, _tile, _color);
+	#define mr_vtilesv(_x, _y1, _y2, _tile, _color) _mr_vtiles(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x, _y1, _y2, _tile, _color);
 
 	// Draws a horizontal line of tiles onto the bitmap.
-	#define mr_htilesv(_x1, _x2, _y, _tile, _color) _mr_htiles(SM(VISIBLE_SCREEN), CM(VISIBLE_SCREEN), _x1, _x2, _y, _tile, _color);
+	#define mr_htilesv(_x1, _x2, _y, _tile, _color) _mr_htiles(SM(MR_VISIBLE_SCREEN), CM(MR_VISIBLE_SCREEN), _x1, _x2, _y, _tile, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- TILES (implicit screen [ENABLED])
 	 -----------------------------------------------------------------------*/
 
 	// Writes a tile into a bitmap.
-	#define mr_puttilee(_x, _y, _tile, _color) _mr_puttile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
+	#define mr_puttilee(_x, _y, _tile, _color) _mr_puttile(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a set of tiles into a bitmap.
-	#define mr_puttilese(_x, _y, _tile, _count, _color) _mr_puttile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _count, _color );
+	#define mr_puttilese(_x, _y, _tile, _count, _color) _mr_puttile(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _tile, _count, _color );
 
 	// Writes a set of tiles into a bitmap.
-	#define mr_putetilese(_x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
+	#define mr_putetilese(_x, _y, _tile, _w, _h, _color) _mr_putetiles(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Writes a set of tiles into a bitmap.
-	#define mr_putftilese(_x, _y, _tile_start, _w, _h, _color) _mr_putftiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
+	#define mr_putftilese(_x, _y, _tile_start, _w, _h, _color) _mr_putftiles(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_horizontale(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
+	#define mr_tile_moveto_horizontale(_x, _y, _tile, _color) _mr_tile_moveto_horizontal(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_horizontal_extendede(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_horizontal(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
+	#define mr_tile_moveto_horizontal_extendede(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_horizontal(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_verticale(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _color );
+	#define mr_tile_moveto_verticale(_x, _y, _tile, _color) _mr_tile_moveto_vertical(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _tile, _color );
 
 	// Writes a tile into a bitmap at *precise* horizontal position.
-	#define mr_tile_moveto_vertical_extendede(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_vertical_extended(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
+	#define mr_tile_moveto_vertical_extendede(_x, _y, _tile, _w, _h, _color) _mr_tile_moveto_vertical_extended(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _tile, _w, _h, _color );
 
 	// Clear a tile of a bitmap.
-	#define mr_cleartilee(_x, _y, _tile) _mr_cleartile(SM(ENABLED_SCREEN), _x, _y);
+	#define mr_cleartilee(_x, _y, _tile) _mr_cleartile(SM(MR_ENABLED_SCREEN), _x, _y);
 
 	// Reads a tile from a bitmap.
-	#define mr_gettilee(_x, _y, _tile, _color) _mr_gettile(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y, _tile )
+	#define mr_gettilee(_x, _y, _tile, _color) _mr_gettile(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y, _tile )
 
 	// Draws a vertical line of tiles on the bitmap.
-	#define mr_vtilese(_x, _y1, _y2, _tile, _color) _mr_vtiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x, _y1, _y2, _tile, _color);
+	#define mr_vtilese(_x, _y1, _y2, _tile, _color) _mr_vtiles(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x, _y1, _y2, _tile, _color);
 
 	// Draws a horizontal line of tiles onto the bitmap.
-	#define mr_htilese(_x1, _x2, _y, _tile, _color) _mr_htiles(SM(ENABLED_SCREEN), CM(ENABLED_SCREEN), _x1, _x2, _y, _tile, _color);
+	#define mr_htilese(_x1, _x2, _y, _tile, _color) _mr_htiles(SM(MR_ENABLED_SCREEN), CM(MR_ENABLED_SCREEN), _x1, _x2, _y, _tile, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- KEYBOARD & OTHER

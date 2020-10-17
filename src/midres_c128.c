@@ -114,8 +114,8 @@ void mr_tile_setcolors_hd(unsigned char _colors[4]) {
 
 void mr_show_hd(unsigned char _screen) {
 
-    VISIBLE_SCREEN = _screen;
-    ENABLED_SCREEN = _screen;
+    MR_VISIBLE_SCREEN = _screen;
+    MR_ENABLED_SCREEN = _screen;
 
     SET_VIDEO(_screen);
     SET_BASIC_VIDEO(_screen);
@@ -137,8 +137,8 @@ void mr_cleanup_hd() {
     SET_BASIC_VIDEO(MR_SCREEN_DEFAULT);
     SET_CHARSET(MR_TILESET_DEFAULT);
 
-    VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
-    ENABLED_SCREEN = MR_SCREEN_DEFAULT;
+    MR_VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
+    MR_ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
 }
 

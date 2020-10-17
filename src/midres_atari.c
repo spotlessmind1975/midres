@@ -115,8 +115,8 @@ void mr_show_hd(unsigned char _screen) {
 
     unsigned char* dlist = (unsigned char*)(*((unsigned char*)(560)) + (*((unsigned char*)(561)) * 256));
 
-    VISIBLE_SCREEN = _screen;
-    ENABLED_SCREEN = _screen;
+    MR_VISIBLE_SCREEN = _screen;
+    MR_ENABLED_SCREEN = _screen;
     
     dlist += 4;
 
