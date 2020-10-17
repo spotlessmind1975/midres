@@ -137,7 +137,7 @@ void demo_bitblit() {
 		if ((x + SPRITE_WIDTH+1) >= WIDTH * 2) {
 			dx = -dx;
 		}
-		if ((y + SPRITE_HEIGHT+1) >= HEIGHT * 2) {
+		if ((y + SPRITE_HEIGHT+1) >= (MR_SCREEN_HEIGHT) * 2) {
 			dy = -dy;
 		}
 		if (x == 0) {

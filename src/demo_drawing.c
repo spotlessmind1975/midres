@@ -26,7 +26,7 @@
 // accessible from all modules, both resident and changing ones.
 
 // Number of buildings to draw in a screen (it depends on width)
-#define BUILDINGS_COUNT         (MR_SCREEN_WIDTH>30?6:3)
+#define BUILDINGS_COUNT         ((MR_SCREEN_WIDTH>30)?6:3)
 
 // Offset from the borders (in mixels)
 #define BUILDINGS_OFFSET        4
@@ -35,16 +35,16 @@
 #define BUILDINGS_HEIGHT        5
 
 // Distance (in mixels) between buildings
-#define BUILDINGS_DISTANCE      ( MR_SCREEN_WIDTH ) / BUILDINGS_COUNT
+#define BUILDINGS_DISTANCE      ( ( (MR_SCREEN_WIDTH * 2) ) / BUILDINGS_COUNT )
 
 // Width of a building (in mixels)
-#define BUILDINGS_WIDTH         BUILDINGS_DISTANCE * 7 / 12
+#define BUILDINGS_WIDTH         ( ( BUILDINGS_DISTANCE * 7 ) / 12 )
 
 // Width and height of a window (in mixels)
 #define BUILDINGS_WINDOW_SIZE   2
 
 // Number of windows on a single building.
-#define BUILDINGS_WINDOWS       ( MR_SCREEN_HEIGHT*2 - BUILDINGS_HEIGHT ) / (BUILDINGS_WINDOW_SIZE*3)
+#define BUILDINGS_WINDOWS       ( (MR_SCREEN_HEIGHT*2) - BUILDINGS_HEIGHT ) / (BUILDINGS_WINDOW_SIZE*3)
 
 // Half a width and the height of a door (in mixels)
 #define BUILDINGS_DOOR_SIZE     2
@@ -66,18 +66,18 @@ void draw_building(mr_position _number) {
     // Each line is as long as the height of the building.
     for (j = 0; j < (BUILDINGS_WIDTH + 1); ++j) {
         mr_vline( MR_SCREEN_DEFAULT, 
-                    BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + j,  BUILDINGS_HEIGHT, 
-                    HEIGHT * 2 - 1, 
+                    BUILDINGS_OFFSET + (_number * BUILDINGS_DISTANCE ) + j,  BUILDINGS_HEIGHT, 
+                    MR_SCREEN_HEIGHT * 2 - 1, 
                     MR_COLOR_CYAN);
     }
 
     // Draw each window.
     for (j = 0; j < BUILDINGS_WINDOWS; ++j) {
         mr_rect(MR_SCREEN_DEFAULT,
-            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE +
+            BUILDINGS_OFFSET + (_number * BUILDINGS_DISTANCE ) +
             BUILDINGS_WINDOW_SIZE + (j & 1) * BUILDINGS_WINDOW_SIZE,
             j * (3 * BUILDINGS_WINDOW_SIZE) + BUILDINGS_HEIGHT + BUILDINGS_WINDOW_SIZE + 1,
-            BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE +
+            BUILDINGS_OFFSET + (_number * BUILDINGS_DISTANCE ) +
             BUILDINGS_WINDOW_SIZE + 1 + (j & 1) * BUILDINGS_WINDOW_SIZE,
             j * (3 * BUILDINGS_WINDOW_SIZE) + BUILDINGS_HEIGHT + BUILDINGS_WINDOW_SIZE + 1,
             MR_COLOR_BLACK);
@@ -85,10 +85,10 @@ void draw_building(mr_position _number) {
 
     // Finally, draw the door.
     mr_rect(MR_SCREEN_DEFAULT,
-        BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_DOOR_SIZE,
-        HEIGHT * 2 - BUILDINGS_DOOR_SIZE,
-        BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + 2 * BUILDINGS_DOOR_SIZE,
-        HEIGHT * 2 - 1,
+        BUILDINGS_OFFSET + (_number * BUILDINGS_DISTANCE ) + BUILDINGS_DOOR_SIZE,
+        MR_SCREENHEIGHT * 2 - BUILDINGS_DOOR_SIZE,
+        BUILDINGS_OFFSET + (_number * BUILDINGS_DISTANCE ) + 2 * BUILDINGS_DOOR_SIZE,
+        MR_SCREEN_HEIGHT * 2 - 1,
         MR_COLOR_BLACK);
 }
 
@@ -100,7 +100,7 @@ void destroy_building(mr_position _number) {
 
     // We destroy the building starting from the top, by drawing
     // an horizontal line that is as long as its width.
-    for (j = BUILDINGS_HEIGHT; j < HEIGHT * 2 - 2 * BUILDINGS_DOOR_SIZE; ++j) {
+    for (j = BUILDINGS_HEIGHT; j < MR_SCREEN_HEIGHT * 2 - 2 * BUILDINGS_DOOR_SIZE; ++j) {
         mr_hline(MR_SCREEN_DEFAULT,
             BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE,
             BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_WIDTH,
@@ -109,7 +109,7 @@ void destroy_building(mr_position _number) {
     }
 
     // The last pixels will be coloured by an index _number based.
-    for (; j < HEIGHT * 2 - 1; ++j) {
+    for (; j < MR_SCREEN_HEIGHT * 2 - 1; ++j) {
         mr_hline(MR_SCREEN_DEFAULT,
             BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE,
             BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_WIDTH,
@@ -120,9 +120,9 @@ void destroy_building(mr_position _number) {
     // Draw the door again, finally.
     mr_rect(MR_SCREEN_DEFAULT,
         BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + BUILDINGS_DOOR_SIZE,
-        HEIGHT * 2 - BUILDINGS_DOOR_SIZE,
+        MR_SCREEN_HEIGHT * 2 - BUILDINGS_DOOR_SIZE,
         BUILDINGS_OFFSET + _number * BUILDINGS_DISTANCE + 2 * BUILDINGS_DOOR_SIZE,
-        HEIGHT * 2 - 1,
+        MR_SCREEN_HEIGHT * 2 - 1,
         MR_COLOR_BLACK);
 }
 
