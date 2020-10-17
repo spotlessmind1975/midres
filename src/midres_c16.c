@@ -121,7 +121,7 @@ void mr_wait_vbl() {
 }
 
 void mr_doublebuffer_switch_hd(unsigned char _screen) {
-    unsigned char _other = (_screen == DB1) ? DB2 : DB1;
+    unsigned char _other = (_screen == MR_DB1) ? MR_DB2 : MR_DB1;
 
     memcpy(SM(_screen), SM(_other), MR_SCREEN_RAM_SIZE>>1);
     memcpy(CM(_screen), CM(_other), MR_SCREEN_RAM_SIZE>>1);

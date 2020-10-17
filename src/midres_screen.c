@@ -82,8 +82,8 @@ void mr_enable(mr_screen _screen) {
 
 // Setup the double buffer (using screens SCREEN_DB1 and SCREEN_DB2)
 void mr_doublebuffer_init() {
-    VISIBLE_SCREEN = DB1;
-    ENABLED_SCREEN = DB2;
+    VISIBLE_SCREEN = MR_DB1;
+    ENABLED_SCREEN = MR_DB2;
 }
 
 // Switch double buffering
@@ -91,15 +91,15 @@ void mr_doublebuffer_switch() {
     
     mr_wait_vbl();
 
-    if (VISIBLE_SCREEN == DB1) {
-        mr_show(DB2);
-        mr_doublebuffer_switch_hd(DB1);
-        mr_enable(DB1);
+    if (VISIBLE_SCREEN == MR_DB1) {
+        mr_show(MR_DB2);
+        mr_doublebuffer_switch_hd(MR_DB1);
+        mr_enable(MR_DB1);
     }
     else {
-        mr_show(DB1);
-        mr_doublebuffer_switch_hd(DB2);
-        mr_enable(DB2);
+        mr_show(MR_DB1);
+        mr_doublebuffer_switch_hd(MR_DB2);
+        mr_enable(MR_DB2);
     }
 }
 
