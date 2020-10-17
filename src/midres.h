@@ -429,6 +429,9 @@
 	// Draw and color a pixel on the visible screen
 	#define mr_psetcv(_x, _y) mr_pcolorop(CM(VISIBLE_SCREEN), _x, _y, SCREEN_INK[VISIBLE_SCREEN]); mr_psetop(SM(VISIBLE_SCREEN), _x, _y, mr_pixel_on);
 
+	// Draw a box on the visible screen, with the given logical operation.
+	#define mr_boxv(_x0, _y0, _x1, _y1) mr_boxop(SM(ENABLED_SCREEN), _x0, _y0, _x1, _y1);
+
 	/*-----------------------------------------------------------------------
 	 --- DRAWING DERIVATED (IMPLICIT SCREEN [ENABLED]) [v1.0]
 	 -----------------------------------------------------------------------*/
