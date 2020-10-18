@@ -631,7 +631,7 @@ mr_color _mr_gettile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_
 
     _colormap = 0;
 
-    return READ_TILE( _screen, offset );
+    return MR_READ_TILE( _screen, offset );
 
 }
 
