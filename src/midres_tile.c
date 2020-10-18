@@ -459,7 +459,7 @@ void _mr_puttile_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _
 
     offset = _y * MR_SCREEN_WIDTH + _x;
 
-    WRITE_TILE(_screen, _colormap, offset, _tile, _color);
+    MR_WRITE_TILE(_screen, _colormap, offset, _tile, _color);
 
 }
 
@@ -484,11 +484,11 @@ void _mr_tile_moveto_horizontal_monocolor(mr_mixel* _screen, mr_color* _colormap
     offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
 
     if (_x >= 0 && ((_x >> 3)) < MR_SCREEN_WIDTH) {
-        WRITE_TILE(_screen, _colormap, offset, _tile + (_x & 0x07), _color);
+        MR_WRITE_TILE(_screen, _colormap, offset, _tile + (_x & 0x07), _color);
     }
 
     if ((_x+8) >= 0  && ((_x >> 3) + 1) < MR_SCREEN_WIDTH) {
-        WRITE_TILE(_screen, _colormap, offset + 1, _tile + (_x & 0x07) + 8, _color);
+        MR_WRITE_TILE(_screen, _colormap, offset + 1, _tile + (_x & 0x07) + 8, _color);
     }
 }
 
@@ -518,7 +518,7 @@ void _mr_tile_moveto_horizontal_extended_monocolor(mr_mixel* _screen, mr_color* 
         for (j = 0; j < _w+1; ++j) {
             if (((_x >> 3) + j) >= 0) {
                 if (((_x >> 3) + j) < MR_SCREEN_WIDTH) {
-                    WRITE_TILE(_screen, _colormap, offset, _tile + (_x & 0x07), _color);
+                    MR_WRITE_TILE(_screen, _colormap, offset, _tile + (_x & 0x07), _color);
                 }
             }
             ++offset;
@@ -557,7 +557,7 @@ void _mr_tile_moveto_vertical_monocolor(mr_mixel* _screen, mr_color* _colormap, 
     _screen[offset] = _tile + (_y & 0x07) + 1;
     _colormap[offset] = _color;
     if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
-        WRITE_TILE(_screen, _colormap, offset + MR_SCREEN_WIDTH, _tile + (_y & 0x07) + 10, _color);
+        MR_WRITE_TILE(_screen, _colormap, offset + MR_SCREEN_WIDTH, _tile + (_y & 0x07) + 10, _color);
     }
 
 }
@@ -587,7 +587,7 @@ void _mr_tile_moveto_vertical_extended_monocolor(mr_mixel* _screen, mr_color* _c
     for (j = 0; j < _w; ++j) {
         for (i = 0; i <= _h; ++i) {
             if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
-                WRITE_TILE(_screen, _colormap, offset, _tile + (_y & 0x07), _color);
+                MR_WRITE_TILE(_screen, _colormap, offset, _tile + (_y & 0x07), _color);
             }
             offset += MR_SCREEN_WIDTH;
             _tile += 9;
@@ -684,7 +684,7 @@ void _mr_putetiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position
     for (; _h != 0; --_h) {
         mr_position w = _w;
         for (; w != 0; --w, ++_tile_start) {
-            WRITE_TILE(_screen, _colormap, offset, _tile_start, _color);
+            MR_WRITE_TILE(_screen, _colormap, offset, _tile_start, _color);
             ++offset;
         }
         offset += MR_SCREEN_WIDTH - _w;
@@ -715,7 +715,7 @@ void _mr_putftiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position
     for (; _h != 0; --_h) {
         mr_position w = _w;
         for (; w != 0; --w) {
-            WRITE_TILE(_screen, _colormap, offset, _tile_start, _color);
+            MR_WRITE_TILE(_screen, _colormap, offset, _tile_start, _color);
             ++offset;
         }
         offset += MR_SCREEN_WIDTH - _w;
@@ -743,7 +743,7 @@ void _mr_puttiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position 
     offset = _y * MR_SCREEN_WIDTH + _x;
 
     for (; _tile_count != 0; --_tile_count, ++_tile_start) {
-        WRITE_TILE(_screen, _colormap, offset, _tile_start, _color);
+        MR_WRITE_TILE(_screen, _colormap, offset, _tile_start, _color);
         ++offset;
     }
 
@@ -769,7 +769,7 @@ void _mr_vtiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x
     int offset = _y1 * MR_SCREEN_WIDTH + _x;
 
     for (; y1 <= _y2; ++y1) {
-        WRITE_TILE(_screen, _colormap, offset, _tile, _color);
+        MR_WRITE_TILE(_screen, _colormap, offset, _tile, _color);
         offset += MR_SCREEN_WIDTH;
     }
 
@@ -795,7 +795,7 @@ void _mr_htiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x
     int offset = _y * MR_SCREEN_WIDTH + x1;
 
     for (; x1 <= _x2; ++x1 ) {
-        WRITE_TILE(_screen, _colormap, offset, _tile, _color);
+        MR_WRITE_TILE(_screen, _colormap, offset, _tile, _color);
         ++offset;
     }
 

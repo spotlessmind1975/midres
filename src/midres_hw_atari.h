@@ -157,7 +157,7 @@ extern mr_mixel* screenRam;
 #define MR_AM(_screen)						((mr_mixel*)((0x0400*(_screen))))
 #define MR_TM(_tileset)					((mr_mixel*)((0x0400*(_tileset))))
 
-#define WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
+#define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
 		_screen[(_offset)] = (_tile); \
 		_colormap[(offset)] = (_color);
 
