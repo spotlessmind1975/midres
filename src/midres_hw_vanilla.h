@@ -72,7 +72,7 @@
 
 #define SM(_screen)						((mr_mixel*)((0x0000*(_screen))))
 #define CM(_screen)						((mr_color*)((0x0000*(_screen))))
-#define AM(_screen)						((mr_mixel*)((0x0000*(_screen))))
+#define MR_AM(_screen)						((mr_mixel*)((0x0000*(_screen))))
 #define TM(_tileset)					((mr_mixel*)((0x0000*(_tileset))))
 
 // #define MIDRES_STANDALONE					1
