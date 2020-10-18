@@ -75,7 +75,7 @@
 #define MR_TILE_COLOR2					3
 
 #define SM(_screen)						((mr_mixel*)((0xbb80)))
-#define CM(_screen)						((mr_color*)((0x9800)))
+#define MR_CM(_screen)						((mr_color*)((0x9800)))
 #define MR_AM(_screen)						((mr_mixel*)((0x9c00)))
 #define TM(_tileset)					((mr_mixel*)((0xb400)))
 

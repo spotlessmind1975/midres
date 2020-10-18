@@ -57,7 +57,7 @@ void mr_clear(mr_screen _screen) {
 
     int i;
     mr_mixel* screen = SM(_screen);
-    mr_color* color = CM(_screen);
+    mr_color* color = MR_CM(_screen);
 
     for (i = 0; i < MR_SCREEN_HEIGHT * MR_SCREEN_WIDTH; ++i) {
         screen[i] = MR_RENDERED_MIXELS[0];
@@ -140,14 +140,14 @@ unsigned char mr_load_color(char* _filename, mr_screen _screen) {
     if (f == NULL) {
         return 0;
     }
-    fread(CM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT, 1, f);
+    fread(MR_CM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT, 1, f);
     fclose(f);
     return 1;
 
 #elif __CBM__
 
     _screen = 0;
-    return cbm_load(_filename, getcurrentdevice(), CM(_screen));
+    return cbm_load(_filename, getcurrentdevice(), MR_CM(_screen));
 
 #endif
 
@@ -156,7 +156,7 @@ unsigned char mr_load_color(char* _filename, mr_screen _screen) {
 #ifdef MIDRES_STANDALONE_FILE
 
 unsigned char mr_load_screen_color(mr_file _index, mr_screen _screen) {
-    mr_read_file(_index, CM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    mr_read_file(_index, MR_CM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
     _screen=0;
     return 0;
 }
@@ -167,7 +167,7 @@ void mr_uncompress(mr_screen _source, mr_screen _destination) {
 
     mr_mixel* source = SM(_source);
     mr_mixel* destination = SM(_destination);
-    mr_color* destinationColor = CM(_destination);
+    mr_color* destinationColor = MR_CM(_destination);
 
     int i;
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {

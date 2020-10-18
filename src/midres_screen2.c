@@ -81,14 +81,14 @@ unsigned char mr_save_color(char* _filename, mr_screen _screen) {
     if (f == NULL) {
         return 0;
     }
-    fwrite(CM(_screen), (unsigned)MR_SCREEN_RAM_SIZE, 1, f);
+    fwrite(MR_CM(_screen), (unsigned)MR_SCREEN_RAM_SIZE, 1, f);
     fclose(f);
     return 1;
 
 #elif __CBM__
 
     _screen = 0;
-    return cbm_save(_filename, getcurrentdevice(), CM(_screen), MR_SCREEN_RAM_SIZE);
+    return cbm_save(_filename, getcurrentdevice(), MR_CM(_screen), MR_SCREEN_RAM_SIZE);
 
 #endif
 
@@ -98,7 +98,7 @@ void mr_compress(mr_screen _source, mr_screen _destination) {
 
     mr_mixel* source = SM(_source);
     mr_mixel* destination = SM(_destination);
-    mr_color* sourceColor = CM(_source);
+    mr_color* sourceColor = MR_CM(_source);
 
     int i;
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
