@@ -60,13 +60,13 @@ unsigned char mr_save(char* _filename, mr_screen _screen) {
     if (f == NULL) {
         return 0;
     }
-    fwrite(SM(_screen), (unsigned)MR_SCREEN_RAM_SIZE, 1, f);
+    fwrite(MR_SM(_screen), (unsigned)MR_SCREEN_RAM_SIZE, 1, f);
     fclose(f);
     return 1;
 
 #elif __CBM__
 
-    return cbm_save(_filename, getcurrentdevice(), SM(_screen), MR_SCREEN_RAM_SIZE);
+    return cbm_save(_filename, getcurrentdevice(), MR_SM(_screen), MR_SCREEN_RAM_SIZE);
 
 #endif
 
@@ -96,8 +96,8 @@ unsigned char mr_save_color(char* _filename, mr_screen _screen) {
 
 void mr_compress(mr_screen _source, mr_screen _destination) {
 
-    mr_mixel* source = SM(_source);
-    mr_mixel* destination = SM(_destination);
+    mr_mixel* source = MR_SM(_source);
+    mr_mixel* destination = MR_SM(_destination);
     mr_color* sourceColor = MR_CM(_source);
 
     int i;
@@ -110,8 +110,8 @@ void mr_compress(mr_screen _source, mr_screen _destination) {
 void mr_pack(mr_screen _source, mr_screen _destination, mr_half_screen _half_screen) {
 
     int i;
-    mr_mixel* source = SM(_source);
-    mr_mixel* destination = SM(_destination);
+    mr_mixel* source = MR_SM(_source);
+    mr_mixel* destination = MR_SM(_destination);
 
     if (_half_screen == mr_half_up) {
         destination += MR_SCREEN_RAM_SIZE >> 1;

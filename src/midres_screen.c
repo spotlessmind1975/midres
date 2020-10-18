@@ -56,7 +56,7 @@
 void mr_clear(mr_screen _screen) {
 
     int i;
-    mr_mixel* screen = SM(_screen);
+    mr_mixel* screen = MR_SM(_screen);
     mr_color* color = MR_CM(_screen);
 
     for (i = 0; i < MR_SCREEN_HEIGHT * MR_SCREEN_WIDTH; ++i) {
@@ -111,13 +111,13 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
     if (f == NULL) {
         return 0;
     }
-    fread(SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT, 1, f);
+    fread(MR_SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT, 1, f);
     fclose(f);
     return 1;
 
 #elif __CBM__
 
-    return cbm_load(_filename, getcurrentdevice(), SM(_screen));
+    return cbm_load(_filename, getcurrentdevice(), MR_SM(_screen));
 
 #endif
 
@@ -126,7 +126,7 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
 #ifdef MIDRES_STANDALONE_FILE
 
 unsigned char mr_load_screen(mr_file _index, mr_screen _screen) {
-    mr_read_file(_index, SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    mr_read_file(_index, MR_SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
     return 0;
 }
 
@@ -165,8 +165,8 @@ unsigned char mr_load_screen_color(mr_file _index, mr_screen _screen) {
 
 void mr_uncompress(mr_screen _source, mr_screen _destination) {
 
-    mr_mixel* source = SM(_source);
-    mr_mixel* destination = SM(_destination);
+    mr_mixel* source = MR_SM(_source);
+    mr_mixel* destination = MR_SM(_destination);
     mr_color* destinationColor = MR_CM(_destination);
 
     int i;
@@ -180,8 +180,8 @@ void mr_uncompress(mr_screen _source, mr_screen _destination) {
 void mr_unpack(mr_screen _source, mr_screen _destination, mr_half_screen _half_screen) {
 
     int i;
-    mr_mixel* source = SM(_source);
-    mr_mixel* destination = SM(_destination);
+    mr_mixel* source = MR_SM(_source);
+    mr_mixel* destination = MR_SM(_destination);
 
     if (_half_screen == mr_half_up) {
         source += (MR_SCREEN_RAM_SIZE >> 1);

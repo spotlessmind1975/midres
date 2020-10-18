@@ -46,7 +46,7 @@
     *((unsigned char*)0xd018) = ((*((unsigned char*)0xd018))& 0x0f) | (_video << 4);
 
 #define SET_BASIC_VIDEO( _video ) \
-    *((unsigned char*)0x0288) = ( (int)(SM(_video)) >> 8 ) & 0xff;
+    *((unsigned char*)0x0288) = ( (int)(MR_SM(_video)) >> 8 ) & 0xff;
 
 #define SET_CHARSET( _tileset ) \
     *((unsigned char*)0xd018) = (*((unsigned char*)0xd018) & 0xf1) | (( _tileset & 0x07 )<<1);
@@ -62,7 +62,7 @@ void mr_init_base_hd() {
     int i;
     unsigned char* dst = (unsigned char* )0x8c00, * src = (unsigned char*)0xd800;
 
-    memset(SM(MR_SCREEN_DEFAULT), 32, 0x400);
+    memset(MR_SM(MR_SCREEN_DEFAULT), 32, 0x400);
 
     SET_DATA_DIRECTION();
     SET_BANK(2);
@@ -150,7 +150,7 @@ void mr_wait_vbl() {
 void mr_doublebuffer_switch_hd(unsigned char _screen) {
     unsigned char _other = (_screen == MR_DB1) ? MR_DB2 : MR_DB1;
 
-    memcpy(SM(_screen), SM(_other), 0x400);
+    memcpy(MR_SM(_screen), MR_SM(_other), 0x400);
 }
 
 void mr_tileset_visible_hd(unsigned char _tileset) {

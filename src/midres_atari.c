@@ -120,9 +120,9 @@ void mr_show_hd(unsigned char _screen) {
     
     dlist += 4;
 
-    /* *(dlist) = ( (int)(SM(_screen)) & 0xff );
+    /* *(dlist) = ( (int)(MR_SM(_screen)) & 0xff );
     ++dlist;
-    *(dlist) = ( ( (int)(SM(_screen)) >> 8 ) & 0xff );*/
+    *(dlist) = ( ( (int)(MR_SM(_screen)) >> 8 ) & 0xff );*/
 
 }
 
@@ -137,7 +137,7 @@ void mr_wait_vbl() {
 void mr_doublebuffer_switch_hd(unsigned char _screen) {
     unsigned char _other = (_screen == MR_DB1) ? MR_DB2 : MR_DB1;
 
-    memcpy(SM(_screen), SM(_other), 0x400);
+    memcpy(MR_SM(_screen), MR_SM(_other), 0x400);
 }
 
 void mr_tileset_visible_hd(unsigned char _tileset) {
