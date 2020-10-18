@@ -62,8 +62,8 @@ void mr_tileset_visible(mr_tileset _tileset) {
 // Copy a tileset over another.
 void mr_tileset_copy(mr_tileset _source, mr_tileset _destination) {
     mr_position w = 255, b = 0;
-    mr_mixel* source = TM(_source);
-    mr_mixel* destination = TM(_destination);
+    mr_mixel* source = MR_TM(_source);
+    mr_mixel* destination = MR_TM(_destination);
     for (--w; w != 255; --w) {
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             *destination = *source;
@@ -74,7 +74,7 @@ void mr_tileset_copy(mr_tileset _source, mr_tileset _destination) {
 // Downgrade a tileset from multicolor to monocolor.
 void mr_tileset_multicolor_to_monocolor(mr_tileset _source, mr_position _starting, mr_position _count) {
     mr_position w = _count, b = 0;
-    mr_mixel* source = TM(_source)+_starting*8;
+    mr_mixel* source = MR_TM(_source)+_starting*8;
     for (--w; w != 255; --w) {
         for (b = 0; b < 8; ++b, ++source) {
             *source = (*source) | (*source >> 1);
@@ -84,7 +84,7 @@ void mr_tileset_multicolor_to_monocolor(mr_tileset _source, mr_position _startin
 
 // Redefine a tile using the given data.
 void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
-    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _tile*8);
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _tile*8);
     mr_position b = 0;
     for (b = 0; b < 8; ++b, ++destination, ++_data) {
         *destination = *_data;
@@ -93,8 +93,8 @@ void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
 
 // Redefine a subset of N tiles by "shifting" horizontally a tile
 void mr_tile_prepare_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
-    mr_mixel* source = (mr_mixel*)(TM(_tileset) + _source*8);
-    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+    mr_mixel* source = (mr_mixel*)(MR_TM(_tileset) + _source*8);
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
     
@@ -134,8 +134,8 @@ void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _d
 
 // Redefine a subset of N tiles by "shifting" horizontally a tile
 void mr_tile_prepare_horizontal_extended_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
-    mr_mixel* source = (mr_mixel*)(TM(_tileset) + _source * 8);
-    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+    mr_mixel* source = (mr_mixel*)(MR_TM(_tileset) + _source * 8);
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
@@ -191,8 +191,8 @@ void mr_tile_prepare_horizontal_extended(mr_tileset _tileset, mr_tile _source, m
 
 // Redefine a subset of N tiles by "shifting" vertically a tile
 void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
-    mr_tile* source = (mr_tile*)(TM(_tileset) + _source*8);
-    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
+    mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source*8);
+    mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
@@ -219,8 +219,8 @@ void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _des
 
 // Redefine a subset of N tiles by "shifting" vertically a tile
 void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination) {
-    mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
-    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
+    mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
     int i, b;
     int w = _w, k = 0;
@@ -264,8 +264,8 @@ void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_
 
 // Redefine a subset of N tiles by "rolling" horizontally a tile
 void mr_tile_prepare_roll_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
-    mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
-    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
+    mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
@@ -304,8 +304,8 @@ void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _destination, mr_direc
     mr_position i, b;
 
     if (_direction == mr_direction_right) {
-        source = (mr_mixel*)(TM(_tileset) + (_destination + 1) * 8);
-        destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+        source = (mr_mixel*)(MR_TM(_tileset) + (_destination + 1) * 8);
+        destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
         for (b = 0; b < 8; ++b, ++source, ++temp) {
             mr_mixel d = *((mr_mixel*)source - 8);
@@ -324,8 +324,8 @@ void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _destination, mr_direc
         }
     }
     else {
-        source = (mr_mixel*)(TM(_tileset) + (_destination + 6) * 8);
-        destination = (mr_mixel*)(TM(_tileset) + (_destination + 7) * 8);
+        source = (mr_mixel*)(MR_TM(_tileset) + (_destination + 6) * 8);
+        destination = (mr_mixel*)(MR_TM(_tileset) + (_destination + 7) * 8);
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
             mr_mixel d = *((mr_mixel*)destination);
             *temp = d;
@@ -354,8 +354,8 @@ void mr_tile_roll_horizontal_on_place(mr_tileset _tileset, mr_tile _destination,
     mr_mixel* destination;
     mr_position b;
 
-    source = (mr_mixel*)(TM(_tileset) + ( _destination * 8 ) + (*_index) * 8);
-    destination = (mr_mixel*)(TM(_tileset) + _place * 8);
+    source = (mr_mixel*)(MR_TM(_tileset) + ( _destination * 8 ) + (*_index) * 8);
+    destination = (mr_mixel*)(MR_TM(_tileset) + _place * 8);
     if (_direction == mr_direction_right) {
         ++(*_index);
         if ((*_index) > 8) {
@@ -377,8 +377,8 @@ void mr_tile_roll_horizontal_on_place(mr_tileset _tileset, mr_tile _destination,
 
 // Redefine a subset of N tiles by "rolling" vertically a tile
 void mr_tile_prepare_roll_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
-    mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
-    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
+    mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
@@ -403,8 +403,8 @@ void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _destination, mr_directi
     mr_position i, b;
 
     if (_direction == mr_direction_up) {
-        source = (mr_mixel*)(TM(_tileset) + (_destination + 1) * 8);
-        destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+        source = (mr_mixel*)(MR_TM(_tileset) + (_destination + 1) * 8);
+        destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
         for (b = 0; b < 8; ++b, ++source, ++temp) {
             mr_mixel d = *((mr_mixel*)source - 8);
@@ -423,8 +423,8 @@ void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _destination, mr_directi
         }
     }
     else {
-        source = (mr_mixel*)(TM(_tileset) + (_destination + 6) * 8);
-        destination = (mr_mixel*)(TM(_tileset) + (_destination + 7) * 8);
+        source = (mr_mixel*)(MR_TM(_tileset) + (_destination + 6) * 8);
+        destination = (mr_mixel*)(MR_TM(_tileset) + (_destination + 7) * 8);
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
             mr_mixel d = *((mr_mixel*)destination);
             *temp = d;
@@ -644,7 +644,7 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
     if (f == NULL) {
         return;
     }
-    fread(TM(_tileset) + 8 * _starting, _count * 8, 1, f);
+    fread(MR_TM(_tileset) + 8 * _starting, _count * 8, 1, f);
     fclose(f);
 
 #ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
@@ -659,7 +659,7 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
 void mr_tileset_load_file(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
 
 #ifdef MIDRES_STANDALONE_FILE
-    mr_read_file(_index, TM(_tileset) + 8 * _starting, _count * 8);
+    mr_read_file(_index, MR_TM(_tileset) + 8 * _starting, _count * 8);
 #endif
 
 #ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
@@ -825,7 +825,7 @@ void mr_tile_setcolors(mr_color _colors[4]) {
 }
 
 void mr_tile_redefine_fill(mr_tileset _tileset, mr_tile _tile, mr_mixel _data) {
-    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _tile * 8);
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _tile * 8);
     unsigned char b = 0;
     for (b = 0; b < 8; ++destination, ++b) {
         *destination = _data;

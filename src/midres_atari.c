@@ -65,7 +65,7 @@ void mr_init_base_hd(unsigned char _mode) {
         *dlist = _mode - 64;
     }
 
-    memset(TM(MR_TILESET_0), 0, 0x400);
+    memset(MR_TM(MR_TILESET_0), 0, 0x400);
 
     mr_tileset_load("ztiles.bin", MR_TILESET_0, 0, 8);
     mr_tileset_visible(MR_TILESET_0);
@@ -141,7 +141,7 @@ void mr_doublebuffer_switch_hd(unsigned char _screen) {
 }
 
 void mr_tileset_visible_hd(unsigned char _tileset) {
-    *(unsigned char*)(0x2F4) = (unsigned char)((((int)(TM(_tileset))) >> 8) & 0xff);
+    *(unsigned char*)(0x2F4) = (unsigned char)((((int)(MR_TM(_tileset))) >> 8) & 0xff);
 }
 
 unsigned char mr_key_pressed_hd() {

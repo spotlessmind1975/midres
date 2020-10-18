@@ -169,7 +169,7 @@
 
 #define MR_SM(_screen)						((mr_mixel*)(0x0200*(_screen)))
 #define MR_CM(_screen)						((mr_mixel*)(0x9400))
-#define TM(_tileset)					((mr_mixel*)( _tileset > 16 ? (0x8000 + ((_tileset)-16) * 0x0400) : ((_tileset) * 0x400) ) )
+#define MR_TM(_tileset)					((mr_mixel*)( _tileset > 16 ? (0x8000 + ((_tileset)-16) * 0x0400) : ((_tileset) * 0x400) ) )
 #define MR_AM(_bitblit)					((mr_mixel*)(0x0200*(_bitblit)))
 
 #define WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \

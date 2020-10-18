@@ -41,8 +41,8 @@
  // function declared at the resident module level.
 
 void mr_tile_prepare_horizontal_multicolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
-    mr_mixel* source = (mr_mixel*)(TM(_tileset) + _source * 8);
-    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+    mr_mixel* source = (mr_mixel*)(MR_TM(_tileset) + _source * 8);
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
@@ -67,8 +67,8 @@ void mr_tile_prepare_horizontal_multicolor(mr_tileset _tileset, mr_tile _source,
 }
 
 void mr_tile_prepare_horizontal_extended_multicolor(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
-    mr_mixel* source = (mr_mixel*)(TM(_tileset) + _source * 8);
-    mr_mixel* destination = (mr_mixel*)(TM(_tileset) + _destination * 8);
+    mr_mixel* source = (mr_mixel*)(MR_TM(_tileset) + _source * 8);
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
@@ -112,8 +112,8 @@ void mr_tile_prepare_horizontal_extended_multicolor(mr_tileset _tileset, mr_tile
 
 // Redefine a subset of N tiles by "rolling" horizontally a tile
 void mr_tile_prepare_roll_horizontal_multicolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
-    mr_tile* source = (mr_tile*)(TM(_tileset) + _source * 8);
-    mr_tile* destination = (mr_tile*)(TM(_tileset) + _destination * 8);
+    mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
 
