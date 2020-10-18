@@ -70,7 +70,7 @@
 #define MR_TILE_WIDTH_IN_PIXEL			(8>>(MR_MULTICOLOR))
 #define MR_TILE_WIDTH_FACTOR			(3-(MR_MULTICOLOR))
 
-#define SM(_screen)						((mr_mixel*)((0x0000*(_screen))))
+#define MR_SM(_screen)						((mr_mixel*)((0x0000*(_screen))))
 #define MR_CM(_screen)						((mr_color*)((0x0000*(_screen))))
 #define MR_AM(_screen)						((mr_mixel*)((0x0000*(_screen))))
 #define TM(_tileset)					((mr_mixel*)((0x0000*(_tileset))))
