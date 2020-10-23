@@ -91,7 +91,7 @@ void mr_doublebuffer_switch() {
     
     mr_wait_vbl();
 
-    if (VISIBLE_SCREEN == MR_DB1) {
+    if (MR_VISIBLE_SCREEN == MR_DB1) {
         mr_show(MR_DB2);
         mr_doublebuffer_switch_hd(MR_DB1);
         mr_enable(MR_DB1);

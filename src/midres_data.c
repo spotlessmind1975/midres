@@ -41,7 +41,7 @@ mr_mixel get_mixel_bits(mr_mixel _current) {
 
     register unsigned char i = 0;
 
-    for (i = 0; i < sizeof(RENDERED_MIXELS); ++i) {
+    for (i = 0; i < sizeof(MR_RENDERED_MIXELS); ++i) {
         if (MR_RENDERED_MIXELS[i] == _current) {
             return i;
         }

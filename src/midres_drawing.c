@@ -53,7 +53,7 @@ void mr_psetop(mr_mixel* _screen, mr_position _x, mr_position _y, mr_pop _pop) {
 
     // Draw on the correct place the new mixel combination
 
-    _screen[my * WIDTH + mx] = calculate_mixel(_screen[my * WIDTH + mx], abcd, _pop);
+    _screen[my * MR_WIDTH + mx] = calculate_mixel(_screen[my * MR_WIDTH + mx], abcd, _pop);
 
 }
 
@@ -66,7 +66,7 @@ void mr_pcolorop(mr_color* _screen, mr_position _x, mr_position _y, mr_color _co
     mx = _x >> 1;
     my = _y >> 1;
 
-    _screen[my * WIDTH + mx] = _color + MR_BRIGHTNESS;
+    _screen[my * MR_WIDTH + mx] = _color + MR_BRIGHTNESS;
 
 }
 

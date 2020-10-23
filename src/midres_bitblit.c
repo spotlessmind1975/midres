@@ -112,7 +112,7 @@ void _mr_copy(mr_mixel* _source, mr_color* _source_color, mr_position _xs, mr_po
                         *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_source) | destination];
                     }
                     else {
-                        *_destination = RENDERED_MIXELS[get_mixel_bits(*_source) & ~destination];
+                        *_destination = MR_RENDERED_MIXELS[get_mixel_bits(*_source) & ~destination];
                     }
                     break;
                 case mr_blitop_xor:

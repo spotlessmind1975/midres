@@ -145,7 +145,7 @@ void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_positi
 
     if (y1 & 1) {
         abcd = mr_mixel_bits(_x, y1);
-        _screen[offset] = RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
+        _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
         _colormap[offset] = _color;
         offset += MR_SCREEN_WIDTH;
         ++y1;
