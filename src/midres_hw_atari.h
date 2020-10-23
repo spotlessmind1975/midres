@@ -172,7 +172,7 @@ extern mr_mixel* screenRam;
 #define MIDRES_STANDALONE_TILE				1
 #define MIDRES_STANDALONE_TILE_MULTICOLOR	1
 #define MIDRES_STANDALONE_KEYBOARD			1
-#define MIDRES_STANDALONE_FILE				1
+// #define MIDRES_STANDALONE_FILE				1
 // #define MIDRES_EMBEDDED_FILES				1
 
 #endif

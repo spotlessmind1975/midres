@@ -80,9 +80,9 @@ mr_mixel calculate_mixel(mr_mixel _current, mr_mixelbits _abcd, mr_pop _pop) {
 }
 
 
-mr_position WIDTH;
+mr_position MR_WIDTH;
 
-mr_position HEIGHT;
+mr_position MR_HEIGHT;
 
 mr_color MR_BRIGHTNESS;
 
