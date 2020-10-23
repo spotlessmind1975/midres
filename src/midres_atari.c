@@ -55,7 +55,7 @@ void mr_init_base_hd(unsigned char _mode) {
     *(dlist) = _mode;
 
     ++dlist;
-    screenRam = *(dlist)+(*(dlist + 1) * 256);
+    screenRam = *(dlist)+((mr_mixel*)(*(dlist + 1) * 256));
 
     dlist += 2;
 

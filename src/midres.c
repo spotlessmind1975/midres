@@ -118,7 +118,7 @@ void mr_init_multicolor() {
 
 #else
 
-    MULTICOLOR = mr_true;
+    MR_MULTICOLOR = mr_true;
     mr_init();
 
 #endif
