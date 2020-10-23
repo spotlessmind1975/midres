@@ -30,6 +30,10 @@ PROGRAMNAME := midres
 #  - atari: single executable for ATARI
 #  - atarilo: single executable for ATARI (low res)
 
+ifdef target
+LTARGETS ?= $(target)
+endif
+
 # Given demonstrations:
 #  - SLIDESHOW - a slideshow with some images converted using img2midres
 #  - DRAWING - an animation using drawing primitives (v1.1)
@@ -791,6 +795,11 @@ $(TARGETOBJDIR):
 
 $(DATADIR):
 	$(call MKDIR,$@)
+
+library: $(LIBDIR) $(TARGETOBJDIR) $(LIBS)
+
+clean-library: 
+	$(foreach LIB,$(LIBS),$(call RMFILES,$(LIB)))
 
 all: $(LIBDIR) $(EXEDIR) $(EXEDIR)/atr $(TARGETOBJDIR) $(LIBS) $(EXES)
 
