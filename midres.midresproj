@@ -1,0 +1,711 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <Name>midres</Name>
+  <Description>midres</Description>
+  <Folder>
+    <Name>library</Name>
+    <Path>src</Path>
+    <Description />
+    <Kind>2</Kind>
+    <CurrentOptions>
+      <OptionsMake>
+        <MakeFileName>makefile</MakeFileName>
+        <DynamicMakefile>true</DynamicMakefile>
+        <AdditionalParams />
+        <ActionBuild>library</ActionBuild>
+        <ActionClean>clean-library</ActionClean>
+      </OptionsMake>
+      <OptionsOutput>
+        <BinaryFileName>lib\midres.{target}.lib</BinaryFileName>
+        <Complete>false</Complete>
+      </OptionsOutput>
+      <OptionsIDE>
+        <RootPath>E:\sources\midres</RootPath>
+        <SourcePath>src</SourcePath>
+        <DataPath>data</DataPath>
+        <ExePath>exe</ExePath>
+      </OptionsIDE>
+      <OptionsEmulators>
+        <ViceEnabled>true</ViceEnabled>
+        <VicePath />
+        <AltirraEnabled>false</AltirraEnabled>
+        <AltirraPath>aaa</AltirraPath>
+        <Atari800Enabled>true</Atari800Enabled>
+        <Atari800Path />
+        <YapeEnabled>false</YapeEnabled>
+        <YapePath>bbbb</YapePath>
+      </OptionsEmulators>
+      <OptionsCC65>
+        <CC65WarningEntry>
+          <Pattern>Unreachable code</Pattern>
+          <Ignored>false</Ignored>
+        </CC65WarningEntry>
+        <Plus4>true</Plus4>
+        <C16>false</C16>
+        <Vic20>true</Vic20>
+        <Vic2024>false</Vic2024>
+        <C64>false</C64>
+        <C128>true</C128>
+        <Atari>false</Atari>
+        <AtariLo>true</AtariLo>
+      </OptionsCC65>
+    </CurrentOptions>
+    <Folder>
+      <Name>hardware</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>0</Kind>
+      <Folder>
+        <Name>Commocore C=16</Name>
+        <Path>src</Path>
+        <Description />
+        <Kind>0</Kind>
+        <File>
+          <Name>midres_c16.c</Name>
+          <Filename>midres_c16.c</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>midres_hw_c16.h</Name>
+          <Filename>midres_hw_c16.h</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>c16.cfg</Name>
+          <Filename>..\cfg\c16.cfg</Filename>
+          <Description />
+        </File>
+      </Folder>
+      <Folder>
+        <Name>Commodore VIC-20</Name>
+        <Path>src</Path>
+        <Description />
+        <Kind>0</Kind>
+        <Folder>
+          <Name>(no expansion)</Name>
+          <Path>src</Path>
+          <Description />
+          <Kind>0</Kind>
+          <File>
+            <Name>midres_hw_vic20.h</Name>
+            <Filename>midres_hw_vic20.h</Filename>
+            <Description />
+          </File>
+          <File>
+            <Name>vic20.cfg</Name>
+            <Filename>..\cfg\vic20.cfg</Filename>
+            <Description />
+          </File>
+        </Folder>
+        <Folder>
+          <Name>24 KB</Name>
+          <Path>src</Path>
+          <Description />
+          <Kind>0</Kind>
+          <File>
+            <Name>midres_hw_vic20_32k.h</Name>
+            <Filename>midres_hw_vic20_32k.h</Filename>
+            <Description />
+          </File>
+          <File>
+            <Name>vic20-32k.cfg</Name>
+            <Filename>..\cfg\vic20-32k.cfg</Filename>
+            <Description />
+          </File>
+        </Folder>
+        <File>
+          <Name>midres_vic20.c</Name>
+          <Filename>midres_vic20.c</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>midres_hw_vic20.h</Name>
+          <Filename>midres_hw_vic20.h</Filename>
+          <Description />
+        </File>
+      </Folder>
+      <Folder>
+        <Name>Commodore PLUS/4</Name>
+        <Path>src</Path>
+        <Description />
+        <Kind>0</Kind>
+        <File>
+          <Name>midres_plus4.c</Name>
+          <Filename>midres_plus4.c</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>midres_hw_plus4.h</Name>
+          <Filename>midres_hw_plus4.h</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>plus4.cfg</Name>
+          <Filename>..\cfg\plus4.cfg</Filename>
+          <Description />
+        </File>
+      </Folder>
+      <Folder>
+        <Name>Commodore C=64</Name>
+        <Path>src</Path>
+        <Description />
+        <Kind>0</Kind>
+        <File>
+          <Name>midres_c64.c</Name>
+          <Filename>midres_c64.c</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>midres_hw_c64.h</Name>
+          <Filename>midres_hw_c64.h</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>c64.cfg</Name>
+          <Filename>..\cfg\c64.cfg</Filename>
+          <Description />
+        </File>
+      </Folder>
+      <Folder>
+        <Name>Commodore C=128</Name>
+        <Path>src</Path>
+        <Description />
+        <Kind>0</Kind>
+        <File>
+          <Name>midres_c128.c</Name>
+          <Filename>midres_c128.c</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>midres_hw_c128_40.h</Name>
+          <Filename>midres_hw_c128_40.h</Filename>
+          <Description />
+        </File>
+        <File>
+          <Name>c128.cfg</Name>
+          <Filename>..\cfg\c128.cfg</Filename>
+          <Description />
+        </File>
+      </Folder>
+      <Folder>
+        <Name>ATARI (8 bit)</Name>
+        <Path>src</Path>
+        <Description />
+        <Kind>0</Kind>
+        <Folder>
+          <Name>monocolor (high res)</Name>
+          <Path>src</Path>
+          <Description />
+          <Kind>0</Kind>
+          <File>
+            <Name>midres_hw_atari.h</Name>
+            <Filename>midres_hw_atari.h</Filename>
+            <Description />
+          </File>
+          <File>
+            <Name>atari.cfg</Name>
+            <Filename>..\cfg\atari.cfg</Filename>
+            <Description />
+          </File>
+        </Folder>
+        <Folder>
+          <Name>multicolor (low res)</Name>
+          <Path>src</Path>
+          <Description />
+          <Kind>0</Kind>
+          <File>
+            <Name>midres_hw_atari_lores.h</Name>
+            <Filename>midres_hw_atari_lores.h</Filename>
+            <Description />
+          </File>
+          <File>
+            <Name>atari.cfg</Name>
+            <Filename>..\cfg\atari.cfg</Filename>
+            <Description />
+          </File>
+        </Folder>
+        <File>
+          <Name>midres_atari.c</Name>
+          <Filename>midres_atari.c</Filename>
+          <Description />
+        </File>
+      </Folder>
+      <Folder>
+        <Name>(vanilla)</Name>
+        <Path>src</Path>
+        <Description />
+        <Kind>0</Kind>
+        <File>
+          <Name>midres_vanilla.c</Name>
+          <Filename>midres_vanilla.c</Filename>
+          <Description />
+        </File>
+      </Folder>
+      <File>
+        <Name>midres_hw.h</Name>
+        <Filename>midres_hw.h</Filename>
+        <Description />
+      </File>
+    </Folder>
+    <Folder>
+      <Name>common</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>0</Kind>
+      <File>
+        <Name>midres_bitblit.c</Name>
+        <Filename>midres_bitblit.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_data.c</Name>
+        <Filename>midres_data.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_drawing.c</Name>
+        <Filename>midres_drawing.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_drawing2.c</Name>
+        <Filename>midres_drawing2.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_file.c</Name>
+        <Filename>midres_file.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_keyboard.c</Name>
+        <Filename>midres_keyboard.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_screen.c</Name>
+        <Filename>midres_screen.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_screen2.c</Name>
+        <Filename>midres_screen2.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_tile.c</Name>
+        <Filename>midres_tile.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres_tile_multicolor.c</Name>
+        <Filename>midres_tile_multicolor.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres.h</Name>
+        <Filename>midres.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>midres.c</Name>
+        <Filename>midres.c</Filename>
+        <Description />
+      </File>
+    </Folder>
+    <File>
+      <Name>makefile</Name>
+      <Filename>..\makefile</Filename>
+      <Description />
+    </File>
+  </Folder>
+  <Folder>
+    <Name>games</Name>
+    <Path>src</Path>
+    <Description />
+    <Kind>0</Kind>
+    <Folder>
+      <Name>air attack!</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>3</Kind>
+      <CurrentOptions>
+        <OptionsMake>
+          <MakeFileName>makefile</MakeFileName>
+          <DynamicMakefile>true</DynamicMakefile>
+          <AdditionalParams>game=airattack</AdditionalParams>
+          <ActionBuild>all</ActionBuild>
+          <ActionClean>clean</ActionClean>
+        </OptionsMake>
+        <OptionsOutput>
+          <BinaryFileName>exe\airattack.{target}.{support}</BinaryFileName>
+          <Complete>true</Complete>
+        </OptionsOutput>
+        <OptionsIDE>
+          <RootPath>E:\sources\midres</RootPath>
+          <SourcePath>src</SourcePath>
+          <DataPath>data</DataPath>
+          <ExePath>exe</ExePath>
+        </OptionsIDE>
+        <OptionsEmulators>
+          <ViceEnabled>true</ViceEnabled>
+          <VicePath />
+          <AltirraEnabled>false</AltirraEnabled>
+          <AltirraPath>aaa</AltirraPath>
+          <Atari800Enabled>true</Atari800Enabled>
+          <Atari800Path />
+          <YapeEnabled>false</YapeEnabled>
+          <YapePath>bbbb</YapePath>
+        </OptionsEmulators>
+        <OptionsCC65>
+          <CC65WarningEntry>
+            <Pattern>Unreachable code</Pattern>
+            <Ignored>false</Ignored>
+          </CC65WarningEntry>
+          <CC65WarningEntry>
+            <Pattern>Warning: Result of comparison is constant</Pattern>
+            <Ignored>true</Ignored>
+          </CC65WarningEntry>
+          <Plus4>true</Plus4>
+          <C16>false</C16>
+          <Vic20>true</Vic20>
+          <Vic2024>false</Vic2024>
+          <C64>false</C64>
+          <C128>true</C128>
+          <Atari>false</Atari>
+          <AtariLo>true</AtariLo>
+        </OptionsCC65>
+      </CurrentOptions>
+      <File>
+        <Name>game_air_attack.c</Name>
+        <Filename>game_air_attack.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>game_air_attack_tiles.h</Name>
+        <Filename>game_air_attack_tiles.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>game_air_attack_tiles4.h</Name>
+        <Filename>game_air_attack_tiles4.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>game_air_attack_tiles20.h</Name>
+        <Filename>game_air_attack_tiles20.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>makefile</Name>
+        <Filename>..\makefile</Filename>
+        <Description />
+      </File>
+    </Folder>
+    <Folder>
+      <Name>alien storm</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>3</Kind>
+      <CurrentOptions>
+        <OptionsMake>
+          <MakeFileName>makefile</MakeFileName>
+          <DynamicMakefile>true</DynamicMakefile>
+          <AdditionalParams>game=alienstorm</AdditionalParams>
+          <ActionBuild>all</ActionBuild>
+          <ActionClean>clean</ActionClean>
+        </OptionsMake>
+        <OptionsOutput>
+          <BinaryFileName>exe\alienstorm.{target}.{support}</BinaryFileName>
+          <Complete>true</Complete>
+        </OptionsOutput>
+        <OptionsIDE>
+          <RootPath>E:\sources\midres</RootPath>
+          <SourcePath>src</SourcePath>
+          <DataPath>data</DataPath>
+          <ExePath>exe</ExePath>
+        </OptionsIDE>
+        <OptionsEmulators>
+          <ViceEnabled>true</ViceEnabled>
+          <VicePath />
+          <AltirraEnabled>false</AltirraEnabled>
+          <AltirraPath>aaa</AltirraPath>
+          <Atari800Enabled>true</Atari800Enabled>
+          <Atari800Path />
+          <YapeEnabled>false</YapeEnabled>
+          <YapePath>bbbb</YapePath>
+        </OptionsEmulators>
+        <OptionsCC65>
+          <CC65WarningEntry>
+            <Pattern>Unreachable code</Pattern>
+            <Ignored>false</Ignored>
+          </CC65WarningEntry>
+          <CC65WarningEntry>
+            <Pattern>Warning: Result of comparison is constant</Pattern>
+            <Ignored>true</Ignored>
+          </CC65WarningEntry>
+          <Plus4>true</Plus4>
+          <C16>false</C16>
+          <Vic20>true</Vic20>
+          <Vic2024>false</Vic2024>
+          <C64>false</C64>
+          <C128>true</C128>
+          <Atari>false</Atari>
+          <AtariLo>true</AtariLo>
+        </OptionsCC65>
+      </CurrentOptions>
+      <File>
+        <Name>game_alien_storm.c</Name>
+        <Filename>game_alien_storm.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>game_alien_storm_tiles.h</Name>
+        <Filename>game_alien_storm_tiles.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>game_alien_storm_tiles1.h</Name>
+        <Filename>game_alien_storm_tiles1.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>game_alien_storm_tiles2.h</Name>
+        <Filename>game_alien_storm_tiles2.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>makefile</Name>
+        <Filename>..\makefile</Filename>
+        <Description />
+      </File>
+    </Folder>
+    <Folder>
+      <Name>totto</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>3</Kind>
+      <CurrentOptions>
+        <OptionsMake>
+          <MakeFileName>makefile</MakeFileName>
+          <DynamicMakefile>true</DynamicMakefile>
+          <AdditionalParams>game=totto</AdditionalParams>
+          <ActionBuild>all</ActionBuild>
+          <ActionClean>clean</ActionClean>
+        </OptionsMake>
+        <OptionsOutput>
+          <BinaryFileName>exe\totto.{target}.{support}</BinaryFileName>
+          <Complete>true</Complete>
+        </OptionsOutput>
+        <OptionsIDE>
+          <RootPath>E:\sources\midres</RootPath>
+          <SourcePath>src</SourcePath>
+          <DataPath>data</DataPath>
+          <ExePath>exe</ExePath>
+        </OptionsIDE>
+        <OptionsEmulators>
+          <ViceEnabled>true</ViceEnabled>
+          <VicePath />
+          <AltirraEnabled>false</AltirraEnabled>
+          <AltirraPath>aaa</AltirraPath>
+          <Atari800Enabled>true</Atari800Enabled>
+          <Atari800Path />
+          <YapeEnabled>false</YapeEnabled>
+          <YapePath>bbbb</YapePath>
+        </OptionsEmulators>
+        <OptionsCC65>
+          <CC65WarningEntry>
+            <Pattern>Unreachable code</Pattern>
+            <Ignored>false</Ignored>
+          </CC65WarningEntry>
+          <CC65WarningEntry>
+            <Pattern>Warning: Result of comparison is constant</Pattern>
+            <Ignored>true</Ignored>
+          </CC65WarningEntry>
+          <Plus4>true</Plus4>
+          <C16>false</C16>
+          <Vic20>true</Vic20>
+          <Vic2024>false</Vic2024>
+          <C64>false</C64>
+          <C128>true</C128>
+          <Atari>false</Atari>
+          <AtariLo>true</AtariLo>
+        </OptionsCC65>
+      </CurrentOptions>
+      <File>
+        <Name>game_totto.c</Name>
+        <Filename>game_totto.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>game_totto_tiles.h</Name>
+        <Filename>game_totto_tiles.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>game_totto_tiles1.h</Name>
+        <Filename>game_totto_tiles1.h</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>makefile</Name>
+        <Filename>..\makefile</Filename>
+        <Description />
+      </File>
+    </Folder>
+  </Folder>
+  <Folder>
+    <Name>demos</Name>
+    <Path>src</Path>
+    <Description />
+    <Kind>1</Kind>
+    <Folder>
+      <Name>bitblit</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>3</Kind>
+      <File>
+        <Name>demo_bitblit.c</Name>
+        <Filename>demo_bitblit.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>makefile</Name>
+        <Filename>..\makefile</Filename>
+        <Description />
+      </File>
+    </Folder>
+    <Folder>
+      <Name>drawing</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>3</Kind>
+      <File>
+        <Name>demo_drawing.c</Name>
+        <Filename>demo_drawing.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>makefile</Name>
+        <Filename>..\makefile</Filename>
+        <Description />
+      </File>
+    </Folder>
+    <Folder>
+      <Name>slideshow</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>3</Kind>
+      <File>
+        <Name>demo_slideshow.c</Name>
+        <Filename>demo_slideshow.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>makefile</Name>
+        <Filename>..\makefile</Filename>
+        <Description />
+      </File>
+    </Folder>
+    <Folder>
+      <Name>tile</Name>
+      <Path>src</Path>
+      <Description />
+      <Kind>3</Kind>
+      <File>
+        <Name>demo_tile.c</Name>
+        <Filename>demo_tile.c</Filename>
+        <Description />
+      </File>
+      <File>
+        <Name>makefile</Name>
+        <Filename>..\makefile</Filename>
+        <Description />
+      </File>
+    </Folder>
+  </Folder>
+  <Folder>
+    <Name>tutorials</Name>
+    <Path>src</Path>
+    <Description />
+    <Kind>3</Kind>
+    <File>
+      <Name>tutorial_mctile.c</Name>
+      <Filename>tutorial_mctile.c</Filename>
+      <Description />
+    </File>
+    <File>
+      <Name>tutorial_mctile.h</Name>
+      <Filename>tutorial_mctile.h</Filename>
+      <Description />
+    </File>
+    <File>
+      <Name>makefile</Name>
+      <Filename>..\makefile</Filename>
+      <Description />
+    </File>
+  </Folder>
+  <Folder>
+    <Name>main</Name>
+    <Path>src</Path>
+    <Description />
+    <Kind>0</Kind>
+    <File>
+      <Name>main.h</Name>
+      <Filename>main.h</Filename>
+      <Description />
+    </File>
+    <File>
+      <Name>main.c</Name>
+      <Filename>main.c</Filename>
+      <Description />
+    </File>
+  </Folder>
+  <Options>
+    <OptionsMake>
+      <MakeFileName>makefile</MakeFileName>
+      <DynamicMakefile>true</DynamicMakefile>
+      <AdditionalParams />
+      <ActionBuild>all</ActionBuild>
+      <ActionClean>clean</ActionClean>
+    </OptionsMake>
+    <OptionsOutput>
+      <BinaryFileName />
+      <Complete>false</Complete>
+    </OptionsOutput>
+    <OptionsIDE>
+      <RootPath>E:\sources\midres</RootPath>
+      <SourcePath>src</SourcePath>
+      <DataPath>data</DataPath>
+      <ExePath>exe</ExePath>
+    </OptionsIDE>
+    <OptionsEmulators>
+      <ViceEnabled>true</ViceEnabled>
+      <VicePath />
+      <AltirraEnabled>false</AltirraEnabled>
+      <AltirraPath>aaa</AltirraPath>
+      <Atari800Enabled>true</Atari800Enabled>
+      <Atari800Path />
+      <YapeEnabled>false</YapeEnabled>
+      <YapePath>bbbb</YapePath>
+    </OptionsEmulators>
+    <OptionsCC65>
+      <CC65WarningEntry>
+        <Pattern>Unreachable code</Pattern>
+        <Ignored>false</Ignored>
+      </CC65WarningEntry>
+      <CC65WarningEntry>
+        <Pattern>Warning: Result of comparison is constant</Pattern>
+        <Ignored>true</Ignored>
+      </CC65WarningEntry>
+      <Plus4>true</Plus4>
+      <C16>false</C16>
+      <Vic20>true</Vic20>
+      <Vic2024>false</Vic2024>
+      <C64>false</C64>
+      <C128>true</C128>
+      <Atari>false</Atari>
+      <AtariLo>true</AtariLo>
+    </OptionsCC65>
+  </Options>
+</Project>
