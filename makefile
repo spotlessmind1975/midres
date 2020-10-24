@@ -797,6 +797,7 @@ $(DATADIR):
 	$(call MKDIR,$@)
 
 library: $(LIBDIR) $(TARGETOBJDIR) $(LIBS)
+	awk '/([mM][rR]_[a-zA-Z0-9]+)/i { for(i=1; i<=NF; i++) { tmp=match($$i,/^([mM][rR]\_[\_a-zA-Z0-9]+)/); if (tmp) { print substr($$i,RSTART, RLENGTH); } } }' src/*.h | sort | uniq >midres_symbols.txt
 
 clean-library: 
 	$(foreach LIB,$(LIBS),$(call RMFILES,$(LIB)))
