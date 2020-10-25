@@ -57,7 +57,7 @@
 
 // Offset for correct brightness.
 #define MR_COLOR_LOWBRIGHTNESS			(3<<4)
-#define MR_COLOR_BRIGHTNESS				(5<<4)
+#define MR_COLOR_BRIGHTNESS				(4<<4)
 #define MR_COLOR_HIGHBRIGHTNESS			(7<<4)
 
 // Default palette.
