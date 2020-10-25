@@ -278,6 +278,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64: $(subst PLATFORM,c64,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 
 # Let's define rules to compile the demo under C=64 as the overlay version.
 # Moreover, all the executable files will be put on a D64 1541 image, 
@@ -303,6 +304,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64ovl:	$(subst PLATFORM,c64ovl,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 
 #$(CC1541) -f test.pic -w $(DATADIR)/test.pic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -332,6 +334,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20:	$(subst PLATFORM,vic20,$(OBJS))
 	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 
 # Let's define rules to compile the demo under VIC 20 as a one and single 
 # executable file. This compilation will fails since there is no enough RAM.
@@ -357,6 +360,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic2024:	$(subst PLATFORM,vic2024,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 
 # Let's define rules to compile the demo under VIC20 as the overlay version.
 # This is the only way to compile this program in order to be able to be 
@@ -382,6 +386,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20ovl:	$(subst PLATFORM,vic20ovl,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 
 ## C16 ------------------------------------------------------------------------
 
@@ -410,6 +415,7 @@ $(EXEDIR)/$(PROGRAMNAME).c16:	$(subst PLATFORM,c16,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 
 ## PLUS4 ------------------------------------------------------------------------
 
@@ -440,6 +446,7 @@ $(EXEDIR)/$(PROGRAMNAME).plus4:	$(subst PLATFORM,plus4,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles4.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 
 ## C128 ------------------------------------------------------------------------
 
@@ -469,6 +476,7 @@ $(EXEDIR)/$(PROGRAMNAME).c128:	$(subst PLATFORM,c128,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 
 # Let's define rules to compile the demo under C=128 as the overlay version.
 # Moreover, all the executable files will be put on a D64 1541 image, 
@@ -494,6 +502,7 @@ $(EXEDIR)/$(PROGRAMNAME).c128ovl:	$(subst PLATFORM,c128ovl,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 
 #$(CC1541) -f test.pic -w $(DATADIR)/test.pic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -524,6 +533,7 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
+	$(call COPYFILES,$(DATADIR)/testcard.bin,$(EXEDIR)/atr/testcard.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atari.atr -o $(EXEDIR)/$(PROGRAMNAME).atari.atr -f $(PROGRAMNAME).exe
 
@@ -552,6 +562,7 @@ $(EXEDIR)/$(PROGRAMNAME).atarilo:	$(subst PLATFORM,atarilo,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
+	$(call COPYFILES,$(DATADIR)/testcard.bin,$(EXEDIR)/atr/testcard.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atarilo.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atarilo.atr -o $(EXEDIR)/$(PROGRAMNAME).atarilo.atr -f $(PROGRAMNAME).exe
 

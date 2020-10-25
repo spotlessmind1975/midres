@@ -1,3 +1,5 @@
+#ifdef __DEMO_TEST_CARD__
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -10,10 +12,14 @@
  ** INCLUDE SECTION
  ****************************************************************************/
 
+#include <stdio.h>
 #include <cc65.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "main.h"
 #include "midres.h"
+#include "demo_test_card_tiles.h"
 
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION
@@ -37,68 +43,27 @@
 // functions present in the modules, taking care to load the relevant 
 // code / data into memory(in the "overlay" area).
 
-void main(void) {
+void demo_test_card() {
 
-#ifdef __DEMO_SLIDESHOW__
+    mr_init_multicolor();
 
-    demo_slideshow();
+	mr_set_border_color(MR_COLOR_GREY);
+	mr_set_background_color(MR_COLOR_YELLOW);
 
-#endif
+    mr_clearv();
 
-#ifdef __DEMO_DRAWING__
+	// Load tiles from mass memory.
+	mr_tileset_load("testcard.bin", MR_TILESET_0, TILE_START, TILE_COUNT);
+    mr_tileset_visible(MR_TILESET_0);
+    mr_tile_setcolor(MR_TILE_BACKGROUND, TILE_COLOR0);
+    mr_tile_setcolor(MR_TILE_COLOR0, TILE_COLOR1);
+    mr_tile_setcolor(MR_TILE_COLOR1, TILE_COLOR2);
+    mr_tile_setcolor(MR_TILE_COLOR2, TILE_COLOR3);
 
-    demo_drawing();
+    mr_putetilesv((MR_SCREEN_WIDTH-TILE_TESTCARD_WIDTH)>>1, MR_SCREEN_HEIGHT>>1, TILE_TESTCARD, TILE_TESTCARD_WIDTH, TILE_TESTCARD_HEIGHT, TILE_COLOR3);
 
-#endif
-
-#ifdef __DEMO_BITBLIT__
-
-#ifndef __OVERLAY__MIDRES__
-
-    demo_bitblit();
-
-#endif
-
-#endif
-
-#ifdef __DEMO_TILE__
-
-#ifndef __OVERLAY__MIDRES__
-
-    demo_tile();
-
-#endif
-
-#endif
-
-#ifdef __DEMO_TEST_CARD__
-
-    demo_test_card();
-
-#endif
-
-#ifdef __GAME_AIR_ATTACK__
-
-    game_air_attack();
-
-#endif
-
-#ifdef __GAME_TOTTO__
-
-    game_totto();
-
-#endif
-
-#ifdef __TUTORIAL_MCTILE__
-
-    tutorial_mctile();
-
-#endif
-
-#ifdef __GAME_ALIEN_STORM__
-
-    game_alien_storm();
-
-#endif
+    while(1) { }
 
 }
+
+#endif
