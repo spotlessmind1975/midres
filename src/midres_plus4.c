@@ -78,7 +78,7 @@ void mr_init_multicolor_hd() {
 void mr_tile_setcolor_hd(unsigned char _index, unsigned char _color) {
     switch (_index) {
     case MR_TILE_BACKGROUND:
-        // currently ignored!
+        mr_set_background_color_hd(_color);
         break;
     case MR_TILE_COLOR0:
         *((unsigned char*)0xff16) = _color;
