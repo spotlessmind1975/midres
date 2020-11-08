@@ -59,29 +59,33 @@
 	#define TILE2_DIGIT8_WIDTH                           1
 	#define TILE2_DIGIT8_HEIGHT                          1
 
-	#define TILE2_INSERTCOIN                            26
+	#define TILE2_DIGIT9                                26
+	#define TILE2_DIGIT9_WIDTH                           1
+	#define TILE2_DIGIT9_HEIGHT                          1
+
+	#define TILE2_INSERTCOIN                            27
 	#define TILE2_INSERTCOIN_WIDTH                       8
 	#define TILE2_INSERTCOIN_HEIGHT                      1
 
-	#define TILE2_12PLAYERS                             34
+	#define TILE2_12PLAYERS                             35
 	#define TILE2_12PLAYERS_WIDTH                        8
 	#define TILE2_12PLAYERS_HEIGHT                       1
 
-	#define TILE2_COIN                                  42
+	#define TILE2_COIN                                  43
 	#define TILE2_COIN_WIDTH                             3
 	#define TILE2_COIN_HEIGHT                            1
 
-	#define TILE2_COINS                                 45
+	#define TILE2_COINS                                 46
 	#define TILE2_COINS_WIDTH                            4
 	#define TILE2_COINS_HEIGHT                           1
 
-	#define TILE2_PLAYER                                49
+	#define TILE2_PLAYER                                50
 	#define TILE2_PLAYER_WIDTH                           4
 	#define TILE2_PLAYER_HEIGHT                          1
 
-	#define TILE2_PLAYERS                               53
+	#define TILE2_PLAYERS                               54
 	#define TILE2_PLAYERS_WIDTH                          5
 	#define TILE2_PLAYERS_HEIGHT                         1
 
-	#define TILE2_COUNT                                  58
+	#define TILE2_COUNT                                  59
 #endif
