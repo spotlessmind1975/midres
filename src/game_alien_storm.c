@@ -1190,7 +1190,9 @@ void check_alien_fire() {
 						// Player has been hit: explode the cannon and decrease the cannons.
 						cannonHit = 40;
 						clear_cannon();
-						--cannonLives[currentPlayer];
+						if (cannonLives[currentPlayer] > 0) {
+							--cannonLives[currentPlayer];
+						}
 						draw_cannons();
 
 					}
@@ -1289,7 +1291,7 @@ void move_aliens() {
 		// We look to see if there are spaces to shoot.
 		for (i = 0; i < ALIEN_COLUMN_COUNT; ++i) {
 			if (rand() > (RAND_MAX >> 1)) continue;
-			if ((alienFireY[i] == 0) && (alienMaxRowPerColumn[i] > 0)) {
+			if ((alienFireY[i] == 0) && (alienMaxRowPerColumn[i] > 0) && (alienMaxRowPerColumn[i] != 0xff)) {
 				alienFireY[i] = alienY + ALIEN_VERTICAL_OFFSET + (alienMaxRowPerColumn[i] + 1) * (TILE_ALIEN1A_HEIGHT + TILE_ALIEN1A_HEIGHT) + 1;
 				alienFireX[i] = alienX + ALIEN_HORIZONTAL_OFFSET + alienColumn[i];
 				break;
