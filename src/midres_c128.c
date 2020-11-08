@@ -61,19 +61,17 @@
 void mr_init_base_hd() {
 
     int i;
-    unsigned char* dst = (unsigned char*)0x8c00, * src = (unsigned char*)0xd800;
 
-    memset(MR_SM(MR_SCREEN_DEFAULT), 32, 0x400);
+    memset(MR_SM(MR_SCREEN_DEFAULT), MR_RENDERED_MIXELS[0], 0x400);
 
     SET_DATA_DIRECTION();
     SET_BANK(2);
     SET_BACKGROUND_COLOR(MR_COLOR_BLACK);
     SET_VIDEO(MR_SCREEN_DEFAULT);
     SET_BASIC_VIDEO(MR_SCREEN_DEFAULT);
-    SET_CHARSET(MR_TILESET_DEFAULT);
 
-    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-        *(dst + i) = *(src + i);
+    if (MR_RENDERED_MIXELS[0] == 32) {
+        SET_CHARSET(MR_TILESET_DEFAULT);
     }
 
 }

@@ -234,6 +234,9 @@
 	// Initialize the graphics subsystem (with multicolor system).
 	void mr_init_multicolor();
 
+	// Start the graphics subsystem.
+	void mr_start();
+
 	// Release the graphics subsystem.
 	void mr_cleanup();
 

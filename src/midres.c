@@ -125,6 +125,45 @@ void mr_init_multicolor() {
 
 }
 
+void mr_init_delayed() {
+
+    MR_MULTICOLOR = mr_false;
+
+    MR_WIDTH = MR_SCREEN_WIDTH;
+    MR_HEIGHT = MR_SCREEN_HEIGHT;
+    MR_BRIGHTNESS = MR_COLOR_BRIGHTNESS;
+
+}
+
+void mr_init_multicolor_delayed() {
+
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR 
+
+    MR_MULTICOLOR = mr_true;
+
+    MR_WIDTH = MR_SCREEN_WIDTH;
+    MR_HEIGHT = MR_SCREEN_HEIGHT;
+    MR_BRIGHTNESS = MR_COLOR_BRIGHTNESS;
+
+#else
+
+    MR_MULTICOLOR = mr_true;
+
+#endif
+
+}
+
+void mr_start() {
+
+    if (MR_MULTICOLOR) {
+        mr_init_multicolor_hd();
+    }
+    else {
+        mr_init_hd();
+    }
+
+}
+
 void mr_cleanup() {
 
     mr_cleanup_hd();
