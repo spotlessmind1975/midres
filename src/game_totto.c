@@ -813,9 +813,6 @@ void game_totto() {
 	// Initialize graphical subsystem
 	mr_init();
 
-	// Start graphical subsystem
-	mr_start();
-
 	// Clear screen bitmap.
 	mr_clear_bitmapv();
 

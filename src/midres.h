@@ -234,7 +234,13 @@
 	// Initialize the graphics subsystem (with multicolor system).
 	void mr_init_multicolor();
 
-	// Start the graphics subsystem.
+	// Initialize the graphics subsystem but not start it.
+	void mr_init_delayed();
+
+	// Initialize the graphics subsystem (with multicolor system) but not start it.
+	void mr_init_multicolor_delayed();
+
+	// Start (delayed) graphics subsystem.
 	void mr_start();
 
 	// Release the graphics subsystem.

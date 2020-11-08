@@ -600,9 +600,6 @@ void game_air_attack() {
 	// Initialize graphical subsystem
 	mr_init();
 
-	// Start graphic system
-	mr_start();
-
 	// Clear screen bitmap.
 	mr_clear_bitmapv();
 
