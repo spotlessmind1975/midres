@@ -262,7 +262,7 @@ unsigned char mr_joy_hd(unsigned char _number) {
             break;
     }
 
-    return port;
+    return ~port;
 }
 
 #endif
