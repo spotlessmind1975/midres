@@ -76,7 +76,7 @@
 // This is the number of frames you have to wait before the game updates 
 // the status of the aliens. It also represents the maximum slowness 
 // of the game.
-#define ALIEN_DELAY_FRAME_COUNT		20
+#define ALIEN_DELAY_FRAME_COUNT		10
 
 // This is the number of frames you have to wait before the game updates 
 // the status of the aliens' fires. It also represents the maximum 
@@ -193,7 +193,7 @@ mr_position misteryXP = 0;
 // This is the number of frames you have to wait before the game updates 
 // the status of the player's fires. It also represents the maximum 
 // slowness of the fired weapons.
-#define FIRE_DELAY_FRAME_COUNT		2
+#define FIRE_DELAY_FRAME_COUNT		1
 
 // This is the updated value of the number of frames that must be 
 // waited before the game updates the status of the player' fire. 
@@ -276,6 +276,9 @@ unsigned char currentPlayer = 0;
 
 // Temporary space to store an addendum.
 unsigned char addendum[4] = { 0, 0, 0, 0 };
+
+// Current level
+unsigned char level = 0;
 
 ///////////////////////////// WELCOME SCREEN ////////////////////////////////
 
@@ -715,8 +718,10 @@ void welcome_screen() {
 
 // This routine takes care of initializing all the various 
 // variables that may have been changed from a previous run.
-void initialize_level() {
+void initialize_game() {
 	unsigned char i, j;
+
+	level = 0;
 
 	////////////////////////////////////// PLAYER
 	cannonX = CANNON_START_X;
@@ -757,6 +762,94 @@ void initialize_level() {
 	alienPY = 1;
 	alienDelayFrameCount = ALIEN_DELAY_FRAME_COUNT;
 	alienFireDelayFrameCount = ALIEN_FIRE_DELAY_FRAME_COUNT;
+	alienRowBitmap = 0;
+	for (i = 0; i < ALIEN_ROW_COUNT; ++i) {
+		alienRowBitmap = alienRowBitmap | (1 << i);
+	}
+	alienMaxRow = 0;
+	leftFreeColumns = 0;
+	rightFreeColumns = 0;
+
+	////////////////////////////////////// GAMEPLAY
+
+	levelFinished = mr_false;
+	gameOver = mr_false;
+
+	// Let's adjust the speed of the game 
+	// to be the default to start with.
+	alienDelayFrameCount = ALIEN_DELAY_FRAME_COUNT;
+
+	// We set the overall lives for each player 
+	// (this applies even if there is only one player!)
+	cannonLives[0] = MAX_LIFES;
+	cannonLives[1] = MAX_LIFES;
+
+	// Reset scores.
+	score[0][0] = 0;
+	score[0][1] = 0;
+	score[0][2] = 0;
+	score[0][3] = 0;
+	score[1][0] = 0;
+	score[1][1] = 0;
+	score[1][2] = 0;
+	score[1][3] = 0;
+
+	// By default, the game has not over 
+	// and the level is not finished, yet.
+	gameOver = mr_false;
+	levelFinished = mr_false;
+
+}
+
+// This routine takes care of initializing all the various 
+// variables that may have been changed from a previous run.
+void initialize_level() {
+	unsigned char i, j;
+
+	////////////////////////////////////// PLAYER
+	cannonX = CANNON_START_X;
+	fireY = 0;
+	fireX = 0;
+	fireDelayFrameCount = FIRE_DELAY_FRAME_COUNT;
+
+	////////////////////////////////////// ALIENS
+	alienFrameCounts = 0;
+	alienFrame = 0;
+	for (i = 0; i < ALIEN_ROW_COUNT; ++i) {
+		for (j = 0; j < ALIEN_COLUMN_COUNT; ++j) {
+			switch (i) {
+			case 0:
+				alienMatrix[i][j] = TILE_ALIEN3A;
+				break;
+			case 1:
+			case 2:
+				alienMatrix[i][j] = TILE_ALIEN2A;
+				break;
+			case 3:
+			case 4:
+				alienMatrix[i][j] = TILE_ALIEN1A;
+				break;
+			}
+		}
+	}
+	for (j = 0; j < ALIEN_COLUMN_COUNT; ++j) {
+		alienColumn[j] = j * ALIEN_WIDTH;
+		alienFireY[j] = 0;
+		alienFireX[j] = 0;
+		alienMaxRowPerColumn[j] = ALIEN_ROW_COUNT;
+	}
+	alienX = 0;
+	alienPX = 0;
+	alienDX = 1;
+	alienY = 1;
+	alienPY = 1;
+	if (level < 10) {
+		alienDelayFrameCount = ((ALIEN_DELAY_FRAME_COUNT)+(10-level));
+	}
+	else {
+		alienDelayFrameCount = ALIEN_DELAY_FRAME_COUNT;
+	}
+	alienFireDelayFrameCount = (ALIEN_FIRE_DELAY_FRAME_COUNT);
 	alienRowBitmap = 0;
 	for (i = 0; i < ALIEN_ROW_COUNT; ++i) {
 		alienRowBitmap = alienRowBitmap | (1 << i);
@@ -1392,29 +1485,7 @@ void gameloop() {
 	// correct tileset for animations.
 	mr_tileset_visible(MR_TILESET_0);
 
-	// Let's adjust the speed of the game 
-	// to be the default to start with.
-	alienDelayFrameCount = ALIEN_DELAY_FRAME_COUNT;
-
-	// We set the overall lives for each player 
-	// (this applies even if there is only one player!)
-	cannonLives[0] = MAX_LIFES;
-	cannonLives[1] = MAX_LIFES;
-
-	// Reset scores.
-	score[0][0] = 0;
-	score[0][1] = 0;
-	score[0][2] = 0;
-	score[0][3] = 0;
-	score[1][0] = 0;
-	score[1][1] = 0;
-	score[1][2] = 0;
-	score[1][3] = 0;
-
-	// By default, the game has not over 
-	// and the level is not finished, yet.
-	gameOver = mr_false;
-	levelFinished = mr_false;
+	initialize_game();
 
 	// The first player starts playing. If there is a second player, 
 	// then we show the player's interstitial page.
