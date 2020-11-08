@@ -1192,6 +1192,26 @@ void check_alien_fire() {
 
 void control_cannon() {
 	if (cannonHit == 0) {
+		unsigned char joy = mr_joy(MR_JOYSTICK_0);
+		if ((joy & MR_JOYSTICK_RIGHT) == MR_JOYSTICK_RIGHT) {
+			if (cannonX < (MR_SCREEN_WIDTH - TILE_CANNON_WIDTH) * 8) {
+				++cannonX;
+			}
+		}
+		else if ((joy & MR_JOYSTICK_LEFT) == MR_JOYSTICK_LEFT) {
+			if (cannonX > 0) {
+				--cannonX;
+			}
+		}
+		if ((joy & MR_JOYSTICK_FIRE) == MR_JOYSTICK_FIRE) {
+			// The player has an unlimited number of bullets 
+			// but can only fire one shot at a time.
+			if (fireY == 0) {
+				fireY = MR_SCREEN_HEIGHT - 4;
+				mr_tile_redefine_fill(MR_TILESET_0, TILE_LASER, 1 << (0x07 - (cannonX & 0x07)));
+				fireX = (cannonX >> 3) + 1;
+			}
+		}
 		switch (mr_get_key_pressed()) {
 			case MR_KEY_A:
 				if (cannonX > 0) {
@@ -1454,6 +1474,8 @@ void gameloop() {
 	}
 
 }
+
+#include <stdio.h>
 
 void game_alien_storm() {
 
