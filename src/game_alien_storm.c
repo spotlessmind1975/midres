@@ -1483,7 +1483,7 @@ void game_alien_storm() {
 	srand(clock());
 
 	// Let's initialize the graphics library.
-	mr_init_delayed();
+	mr_init();
 
 	// We prepare the graphics.
 	prepare_graphics();
