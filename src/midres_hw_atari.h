@@ -142,6 +142,17 @@
 #define MR_KEY_S						62
 #define MR_KEY_A						63
 
+#define MR_JOYSTICK_0					0
+#define MR_JOYSTICK_1					1
+#define MR_JOYSTICK_2					2
+#define MR_JOYSTICK_3					3
+#define MR_JOYSTICK_COUNT				4
+#define MR_JOYSTICK_UP					1
+#define MR_JOYSTICK_DOWN				2
+#define MR_JOYSTICK_LEFT				4
+#define MR_JOYSTICK_RIGHT				8
+#define MR_JOYSTICK_FIRE				16
+
 #define MR_TILE_WIDTH_IN_PIXEL			(8>>(MR_MULTICOLOR))
 #define MR_TILE_WIDTH_FACTOR			(3-(MR_MULTICOLOR))
 

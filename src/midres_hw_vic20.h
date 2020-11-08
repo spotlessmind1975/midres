@@ -82,6 +82,14 @@
 
 #define MR_COLOR_COUNT					16
 
+#define MR_JOYSTICK_0					0
+#define MR_JOYSTICK_COUNT				1
+#define MR_JOYSTICK_UP					4
+#define MR_JOYSTICK_DOWN				8
+#define MR_JOYSTICK_LEFT				16
+#define MR_JOYSTICK_RIGHT				128
+#define MR_JOYSTICK_FIRE				32
+
 #define MR_TILE_WIDTH_IN_PIXEL			(8>>(MR_MULTICOLOR))
 #define MR_TILE_WIDTH_FACTOR			(3-(MR_MULTICOLOR))
 #define MR_TILE_BACKGROUND				3

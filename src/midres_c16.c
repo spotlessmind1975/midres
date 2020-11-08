@@ -226,5 +226,23 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
 
 #endif
 
+unsigned char mr_joy_hd(unsigned char _number) {
+
+    unsigned char port;
+
+    switch (_number) {
+        case MR_JOYSTICK_0:
+            (*(unsigned char*)0xff08) = 0xfa;
+            port = (*(unsigned char*)0xff08);
+            break;
+        case MR_JOYSTICK_1:
+            (*(unsigned char*)0xff08) = 0xfd;
+            port = (*(unsigned char*)0xff08);
+            break;
+    }
+    
+    return port;
+}
+
 #endif
 #endif

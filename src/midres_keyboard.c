@@ -128,5 +128,9 @@ void mr_sound_stop_channel(unsigned char _channel) {
     mr_sound_stop_hd(_channel);
 }
 
+unsigned char mr_joy(unsigned char _number) {
+    return mr_joy_hd(_number);
+}
+
 
 #endif

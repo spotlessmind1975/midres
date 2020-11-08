@@ -111,6 +111,8 @@ unsigned char* mr_translate_file_user(unsigned int _file);
 // Hardware dependent read external data
 void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);
 
+unsigned char mr_joy_hd(unsigned char _number);
+
 #define mr_assert_max_tiles( x ) if ( x > MR_TILESET_TILE_COUNT ) { puts("Maximum number of tiles for tileset exceeded."); return; }
 
 #endif

@@ -952,6 +952,10 @@
 
 	void mr_read_file_from_offset(mr_file _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);
 
+	unsigned char mr_joy(unsigned char _number);
+
+	void mr_end_frame(unsigned char _jiffies);
+
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"
 

@@ -135,5 +135,8 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     memcpy(_dest, (&_includedFiles[_file][0])+_offset, _size);
 }
 
+unsigned char mr_joy_hd(unsigned char _number) {
+    return 0;
+}
 
 #endif
