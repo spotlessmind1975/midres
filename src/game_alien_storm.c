@@ -68,7 +68,7 @@
 #define ALIEN_HORIZONTAL_OFFSET		( ( MR_SCREEN_WIDTH - (ALIEN_COLUMN_COUNT * ALIEN_WIDTH) ) >> 1 )
 
 // Maximum animation elongation.
-#define ALIEN_HORIZONTAL_ELONGATION	ALIEN_HORIZONTAL_OFFSET
+#define ALIEN_HORIZONTAL_ELONGATION	( ALIEN_HORIZONTAL_OFFSET )
 
 // This is the offset from the top edge of the first row of aliens.
 #define ALIEN_VERTICAL_OFFSET		4
@@ -152,6 +152,11 @@ mr_position alienPY = 1;
 
 // This is the number of the note of the soundtrack.
 unsigned char alienSoundtrack = 0;
+
+// This is the number of the columns freed on the left and right
+// set of arriving aliens.
+signed char leftFreeColumns = 0;
+signed char rightFreeColumns = 0;
 
 ////////////////////////////////// MISTERY //////////////////////////////////
 
@@ -757,6 +762,8 @@ void initialize_level() {
 		alienRowBitmap = alienRowBitmap | (1 << i);
 	}
 	alienMaxRow = 0;
+	leftFreeColumns = 0;
+	rightFreeColumns = 0;
 
 	////////////////////////////////////// GAMEPLAY
 
@@ -916,7 +923,7 @@ void draw_aliens() {
 
 	// We initialize the control structures.
 	for (i = 0; i < ALIEN_COLUMN_COUNT; ++i) {
-		alienMaxRowPerColumn[i] = 0;
+		alienMaxRowPerColumn[i] = 0xff;
 	}
 
 	alienMaxRow = 0;
@@ -967,6 +974,26 @@ void draw_aliens() {
 			if (!alienPresent) {
 				alienRowBitmap = alienRowBitmap & ~(1 << i);
 			}
+		}
+	}
+
+	leftFreeColumns = 0;
+	for (i = 0; i < (ALIEN_COLUMN_COUNT>>1); ++i) {
+		if (alienMaxRowPerColumn[i] == 0xff) {
+			leftFreeColumns = (i+1);
+		}
+		else {
+			break;
+		}
+	}
+
+	rightFreeColumns = 0;
+	for (i = (ALIEN_COLUMN_COUNT-1); i > (ALIEN_COLUMN_COUNT >> 1); --i) {
+		if (alienMaxRowPerColumn[i] == 0xff) {
+			rightFreeColumns = (ALIEN_COLUMN_COUNT-i);
+		}
+		else {
+			break;
 		}
 	}
 
@@ -1278,17 +1305,17 @@ void move_aliens() {
 			alienX += alienDX;
 			if (alienDX == 0) {
 				++alienY;
-				if (alienX > ALIEN_HORIZONTAL_ELONGATION) {
+				if (alienX > ( ( ALIEN_HORIZONTAL_ELONGATION ) + (rightFreeColumns * ALIEN_WIDTH) ) ) {
 					alienDX = -1;
 				}
 				else {
 					alienDX = 1;
 				}
 			}
-			else if (alienX > ALIEN_HORIZONTAL_ELONGATION) {
+			else if (alienX > ((ALIEN_HORIZONTAL_ELONGATION)+ (rightFreeColumns * ALIEN_WIDTH))) {
 				alienDX = 0;
 			}
-			else if (alienX <= -ALIEN_HORIZONTAL_ELONGATION) {
+			else if (alienX <= -((ALIEN_HORIZONTAL_ELONGATION)+ (leftFreeColumns * ALIEN_WIDTH))) {
 				alienDX = 0;
 			}
 		}
