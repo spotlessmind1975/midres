@@ -370,7 +370,7 @@ void draw_credit() {
 		TILE_CREDIT_HEIGHT,
 		MR_COLOR_WHITE);
 
-	mr_puttilev(MR_SCREEN_WIDTH - 2, MR_SCREEN_HEIGHT - 1, TILE_DIGIT0 + credit, MR_COLOR_WHITE);
+	mr_puttilev(MR_SCREEN_WIDTH - 1, MR_SCREEN_HEIGHT - 1, TILE_DIGIT0 + credit, MR_COLOR_WHITE);
 }
 
 // This function contains the functional logic for managing the 
