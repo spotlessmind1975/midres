@@ -815,6 +815,14 @@ $(EXEDIR)/alienstorm.atarilo:	$(subst PLATFORM,alienstorm.atarilo,$(OBJS))
 ##
 ###############################################################################
 
+obj/joycheck.c16/%.o:	$(SOURCES)
+	$(CC) -t c16 -c -D__UTILITY_JOYCHECK__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/joycheck.c16/,src/,$(@:.o=.c))
+
+$(EXEDIR)/joycheck.c16: $(LIBDIR)/midres.c16.lib $(subst PLATFORM,joycheck.c16,$(OBJS))
+	$(CC) -t c16 $(LDFLAGS) -C cfg/c16.cfg -o $(EXEDIR)/joycheck.c16 $(subst PLATFORM,joycheck.c16,$(OBJS)) $(LIBDIR)/midres.c16.lib 
+	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.c16 $(EXEDIR)/joycheck.c16.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/joycheck.c16.d64  
+
 obj/joycheck.c64/%.o:	$(SOURCES)
 	$(CC) -t c64 -c -D__UTILITY_JOYCHECK__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/joycheck.c64/,src/,$(@:.o=.c))
 
