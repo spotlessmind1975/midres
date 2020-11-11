@@ -1329,7 +1329,8 @@ void control_cannon() {
 				fireX = (cannonX >> 3) + 1;
 			}
 		}
-		switch (mr_get_key_pressed()) {
+		if (!joy) {
+			switch (mr_get_key_pressed()) {
 			case MR_KEY_A:
 				if (cannonX > 0) {
 					--cannonX;
@@ -1349,6 +1350,7 @@ void control_cannon() {
 					fireX = (cannonX >> 3) + 1;
 				}
 				break;
+			}
 		}
 	}
 }
