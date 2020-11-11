@@ -823,6 +823,14 @@ $(EXEDIR)/joycheck.c16: $(LIBDIR)/midres.c16.lib $(subst PLATFORM,joycheck.c16,$
 	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.c16 $(EXEDIR)/joycheck.c16.d64  
 	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/joycheck.c16.d64  
 
+obj/joycheck.vic20/%.o:	$(SOURCES)
+	$(CC) -t vic20 -c -D__UTILITY_JOYCHECK__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/joycheck.vic20/,src/,$(@:.o=.c))
+
+$(EXEDIR)/joycheck.vic20: $(LIBDIR)/midres.vic20.lib $(subst PLATFORM,joycheck.vic20,$(OBJS))
+	$(CC) -t vic20 $(LDFLAGS) -C cfg/vic20.cfg -o $(EXEDIR)/joycheck.vic20 $(subst PLATFORM,joycheck.vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib 
+	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.vic20 $(EXEDIR)/joycheck.vic20.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/joycheck.vic20.d64  
+
 obj/joycheck.c64/%.o:	$(SOURCES)
 	$(CC) -t c64 -c -D__UTILITY_JOYCHECK__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/joycheck.c64/,src/,$(@:.o=.c))
 
@@ -835,7 +843,7 @@ obj/joycheck.vic2024/%.o:	$(SOURCES)
 	$(CC) -t vic20 -c -D__UTILITY_JOYCHECK__ -D__24K__ -C cfg/vic20-32k.cfg -Osir -Cl -D__CBM__ -o $@ $(subst obj/joycheck.vic2024/,src/,$(@:.o=.c))
 
 $(EXEDIR)/joycheck.vic2024: $(LIBDIR)/midres.vic2024.lib $(subst PLATFORM,joycheck.vic2024,$(OBJS))
-	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/joycheck.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/joycheck.vic2024 $(subst PLATFORM,alienstorm.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
+	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/joycheck.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/joycheck.vic2024 $(subst PLATFORM,joycheck.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
 	$(CC1541) -f loader -w $(DATADIR)/jcloader2024.prg $(EXEDIR)/joycheck.vic2024.d64  
 	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.vic2024 $(EXEDIR)/joycheck.vic2024.d64  
 	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/joycheck.vic2024.d64  
@@ -864,10 +872,10 @@ $(EXEDIR)/joycheck.atari:	$(subst PLATFORM,joycheck.atari,$(OBJS))
 	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/joycheck.atari $(subst PLATFORM,joycheck.atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
-	$(call COPYFILES,$(EXEDIR)/joycheck.atari,$(EXEDIR)/atr/joycheck.exe)
+	$(call COPYFILES,$(EXEDIR)/joycheck.atari,$(EXEDIR)/atr/joyc.exe)
 	$(call COPYFILES,$(DATADIR)/zdjtiles.bin,$(EXEDIR)/atr/zdjtiles.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/joycheck.atari.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/joycheck.atari.atr -o $(EXEDIR)/joycheck.atari.atr -f joycheck.exe
+	$(ATRAUTORUN) -i $(EXEDIR)/joycheck.atari.atr -o $(EXEDIR)/joycheck.atari.atr -f joyc.exe
 
 ###############################################################################
 ## FINAL RULES
