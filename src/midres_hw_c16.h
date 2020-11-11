@@ -154,10 +154,10 @@
 #define MR_JOYSTICK_1					1
 #define MR_JOYSTICK_COUNT				2
 #define MR_JOYSTICK_UP					1
-#define MR_JOYSTICK_DOWN				5
-#define MR_JOYSTICK_LEFT				3
-#define MR_JOYSTICK_RIGHT				7
-#define MR_JOYSTICK_FIRE				128
+#define MR_JOYSTICK_DOWN				2
+#define MR_JOYSTICK_LEFT				4
+#define MR_JOYSTICK_RIGHT				8
+#define MR_JOYSTICK_FIRE				64
 
 #define MR_MAX_TILES_FOR_TILESET		128
 #define MR_TILE_WIDTH_IN_PIXEL			(8>>(MR_MULTICOLOR))

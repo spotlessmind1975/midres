@@ -230,18 +230,27 @@ unsigned char mr_joy_hd(unsigned char _number) {
 
     unsigned char port;
 
-    switch (_number) {
-        case MR_JOYSTICK_0:
-            (*(unsigned char*)0xff08) = 0xfa;
-            port = (*(unsigned char*)0xff08);
-            break;
-        case MR_JOYSTICK_1:
-            (*(unsigned char*)0xff08) = 0xfd;
-            port = (*(unsigned char*)0xff08);
-            break;
+    if (_number == MR_JOYSTICK_0) {
+        (*(unsigned char*)0xfd30) = 0xff;
+        (*(unsigned char*)0xff08) = 0x02;
+        port = 0;
+        port = (*(unsigned char*)0xff08);
+        (*(unsigned char*)0xff08) = 0x02;
+        port = 0;
+        port = (*(unsigned char*)0xff08);
     }
-    
-    return port;
+    else {
+        (*(unsigned char*)0xfd30) = 0xff;
+        (*(unsigned char*)0xff08) = 0x04;
+        port = 0;
+        port = (*(unsigned char*)0xff08);
+        (*(unsigned char*)0xff08) = 0x04;
+        port = 0;
+        port = (*(unsigned char*)0xff08);
+    }
+
+    return ~port;
+
 }
 
 #endif
