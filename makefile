@@ -847,7 +847,7 @@ obj/joycheck.c128/%.o:	$(SOURCES)
 $(EXEDIR)/joycheck.c128:	$(subst PLATFORM,joycheck.c128,$(OBJS))
 	$(CC) -t c128 $(LDFLAGS) -o $(EXEDIR)/joycheck.c128 $(subst PLATFORM,joycheck.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
 	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.c128 $(EXEDIR)/joycheck.c128.d64  
-	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/alienstorm.c128.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/joycheck.c128.d64  
 
 obj/joycheck.atari/%.o:	$(SOURCES)
 	$(CC) -t atari -c -D__UTILITY_JOYCHECK__ -Osir -Cl -o $@ $(subst obj/joycheck.atari/,src/,$(@:.o=.c))
