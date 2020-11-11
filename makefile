@@ -39,6 +39,7 @@ endif
 #  - DRAWING - an animation using drawing primitives (v1.1)
 #  - BITBLIT - an animation using bit blits primivites (v1.2)
 #  - TILE - an animation using tiles primivites (v1.3)
+#  - JOY - joystick feedback (v1.61)
 
 ifdef demo
 DEMO := $(demo)
@@ -64,6 +65,16 @@ endif
 ifdef game
 ifdef target
 ATARGETS ?= $(game).$(target)
+LTARGETS ?= $(target)
+endif
+endif
+
+# Given UTILITY:
+#  - joycheck
+
+ifdef utility
+ifdef target
+ATARGETS ?= $(utility).$(target)
 LTARGETS ?= $(target)
 endif
 endif
@@ -199,6 +210,7 @@ SOURCES := $(wildcard src/main.c)
 SOURCES += $(wildcard src/demo_*.c)
 SOURCES += $(wildcard src/game_*.c)
 SOURCES += $(wildcard src/tutorial_*.c)
+SOURCES += $(wildcard src/utility_*.c)
 
 LIB_SOURCES := $(wildcard src/midres.c)
 LIB_SOURCES += $(wildcard src/midres_*.c)
@@ -279,6 +291,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64: $(subst PLATFORM,c64,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 
 # Let's define rules to compile the demo under C=64 as the overlay version.
 # Moreover, all the executable files will be put on a D64 1541 image, 
@@ -305,6 +318,7 @@ $(EXEDIR)/$(PROGRAMNAME).c64ovl:	$(subst PLATFORM,c64ovl,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).c64ovl.d64  
 
 #$(CC1541) -f test.pic -w $(DATADIR)/test.pic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -335,6 +349,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20:	$(subst PLATFORM,vic20,$(OBJS))
 	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20.d64  
 
 # Let's define rules to compile the demo under VIC 20 as a one and single 
 # executable file. This compilation will fails since there is no enough RAM.
@@ -361,6 +376,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic2024:	$(subst PLATFORM,vic2024,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).vic2024.d64  
 
 # Let's define rules to compile the demo under VIC20 as the overlay version.
 # This is the only way to compile this program in order to be able to be 
@@ -387,6 +403,7 @@ $(EXEDIR)/$(PROGRAMNAME).vic20ovl:	$(subst PLATFORM,vic20ovl,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).vic20ovl.d64  
 
 ## C16 ------------------------------------------------------------------------
 
@@ -416,6 +433,7 @@ $(EXEDIR)/$(PROGRAMNAME).c16:	$(subst PLATFORM,c16,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).c16.d64  
 
 ## PLUS4 ------------------------------------------------------------------------
 
@@ -447,6 +465,7 @@ $(EXEDIR)/$(PROGRAMNAME).plus4:	$(subst PLATFORM,plus4,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).plus4.d64  
 
 ## C128 ------------------------------------------------------------------------
 
@@ -477,6 +496,7 @@ $(EXEDIR)/$(PROGRAMNAME).c128:	$(subst PLATFORM,c128,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).c128.d64  
 
 # Let's define rules to compile the demo under C=128 as the overlay version.
 # Moreover, all the executable files will be put on a D64 1541 image, 
@@ -503,6 +523,7 @@ $(EXEDIR)/$(PROGRAMNAME).c128ovl:	$(subst PLATFORM,c128ovl,$(OBJS))
 	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/$(PROGRAMNAME).c128ovl.d64  
 
 #$(CC1541) -f test.pic -w $(DATADIR)/test.pic.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
 #$(CC1541) -f test.col -w $(DATADIR)/test.col.prg $(EXEDIR)/$(PROGRAMNAME).c64.d64  
@@ -534,6 +555,7 @@ $(EXEDIR)/$(PROGRAMNAME).atari:	$(subst PLATFORM,atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
 	$(call COPYFILES,$(DATADIR)/testcard.bin,$(EXEDIR)/atr/testcard.bin)
+	$(call COPYFILES,$(DATADIR)/zdjtiles.bin,$(EXEDIR)/atr/zdjtiles.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atari.atr -o $(EXEDIR)/$(PROGRAMNAME).atari.atr -f $(PROGRAMNAME).exe
 
@@ -563,6 +585,7 @@ $(EXEDIR)/$(PROGRAMNAME).atarilo:	$(subst PLATFORM,atarilo,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
 	$(call COPYFILES,$(DATADIR)/testcard.bin,$(EXEDIR)/atr/testcard.bin)
+	$(call COPYFILES,$(DATADIR)/zdjtiles.bin,$(EXEDIR)/atr/zdjtiles.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/$(PROGRAMNAME).atarilo.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/$(PROGRAMNAME).atarilo.atr -o $(EXEDIR)/$(PROGRAMNAME).atarilo.atr -f $(PROGRAMNAME).exe
 
@@ -789,6 +812,56 @@ $(EXEDIR)/alienstorm.atarilo:	$(subst PLATFORM,alienstorm.atarilo,$(OBJS))
 	$(ATRAUTORUN) -i $(EXEDIR)/alienstorm.atarilo.atr -o $(EXEDIR)/alienstorm.atarilo.atr -f game.exe
 
 ###############################################################################
+##
+###############################################################################
+
+obj/joycheck.c64/%.o:	$(SOURCES)
+	$(CC) -t c64 -c -D__UTILITY_JOYCHECK__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/joycheck.c64/,src/,$(@:.o=.c))
+
+$(EXEDIR)/joycheck.c64: $(LIBDIR)/midres.c64.lib $(subst PLATFORM,joycheck.c64,$(OBJS))
+	$(CC) -t c64 $(LDFLAGS) -o $(EXEDIR)/joycheck.c64 $(subst PLATFORM,joycheck.c64,$(OBJS)) $(LIBDIR)/midres.c64.lib 
+	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.c64 $(EXEDIR)/joycheck.c64.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/joycheck.c64.d64  
+
+obj/joycheck.vic2024/%.o:	$(SOURCES)
+	$(CC) -t vic20 -c -D__UTILITY_JOYCHECK__ -D__24K__ -C cfg/vic20-32k.cfg -Osir -Cl -D__CBM__ -o $@ $(subst obj/joycheck.vic2024/,src/,$(@:.o=.c))
+
+$(EXEDIR)/joycheck.vic2024: $(LIBDIR)/midres.vic2024.lib $(subst PLATFORM,joycheck.vic2024,$(OBJS))
+	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/joycheck.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/joycheck.vic2024 $(subst PLATFORM,alienstorm.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
+	$(CC1541) -f loader -w $(DATADIR)/jcloader2024.prg $(EXEDIR)/joycheck.vic2024.d64  
+	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.vic2024 $(EXEDIR)/joycheck.vic2024.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/joycheck.vic2024.d64  
+
+obj/joycheck.plus4/%.o:	$(SOURCES)
+	$(CC) -t plus4 -c -D__UTILITY_JOYCHECK__ -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/plus4.cfg -o $@ $(subst obj/joycheck.plus4/,src/,$(@:.o=.c))
+
+$(EXEDIR)/joycheck.plus4:	$(subst PLATFORM,joycheck.plus4,$(OBJS))
+	$(CC) -t plus4 $(LDFLAGS) -m $(EXEDIR)/joycheck.plus4.map -C cfg/plus4.cfg -o $(EXEDIR)/joycheck.plus4 $(subst PLATFORM,joycheck.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
+	$(CC1541) -f loader -w $(DATADIR)/jcloader4.prg $(EXEDIR)/joycheck.plus4.d64  
+	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.plus4 $(EXEDIR)/joycheck.plus4.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/joycheck.plus4.d64  
+
+obj/joycheck.c128/%.o:	$(SOURCES)
+	$(CC) -t c128 -c -D__UTILITY_JOYCHECK__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/joycheck.c128/,src/,$(@:.o=.c))
+
+$(EXEDIR)/joycheck.c128:	$(subst PLATFORM,joycheck.c128,$(OBJS))
+	$(CC) -t c128 $(LDFLAGS) -o $(EXEDIR)/joycheck.c128 $(subst PLATFORM,joycheck.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
+	$(CC1541) -f joycheck -w $(EXEDIR)/joycheck.c128 $(EXEDIR)/joycheck.c128.d64  
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/alienstorm.c128.d64  
+
+obj/joycheck.atari/%.o:	$(SOURCES)
+	$(CC) -t atari -c -D__UTILITY_JOYCHECK__ -Osir -Cl -o $@ $(subst obj/joycheck.atari/,src/,$(@:.o=.c))
+
+$(EXEDIR)/joycheck.atari:	$(subst PLATFORM,joycheck.atari,$(OBJS))
+	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/joycheck.atari $(subst PLATFORM,joycheck.atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(EXEDIR)/joycheck.atari,$(EXEDIR)/atr/joycheck.exe)
+	$(call COPYFILES,$(DATADIR)/zdjtiles.bin,$(EXEDIR)/atr/zdjtiles.bin)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/joycheck.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/joycheck.atari.atr -o $(EXEDIR)/joycheck.atari.atr -f joycheck.exe
+
+###############################################################################
 ## FINAL RULES
 ###############################################################################
 
@@ -855,6 +928,15 @@ clean:
 	$(call RMFILES,$(EXEDIR)/alienstorm.vic2024)
 	$(call RMFILES,$(EXEDIR)/alienstorm.vic2024.d64)
 	$(call RMFILES,$(EXEDIR)/alienstorm.atari.atr)
+	$(call RMFILES,$(EXEDIR)/joycheck.c64)
+	$(call RMFILES,$(EXEDIR)/joycheck.c64.d64)
+	$(call RMFILES,$(EXEDIR)/joycheck.plus4)
+	$(call RMFILES,$(EXEDIR)/joycheck.plus4.d64)
+	$(call RMFILES,$(EXEDIR)/joycheck.vic2024)
+	$(call RMFILES,$(EXEDIR)/joycheck.vic2024.d64)
+	$(call RMFILES,$(EXEDIR)/joycheck.c128)
+	$(call RMFILES,$(EXEDIR)/joycheck.c128.d64)
+	$(call RMFILES,$(EXEDIR)/joycheck.atari.atr)
 	$(call RMFILES,$(LIBDIR)/midres.c64.lib)
 	$(call RMFILES,$(LIBDIR)/midres.vic2024.lib)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))

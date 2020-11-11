@@ -31,6 +31,7 @@ void demo_drawing();
 void demo_bitblit();
 void demo_tile();
 void demo_test_card();
+void utility_joycheck();
 
 void game_air_attack();
 void game_totto();

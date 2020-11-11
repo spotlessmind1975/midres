@@ -101,4 +101,10 @@ void main(void) {
 
 #endif
 
+#ifdef __UTILITY_JOYCHECK__
+
+    utility_joycheck();
+
+#endif
+
 }
