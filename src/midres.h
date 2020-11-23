@@ -904,6 +904,146 @@
 	#define mr_htilese(_x1, _x2, _y, _tile, _color) _mr_htiles(MR_SM(MR_ENABLED_SCREEN), MR_CM(MR_ENABLED_SCREEN), _x1, _x2, _y, _tile, _color);
 
 	/*-----------------------------------------------------------------------
+	 --- PROTOTHREADING
+	 -----------------------------------------------------------------------*/
+
+	typedef unsigned int mr_lc_t;
+
+	#define MR_LC_INIT(s)		s = 0;
+	#define MR_LC_RESUME(s)		switch((unsigned int)(s)) { case 0:
+	#define MR_LC_SET(s)		s = (unsigned int)(__LINE__); case (unsigned int)(__LINE__):
+	#define MR_LC_END(s)		}
+
+	struct mr_pt {	mr_lc_t lc; };
+	typedef struct mr_pt mr_protothread;
+
+	#define MR_PT_WAITING		0
+	#define MR_PT_YIELDED		1
+	#define MR_PT_EXITED		2
+	#define MR_PT_ENDED			3
+
+	#define MR_PT_INIT(pt)		MR_LC_INIT((pt)->lc)
+	#define MR_PT_THREAD(name)	unsigned char name(mr_protothread * _mr_pt)
+	#define MR_PT_THREAD_EXT(name,ctx) \
+								unsigned char name(ctx * _mr_pt)
+
+	#define MR_PT_BEGIN(pt)		{ char MR_PT_YIELD_FLAG = 1; MR_LC_RESUME((pt)->lc)
+	#define MR_PT_END(pt)		MR_LC_END((pt)->lc); MR_PT_YIELD_FLAG = 0; MR_PT_INIT(pt); return MR_PT_ENDED; }
+	#define MR_PT_SCHEDULE(f)	((f) < MR_PT_EXITED)
+
+	#define MR_PT_WAIT_UNTIL(pt, condition)									\
+								do {										\
+									MR_LC_SET((pt)->lc);					\
+									if(!(condition)) {						\
+										return MR_PT_WAITING;				\
+									}										\
+								} while(0)
+	#define MR_PT_WAIT_WHILE(pt, cond) \
+								MR_PT_WAIT_UNTIL((pt), !(cond))
+	#define MR_PT_WAIT_THREAD(pt, thread) \
+								MR_PT_WAIT_WHILE((pt), MR_PT_SCHEDULE(thread))
+	#define MR_PT_SPAWN(pt, child, thread)	\
+								do {										\
+									MR_PT_INIT((child));					\
+									MR_PT_WAIT_THREAD((pt), (thread));		\
+								} while(0)
+	#define MR_PT_RESTART(pt) \
+								do {										\
+									MR_PT_INIT(pt);							\
+									return MR_PT_WAITING;					\
+								} while(0)
+
+	#define MR_PT_EXIT(pt) \
+								do {										\
+									MR_PT_INIT(pt);							\
+									return MR_PT_EXITED;					\
+								} while(0)
+
+	#define MR_PT_YIELD(pt)	\
+								do {										\
+									MR_PT_YIELD_FLAG = 0;					\
+									MR_LC_SET((pt)->lc);					\
+									if(MR_PT_YIELD_FLAG == 0) {				\
+										return MR_PT_YIELDED;				\
+									}										\
+								} while(0)
+
+	#define MR_PT_YIELD_UNTIL(pt, cond) \
+								do {										\
+									MR_PT_YIELD_FLAG = 0;					\
+									MR_LC_SET((pt)->lc);					\
+									if((MR_PT_YIELD_FLAG == 0) || !(cond)) {\
+									  return MR_PT_YIELDED;					\
+									}										\
+								} while(0)
+
+	///
+
+	#define MR_PTI_BEGIN()		{ char MR_PT_YIELD_FLAG = 1; MR_LC_RESUME((_mr_pt)->lc)
+	#define MR_PTI_END() \
+								MR_LC_END((_mr_pt)->lc);					\
+								MR_PT_YIELD_FLAG = 0;						\
+								MR_PT_INIT(_mr_pt);							\
+								return MR_PT_ENDED;							\
+								}
+	#define MR_PTI_WAIT_UNTIL(condition) \
+								do {										\
+									MR_LC_SET((_mr_pt)->lc);				\
+									if(!(condition)) {						\
+										return MR_PT_WAITING;				\
+									}										\
+								} while(0)
+	#define MR_PTI_WAIT_WHILE(cond) \
+								MR_PT_WAIT_UNTIL((_mr_pt), !(cond))
+	#define MR_PTI_WAIT_THREAD(thread) \
+								MR_PT_WAIT_WHILE((_mr_pt), MR_PT_SCHEDULE(thread))
+	#define MR_PTI_SPAWN(child, thread) \
+								do {										\
+									MR_PT_INIT((child));					\
+									MR_PTI_WAIT_THREAD((thread));			\
+								} while(0)
+	#define MR_PTI_RESTART() \
+								do {										\
+									MR_PT_INIT(_mr_pt);						\
+									return MR_PT_WAITING;					\
+								} while(0)
+	#define MR_PTI_EXIT() \
+								do {										\
+									MR_PT_INIT(_mr_pt);						\
+									return MR_PT_EXITED;					\
+								} while(0)
+	#define MR_PTI_YIELD() \
+								do {										\
+									MR_PT_YIELD_FLAG = 0;					\
+									MR_LC_SET((_mr_pt)->lc);				\
+									if(MR_PT_YIELD_FLAG == 0) {				\
+										return MR_PT_YIELDED;				\
+									}										\
+								} while(0)
+	#define MR_PTI_YIELD_UNTIL(cond) \
+								do {										\
+									MR_PT_YIELD_FLAG = 0;					\
+									MR_LC_SET((_mr_pt)->lc);				\
+									if((MR_PT_YIELD_FLAG == 0) || !(cond)) {\
+										return MR_PT_YIELDED;				\
+									}										\
+								} while(0)
+
+	struct mr_pt_sem { unsigned char count; };
+	typedef struct mr_pt_sem mr_semaphore;
+
+	#define MR_PTI_SEM_INIT(s, c) \
+								(s)->count = c
+	#define MR_PTI_SEM_WAIT(s) \
+								do {                                        \
+									MR_PTI_WAIT_UNTIL((s)->count > 0);      \
+									--(s)->count;                           \
+								} while(0)
+	#define MR_PTI_SEM_SIGNAL(s) \
+								+(s)->count
+
+
+	/*-----------------------------------------------------------------------
 	 --- KEYBOARD & OTHER
 	 -----------------------------------------------------------------------*/
 
