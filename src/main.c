@@ -101,6 +101,12 @@ void main(void) {
 
 #endif
 
+#ifdef __GAME_ELEVATOR__
+
+    game_elevator();
+
+#endif
+
 #ifdef __UTILITY_JOYCHECK__
 
     utility_joycheck();

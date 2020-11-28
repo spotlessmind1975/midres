@@ -878,6 +878,79 @@ $(EXEDIR)/joycheck.atari:	$(subst PLATFORM,joycheck.atari,$(OBJS))
 	$(ATRAUTORUN) -i $(EXEDIR)/joycheck.atari.atr -o $(EXEDIR)/joycheck.atari.atr -f joyc.exe
 
 ###############################################################################
+##
+###############################################################################
+
+obj/elevator.c16/%.o:	$(SOURCES)
+	$(CC) -t c16 -c -D__GAME_ELEVATOR__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/elevator.c16/,src/,$(@:.o=.c))
+
+$(EXEDIR)/elevator.c16: $(LIBDIR)/midres.c16.lib $(subst PLATFORM,elevator.c16,$(OBJS))
+	$(CC) -t c16 $(LDFLAGS) -C cfg/c16.cfg -o $(EXEDIR)/elevator.c16 $(subst PLATFORM,elevator.c16,$(OBJS)) $(LIBDIR)/midres.c16.lib 
+	$(CC1541) -f elevator -w $(EXEDIR)/elevator.c16 $(EXEDIR)/elevator.c16.d64  
+	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/elevator.c16.d64  
+	$(CC1541) -f zelintro.bin -w $(DATADIR)/elevator16.mpic $(EXEDIR)/elevator.c16.d64  
+
+obj/elevator.vic20/%.o:	$(SOURCES)
+	$(CC) -t vic20 -c -D__GAME_ELEVATOR__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/elevator.vic20/,src/,$(@:.o=.c))
+
+$(EXEDIR)/elevator.vic20: $(LIBDIR)/midres.vic20.lib $(subst PLATFORM,elevator.vic20,$(OBJS))
+	$(CC) -t vic20 $(LDFLAGS) -C cfg/vic20.cfg -o $(EXEDIR)/elevator.vic20 $(subst PLATFORM,elevator.vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib 
+	$(CC1541) -f elevator -w $(EXEDIR)/elevator.vic20 $(EXEDIR)/elevator.vic20.d64  
+	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/elevator.vic20.d64  
+	$(CC1541) -f zelintro.bin -w $(DATADIR)/elevator20.mpic $(EXEDIR)/elevator.vic20.d64  
+
+obj/elevator.c64/%.o:	$(SOURCES)
+	$(CC) -t c64 -c -D__GAME_ELEVATOR__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/elevator.c64/,src/,$(@:.o=.c))
+
+$(EXEDIR)/elevator.c64: $(LIBDIR)/midres.c64.lib $(subst PLATFORM,elevator.c64,$(OBJS))
+	$(CC) -t c64 $(LDFLAGS) -o $(EXEDIR)/elevator.c64 $(subst PLATFORM,elevator.c64,$(OBJS)) $(LIBDIR)/midres.c64.lib 
+	$(CC1541) -f elevator -w $(EXEDIR)/elevator.c64 $(EXEDIR)/elevator.c64.d64  
+	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/elevator.c64.d64  
+	$(CC1541) -f zelintro.bin -w $(DATADIR)/elevator64.mpic $(EXEDIR)/elevator.c64.d64  
+
+obj/elevator.vic2024/%.o:	$(SOURCES)
+	$(CC) -t vic20 -c -D__GAME_ELEVATOR__ -D__24K__ -C cfg/vic20-32k.cfg -Osir -Cl -D__CBM__ -o $@ $(subst obj/elevator.vic2024/,src/,$(@:.o=.c))
+
+$(EXEDIR)/elevator.vic2024: $(LIBDIR)/midres.vic2024.lib $(subst PLATFORM,elevator.vic2024,$(OBJS))
+	$(CC) -t vic20 $(LDFLAGS) -m $(EXEDIR)/elevator.vic2024.map -C cfg/vic20-32k.cfg -o $(EXEDIR)/elevator.vic2024 $(subst PLATFORM,elevator.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
+	$(CC1541) -f loader -w $(DATADIR)/elloader2024.prg $(EXEDIR)/elevator.vic2024.d64  
+	$(CC1541) -f elevator -w $(EXEDIR)/elevator.vic2024 $(EXEDIR)/elevator.vic2024.d64  
+	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/elevator.vic2024.d64  
+	$(CC1541) -f zelintro.bin -w $(DATADIR)/elevator20.mpic $(EXEDIR)/elevator.vic2024.d64  
+
+obj/elevator.plus4/%.o:	$(SOURCES)
+	$(CC) -t plus4 -c -D__GAME_ELEVATOR__ -Osir -Cl -T -l $(@:.o=.map) -D__CBM__ -C cfg/plus4.cfg -o $@ $(subst obj/elevator.plus4/,src/,$(@:.o=.c))
+
+$(EXEDIR)/elevator.plus4:	$(subst PLATFORM,elevator.plus4,$(OBJS))
+	$(CC) -t plus4 $(LDFLAGS) -m $(EXEDIR)/elevator.plus4.map -C cfg/plus4.cfg -o $(EXEDIR)/elevator.plus4 $(subst PLATFORM,elevator.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
+	$(CC1541) -f loader -w $(DATADIR)/elloader4.prg $(EXEDIR)/elevator.plus4.d64  
+	$(CC1541) -f elevator -w $(EXEDIR)/elevator.plus4 $(EXEDIR)/elevator.plus4.d64  
+	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/elevator.plus4.d64  
+	$(CC1541) -f zelintro.bin -w $(DATADIR)/elevator16.mpic $(EXEDIR)/elevator.plus4.d64  
+
+obj/elevator.c128/%.o:	$(SOURCES)
+	$(CC) -t c128 -c -D__GAME_ELEVATOR__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/elevator.c128/,src/,$(@:.o=.c))
+
+$(EXEDIR)/elevator.c128:	$(subst PLATFORM,elevator.c128,$(OBJS))
+	$(CC) -t c128 $(LDFLAGS) -o $(EXEDIR)/elevator.c128 $(subst PLATFORM,elevator.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
+	$(CC1541) -f elevator -w $(EXEDIR)/elevator.c128 $(EXEDIR)/elevator.c128.d64  
+	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/elevator.c128.d64  
+	$(CC1541) -f zelintro.bin -w $(DATADIR)/elevator64.mpic $(EXEDIR)/elevator.c128.d64  
+
+obj/elevator.atari/%.o:	$(SOURCES)
+	$(CC) -t atari -c -D__GAME_ELEVATOR__ -Osir -Cl -o $@ $(subst obj/elevator.atari/,src/,$(@:.o=.c))
+
+$(EXEDIR)/elevator.atari:	$(subst PLATFORM,elevator.atari,$(OBJS))
+	$(CC) -t atari $(LDFLAGS) -o $(EXEDIR)/elevator.atari $(subst PLATFORM,elevator.atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
+	$(call RMFILES,$(EXEDIR)/atr/*.*)
+	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
+	$(call COPYFILES,$(EXEDIR)/elevator.atari,$(EXEDIR)/atr/elevatr.exe)
+	$(call COPYFILES,$(DATADIR)/zeltiles.bin,$(EXEDIR)/atr/zeltiles.bin)
+	$(call COPYFILES,$(DATADIR)/elevatora.mpic,$(EXEDIR)/atr/zelintro.bin)
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/elevator.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/elevator.atari.atr -o $(EXEDIR)/elevator.atari.atr -f elevatr.exe
+
+###############################################################################
 ## FINAL RULES
 ###############################################################################
 
@@ -953,6 +1026,15 @@ clean:
 	$(call RMFILES,$(EXEDIR)/joycheck.c128)
 	$(call RMFILES,$(EXEDIR)/joycheck.c128.d64)
 	$(call RMFILES,$(EXEDIR)/joycheck.atari.atr)
+	$(call RMFILES,$(EXEDIR)/elevator.c64)
+	$(call RMFILES,$(EXEDIR)/elevator.c64.d64)
+	$(call RMFILES,$(EXEDIR)/elevator.plus4)
+	$(call RMFILES,$(EXEDIR)/elevator.plus4.d64)
+	$(call RMFILES,$(EXEDIR)/elevator.vic2024)
+	$(call RMFILES,$(EXEDIR)/elevator.vic2024.d64)
+	$(call RMFILES,$(EXEDIR)/elevator.c128)
+	$(call RMFILES,$(EXEDIR)/elevator.c128.d64)
+	$(call RMFILES,$(EXEDIR)/elevator.atari.atr)
 	$(call RMFILES,$(LIBDIR)/midres.c64.lib)
 	$(call RMFILES,$(LIBDIR)/midres.vic2024.lib)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))

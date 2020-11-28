@@ -36,6 +36,7 @@ void utility_joycheck();
 void game_air_attack();
 void game_totto();
 void game_alien_storm();
+void game_elevator();
 
 void tutorial_mctile();
 
