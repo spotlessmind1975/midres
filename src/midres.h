@@ -1033,14 +1033,26 @@
 	typedef struct mr_pt_sem mr_semaphore;
 
 	#define MR_PTI_SEM_INIT(s, c) \
-								(s)->count = c
+								(s)->count = c;
 	#define MR_PTI_SEM_WAIT(s) \
 								do {                                        \
 									MR_PTI_WAIT_UNTIL((s)->count > 0);      \
 									--(s)->count;                           \
 								} while(0)
 	#define MR_PTI_SEM_SIGNAL(s) \
-								+(s)->count
+								++(s)->count;
+
+	struct mr_pt_wait { unsigned char count; };
+	typedef struct mr_pt_wait mr_twait;
+
+	#define MR_PTI_WAIT(s, c) \
+								(s)->count = c;					\
+								while( (s)->count ) {			\
+									--(s)->count;				\
+									MR_PTI_YIELD( );			\
+								}
+	#define MR_PTI_RESET(s, c) \
+								(s)->count = c;
 
 
 	/*-----------------------------------------------------------------------
