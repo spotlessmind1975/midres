@@ -71,6 +71,12 @@ typedef struct {
 #define	FLOOR_COUNT						4
 #endif
 
+#ifdef __ATARI__
+#define OFFSET 1
+#else
+#define OFFSET 0
+#endif
+
 // Height of a floor, in tiles. We reserve 2 tiles for status lines (up&down).
 #define	FLOOR_HEIGHT					( ( MR_SCREEN_HEIGHT - 2 ) / 5 )
 
@@ -82,7 +88,7 @@ typedef struct {
 
 // Starting position of CONTAINER and size
 #define	CONTAINER_WIDTH					( MR_SCREEN_WIDTH )
-#define	CONTAINER_HEIGHT				( FLOOR_HEIGHT )
+#define	CONTAINER_HEIGHT				( FLOOR_HEIGHT - OFFSET )
 #define	CONTAINER_X						( 0 )
 #define	CONTAINER_Y						( MR_SCREEN_HEIGHT - CONTAINER_HEIGHT )
 
