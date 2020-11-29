@@ -1038,9 +1038,15 @@ MR_PT_THREAD(elevatormove) {
 
 		// UPDATE FLOOR
 		if (directionUp) {
-			++actualFloor;
+			// Defensive programming: avoid crashes.
+			if (actualFloor < FLOOR_COUNT) {
+				++actualFloor;
+			}
 		} else {
-			--actualFloor;
+			// Defensive programming: avoid crashes.
+			if (actualFloor > 0) {
+				--actualFloor;
+			}
 		}
 
 		// RESET MOTOR STEP
@@ -1162,6 +1168,11 @@ MR_PT_THREAD(lift) {
 			for (i = 0; i < FLOOR_COUNT; ++i) {
 				draw_moving_floor(i);
 			}
+
+			// By default, current floor must be removed 
+			// from potential targets.
+			targetFloorsUp &= ~(1 << actualFloor);
+			targetFloorsDown &= ~(1 << actualFloor);
 
 			targetFloor = 0xff;
 			if (directionUp) {
@@ -1331,7 +1342,10 @@ MR_PT_THREAD_EXT(passenger, passenger_protothread) {
 						process_request_floor(passengerFloor[_mr_pt->index]);
 					}
 
-					++passengerWait[_mr_pt->index];
+					// Avoid to increment over a reasonable quota.
+					if (passengerWait[_mr_pt->index] < 50) {
+						++passengerWait[_mr_pt->index];
+					}
 
 				}
 
@@ -1373,7 +1387,10 @@ MR_PT_THREAD_EXT(passenger, passenger_protothread) {
 		while ((actualFloor != desiredFloor[_mr_pt->index])) {
 			// WAIT (to floor and open door)
 			MR_PTI_YIELD_UNTIL((doorFrame == 0));
-			++passengerWait[_mr_pt->index];
+			// Avoid to increment over a reasonable quota.
+			if (passengerWait[_mr_pt->index] < 50) {
+				++passengerWait[_mr_pt->index];
+			}
 		}
 
 		passengerFloor[_mr_pt->index] = actualFloor;
@@ -1485,6 +1502,7 @@ MR_PT_THREAD(input) {
 
 			case MR_KEY_S:
 				gameMode = GAME_MODE_SIMULATION;
+				draw_background_panel(TILE_PANEL);
 				draw_elevator_panel();
 				draw_mode();
 				clear_time();
