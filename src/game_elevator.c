@@ -902,7 +902,7 @@ void draw_time() {
 
 // Clear the space on the screen occupied by the times.
 void clear_time() {
-	mr_putftilesv(TILE_SIMULATION_WIDTH+1, 0, TILE_EMPTY, (TIME_REMAIN_MAX>>3)+4+(COOPERATIVE_LATENCY_MAX), 1, MR_COLOR_BLACK);
+	mr_putftilesv(TILE_SIMULATION_WIDTH+1, 0, TILE_EMPTY, (TIME_REMAIN_MAX>>3)+4+(COOPERATIVE_LATENCY_MAX>>3), 1, MR_COLOR_BLACK);
 }
 
 // This function will draw the score to a specific position on the screen.
