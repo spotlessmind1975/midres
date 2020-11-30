@@ -31,7 +31,6 @@ void demo_drawing();
 void demo_bitblit();
 void demo_tile();
 void demo_test_card();
-void utility_joycheck();
 
 void game_air_attack();
 void game_totto();
@@ -39,6 +38,9 @@ void game_alien_storm();
 void game_elevator();
 
 void tutorial_mctile();
+void tutorial_protothread1();
+
+void utility_joycheck();
 
 // OVERLAYED FUNCTIONS (MODULE 1)
 #include "midres.h"
