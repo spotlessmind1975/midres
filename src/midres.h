@@ -916,7 +916,7 @@
 
 	struct mr_pt {	mr_lc_t lc; };
 	typedef struct mr_pt mr_protothread;
-	#define MR_PT_CTX(ctx,x)	typedef struct { mr_lc_t lc; x; } ctx##_protothread;
+	#define MR_PT_CTX(ctx,x)	typedef struct { mr_lc_t lc; x } ctx##_protothread;
 
 	#define MR_PT_WAITING		0
 	#define MR_PT_YIELDED		1
