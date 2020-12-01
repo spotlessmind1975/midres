@@ -39,6 +39,7 @@ void game_elevator();
 
 void tutorial_mctile();
 void tutorial_protothread1();
+void tutorial_protothread2();
 
 void utility_joycheck();
 

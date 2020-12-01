@@ -101,6 +101,12 @@ void main(void) {
 
 #endif
 
+#ifdef __TUTORIAL_PROTOTHREAD2__
+
+    tutorial_protothread2();
+
+#endif
+
 #ifdef __GAME_ALIEN_STORM__
 
     game_alien_storm();

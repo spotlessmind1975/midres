@@ -21,8 +21,6 @@
 // Needed for MIDRES library call.
 #include "midres.h"
 
-MR_PT_CTX(pippo, unsigned char variable)
-
 mr_protothread firstThread;
 mr_protothread secondThread;
 
