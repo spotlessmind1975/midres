@@ -1,5 +1,4 @@
-#define __TUTORIAL__PROTOTHREAD1__ 1
-#ifdef __TUTORIAL__PROTOTHREAD1__
+#ifdef __TUTORIAL_PROTOTHREAD1__
 
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *

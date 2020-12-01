@@ -1,5 +1,4 @@
-#define __TUTORIAL__PROTOTHREAD2__ 1
-#ifdef __TUTORIAL__PROTOTHREAD2__
+#ifdef __TUTORIAL_PROTOTHREAD2__
 
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
@@ -169,7 +168,7 @@ void tutorial_protothread2() {
 
 	while (1) {
 		mr_start_frame();
-		for (i = 0; i < 5; ++i) {
+		for (i = 0; i < FLOOR_COUNT; ++i) {
 			walk(&walkThread[i]);
 		}
 		mr_end_frame(4);
