@@ -604,14 +604,20 @@ $(EXEDIR)/$(PROGRAMNAME).atarilo:	$(subst PLATFORM,atarilo,$(OBJS))
 # executable file. This compilation is used as a "functional check", to
 # be sure that the source implementation is correct.
 obj/atmos/rawdata.o:	$(DATADIR)/tutorial_mctile.bin
-	$(FILE2INCLUDE) -i $(DATADIR)/tutorial_mctile.bin -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tutorial_mctile.bin -c src/rawdata.c -h src/rawdata.h
 	$(CC) -T -t c64 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o obj/atmos/rawdata.o src/rawdata.c
+
+obj/atmos/%.o:	$(LIB_SOURCES)
+	$(CC) -T -l $(@:.o=.asm) -t atmos -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/atmos/,src/,$(@:.o=.c))
+
+$(LIBDIR)/midres.atmos.lib:	$(subst PLATFORM,atmos,$(LIB_OBJS))
+	$(AR) r $(LIBDIR)/midres.atmos.lib $(subst PLATFORM,atmos,$(LIB_OBJS))
 
 obj/atmos/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atmos -c $(CFLAGS) -Osir -Cl -o $@ $(subst obj/atmos/,src/,$(@:.o=.c))
 
-$(EXEDIR)/$(PROGRAMNAME).atmos:	$(subst PLATFORM,atmos,$(OBJS))
-	$(CC) -Ln demoatmos.lbl -t atmos $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atmos.map -C cfg/atmos.cfg -o $(EXEDIR)/$(PROGRAMNAME).atmos.tap $(subst PLATFORM,atmos,$(OBJS))
+$(EXEDIR)/$(PROGRAMNAME).atmos:	$(subst PLATFORM,atmos,$(OBJS)) obj/atmos/rawdata.o
+	$(CC) -Ln demoatmos.lbl -t atmos $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atmos.map -C cfg/atmos.cfg -o $(EXEDIR)/$(PROGRAMNAME).atmos.tap obj/atmos/rawdata.o $(subst PLATFORM,atmos,$(OBJS)) $(LIBDIR)/midres.atmos.lib
 
 ###############################################################################
 ##
