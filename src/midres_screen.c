@@ -105,6 +105,8 @@ void mr_doublebuffer_switch() {
 
 unsigned char mr_load(char* _filename, mr_screen _screen) {
 
+#ifdef MIDRES_STANDALONE_FILE
+
 #if __ATARI__
 
     FILE* f = fopen(_filename, "rb");
@@ -121,6 +123,8 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
 
 #endif
 
+#endif
+
 }
 
 #ifdef MIDRES_STANDALONE_FILE
@@ -133,6 +137,8 @@ unsigned char mr_load_screen(mr_file _index, mr_screen _screen) {
 #endif
 
 unsigned char mr_load_color(char* _filename, mr_screen _screen) {
+
+#ifdef MIDRES_STANDALONE_FILE
 
 #if __ATARI__
 
@@ -148,6 +154,8 @@ unsigned char mr_load_color(char* _filename, mr_screen _screen) {
 
     _screen = 0;
     return cbm_load(_filename, getcurrentdevice(), MR_CM(_screen));
+
+#endif
 
 #endif
 

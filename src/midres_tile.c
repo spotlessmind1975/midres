@@ -274,6 +274,8 @@ mr_color _mr_gettile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_
 // Load a tileset (or part of it)
 void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
 
+#ifdef MIDRES_STANDALONE_FILE
+
 #if defined(__ATARI__) || defined(__CBM__) 
 
     FILE* f = fopen(_filename, "rb");
@@ -290,6 +292,9 @@ void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _sta
 #endif
 
 #endif
+
+#endif
+
 }
 
 void mr_tileset_load_file(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {

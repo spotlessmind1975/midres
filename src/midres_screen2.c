@@ -54,6 +54,8 @@
 
 unsigned char mr_save(char* _filename, mr_screen _screen) {
 
+#ifdef MIDRES_STANDALONE_FILE
+
 #ifdef __ATARI__
 
     FILE* f = fopen(_filename, "wb");
@@ -70,10 +72,13 @@ unsigned char mr_save(char* _filename, mr_screen _screen) {
 
 #endif
 
+#endif
 
 }
 
 unsigned char mr_save_color(char* _filename, mr_screen _screen) {
+
+#ifdef MIDRES_STANDALONE_FILE
 
 #ifdef __ATARI__
 
@@ -92,6 +97,7 @@ unsigned char mr_save_color(char* _filename, mr_screen _screen) {
 
 #endif
 
+#endif
 }
 
 void mr_compress(mr_screen _source, mr_screen _destination) {
