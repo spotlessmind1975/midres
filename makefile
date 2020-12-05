@@ -162,6 +162,16 @@ else
   FILE2INCLUDE := file2include
 endif
 
+# On Windows it is mandatory to have ZCCCFG set. So do not unnecessarily
+# rely on z88dk being added to the PATH in this scenario.
+ifdef ZCCCFG
+  CC88 := $(ZCCCFG)/../../bin/zcc
+  ASM88 := $(ZCCCFG)/../../bin/z80asm
+else
+  CC88 := zcc
+  ASM88 := z80asm
+endif
+
 ###############################################################################
 ## COMPILATION / LINKING OPTIONS
 ###############################################################################
@@ -618,6 +628,27 @@ obj/atmos/%.o:	$(SOURCES)
 
 $(EXEDIR)/$(PROGRAMNAME).atmos:	$(subst PLATFORM,atmos,$(OBJS)) obj/atmos/rawdata.o
 	$(CC) -Ln demoatmos.lbl -t atmos $(LDFLAGS) -m $(EXEDIR)/$(PROGRAMNAME).atmos.map -C cfg/atmos.cfg -o $(EXEDIR)/$(PROGRAMNAME).atmos.tap obj/atmos/rawdata.o $(subst PLATFORM,atmos,$(OBJS)) $(LIBDIR)/midres.atmos.lib
+
+##-----------------------------------------------------------------------------
+## Z88DK
+##-----------------------------------------------------------------------------
+
+## ColecoVision -------------------------------------------------------------------------
+
+obj/coleco/rawdata.o:	$(DATADIR)/mtiles.bin
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tutorial_mctile.bin -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -o obj/coleco/rawdata.o src/rawdata.c
+
+obj/coleco/midres_coleco_vdp.o:	src/midres_coleco_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/coleco/midres_coleco_vdp.o src/midres_coleco_vdp.asm
+
+obj/coleco/%.o:	$(LIB_SOURCES) $(SOURCES)
+	$(CC88) +coleco $(CFLAGS) -c -o $@ $(subst obj/coleco/,src/,$(@:.o=.c))
+
+# This rule will produce the final binary file for ColecoVision platform.
+$(EXEDIR)/$(PROGRAMNAME).coleco:	$(subst PLATFORM,coleco,$(OBJS)) obj/coleco/rawdata.o obj/coleco/midres_coleco_vdp.o
+	$(CC88) +coleco -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_coleco_vdp.o $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).coleco -create-app 
+	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).rom,$(EXEDIR)/$(PROGRAMNAME).coleco.rom)
 
 ###############################################################################
 ##
