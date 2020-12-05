@@ -48,6 +48,8 @@
 
 #endif
 
+#define		FILE_TILES_BIN		1
+
 // Tile with the ground dawing in "tiles.bin" (currently not used)
 #define		TILE_GROUND			TILE_START
 
@@ -108,6 +110,8 @@ void demo_tile() {
 	// Load the tiles from the disk on the first tileset space.
 	// We load all tiles (TILE_COUNT) from first position (0).
 	mr_tileset_load("tiles.bin", MR_TILESET_0, TILE_START, TILE_COUNT);
+	
+	mr_tileset_load_file(FILE_TILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
 
 	// Precalculate the vertical movement for drop tile.
 	mr_tile_prepare_vertical(MR_TILESET_0, TILE_DROP, TILE_DROP_VERTICAL);
