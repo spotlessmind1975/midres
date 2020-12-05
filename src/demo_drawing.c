@@ -13,7 +13,6 @@
   ****************************************************************************/
 
 #include <stdio.h>
-#include <cc65.h>
 
 #include "main.h"
 #include "midres.h"
@@ -86,7 +85,7 @@ void draw_building(mr_position _number) {
     // Finally, draw the door.
     mr_rect(MR_SCREEN_DEFAULT,
         BUILDINGS_OFFSET + (_number * BUILDINGS_DISTANCE ) + BUILDINGS_DOOR_SIZE,
-        MR_SCREENHEIGHT * 2 - BUILDINGS_DOOR_SIZE,
+        MR_SCREEN_HEIGHT * 2 - BUILDINGS_DOOR_SIZE,
         BUILDINGS_OFFSET + (_number * BUILDINGS_DISTANCE ) + 2 * BUILDINGS_DOOR_SIZE,
         MR_SCREEN_HEIGHT * 2 - 1,
         MR_COLOR_BLACK);
@@ -161,12 +160,16 @@ void demo_drawing() {
 
         // Draw each building.
         for (i = 0; i < BUILDINGS_COUNT; ++i) {
+            mr_start_frame();
             draw_building(i);
+            mr_end_frame(4);
         }
 
         // Destroy each building.
         for (i = 0; i < BUILDINGS_COUNT; ++i) {
+            mr_start_frame();
             destroy_building(i);
+            mr_end_frame(4);
         }
 
     }
