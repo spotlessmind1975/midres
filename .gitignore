@@ -372,4 +372,9 @@ src/rawdata.c
 src/rawdata.h
 lib/
 *.tasks
+*.midresproj
+src/*.map
+src/*.o
+src/*.sym
+*.def
 
