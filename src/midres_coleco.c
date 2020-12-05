@@ -14,6 +14,8 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <stdlib.h>
 
 #include "midres.h"
 #include "rawdata.h"
@@ -50,9 +52,9 @@ void mr_init_hd() {
 
     vdp_out(VDP_R0, 0x00);
     vdp_out(VDP_R1, 0xc0);
-    vdp_out(VDP_RNAME, 0x05);
+    vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
     vdp_out(VDP_RCOLORTABLE, 0x80);
-    vdp_out(VDP_RPATTERN, 0x01);
+    vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
     vdp_out(VDP_RSPRITEA, 0x20);
     vdp_out(VDP_RSPRITEP, 0x00);
     vdp_out(VDP_RCOLOR, 0x04);
@@ -65,9 +67,9 @@ void mr_init_multicolor_hd() {
 
     vdp_out(VDP_R0, 0x00);
     vdp_out(VDP_R1, 0xc0);
-    vdp_out(VDP_RNAME, 0x05);
+    vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
     vdp_out(VDP_RCOLORTABLE, 0x80);
-    vdp_out(VDP_RPATTERN, 0x01);
+    vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
     vdp_out(VDP_RSPRITEA, 0x20);
     vdp_out(VDP_RSPRITEP, 0x00);
     vdp_out(VDP_RCOLOR, 0x04);
@@ -85,7 +87,7 @@ void mr_tile_setcolors_hd(unsigned char _colors[4]) {
 }
 
 void mr_show_hd(unsigned char _screen) {
-
+    vdp_out(VDP_RNAME, _screen);
 }
 
 void mr_cleanup_hd() {
@@ -113,7 +115,7 @@ unsigned char mr_get_key_pressed_hd() {
 }
 
 void mr_wait_hd(unsigned char _seconds) {
-
+    sleep(_seconds);
 }
 
 void mr_wait_jiffies_hd(unsigned char _jiffies) {
@@ -168,5 +170,49 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
 unsigned char mr_joy_hd(unsigned char _number) {
 
 }
+
+void mr_tileset_copy_hd(unsigned char _source, unsigned char _dest) {
+    unsigned char i;
+    for (i = 0; i < (MR_TILESET_TILE_COUNT-1); ++i) {
+        mr_position w = 255, b = 0;
+        unsigned int source = MR_TM(_source);
+        unsigned int destination = MR_TM(_dest);
+        for (--w; w != 255; --w) {
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                vdp_fill(vdp_get(source), destination, 1);
+            }
+        }
+    }
+}
+
+void mr_tileset_multicolor_to_monocolor_hd(unsigned char _source, unsigned char _starting, unsigned char _count) {
+    mr_position w = _count, b = 0;
+    unsigned int source = MR_TM(_source) + _starting * 8;
+    for (--w; w != 255; --w) {
+        for (b = 0; b < 8; ++b, ++source) {
+            unsigned char s = vdp_get(source);
+            s = s | (s >> 1);
+            vdp_fill(s, source, 1);
+        }
+    }
+}
+
+void mr_tile_redefine_hd(unsigned char _tileset, unsigned char _tile, unsigned char* _data) {
+    unsigned int destination = (MR_TM(_tileset) + _tile * 8);
+    mr_position b = 0;
+    for (b = 0; b < 8; ++b, ++destination, ++_data) {
+        vdp_fill(*_data, destination, 1);
+    }
+}
+
+void mr_tile_redefine_fill_hd(unsigned char _tileset, unsigned char _tile, unsigned char _data) {
+    unsigned int destination = (MR_TM(_tileset) + _tile * 8);
+    unsigned char b = 0;
+    for (b = 0; b < 8; ++destination, ++b) {
+        vdp_fill(_data, destination, 1);
+    }
+
+}
+
 
 #endif
