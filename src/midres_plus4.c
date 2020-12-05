@@ -1,3 +1,5 @@
+#ifdef __PLUS4__
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -28,8 +30,6 @@
     // The functions defined at this level can only be called up if the current
     // module has been loaded into memory. On the other hand, they can call any 
     // function declared at the resident module level.
-
-#ifdef __PLUS4__
 
 #define SET_VIDEO( _screen ) \
         *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & 0x07 ) | ( (_screen) << 3 );

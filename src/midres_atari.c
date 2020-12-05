@@ -1,3 +1,5 @@
+#ifdef __ATARI__
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -37,8 +39,6 @@ unsigned char MR_RENDERED_MIXELS_ATARI[16] = {
 };
 
 #endif
-
-#ifdef __ATARI__
 
 mr_mixel* screenRam = NULL;
 

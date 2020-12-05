@@ -1,3 +1,5 @@
+#if defined(__IMG2MIDRES__) || defined(__VANILLA__)
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -26,8 +28,6 @@
     // The functions defined at this level can only be called up if the current
     // module has been loaded into memory. On the other hand, they can call any 
     // function declared at the resident module level.
-
-#if defined(__IMG2MIDRES__) || defined(__VANILLA__)
 
 unsigned char MR_RENDERED_MIXELS_VANILLA[16] = {
    0x00, 0x01, 0x02, 0x03,

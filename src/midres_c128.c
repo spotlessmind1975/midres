@@ -1,3 +1,5 @@
+#ifdef __C128__
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -27,8 +29,6 @@
 // The functions defined at this level can only be called up if the current
 // module has been loaded into memory. On the other hand, they can call any 
 // function declared at the resident module level.
-
-#ifdef __C128__
 
 #define SET_BACKGROUND_COLOR( _color ) \
     *((unsigned char*)0xd021) = _color;

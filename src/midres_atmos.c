@@ -1,3 +1,5 @@
+#ifdef __ATMOS__
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -38,8 +40,6 @@ unsigned char MR_RENDERED_MIXELS_ATMOS[16] = {
 };
 
 #endif
-
-#ifdef __ATMOS__
 
 void mr_init_hd() {
 

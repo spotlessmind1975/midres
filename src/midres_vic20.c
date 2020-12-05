@@ -1,3 +1,5 @@
+#ifdef __VIC20__
+
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -27,8 +29,6 @@
 // The functions defined at this level can only be called up if the current
 // module has been loaded into memory. On the other hand, they can call any 
 // function declared at the resident module level.
-
-#ifdef __VIC20__
 
 /*
     The following table shows how the bottom four bits of memory
