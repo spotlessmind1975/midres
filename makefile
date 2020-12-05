@@ -642,11 +642,13 @@ obj/coleco/rawdata.o:	$(DATADIR)/mtiles.bin
 obj/coleco/midres_coleco_vdp.o:	src/midres_coleco_vdp.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/coleco/midres_coleco_vdp.o src/midres_coleco_vdp.asm
 
+lib/midres.coleco.lib:	
+
 obj/coleco/%.o:	$(LIB_SOURCES) $(SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c -o $@ $(subst obj/coleco/,src/,$(@:.o=.c))
 
 # This rule will produce the final binary file for ColecoVision platform.
-$(EXEDIR)/$(PROGRAMNAME).coleco:	$(subst PLATFORM,coleco,$(OBJS)) obj/coleco/rawdata.o obj/coleco/midres_coleco_vdp.o
+$(EXEDIR)/$(PROGRAMNAME).coleco:	$(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) obj/coleco/rawdata.o obj/coleco/midres_coleco_vdp.o
 	$(CC88) +coleco -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_coleco_vdp.o $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).rom,$(EXEDIR)/$(PROGRAMNAME).coleco.rom)
 
