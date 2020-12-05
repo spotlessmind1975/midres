@@ -9,6 +9,7 @@
 PUBLIC _vdp_out
 PUBLIC _vdp_put
 PUBLIC _vdp_fill
+PUBLIC _vdp_get
 
 VdpPort:
     defb    0beh
@@ -85,6 +86,12 @@ VdpWriteLoop:
         jp      nz, VdpWriteLoop
         ret
 
+VdpRead:
+        call    VdpReadAddr
+        call    VdpRamIn
+        ld      l, a
+        ret
+
 VdpFill:
         push    af
         call    VdpWriteAddr
@@ -153,3 +160,11 @@ _vdp_fill:
     inc hl
 	ld	a, (hl)			    ; value to fill
     jp VdpFill8
+
+_vdp_get:
+	ld	hl, 2
+	add	hl, sp
+    ld e,(hl)
+    inc hl
+    ld d,(hl)              ; vram source address
+    jp VdpRead
