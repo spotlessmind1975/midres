@@ -26,23 +26,32 @@ extern uint8_t vdp_get(uint16_t _src);
 #define MR_SCREEN_RAM_SIZE			768
 
 // List of available screens:
-#define MR_SCREEN_0					0
-#define MR_SCREEN_COUNT				1
+#define MR_SCREEN_0					5
+#define MR_SCREEN_1					6
+#define MR_SCREEN_2					7
+#define MR_SCREEN_3					8
+#define MR_SCREEN_4					9
+#define MR_SCREEN_5					10
+#define MR_SCREEN_COUNT				6
 #define MR_SCREEN_DEFAULT			MR_SCREEN_0
 
 // The four screens used for double buffering
 #define	MR_SCREEN_DB1				MR_SCREEN_0
-#define	MR_SCREEN_DB2				MR_SCREEN_0
+#define	MR_SCREEN_DB2				MR_SCREEN_1
 
 // List of available tilesets:
 #define MR_TILESET_ROM_0				0
 #define MR_TILESET_0					0
-#define MR_TILESET_COUNT				1
+#define MR_TILESET_1					1
+#define MR_TILESET_2					5
+#define MR_TILESET_3					6
+#define MR_TILESET_COUNT				4
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
 #define MR_TILESET_TILE_COUNT			256
 
 // List of available areas for bit blits:
-#define MR_AUX_0						1
+#define MR_AUX_0						14
+#define MR_AUX_1						15
 #define MR_AUX_COUNT					1
 #define MR_AUX_DEFAULT					MR_AUX_0
 
@@ -92,15 +101,18 @@ extern uint8_t vdp_get(uint16_t _src);
 #define MR_TILE_COLOR1					2
 #define MR_TILE_COLOR2					3
 
-#define MR_SM(_screen)					0x1400
-#define MR_CM(_screen)					0x2000
-#define MR_AM(_screen)					0x2200
-#define MR_TM(_tileset)					0x0800
+#define MR_SM(_screen)					((unsigned int)(0x400*_screen))
+#define MR_CM(_screen)					((unsigned int)(0x400*_screen))
+#define MR_AM(_screen)					((unsigned int)(0x400*_screen))
+#define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
+
+#define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
+        vdp_fill(_tile, _screen + _offset, 1 );
 
 #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
         vdp_fill(_tile, _screen + _offset, 1 );
 
-#define MR_READ_TILE(_screen, _offset) ;
+#define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
 
 #define MIDRES_STANDALONE					1
 //#define MIDRES_STANDALONE_BITBLIT			1	
@@ -108,12 +120,12 @@ extern uint8_t vdp_get(uint16_t _src);
 //#define MIDRES_STANDALONE_DRAWING2			1
 //#define MIDRES_STANDALONE_SCREEN			1
 //#define MIDRES_STANDALONE_SCREEN2			1
-//#define MIDRES_STANDALONE_TILE				1
+#define MIDRES_STANDALONE_TILE				1
 //#define MIDRES_STANDALONE_TILE_PROCESSING	1
 //#define MIDRES_STANDALONE_TILE_MULTICOLOR	1
 //#define MIDRES_STANDALONE_KEYBOARD			1
 // #define MIDRES_STANDALONE_FILE				1
-// #define MIDRES_EMBEDDED_FILES				1
+#define MIDRES_EMBEDDED_FILES				1
 
 
 #endif
