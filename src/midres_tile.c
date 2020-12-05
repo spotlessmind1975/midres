@@ -203,8 +203,9 @@ void _mr_tile_moveto_vertical_monocolor(mr_mixel* _screen, mr_color* _colormap, 
 
     offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
 
-    _screen[offset] = _tile + (_y & 0x07) + 1;
-    _colormap[offset] = _color;
+    // _screen[offset] = _tile + (_y & 0x07) + 1;
+    // _colormap[offset] = _color;
+    MR_WRITE_TILE(_screen, _colormap, offset, _tile + (_y & 0x07) + 1, _color);
     if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
         MR_WRITE_TILE(_screen, _colormap, offset + MR_SCREEN_WIDTH, _tile + (_y & 0x07) + 10, _color);
     }
@@ -264,10 +265,10 @@ void _mr_tile_moveto_vertical_extended(mr_mixel* _screen, mr_color* _colormap, m
 void _mr_cleartile(mr_mixel* _screen, mr_position _x, mr_position _y) {
 
     int offset;
-
     offset = _y * MR_SCREEN_WIDTH + _x;
-
-    _screen[offset] = MR_RENDERED_MIXELS[0];
+    
+    // _screen[offset] = MR_RENDERED_MIXELS[0];
+    MR_WRITE_TILE_LUMINANCE(_screen, offset, MR_RENDERED_MIXELS[0]);
 
 }
 
