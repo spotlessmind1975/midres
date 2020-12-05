@@ -37,6 +37,8 @@
 #endif
 #elif __ATMOS__
 #include "midres_hw_atmos.h"
+#elif __COLECO__
+#include "midres_hw_coleco.h"
 #else
 #include "midres_hw_vanilla.h"
 #endif
