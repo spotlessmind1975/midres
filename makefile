@@ -636,7 +636,7 @@ $(EXEDIR)/$(PROGRAMNAME).atmos:	$(subst PLATFORM,atmos,$(OBJS)) obj/atmos/rawdat
 ## ColecoVision -------------------------------------------------------------------------
 
 obj/coleco/rawdata.o:	$(DATADIR)/mtiles.bin
-	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tutorial_mctile.bin -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tiles.bin -i $(DATADIR)/tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -o obj/coleco/rawdata.o src/rawdata.c
 
 obj/coleco/midres_coleco_vdp.o:	src/midres_coleco_vdp.asm
