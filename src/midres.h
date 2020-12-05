@@ -688,11 +688,23 @@
 	// Copy a tileset over another.
 	void mr_tileset_copy(mr_tileset _source, mr_tileset _destination);
 
+	// Copy a tileset over another (memory mapped video ram).
+	void mr_tileset_copy_memory_mapped(mr_tileset _source, mr_tileset _destination);
+
+	// Downgrade a tileset from multicolor to monocolor.
+	void mr_tileset_multicolor_to_monocolor_memory_mapped(mr_tileset _source, mr_position _starting, mr_position _count);
+
 	// Redefine a tile using the given data.
 	void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data);
 
+	// Redefine a tile using the given data.
+	void mr_tile_redefine_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data);
+
 	// Redefine a tile filling the tile with the given data.
 	void mr_tile_redefine_fill(mr_tileset _tileset, mr_tile _tile, mr_mixel _data);
+
+	// Redefine a tile filling the tile with the given data.
+	void mr_tile_redefine_fill_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_mixel _data);
 
 	// Set a single color for multicolor tiles
 	void mr_tile_setcolor(mr_position _index, mr_color _color);

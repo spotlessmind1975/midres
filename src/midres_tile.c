@@ -56,8 +56,7 @@ void mr_tileset_visible(mr_tileset _tileset) {
     mr_tileset_visible_hd(_tileset);
 }
 
-// Copy a tileset over another.
-void mr_tileset_copy(mr_tileset _source, mr_tileset _destination) {
+void mr_tileset_copy_memory_mapped(mr_tileset _source, mr_tileset _destination) {
     mr_position w = 255, b = 0;
     mr_mixel* source = MR_TM(_source);
     mr_mixel* destination = MR_TM(_destination);
@@ -68,8 +67,13 @@ void mr_tileset_copy(mr_tileset _source, mr_tileset _destination) {
     }
 }
 
+// Copy a tileset over another.
+void mr_tileset_copy(mr_tileset _source, mr_tileset _destination) {
+    mr_tileset_copy_hd(_source, _destination);
+}
+
 // Downgrade a tileset from multicolor to monocolor.
-void mr_tileset_multicolor_to_monocolor(mr_tileset _source, mr_position _starting, mr_position _count) {
+void mr_tileset_multicolor_to_monocolor_memory_mapped(mr_tileset _source, mr_position _starting, mr_position _count) {
     mr_position w = _count, b = 0;
     mr_mixel* source = MR_TM(_source)+_starting*8;
     for (--w; w != 255; --w) {
@@ -79,13 +83,22 @@ void mr_tileset_multicolor_to_monocolor(mr_tileset _source, mr_position _startin
     }
 }
 
+void mr_tileset_multicolor_to_monocolor(mr_tileset _source, mr_position _starting, mr_position _count) {
+    mr_tileset_multicolor_to_monocolor_hd(_source, _starting, _count);
+}
+
+
 // Redefine a tile using the given data.
-void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
+void mr_tile_redefine_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
     mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _tile*8);
     mr_position b = 0;
     for (b = 0; b < 8; ++b, ++destination, ++_data) {
         *destination = *_data;
     }
+}
+
+void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
+    mr_tile_redefine_hd(_tileset, _tile, _data);
 }
 
 // Writes a tile into a bitmap.
@@ -465,11 +478,16 @@ void mr_tile_setcolors(mr_color _colors[4]) {
     mr_tile_setcolors_hd(_colors);
 }
 
-void mr_tile_redefine_fill(mr_tileset _tileset, mr_tile _tile, mr_mixel _data) {
+void mr_tile_redefine_fill_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_mixel _data) {
     mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _tile * 8);
     unsigned char b = 0;
     for (b = 0; b < 8; ++destination, ++b) {
         *destination = _data;
     }
 }
+
+void mr_tile_redefine_fill(mr_tileset _tileset, mr_tile _tile, mr_mixel _data) {
+    mr_tile_redefine_fill_hd(_tileset, _tile, _data);
+}
+
 #endif

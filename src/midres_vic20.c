@@ -338,4 +338,20 @@ unsigned char mr_joy_hd(unsigned char _number) {
     return ~port;
 }
 
+void mr_tileset_copy_hd(unsigned char _source, unsigned char _dest) {
+    mr_tileset_copy_memory_mapped(_source, _dest);
+}
+
+void mr_tileset_multicolor_to_monocolor_hd(unsigned char _source, unsigned char _starting, unsigned char _count) {
+    mr_tileset_multicolor_to_monocolor_memory_mapped(_source, _starting, _count);
+}
+
+void mr_tile_redefine_hd(unsigned char _tileset, unsigned char _tile, unsigned char* _data) {
+    mr_tile_redefine_memory_mapped(_tileset, _tile, _data);
+}
+
+void mr_tile_redefine_fill_hd(unsigned char _tileset, unsigned char _tile, unsigned char _data) {
+    mr_tile_redefine_fill_memory_mapped(_tileset, _tile, _data);
+}
+
 #endif

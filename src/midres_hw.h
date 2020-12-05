@@ -115,6 +115,18 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
 
 unsigned char mr_joy_hd(unsigned char _number);
 
+// Hardware dependent tileset copy
+void mr_tileset_copy_hd(unsigned char _source, unsigned char _dest);
+
+// Hardware dependent tileset converted multicolor > monocolor
+void mr_tileset_multicolor_to_monocolor_hd(unsigned char _source, unsigned char _starting, unsigned char _count);
+
+// Hardware dependent tile redefinition
+void mr_tile_redefine_hd(unsigned char _tileset, unsigned char _tile, unsigned char* _data);
+
+// Hardware dependent tile redefinition with filling
+void mr_tile_redefine_fill_hd(unsigned char _tileset, unsigned char _tile, unsigned char _data);
+
 #define mr_assert_max_tiles( x ) if ( x > MR_TILESET_TILE_COUNT ) { puts("Maximum number of tiles for tileset exceeded."); return; }
 
 #endif
