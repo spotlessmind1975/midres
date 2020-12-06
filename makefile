@@ -61,6 +61,7 @@ endif
 #  - totto
 #  - airattack
 #  - alienstorm
+#  - elevator
 
 ifdef game
 ifdef target
