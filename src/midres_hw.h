@@ -158,6 +158,9 @@ void mr_tile_prepare_roll_vertical_hd(unsigned char _tileset, unsigned char _sou
 // Hardware dependent tile preparation
 void mr_tile_roll_vertical_hd(unsigned char _tileset, unsigned char _destination, mr_direction _direction);
 
+// Hardware dependent loading tileset
+void mr_tileset_load_file_hd(unsigned char _index, unsigned char _tileset, unsigned char _starting, unsigned char _count);
+
 #define mr_assert_max_tiles( x ) if ( x > MR_TILESET_TILE_COUNT ) { puts("Maximum number of tiles for tileset exceeded."); return; }
 
 #endif

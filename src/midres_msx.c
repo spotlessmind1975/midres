@@ -523,5 +523,8 @@ void mr_tile_roll_vertical_hd(unsigned char _tileset, unsigned char _destination
 
 }
 
+void mr_tileset_load_file_hd(unsigned char _index, unsigned char _tileset, unsigned char _starting, unsigned char _count) {
+    vdp_put(&_includedFiles[_index][0], MR_TM(_tileset) + (_starting * 8), _count * 8);
+}
 
 #endif
