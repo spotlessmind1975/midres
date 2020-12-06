@@ -55,9 +55,9 @@ void mr_init_hd() {
 
     vdp_port(0x98);
     vdp_out(VDP_R0, 0x00);
-    vdp_out(VDP_R1, 0xc0);
+    vdp_out(VDP_R1, 0xe0);
     vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
-    vdp_out(VDP_RCOLORTABLE, 0x80);
+    vdp_out(VDP_RCOLORTABLE, MR_SCREEN_DEFAULT);
     vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
     vdp_out(VDP_RSPRITEA, 0x20);
     vdp_out(VDP_RSPRITEP, 0x00);
@@ -71,9 +71,9 @@ void mr_init_multicolor_hd() {
 
     vdp_port(0x98);
     vdp_out(VDP_R0, 0x00);
-    vdp_out(VDP_R1, 0xc0);
+    vdp_out(VDP_R1, 0xe0);
     vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
-    vdp_out(VDP_RCOLORTABLE, 0x80);
+    vdp_out(VDP_RCOLORTABLE, MR_SCREEN_DEFAULT);
     vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
     vdp_out(VDP_RSPRITEA, 0x20);
     vdp_out(VDP_RSPRITEP, 0x00);
@@ -93,6 +93,7 @@ void mr_tile_setcolors_hd(unsigned char _colors[4]) {
 
 void mr_show_hd(unsigned char _screen) {
     vdp_out(VDP_RNAME, _screen);
+    vdp_out(VDP_RCOLORTABLE, _screen);
 }
 
 void mr_cleanup_hd() {
