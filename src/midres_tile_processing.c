@@ -182,7 +182,7 @@ void mr_tile_prepare_vertical_memory_mapped(mr_tileset _tileset, mr_tile _source
 
 // Redefine a subset of N tiles by "shifting" vertically a tile
 void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
-    void mr_tile_prepare_vertical_hd(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+    mr_tile_prepare_vertical_hd(_tileset, _source, _destination);
 }
 
 // Redefine a subset of N tiles by "shifting" vertically a tile
