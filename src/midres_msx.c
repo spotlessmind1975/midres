@@ -29,6 +29,9 @@
 #define VDP_RSPRITEP    0x86
 #define VDP_RCOLOR      0x87
 
+#define PSG_R14         0x14
+#define PSG_R15         0x15
+
 unsigned char MR_RENDERED_MIXELS_MSX[16] = {
    0x00, 0x01, 0x02, 0x03,
    0x04, 0x05, 0x06, 0x07,
@@ -282,6 +285,12 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
 
 unsigned char mr_joy_hd(unsigned char _number) {
 
+    unsigned char r14;
+    
+    io_put(PSG_R15, ( io_get(PSG_R15) & ~0xdf) | (0x20 * _number));
+    r14 = io_get(PSG_R14);
+
+    return ~r14;
 }
 
 void mr_tileset_copy_hd(unsigned char _source, unsigned char _dest) {
