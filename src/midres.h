@@ -147,6 +147,12 @@
 	 * ------ ACCESSIBLE DATA
 	 ************************************************************************/
 
+	#ifdef FRAME_BUFFER
+		extern unsigned char frameBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+		extern unsigned char colorBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+		extern unsigned char auxBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+	#endif
+
 	 // Set of colors assigned for each screen.
 	extern mr_color MR_SCREEN_INK[MR_SCREEN_COUNT];
 

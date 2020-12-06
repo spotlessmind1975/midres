@@ -9,6 +9,8 @@
 #ifndef _MIDRES_HW_MSX_H_
 #define _MIDRES_HW_MSX_H_
 
+// #define FRAME_BUFFER    1
+
 #define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_MSX
 
 // The maximum resolution is 80 x 50 pixels, equivalent to 
@@ -201,19 +203,38 @@
 #define MR_TILE_COLOR1					2
 #define MR_TILE_COLOR2					3
 
-#define MR_SM(_screen)					((unsigned int)(0x400*_screen))
-#define MR_CM(_screen)					((unsigned int)(0x40*_screen))
-#define MR_AM(_screen)					((unsigned int)(0x400*_screen))
-#define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
+#ifdef FRAME_BUFFER
+    #define MR_SM(_screen)					(&frameBuffer[0])
+    #define MR_CM(_screen)					(&colorBuffer[0])
+    #define MR_AM(_screen)					(&auxBuffer[0])
+    #define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
 
-#define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
-        vdp_fill(_tile, _screen + _offset, 1 );
+    #define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
+		    _screen[(_offset)] = (_tile);
 
-#define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-        vdp_fill(_tile, _screen + _offset, 1 ); \
-        vdp_fill((_color & 0xf)<<4, _colormap + ( _tile >> 3 ), 1 ); \
+    #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
+		    _screen[(_offset)] = (_tile); \
+		    _colormap[(_offset)] = (_color);
 
-#define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
+    #define MR_READ_TILE(_screen, _offset) _screen[(_offset)]
+
+#else
+    #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
+    #define MR_CM(_screen)					((unsigned int)(0x40*_screen))
+    #define MR_AM(_screen)					((unsigned int)(0x400*_screen))
+    #define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
+
+    #define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
+            vdp_fill(_tile, _screen + _offset, 1 );
+
+    #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
+            vdp_fill(_tile, _screen + _offset, 1 ); \
+            vdp_fill((_color & 0xf)<<4, _colormap + ( _tile >> 3 ), 1 ); \
+
+    #define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
+
+#endif
+
 
 #define MIDRES_STANDALONE					1
 //#define MIDRES_STANDALONE_BITBLIT			1	

@@ -14,6 +14,12 @@
 
 #if ( !defined(__OVERLAY__MIDRES__) && defined(MIDRES_STANDALONE) ) || defined(__OVERLAY__MIDRES__)
 
+#ifdef FRAME_BUFFER
+    unsigned char frameBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+    unsigned char colorBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+    unsigned char auxBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+#endif
+
   /****************************************************************************
    ** RESIDENT VARIABLES SECTION
    ****************************************************************************/
