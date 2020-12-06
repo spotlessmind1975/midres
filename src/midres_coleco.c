@@ -217,7 +217,7 @@ void mr_tile_redefine_fill_hd(unsigned char _tileset, unsigned char _tile, unsig
 }
 
 void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination) {
-    unsigned int source = MR_TM(_tileset) + _source * 8);
+    unsigned int source = (MR_TM(_tileset) + _source * 8);
     unsigned int destination = (MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
@@ -226,7 +226,7 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = vdp_get(source);
             mr_mixel m = d >> i;
-            vpd_fill(m, destination, 1);
+            vdp_fill(m, destination, 1);
         }
         source -= 8;
     }
@@ -235,7 +235,7 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = *((mr_mixel*)source);
             mr_mixel n = d & (0xff >> (7 - i));
-            vpd_fill((n << (7 - i)), destination, 1);
+            vdp_fill((n << (7 - i)), destination, 1);
         }
         source -= 8;
     }
@@ -415,7 +415,7 @@ void mr_tile_roll_horizontal_hd(unsigned char _tileset, unsigned char _destinati
         for (i = 0; i < 7; ++i) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
                 mr_mixel d = vdp_get(source);
-                *destination = d;
+                vdp_fill(d, destination, 1);
             }
             source -= 16;
             destination -= 16;
