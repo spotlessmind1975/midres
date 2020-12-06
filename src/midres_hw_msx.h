@@ -202,7 +202,7 @@
 #define MR_TILE_COLOR2					3
 
 #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
-#define MR_CM(_screen)					((unsigned int)(0x400*_screen))
+#define MR_CM(_screen)					((unsigned int)(0x40*_screen))
 #define MR_AM(_screen)					((unsigned int)(0x400*_screen))
 #define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
 
@@ -210,7 +210,8 @@
         vdp_fill(_tile, _screen + _offset, 1 );
 
 #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-        vdp_fill(_tile, _screen + _offset, 1 );
+        vdp_fill(_tile, _screen + _offset, 1 ); \
+        vdp_fill((_color & 0xf)<<4, _colormap + ( _tile >> 3 ), 1 ); \
 
 #define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
 
