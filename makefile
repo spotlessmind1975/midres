@@ -888,7 +888,42 @@ $(EXEDIR)/alienstorm.atarilo:	$(subst PLATFORM,alienstorm.atarilo,$(OBJS))
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/alienstorm.atarilo.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/alienstorm.atarilo.atr -o $(EXEDIR)/alienstorm.atarilo.atr -f game.exe
 
-###############################################################################
+src/rawdata.c:	$(DATADIR)/astiles.bin $(DATADIR)/astiles1.bin $(DATADIR)/astiles2.bin
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/astiles.bin -i $(DATADIR)/astiles1.bin -i $(DATADIR)/astiles2.bin -c src/rawdata.c -h src/rawdata.h
+
+obj/alienstorm.msx/rawdata.o:	src/rawdata.c src/rawdata.h
+	$(CC88) +msx $(CFLAGS) -c -D__GAME_ALIEN_STORM__ $(CFLAGS88) -o obj/alienstorm.msx/rawdata.o src/rawdata.c
+
+obj/alienstorm.msx/midres_vdp.o:	src/midres_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.msx/midres_vdp.o src/midres_vdp.asm
+
+obj/alienstorm.msx/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.msx/midres_io.o src/midres_io.asm
+
+obj/alienstorm.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
+	$(CC88) +msx -O3 $(CFLAGS) -c -D__GAME_ALIEN_STORM__ -o $@ $(subst obj/alienstorm.msx/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.msx: obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_io.o obj/alienstorm.msx/midres_vdp.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msx,$(OBJS))
+	$(CC88) +msx -lndos -D__GAME_ALIEN_STORM__ -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_vdp.o obj/alienstorm.msx/midres_io.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS))  $(subst PLATFORM,alienstorm.msx,$(OBJS)) -o $(EXEDIR)/alienstorm.msx -create-app 
+	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.msx.rom)
+
+obj/alienstorm.coleco/rawdata.o:	src/rawdata.c src/rawdata.h
+	$(CC88) +coleco $(CFLAGS) -c -D__GAME_ALIEN_STORM__ $(CFLAGS88) -o obj/alienstorm.coleco/rawdata.o src/rawdata.c
+
+obj/alienstorm.coleco/midres_vdp.o:	src/midres_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.coleco/midres_vdp.o src/midres_vdp.asm
+
+obj/alienstorm.coleco/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.coleco/midres_io.o src/midres_io.asm
+
+obj/alienstorm.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
+	$(CC88) +coleco -O3 $(CFLAGS) -c -D__GAME_ALIEN_STORM__ -o $@ $(subst obj/alienstorm.coleco/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.coleco: obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_io.o obj/alienstorm.coleco/midres_vdp.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.coleco,$(OBJS))
+	$(CC88) +coleco -lndos -D__GAME_ALIEN_STORM__ -m $(LDFLAGS88) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_vdp.o obj/alienstorm.coleco/midres_io.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS))  $(subst PLATFORM,alienstorm.coleco,$(OBJS)) -o $(EXEDIR)/alienstorm.coleco -create-app 
+	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.coleco.rom)
+
+###########################################################################
 ##
 ###############################################################################
 
@@ -1114,6 +1149,8 @@ clean:
 	$(call RMFILES,$(EXEDIR)/elevator.atari.atr)
 	$(call RMFILES,$(LIBDIR)/midres.c64.lib)
 	$(call RMFILES,$(LIBDIR)/midres.vic2024.lib)
+	$(call RMFILES,src/rawdata.h)
+	$(call RMFILES,src/rawdata.c)
 	$(foreach EXE,$(EXES),$(call RMFILES,$(EXE)))
 	$(foreach OBJECT,$(OBJECTS),$(call RMFILES,$(OBJECT)))
 	$(foreach OBJECT,$(LIB_OBJECTS),$(call RMFILES,$(OBJECT)))
