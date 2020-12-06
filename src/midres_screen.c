@@ -60,8 +60,7 @@ void mr_clear(mr_screen _screen) {
     mr_color* color = MR_CM(_screen);
 
     for (i = 0; i < MR_SCREEN_HEIGHT * MR_SCREEN_WIDTH; ++i) {
-        screen[i] = MR_RENDERED_MIXELS[0];
-        color[i] = MR_COLOR_BLACK;
+        MR_WRITE_TILE(screen, color, i, MR_RENDERED_MIXELS[0], MR_COLOR_BLACK)
     }
 }
 
