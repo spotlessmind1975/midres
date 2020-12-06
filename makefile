@@ -158,9 +158,9 @@ endif
 # On Windows it is mandatory to have FILE2INCLUDE_HOME set. So do not unnecessarily
 # rely on being added to the PATH in this scenario.
 ifdef FILE2INCLUDE_HOME
-  FILE2INCLUDE := $(FILE2INCLUDE_HOME)/file2include
+  FILE2INCLUDE := $(FILE2INCLUDE_HOME)/file2include64
 else
-  FILE2INCLUDE := file2include
+  FILE2INCLUDE := file2include64
 endif
 
 # On Windows it is mandatory to have ZCCCFG set. So do not unnecessarily
