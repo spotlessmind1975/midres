@@ -643,6 +643,9 @@ obj/coleco/rawdata.o:	$(DATADIR)/mtiles.bin
 obj/coleco/midres_vdp.o:	src/midres_vdp.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/coleco/midres_vdp.o src/midres_vdp.asm
 
+obj/coleco/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/coleco/midres_io.o src/midres_io.asm
+
 lib/midres.coleco.lib:	
 
 obj/coleco/%.o:	$(LIB_SOURCES) $(SOURCES)
@@ -650,7 +653,7 @@ obj/coleco/%.o:	$(LIB_SOURCES) $(SOURCES)
 
 # This rule will produce the final binary file for ColecoVision platform.
 $(EXEDIR)/$(PROGRAMNAME).coleco:	$(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) obj/coleco/rawdata.o obj/coleco/midres_vdp.o
-	$(CC88) +coleco -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_vdp.o $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).coleco -create-app 
+	$(CC88) +coleco -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_io.o obj/coleco/midres_vdp.o $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).rom,$(EXEDIR)/$(PROGRAMNAME).coleco.rom)
 
 ## MSX -------------------------------------------------------------------------
@@ -662,6 +665,9 @@ obj/msx/rawdata.o:	$(DATADIR)/mtiles.bin
 obj/msx/midres_vdp.o:	src/midres_vdp.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/msx/midres_vdp.o src/midres_vdp.asm
 
+obj/msx/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/msx/midres_io.o src/midres_io.asm
+
 lib/midres.msx.lib:	
 
 obj/msx/%.o:	$(LIB_SOURCES) $(SOURCES)
@@ -669,7 +675,7 @@ obj/msx/%.o:	$(LIB_SOURCES) $(SOURCES)
 
 # This rule will produce the final binary file for ColecoVision platform.
 $(EXEDIR)/$(PROGRAMNAME).msx:	$(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) obj/msx/rawdata.o obj/msx/midres_vdp.o
-	$(CC88) +msx -lndos -subtype=rom -m $(LDFLAGS88) obj/msx/rawdata.o obj/msx/midres_vdp.o $(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).msx -create-app 
+	$(CC88) +msx -lndos -subtype=rom -m $(LDFLAGS88) obj/msx/rawdata.o obj/msx/midres_io.o obj/msx/midres_vdp.o $(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).rom,$(EXEDIR)/$(PROGRAMNAME).msx.rom)
 
 
