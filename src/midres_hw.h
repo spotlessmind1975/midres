@@ -131,6 +131,33 @@ void mr_tile_redefine_hd(unsigned char _tileset, unsigned char _tile, unsigned c
 // Hardware dependent tile redefinition with filling
 void mr_tile_redefine_fill_hd(unsigned char _tileset, unsigned char _tile, unsigned char _data);
 
+// Hardware dependent tile preparation
+void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination);
+
+// Hardware dependent tile preparation
+void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, unsigned char _source, unsigned char _w, unsigned char _h, unsigned char _destination);
+
+// Hardware dependent tile preparation
+void mr_tile_prepare_vertical_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination);
+
+// Hardware dependent tile preparation
+void mr_tile_prepare_vertical_extended_hd(unsigned char _tileset, unsigned char _source, unsigned char _w, unsigned char _h, unsigned char _destination);
+
+// Hardware dependent tile preparation
+void mr_tile_prepare_roll_horizontal_monocolor_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination);
+
+// Hardware dependent tile preparation
+void mr_tile_roll_horizontal_hd(unsigned char _tileset, unsigned char _destination, unsigned char _direction);
+
+// Hardware dependent tile preparation
+void mr_tile_roll_horizontal_on_place_hd(unsigned char _tileset, unsigned char _destination, unsigned char _direction, unsigned char _place, unsigned char* _index);
+
+// Hardware dependent tile preparation
+void mr_tile_prepare_roll_vertical_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination);
+
+// Hardware dependent tile preparation
+void mr_tile_roll_vertical_hd(unsigned char _tileset, unsigned char _destination, mr_direction _direction);
+
 #define mr_assert_max_tiles( x ) if ( x > MR_TILESET_TILE_COUNT ) { puts("Maximum number of tiles for tileset exceeded."); return; }
 
 #endif

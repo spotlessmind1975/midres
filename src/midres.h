@@ -715,8 +715,14 @@
 	// Redefine a subset of N tiles by "shifting" horizontally a tile
 	void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 
+	// Redefine a subset of N tiles by "shifting" horizontally a tile on memory mapped platforms
+	void mr_tile_prepare_horizontal_monocolor_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+	
 	// Redefine a subset of (M+2)xN tiles by "shifting" horizontally a tile
 	void mr_tile_prepare_horizontal_extended(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination);
+
+	// Redefine a subset of (M+2)xN tiles by "shifting" horizontally a tile on memory mapped platforms
+	void mr_tile_prepare_horizontal_extended_monocolor_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination);
 
 	// Calculate che number of frames needed to store the preparation
 	#define mr_calculate_prepared_tile_size( _w, _h )	( ( ( _w + 1 ) * _h ) * 9 )
@@ -732,8 +738,14 @@
 	// Redefine a subset of N tiles by "shifting" vertically a tile
 	void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 
+	// Redefine a subset of N tiles by "shifting" vertically a tile on memory mapped platforms
+	void mr_tile_prepare_vertical_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+
 	// Redefine a subset of N tiles by "shifting" vertically a tile
 	void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination);
+
+	// Redefine a subset of N tiles by "shifting" vertically a tile
+	void mr_tile_prepare_vertical_extended_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination);
 
 	// Writes a tile into a bitmap at *precise* vertical position.
 	void _mr_tile_moveto_vertical(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color);
@@ -743,18 +755,33 @@
 
 	// Redefine a subset of N tiles by "rolling" horizontally a tile
 	void mr_tile_prepare_roll_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+	
+	// Redefine a subset of N tiles by "rolling" horizontally a tile using a memory mapped platform
+	void mr_tile_prepare_roll_horizontal_monocolor_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 
 	// Roll horizontally a tile
 	void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _tile, mr_direction _direction);
 
 	// Roll horizontally a tile
+	void mr_tile_roll_horizontal_memory_mapped(mr_tileset _tileset, mr_tile _destination, mr_direction _direction);
+
+	// Roll horizontally a tile
 	void mr_tile_roll_horizontal_on_place(mr_tileset _tileset, mr_tile _tile, mr_direction _direction, mr_tile _place, mr_position *_index);
+	
+	// Roll horizontally a tile on a memory mapped platform
+	void mr_tile_roll_horizontal_on_place_memory_mapped(mr_tileset _tileset, mr_tile _destination, mr_direction _direction, mr_tile _place, mr_position* _index);
 
 	// Redefine a subset of N tiles by "rolling" vertically a tile
 	void mr_tile_prepare_roll_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
 
+	// Redefine a subset of N tiles by "rolling" vertically a tile on memory mapped platform
+	void mr_tile_prepare_roll_vertical_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+
 	// Roll vertically a tile
 	void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _tile, mr_direction _direction);
+
+	// Roll vertically a tile on memory mapped platforms
+	void mr_tile_roll_vertical_memory_mapped(mr_tileset _tileset, mr_tile _destination, mr_direction _direction);
 
 	// Roll vertically a tile
 	void mr_tile_roll_vertical_on_place(mr_tileset _tileset, mr_tile _tile, mr_direction _direction, mr_tile _place, mr_position* _index);

@@ -45,7 +45,7 @@ void mr_tile_prepare_roll_horizontal_multicolor(mr_tileset _tileset, mr_tile _so
 // function declared at the resident module level.
 
 // Redefine a subset of N tiles by "shifting" horizontally a tile
-void mr_tile_prepare_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+void mr_tile_prepare_horizontal_monocolor_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_mixel* source = (mr_mixel*)(MR_TM(_tileset) + _source * 8);
     mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
@@ -68,7 +68,10 @@ void mr_tile_prepare_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, 
         }
         source -= 8;
     }
+}
 
+void mr_tile_prepare_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+    mr_tile_prepare_horizontal_monocolor_hd(_tileset, _source, _destination);
 }
 
 void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
@@ -87,7 +90,7 @@ void mr_tile_prepare_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _d
 }
 
 // Redefine a subset of N tiles by "shifting" horizontally a tile
-void mr_tile_prepare_horizontal_extended_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
+void mr_tile_prepare_horizontal_extended_monocolor_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
     mr_mixel* source = (mr_mixel*)(MR_TM(_tileset) + _source * 8);
     mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
@@ -131,6 +134,10 @@ void mr_tile_prepare_horizontal_extended_monocolor(mr_tileset _tileset, mr_tile 
 
 }
 
+void mr_tile_prepare_horizontal_extended_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
+    mr_tile_prepare_horizontal_extended_monocolor_hd(_tileset, _source, _w, _h, _destination);
+}
+
 void mr_tile_prepare_horizontal_extended(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
 #ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
     if (MR_MULTICOLOR) {
@@ -145,7 +152,8 @@ void mr_tile_prepare_horizontal_extended(mr_tileset _tileset, mr_tile _source, m
 }
 
 // Redefine a subset of N tiles by "shifting" vertically a tile
-void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+void mr_tile_prepare_vertical_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+
     mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
     mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
@@ -173,7 +181,12 @@ void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _des
 }
 
 // Redefine a subset of N tiles by "shifting" vertically a tile
-void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination) {
+void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+    void mr_tile_prepare_vertical_hd(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+}
+
+// Redefine a subset of N tiles by "shifting" vertically a tile
+void mr_tile_prepare_vertical_extended_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
     mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
@@ -217,8 +230,12 @@ void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_
     }
 }
 
+void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination) {
+    mr_tile_prepare_vertical_extended_hd(_tileset, _source, _w, _h, _destination);
+}
+
 // Redefine a subset of N tiles by "rolling" horizontally a tile
-void mr_tile_prepare_roll_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+void mr_tile_prepare_roll_horizontal_monocolor_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
     mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
@@ -232,7 +249,10 @@ void mr_tile_prepare_roll_horizontal_monocolor(mr_tileset _tileset, mr_tile _sou
         }
         source -= 8;
     }
+}
 
+void mr_tile_prepare_roll_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+    mr_tile_prepare_roll_horizontal_monocolor_hd(_tileset, _source, _destination);
 }
 
 // Redefine a subset of N tiles by "rolling" horizontally a tile
@@ -252,7 +272,7 @@ void mr_tile_prepare_roll_horizontal(mr_tileset _tileset, mr_tile _source, mr_ti
 mr_mixel rollBuffer[8];
 
 // Roll horizontally a tile
-void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _destination, mr_direction _direction) {
+void mr_tile_roll_horizontal_memory_mapped(mr_tileset _tileset, mr_tile _destination, mr_direction _direction) {
 
     mr_mixel* source;
     mr_mixel* destination;
@@ -303,8 +323,12 @@ void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _destination, mr_direc
 
 }
 
+void mr_tile_roll_horizontal(mr_tileset _tileset, mr_tile _destination, mr_direction _direction) {
+    mr_tile_roll_horizontal_hd(_tileset, _destination, _direction);
+}
+
 // Roll horizontally a tile
-void mr_tile_roll_horizontal_on_place(mr_tileset _tileset, mr_tile _destination, mr_direction _direction, mr_tile _place, mr_position* _index) {
+void mr_tile_roll_horizontal_on_place_memory_mapped(mr_tileset _tileset, mr_tile _destination, mr_direction _direction, mr_tile _place, mr_position* _index) {
 
     mr_mixel* source;
     mr_mixel* destination;
@@ -331,8 +355,12 @@ void mr_tile_roll_horizontal_on_place(mr_tileset _tileset, mr_tile _destination,
 
 }
 
+void mr_tile_roll_horizontal_on_place(mr_tileset _tileset, mr_tile _destination, mr_direction _direction, mr_tile _place, mr_position* _index) {
+    mr_tile_roll_horizontal_on_place_hd(_tileset, _destination, _direction, _place, _index);
+}
+
 // Redefine a subset of N tiles by "rolling" vertically a tile
-void mr_tile_prepare_roll_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+void mr_tile_prepare_roll_vertical_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
     mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
     mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
 
@@ -350,8 +378,12 @@ void mr_tile_prepare_roll_vertical(mr_tileset _tileset, mr_tile _source, mr_tile
     }
 }
 
+void mr_tile_prepare_roll_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+    mr_tile_prepare_roll_vertical_hd(_tileset, _source, _destination);
+}
+
 // Roll vertically a tile
-void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _destination, mr_direction _direction) {
+void mr_tile_roll_vertical_memory_mapped(mr_tileset _tileset, mr_tile _destination, mr_direction _direction) {
 
     mr_mixel* source;
     mr_mixel* destination;
@@ -401,6 +433,10 @@ void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _destination, mr_directi
     }
 
 
+}
+
+void mr_tile_roll_vertical(mr_tileset _tileset, mr_tile _destination, mr_direction _direction) {
+    mr_tile_roll_vertical_hd(_tileset, _destination, _direction);
 }
 
 // Roll vertically a tile
