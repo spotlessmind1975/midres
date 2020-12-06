@@ -105,15 +105,126 @@ void mr_doublebuffer_switch_hd(unsigned char _screen) {
 }
 
 void mr_tileset_visible_hd(unsigned char _tileset) {
-
+    vdp_out(VDP_RPATTERN, _tileset);
 }
 
 unsigned char mr_key_pressed_hd() {
-
+    return mr_get_key_pressed_hd() != MR_KEY_NONE;
 }
 
 unsigned char mr_get_key_pressed_hd() {
-
+    
+    unsigned char key;
+    
+    key = *((unsigned char*)0xFBE5);
+    if ((key & ~0x01) == 0) { return MR_KEY_0; };
+    if ((key & ~0x02) == 0) { return MR_KEY_1; };
+    if ((key & ~0x04) == 0) { return MR_KEY_2; };
+    if ((key & ~0x08) == 0) { return MR_KEY_3; };
+    if ((key & ~0x10) == 0) { return MR_KEY_4; };
+    if ((key & ~0x20) == 0) { return MR_KEY_5; };
+    if ((key & ~0x40) == 0) { return MR_KEY_6; };
+    if ((key & ~0x80) == 0) { return MR_KEY_7; };
+    key = *((unsigned char*)0xFBE6);
+    if ((key & ~0x01) == 0) { return MR_KEY_8; };
+    if ((key & ~0x02) == 0) { return MR_KEY_9; };
+    if ((key & ~0x04) == 0) { return MR_KEY_MINUS; };
+    if ((key & ~0x08) == 0) { return MR_KEY_EQUAL; };
+    if ((key & ~0x10) == 0) { return MR_KEY_BACKSLASH; };
+    if ((key & ~0x20) == 0) { return MR_KEY_SQUARE_OPEN; };
+    if ((key & ~0x40) == 0) { return MR_KEY_SQUARE_CLOSED; };
+    if ((key & ~0x80) == 0) { return MR_KEY_SEMICOMMA; };
+    key = *((unsigned char*)0xFBE7);
+    if ((key & ~0x01) == 0) { return MR_KEY_QUOTE; };
+    if ((key & ~0x02) == 0) { return MR_KEY_APIX; };
+    if ((key & ~0x04) == 0) { return MR_KEY_COMMA; };
+    if ((key & ~0x08) == 0) { return MR_KEY_PERIOD; };
+    if ((key & ~0x10) == 0) { return MR_KEY_SLASH; };
+    if ((key & ~0x20) == 0) { return MR_KEY_DEAD; };
+    if ((key & ~0x40) == 0) { return MR_KEY_A; };
+    if ((key & ~0x80) == 0) { return MR_KEY_B; };
+    key = *((unsigned char*)0xFBE8);
+    if ((key & ~0x01) == 0) { return MR_KEY_C; };
+    if ((key & ~0x02) == 0) { return MR_KEY_D; };
+    if ((key & ~0x04) == 0) { return MR_KEY_E; };
+    if ((key & ~0x08) == 0) { return MR_KEY_F; };
+    if ((key & ~0x10) == 0) { return MR_KEY_G; };
+    if ((key & ~0x20) == 0) { return MR_KEY_H; };
+    if ((key & ~0x40) == 0) { return MR_KEY_I; };
+    if ((key & ~0x80) == 0) { return MR_KEY_J; };
+    key = *((unsigned char*)0xFBE9);
+    if ((key & ~0x01) == 0) { return MR_KEY_K; };
+    if ((key & ~0x02) == 0) { return MR_KEY_L; };
+    if ((key & ~0x04) == 0) { return MR_KEY_M; };
+    if ((key & ~0x08) == 0) { return MR_KEY_N; };
+    if ((key & ~0x10) == 0) { return MR_KEY_O; };
+    if ((key & ~0x20) == 0) { return MR_KEY_P; };
+    if ((key & ~0x40) == 0) { return MR_KEY_Q; };
+    if ((key & ~0x80) == 0) { return MR_KEY_R; };
+    key = *((unsigned char*)0xFBEA);
+    if ((key & ~0x01) == 0) { return MR_KEY_S; };
+    if ((key & ~0x02) == 0) { return MR_KEY_T; };
+    if ((key & ~0x04) == 0) { return MR_KEY_U; };
+    if ((key & ~0x08) == 0) { return MR_KEY_V; };
+    if ((key & ~0x10) == 0) { return MR_KEY_W; };
+    if ((key & ~0x20) == 0) { return MR_KEY_X; };
+    if ((key & ~0x40) == 0) { return MR_KEY_Y; };
+    if ((key & ~0x80) == 0) { return MR_KEY_Z; };
+    key = *((unsigned char*)0xFBEB);
+    if ((key & ~0x01) == 0) { return MR_KEY_SHIFT; };
+    if ((key & ~0x02) == 0) { return MR_KEY_CTRL; };
+    if ((key & ~0x04) == 0) { return MR_KEY_GRAPH; };
+    if ((key & ~0x08) == 0) { return MR_KEY_CAPS; };
+    if ((key & ~0x10) == 0) { return MR_KEY_CODE; };
+    if ((key & ~0x20) == 0) { return MR_KEY_F1; };
+    if ((key & ~0x40) == 0) { return MR_KEY_F2; };
+    if ((key & ~0x80) == 0) { return MR_KEY_F3; };
+    key = *((unsigned char*)0xFBEC);
+    if ((key & ~0x01) == 0) { return MR_KEY_F4; };
+    if ((key & ~0x02) == 0) { return MR_KEY_F5; };
+    if ((key & ~0x04) == 0) { return MR_KEY_ESC; };
+    if ((key & ~0x08) == 0) { return MR_KEY_TAB; };
+    if ((key & ~0x10) == 0) { return MR_KEY_STOP; };
+    if ((key & ~0x20) == 0) { return MR_KEY_BS; };
+    if ((key & ~0x40) == 0) { return MR_KEY_SELECT; };
+    if ((key & ~0x80) == 0) { return MR_KEY_RET; };
+    key = *((unsigned char*)0xFBED);
+    if ((key & ~0x01) == 0) { return MR_KEY_F4; };
+    if ((key & ~0x02) == 0) { return MR_KEY_F5; };
+    if ((key & ~0x04) == 0) { return MR_KEY_ESC; };
+    if ((key & ~0x08) == 0) { return MR_KEY_TAB; };
+    if ((key & ~0x10) == 0) { return MR_KEY_STOP; };
+    if ((key & ~0x20) == 0) { return MR_KEY_BS; };
+    if ((key & ~0x40) == 0) { return MR_KEY_SELECT; };
+    if ((key & ~0x80) == 0) { return MR_KEY_RET; };
+    key = *((unsigned char*)0xFBEE);
+    if ((key & ~0x01) == 0) { return MR_KEY_SPACE; };
+    if ((key & ~0x02) == 0) { return MR_KEY_HOME; };
+    if ((key & ~0x04) == 0) { return MR_KEY_INS; };
+    if ((key & ~0x08) == 0) { return MR_KEY_DEL; };
+    if ((key & ~0x10) == 0) { return MR_KEY_LEFT; };
+    if ((key & ~0x20) == 0) { return MR_KEY_UP; };
+    if ((key & ~0x40) == 0) { return MR_KEY_DOWN; };
+    if ((key & ~0x80) == 0) { return MR_KEY_RIGHT; };
+    key = *((unsigned char*)0xFBEF);
+    if ((key & ~0x01) == 0) { return MR_KEY_ASTERISK; };
+    if ((key & ~0x02) == 0) { return MR_KEY_PLUS; };
+    if ((key & ~0x04) == 0) { return MR_KEY_DIVISION; };
+    if ((key & ~0x08) == 0) { return MR_KEY_0; };
+    if ((key & ~0x10) == 0) { return MR_KEY_1; };
+    if ((key & ~0x20) == 0) { return MR_KEY_2; };
+    if ((key & ~0x40) == 0) { return MR_KEY_3; };
+    if ((key & ~0x80) == 0) { return MR_KEY_4; };
+    key = *((unsigned char*)0xFBF0);
+    if ((key & ~0x01) == 0) { return MR_KEY_5; };
+    if ((key & ~0x02) == 0) { return MR_KEY_6; };
+    if ((key & ~0x04) == 0) { return MR_KEY_7; };
+    if ((key & ~0x08) == 0) { return MR_KEY_8; };
+    if ((key & ~0x10) == 0) { return MR_KEY_9; };
+    if ((key & ~0x20) == 0) { return MR_KEY_MINUS; };
+    if ((key & ~0x40) == 0) { return MR_KEY_COMMA; };
+    if ((key & ~0x80) == 0) { return MR_KEY_PERIOD; };
+    return MR_KEY_NONE;
 }
 
 void mr_wait_hd(unsigned char _seconds) {
