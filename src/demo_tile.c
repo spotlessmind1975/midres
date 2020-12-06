@@ -13,7 +13,6 @@
  ****************************************************************************/
 
 #include <stdio.h>
-#include <cc65.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -45,6 +44,10 @@
 #elif __ATARI__
 
 #define		TILE_START			8
+
+#else
+
+#define		TILE_START			16
 
 #endif
 
@@ -105,7 +108,7 @@ void demo_tile() {
 	mr_init();
 
 	// Clear screen bitmap.
-	mr_clear_bitmap(MR_SCREEN_DEFAULT);
+	mr_clearv();
 
 	// Load the tiles from the disk on the first tileset space.
 	// We load all tiles (TILE_COUNT) from first position (0).
