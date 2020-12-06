@@ -12,10 +12,6 @@ PUBLIC _vdp_put
 PUBLIC _vdp_fill
 PUBLIC _vdp_get
 
-VdpPort:
-    defb    0beh
-VdpMode:
-    defw    0
 VdpWriteBit: equ     40h
 
 VdpSetReg:
@@ -173,7 +169,11 @@ _vdp_get:
 _vdp_port:
 	ld	hl, 2
 	add	hl, sp
-    ld a,(hl)
-    inc hl
+	ld	a, (hl)			; port
     ld (VdpPort), a
     ret
+
+SECTION data
+VdpPort:
+    defb    0beh
+
