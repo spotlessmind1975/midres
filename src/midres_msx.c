@@ -260,7 +260,10 @@ void mr_wait_hd(unsigned char _seconds) {
 }
 
 void mr_wait_jiffies_hd(unsigned char _jiffies) {
+    unsigned int actual = *((unsigned int*)0xFC9E);
+    while ( (*((unsigned int*)0xFC9E) - actual ) < (unsigned int)_jiffies) {
 
+    }    
 }
 
 // Hardware dependent sound library
@@ -283,17 +286,19 @@ void mr_set_background_color_hd(unsigned char _color) {
 }
 
 void mr_set_border_color_hd(unsigned char _color) {
-
+    vdp_out(VDP_RCOLOR, _color & 0x0f );
 }
 
-unsigned char storedJiffy = 0;
+unsigned int storedJiffy = 0;
 
 void mr_start_frame_hd() {
-
+    storedJiffy = *((unsigned int*)0xFC9E);
 }
 
 void mr_end_frame_hd(unsigned char _jiffies) {
+    while ((*((unsigned int*)0xFC9E) - storedJiffy) < _jiffies) {
 
+    }
 }
 
 #ifdef MIDRES_STANDALONE_FILE
