@@ -50,6 +50,8 @@ unsigned char MR_RENDERED_MIXELS_COLECO[16] = {
 
 void mr_init_hd() {
 
+    vdp_port(0xbe);
+    vdp_port(VDP_R0, 0x00);
     vdp_out(VDP_R0, 0x00);
     vdp_out(VDP_R1, 0xc0);
     vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
@@ -65,6 +67,7 @@ void mr_init_hd() {
 
 void mr_init_multicolor_hd() {
 
+    vdp_port(0xbe);
     vdp_out(VDP_R0, 0x00);
     vdp_out(VDP_R1, 0xc0);
     vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
