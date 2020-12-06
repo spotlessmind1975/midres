@@ -1,4 +1,4 @@
-#ifdef __COLECO__
+#ifdef __MSX__
 
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
@@ -29,27 +29,28 @@
 #define VDP_RSPRITEP    0x86
 #define VDP_RCOLOR      0x87
 
-unsigned char MR_RENDERED_MIXELS_COLECO[16] = {
+unsigned char MR_RENDERED_MIXELS_MSX[16] = {
    0x00, 0x01, 0x02, 0x03,
    0x04, 0x05, 0x06, 0x07,
    0x08, 0x09, 0x10, 0x11,
    0x12, 0x13, 0x14, 0x15
 };
 
-  /****************************************************************************
-   ** RESIDENT VARIABLES SECTION
-   ****************************************************************************/
+/****************************************************************************
+ ** RESIDENT VARIABLES SECTION
+ ****************************************************************************/
 
-   /****************************************************************************
-    ** RESIDENT FUNCTIONS SECTION
-    ****************************************************************************/
+ /****************************************************************************
+  ** RESIDENT FUNCTIONS SECTION
+  ****************************************************************************/
 
-    // The functions defined at this level can only be called up if the current
-    // module has been loaded into memory. On the other hand, they can call any 
-    // function declared at the resident module level.
+  // The functions defined at this level can only be called up if the current
+  // module has been loaded into memory. On the other hand, they can call any 
+  // function declared at the resident module level.
 
 void mr_init_hd() {
 
+    vdp_port(0x98);
     vdp_out(VDP_R0, 0x00);
     vdp_out(VDP_R1, 0xc0);
     vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
@@ -65,6 +66,7 @@ void mr_init_hd() {
 
 void mr_init_multicolor_hd() {
 
+    vdp_port(0x98);
     vdp_out(VDP_R0, 0x00);
     vdp_out(VDP_R1, 0xc0);
     vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
@@ -173,7 +175,7 @@ unsigned char mr_joy_hd(unsigned char _number) {
 
 void mr_tileset_copy_hd(unsigned char _source, unsigned char _dest) {
     unsigned char i;
-    for (i = 0; i < (MR_TILESET_TILE_COUNT-1); ++i) {
+    for (i = 0; i < (MR_TILESET_TILE_COUNT - 1); ++i) {
         mr_position w = 255, b = 0;
         unsigned int source = MR_TM(_source);
         unsigned int destination = MR_TM(_dest);
@@ -215,7 +217,8 @@ void mr_tile_redefine_fill_hd(unsigned char _tileset, unsigned char _tile, unsig
 }
 
 void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination) {
-    unsigned int source = MR_TM(_tileset) + _source * 8);
+    
+    unsigned int source = (MR_TM(_tileset) + _source * 8);
     unsigned int destination = (MR_TM(_tileset) + _destination * 8);
 
     mr_position i, b;
@@ -224,7 +227,7 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = vdp_get(source);
             mr_mixel m = d >> i;
-            vpd_fill(m, destination, 1);
+            vdp_fill(m, destination, 1);
         }
         source -= 8;
     }
@@ -233,7 +236,7 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = *((mr_mixel*)source);
             mr_mixel n = d & (0xff >> (7 - i));
-            vpd_fill((n << (7 - i)), destination, 1);
+            vdp_fill((n << (7 - i)), destination, 1);
         }
         source -= 8;
     }
@@ -262,7 +265,7 @@ void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, un
             for (i = 0; i < 9; ++i) {
                 for (b = 0; b < 8; ++b, ++source, ++destination) {
                     mr_mixel d = vdp_get(source);
-                    mr_mixel e = vdp_get(source+8);
+                    mr_mixel e = vdp_get(source + 8);
                     mr_mixel m = (e >> i) | (d << (8 - i));
                     vdp_fill(m, destination, 1);
                 }
@@ -309,6 +312,7 @@ void mr_tile_prepare_vertical_hd(unsigned char _tileset, unsigned char _source, 
             vdp_fill(0x00, destination, 1);
         }
     }
+
 }
 
 void mr_tile_prepare_vertical_extended_hd(unsigned char _tileset, unsigned char _source, unsigned char _w, unsigned char _h, unsigned char _destination) {
@@ -356,7 +360,7 @@ void mr_tile_prepare_vertical_extended_hd(unsigned char _tileset, unsigned char 
 
 }
 
-void mr_tile_prepare_roll_horizontal_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination) {
+void mr_tile_prepare_roll_horizontal_monocolor_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination) {
     unsigned int source = (MR_TM(_tileset) + _source * 8);
     unsigned int destination = (MR_TM(_tileset) + _destination * 8);
 
@@ -372,13 +376,13 @@ void mr_tile_prepare_roll_horizontal_hd(unsigned char _tileset, unsigned char _s
     }
 }
 
-extern mr_mixel rollBuffer[8];
+extern mr_mixel rollBuffer[8]; 
 
 void mr_tile_roll_horizontal_hd(unsigned char _tileset, unsigned char _destination, unsigned char _direction) {
 
     unsigned int source;
     unsigned int destination;
-    unsigned char *temp = &rollBuffer[0];
+    unsigned char* temp = &rollBuffer[0];
     mr_position i, b;
 
     if (_direction == mr_direction_right) {
@@ -413,13 +417,13 @@ void mr_tile_roll_horizontal_hd(unsigned char _tileset, unsigned char _destinati
         for (i = 0; i < 7; ++i) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
                 mr_mixel d = vdp_get(source);
-                *destination = d;
+                vdp_fill(d, destination, 1);
             }
             source -= 16;
             destination -= 16;
         }
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
-            vdp_fill(*temp, destination,1);
+            vdp_fill(*temp, destination, 1);
         }
     }
 
@@ -516,6 +520,8 @@ void mr_tile_roll_vertical_hd(unsigned char _tileset, unsigned char _destination
             vdp_fill(*temp, destination, 1);
         }
     }
+
 }
+
 
 #endif

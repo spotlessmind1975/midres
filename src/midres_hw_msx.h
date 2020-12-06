@@ -6,10 +6,10 @@
  * INCLUDE FILE                                                             *
  ****************************************************************************/
 
-#ifndef _MIDRES_HW_COLECO_H_
-#define _MIDRES_HW_COLECO_H_
+#ifndef _MIDRES_HW_MSX_H_
+#define _MIDRES_HW_MSX_H_
 
-#define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_COLECO
+#define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_MSX
 
 // The maximum resolution is 80 x 50 pixels, equivalent to 
 // 40 x 25 mixels.
@@ -110,10 +110,10 @@
 //#define MIDRES_STANDALONE_BITBLIT			1	
 //#define MIDRES_STANDALONE_DRAWING			1
 //#define MIDRES_STANDALONE_DRAWING2			1
-//#define MIDRES_STANDALONE_SCREEN			1
+#define MIDRES_STANDALONE_SCREEN			1
 //#define MIDRES_STANDALONE_SCREEN2			1
 #define MIDRES_STANDALONE_TILE				1
-//#define MIDRES_STANDALONE_TILE_PROCESSING	1
+#define MIDRES_STANDALONE_TILE_PROCESSING	1
 //#define MIDRES_STANDALONE_TILE_MULTICOLOR	1
 //#define MIDRES_STANDALONE_KEYBOARD			1
 // #define MIDRES_STANDALONE_FILE				1

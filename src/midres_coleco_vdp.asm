@@ -6,6 +6,7 @@
 ;  * DRAWING LIBRARY                                                          *
 ;  ****************************************************************************/
 
+PUBLIC _vdp_port
 PUBLIC _vdp_out
 PUBLIC _vdp_put
 PUBLIC _vdp_fill
@@ -168,3 +169,11 @@ _vdp_get:
     inc hl
     ld d,(hl)              ; vram source address
     jp VdpRead
+
+_vdp_port:
+	ld	hl, 2
+	add	hl, sp
+    ld a,(hl)
+    inc hl
+    ld (VdpPort), a
+    ret

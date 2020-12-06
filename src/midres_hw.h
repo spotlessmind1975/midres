@@ -38,7 +38,11 @@
 #elif __ATMOS__
 #include "midres_hw_atmos.h"
 #elif __COLECO__
+#include "midres_hw_vdp.h"
 #include "midres_hw_coleco.h"
+#elif __MSX__
+#include "midres_hw_vdp.h"
+#include "midres_hw_msx.h"
 #else
 #include "midres_hw_vanilla.h"
 #endif
