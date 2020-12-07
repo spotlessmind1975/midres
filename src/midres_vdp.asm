@@ -37,8 +37,6 @@ VdpRamOut:
         push    bc
         ld      bc, (VdpPort)
         out     (c), a
-VdpRamOutDelay:
-        djnz    VdpRamOutDelay
         pop     bc
         ret
 
