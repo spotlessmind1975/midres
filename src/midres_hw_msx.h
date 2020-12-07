@@ -9,7 +9,7 @@
 #ifndef _MIDRES_HW_MSX_H_
 #define _MIDRES_HW_MSX_H_
 
-// #define FRAME_BUFFER    1
+#define FRAME_BUFFER    1
 
 #define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_MSX
 
