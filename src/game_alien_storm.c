@@ -1,8 +1,5 @@
 #ifdef __GAME_ALIEN_STORM__
 
-// midresIde.makeCommandLine:game=alienstorm;
-// midresIde.executableName:alienstorm.{target}.d64;
-
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
@@ -490,8 +487,16 @@ void prepare_graphics() {
 // hitting the various elements of the game.
 void welcome_screen() {
 
+	mr_start_frame();
+
 	// Let's start by clearing the screen.
 	mr_clearv();
+
+	mr_end_frame(0);
+
+	mr_start_frame();
+
+	mr_tileset_visible(MR_TILESET_2);
 
 	// Let's draw the upper and lower part of the screen, the one that 
 	// contains the total score and the maximum. At the bottom we draw 
@@ -500,6 +505,8 @@ void welcome_screen() {
 	draw_hiscore();
 	draw_score(PLAYER_2);
 	draw_credit();
+
+	mr_end_frame(0);
 
 	// Endless loop (until a valid key is pressed).
 	while (1) {
@@ -510,11 +517,19 @@ void welcome_screen() {
 		//		1 player = 1 coin
 		//		2 players = 2 coins.
 
+		mr_start_frame();
+
 		clear_welcome_screen();
+
+		mr_end_frame(0);
+
+		mr_start_frame();
 
 		// Let's change the tile set on the fly, in order 
 		// to have the right tiles for writing on the screen.
 		mr_tileset_visible(MR_TILESET_2);
+
+		mr_start_frame();
 
 		// "INSERT COIN"
 		mr_putetilesv(TITLE_INSERTCOIN_X, TITLE_INSERTCOIN_Y, 
@@ -530,10 +545,14 @@ void welcome_screen() {
 							TILE2_12PLAYERS_HEIGHT, 
 							MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// "1 PLAYER = 1 COIN"
 		mr_puttilev(TITLE_1PLAYER_1COIN_X, TITLE_1PLAYER_1COIN_Y, TILE2_DIGIT1, MR_COLOR_WHITE);
@@ -549,10 +568,14 @@ void welcome_screen() {
 						TILE2_COIN_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_start_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// "2 COINS = 2 PLAYERS"
 		mr_puttilev(TITLE_2PLAYERS_2COINS_X, TITLE_2PLAYERS_2COINS_Y, TILE2_DIGIT2, MR_COLOR_GREEN);
@@ -568,6 +591,8 @@ void welcome_screen() {
 						TILE2_COINS_HEIGHT, 
 						MR_COLOR_GREEN);
 
+		mr_end_frame(0);
+
 		// Wait 3 seconds or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
@@ -575,11 +600,17 @@ void welcome_screen() {
 
 #endif
 
+		mr_start_frame();
+
 		//------------------------------------------- SECOND SCREEN:
 		// We suggest the scores that can be obtained 
 		// by hitting the various aliens.
 
 		clear_welcome_screen();
+
+		mr_end_frame(0);
+
+		mr_start_frame();
 
 		// Let's change the tile set on the fly, in order 
 		// to have the right tiles for writing on the screen.
@@ -592,10 +623,14 @@ void welcome_screen() {
 						TILE1_PLAY_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// "ALIEN STORM"
 		mr_putetilesv(TITLE_ALIEN_STORM_X, TITLE_ALIEN_STORM_Y, 
@@ -604,10 +639,14 @@ void welcome_screen() {
 						TILE1_TITLE_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// "SCORETABLE"
 		mr_putetilesv(TITLE_SCORETABLE_X, TITLE_SCORETABLE_Y, 
@@ -616,10 +655,14 @@ void welcome_screen() {
 						TILE1_SCORETABLE_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// (mistery ship icon)
 		mr_putetilesv(TITLE_MISTERY_SCORE_X, TITLE_MISTERY_SCORE_Y, 
@@ -628,10 +671,14 @@ void welcome_screen() {
 						TILE1_MYSTERO_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// "? MISTERY"
 		mr_putetilesv(TITLE_MISTERY_SCORE_X + TILE1_MYSTERO_WIDTH + 2, TITLE_MISTERY_SCORE_Y, 
@@ -640,10 +687,14 @@ void welcome_screen() {
 						TILE1_MISTERY_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// (alien 1 icon)
 		mr_putetilesv(TITLE_ALIEN1_SCORE_X, TITLE_ALIEN1_SCORE_Y, 
@@ -652,10 +703,14 @@ void welcome_screen() {
 						TILE1_ALIEN1A_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// "= 30 POINTS"
 		mr_puttilev(TITLE_ALIEN1_SCORE_X + TILE1_MYSTERO_WIDTH + 2, TITLE_ALIEN1_SCORE_Y, TILE1_DIGIT3, MR_COLOR_WHITE);
@@ -666,10 +721,14 @@ void welcome_screen() {
 						TILE1_POINTS_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// (alien 2 icon)
 		mr_putetilesv(TITLE_ALIEN2_SCORE_X, TITLE_ALIEN2_SCORE_Y, 
@@ -678,10 +737,14 @@ void welcome_screen() {
 						TILE1_ALIEN2A_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// "= 20 POINTS"
 		mr_puttilev(TITLE_ALIEN2_SCORE_X + TILE1_MYSTERO_WIDTH + 2, 15, TILE1_DIGIT2, MR_COLOR_WHITE);
@@ -692,10 +755,14 @@ void welcome_screen() {
 						TILE1_POINTS_HEIGHT, 
 						MR_COLOR_WHITE);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// (alien 3 icon)
 		mr_putetilesv(TITLE_ALIEN3_SCORE_X, TITLE_ALIEN3_SCORE_Y, 
@@ -704,10 +771,14 @@ void welcome_screen() {
 						TILE1_ALIEN1A_HEIGHT, 
 						MR_COLOR_GREEN);
 
+		mr_end_frame(0);
+
 		// Wait 1 second or press certain keys, 
 		// some of which can take you out of 
 		// the welcome screen and start playing.
 		if (keyboard_controller(1)) return;
+
+		mr_start_frame();
 
 		// "= 10 POINTS"
 		mr_puttilev(TITLE_ALIEN3_SCORE_X + TILE1_MYSTERO_WIDTH + 2, TITLE_ALIEN3_SCORE_Y, TILE1_DIGIT1, MR_COLOR_GREEN);
@@ -717,6 +788,8 @@ void welcome_screen() {
 						TILE1_POINTS_WIDTH, 
 						TILE1_POINTS_HEIGHT, 
 						MR_COLOR_GREEN);
+
+		mr_end_frame(0);
 
 		// Wait 3 seconds or press certain keys, 
 		// some of which can take you out of 
@@ -1492,11 +1565,19 @@ void check_end_conditions() {
 // This is the main loop of the game.
 void gameloop() {
 
+	mr_start_frame();
+
 	mr_clearv();
+
+	mr_end_frame(0);
+
+	mr_start_frame();
 
 	// First of all, let's activate the 
 	// correct tileset for animations.
 	mr_tileset_visible(MR_TILESET_0);
+
+	mr_end_frame(0);
 
 	initialize_game();
 
@@ -1516,6 +1597,8 @@ void gameloop() {
 	//This loop runs until the end of the game.
 	while (!gameOver) {
 
+		mr_start_frame();
+
 		// Clear the middle part.
 		clear_welcome_screen();
 
@@ -1529,6 +1612,8 @@ void gameloop() {
 
 		// Draw aliens array.
 		draw_aliens();
+
+		mr_end_frame(0);
 
 		//This loop runs until the end of the level.
 		while (!levelFinished) {
