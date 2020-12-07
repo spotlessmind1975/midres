@@ -34,11 +34,11 @@
 #define	MR_SCREEN_DB2				MR_SCREEN_1
 
 // List of available tilesets:
-#define MR_TILESET_ROM_0				0
-#define MR_TILESET_0					0
-#define MR_TILESET_1					1
-#define MR_TILESET_2					5
-#define MR_TILESET_3					6
+#define MR_TILESET_ROM_0				1
+#define MR_TILESET_0					1
+#define MR_TILESET_1					2
+#define MR_TILESET_2					6
+#define MR_TILESET_3					7
 #define MR_TILESET_COUNT				4
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
 #define MR_TILESET_TILE_COUNT			256
@@ -220,7 +220,7 @@
 
 #else
     #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
-    #define MR_CM(_screen)					((unsigned int)(0x40*_screen))
+    #define MR_CM(_screen)					((unsigned int)((0x40*(_screen+0x80))))
     #define MR_AM(_screen)					((unsigned int)(0x400*_screen))
     #define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
 
@@ -229,7 +229,7 @@
 
     #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
             vdp_fill(_tile, _screen + _offset, 1 ); \
-            vdp_fill((_color & 0xf)<<4, _colormap + ( _tile >> 3 ), 1 ); \
+            vdp_fill((_color & 0x0f) << 4, _colormap + _tile>>3, 1 );
 
     #define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
 
