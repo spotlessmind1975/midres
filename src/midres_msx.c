@@ -300,7 +300,7 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 
     }
 #ifdef FRAME_BUFFER
-    vdp_put(&frameBuffer[0], MR_SCREEN_DEFAULT * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
 #endif
 }
 
