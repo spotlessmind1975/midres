@@ -92,12 +92,8 @@ void mr_tile_setcolors_hd(unsigned char _colors[4]) {
 }
 
 void mr_show_hd(unsigned char _screen) {
-    #ifdef FRAME_BUFFER
-        vdp_put(&frameBuffer[0], MR_SCREEN_DEFAULT * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-    #else
-        vdp_out(VDP_RNAME, _screen);
-        vdp_out(VDP_RCOLORTABLE, _screen);
-    #endif
+    vdp_out(VDP_RNAME, _screen);
+    vdp_out(VDP_RCOLORTABLE, 0x80 + (_screen - MR_SCREEN_DEFAULT));
 }
 
 void mr_cleanup_hd() {
