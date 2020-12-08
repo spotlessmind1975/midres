@@ -36,13 +36,16 @@ VdpRegIn:
         ret
 
 VdpRamOut:
+        di
         push    bc
         ld      bc, (VdpPort)
         out     (c), a
         pop     bc
+        ei
         ret
 
 VdpRamOut8:
+        di
         push    bc
         ld      bc, (VdpPort)
         out     (c), a
@@ -118,6 +121,7 @@ VdpRamOut8:
         nop
         nop
         pop     bc
+        ei
         ret
 
 VdpRamIn:
@@ -150,6 +154,7 @@ VdpReadAddr:
         ret
 
 VdpWrite:
+        di
         call    VdpWriteAddr
 VdpWriteLoop:
         ld      a, (hl)
@@ -159,9 +164,11 @@ VdpWriteLoop:
         ld      a, b
         or      c
         jp      nz, VdpWriteLoop
+        ei
         ret
 
 VdpWrite8:
+        di
         call    VdpWriteAddr
 VdpWrite8Loop:
         ld      a, (hl)
@@ -171,15 +178,19 @@ VdpWrite8Loop:
         ld      a, b
         or      c
         jp      nz, VdpWrite8Loop
+        ei
         ret
 
 VdpRead:
+        di
         call    VdpReadAddr
         call    VdpRamIn
         ld      l, a
+        ei
         ret
 
 VdpFill:
+        di
         push    af
         call    VdpWriteAddr
         pop     af
@@ -188,9 +199,11 @@ VdpFillLoop:
         dec     c
         jp      nz, VdpFillLoop
         djnz    VdpFillLoop
+        ei
         ret
 
 VdpFill8:
+        di
         push    af
         call    VdpWriteAddr
         pop     af
@@ -198,6 +211,7 @@ VdpFillLoop8:
         call    VdpRamOut
         dec     c
         jp      nz, VdpFillLoop8
+        ei
         ret
 
 _vdp_out:
