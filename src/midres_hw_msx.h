@@ -9,7 +9,7 @@
 #ifndef _MIDRES_HW_MSX_H_
 #define _MIDRES_HW_MSX_H_
 
-//#define FRAME_BUFFER        1
+// #define FRAME_BUFFER        1
 #define GRAPHIC_MODE_I      1
 //#define GRAPHIC_MODE_II     1
 
@@ -230,7 +230,7 @@
 #define MR_TILE_COLOR2					3
 
 #ifdef FRAME_BUFFER
-    #ifdef GRAPHICS_MODE_I
+    #ifdef GRAPHIC_MODE_I
         #define MR_SM(_screen)					(&frameBuffer[0])
         #define MR_CM(_screen)					(&colorBuffer[0])
         #define MR_AM(_screen)					(&auxBuffer[0])
@@ -266,18 +266,17 @@ extern unsigned char auxBuffer[];
         #define MR_READ_TILE(_screen, _offset) _screen[(_offset)]
     #endif
 #else
-    #ifdef GRAPHICS_MODE_I
+    #ifdef GRAPHIC_MODE_I
         #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
         #define MR_CM(_screen)					((unsigned int)((0x40*(_screen+0x80))))
         #define MR_AM(_screen)					((unsigned int)(0x400*_screen))
         #define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
 
         #define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
-                vdp_fill(_tile, _screen + _offset, 1 );
+                vdp_fill8(_tile, _screen + _offset, 1 );
 
         #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-                vdp_fill(_tile, _screen + _offset, 1 ); \
-                vdp_fill((_color & 0x0f) << 4, _colormap + _tile>>3, 1 );
+                vdp_fill8(_tile, _screen + _offset, 1 );
 
         #define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
     #else
@@ -287,18 +286,18 @@ extern unsigned char auxBuffer[];
         #define MR_TM(_tileset)					((unsigned int)((_tileset==0x0e)?0x2000:0x0000))
 
         #define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
-                    vdp_fill(_tile, _screen + _offset, 1 );
+                    vdp_fill8(_tile, _screen + _offset, 1 );
 
         #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-                    vdp_fill(_tile, _screen + _offset, 1 ); \
-                    vdp_fill((_color & 0x0f), _colormap + (_offset * 8), 1 ); \
-                    vdp_fill((_color & 0x0f), _colormap + (_offset * 8) + 1, 1); \
-                    vdp_fill((_color & 0x0f), _colormap + (_offset * 8) + 2, 1); \
-                    vdp_fill((_color & 0x0f), _colormap + (_offset * 8) + 3, 1); \
-                    vdp_fill((_color & 0x0f), _colormap + (_offset * 8) + 4, 1); \
-                    vdp_fill((_color & 0x0f), _colormap + (_offset * 8) + 5, 1); \
-                    vdp_fill((_color & 0x0f), _colormap + (_offset * 8) + 6, 1); \
-                    vdp_fill((_color & 0x0f), _colormap + (_offset * 8) + 7, 1);
+                    vdp_fill8(_tile, _screen + _offset, 1 ); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8), 1 ); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 1, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 2, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 3, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 4, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 5, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 6, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 7, 1);
 
         #define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
     #endif
