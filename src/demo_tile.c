@@ -33,6 +33,8 @@
 // All the functions defined within the resident body of the code are 
 // accessible from all modules, both resident and changing ones.
 
+#include "rawdata.h"
+
 /****************************************************************************
  ** RESIDENT MAIN FUNCTION
  ****************************************************************************/
@@ -134,6 +136,8 @@ void demo_tile() {
 	// Endless loop...
 	while (1) {
 
+		mr_start_frame();
+
 		// Update frames for wheels.
 		for (i = 0; i < 4; ++i) {
 			++wheels[i];
@@ -161,6 +165,9 @@ void demo_tile() {
 				drops[i] = 0;
 			}
 		}
+
+		mr_end_frame(0);
+
 	}
 
 }
