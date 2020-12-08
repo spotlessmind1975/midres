@@ -658,7 +658,7 @@ $(EXEDIR)/$(PROGRAMNAME).coleco:	$(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFO
 
 ## MSX -------------------------------------------------------------------------
 
-obj/msx/rawdata.o:	$(DATADIR)/mtiles.bin
+midres.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tiles.bin -i $(DATADIR)/tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -o obj/msx/rawdata.o src/rawdata.c
 
@@ -673,11 +673,9 @@ lib/midres.msx.lib:
 obj/msx/%.o:	$(LIB_SOURCES) $(SOURCES)
 	$(CC88) +msx -O3 $(CFLAGS) -c -o $@ $(subst obj/msx/,src/,$(@:.o=.c))
 
-# This rule will produce the final binary file for ColecoVision platform.
-$(EXEDIR)/$(PROGRAMNAME).msx:	$(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) obj/msx/rawdata.o obj/msx/midres_vdp.o
+$(EXEDIR)/$(PROGRAMNAME).msx: midres.embedded.msx	$(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) obj/msx/rawdata.o obj/msx/midres_vdp.o  obj/msx/midres_io.o
 	$(CC88) +msx -lndos -subtype=rom -m $(LDFLAGS88) obj/msx/rawdata.o obj/msx/midres_io.o obj/msx/midres_vdp.o $(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).rom,$(EXEDIR)/$(PROGRAMNAME).msx.rom)
-
 
 ###############################################################################
 ##
