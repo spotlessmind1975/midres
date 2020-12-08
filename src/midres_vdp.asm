@@ -9,6 +9,8 @@
 PUBLIC _vdp_port
 PUBLIC _vdp_out
 PUBLIC _vdp_put
+PUBLIC _vdp_put8
+PUBLIC _vdp_fill8
 PUBLIC _vdp_fill
 PUBLIC _vdp_get
 
@@ -37,6 +39,84 @@ VdpRamOut:
         push    bc
         ld      bc, (VdpPort)
         out     (c), a
+        pop     bc
+        ret
+
+VdpRamOut8:
+        push    bc
+        ld      bc, (VdpPort)
+        out     (c), a
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        out     (c), a
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        out     (c), a
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        out     (c), a
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        out     (c), a
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        out     (c), a
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        out     (c), a
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        out     (c), a
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
         pop     bc
         ret
 
@@ -79,6 +159,18 @@ VdpWriteLoop:
         ld      a, b
         or      c
         jp      nz, VdpWriteLoop
+        ret
+
+VdpWrite8:
+        call    VdpWriteAddr
+VdpWrite8Loop:
+        ld      a, (hl)
+        call    VdpRamOut8
+        inc     hl
+        dec     bc
+        ld      a, b
+        or      c
+        jp      nz, VdpWrite8Loop
         ret
 
 VdpRead:
@@ -142,7 +234,28 @@ _vdp_put:
     ld l, a
     jp VdpWrite
 
-_vdp_fill:
+_vdp_put8:
+	ld	hl, 2
+	add	hl, sp
+    ld c,(hl)
+    inc hl
+    ld b,(hl)              ; byte count
+    inc hl
+    ld e,(hl)
+    inc hl
+    ld d,(hl)              ; vram destination address
+    inc hl
+    ld a, (hl)
+    inc hl
+    ex af,af'
+    ld a, (hl)
+    inc hl
+    ld h, a
+    ex af,af'
+    ld l, a
+    jp VdpWrite8
+
+_vdp_fill8:
 	ld	hl, 2
 	add	hl, sp
     ld c,(hl)
@@ -155,6 +268,20 @@ _vdp_fill:
     inc hl
 	ld	a, (hl)			    ; value to fill
     jp VdpFill8
+
+_vdp_fill:
+	ld	hl, 2
+	add	hl, sp
+    ld c,(hl)
+    inc hl
+    ld b,(hl)              ; byte count
+    inc hl
+    ld e,(hl)
+    inc hl
+    ld d,(hl)              ; vram destination address
+    inc hl
+	ld	a, (hl)			    ; value to fill
+    jp VdpFill
 
 _vdp_get:
 	ld	hl, 2
