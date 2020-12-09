@@ -165,4 +165,6 @@ void mr_tileset_load_file_hd(unsigned char _index, unsigned char _tileset, unsig
 
 #define mr_assert_max_tiles( x ) if ( x > MR_TILESET_TILE_COUNT ) { puts("Maximum number of tiles for tileset exceeded."); return; }
 
+#define MR_WRITE_TILE_COLOR MR_WRITE_TILE_LUMINANCE
+
 #endif
