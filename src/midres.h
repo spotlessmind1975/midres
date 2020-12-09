@@ -60,8 +60,12 @@
 	// data type. Since the maximum resolution is 80 x 50, the type used is 
 	// the one that represents these two numbers with the lowest numer of bits.
 
-	typedef unsigned char mr_position;
-
+	#ifdef __Z80__
+		typedef int mr_position;
+	#else
+		typedef unsigned char mr_position;
+	#endif
+	
 	// The position of the tile on the screen at maximum resolution.
 
 	typedef int mr_tile_position;
@@ -120,12 +124,20 @@
 	// The speed of an object can be easily represented by this
 	// type, that has been added for commodity.
 
-	typedef signed char mr_speed;
+	#ifdef __Z80__
+		typedef int mr_speed;
+	#else
+		typedef signed char mr_speed;
+	#endif
 
 	// The acceleration of an object can be easily represented by this
 	// type, that has been added for commodity.
 
-	typedef signed char mr_acceleration;
+	#ifdef __Z80__
+		typedef int mr_acceleration;
+	#else
+		typedef signed char mr_acceleration;
+	#endif
 
 	// The boolean can be easily represented by this type, 
 	// that has been added for commodity.

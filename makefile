@@ -178,6 +178,7 @@ endif
 ###############################################################################
 
 CFLAGS := -D__DEMO_$(DEMO)__ -D__GAME_$(GAME)__ -D__TUTORIAL_$(TUTORIAL)__ -W -const-comparison
+CFLAGS88 := -D__Z80__
 LDFLAGS := 
 CRT :=
 REMOVES :=
@@ -637,7 +638,7 @@ $(EXEDIR)/$(PROGRAMNAME).atmos:	$(subst PLATFORM,atmos,$(OBJS)) obj/atmos/rawdat
 
 midres.embedded.coleco:
 	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tiles.bin -i $(DATADIR)/tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -o obj/coleco/rawdata.o src/rawdata.c
+	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -o obj/coleco/rawdata.o src/rawdata.c
 
 obj/coleco/midres_vdp.o:	src/midres_vdp.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/coleco/midres_vdp.o src/midres_vdp.asm
@@ -648,7 +649,7 @@ obj/coleco/midres_io.o:	src/midres_io.asm
 lib/midres.coleco.lib:	
 
 obj/coleco/%.o:	$(LIB_SOURCES) $(SOURCES)
-	$(CC88) +coleco $(CFLAGS) -c -o $@ $(subst obj/coleco/,src/,$(@:.o=.c))
+	$(CC88) +coleco $(CFLAGS88) $(CFLAGS) -c -o $@ $(subst obj/coleco/,src/,$(@:.o=.c))
 
 # This rule will produce the final binary file for ColecoVision platform.
 $(EXEDIR)/$(PROGRAMNAME).coleco:	midres.embedded.coleco $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) obj/coleco/rawdata.o obj/coleco/midres_vdp.o obj/coleco/midres_io.o
@@ -670,7 +671,7 @@ obj/msx/midres_io.o:	src/midres_io.asm
 lib/midres.msx.lib:	
 
 obj/msx/%.o:	$(LIB_SOURCES) $(SOURCES)
-	$(CC88) +msx -O3 $(CFLAGS) -c -o $@ $(subst obj/msx/,src/,$(@:.o=.c))
+	$(CC88) +msx -O3 $(CFLAGS) $(CFLAGS88) -c -o $@ $(subst obj/msx/,src/,$(@:.o=.c))
 
 $(EXEDIR)/$(PROGRAMNAME).msx: midres.embedded.msx	$(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) obj/msx/rawdata.o obj/msx/midres_vdp.o  obj/msx/midres_io.o
 	$(CC88) +msx -lndos -subtype=rom -m $(LDFLAGS88) obj/msx/rawdata.o obj/msx/midres_io.o obj/msx/midres_vdp.o $(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).msx -create-app 
@@ -743,7 +744,7 @@ obj/airattack.msx/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/airattack.msx/midres_io.o src/midres_io.asm
 
 obj/airattack.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx -O3 $(CFLAGS) -DFRAME_BUFFER -c -D__GAME_AIR_ATTACK__ -o $@ $(subst obj/airattack.msx/,src/,$(@:.o=.c))
+	$(CC88) +msx -O3 $(CFLAGS) $(CFLAGS88) -DFRAME_BUFFER -c -D__GAME_AIR_ATTACK__ -o $@ $(subst obj/airattack.msx/,src/,$(@:.o=.c))
 
 $(EXEDIR)/airattack.msx: airattack.embedded.msx obj/airattack.msx/midres_io.o obj/airattack.msx/midres_vdp.o $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) $(subst PLATFORM,airattack.msx,$(OBJS))
 	$(CC88) +msx -lndos -DFRAME_BUFFER -D__GAME_AIR_ATTACK__ -subtype=rom -m $(LDFLAGS88) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_vdp.o obj/airattack.msx/midres_io.o $(subst PLATFORM,airattack.msx,$(LIB_OBJS))  $(subst PLATFORM,airattack.msx,$(OBJS)) -o $(EXEDIR)/airattack.msx -create-app 
@@ -837,10 +838,10 @@ obj/totto.msx/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/totto.msx/midres_io.o src/midres_io.asm
 
 obj/totto.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx -O3 $(CFLAGS) -c -D__GAME_TOTTO__ -o $@ $(subst obj/totto.msx/,src/,$(@:.o=.c))
+	$(CC88) +msx -O3 $(CFLAGS88) $(CFLAGS) -c -D__GAME_TOTTO__ -o $@ $(subst obj/totto.msx/,src/,$(@:.o=.c))
 
 $(EXEDIR)/totto.msx: totto.embedded.msx obj/totto.msx/midres_io.o obj/totto.msx/midres_vdp.o $(subst PLATFORM,totto.msx,$(LIB_OBJS)) $(subst PLATFORM,totto.msx,$(OBJS))
-	$(CC88) +msx -lndos -D__GAME_TOTTO__ -subtype=rom -m $(LDFLAGS88) obj/totto.msx/rawdata.o obj/totto.msx/midres_vdp.o obj/totto.msx/midres_io.o $(subst PLATFORM,totto.msx,$(LIB_OBJS))  $(subst PLATFORM,totto.msx,$(OBJS)) -o $(EXEDIR)/totto.msx -create-app 
+	$(CC88) +msx -lndos $(CFLAGS88) -D__GAME_TOTTO__ -subtype=rom -m $(LDFLAGS88) obj/totto.msx/rawdata.o obj/totto.msx/midres_vdp.o obj/totto.msx/midres_io.o $(subst PLATFORM,totto.msx,$(LIB_OBJS))  $(subst PLATFORM,totto.msx,$(OBJS)) -o $(EXEDIR)/totto.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/totto.rom,$(EXEDIR)/totto.msx.rom)
 
 ###############################################################################
@@ -930,15 +931,15 @@ obj/alienstorm.msx/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.msx/midres_io.o src/midres_io.asm
 
 obj/alienstorm.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx -O3 $(CFLAGS) -c -D__GAME_ALIEN_STORM__ -o $@ $(subst obj/alienstorm.msx/,src/,$(@:.o=.c))
+	$(CC88) +msx -O3 $(CFLAGS88) $(CFLAGS) -c -D__GAME_ALIEN_STORM__ -o $@ $(subst obj/alienstorm.msx/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.msx: alienstorm.embedded.msx obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_io.o obj/alienstorm.msx/midres_vdp.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msx,$(OBJS))
-	$(CC88) +msx -lndos -D__GAME_ALIEN_STORM__ -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_vdp.o obj/alienstorm.msx/midres_io.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS))  $(subst PLATFORM,alienstorm.msx,$(OBJS)) -o $(EXEDIR)/alienstorm.msx -create-app 
+	$(CC88) +msx -lndos $(CFLAGS88) -D__GAME_ALIEN_STORM__ -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_vdp.o obj/alienstorm.msx/midres_io.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS))  $(subst PLATFORM,alienstorm.msx,$(OBJS)) -o $(EXEDIR)/alienstorm.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.msx.rom)
 
 alienstorm.embedded.coleco:
 	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/astiles.bin -i $(DATADIR)/astiles1.bin -i $(DATADIR)/astiles2.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +coleco $(CFLAGS) -c -D__GAME_ALIEN_STORM__ $(CFLAGS88) -o obj/alienstorm.coleco/rawdata.o src/rawdata.c
+	$(CC88) +coleco $(CFLAGS88) $(CFLAGS) -c -D__GAME_ALIEN_STORM__ $(CFLAGS88) -o obj/alienstorm.coleco/rawdata.o src/rawdata.c
 
 obj/alienstorm.coleco/midres_vdp.o:	src/midres_vdp.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.coleco/midres_vdp.o src/midres_vdp.asm
@@ -947,10 +948,10 @@ obj/alienstorm.coleco/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.coleco/midres_io.o src/midres_io.asm
 
 obj/alienstorm.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +coleco -O3 $(CFLAGS) -c -D__GAME_ALIEN_STORM__ -o $@ $(subst obj/alienstorm.coleco/,src/,$(@:.o=.c))
+	$(CC88) +coleco -O3 $(CFLAGS88) $(CFLAGS) -c -D__GAME_ALIEN_STORM__ -o $@ $(subst obj/alienstorm.coleco/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.coleco: alienstorm.embedded.coleco obj/alienstorm.coleco/midres_io.o obj/alienstorm.coleco/midres_vdp.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.coleco,$(OBJS))
-	$(CC88) +coleco -lndos -D__GAME_ALIEN_STORM__ -m $(LDFLAGS88) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_vdp.o obj/alienstorm.coleco/midres_io.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS))  $(subst PLATFORM,alienstorm.coleco,$(OBJS)) -o $(EXEDIR)/alienstorm.coleco -create-app 
+	$(CC88) +coleco -lndos $(CFLAGS88) -D__GAME_ALIEN_STORM__ -m $(LDFLAGS88) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_vdp.o obj/alienstorm.coleco/midres_io.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS))  $(subst PLATFORM,alienstorm.coleco,$(OBJS)) -o $(EXEDIR)/alienstorm.coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.coleco.rom)
 
 ###########################################################################
@@ -1103,10 +1104,10 @@ obj/elevator.msx/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msx/midres_io.o src/midres_io.asm
 
 obj/elevator.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx -O3 $(CFLAGS) -c -D__GAME_ELEVATOR__ -o $@ $(subst obj/elevator.msx/,src/,$(@:.o=.c))
+	$(CC88) +msx -O3 $(CFLAGS88) $(CFLAGS) -c -D__GAME_ELEVATOR__ -o $@ $(subst obj/elevator.msx/,src/,$(@:.o=.c))
 
 $(EXEDIR)/elevator.msx: elevator.embedded.msx obj/elevator.msx/midres_io.o obj/elevator.msx/midres_vdp.o $(subst PLATFORM,elevator.msx,$(LIB_OBJS)) $(subst PLATFORM,elevator.msx,$(OBJS))
-	$(CC88) +msx -lndos -D__GAME_ELEVATOR__ -subtype=rom -m $(LDFLAGS88) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_vdp.o obj/elevator.msx/midres_io.o $(subst PLATFORM,elevator.msx,$(LIB_OBJS))  $(subst PLATFORM,elevator.msx,$(OBJS)) -o $(EXEDIR)/elevator.msx -create-app 
+	$(CC88) +msx -lndos $(CFLAGS88) -D__GAME_ELEVATOR__ -subtype=rom -m $(LDFLAGS88) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_vdp.o obj/elevator.msx/midres_io.o $(subst PLATFORM,elevator.msx,$(LIB_OBJS))  $(subst PLATFORM,elevator.msx,$(OBJS)) -o $(EXEDIR)/elevator.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/elevator.rom,$(EXEDIR)/elevator.msx.rom)
 
 ###############################################################################
