@@ -500,7 +500,7 @@ void prepare_graphics() {
 
 	mr_set_background_color(MR_COLOR_LIGHT_GREY);
 
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// Enable the custom charset.
 	mr_tileset_visible(MR_TILESET_0);
@@ -1638,7 +1638,7 @@ MR_PT_THREAD(input) {
 void show_final_screen() {
 
 	// Clear the screen.
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// Word: "GAME OVER"
 	mr_putetilesv(((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1), (MR_SCREEN_HEIGHT >> 1) - 2, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, TILE_GAMEOVER_HEIGHT, MR_COLOR_BLACK);
@@ -1659,7 +1659,7 @@ void show_title_screen() {
 	mr_set_background_color(COLOR_BACKGROUND);
 
 	// Clear screen bitmap.
-	mr_clear_bitmapv();
+	mr_clearv();
 
 #ifdef __ATARI__
 

@@ -19,6 +19,10 @@
 #include "main.h"
 #include "midres.h"
 
+#ifdef MIDRES_EMBEDDED_FILES
+#include "rawdata.h"
+#endif
+
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION
  ****************************************************************************/
@@ -32,8 +36,6 @@
 
 // All the functions defined within the resident body of the code are 
 // accessible from all modules, both resident and changing ones.
-
-#include "rawdata.h"
 
 /****************************************************************************
  ** RESIDENT MAIN FUNCTION
@@ -93,6 +95,23 @@ mr_color dropsColor[DROP_COUNT];
 
 // Index of the animation of the frame.
 mr_tile wheels[4];
+
+unsigned char* mr_translate_file_user(mr_file _file) {
+
+	switch (_file) {
+		case FILE_MTILES_BIN:
+			return "mtiles.bin";
+		case FILE_TILES_BIN:
+			return "tiles.bin";
+		case FILE_TUTORIAL_MCTILE_BIN:
+			return "tutorial_mctile.bin";
+		case FILE_ZELTILES_BIN:
+			return "zeltiles.bin";
+	}
+
+	return 0;
+
+}
 
 // This is the main function body. The purpose is to call the various 
 // functions present in the modules, taking care to load the relevant 
