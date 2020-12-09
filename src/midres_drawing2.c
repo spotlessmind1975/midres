@@ -65,8 +65,7 @@ void _mr_clear_to_color(mr_mixel* _screen, mr_color* _colormap, mr_color _color)
     int i;
 
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-        _screen[i] = MR_RENDERED_MIXELS[15];
-        _colormap[i] = _color;
+        MR_WRITE_TILE(_screen, _colormap, i, MR_RENDERED_MIXELS[15], _color);
     }
 
 }
@@ -89,8 +88,7 @@ void _mr_putpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_pos
 
     abcd = mr_mixel_bits(_x, _y);
 
-    _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset])| abcd];
-    _colormap[offset] = _color;
+    MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
 
 }
 
@@ -107,7 +105,7 @@ void _mr_clearpixel(mr_mixel* _screen, mr_position _x, mr_position _y) {
 
     abcd = mr_mixel_bits(_x, _y);
 
-    _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
+    MR_WRITE_TILE_LUMINANCE(_screen, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen,offset)) | abcd]);
 
 }
 
@@ -123,8 +121,8 @@ mr_color _mr_getpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr
     abcd = mr_mixel_bits(_x, _y);
     offset = my * MR_SCREEN_WIDTH + mx;
 
-    if ( ( _screen[offset] & abcd ) == abcd) {
-        return _colormap[offset];
+    if ( ( MR_READ_TILE(_screen, offset) & abcd ) == abcd) {
+        return MR_READ_TILE_COLOR(_colormap, offset );
     } else {
         return MR_COLOR_BLACK;
     }
@@ -145,8 +143,7 @@ void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_positi
 
     if (y1 & 1) {
         abcd = mr_mixel_bits(_x, y1);
-        _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
-        _colormap[offset] = _color;
+        MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
         offset += MR_SCREEN_WIDTH;
         ++y1;
     }
@@ -156,8 +153,7 @@ void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_positi
         } else {
             abcd = mr_mixel_bits(_x, y1);
         }
-        _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset])|abcd];
-        _colormap[offset] = _color;
+        MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
         offset += MR_SCREEN_WIDTH;
     }
 
@@ -177,8 +173,7 @@ void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_posit
 
     if (x1 & 1) {
         abcd = mr_mixel_bits(x1, _y);
-        _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
-        _colormap[offset] = _color;
+        MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
         ++offset;
         ++x1;
     }
@@ -189,8 +184,7 @@ void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_posit
         else {
             abcd = mr_mixel_bits(x1, _y);
         }
-        _screen[offset] = MR_RENDERED_MIXELS[get_mixel_bits(_screen[offset]) | abcd];
-        _colormap[offset] = _color;
+        MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
         ++offset;
     }
 

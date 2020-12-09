@@ -53,7 +53,11 @@ void mr_psetop(mr_mixel* _screen, mr_position _x, mr_position _y, mr_pop _pop) {
 
     // Draw on the correct place the new mixel combination
 
-    _screen[my * MR_WIDTH + mx] = calculate_mixel(_screen[my * MR_WIDTH + mx], abcd, _pop);
+    MR_WRITE_TILE_LUMINANCE(
+            _screen, 
+            my * MR_WIDTH + mx, 
+            calculate_mixel(MR_READ_TILE(_screen, my * MR_WIDTH + mx), abcd, _pop)
+    );
 
 }
 
@@ -66,7 +70,7 @@ void mr_pcolorop(mr_color* _screen, mr_position _x, mr_position _y, mr_color _co
     mx = _x >> 1;
     my = _y >> 1;
 
-    _screen[my * MR_WIDTH + mx] = _color + MR_BRIGHTNESS;
+    MR_WRITE_TILE_COLOR(_screen, my * MR_WIDTH + mx, _color + MR_BRIGHTNESS);
 
 }
 
@@ -82,8 +86,7 @@ void _mr_clear_bitmap(mr_mixel* _screen, mr_color* _colormap) {
     int i;
 
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
-        _screen[i] = MR_RENDERED_MIXELS[0];
-        _colormap[i] = 0;
+        MR_WRITE_TILE(_screen, _colormap, i, MR_RENDERED_MIXELS[0], MR_COLOR_BLACK);
     }
 
 }
