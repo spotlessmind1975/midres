@@ -13,7 +13,6 @@
   ****************************************************************************/
 
 #include <stdio.h>
-#include <cc65.h>
 
 #include "main.h"
 #include "midres.h"
@@ -134,7 +133,7 @@ void demo_bitblit() {
 		y = y + dy;
 
 		// Change direction if we are going to hit the borders.
-		if ((x + SPRITE_WIDTH+1) >= WIDTH * 2) {
+		if ((x + SPRITE_WIDTH+1) >= MR_SCREEN_WIDTH * 2) {
 			dx = -dx;
 		}
 		if ((y + SPRITE_HEIGHT+1) >= (MR_SCREEN_HEIGHT) * 2) {
