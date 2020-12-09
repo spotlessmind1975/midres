@@ -240,7 +240,6 @@ LIB_OBJS := $(addsuffix .o,$(basename $(addprefix obj/PLATFORM/,$(LIB_SOURCES:sr
 # environment.
 OBJECTS := $(foreach TARGET,$(TARGETS),$(subst PLATFORM,$(TARGET),$(OBJS)))
 OBJECTS += $(foreach ATARGET,$(ATARGETS),$(subst PLATFORM,$(ATARGET),$(OBJS)))
-
 LIB_OBJECTS := $(foreach TARGET,$(TARGETS),$(subst PLATFORM,$(TARGET),$(LIB_OBJS)))
 
 # We generate the list of paths where the object files for each target will 
@@ -636,9 +635,9 @@ $(EXEDIR)/$(PROGRAMNAME).atmos:	$(subst PLATFORM,atmos,$(OBJS)) obj/atmos/rawdat
 
 ## ColecoVision -------------------------------------------------------------------------
 
-obj/coleco/rawdata.o:	$(DATADIR)/mtiles.bin
+midres.embedded.coleco:
 	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tiles.bin -i $(DATADIR)/tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -o obj/coleco/rawdata.o src/rawdata.c
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -o obj/coleco/rawdata.o src/rawdata.c
 
 obj/coleco/midres_vdp.o:	src/midres_vdp.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/coleco/midres_vdp.o src/midres_vdp.asm
@@ -652,8 +651,8 @@ obj/coleco/%.o:	$(LIB_SOURCES) $(SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c -o $@ $(subst obj/coleco/,src/,$(@:.o=.c))
 
 # This rule will produce the final binary file for ColecoVision platform.
-$(EXEDIR)/$(PROGRAMNAME).coleco:	$(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) obj/coleco/rawdata.o obj/coleco/midres_vdp.o
-	$(CC88) +coleco -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_io.o obj/coleco/midres_vdp.o $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).coleco -create-app 
+$(EXEDIR)/$(PROGRAMNAME).coleco:	midres.embedded.coleco $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) obj/coleco/rawdata.o obj/coleco/midres_vdp.o obj/coleco/midres_io.o
+	$(CC88) +coleco -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_io.o obj/coleco/midres_vdp.o $(subst PLATFORM,coleco,$(LIB_OBJS)) $(subst PLATFORM,coleco,$(OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).rom,$(EXEDIR)/$(PROGRAMNAME).coleco.rom)
 
 ## MSX -------------------------------------------------------------------------
