@@ -13,7 +13,6 @@
  ****************************************************************************/
 
 #include <stdio.h>
-#include <cc65.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -23,6 +22,10 @@
 #include "midres.h"
 #include "game_totto_tiles.h"
 #include "game_totto_tiles1.h"
+
+#ifdef MIDRES_EMBEDDED_FILES
+#include "rawdata.h"
+#endif
 
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION
@@ -189,6 +192,18 @@ signed char soundDuration = 0;
  ** RESIDENT FUNCTIONS SECTION
  ****************************************************************************/
 
+unsigned char* mr_translate_file_user(mr_file _file) {
+
+	switch (_file) {
+	case FILE_TTTILES_BIN:
+		return "tttiles.bin";
+	case FILE_TTTILES1_BIN:
+		return "tttiles1.bin";
+	}
+
+	return 0;
+
+}
 // All the functions defined within the resident body of the code are 
 // accessible from all modules, both resident and changing ones.
 
@@ -244,8 +259,8 @@ void prepare_graphics() {
 	mr_position i;
 
 	// Load the tilesets from disk.
-	mr_tileset_load("tttiles.bin", MR_TILESET_0, TILE_START, TILE_COUNT);
-	mr_tileset_load("tttiles1.bin", MR_TILESET_1, TILE1_START, TILE1_COUNT);
+	mr_tileset_load_file(FILE_TTTILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
+	mr_tileset_load_file(FILE_TTTILES1_BIN, MR_TILESET_1, TILE1_START, TILE1_COUNT);
 
 	// Prepare animation tiles for vertical movement of first frame of the bird.
 	mr_tile_prepare_vertical_extended(MR_TILESET_0, TILE_BIRD1, TILE_BIRD1_WIDTH, TILE_BIRD1_HEIGHT, TILE_MOVING_BIRD1);
@@ -390,6 +405,8 @@ void prepare_playfield() {
 // Show the "game over" screen.
 void show_game_over() {
 
+	mr_start_frame();
+
 	// Set the background to the blue sky.
 	mr_set_background_color(SKY_COLOR);
 
@@ -407,6 +424,8 @@ void show_game_over() {
 
 	// Draw level reached
 	draw_level(( (MR_SCREEN_HEIGHT) >> 1 ) + 4);
+
+	mr_end_frame(2);
 
 	// Wait for two seconds.
 	mr_wait(2);
@@ -676,6 +695,8 @@ void show_titles() {
 	// Used to maintain the horizontal position of animated bird.
 	mr_position bx;
 
+	mr_start_frame();
+
 	// Since we do not need midres, we redefine characters, in order to avoid
 	// side effects in using the drawing primitives.
 	for (i = 0; i < 16; ++i) {
@@ -701,7 +722,11 @@ void show_titles() {
 	// "PRESS ANY KEY"
 	mr_putetilesv(PRESSANYKEY_CENTER_X, MR_SCREEN_HEIGHT - TILE1_PRESSANYKEY_HEIGHT - 1, TILE1_PRESSANYKEY, TILE1_PRESSANYKEY_WIDTH, TILE1_PRESSANYKEY_HEIGHT, MR_COLOR_WHITE);
 
+	mr_end_frame(0);
+
 	while (!exitLoop) {
+
+		mr_start_frame();
 
 		// Move the birds horizzontally
 		for (i = -2 * TILE1_BIRD1_WIDTH; i < (MR_SCREEN_WIDTH * 8 + 4 * 8 * TILE1_BIRD1_WIDTH); i+=2) {
@@ -754,7 +779,11 @@ void show_titles() {
 		// Pass to next color.
 		c = MR_NEXT_COLOR(c);
 
+		mr_end_frame(0);
+
 	}
+
+	mr_start_frame();
 
 	// Since we do not need midres, we redefine characters, in order to avoid
 	// side effects in using the drawing primitives.
@@ -767,10 +796,13 @@ void show_titles() {
 	// Enable the custom tileset for viewing.
 	mr_tileset_visible(MR_TILESET_0);
 
+	mr_end_frame(0);
 }
 
 // Show the "level" screen.
 void show_level() {
+
+	mr_start_frame();
 
 	// Clear the screen.
 	mr_clear_bitmapv();
@@ -780,10 +812,14 @@ void show_level() {
 
 	mr_wait(2);
 
+	mr_end_frame(0);
+
 }
 
 // Show the "winning" screen.
 void show_winning_screen() {
+
+	mr_start_frame();
 
 	// Choose a random screen.
 	switch (rand() & 0x03) {
@@ -801,6 +837,8 @@ void show_winning_screen() {
 			break;
 	}
 	mr_uncompressv(MR_AUX_DEFAULT);
+
+	mr_end_frame(0);
 
 }
 
