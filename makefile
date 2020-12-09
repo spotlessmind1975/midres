@@ -827,6 +827,23 @@ $(EXEDIR)/totto.atari:	$(subst PLATFORM,totto.atari,$(OBJS))
 #	$(call COPYFILES,$(DATADIR)/ttfinal3.mpic,$(EXEDIR)/atr/ttfinal1.pic)
 #	$(call COPYFILES,$(DATADIR)/ttfinal4.mpic,$(EXEDIR)/atr/ttfinal1.pic)
 
+totto.embedded.msx:	src/rawdata.c src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -i $(DATADIR)/tttiles1.bin -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -o obj/totto.msx/rawdata.o src/rawdata.c
+
+obj/totto.msx/midres_vdp.o:	src/midres_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/totto.msx/midres_vdp.o src/midres_vdp.asm
+
+obj/totto.msx/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/totto.msx/midres_io.o src/midres_io.asm
+
+obj/totto.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
+	$(CC88) +msx -O3 $(CFLAGS) -c -D__GAME_TOTTO__ -o $@ $(subst obj/totto.msx/,src/,$(@:.o=.c))
+
+$(EXEDIR)/totto.msx: totto.embedded.msx obj/totto.msx/midres_io.o obj/totto.msx/midres_vdp.o $(subst PLATFORM,totto.msx,$(LIB_OBJS)) $(subst PLATFORM,totto.msx,$(OBJS))
+	$(CC88) +msx -lndos -D__GAME_TOTTO__ -subtype=rom -m $(LDFLAGS88) obj/totto.msx/rawdata.o obj/totto.msx/midres_vdp.o obj/totto.msx/midres_io.o $(subst PLATFORM,totto.msx,$(LIB_OBJS))  $(subst PLATFORM,totto.msx,$(OBJS)) -o $(EXEDIR)/totto.msx -create-app 
+	$(call COPYFILES,$(EXEDIR)/totto.rom,$(EXEDIR)/totto.msx.rom)
+
 ###############################################################################
 ##
 ###############################################################################

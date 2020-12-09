@@ -284,6 +284,19 @@ mr_position walkFrame[PASSENGER_COUNT];
  ** FUNCTIONS
  ****************************************************************************/
 
+unsigned char* mr_translate_file_user(mr_file _file) {
+
+	switch (_file) {
+	case FILE_ELEVATORA_MPIC:
+		return "zelintro.bin";
+	case FILE_ZELTILES_BIN:
+		return "zeltile.bin";
+	}
+
+	return 0;
+
+}
+
 /////////////////////////////////////////////////////////////////////////////
 /// AUXILIARY FUNCTIONS
 /////////////////////////////////////////////////////////////////////////////
@@ -475,7 +488,7 @@ void add_passenger_on_floor(floor _floor) {
 void prepare_graphics() {
 
 	// Load tiles from mass memory.
-	mr_tileset_load(FILENAME_TILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
+	mr_tileset_load_file(FILE_ZELTILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
 
 	// This little "trick" allows us to quickly clean the screen 
 	// using the prepared empty tile.
@@ -1648,6 +1661,13 @@ void show_title_screen() {
 
 	// Load compressed screen on the auxiliary space
 	mr_load(FILENAME_INTRO_MPIC, MR_SCREEN_DEFAULT);
+
+	mr_wait(2);
+
+#elif MIDRES_EMBEDDED_FILES
+
+	// Load compressed screen on the auxiliary space
+	mr_load_screen(FILE_ELEVATORA_MPIC, MR_SCREEN_DEFAULT);
 
 	mr_wait(2);
 
