@@ -258,17 +258,6 @@ unsigned char mr_get_key_pressed_hd() {
     }
     key = *((unsigned char*)0xFBED);
     if (key != 0xff) {
-        if (key == 0xfe) { return MR_KEY_F4; };
-        if (key == 0xfd) { return MR_KEY_F5; };
-        if (key == 0xfb) { return MR_KEY_ESC; };
-        if (key == 0xf7) { return MR_KEY_TAB; };
-        if (key == 0xef) { return MR_KEY_STOP; };
-        if (key == 0xdf) { return MR_KEY_BS; };
-        if (key == 0xbf) { return MR_KEY_SELECT; };
-        if (key == 0x7f) { return MR_KEY_RET; };
-    }
-    key = *((unsigned char*)0xFBEE);
-    if (key != 0xff) {
         if (key == 0xfe) { return MR_KEY_SPACE; };
         if (key == 0xfd) { return MR_KEY_HOME; };
         if (key == 0xfb) { return MR_KEY_INS; };
@@ -278,7 +267,7 @@ unsigned char mr_get_key_pressed_hd() {
         if (key == 0xbf) { return MR_KEY_DOWN; };
         if (key == 0x7f) { return MR_KEY_RIGHT; };
     }
-    key = *((unsigned char*)0xFBEF);
+    key = *((unsigned char*)0xFBEE);
     if (key != 0xff) {
         if (key == 0xfe) { return MR_KEY_ASTERISK; };
         if (key == 0xfd) { return MR_KEY_PLUS; };
@@ -289,7 +278,7 @@ unsigned char mr_get_key_pressed_hd() {
         if (key == 0xbf) { return MR_KEY_3; };
         if (key == 0x7f) { return MR_KEY_4; };
     }
-    key = *((unsigned char*)0xFBF0);
+    key = *((unsigned char*)0xFBEF);
     if (key != 0xff) {
         if (key == 0xfe) { return MR_KEY_5; };
         if (key == 0xfd) { return MR_KEY_6; };
