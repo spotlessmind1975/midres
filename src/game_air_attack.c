@@ -13,7 +13,6 @@
  ****************************************************************************/
 
 #include <stdio.h>
-#include <cc65.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -27,6 +26,10 @@
 #include "game_air_attack_tiles20.h"
 #else
 #include "game_air_attack_tiles.h"
+#endif
+
+#ifdef MIDRES_EMBEDDED_FILES
+#include "rawdata.h"
 #endif
 
 /****************************************************************************
@@ -43,9 +46,12 @@
 // All the functions defined within the resident body of the code are 
 // accessible from all modules, both resident and changing ones.
 
-#ifdef __VIC20__
+#if MR_SCREEN_WIDTH < 30
 	// Number of buildings to draw in a screen (it depends on width)
 	#define BUILDINGS_COUNT         7
+#elif MR_SCREEN_WIDTH < 40
+	// Number of buildings to draw in a screen (it depends on width)
+	#define BUILDINGS_COUNT         10
 #else
 	// Number of buildings to draw in a screen (it depends on width)
 	#define BUILDINGS_COUNT         13
@@ -109,6 +115,21 @@ mr_position drops[4] = { 0, 0, 0, 0 };
 // Store the level
 mr_position level[2] = { 1, 0 };
 
+unsigned char* mr_translate_file_user(mr_file _file) {
+
+	switch (_file) {
+		case FILE_ZTILES_BIN:
+			return "ztiles.bin";
+		case FILE_AATILES_BIN:
+			return "aatiles.bin";
+		case FILE_AAINTROA_PIC:
+			return "aaintroa.pic";
+	}
+
+	return 0;
+
+}
+
 // Draw the _number-nth building of _height bricks, using
 // the a specific tile for wall and roof.
 void draw_building(mr_position _number, mr_position _height, mr_tile _tile_wall, mr_tile _tile_roof) {
@@ -149,7 +170,7 @@ void draw_building(mr_position _number, mr_position _height, mr_tile _tile_wall,
 void prepare_graphics() {
 
 	// Load the tileset from disk.
-	mr_tileset_load(FILENAME_TILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
+	mr_tileset_load_file(FILE_AATILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
 
 	// Prepare animation for airplane.
 	mr_tile_prepare_horizontal_extended(MR_TILESET_0, TILE_AIRPLANE_STATIC, TILE_AIRPLANE_STATIC_WIDTH, TILE_AIRPLANE_STATIC_HEIGHT, TILE_MOVING_AIRPLANE);
@@ -584,7 +605,11 @@ void gameloop() {
 			}
 		}
 
+#ifdef FRAME_BUFFER
+		mr_end_frame(0);
+#else
 		mr_end_frame(1);
+#endif
 
 	}
 
@@ -600,6 +625,8 @@ void game_air_attack() {
 	// Initialize graphical subsystem
 	mr_init();
 
+	mr_start_frame();
+
 	// Clear screen bitmap.
 	mr_clear_bitmapv();
 
@@ -607,6 +634,16 @@ void game_air_attack() {
 
 	// Load compressed screen on the auxiliary space
 	mr_load(FILENAME_INTRO_MPIC, MR_SCREEN_DEFAULT);
+
+	mr_end_frame(0);
+
+	mr_wait(2);
+
+#elif MIDRES_EMBEDDED_FILES
+
+	mr_load_screen(FILE_AAINTRO_PIC, MR_SCREEN_DEFAULT);
+
+	mr_end_frame(0);
 
 	mr_wait(2);
 
@@ -618,6 +655,8 @@ void game_air_attack() {
 	// Show titles.
 	mr_uncompressv(MR_AUX_DEFAULT);
 
+	mr_end_frame(0);
+
 #endif
 
 	// Prepare graphics (it can take some time).
@@ -626,8 +665,12 @@ void game_air_attack() {
 	// Endless loop...
 	while (1) {
 
+		mr_start_frame();
+
 		// Clear the screen.
 		mr_clear_bitmapv();
+
+		mr_end_frame(0);
 
 		// Show the "press any key" interstitial screen:
 		// this screen is available only where the relative
@@ -636,6 +679,7 @@ void game_air_attack() {
 #ifdef TILE_PRESSANYKEY
 
 		while (!mr_key_pressed()) {
+			mr_start_frame();
 			i = i ^ 1;
 			if (i == 0) {
 				mr_puttilesv((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1, (MR_SCREEN_HEIGHT - 1) >> 1, TILE_PRESSANYKEY, TILE_PRESSANYKEY_WIDTH, MR_COLOR_WHITE);
@@ -645,8 +689,7 @@ void game_air_attack() {
 					mr_cleartilev(((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
 				}
 			}
-			mr_wait_jiffies(4);
-			mr_wait_vbl();
+			mr_end_frame(4);
 		}
 
 #else
@@ -658,19 +701,27 @@ void game_air_attack() {
 		// Repeat the loop while player win.
 		do {
 
+			mr_start_frame();
+
 			// Clear the screen.
 			mr_clear_bitmapv();
 
 			// Show level
 			draw_level(MR_SCREEN_HEIGHT >> 1);
 
+			mr_end_frame(0);
+
 			mr_wait(2);
+
+			mr_start_frame();
 
 			// Clear the screen.
 			mr_clear_bitmapv();
 
 			// Draw the playfield
 			draw_random_buildings();
+
+			mr_end_frame(0);
 
 			// Play the game.
 			gameloop();
@@ -723,13 +774,18 @@ void game_air_attack() {
 		// Show "GAME OVER" only if the relative tile is present.
 #ifdef TILE_GAMEOVER
 
+		mr_start_frame();
+
 		mr_clear_bitmapv();
 
 		// Show score
 		draw_score(( MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) + 2);
 
+		mr_end_frame(0);
+
 		i = 0;
 		while (!mr_key_pressed()) {
+			mr_start_frame();
 			i = i ^ 1;
 			if (i == 0) {
 				mr_puttilesv((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1, (MR_SCREEN_HEIGHT - 1) >> 1, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, MR_COLOR_WHITE);
@@ -739,7 +795,7 @@ void game_air_attack() {
 					mr_cleartilev(((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
 				}
 			}
-			mr_wait_vbl();
+			mr_end_frame(2);
 		}
 
 #endif

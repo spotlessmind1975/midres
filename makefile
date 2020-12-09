@@ -733,6 +733,23 @@ $(EXEDIR)/airattack.atari:	$(subst PLATFORM,airattack.atari,$(OBJS))
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/airattack.atari.atr -o $(EXEDIR)/airattack.atari.atr -f game.exe
 
+airattack.embedded.msx:	src/rawdata.c src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -i $(DATADIR)/aatiles.bin -i $(DATADIR)/aaintroa.pic -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -o obj/airattack.msx/rawdata.o src/rawdata.c
+
+obj/airattack.msx/midres_vdp.o:	src/midres_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/airattack.msx/midres_vdp.o src/midres_vdp.asm
+
+obj/airattack.msx/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/airattack.msx/midres_io.o src/midres_io.asm
+
+obj/airattack.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
+	$(CC88) +msx -O3 $(CFLAGS) -DFRAME_BUFFER -c -D__GAME_AIR_ATTACK__ -o $@ $(subst obj/airattack.msx/,src/,$(@:.o=.c))
+
+$(EXEDIR)/airattack.msx: airattack.embedded.msx obj/airattack.msx/midres_io.o obj/airattack.msx/midres_vdp.o $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) $(subst PLATFORM,airattack.msx,$(OBJS))
+	$(CC88) +msx -lndos -DFRAME_BUFFER -D__GAME_AIR_ATTACK__ -subtype=rom -m $(LDFLAGS88) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_vdp.o obj/airattack.msx/midres_io.o $(subst PLATFORM,airattack.msx,$(LIB_OBJS))  $(subst PLATFORM,airattack.msx,$(OBJS)) -o $(EXEDIR)/airattack.msx -create-app 
+	$(call COPYFILES,$(EXEDIR)/airattack.rom,$(EXEDIR)/airattack.msx.rom)
+
 ###############################################################################
 ##
 ###############################################################################
