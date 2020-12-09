@@ -9,6 +9,10 @@
 #ifndef _MIDRES_HW_COLECO_H_
 #define _MIDRES_HW_COLECO_H_
 
+ //#define FRAME_BUFFER        1
+#define GRAPHIC_MODE_I      1
+//#define GRAPHIC_MODE_II     1
+
 #define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_COLECO
 
 // The maximum resolution is 80 x 50 pixels, equivalent to 
@@ -16,6 +20,8 @@
 #define MR_SCREEN_WIDTH				32
 #define MR_SCREEN_HEIGHT			24
 #define MR_SCREEN_RAM_SIZE			768
+
+#ifdef GRAPHIC_MODE_I
 
 // List of available screens:
 #define MR_SCREEN_0					5
@@ -27,16 +33,12 @@
 #define MR_SCREEN_COUNT				6
 #define MR_SCREEN_DEFAULT			MR_SCREEN_0
 
-// The four screens used for double buffering
-#define	MR_SCREEN_DB1				MR_SCREEN_0
-#define	MR_SCREEN_DB2				MR_SCREEN_1
-
 // List of available tilesets:
-#define MR_TILESET_ROM_0				0
-#define MR_TILESET_0					0
-#define MR_TILESET_1					1
-#define MR_TILESET_2					5
-#define MR_TILESET_3					6
+#define MR_TILESET_ROM_0				1
+#define MR_TILESET_0					1
+#define MR_TILESET_1					2
+#define MR_TILESET_2					6
+#define MR_TILESET_3					7
 #define MR_TILESET_COUNT				4
 #define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
 #define MR_TILESET_TILE_COUNT			256
@@ -46,6 +48,32 @@
 #define MR_AUX_1						15
 #define MR_AUX_COUNT					1
 #define MR_AUX_DEFAULT					MR_AUX_0
+
+#else
+
+#define MR_SCREEN_0					0x0e
+#define MR_SCREEN_1					0x0f
+#define MR_SCREEN_COUNT				2
+#define MR_SCREEN_DEFAULT			MR_SCREEN_0
+
+// List of available tilesets:
+#define MR_TILESET_ROM_0				0
+#define MR_TILESET_0					0
+#define MR_TILESET_COUNT				1
+#define MR_TILESET_DEFAULT				MR_TILESET_ROM_0
+#define MR_TILESET_TILE_COUNT			256
+
+// List of available areas for bit blits:
+#define MR_AUX_0						0x0e
+#define MR_AUX_1						0x0f
+#define MR_AUX_COUNT					2
+#define MR_AUX_DEFAULT					MR_AUX_1
+
+#endif
+
+// The four screens used for double buffering
+#define	MR_SCREEN_DB1				MR_SCREEN_0
+#define	MR_SCREEN_DB2				MR_SCREEN_1
 
 // Offset for correct brightness.
 #define MR_COLOR_LOWBRIGHTNESS			0
@@ -84,6 +112,8 @@
 #define MR_NEXT_COLOR( c )				( ( ( ( c & 0x0f ) + 1 ) & 0x0f ) )
 
 #define MR_COLOR_COUNT					16
+
+
 #define MR_KEY_NONE						64
 #define MR_KEY_0						35
 #define MR_KEY_1						56
@@ -200,18 +230,47 @@
 #define MR_TILE_COLOR1					2
 #define MR_TILE_COLOR2					3
 
+#ifdef GRAPHIC_MODE_I
 #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
-#define MR_CM(_screen)					((unsigned int)(0x400*_screen))
+#define MR_CM(_screen)					((unsigned int)((0x40*(_screen+0x80))))
 #define MR_AM(_screen)					((unsigned int)(0x400*_screen))
 #define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
 
 #define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
-        vdp_fill(_tile, _screen + _offset, 1 );
+                vdp_fill8(_tile, _screen + _offset, 1 );
 
 #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-        vdp_fill(_tile, _screen + _offset, 1 );
+                vdp_fill8(_tile, _screen + _offset, 1 ); \
+                vdp_fill8(_color, _colormap + ( _tile >> 3 ), 1 );
 
-#define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
+#define MR_READ_TILE(_screen, _offset) vdp_get(_offset)
+#define MR_READ_TILE_COLOR(_colormap, _offset) vdp_get(_offset)
+
+#else
+#define MR_SM(_screen)					((unsigned int)(0x400*_screen))
+#define MR_CM(_screen)					((unsigned int)((0x2000*(_screen-0x0e))))
+#define MR_AM(_screen)					((unsigned int)(0x400*_screen))
+#define MR_TM(_tileset)					((unsigned int)((_tileset==0x0e)?0x2000:0x0000))
+
+#define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
+                    vdp_fill8(_tile, _screen + _offset, 1 );
+
+#define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
+                    vdp_fill8(_tile, _screen + _offset, 1 ); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8), 1 ); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 1, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 2, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 3, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 4, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 5, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 6, 1); \
+                    vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 7, 1);
+
+#define MR_READ_TILE(_screen, _offset) vdp_get(_offset)
+#define MR_READ_TILE_COLOR(_colormap, _offset) vdp_get(_offset)
+#endif
+
+
 
 #define MIDRES_STANDALONE					1
 //#define MIDRES_STANDALONE_BITBLIT			1	
@@ -220,7 +279,7 @@
 #define MIDRES_STANDALONE_SCREEN			1
 //#define MIDRES_STANDALONE_SCREEN2			1
 #define MIDRES_STANDALONE_TILE				1
-#define MIDRES_STANDALONE_TILE_PROCESSING	1
+// #define MIDRES_STANDALONE_TILE_PROCESSING	1
 //#define MIDRES_STANDALONE_TILE_MULTICOLOR	1
 #define MIDRES_STANDALONE_KEYBOARD			1
 // #define MIDRES_STANDALONE_FILE				1
