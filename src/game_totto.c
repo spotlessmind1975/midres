@@ -291,7 +291,7 @@ void prepare_graphics() {
 	}
 	MR_RENDERED_MIXELS[15] = TILE_FILLER;
 
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// Enable the custom tileset for viewing.
 	mr_tileset_visible(MR_TILESET_0);
@@ -365,7 +365,7 @@ void prepare_playfield() {
 	mr_position i;
 
 	// Clear screen bitmap.
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// Let's draw the fixed ground terrain.
 	for (i = MR_SCREEN_HEIGHT - 3; i < MR_SCREEN_HEIGHT; ++i) {
@@ -411,7 +411,7 @@ void show_game_over() {
 	mr_set_background_color(SKY_COLOR);
 
 	// Clear the bitmap
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// "GAME OVER"
 	mr_putetilesv((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1, (MR_SCREEN_HEIGHT - TILE_GAMEOVER_HEIGHT)>>1, TILE_GAMEOVER, TILE_GAMEOVER_WIDTH, TILE_GAMEOVER_HEIGHT, MR_COLOR_YELLOW);
@@ -540,7 +540,7 @@ void gameloop() {
 						// or lower border of the column.
 						if ( ( BIRD_Y_BORDER >= (( h+ holeHeight + 1) * 8) ) || ( birdY <= (h * 8) ) ) {
 
-							mr_clear_bitmapv();
+							mr_clearv();
 
 							// OUCH! Game over and player loses.
 							gameOver = mr_true;
@@ -703,7 +703,7 @@ void show_titles() {
 		MR_RENDERED_MIXELS[0] = TILE1_EMPTY;
 	}
 	MR_RENDERED_MIXELS[15] = TILE1_FILLER;
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// Enable the custom tileset for viewing.
 	mr_tileset_visible(MR_TILESET_1);
@@ -791,7 +791,7 @@ void show_titles() {
 		MR_RENDERED_MIXELS[0] = TILE_EMPTY;
 	}
 	MR_RENDERED_MIXELS[15] = TILE_FILLER;
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// Enable the custom tileset for viewing.
 	mr_tileset_visible(MR_TILESET_0);
@@ -805,7 +805,7 @@ void show_level() {
 	mr_start_frame();
 
 	// Clear the screen.
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// Show level
 	draw_level(MR_SCREEN_HEIGHT >> 1);
@@ -852,7 +852,7 @@ void game_totto() {
 	mr_init();
 
 	// Clear screen bitmap.
-	mr_clear_bitmapv();
+	mr_clearv();
 
 	// Prepare the graphics.
 	prepare_graphics();
