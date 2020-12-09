@@ -827,7 +827,7 @@ $(EXEDIR)/totto.atari:	$(subst PLATFORM,totto.atari,$(OBJS))
 #	$(call COPYFILES,$(DATADIR)/ttfinal3.mpic,$(EXEDIR)/atr/ttfinal1.pic)
 #	$(call COPYFILES,$(DATADIR)/ttfinal4.mpic,$(EXEDIR)/atr/ttfinal1.pic)
 
-totto.embedded.msx:	src/rawdata.c src/rawdata.h
+totto.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -i $(DATADIR)/tttiles1.bin -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -o obj/totto.msx/rawdata.o src/rawdata.c
 
