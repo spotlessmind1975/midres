@@ -1094,6 +1094,23 @@ $(EXEDIR)/elevator.atari:	$(subst PLATFORM,elevator.atari,$(OBJS))
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/elevator.atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/elevator.atari.atr -o $(EXEDIR)/elevator.atari.atr -f elevatr.exe
 
+elevator.embedded.msx:	src/rawdata.c src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -i $(DATADIR)/elevatora.mpic -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -o obj/elevator.msx/rawdata.o src/rawdata.c
+
+obj/elevator.msx/midres_vdp.o:	src/midres_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msx/midres_vdp.o src/midres_vdp.asm
+
+obj/elevator.msx/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msx/midres_io.o src/midres_io.asm
+
+obj/elevator.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
+	$(CC88) +msx -O3 $(CFLAGS) -c -D__GAME_ELEVATOR__ -o $@ $(subst obj/elevator.msx/,src/,$(@:.o=.c))
+
+$(EXEDIR)/elevator.msx: elevator.embedded.msx obj/elevator.msx/midres_io.o obj/elevator.msx/midres_vdp.o $(subst PLATFORM,elevator.msx,$(LIB_OBJS)) $(subst PLATFORM,elevator.msx,$(OBJS))
+	$(CC88) +msx -lndos -D__GAME_ELEVATOR__ -subtype=rom -m $(LDFLAGS88) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_vdp.o obj/elevator.msx/midres_io.o $(subst PLATFORM,elevator.msx,$(LIB_OBJS))  $(subst PLATFORM,elevator.msx,$(OBJS)) -o $(EXEDIR)/elevator.msx -create-app 
+	$(call COPYFILES,$(EXEDIR)/elevator.rom,$(EXEDIR)/elevator.msx.rom)
+
 ###############################################################################
 ## FINAL RULES
 ###############################################################################

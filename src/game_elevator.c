@@ -23,6 +23,10 @@
 // Tiles used in the game.
 #include "game_elevator_tiles.h"
 
+#ifdef MIDRES_EMBEDDED_FILES
+#include "rawdata.h"
+#endif
+
 /****************************************************************************
  ** DEFINES, TYPEDEFS AND VARIABLES SECTION
  ****************************************************************************/
