@@ -357,17 +357,13 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 #endif
 }
 
-#ifdef MIDRES_STANDALONE_FILE
-
 unsigned char* mr_translate_file_hd(mr_file _file) {
 
 }
 
 void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
-
+    memcpy(_dest, &_includedFiles[_file][_offset], _size);
 }
-
-#endif
 
 unsigned char mr_joy_hd(unsigned char _number) {
 

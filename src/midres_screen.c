@@ -126,14 +126,10 @@ unsigned char mr_load(char* _filename, mr_screen _screen) {
 
 }
 
-#ifdef MIDRES_STANDALONE_FILE
-
 unsigned char mr_load_screen(mr_file _index, mr_screen _screen) {
     mr_read_file(_index, MR_SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
     return 0;
 }
-
-#endif
 
 unsigned char mr_load_color(char* _filename, mr_screen _screen) {
 
