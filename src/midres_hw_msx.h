@@ -244,7 +244,9 @@
 		        _colormap[(_offset)] = (_color);
 
         #define MR_READ_TILE(_screen, _offset) _screen[(_offset)]
-    #else
+        #define MR_READ_TILE_COLOR(_colormap, _offset) _colormap[(_offset)]
+
+#else
 
 extern unsigned char frameBuffer[];
 extern unsigned char colorBuffer[];
@@ -264,7 +266,8 @@ extern unsigned char auxBuffer[];
             
 
         #define MR_READ_TILE(_screen, _offset) _screen[(_offset)]
-    #endif
+        #define MR_READ_TILE_COLOR(_colormap, _offset) _colormap[(_offset)]
+#endif
 #else
     #ifdef GRAPHIC_MODE_I
         #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
@@ -276,9 +279,12 @@ extern unsigned char auxBuffer[];
                 vdp_fill8(_tile, _screen + _offset, 1 );
 
         #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-                vdp_fill8(_tile, _screen + _offset, 1 );
+                vdp_fill8(_tile, _screen + _offset, 1 ); \
+                vdp_fill8(_color, _colormap + ( _tile >> 3 ), 1 );
 
-        #define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
+        #define MR_READ_TILE(_screen, _offset) vdp_get(_offset)
+        #define MR_READ_TILE_COLOR(_colormap, _offset) vdp_get(_offset)
+
     #else
         #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
         #define MR_CM(_screen)					((unsigned int)((0x2000*(_screen-0x0e))))
@@ -299,8 +305,9 @@ extern unsigned char auxBuffer[];
                     vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 6, 1); \
                     vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 7, 1);
 
-        #define MR_READ_TILE(_screen, _offset) vdp_get(_offset);
-    #endif
+        #define MR_READ_TILE(_screen, _offset) vdp_get(_offset)
+        #define MR_READ_TILE_COLOR(_colormap, _offset) vdp_get(_offset)
+#endif
 
 #endif
 
