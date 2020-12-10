@@ -6,6 +6,8 @@
 ;  * DRAWING LIBRARY                                                          *
 ;  ****************************************************************************/
 
+PUBLIC _vdp_port_read
+PUBLIC _vdp_port_write
 PUBLIC _vdp_port
 PUBLIC _vdp_out
 PUBLIC _vdp_put
@@ -21,7 +23,7 @@ VdpSetReg:
         ld      a, e
 VdpRegOut:
         push    bc
-        ld      bc, (VdpPort)
+        ld      bc, (VdpPortWrite)
         inc     c
         out     (c), a
         pop     bc
@@ -29,7 +31,7 @@ VdpRegOut:
 
 VdpRegIn:
         push    bc
-        ld      bc, (VdpPort)
+        ld      bc, (VdpPortRead)
         inc     c
         in      a, (c)
         pop     bc
@@ -38,7 +40,7 @@ VdpRegIn:
 VdpRamOut:
         di
         push    bc
-        ld      bc, (VdpPort)
+        ld      bc, (VdpPortWrite)
         out     (c), a
         pop     bc
         ei
@@ -47,7 +49,7 @@ VdpRamOut:
 VdpRamOut8:
         di
         push    bc
-        ld      bc, (VdpPort)
+        ld      bc, (VdpPortWrite)
         out     (c), a
         nop
         nop
@@ -126,11 +128,11 @@ VdpRamOut8:
 
 VdpRamIn:
         push    bc
-        ld      bc, (VdpPort)
+        ld      bc, (VdpPortRead)
 VdpRamInDelay:
         djnz    VdpRamInDelay
         in      a, (c)
-        ld      bc, (VdpPort)
+        ld      bc, (VdpPortRead)
 VdpRamInDelay2:
         djnz    VdpRamInDelay2
         pop     bc
@@ -309,10 +311,27 @@ _vdp_port:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; port
-    ld (VdpPort), a
+    ld (VdpPortRead), a
+    ld (VdpPortWrite), a
+    ret
+
+_vdp_port_read:
+	ld	hl, 2
+	add	hl, sp
+	ld	a, (hl)			; port
+    ld (VdpPortRead), a
+    ret
+
+_vdp_port_write:
+	ld	hl, 2
+	add	hl, sp
+	ld	a, (hl)			; port
+    ld (VdpPortRead), a
     ret
 
 SECTION data
-VdpPort:
+VdpPortRead:
+    defb    0beh
+VdpPortWrite:
     defb    0beh
 

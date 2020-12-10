@@ -698,6 +698,27 @@ $(EXEDIR)/$(PROGRAMNAME).mtx500: midres.embedded.mtx500	$(subst PLATFORM,mtx500,
 	$(CC88) +mtx -m $(LDFLAGS88) obj/mtx500/rawdata.o obj/mtx500/midres_io.o obj/mtx500/midres_vdp.o $(subst PLATFORM,mtx500,$(OBJS)) $(subst PLATFORM,mtx500,$(LIB_OBJS)) -o$(EXEDIR)/$(PROGRAMNAME).mtx -create-app 
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).mtx,$(EXEDIR)/$(PROGRAMNAME).mtx500.mtx)
 
+## Spectravideo SVI-318 + SVI-328 -------------------------------------------------------------------------
+
+midres.embedded.svi:
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tiles.bin -i $(DATADIR)/tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -o obj/svi/rawdata.o src/rawdata.c
+
+obj/svi/midres_vdp.o:	src/midres_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/svi/midres_vdp.o src/midres_vdp.asm
+
+obj/svi/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/svi/midres_io.o src/midres_io.asm
+
+lib/midres.svi.lib:	
+
+obj/svi/%.o:	$(LIB_SOURCES) $(SOURCES)
+	$(CC88) +svi -O3 $(CFLAGS) $(CFLAGS88) -c -o $@ $(subst obj/svi/,src/,$(@:.o=.c))
+
+$(EXEDIR)/$(PROGRAMNAME).svi: midres.embedded.svi	$(subst PLATFORM,svi,$(OBJS)) $(subst PLATFORM,svi,$(LIB_OBJS)) obj/svi/rawdata.o obj/svi/midres_vdp.o  obj/svi/midres_io.o
+	$(CC88) +svi -lm -m $(LDFLAGS88) obj/svi/rawdata.o obj/svi/midres_io.o obj/svi/midres_vdp.o $(subst PLATFORM,svi,$(OBJS)) $(subst PLATFORM,svi,$(LIB_OBJS)) -o$(EXEDIR)/$(PROGRAMNAME).svi -create-app 
+	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).svi,$(EXEDIR)/$(PROGRAMNAME).svi.cas)
+
 ###############################################################################
 ##
 ###############################################################################
@@ -974,6 +995,23 @@ obj/alienstorm.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 $(EXEDIR)/alienstorm.coleco: alienstorm.embedded.coleco obj/alienstorm.coleco/midres_io.o obj/alienstorm.coleco/midres_vdp.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.coleco,$(OBJS))
 	$(CC88) +coleco -lndos $(CFLAGS88) -D__GAME_ALIEN_STORM__ -m $(LDFLAGS88) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_vdp.o obj/alienstorm.coleco/midres_io.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS))  $(subst PLATFORM,alienstorm.coleco,$(OBJS)) -o $(EXEDIR)/alienstorm.coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.coleco.rom)
+
+alienstorm.embedded.svi:
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/astiles.bin -i $(DATADIR)/astiles1.bin -i $(DATADIR)/astiles2.bin -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +svi $(CFLAGS) -c -D__GAME_ALIEN_STORM__ $(CFLAGS88) -o obj/alienstorm.msx/rawdata.o src/rawdata.c
+
+obj/alienstorm.svi/midres_vdp.o:	src/midres_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.svi/midres_vdp.o src/midres_vdp.asm
+
+obj/alienstorm.svi/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.svi/midres_io.o src/midres_io.asm
+
+obj/alienstorm.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
+	$(CC88) +svi -O3 $(CFLAGS88) $(CFLAGS) -c -D__GAME_ALIEN_STORM__ -o $@ $(subst obj/alienstorm.svi/,src/,$(@:.o=.c))
+
+$(EXEDIR)/alienstorm.svi: alienstorm.embedded.svi obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_io.o obj/alienstorm.svi/midres_vdp.o $(subst PLATFORM,alienstorm.svi,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.svi,$(OBJS))
+	$(CC88) +svi -subtype=wav $(CFLAGS88) -D__GAME_ALIEN_STORM__ -m $(LDFLAGS88) obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_vdp.o obj/alienstorm.svi/midres_io.o $(subst PLATFORM,alienstorm.svi,$(LIB_OBJS))  $(subst PLATFORM,alienstorm.svi,$(OBJS)) -o$(EXEDIR)/alienstorm.svi -create-app 
+	$(call COPYFILES,$(EXEDIR)/alienstorm.wav,$(EXEDIR)/alienstorm.svi.wav)
 
 ###########################################################################
 ##

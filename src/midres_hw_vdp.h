@@ -12,6 +12,8 @@
 #include <stdint.h>
 
 extern void vdp_port(uint8_t port);
+extern void vdp_port_read(uint8_t port);
+extern void vdp_port_write(uint8_t port);
 extern void vdp_out(uint8_t reg, uint8_t val);
 extern uint8_t vdp_in();
 extern void vdp_put(uint8_t* _src, uint16_t _dst, uint16_t _count);
