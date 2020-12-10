@@ -677,6 +677,27 @@ $(EXEDIR)/$(PROGRAMNAME).msx: midres.embedded.msx	$(subst PLATFORM,msx,$(OBJS)) 
 	$(CC88) +msx -lndos -subtype=rom -m $(LDFLAGS88) obj/msx/rawdata.o obj/msx/midres_io.o obj/msx/midres_vdp.o $(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) -o $(EXEDIR)/$(PROGRAMNAME).msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).rom,$(EXEDIR)/$(PROGRAMNAME).msx.rom)
 
+## MTX 500 -------------------------------------------------------------------------
+
+midres.embedded.mtx500:
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -i $(DATADIR)/tiles.bin -i $(DATADIR)/tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -o obj/mtx500/rawdata.o src/rawdata.c
+
+obj/mtx500/midres_vdp.o:	src/midres_vdp.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/mtx500/midres_vdp.o src/midres_vdp.asm
+
+obj/mtx500/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/mtx500/midres_io.o src/midres_io.asm
+
+lib/midres.mtx500.lib:	
+
+obj/mtx500/%.o:	$(LIB_SOURCES) $(SOURCES)
+	$(CC88) +mtx -O3 $(CFLAGS) $(CFLAGS88) -c -o $@ $(subst obj/mtx500/,src/,$(@:.o=.c))
+
+$(EXEDIR)/$(PROGRAMNAME).mtx500: midres.embedded.mtx500	$(subst PLATFORM,mtx500,$(OBJS)) $(subst PLATFORM,mtx500,$(LIB_OBJS)) obj/mtx500/rawdata.o obj/mtx500/midres_vdp.o  obj/mtx500/midres_io.o
+	$(CC88) +mtx -m $(LDFLAGS88) obj/mtx500/rawdata.o obj/mtx500/midres_io.o obj/mtx500/midres_vdp.o $(subst PLATFORM,mtx500,$(OBJS)) $(subst PLATFORM,mtx500,$(LIB_OBJS)) -o$(EXEDIR)/$(PROGRAMNAME).mtx -create-app 
+	$(call COPYFILES,$(EXEDIR)/$(PROGRAMNAME).mtx,$(EXEDIR)/$(PROGRAMNAME).mtx500.mtx)
+
 ###############################################################################
 ##
 ###############################################################################

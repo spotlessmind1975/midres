@@ -45,6 +45,10 @@
 #include "midres_hw_io.h"
 #include "midres_hw_vdp.h"
 #include "midres_hw_msx.h"
+#elif __MTX__
+#include "midres_hw_io.h"
+#include "midres_hw_vdp.h"
+#include "midres_hw_mtx500.h"
 #else
 #include "midres_hw_vanilla.h"
 #endif
