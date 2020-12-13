@@ -178,9 +178,10 @@
 
 #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
 		_screen[(_offset)] = (_tile); \
-		_colormap[(offset)] = (_color);
+		_colormap[(_offset)] = (_color);
 
 #define MR_READ_TILE(_screen, _offset) _screen[(_offset)]
+#define MR_READ_TILE_COLOR(_colormap, _offset) _colormap[(_offset)]
 
 #define MIDRES_STANDALONE					1
 // #define MIDRES_STANDALONE_BITBLIT		1

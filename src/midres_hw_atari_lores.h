@@ -175,6 +175,7 @@ extern mr_mixel* screenRam;
 		_screen[(_offset)] = (_tile) | ((_color & 0x03)<<6); _colormap=0;
 
 #define MR_READ_TILE(_screen, _offset) ( _screen[(_offset)] & 0x3f )
+#define MR_READ_TILE_COLOR(_colormap, _offset) _colormap[(_offset)]
 
 #define MIDRES_STANDALONE					1
 #define MIDRES_STANDALONE_BITBLIT			1	
