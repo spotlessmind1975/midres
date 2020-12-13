@@ -10,7 +10,7 @@
 #define _MIDRES_HW_MSX_H_
 
 //#define FRAME_BUFFER        1
-#define GRAPHIC_MODE_I      1
+//#define GRAPHIC_MODE_I      1
 //#define GRAPHIC_MODE_II     1
 
 #define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_MSX
