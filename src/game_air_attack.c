@@ -28,9 +28,7 @@
 #include "game_air_attack_tiles.h"
 #endif
 
-#ifdef MIDRES_EMBEDDED_FILES
 #include "rawdata.h"
-#endif
 
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION
@@ -118,12 +116,14 @@ mr_position level[2] = { 1, 0 };
 unsigned char* mr_translate_file_user(mr_file _file) {
 
 	switch (_file) {
+#ifdef FILE_ZTILES_BIN
 		case FILE_ZTILES_BIN:
 			return "ztiles.bin";
-		case FILE_AATILES_BIN:
-			return "aatiles.bin";
-		case FILE_AAINTROA_PIC:
-			return "aaintroa.pic";
+#endif
+		case FILE_ZZTILES_BIN:
+			return "zztiles.bin";
+		case FILE_ZZINTRO_PIC:
+			return "zzintro.pic";
 	}
 
 	return 0;
@@ -170,7 +170,7 @@ void draw_building(mr_position _number, mr_position _height, mr_tile _tile_wall,
 void prepare_graphics() {
 
 	// Load the tileset from disk.
-	mr_tileset_load_file(FILE_AATILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
+	mr_tileset_load_file(FILE_ZZTILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
 
 	// Prepare animation for airplane.
 	mr_tile_prepare_horizontal_extended(MR_TILESET_0, TILE_AIRPLANE_STATIC, TILE_AIRPLANE_STATIC_WIDTH, TILE_AIRPLANE_STATIC_HEIGHT, TILE_MOVING_AIRPLANE);
@@ -641,7 +641,7 @@ void game_air_attack() {
 
 #elif MIDRES_EMBEDDED_FILES
 
-	mr_load_screen(FILE_AAINTRO_PIC, MR_SCREEN_DEFAULT);
+	mr_load_screen(FILE_ZZINTRO_PIC, MR_SCREEN_DEFAULT);
 
 	mr_end_frame(0);
 

@@ -23,9 +23,7 @@
 // Tiles used in the game.
 #include "game_elevator_tiles.h"
 
-#ifdef MIDRES_EMBEDDED_FILES
 #include "rawdata.h"
-#endif
 
 /****************************************************************************
  ** DEFINES, TYPEDEFS AND VARIABLES SECTION
@@ -291,10 +289,10 @@ mr_position walkFrame[PASSENGER_COUNT];
 unsigned char* mr_translate_file_user(mr_file _file) {
 
 	switch (_file) {
-	case FILE_ELEVATORA_MPIC:
-		return "zelintro.bin";
-	case FILE_ZELTILES_BIN:
-		return "zeltile.bin";
+		case FILE_ZELINTRO_BIN:
+			return "zelintro.bin";
+		case FILE_ZELTILES_BIN:
+			return "zeltile.bin";
 	}
 
 	return 0;
@@ -1671,7 +1669,7 @@ void show_title_screen() {
 #elif MIDRES_EMBEDDED_FILES
 
 	// Load compressed screen on the auxiliary space
-	mr_load_screen(FILE_ELEVATORA_MPIC, MR_SCREEN_DEFAULT);
+	mr_load_screen(FILE_ZELINTRO_BIN, MR_SCREEN_DEFAULT);
 
 	mr_wait(2);
 

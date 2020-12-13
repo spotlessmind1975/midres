@@ -23,9 +23,7 @@
 #include "game_totto_tiles.h"
 #include "game_totto_tiles1.h"
 
-#ifdef MIDRES_EMBEDDED_FILES
 #include "rawdata.h"
-#endif
 
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION

@@ -19,9 +19,7 @@
 // Needed for MIDRES library call.
 #include "midres.h"
 
-#ifdef MIDRES_EMBEDDED_FILES
 #include "rawdata.h"
-#endif
 
 // Include generated tiles reference.
 #include "game_alien_storm_tiles.h"
@@ -321,11 +319,11 @@ unsigned char level = 0;
 unsigned char* mr_translate_file_user(mr_file _file) {
 
 	switch (_file) {
-		case FILE_ASTILES_BIN:
+		case FILE_ZSTILES_BIN:
 			return "zstiles.bin";
-		case FILE_ASTILES1_BIN:
+		case FILE_ZSTILES1_BIN:
 			return "zstiles1.bin";
-		case FILE_ASTILES2_BIN:
+		case FILE_ZSTILES2_BIN:
 			return "zstiles2.bin";
 	}
 
@@ -465,10 +463,10 @@ void prepare_graphics() {
 	mr_set_background_color(MR_COLOR_BLACK);
 
 	// Load tiles from mass memory.
-	mr_tileset_load_file(FILE_ASTILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
-	mr_tileset_load_file(FILE_ASTILES1_BIN, MR_TILESET_1, TILE1_START, TILE1_COUNT);
+	mr_tileset_load_file(FILE_ZSTILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
+	mr_tileset_load_file(FILE_ZSTILES1_BIN, MR_TILESET_1, TILE1_START, TILE1_COUNT);
 #ifdef MR_TILESET_2
-	mr_tileset_load_file(FILE_ASTILES2_BIN, MR_TILESET_2, TILE2_START, TILE2_COUNT);
+	mr_tileset_load_file(FILE_ZSTILES2_BIN, MR_TILESET_2, TILE2_START, TILE2_COUNT);
 #endif
 
 	// Let's prepare the cannon animation.
