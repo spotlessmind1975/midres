@@ -363,11 +363,7 @@ void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, un
 }
 
 void mr_tile_prepare_vertical_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination) {
-    void mr_tile_prepare_vertical_memory_mapped(_tileset, _source, _destination);
-}
-
-void mr_tile_prepare_vertical_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination) {
-    void mr_tile_prepare_vertical_memory_mapped(_tileset, _source, _destination);
+    mr_tile_prepare_vertical_memory_mapped(_tileset, _source, _destination);
 }
 
 void mr_tile_prepare_roll_horizontal_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination) {
@@ -378,12 +374,8 @@ void mr_tile_roll_horizontal_hd(unsigned char _tileset, unsigned char _destinati
     mr_tile_roll_horizontal_memory_mapped(_tileset, _destination, _direction);
 }
 
-void mr_tile_roll_horizontal_hd(unsigned char _tileset, unsigned char _destination, unsigned char _direction) {
-    mr_tile_roll_horizontal_memory_mapped(_tileset, _destination, _direction);
-}
-
 void mr_tile_roll_horizontal_on_place_hd(unsigned char _tileset, unsigned char _destination, unsigned char _direction, unsigned char _place, unsigned char* _index) {
-    mr_tile_roll_horizontal_on_place_memory_mapped(_tileset, _destination, _direction, _place, *_index);
+    mr_tile_roll_horizontal_on_place_memory_mapped(_tileset, _destination, _direction, _place, _index);
 }
 
 void mr_tile_prepare_roll_vertical_hd(unsigned char _tileset, unsigned char _source, unsigned char _destination) {
@@ -395,7 +387,7 @@ void mr_tile_roll_vertical_hd(unsigned char _tileset, unsigned char _destination
 }
 
 void mr_tileset_load_file_hd(unsigned char _index, unsigned char _tileset, unsigned char _starting, unsigned char _count) {
-    mr_tileset_load_file_memoy_mapped(_index, _tileset, _starting, _count);
+    mr_tileset_load_file_memory_mapped(_index, _tileset, _starting, _count);
 }
 
 #endif

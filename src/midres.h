@@ -828,6 +828,9 @@
 	// Load a tileset (or part of it)
 	void mr_tileset_load_file(mr_file _file, mr_tileset _tileset, mr_tile _starting, mr_tile _count);
 
+	//  Load a tileset (or part of it) with memory mapped
+	void mr_tileset_load_file_memory_mapped(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count);
+
 	// Draws a vertical line onto the bitmap.
 	void _mr_vtiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color);
 
