@@ -1,4 +1,4 @@
-#ifdef __UTILITY_JOYCHECK__
+#ifdef __JOYCHECK__
 
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *

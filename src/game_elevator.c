@@ -1,4 +1,4 @@
-#ifdef __GAME_ELEVATOR__
+#ifdef __ELEVATOR__
 
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *

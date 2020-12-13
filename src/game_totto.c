@@ -1,4 +1,4 @@
-#ifdef __GAME_TOTTO__
+#ifdef __TOTTO__
 
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *

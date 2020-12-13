@@ -1,4 +1,4 @@
-#ifdef __GAME_ALIEN_STORM__
+#ifdef __ALIENSTORM__
 
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *

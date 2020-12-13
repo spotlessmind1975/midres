@@ -1,4 +1,4 @@
-#ifdef __GAME_AIR_ATTACK__
+#ifdef __AIRATTACK__
 
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
