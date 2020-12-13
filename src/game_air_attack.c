@@ -628,7 +628,7 @@ void game_air_attack() {
 	mr_start_frame();
 
 	// Clear screen bitmap.
-	mr_clear_bitmapv();
+	mr_clearv();
 
 #ifdef __ATARI__
 
@@ -668,7 +668,7 @@ void game_air_attack() {
 		mr_start_frame();
 
 		// Clear the screen.
-		mr_clear_bitmapv();
+		mr_clearv();
 
 		mr_end_frame(0);
 
@@ -704,7 +704,7 @@ void game_air_attack() {
 			mr_start_frame();
 
 			// Clear the screen.
-			mr_clear_bitmapv();
+			mr_clearv();
 
 			// Show level
 			draw_level(MR_SCREEN_HEIGHT >> 1);
@@ -716,7 +716,7 @@ void game_air_attack() {
 			mr_start_frame();
 
 			// Clear the screen.
-			mr_clear_bitmapv();
+			mr_clearv();
 
 			// Draw the playfield
 			draw_random_buildings();
@@ -730,7 +730,7 @@ void game_air_attack() {
 				increase(level);
 
 				// Clear the screen.
-				mr_clear_bitmapv();
+				mr_clearv();
 
 				// Show bombs
 				draw_bombs((MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) - 1);
@@ -776,7 +776,7 @@ void game_air_attack() {
 
 		mr_start_frame();
 
-		mr_clear_bitmapv();
+		mr_clearv();
 
 		// Show score
 		draw_score(( MR_SCREEN_WIDTH >> 1) - 3, (MR_SCREEN_HEIGHT >> 1) + 2);
