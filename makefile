@@ -406,7 +406,7 @@ $(EXEDIR)/midres.coleco:	midres.embedded.coleco $(subst PLATFORM,coleco,$(OBJS))
 # -------------------------------------------------------------------
 
 obj/atmos/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atmos -c $(CFLAGS) -Osir -Cl   -o $@ $(subst obj/atmos/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t atmos -c $(CFLAGS)  -Osir -Cl   -o $@ $(subst obj/atmos/,src/,$(@:.o=.c))
 
 $(LIBDIR)/midres.atmos.lib:	$(LIB_INCLUDES) $(subst PLATFORM,atmos,$(LIB_OBJS))
 	$(AR) r $(LIBDIR)/midres.atmos.lib $(subst PLATFORM,atmos,$(LIB_OBJS))
@@ -417,7 +417,7 @@ $(LIBDIR)/midres.atmos.lib:	$(LIB_INCLUDES) $(subst PLATFORM,atmos,$(LIB_OBJS))
 # -------------------------------------------------------------------
 
 obj/atari/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl   -o $@ $(subst obj/atari/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl   -o $@ $(subst obj/atari/,src/,$(@:.o=.c))
 
 $(LIBDIR)/midres.atari.lib:	$(LIB_INCLUDES) $(subst PLATFORM,atari,$(LIB_OBJS))
 	$(AR) r $(LIBDIR)/midres.atari.lib $(subst PLATFORM,atari,$(LIB_OBJS))
@@ -427,7 +427,7 @@ $(LIBDIR)/midres.atari.lib:	$(LIB_INCLUDES) $(subst PLATFORM,atari,$(LIB_OBJS))
 # -------------------------------------------------------------------
 
 obj/atari/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl  -o $@ $(subst obj/atari/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl  -o $@ $(subst obj/atari/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.atari: $(subst PLATFORM,atari,$(OBJS))
 	$(CC) -Ln demoatari.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/midres.atari.map -o $(EXEDIR)/midres.atari $(subst PLATFORM,atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
@@ -453,7 +453,7 @@ $(EXEDIR)/midres.atari: $(subst PLATFORM,atari,$(OBJS))
 # -------------------------------------------------------------------
 
 obj/vic20/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__CBM__  -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
 
 $(LIBDIR)/midres.vic20.lib:	$(LIB_INCLUDES) $(subst PLATFORM,vic20,$(LIB_OBJS))
 	$(AR) r $(LIBDIR)/midres.vic20.lib $(subst PLATFORM,vic20,$(LIB_OBJS))
@@ -463,7 +463,7 @@ $(LIBDIR)/midres.vic20.lib:	$(LIB_INCLUDES) $(subst PLATFORM,vic20,$(LIB_OBJS))
 # -------------------------------------------------------------------
 
 obj/vic20/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.vic20: $(subst PLATFORM,vic20,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/midres.vic20.map -o $(EXEDIR)/midres.vic20 $(subst PLATFORM,vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib
@@ -488,7 +488,7 @@ $(EXEDIR)/midres.vic20: $(subst PLATFORM,vic20,$(OBJS))
 # -------------------------------------------------------------------
 
 obj/vic2024/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__CBM__  -o $@ $(subst obj/vic2024/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__CBM__  -o $@ $(subst obj/vic2024/,src/,$(@:.o=.c))
 
 $(LIBDIR)/midres.vic2024.lib:	$(LIB_INCLUDES) $(subst PLATFORM,vic2024,$(LIB_OBJS))
 	$(AR) r $(LIBDIR)/midres.vic2024.lib $(subst PLATFORM,vic2024,$(LIB_OBJS))
@@ -498,7 +498,7 @@ $(LIBDIR)/midres.vic2024.lib:	$(LIB_INCLUDES) $(subst PLATFORM,vic2024,$(LIB_OBJ
 # -------------------------------------------------------------------
 
 obj/vic2024/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/vic2024/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/vic2024/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.vic2024: $(subst PLATFORM,vic2024,$(OBJS))
 	$(CC) -Ln demovic2024.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/midres.vic2024.map -o $(EXEDIR)/midres.vic2024 $(subst PLATFORM,vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
@@ -523,7 +523,7 @@ $(EXEDIR)/midres.vic2024: $(subst PLATFORM,vic2024,$(OBJS))
 # -------------------------------------------------------------------
 
 obj/c64/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__CBM__  -o $@ $(subst obj/c64/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/c64/,src/,$(@:.o=.c))
 
 $(LIBDIR)/midres.c64.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c64,$(LIB_OBJS))
 	$(AR) r $(LIBDIR)/midres.c64.lib $(subst PLATFORM,c64,$(LIB_OBJS))
@@ -533,7 +533,7 @@ $(LIBDIR)/midres.c64.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c64,$(LIB_OBJS))
 # -------------------------------------------------------------------
 
 obj/c64/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/c64/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/c64/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.c64: $(subst PLATFORM,c64,$(OBJS))
 	$(CC) -Ln democ64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/midres.c64.map -o $(EXEDIR)/midres.c64 $(subst PLATFORM,c64,$(OBJS)) $(LIBDIR)/midres.c64.lib
@@ -558,7 +558,7 @@ $(EXEDIR)/midres.c64: $(subst PLATFORM,c64,$(OBJS))
 # -------------------------------------------------------------------
 
 obj/c128/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS) -Osir -Cl -D__CBM__  -o $@ $(subst obj/c128/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/c128/,src/,$(@:.o=.c))
 
 $(LIBDIR)/midres.c128.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c128,$(LIB_OBJS))
 	$(AR) r $(LIBDIR)/midres.c128.lib $(subst PLATFORM,c128,$(LIB_OBJS))
@@ -568,7 +568,7 @@ $(LIBDIR)/midres.c128.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c128,$(LIB_OBJS))
 # -------------------------------------------------------------------
 
 obj/c128/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/c128/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/c128/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.c128: $(subst PLATFORM,c128,$(OBJS))
 	$(CC) -Ln democ128.lbl -t c128 $(LDFLAGS) -m $(EXEDIR)/midres.c128.map -o $(EXEDIR)/midres.c128 $(subst PLATFORM,c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
@@ -593,7 +593,7 @@ $(EXEDIR)/midres.c128: $(subst PLATFORM,c128,$(OBJS))
 # -------------------------------------------------------------------
 
 obj/c16/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS) -Osir -Cl -D__CBM__  -o $@ $(subst obj/c16/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/c16/,src/,$(@:.o=.c))
 
 $(LIBDIR)/midres.c16.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c16,$(LIB_OBJS))
 	$(AR) r $(LIBDIR)/midres.c16.lib $(subst PLATFORM,c16,$(LIB_OBJS))
@@ -603,7 +603,7 @@ $(LIBDIR)/midres.c16.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c16,$(LIB_OBJS))
 # -------------------------------------------------------------------
 
 obj/c16/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/c16/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/c16/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.c16: $(subst PLATFORM,c16,$(OBJS))
 	$(CC) -Ln democ16.lbl -t c16 $(LDFLAGS) -m $(EXEDIR)/midres.c16.map -o $(EXEDIR)/midres.c16 $(subst PLATFORM,c16,$(OBJS)) $(LIBDIR)/midres.c16.lib
@@ -628,7 +628,7 @@ $(EXEDIR)/midres.c16: $(subst PLATFORM,c16,$(OBJS))
 # -------------------------------------------------------------------
 
 obj/plus4/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS) -Osir -Cl -D__CBM__  -o $@ $(subst obj/plus4/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/plus4/,src/,$(@:.o=.c))
 
 $(LIBDIR)/midres.plus4.lib:	$(LIB_INCLUDES) $(subst PLATFORM,plus4,$(LIB_OBJS))
 	$(AR) r $(LIBDIR)/midres.plus4.lib $(subst PLATFORM,plus4,$(LIB_OBJS))
@@ -638,7 +638,7 @@ $(LIBDIR)/midres.plus4.lib:	$(LIB_INCLUDES) $(subst PLATFORM,plus4,$(LIB_OBJS))
 # -------------------------------------------------------------------
 
 obj/plus4/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS) -Osir -Cl -D__CBM__ -o $@ $(subst obj/plus4/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/plus4/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.plus4: $(subst PLATFORM,plus4,$(OBJS))
 	$(CC) -Ln demoplus4.lbl -t plus4 $(LDFLAGS) -m $(EXEDIR)/midres.plus4.map -o $(EXEDIR)/midres.plus4 $(subst PLATFORM,plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
@@ -1102,7 +1102,7 @@ alienstorm.embedded.atari:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/alienstorm.atari/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -D__ALIENSTORM__  -o $@ $(subst obj/alienstorm.atari/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl -D__ALIENSTORM__  -o $@ $(subst obj/alienstorm.atari/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.atari: alienstorm.embedded.atari $(subst PLATFORM,alienstorm.atari,$(OBJS))
 	$(CC) -Ln demoatari.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/alienstorm.atari.map -o $(EXEDIR)/alienstorm.atari $(subst PLATFORM,alienstorm.atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
@@ -1123,7 +1123,7 @@ elevator.embedded.atari:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator64.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/elevator.atari/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -D__ELEVATOR__  -o $@ $(subst obj/elevator.atari/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR__  -o $@ $(subst obj/elevator.atari/,src/,$(@:.o=.c))
 
 $(EXEDIR)/elevator.atari: elevator.embedded.atari $(subst PLATFORM,elevator.atari,$(OBJS))
 	$(CC) -Ln demoatari.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/elevator.atari.map -o $(EXEDIR)/elevator.atari $(subst PLATFORM,elevator.atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
@@ -1143,7 +1143,7 @@ airattack.embedded.atari:
 	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintroa.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.atari/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -D__AIRATTACK__  -o $@ $(subst obj/airattack.atari/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__  -o $@ $(subst obj/airattack.atari/,src/,$(@:.o=.c))
 
 $(EXEDIR)/airattack.atari: airattack.embedded.atari $(subst PLATFORM,airattack.atari,$(OBJS))
 	$(CC) -Ln demoatari.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/airattack.atari.map -o $(EXEDIR)/airattack.atari $(subst PLATFORM,airattack.atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
@@ -1166,7 +1166,7 @@ joycheck.embedded.atari:
 	$(FILE2INCLUDE) -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/joycheck.atari/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS) -Osir -Cl -D__JOYCHECK__  -o $@ $(subst obj/joycheck.atari/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl -D__JOYCHECK__  -o $@ $(subst obj/joycheck.atari/,src/,$(@:.o=.c))
 
 $(EXEDIR)/joycheck.atari: joycheck.embedded.atari $(subst PLATFORM,joycheck.atari,$(OBJS))
 	$(CC) -Ln demoatari.lbl -t atari $(LDFLAGS) -m $(EXEDIR)/joycheck.atari.map -o $(EXEDIR)/joycheck.atari $(subst PLATFORM,joycheck.atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
@@ -1185,7 +1185,7 @@ alienstorm.embedded.vic20:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/alienstorm.vic20/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.vic20/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.vic20/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.vic20: alienstorm.embedded.vic20 $(subst PLATFORM,alienstorm.vic20,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/alienstorm.vic20.map -o $(EXEDIR)/alienstorm.vic20 $(subst PLATFORM,alienstorm.vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib
@@ -1204,7 +1204,7 @@ elevator.embedded.vic20:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator20.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/elevator.vic20/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.vic20/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.vic20/,src/,$(@:.o=.c))
 
 $(EXEDIR)/elevator.vic20: elevator.embedded.vic20 $(subst PLATFORM,elevator.vic20,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/elevator.vic20.map -o $(EXEDIR)/elevator.vic20 $(subst PLATFORM,elevator.vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib
@@ -1222,7 +1222,7 @@ airattack.embedded.vic20:
 	$(FILE2INCLUDE) -i $(DATADIR)/aatiles20.bin -n zztiles.bin -i $(DATADIR)/aaintro20.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.vic20/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.vic20/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.vic20/,src/,$(@:.o=.c))
 
 $(EXEDIR)/airattack.vic20: airattack.embedded.vic20 $(subst PLATFORM,airattack.vic20,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/airattack.vic20.map -o $(EXEDIR)/airattack.vic20 $(subst PLATFORM,airattack.vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib
@@ -1240,7 +1240,7 @@ totto.embedded.vic20:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal120.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal220.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal320.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal420.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.vic20/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.vic20/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.vic20/,src/,$(@:.o=.c))
 
 $(EXEDIR)/totto.vic20: totto.embedded.vic20 $(subst PLATFORM,totto.vic20,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/totto.vic20.map -o $(EXEDIR)/totto.vic20 $(subst PLATFORM,totto.vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib
@@ -1262,7 +1262,7 @@ joycheck.embedded.vic20:
 	$(FILE2INCLUDE) -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/joycheck.vic20/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.vic20/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.vic20/,src/,$(@:.o=.c))
 
 $(EXEDIR)/joycheck.vic20: joycheck.embedded.vic20 $(subst PLATFORM,joycheck.vic20,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/joycheck.vic20.map -o $(EXEDIR)/joycheck.vic20 $(subst PLATFORM,joycheck.vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib
@@ -1279,7 +1279,7 @@ alienstorm.embedded.vic2024:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/alienstorm.vic2024/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.vic2024/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.vic2024/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.vic2024: alienstorm.embedded.vic2024 $(subst PLATFORM,alienstorm.vic2024,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/alienstorm.vic20.map -o $(EXEDIR)/alienstorm.vic2024 $(subst PLATFORM,alienstorm.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
@@ -1298,7 +1298,7 @@ elevator.embedded.vic2024:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator20.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/elevator.vic2024/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.vic2024/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.vic2024/,src/,$(@:.o=.c))
 
 $(EXEDIR)/elevator.vic2024: elevator.embedded.vic2024 $(subst PLATFORM,elevator.vic2024,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/elevator.vic20.map -o $(EXEDIR)/elevator.vic2024 $(subst PLATFORM,elevator.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
@@ -1316,7 +1316,7 @@ airattack.embedded.vic2024:
 	$(FILE2INCLUDE) -i $(DATADIR)/aatiles20.bin -n zztiles.bin -i $(DATADIR)/aaintro20.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.vic2024/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.vic2024/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.vic2024/,src/,$(@:.o=.c))
 
 $(EXEDIR)/airattack.vic2024: airattack.embedded.vic2024 $(subst PLATFORM,airattack.vic2024,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/airattack.vic20.map -o $(EXEDIR)/airattack.vic2024 $(subst PLATFORM,airattack.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
@@ -1334,7 +1334,7 @@ totto.embedded.vic2024:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal120.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal220.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal320.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal420.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.vic2024/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.vic2024/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.vic2024/,src/,$(@:.o=.c))
 
 $(EXEDIR)/totto.vic2024: totto.embedded.vic2024 $(subst PLATFORM,totto.vic2024,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/totto.vic20.map -o $(EXEDIR)/totto.vic2024 $(subst PLATFORM,totto.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
@@ -1356,7 +1356,7 @@ joycheck.embedded.vic2024:
 	$(FILE2INCLUDE) -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/joycheck.vic2024/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.vic2024/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.vic2024/,src/,$(@:.o=.c))
 
 $(EXEDIR)/joycheck.vic2024: joycheck.embedded.vic2024 $(subst PLATFORM,joycheck.vic2024,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 $(LDFLAGS) -m $(EXEDIR)/joycheck.vic20.map -o $(EXEDIR)/joycheck.vic2024 $(subst PLATFORM,joycheck.vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
@@ -1373,7 +1373,7 @@ alienstorm.embedded.c64:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/alienstorm.c64/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.c64/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.c64/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.c64: alienstorm.embedded.c64 $(subst PLATFORM,alienstorm.c64,$(OBJS))
 	$(CC) -Ln democ64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/alienstorm.c64.map -o $(EXEDIR)/alienstorm.c64 $(subst PLATFORM,alienstorm.c64,$(OBJS)) $(LIBDIR)/midres.c64.lib
@@ -1392,7 +1392,7 @@ elevator.embedded.c64:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator64.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/elevator.c64/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.c64/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.c64/,src/,$(@:.o=.c))
 
 $(EXEDIR)/elevator.c64: elevator.embedded.c64 $(subst PLATFORM,elevator.c64,$(OBJS))
 	$(CC) -Ln democ64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/elevator.c64.map -o $(EXEDIR)/elevator.c64 $(subst PLATFORM,elevator.c64,$(OBJS)) $(LIBDIR)/midres.c64.lib
@@ -1410,7 +1410,7 @@ airattack.embedded.c64:
 	$(FILE2INCLUDE) -i $(DATADIR)/aatiles.bin -n zztiles.bin -i $(DATADIR)/aaintro64.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.c64/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.c64/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.c64/,src/,$(@:.o=.c))
 
 $(EXEDIR)/airattack.c64: airattack.embedded.c64 $(subst PLATFORM,airattack.c64,$(OBJS))
 	$(CC) -Ln democ64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/airattack.c64.map -o $(EXEDIR)/airattack.c64 $(subst PLATFORM,airattack.c64,$(OBJS)) $(LIBDIR)/midres.c64.lib
@@ -1428,7 +1428,7 @@ totto.embedded.c64:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal164.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal264.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal364.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal464.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.c64/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.c64/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.c64/,src/,$(@:.o=.c))
 
 $(EXEDIR)/totto.c64: totto.embedded.c64 $(subst PLATFORM,totto.c64,$(OBJS))
 	$(CC) -Ln democ64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/totto.c64.map -o $(EXEDIR)/totto.c64 $(subst PLATFORM,totto.c64,$(OBJS)) $(LIBDIR)/midres.c64.lib
@@ -1450,7 +1450,7 @@ joycheck.embedded.c64:
 	$(FILE2INCLUDE) -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/joycheck.c64/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS) -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.c64/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.c64/,src/,$(@:.o=.c))
 
 $(EXEDIR)/joycheck.c64: joycheck.embedded.c64 $(subst PLATFORM,joycheck.c64,$(OBJS))
 	$(CC) -Ln democ64.lbl -t c64 $(LDFLAGS) -m $(EXEDIR)/joycheck.c64.map -o $(EXEDIR)/joycheck.c64 $(subst PLATFORM,joycheck.c64,$(OBJS)) $(LIBDIR)/midres.c64.lib
@@ -1467,7 +1467,7 @@ alienstorm.embedded.c128:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/alienstorm.c128/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS) -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.c128/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.c128/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.c128: alienstorm.embedded.c128 $(subst PLATFORM,alienstorm.c128,$(OBJS))
 	$(CC) -Ln democ128.lbl -t c128 $(LDFLAGS) -m $(EXEDIR)/alienstorm.c128.map -o $(EXEDIR)/alienstorm.c128 $(subst PLATFORM,alienstorm.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
@@ -1486,7 +1486,7 @@ elevator.embedded.c128:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator64.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/elevator.c128/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS) -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.c128/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.c128/,src/,$(@:.o=.c))
 
 $(EXEDIR)/elevator.c128: elevator.embedded.c128 $(subst PLATFORM,elevator.c128,$(OBJS))
 	$(CC) -Ln democ128.lbl -t c128 $(LDFLAGS) -m $(EXEDIR)/elevator.c128.map -o $(EXEDIR)/elevator.c128 $(subst PLATFORM,elevator.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
@@ -1504,7 +1504,7 @@ airattack.embedded.c128:
 	$(FILE2INCLUDE) -i $(DATADIR)/aatiles.bin -n zztiles.bin -i $(DATADIR)/aaintro64.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.c128/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS) -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.c128/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.c128/,src/,$(@:.o=.c))
 
 $(EXEDIR)/airattack.c128: airattack.embedded.c128 $(subst PLATFORM,airattack.c128,$(OBJS))
 	$(CC) -Ln democ128.lbl -t c128 $(LDFLAGS) -m $(EXEDIR)/airattack.c128.map -o $(EXEDIR)/airattack.c128 $(subst PLATFORM,airattack.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
@@ -1522,7 +1522,7 @@ totto.embedded.c128:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal164.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal264.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal364.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal464.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.c128/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS) -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.c128/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.c128/,src/,$(@:.o=.c))
 
 $(EXEDIR)/totto.c128: totto.embedded.c128 $(subst PLATFORM,totto.c128,$(OBJS))
 	$(CC) -Ln democ128.lbl -t c128 $(LDFLAGS) -m $(EXEDIR)/totto.c128.map -o $(EXEDIR)/totto.c128 $(subst PLATFORM,totto.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
@@ -1544,7 +1544,7 @@ joycheck.embedded.c128:
 	$(FILE2INCLUDE) -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/joycheck.c128/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS) -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.c128/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.c128/,src/,$(@:.o=.c))
 
 $(EXEDIR)/joycheck.c128: joycheck.embedded.c128 $(subst PLATFORM,joycheck.c128,$(OBJS))
 	$(CC) -Ln democ128.lbl -t c128 $(LDFLAGS) -m $(EXEDIR)/joycheck.c128.map -o $(EXEDIR)/joycheck.c128 $(subst PLATFORM,joycheck.c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
@@ -1561,7 +1561,7 @@ alienstorm.embedded.c16:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/alienstorm.c16/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS) -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.c16/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.c16/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.c16: alienstorm.embedded.c16 $(subst PLATFORM,alienstorm.c16,$(OBJS))
 	$(CC) -Ln democ16.lbl -t c16 $(LDFLAGS) -m $(EXEDIR)/alienstorm.c16.map -o $(EXEDIR)/alienstorm.c16 $(subst PLATFORM,alienstorm.c16,$(OBJS)) $(LIBDIR)/midres.c16.lib
@@ -1580,7 +1580,7 @@ elevator.embedded.c16:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator16.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/elevator.c16/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS) -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.c16/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.c16/,src/,$(@:.o=.c))
 
 $(EXEDIR)/elevator.c16: elevator.embedded.c16 $(subst PLATFORM,elevator.c16,$(OBJS))
 	$(CC) -Ln democ16.lbl -t c16 $(LDFLAGS) -m $(EXEDIR)/elevator.c16.map -o $(EXEDIR)/elevator.c16 $(subst PLATFORM,elevator.c16,$(OBJS)) $(LIBDIR)/midres.c16.lib
@@ -1598,7 +1598,7 @@ airattack.embedded.c16:
 	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintro16.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.c16/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS) -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.c16/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.c16/,src/,$(@:.o=.c))
 
 $(EXEDIR)/airattack.c16: airattack.embedded.c16 $(subst PLATFORM,airattack.c16,$(OBJS))
 	$(CC) -Ln democ16.lbl -t c16 $(LDFLAGS) -m $(EXEDIR)/airattack.c16.map -o $(EXEDIR)/airattack.c16 $(subst PLATFORM,airattack.c16,$(OBJS)) $(LIBDIR)/midres.c16.lib
@@ -1616,7 +1616,7 @@ totto.embedded.c16:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal116.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal216.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal316.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal416.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.c16/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS) -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.c16/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.c16/,src/,$(@:.o=.c))
 
 $(EXEDIR)/totto.c16: totto.embedded.c16 $(subst PLATFORM,totto.c16,$(OBJS))
 	$(CC) -Ln democ16.lbl -t c16 $(LDFLAGS) -m $(EXEDIR)/totto.c16.map -o $(EXEDIR)/totto.c16 $(subst PLATFORM,totto.c16,$(OBJS)) $(LIBDIR)/midres.c16.lib
@@ -1641,7 +1641,7 @@ alienstorm.embedded.plus4:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/alienstorm.plus4/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS) -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.plus4/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__ALIENSTORM__ -D__CBM__ -o $@ $(subst obj/alienstorm.plus4/,src/,$(@:.o=.c))
 
 $(EXEDIR)/alienstorm.plus4: alienstorm.embedded.plus4 $(subst PLATFORM,alienstorm.plus4,$(OBJS))
 	$(CC) -Ln demoplus4.lbl -t plus4 $(LDFLAGS) -m $(EXEDIR)/alienstorm.plus4.map -o $(EXEDIR)/alienstorm.plus4 $(subst PLATFORM,alienstorm.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
@@ -1660,7 +1660,7 @@ elevator.embedded.plus4:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator16.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/elevator.plus4/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS) -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.plus4/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR__ -D__CBM__ -o $@ $(subst obj/elevator.plus4/,src/,$(@:.o=.c))
 
 $(EXEDIR)/elevator.plus4: elevator.embedded.plus4 $(subst PLATFORM,elevator.plus4,$(OBJS))
 	$(CC) -Ln demoplus4.lbl -t plus4 $(LDFLAGS) -m $(EXEDIR)/elevator.plus4.map -o $(EXEDIR)/elevator.plus4 $(subst PLATFORM,elevator.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
@@ -1678,7 +1678,7 @@ airattack.embedded.plus4:
 	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintro16.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.plus4/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS) -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.plus4/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.plus4/,src/,$(@:.o=.c))
 
 $(EXEDIR)/airattack.plus4: airattack.embedded.plus4 $(subst PLATFORM,airattack.plus4,$(OBJS))
 	$(CC) -Ln demoplus4.lbl -t plus4 $(LDFLAGS) -m $(EXEDIR)/airattack.plus4.map -o $(EXEDIR)/airattack.plus4 $(subst PLATFORM,airattack.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
@@ -1696,7 +1696,7 @@ totto.embedded.plus4:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal116.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal216.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal316.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal416.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.plus4/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS) -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.plus4/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.plus4/,src/,$(@:.o=.c))
 
 $(EXEDIR)/totto.plus4: totto.embedded.plus4 $(subst PLATFORM,totto.plus4,$(OBJS))
 	$(CC) -Ln demoplus4.lbl -t plus4 $(LDFLAGS) -m $(EXEDIR)/totto.plus4.map -o $(EXEDIR)/totto.plus4 $(subst PLATFORM,totto.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
@@ -1718,7 +1718,7 @@ joycheck.embedded.plus4:
 	$(FILE2INCLUDE) -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -c src/rawdata.c -h src/rawdata.h
 
 obj/joycheck.plus4/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS) -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.plus4/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__JOYCHECK__ -D__CBM__ -o $@ $(subst obj/joycheck.plus4/,src/,$(@:.o=.c))
 
 $(EXEDIR)/joycheck.plus4: joycheck.embedded.plus4 $(subst PLATFORM,joycheck.plus4,$(OBJS))
 	$(CC) -Ln demoplus4.lbl -t plus4 $(LDFLAGS) -m $(EXEDIR)/joycheck.plus4.map -o $(EXEDIR)/joycheck.plus4 $(subst PLATFORM,joycheck.plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
