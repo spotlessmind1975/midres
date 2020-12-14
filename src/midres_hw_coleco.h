@@ -285,5 +285,4 @@
 // #define MIDRES_STANDALONE_FILE				1
 #define MIDRES_EMBEDDED_FILES				1
 
-
 #endif
