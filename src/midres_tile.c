@@ -67,11 +67,6 @@ void mr_tileset_copy_memory_mapped(mr_tileset _source, mr_tileset _destination) 
     }
 }
 
-// Copy a tileset over another.
-void mr_tileset_copy(mr_tileset _source, mr_tileset _destination) {
-    mr_tileset_copy_hd(_source, _destination);
-}
-
 // Downgrade a tileset from multicolor to monocolor.
 void mr_tileset_multicolor_to_monocolor_memory_mapped(mr_tileset _source, mr_position _starting, mr_position _count) {
     mr_position w = _count, b = 0;
@@ -83,11 +78,6 @@ void mr_tileset_multicolor_to_monocolor_memory_mapped(mr_tileset _source, mr_pos
     }
 }
 
-void mr_tileset_multicolor_to_monocolor(mr_tileset _source, mr_position _starting, mr_position _count) {
-    mr_tileset_multicolor_to_monocolor_hd(_source, _starting, _count);
-}
-
-
 // Redefine a tile using the given data.
 void mr_tile_redefine_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
     mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _tile*8);
@@ -95,10 +85,6 @@ void mr_tile_redefine_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_mixel
     for (b = 0; b < 8; ++b, ++destination, ++_data) {
         *destination = *_data;
     }
-}
-
-void mr_tile_redefine(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
-    mr_tile_redefine_hd(_tileset, _tile, _data);
 }
 
 // Writes a tile into a bitmap.
@@ -315,10 +301,6 @@ void mr_tileset_load_file_memory_mapped(mr_file _index, mr_tileset _tileset, mr_
 #ifdef MIDRES_STANDALONE_FILE
     mr_read_file(_index, MR_TM(_tileset) + 8 * _starting, _count * 8);
 #endif
-}
-
-void mr_tileset_load_file(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
-    mr_tileset_load_file_hd(_index, _tileset, _starting, _count);
 
 #ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
     if (MR_MULTICOLOR) {
@@ -489,10 +471,6 @@ void mr_tile_redefine_fill_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_
     for (b = 0; b < 8; ++destination, ++b) {
         *destination = _data;
     }
-}
-
-void mr_tile_redefine_fill(mr_tileset _tileset, mr_tile _tile, mr_mixel _data) {
-    mr_tile_redefine_fill_hd(_tileset, _tile, _data);
 }
 
 #endif

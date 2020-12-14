@@ -325,5 +325,6 @@ extern unsigned char auxBuffer[];
 // #define MIDRES_STANDALONE_FILE				1
 #define MIDRES_EMBEDDED_FILES				1
 
+#include "midres_tile_hd.h"
 
 #endif

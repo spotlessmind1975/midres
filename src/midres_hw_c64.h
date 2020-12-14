@@ -227,6 +227,7 @@
 #define MIDRES_STANDALONE_FILE				1
 // #define MIDRES_EMBEDDED_FILES				1
 
+#include "midres_tile.h"
 #include "midres_tile_processing.h"
 
 #endif
