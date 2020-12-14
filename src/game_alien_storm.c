@@ -494,7 +494,9 @@ void welcome_screen() {
 
 	mr_start_frame();
 
+#ifdef MR_TILESET_2
 	mr_tileset_visible(MR_TILESET_2);
+#endif
 
 	// Let's draw the upper and lower part of the screen, the one that 
 	// contains the total score and the maximum. At the bottom we draw 
