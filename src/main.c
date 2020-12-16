@@ -77,13 +77,13 @@ void main(void) {
 
 #endif
 
-#ifdef __GAME_AIR_ATTACK__
+#ifdef __AIRATTACK__
 
     game_air_attack();
 
 #endif
 
-#ifdef __GAME_TOTTO__
+#ifdef __TOTTO__
 
     game_totto();
 
@@ -107,19 +107,19 @@ void main(void) {
 
 #endif
 
-#ifdef __GAME_ALIEN_STORM__
+#ifdef __ALIENSTORM__
 
     game_alien_storm();
 
 #endif
 
-#ifdef __GAME_ELEVATOR__
+#ifdef __ELEVATOR__
 
     game_elevator();
 
 #endif
 
-#ifdef __UTILITY_JOYCHECK__
+#ifdef __JOYCHECK__
 
     utility_joycheck();
 
