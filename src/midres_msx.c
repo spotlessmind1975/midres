@@ -63,29 +63,29 @@ void mr_init_hd() {
     memset(&colorBuffer[0], 0, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
 #endif
 
-    vdp_port(0x98);
+    mr_vdp_port(0x98);
 #ifdef GRAPHIC_MODE_I
-    vdp_out(VDP_R0, 0x00);
-    vdp_out(VDP_R1, 0xe0);
-    vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
-    vdp_out(VDP_RCOLORTABLE, 0x80);
-    vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
+    mr_vdp_out(VDP_R0, 0x00);
+    mr_vdp_out(VDP_R1, 0xe0);
+    mr_vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
+    mr_vdp_out(VDP_RCOLORTABLE, 0x80);
+    mr_vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
 
-    vdp_put(&_includedFiles[0][0], 0x0800, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
 #else
-    vdp_out(VDP_R0, 0x02);
-    vdp_out(VDP_R1, 0xc0);
-    vdp_out(VDP_RNAME, 0x0e);
-    vdp_out(VDP_RCOLORTABLE, 0xff);
-    vdp_out(VDP_RPATTERN, 0x03);
+    mr_vdp_out(VDP_R0, 0x02);
+    mr_vdp_out(VDP_R1, 0xc0);
+    mr_vdp_out(VDP_RNAME, 0x0e);
+    mr_vdp_out(VDP_RCOLORTABLE, 0xff);
+    mr_vdp_out(VDP_RPATTERN, 0x03);
 
-    vdp_put(&_includedFiles[0][0], 0x0000, 128);
-    vdp_put(&_includedFiles[0][0], 0x0800, 128);
-    vdp_put(&_includedFiles[0][0], 0x1000, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x0000, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x1000, 128);
 #endif
-    vdp_out(VDP_RSPRITEA, 0x76);
-    vdp_out(VDP_RSPRITEP, 0x03);
-    vdp_out(VDP_RCOLOR, 0x0f);
+    mr_vdp_out(VDP_RSPRITEA, 0x76);
+    mr_vdp_out(VDP_RSPRITEP, 0x03);
+    mr_vdp_out(VDP_RCOLOR, 0x0f);
 
 }
 
@@ -96,29 +96,29 @@ void mr_init_multicolor_hd() {
     memset(&colorBuffer[0], 0, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
 #endif
 
-    vdp_port(0x98);
+    mr_vdp_port(0x98);
 #ifdef GRAPHIC_MODE_I
-    vdp_out(VDP_R0, 0x00);
-    vdp_out(VDP_R1, 0xe0);
-    vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
-    vdp_out(VDP_RCOLORTABLE, 0x80);
-    vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
+    mr_vdp_out(VDP_R0, 0x00);
+    mr_vdp_out(VDP_R1, 0xe0);
+    mr_vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
+    mr_vdp_out(VDP_RCOLORTABLE, 0x80);
+    mr_vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
 
-    vdp_put(&_includedFiles[0][0], 0x0800, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
 #else
-    vdp_out(VDP_R0, 0x02);
-    vdp_out(VDP_R1, 0xc0);
-    vdp_out(VDP_RNAME, 0x0e);
-    vdp_out(VDP_RCOLORTABLE, 0xff);
-    vdp_out(VDP_RPATTERN, 0x03);
+    mr_vdp_out(VDP_R0, 0x02);
+    mr_vdp_out(VDP_R1, 0xc0);
+    mr_vdp_out(VDP_RNAME, 0x0e);
+    mr_vdp_out(VDP_RCOLORTABLE, 0xff);
+    mr_vdp_out(VDP_RPATTERN, 0x03);
 
-    vdp_put(&_includedFiles[0][0], 0x0000, 128);
-    vdp_put(&_includedFiles[0][0], 0x0800, 128);
-    vdp_put(&_includedFiles[0][0], 0x1000, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x0000, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x1000, 128);
 #endif
-    vdp_out(VDP_RSPRITEA, 0x76);
-    vdp_out(VDP_RSPRITEP, 0x03);
-    vdp_out(VDP_RCOLOR, 0x0f);
+    mr_vdp_out(VDP_RSPRITEA, 0x76);
+    mr_vdp_out(VDP_RSPRITEP, 0x03);
+    mr_vdp_out(VDP_RCOLOR, 0x0f);
 
 
 }
@@ -132,11 +132,11 @@ void mr_tile_setcolors_hd(unsigned char _colors[4]) {
 }
 
 void mr_show_hd(unsigned char _screen) {
-    vdp_out(VDP_RNAME, _screen);
+    mr_vdp_out(VDP_RNAME, _screen);
 #ifdef GRAPHIC_MODE_I
-    vdp_out(VDP_RCOLORTABLE, 0x80 + (_screen - MR_SCREEN_DEFAULT));
+    mr_vdp_out(VDP_RCOLORTABLE, 0x80 + (_screen - MR_SCREEN_DEFAULT));
 #else
-    vdp_out(VDP_RCOLORTABLE, (_screen==MR_SCREEN_0)?0xff:0x7f);
+    mr_vdp_out(VDP_RCOLORTABLE, (_screen==MR_SCREEN_0)?0xff:0x7f);
 #endif
     MR_VISIBLE_SCREEN = _screen;
     MR_ENABLED_SCREEN = _screen;
@@ -156,7 +156,7 @@ void mr_doublebuffer_switch_hd(unsigned char _screen) {
 
 void mr_tileset_visible_hd(unsigned char _tileset) {
 #ifdef GRAPHIC_MODE_I
-    vdp_out(VDP_RPATTERN, _tileset);
+    mr_vdp_out(VDP_RPATTERN, _tileset);
 #endif
 }
 
@@ -323,7 +323,7 @@ void mr_set_background_color_hd(unsigned char _color) {
 }
 
 void mr_set_border_color_hd(unsigned char _color) {
-    vdp_out(VDP_RCOLOR, _color & 0x0f );
+    mr_vdp_out(VDP_RCOLOR, _color & 0x0f );
 }
 
 unsigned int storedJiffy = 0;
@@ -338,10 +338,10 @@ void mr_end_frame_hd(unsigned char _jiffies) {
     }
 #ifdef FRAME_BUFFER
 #ifdef GRAPHIC_MODE_I
-    vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
 #else
-    vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x3800 : 0x4000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-    vdp_put8(&colorBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x2000 : 0x0000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x3800 : 0x4000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    mr_vdp_put8(&colorBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x2000 : 0x0000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
 #endif
 #endif
 }
@@ -372,10 +372,10 @@ void mr_tileset_copy_hd(unsigned char _source, unsigned char _dest) {
         unsigned int destination = MR_TM(_dest);
         for (--w; w != 255; --w) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
-                vdp_fill8(vdp_get(source), destination, 1);
+                mr_vdp_fill8(mr_vdp_get(source), destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(vdp_get(source), destination+0x800, 1);
-                vdp_fill8(vdp_get(source), destination+0x1000, 1);
+                mr_vdp_fill8(mr_vdp_get(source), destination+0x800, 1);
+                mr_vdp_fill8(mr_vdp_get(source), destination+0x1000, 1);
 #endif
             }
         }
@@ -387,12 +387,12 @@ void mr_tileset_multicolor_to_monocolor_hd(unsigned char _source, unsigned char 
     unsigned int source = MR_TM(_source) + _starting * 8;
     for (--w; w != 255; --w) {
         for (b = 0; b < 8; ++b, ++source) {
-            unsigned char s = vdp_get(source);
+            unsigned char s = mr_vdp_get(source);
             s = s | (s >> 1);
-            vdp_fill8(s, source, 1);
+            mr_vdp_fill8(s, source, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(s, source+0x800, 1);
-            vdp_fill8(s, source+0x1000, 1);
+            mr_vdp_fill8(s, source+0x800, 1);
+            mr_vdp_fill8(s, source+0x1000, 1);
 #endif
         }
     }
@@ -402,10 +402,10 @@ void mr_tile_redefine_hd(unsigned char _tileset, unsigned char _tile, unsigned c
     unsigned int destination = (MR_TM(_tileset) + _tile * 8);
     mr_position b = 0;
     for (b = 0; b < 8; ++b, ++destination, ++_data) {
-        vdp_fill8(*_data, destination, 1);
+        mr_vdp_fill8(*_data, destination, 1);
 #ifdef GRAPHIC_MODE_II
-        vdp_fill8(*_data, destination+0x800, 1);
-        vdp_fill8(*_data, destination+0x1000, 1);
+        mr_vdp_fill8(*_data, destination+0x800, 1);
+        mr_vdp_fill8(*_data, destination+0x1000, 1);
 #endif
     }
 }
@@ -414,10 +414,10 @@ void mr_tile_redefine_fill_hd(unsigned char _tileset, unsigned char _tile, unsig
     unsigned int destination = (MR_TM(_tileset) + _tile * 8);
     unsigned char b = 0;
     for (b = 0; b < 8; ++destination, ++b) {
-        vdp_fill8(_data, destination, 1);
+        mr_vdp_fill8(_data, destination, 1);
 #ifdef GRAPHIC_MODE_II
-        vdp_fill8(_data, destination+0x800, 1);
-        vdp_fill8(_data, destination+0x1000, 1);
+        mr_vdp_fill8(_data, destination+0x800, 1);
+        mr_vdp_fill8(_data, destination+0x1000, 1);
 #endif
     }
 }
@@ -431,12 +431,12 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
 
     for (i = 0; i < 9; ++i) {
         for (b = 0; b < 8; ++b, ++source, ++destination) {
-            mr_mixel d = vdp_get(source);
+            mr_mixel d = mr_vdp_get(source);
             mr_mixel m = d >> i;
-            vdp_fill8(m, destination, 1);
+            mr_vdp_fill8(m, destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(m, destination+0x800, 1);
-            vdp_fill8(m, destination+0x1000, 1);
+            mr_vdp_fill8(m, destination+0x800, 1);
+            mr_vdp_fill8(m, destination+0x1000, 1);
 #endif
         }
         source -= 8;
@@ -446,10 +446,10 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
         for (b = 0; b < 8; ++b, ++source, ++destination) {
             mr_mixel d = *((mr_mixel*)source);
             mr_mixel n = d & (0xff >> (7 - i));
-            vdp_fill8((n << (7 - i)), destination, 1);
+            mr_vdp_fill8((n << (7 - i)), destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8((n << (7 - i)), destination+0x800, 1);
-            vdp_fill8((n << (7 - i)), destination+0x1000, 1);
+            mr_vdp_fill8((n << (7 - i)), destination+0x800, 1);
+            mr_vdp_fill8((n << (7 - i)), destination+0x1000, 1);
 #endif
         }
         source -= 8;
@@ -468,12 +468,12 @@ void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, un
     for (j = 0; j < _h; ++j) {
         for (i = 0; i < 9; ++i) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
-                mr_mixel e = vdp_get(source);
+                mr_mixel e = mr_vdp_get(source);
                 mr_mixel m = e >> i;
-                vdp_fill8(m, destination, 1);
+                mr_vdp_fill8(m, destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(m, destination+0x800, 1);
-                vdp_fill8(m, destination+0x1000, 1);
+                mr_vdp_fill8(m, destination+0x800, 1);
+                mr_vdp_fill8(m, destination+0x1000, 1);
 #endif
             }
             source -= 8;
@@ -482,13 +482,13 @@ void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, un
         for (k = 0; k < (_w - 1); ++k) {
             for (i = 0; i < 9; ++i) {
                 for (b = 0; b < 8; ++b, ++source, ++destination) {
-                    mr_mixel d = vdp_get(source);
-                    mr_mixel e = vdp_get(source + 8);
+                    mr_mixel d = mr_vdp_get(source);
+                    mr_mixel e = mr_vdp_get(source + 8);
                     mr_mixel m = (e >> i) | (d << (8 - i));
-                    vdp_fill8(m, destination, 1);
+                    mr_vdp_fill8(m, destination, 1);
 #ifdef GRAPHIC_MODE_II
-                    vdp_fill8(m, destination+0x800, 1);
-                    vdp_fill8(m, destination+0x1000, 1);
+                    mr_vdp_fill8(m, destination+0x800, 1);
+                    mr_vdp_fill8(m, destination+0x1000, 1);
 #endif
                 }
                 source -= 8;
@@ -498,12 +498,12 @@ void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, un
 
         for (i = 0; i < 9; ++i) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
-                mr_mixel d = vdp_get(source);
+                mr_mixel d = mr_vdp_get(source);
                 mr_mixel n = d & (0xff >> (8 - i));
-                vdp_fill8((n << (8 - i)), destination, 1);
+                mr_vdp_fill8((n << (8 - i)), destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8((n << (8 - i)), destination+0x800, 1);
-                vdp_fill8((n << (8 - i)), destination+0x1000, 1);
+                mr_vdp_fill8((n << (8 - i)), destination+0x800, 1);
+                mr_vdp_fill8((n << (8 - i)), destination+0x1000, 1);
 #endif
             }
             source -= 8;
@@ -520,17 +520,17 @@ void mr_tile_prepare_vertical_hd(unsigned char _tileset, unsigned char _source, 
 
     for (i = 0; i < 9; ++i) {
         for (b = 0; b < i; ++b, ++destination) {
-            vdp_fill8(0x00, destination, 1);
+            mr_vdp_fill8(0x00, destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(0x00, destination+0x800, 1);
-            vdp_fill8(0x00, destination+0x1000, 1);
+            mr_vdp_fill8(0x00, destination+0x800, 1);
+            mr_vdp_fill8(0x00, destination+0x1000, 1);
 #endif
         }
         for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
-            vdp_fill8(vdp_get(source), destination, 1);
+            mr_vdp_fill8(mr_vdp_get(source), destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(vdp_get(source), destination+0x800, 1);
-            vdp_fill8(vdp_get(source), destination+0x1000, 1);
+            mr_vdp_fill8(mr_vdp_get(source), destination+0x800, 1);
+            mr_vdp_fill8(mr_vdp_get(source), destination+0x1000, 1);
 #endif
         }
         source -= b;
@@ -538,18 +538,18 @@ void mr_tile_prepare_vertical_hd(unsigned char _tileset, unsigned char _source, 
 
     for (i = 8; i != 255; --i) {
         for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
-            vdp_fill8(vdp_get(source + i), destination, 1);
+            mr_vdp_fill8(mr_vdp_get(source + i), destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(vdp_get(source + i), destination+0x800, 1);
-            vdp_fill8(vdp_get(source + i), destination+0x1000, 1);
+            mr_vdp_fill8(mr_vdp_get(source + i), destination+0x800, 1);
+            mr_vdp_fill8(mr_vdp_get(source + i), destination+0x1000, 1);
 #endif
         }
         source -= b;
         for (; b < 8; ++b, ++destination) {
-            vdp_fill8(0x00, destination, 1);
+            mr_vdp_fill8(0x00, destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(0x00, destination+0x800, 1);
-            vdp_fill8(0x00, destination+0x1000, 1);
+            mr_vdp_fill8(0x00, destination+0x800, 1);
+            mr_vdp_fill8(0x00, destination+0x1000, 1);
 #endif
         }
     }
@@ -565,17 +565,17 @@ void mr_tile_prepare_vertical_extended_hd(unsigned char _tileset, unsigned char 
     for (; w != 0; --w) {
         for (i = 0; i < 9; ++i) {
             for (b = 0; b < i; ++b, ++destination) {
-                vdp_fill8(0x00, destination, 1);
+                mr_vdp_fill8(0x00, destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(0x00, destination+0x800, 1);
-                vdp_fill8(0x00, destination+0x1000, 1);
+                mr_vdp_fill8(0x00, destination+0x800, 1);
+                mr_vdp_fill8(0x00, destination+0x1000, 1);
 #endif
             }
             for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
-                vdp_fill8(vdp_get(source), destination, 1);
+                mr_vdp_fill8(mr_vdp_get(source), destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(vdp_get(source), destination+0x800, 1);
-                vdp_fill8(vdp_get(source), destination+0x1000, 1);
+                mr_vdp_fill8(mr_vdp_get(source), destination+0x800, 1);
+                mr_vdp_fill8(mr_vdp_get(source), destination+0x1000, 1);
 #endif
             }
             source -= b;
@@ -584,18 +584,18 @@ void mr_tile_prepare_vertical_extended_hd(unsigned char _tileset, unsigned char 
         for (k = 0; k < (_h - 1); ++k) {
             for (i = 0; i < 9; ++i) {
                 for (b = 0; b < i; ++b, ++destination, ++source) {
-                    vdp_fill8(vdp_get(source + (k * _w * 8) + (8 - i)), destination, 1);
+                    mr_vdp_fill8(mr_vdp_get(source + (k * _w * 8) + (8 - i)), destination, 1);
 #ifdef GRAPHIC_MODE_II
-                    vdp_fill8(vdp_get(source + (k * _w * 8) + (8 - i)), destination+0x800, 1);
-                    vdp_fill8(vdp_get(source + (k * _w * 8) + (8 - i)), destination+0x1000, 1);
+                    mr_vdp_fill8(mr_vdp_get(source + (k * _w * 8) + (8 - i)), destination+0x800, 1);
+                    mr_vdp_fill8(mr_vdp_get(source + (k * _w * 8) + (8 - i)), destination+0x1000, 1);
 #endif
                 }
                 source -= b;
                 for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
-                    vdp_fill8(vdp_get(source + ((k + 1) * _w * 8)), destination, 1);
+                    mr_vdp_fill8(mr_vdp_get(source + ((k + 1) * _w * 8)), destination, 1);
 #ifdef GRAPHIC_MODE_II
-                    vdp_fill8(vdp_get(source + ((k + 1) * _w * 8)), destination+0x800, 1);
-                    vdp_fill8(vdp_get(source + ((k + 1) * _w * 8)), destination+0x1000, 1);
+                    mr_vdp_fill8(mr_vdp_get(source + ((k + 1) * _w * 8)), destination+0x800, 1);
+                    mr_vdp_fill8(mr_vdp_get(source + ((k + 1) * _w * 8)), destination+0x1000, 1);
 #endif
                 }
                 source -= b;
@@ -604,18 +604,18 @@ void mr_tile_prepare_vertical_extended_hd(unsigned char _tileset, unsigned char 
 
         for (i = 0; i < 9; ++i) {
             for (b = 0; b < i; ++b, ++destination, ++source) {
-                vdp_fill8(vdp_get(source + ((_h - 1) * _w * 8) + (8 - i)), destination, 1);
+                mr_vdp_fill8(mr_vdp_get(source + ((_h - 1) * _w * 8) + (8 - i)), destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(vdp_get(source + ((_h - 1) * _w * 8) + (8 - i)), destination + 0x800, 1);
-                vdp_fill8(vdp_get(source + ((_h - 1) * _w * 8) + (8 - i)), destination + 0x1000, 1);
+                mr_vdp_fill8(mr_vdp_get(source + ((_h - 1) * _w * 8) + (8 - i)), destination + 0x800, 1);
+                mr_vdp_fill8(mr_vdp_get(source + ((_h - 1) * _w * 8) + (8 - i)), destination + 0x1000, 1);
 #endif
             }
             source -= b;
             for (b = 0; b < (8 - i); ++b, ++destination) {
-                vdp_fill8(0x00, destination, 1);
+                mr_vdp_fill8(0x00, destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(0x00, destination+0x800, 1);
-                vdp_fill8(0x00, destination+0x1000, 1);
+                mr_vdp_fill8(0x00, destination+0x800, 1);
+                mr_vdp_fill8(0x00, destination+0x1000, 1);
 #endif
             }
         }
@@ -631,12 +631,12 @@ void mr_tile_prepare_roll_horizontal_monocolor_hd(unsigned char _tileset, unsign
 
     for (i = 0; i < 8; ++i) {
         for (b = 0; b < 8; ++b, ++source, ++destination) {
-            mr_mixel d = vdp_get(source);
+            mr_mixel d = mr_vdp_get(source);
             mr_mixel m = d >> i, n = d & (0xff >> (8 - i));
-            vdp_fill8(m | (n << (8 - i)), destination, 1);
+            mr_vdp_fill8(m | (n << (8 - i)), destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(m | (n << (8 - i)), destination+0x800, 1);
-            vdp_fill8(m | (n << (8 - i)), destination+0x1000, 1);
+            mr_vdp_fill8(m | (n << (8 - i)), destination+0x800, 1);
+            mr_vdp_fill8(m | (n << (8 - i)), destination+0x1000, 1);
 #endif
         }
         source -= 8;
@@ -656,26 +656,26 @@ void mr_tile_roll_horizontal_hd(unsigned char _tileset, unsigned char _destinati
         destination = (MR_TM(_tileset) + _destination * 8);
 
         for (b = 0; b < 8; ++b, ++source, ++temp) {
-            mr_mixel d = vdp_get(source - 8);
+            mr_mixel d = mr_vdp_get(source - 8);
             *temp = d;
         }
         temp -= 8;
         source -= 8;
         for (i = 0; i < 6; ++i) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
-                mr_mixel d = vdp_get(source);
-                vdp_fill8(d, destination, 1);
+                mr_mixel d = mr_vdp_get(source);
+                mr_vdp_fill8(d, destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(d, destination+0x800, 1);
-                vdp_fill8(d, destination+0x1000, 1);
+                mr_vdp_fill8(d, destination+0x800, 1);
+                mr_vdp_fill8(d, destination+0x1000, 1);
 #endif
             }
         }
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
-            vdp_fill8(*temp, destination, 1);
+            mr_vdp_fill8(*temp, destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(*temp, destination+0x800, 1);
-            vdp_fill8(*temp, destination+0x1000, 1);
+            mr_vdp_fill8(*temp, destination+0x800, 1);
+            mr_vdp_fill8(*temp, destination+0x1000, 1);
 #endif
         }
     }
@@ -683,28 +683,28 @@ void mr_tile_roll_horizontal_hd(unsigned char _tileset, unsigned char _destinati
         source = (MR_TM(_tileset) + (_destination + 6) * 8);
         destination = (MR_TM(_tileset) + (_destination + 7) * 8);
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
-            mr_mixel d = vdp_get(destination);
+            mr_mixel d = mr_vdp_get(destination);
             *temp = d;
         }
         temp -= 8;
         destination -= 8;
         for (i = 0; i < 7; ++i) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
-                mr_mixel d = vdp_get(source);
-                vdp_fill8(d, destination, 1);
+                mr_mixel d = mr_vdp_get(source);
+                mr_vdp_fill8(d, destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(d, destination+0x800, 1);
-                vdp_fill8(d, destination+0x1000, 1);
+                mr_vdp_fill8(d, destination+0x800, 1);
+                mr_vdp_fill8(d, destination+0x1000, 1);
 #endif
             }
             source -= 16;
             destination -= 16;
         }
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
-            vdp_fill8(*temp, destination, 1);
+            mr_vdp_fill8(*temp, destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(*temp, destination+0x800, 1);
-            vdp_fill8(*temp, destination+0x1000, 1);
+            mr_vdp_fill8(*temp, destination+0x800, 1);
+            mr_vdp_fill8(*temp, destination+0x1000, 1);
 #endif
         }
     }
@@ -730,11 +730,11 @@ void mr_tile_roll_horizontal_on_place_hd(unsigned char _tileset, unsigned char _
         }
     }
     for (b = 0; b < 8; ++b, ++source, ++destination) {
-        mr_mixel d = vdp_get(source);
-        vdp_fill8(d, destination, 1);
+        mr_mixel d = mr_vdp_get(source);
+        mr_vdp_fill8(d, destination, 1);
 #ifdef GRAPHIC_MODE_II
-        vdp_fill8(d, destination+0x800, 1);
-        vdp_fill8(d, destination+0x1000, 1);
+        mr_vdp_fill8(d, destination+0x800, 1);
+        mr_vdp_fill8(d, destination+0x1000, 1);
 #endif
     }
 }
@@ -747,18 +747,18 @@ void mr_tile_prepare_roll_vertical_hd(unsigned char _tileset, unsigned char _sou
 
     for (i = 0; i < 8; ++i) {
         for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
-            vdp_fill8(vdp_get(source + i), destination, 1);
+            mr_vdp_fill8(mr_vdp_get(source + i), destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(vdp_get(source + i), destination+0x800, 1);
-            vdp_fill8(vdp_get(source + i), destination+0x1000, 1);
+            mr_vdp_fill8(mr_vdp_get(source + i), destination+0x800, 1);
+            mr_vdp_fill8(mr_vdp_get(source + i), destination+0x1000, 1);
 #endif
         }
         source -= b;
         for (b = 0; b < i; ++b, ++source, ++destination) {
-            vdp_fill8(vdp_get(source), destination, 1);
+            mr_vdp_fill8(mr_vdp_get(source), destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(vdp_get(source), destination+0x800, 1);
-            vdp_fill8(vdp_get(source), destination+0x1000, 1);
+            mr_vdp_fill8(mr_vdp_get(source), destination+0x800, 1);
+            mr_vdp_fill8(mr_vdp_get(source), destination+0x1000, 1);
 #endif
         }
         source -= b;
@@ -776,26 +776,26 @@ void mr_tile_roll_vertical_hd(unsigned char _tileset, unsigned char _destination
         destination = (MR_TM(_tileset) + _destination * 8);
 
         for (b = 0; b < 8; ++b, ++source, ++temp) {
-            mr_mixel d = vdp_get(source - 8);
+            mr_mixel d = mr_vdp_get(source - 8);
             *temp = d;
         }
         temp -= 8;
         source -= 8;
         for (i = 0; i < 6; ++i) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
-                mr_mixel d = vdp_get(source);
-                vdp_fill8(d, destination, 1);
+                mr_mixel d = mr_vdp_get(source);
+                mr_vdp_fill8(d, destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(d, destination+0x800, 1);
-                vdp_fill8(d, destination+0x1000, 1);
+                mr_vdp_fill8(d, destination+0x800, 1);
+                mr_vdp_fill8(d, destination+0x1000, 1);
 #endif
             }
         }
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
-            vdp_fill8(*temp, destination, 1);
+            mr_vdp_fill8(*temp, destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(*temp, destination+0x800, 1);
-            vdp_fill8(*temp, destination+0x1000, 1);
+            mr_vdp_fill8(*temp, destination+0x800, 1);
+            mr_vdp_fill8(*temp, destination+0x1000, 1);
 #endif
         }
     }
@@ -803,38 +803,38 @@ void mr_tile_roll_vertical_hd(unsigned char _tileset, unsigned char _destination
         source = (MR_TM(_tileset) + (_destination + 6) * 8);
         destination = (MR_TM(_tileset) + (_destination + 7) * 8);
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
-            mr_mixel d = vdp_get(destination);
+            mr_mixel d = mr_vdp_get(destination);
             *temp = d;
         }
         temp -= 8;
         destination -= 8;
         for (i = 0; i < 7; ++i) {
             for (b = 0; b < 8; ++b, ++source, ++destination) {
-                mr_mixel d = vdp_get(source);
-                vdp_fill8(d, destination, 1);
+                mr_mixel d = mr_vdp_get(source);
+                mr_vdp_fill8(d, destination, 1);
 #ifdef GRAPHIC_MODE_II
-                vdp_fill8(d, destination+0x800, 1);
-                vdp_fill8(d, destination+0x1000, 1);
+                mr_vdp_fill8(d, destination+0x800, 1);
+                mr_vdp_fill8(d, destination+0x1000, 1);
 #endif
             }
             source -= 16;
             destination -= 16;
         }
         for (b = 0; b < 8; ++b, ++destination, ++temp) {
-            vdp_fill8(*temp, destination, 1);
+            mr_vdp_fill8(*temp, destination, 1);
 #ifdef GRAPHIC_MODE_II
-            vdp_fill8(*temp, destination+0x800, 1);
-            vdp_fill8(*temp, destination+0x1000, 1);
+            mr_vdp_fill8(*temp, destination+0x800, 1);
+            mr_vdp_fill8(*temp, destination+0x1000, 1);
 #endif
         }
     }
 }
 
 void mr_tileset_load_file_hd(unsigned int _index, unsigned char _tileset, unsigned char _starting, unsigned char _count) {
-    vdp_put(&_includedFiles[_index][0], MR_TM(_tileset) + (_starting * 8), _count * 8);
+    mr_vdp_put(&_includedFiles[_index][0], MR_TM(_tileset) + (_starting * 8), _count * 8);
 #ifdef GRAPHIC_MODE_II
-    vdp_put(&_includedFiles[_index][0], 0x800 + MR_TM(_tileset) + (_starting * 8), _count * 8);
-    vdp_put(&_includedFiles[_index][0], 0x1000 + MR_TM(_tileset) + (_starting * 8), _count * 8);
+    mr_vdp_put(&_includedFiles[_index][0], 0x800 + MR_TM(_tileset) + (_starting * 8), _count * 8);
+    mr_vdp_put(&_includedFiles[_index][0], 0x1000 + MR_TM(_tileset) + (_starting * 8), _count * 8);
 #endif
 }
 

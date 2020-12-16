@@ -290,7 +290,7 @@ obj/msx/%.o:	$(SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o $(subst obj/msx/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.msx:	midres.embedded.msx $(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) obj/msx/rawdata.o obj/msx/midres_vdp.o obj/msx/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/msx/rawdata.o obj/msx/midres_io.o obj/msx/midres_vdp.o $(subst PLATFORM,msx,$(LIB_OBJS)) $(subst PLATFORM,msx,$(OBJS)) -o $(EXEDIR)/midres.msx -create-app 
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/msx/rawdata.o obj/msx/midres_io.o obj/msx/midres_vdp.o $(subst PLATFORM,msx,$(LIB_OBJS)) $(subst PLATFORM,msx,$(OBJS)) -o $(EXEDIR)/midres.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/midres.rom,$(EXEDIR)/midres.msx.rom)
 
 # -------------------------------------------------------------------
@@ -317,8 +317,8 @@ obj/msxc/%.o:	$(SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -o $(subst obj/msxc/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.msxc:	midres.embedded.msxc $(subst PLATFORM,msxc,$(OBJS)) $(subst PLATFORM,msxc,$(LIB_OBJS)) obj/msxc/rawdata.o obj/msxc/midres_vdp.o obj/msxc/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/msxc/rawdata.o obj/msxc/midres_io.o obj/msxc/midres_vdp.o $(subst PLATFORM,msxc,$(LIB_OBJS)) $(subst PLATFORM,msxc,$(OBJS)) -o $(EXEDIR)/midres.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/midres.rom,$(EXEDIR)/midres.msx.rom)
+	$(CC88) +msx  -m $(LDFLAGS88) obj/msxc/rawdata.o obj/msxc/midres_io.o obj/msxc/midres_vdp.o $(subst PLATFORM,msxc,$(LIB_OBJS)) $(subst PLATFORM,msxc,$(OBJS)) -o $(EXEDIR)/midres.msxc -create-app 
+	$(call COPYFILES,$(EXEDIR)/midres.cas,$(EXEDIR)/midres.msx.cas)
 
 # -------------------------------------------------------------------
 # --- MIDRES LIBRARY FOR SVI 
@@ -344,8 +344,8 @@ obj/svi/%.o:	$(SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o $(subst obj/svi/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.svi:	midres.embedded.svi $(subst PLATFORM,svi,$(OBJS)) $(subst PLATFORM,svi,$(LIB_OBJS)) obj/svi/rawdata.o obj/svi/midres_vdp.o obj/svi/midres_io.o
-	$(CC88) +svi -m $(LDFLAGS88) obj/svi/rawdata.o obj/svi/midres_io.o obj/svi/midres_vdp.o $(subst PLATFORM,svi,$(LIB_OBJS)) $(subst PLATFORM,svi,$(OBJS)) -o $(EXEDIR)/midres.svi -create-app 
-	$(call COPYFILES,$(EXEDIR)/midres.rom,$(EXEDIR)/midres.svi.cas)
+	$(CC88) +svi  -m $(LDFLAGS88) obj/svi/rawdata.o obj/svi/midres_io.o obj/svi/midres_vdp.o $(subst PLATFORM,svi,$(LIB_OBJS)) $(subst PLATFORM,svi,$(OBJS)) -o $(EXEDIR)/midres.svi -create-app 
+	$(call COPYFILES,$(EXEDIR)/midres.cas,$(EXEDIR)/midres.svi.cas)
 
 # -------------------------------------------------------------------
 # --- MIDRES LIBRARY FOR MTX500 
@@ -371,8 +371,8 @@ obj/mtx500/%.o:	$(SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o $(subst obj/mtx500/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.mtx500:	midres.embedded.mtx500 $(subst PLATFORM,mtx500,$(OBJS)) $(subst PLATFORM,mtx500,$(LIB_OBJS)) obj/mtx500/rawdata.o obj/mtx500/midres_vdp.o obj/mtx500/midres_io.o
-	$(CC88) +mtx -m $(LDFLAGS88) obj/mtx500/rawdata.o obj/mtx500/midres_io.o obj/mtx500/midres_vdp.o $(subst PLATFORM,mtx500,$(LIB_OBJS)) $(subst PLATFORM,mtx500,$(OBJS)) -o $(EXEDIR)/midres.mtx500 -create-app 
-	$(call COPYFILES,$(EXEDIR)/midres.rom,$(EXEDIR)/midres.mtx.cas)
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/mtx500/rawdata.o obj/mtx500/midres_io.o obj/mtx500/midres_vdp.o $(subst PLATFORM,mtx500,$(LIB_OBJS)) $(subst PLATFORM,mtx500,$(OBJS)) -o $(EXEDIR)/midres.mtx500 -create-app 
+	$(call COPYFILES,$(EXEDIR)/midres.cas,$(EXEDIR)/midres.mtx.cas)
 
 # -------------------------------------------------------------------
 # --- MIDRES LIBRARY FOR COLECO 
@@ -398,7 +398,7 @@ obj/coleco/%.o:	$(SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o $(subst obj/coleco/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.coleco:	midres.embedded.coleco $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) obj/coleco/rawdata.o obj/coleco/midres_vdp.o obj/coleco/midres_io.o
-	$(CC88) +coleco -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_io.o obj/coleco/midres_vdp.o $(subst PLATFORM,coleco,$(LIB_OBJS)) $(subst PLATFORM,coleco,$(OBJS)) -o $(EXEDIR)/midres.coleco -create-app 
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_io.o obj/coleco/midres_vdp.o $(subst PLATFORM,coleco,$(LIB_OBJS)) $(subst PLATFORM,coleco,$(OBJS)) -o $(EXEDIR)/midres.coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/midres.rom,$(EXEDIR)/midres.coleco.rom)
 
 # -------------------------------------------------------------------
@@ -676,8 +676,8 @@ obj/alienstorm.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.msx/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/alienstorm.msx:	alienstorm.embedded.msx $(subst PLATFORM,alienstorm.msx,$(OBJS)) $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_vdp.o obj/alienstorm.msx/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_io.o obj/alienstorm.msx/midres_vdp.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msx,$(OBJS)) -o $(EXEDIR)/alienstorm.msx -create-app 
-	$(call COPYFILES,$(EXEDIR)/alienstorm.msx,$(EXEDIR)/alienstorm.msx.rom)
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_io.o obj/alienstorm.msx/midres_vdp.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msx,$(OBJS)) -o $(EXEDIR)/alienstorm.msx -create-app 
+	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.msx.rom)
 
                     
 #!!! missing resources for elevator (msx)
@@ -701,8 +701,8 @@ obj/airattack.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__AIRATTACK__ -o $@ $(subst obj/airattack.msx/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/airattack.msx:	airattack.embedded.msx $(subst PLATFORM,airattack.msx,$(OBJS)) $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_vdp.o obj/airattack.msx/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_io.o obj/airattack.msx/midres_vdp.o $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) $(subst PLATFORM,airattack.msx,$(OBJS)) -o $(EXEDIR)/airattack.msx -create-app 
-	$(call COPYFILES,$(EXEDIR)/airattack.msx,$(EXEDIR)/airattack.msx.rom)
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_io.o obj/airattack.msx/midres_vdp.o $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) $(subst PLATFORM,airattack.msx,$(OBJS)) -o $(EXEDIR)/airattack.msx -create-app 
+	$(call COPYFILES,$(EXEDIR)/airattack.rom,$(EXEDIR)/airattack.msx.rom)
 
 
 # -------------------------------------------------------------------
@@ -723,8 +723,8 @@ obj/totto.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__TOTTO__ -o $@ $(subst obj/totto.msx/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/totto.msx:	totto.embedded.msx $(subst PLATFORM,totto.msx,$(OBJS)) $(subst PLATFORM,totto.msx,$(LIB_OBJS)) obj/totto.msx/rawdata.o obj/totto.msx/midres_vdp.o obj/totto.msx/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/totto.msx/rawdata.o obj/totto.msx/midres_io.o obj/totto.msx/midres_vdp.o $(subst PLATFORM,totto.msx,$(LIB_OBJS)) $(subst PLATFORM,totto.msx,$(OBJS)) -o $(EXEDIR)/totto.msx -create-app 
-	$(call COPYFILES,$(EXEDIR)/totto.msx,$(EXEDIR)/totto.msx.rom)
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/totto.msx/rawdata.o obj/totto.msx/midres_io.o obj/totto.msx/midres_vdp.o $(subst PLATFORM,totto.msx,$(LIB_OBJS)) $(subst PLATFORM,totto.msx,$(OBJS)) -o $(EXEDIR)/totto.msx -create-app 
+	$(call COPYFILES,$(EXEDIR)/totto.rom,$(EXEDIR)/totto.msx.rom)
 
                     
 #!!! missing resources for joycheck (msx)
@@ -748,8 +748,8 @@ obj/alienstorm.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.msxc/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/alienstorm.msxc:	alienstorm.embedded.msxc $(subst PLATFORM,alienstorm.msxc,$(OBJS)) $(subst PLATFORM,alienstorm.msxc,$(LIB_OBJS)) obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_vdp.o obj/alienstorm.msxc/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_io.o obj/alienstorm.msxc/midres_vdp.o $(subst PLATFORM,alienstorm.msxc,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msxc,$(OBJS)) -o $(EXEDIR)/alienstorm.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/alienstorm.msxc,$(EXEDIR)/alienstorm.msxc.rom)
+	$(CC88) +msx  -m $(LDFLAGS88) obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_io.o obj/alienstorm.msxc/midres_vdp.o $(subst PLATFORM,alienstorm.msxc,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msxc,$(OBJS)) -o $(EXEDIR)/alienstorm.msxc -create-app 
+	$(call COPYFILES,$(EXEDIR)/alienstorm.cas,$(EXEDIR)/alienstorm.msxc.cas)
 
 
 # -------------------------------------------------------------------
@@ -770,8 +770,8 @@ obj/elevator.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__ELEVATOR__ -o $@ $(subst obj/elevator.msxc/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/elevator.msxc:	elevator.embedded.msxc $(subst PLATFORM,elevator.msxc,$(OBJS)) $(subst PLATFORM,elevator.msxc,$(LIB_OBJS)) obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_vdp.o obj/elevator.msxc/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_io.o obj/elevator.msxc/midres_vdp.o $(subst PLATFORM,elevator.msxc,$(LIB_OBJS)) $(subst PLATFORM,elevator.msxc,$(OBJS)) -o $(EXEDIR)/elevator.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/elevator.msxc,$(EXEDIR)/elevator.msxc.rom)
+	$(CC88) +msx  -m $(LDFLAGS88) obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_io.o obj/elevator.msxc/midres_vdp.o $(subst PLATFORM,elevator.msxc,$(LIB_OBJS)) $(subst PLATFORM,elevator.msxc,$(OBJS)) -o $(EXEDIR)/elevator.msxc -create-app 
+	$(call COPYFILES,$(EXEDIR)/elevator.cas,$(EXEDIR)/elevator.msxc.cas)
 
 
 # -------------------------------------------------------------------
@@ -792,8 +792,8 @@ obj/airattack.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__AIRATTACK__ -o $@ $(subst obj/airattack.msxc/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/airattack.msxc:	airattack.embedded.msxc $(subst PLATFORM,airattack.msxc,$(OBJS)) $(subst PLATFORM,airattack.msxc,$(LIB_OBJS)) obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_vdp.o obj/airattack.msxc/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_io.o obj/airattack.msxc/midres_vdp.o $(subst PLATFORM,airattack.msxc,$(LIB_OBJS)) $(subst PLATFORM,airattack.msxc,$(OBJS)) -o $(EXEDIR)/airattack.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/airattack.msxc,$(EXEDIR)/airattack.msxc.rom)
+	$(CC88) +msx  -m $(LDFLAGS88) obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_io.o obj/airattack.msxc/midres_vdp.o $(subst PLATFORM,airattack.msxc,$(LIB_OBJS)) $(subst PLATFORM,airattack.msxc,$(OBJS)) -o $(EXEDIR)/airattack.msxc -create-app 
+	$(call COPYFILES,$(EXEDIR)/airattack.cas,$(EXEDIR)/airattack.msxc.cas)
 
 
 # -------------------------------------------------------------------
@@ -814,8 +814,8 @@ obj/totto.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__TOTTO__ -o $@ $(subst obj/totto.msxc/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/totto.msxc:	totto.embedded.msxc $(subst PLATFORM,totto.msxc,$(OBJS)) $(subst PLATFORM,totto.msxc,$(LIB_OBJS)) obj/totto.msxc/rawdata.o obj/totto.msxc/midres_vdp.o obj/totto.msxc/midres_io.o
-	$(CC88) +msx -m $(LDFLAGS88) obj/totto.msxc/rawdata.o obj/totto.msxc/midres_io.o obj/totto.msxc/midres_vdp.o $(subst PLATFORM,totto.msxc,$(LIB_OBJS)) $(subst PLATFORM,totto.msxc,$(OBJS)) -o $(EXEDIR)/totto.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/totto.msxc,$(EXEDIR)/totto.msxc.rom)
+	$(CC88) +msx  -m $(LDFLAGS88) obj/totto.msxc/rawdata.o obj/totto.msxc/midres_io.o obj/totto.msxc/midres_vdp.o $(subst PLATFORM,totto.msxc,$(LIB_OBJS)) $(subst PLATFORM,totto.msxc,$(OBJS)) -o $(EXEDIR)/totto.msxc -create-app 
+	$(call COPYFILES,$(EXEDIR)/totto.cas,$(EXEDIR)/totto.msxc.cas)
 
                     
 #!!! missing resources for joycheck (msxc)
@@ -839,8 +839,8 @@ obj/alienstorm.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.svi/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/alienstorm.svi:	alienstorm.embedded.svi $(subst PLATFORM,alienstorm.svi,$(OBJS)) $(subst PLATFORM,alienstorm.svi,$(LIB_OBJS)) obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_vdp.o obj/alienstorm.svi/midres_io.o
-	$(CC88) +svi -m $(LDFLAGS88) obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_io.o obj/alienstorm.svi/midres_vdp.o $(subst PLATFORM,alienstorm.svi,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.svi,$(OBJS)) -o $(EXEDIR)/alienstorm.svi -create-app 
-	$(call COPYFILES,$(EXEDIR)/alienstorm.svi,$(EXEDIR)/alienstorm.svi.cas)
+	$(CC88) +svi  -m $(LDFLAGS88) obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_io.o obj/alienstorm.svi/midres_vdp.o $(subst PLATFORM,alienstorm.svi,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.svi,$(OBJS)) -o $(EXEDIR)/alienstorm.svi -create-app 
+	$(call COPYFILES,$(EXEDIR)/alienstorm.cas,$(EXEDIR)/alienstorm.svi.cas)
 
 
 # -------------------------------------------------------------------
@@ -861,8 +861,8 @@ obj/elevator.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ELEVATOR__ -o $@ $(subst obj/elevator.svi/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/elevator.svi:	elevator.embedded.svi $(subst PLATFORM,elevator.svi,$(OBJS)) $(subst PLATFORM,elevator.svi,$(LIB_OBJS)) obj/elevator.svi/rawdata.o obj/elevator.svi/midres_vdp.o obj/elevator.svi/midres_io.o
-	$(CC88) +svi -m $(LDFLAGS88) obj/elevator.svi/rawdata.o obj/elevator.svi/midres_io.o obj/elevator.svi/midres_vdp.o $(subst PLATFORM,elevator.svi,$(LIB_OBJS)) $(subst PLATFORM,elevator.svi,$(OBJS)) -o $(EXEDIR)/elevator.svi -create-app 
-	$(call COPYFILES,$(EXEDIR)/elevator.svi,$(EXEDIR)/elevator.svi.cas)
+	$(CC88) +svi  -m $(LDFLAGS88) obj/elevator.svi/rawdata.o obj/elevator.svi/midres_io.o obj/elevator.svi/midres_vdp.o $(subst PLATFORM,elevator.svi,$(LIB_OBJS)) $(subst PLATFORM,elevator.svi,$(OBJS)) -o $(EXEDIR)/elevator.svi -create-app 
+	$(call COPYFILES,$(EXEDIR)/elevator.cas,$(EXEDIR)/elevator.svi.cas)
 
 
 # -------------------------------------------------------------------
@@ -883,8 +883,8 @@ obj/airattack.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__AIRATTACK__ -o $@ $(subst obj/airattack.svi/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/airattack.svi:	airattack.embedded.svi $(subst PLATFORM,airattack.svi,$(OBJS)) $(subst PLATFORM,airattack.svi,$(LIB_OBJS)) obj/airattack.svi/rawdata.o obj/airattack.svi/midres_vdp.o obj/airattack.svi/midres_io.o
-	$(CC88) +svi -m $(LDFLAGS88) obj/airattack.svi/rawdata.o obj/airattack.svi/midres_io.o obj/airattack.svi/midres_vdp.o $(subst PLATFORM,airattack.svi,$(LIB_OBJS)) $(subst PLATFORM,airattack.svi,$(OBJS)) -o $(EXEDIR)/airattack.svi -create-app 
-	$(call COPYFILES,$(EXEDIR)/airattack.svi,$(EXEDIR)/airattack.svi.cas)
+	$(CC88) +svi  -m $(LDFLAGS88) obj/airattack.svi/rawdata.o obj/airattack.svi/midres_io.o obj/airattack.svi/midres_vdp.o $(subst PLATFORM,airattack.svi,$(LIB_OBJS)) $(subst PLATFORM,airattack.svi,$(OBJS)) -o $(EXEDIR)/airattack.svi -create-app 
+	$(call COPYFILES,$(EXEDIR)/airattack.cas,$(EXEDIR)/airattack.svi.cas)
 
 
 # -------------------------------------------------------------------
@@ -905,8 +905,8 @@ obj/totto.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__TOTTO__ -o $@ $(subst obj/totto.svi/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/totto.svi:	totto.embedded.svi $(subst PLATFORM,totto.svi,$(OBJS)) $(subst PLATFORM,totto.svi,$(LIB_OBJS)) obj/totto.svi/rawdata.o obj/totto.svi/midres_vdp.o obj/totto.svi/midres_io.o
-	$(CC88) +svi -m $(LDFLAGS88) obj/totto.svi/rawdata.o obj/totto.svi/midres_io.o obj/totto.svi/midres_vdp.o $(subst PLATFORM,totto.svi,$(LIB_OBJS)) $(subst PLATFORM,totto.svi,$(OBJS)) -o $(EXEDIR)/totto.svi -create-app 
-	$(call COPYFILES,$(EXEDIR)/totto.svi,$(EXEDIR)/totto.svi.cas)
+	$(CC88) +svi  -m $(LDFLAGS88) obj/totto.svi/rawdata.o obj/totto.svi/midres_io.o obj/totto.svi/midres_vdp.o $(subst PLATFORM,totto.svi,$(LIB_OBJS)) $(subst PLATFORM,totto.svi,$(OBJS)) -o $(EXEDIR)/totto.svi -create-app 
+	$(call COPYFILES,$(EXEDIR)/totto.cas,$(EXEDIR)/totto.svi.cas)
 
                     
 #!!! missing resources for joycheck (svi)
@@ -930,8 +930,8 @@ obj/alienstorm.mtx500/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.mtx500/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/alienstorm.mtx500:	alienstorm.embedded.mtx500 $(subst PLATFORM,alienstorm.mtx500,$(OBJS)) $(subst PLATFORM,alienstorm.mtx500,$(LIB_OBJS)) obj/alienstorm.mtx500/rawdata.o obj/alienstorm.mtx500/midres_vdp.o obj/alienstorm.mtx500/midres_io.o
-	$(CC88) +mtx -m $(LDFLAGS88) obj/alienstorm.mtx500/rawdata.o obj/alienstorm.mtx500/midres_io.o obj/alienstorm.mtx500/midres_vdp.o $(subst PLATFORM,alienstorm.mtx500,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.mtx500,$(OBJS)) -o $(EXEDIR)/alienstorm.mtx500 -create-app 
-	$(call COPYFILES,$(EXEDIR)/alienstorm.mtx500,$(EXEDIR)/alienstorm.mtx500.cas)
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/alienstorm.mtx500/rawdata.o obj/alienstorm.mtx500/midres_io.o obj/alienstorm.mtx500/midres_vdp.o $(subst PLATFORM,alienstorm.mtx500,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.mtx500,$(OBJS)) -o $(EXEDIR)/alienstorm.mtx500 -create-app 
+	$(call COPYFILES,$(EXEDIR)/alienstorm.cas,$(EXEDIR)/alienstorm.mtx500.cas)
 
 
 # -------------------------------------------------------------------
@@ -952,8 +952,8 @@ obj/elevator.mtx500/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ELEVATOR__ -o $@ $(subst obj/elevator.mtx500/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/elevator.mtx500:	elevator.embedded.mtx500 $(subst PLATFORM,elevator.mtx500,$(OBJS)) $(subst PLATFORM,elevator.mtx500,$(LIB_OBJS)) obj/elevator.mtx500/rawdata.o obj/elevator.mtx500/midres_vdp.o obj/elevator.mtx500/midres_io.o
-	$(CC88) +mtx -m $(LDFLAGS88) obj/elevator.mtx500/rawdata.o obj/elevator.mtx500/midres_io.o obj/elevator.mtx500/midres_vdp.o $(subst PLATFORM,elevator.mtx500,$(LIB_OBJS)) $(subst PLATFORM,elevator.mtx500,$(OBJS)) -o $(EXEDIR)/elevator.mtx500 -create-app 
-	$(call COPYFILES,$(EXEDIR)/elevator.mtx500,$(EXEDIR)/elevator.mtx500.cas)
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/elevator.mtx500/rawdata.o obj/elevator.mtx500/midres_io.o obj/elevator.mtx500/midres_vdp.o $(subst PLATFORM,elevator.mtx500,$(LIB_OBJS)) $(subst PLATFORM,elevator.mtx500,$(OBJS)) -o $(EXEDIR)/elevator.mtx500 -create-app 
+	$(call COPYFILES,$(EXEDIR)/elevator.cas,$(EXEDIR)/elevator.mtx500.cas)
 
 
 # -------------------------------------------------------------------
@@ -974,8 +974,8 @@ obj/airattack.mtx500/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__AIRATTACK__ -o $@ $(subst obj/airattack.mtx500/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/airattack.mtx500:	airattack.embedded.mtx500 $(subst PLATFORM,airattack.mtx500,$(OBJS)) $(subst PLATFORM,airattack.mtx500,$(LIB_OBJS)) obj/airattack.mtx500/rawdata.o obj/airattack.mtx500/midres_vdp.o obj/airattack.mtx500/midres_io.o
-	$(CC88) +mtx -m $(LDFLAGS88) obj/airattack.mtx500/rawdata.o obj/airattack.mtx500/midres_io.o obj/airattack.mtx500/midres_vdp.o $(subst PLATFORM,airattack.mtx500,$(LIB_OBJS)) $(subst PLATFORM,airattack.mtx500,$(OBJS)) -o $(EXEDIR)/airattack.mtx500 -create-app 
-	$(call COPYFILES,$(EXEDIR)/airattack.mtx500,$(EXEDIR)/airattack.mtx500.cas)
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/airattack.mtx500/rawdata.o obj/airattack.mtx500/midres_io.o obj/airattack.mtx500/midres_vdp.o $(subst PLATFORM,airattack.mtx500,$(LIB_OBJS)) $(subst PLATFORM,airattack.mtx500,$(OBJS)) -o $(EXEDIR)/airattack.mtx500 -create-app 
+	$(call COPYFILES,$(EXEDIR)/airattack.cas,$(EXEDIR)/airattack.mtx500.cas)
 
 
 # -------------------------------------------------------------------
@@ -996,8 +996,8 @@ obj/totto.mtx500/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__TOTTO__ -o $@ $(subst obj/totto.mtx500/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/totto.mtx500:	totto.embedded.mtx500 $(subst PLATFORM,totto.mtx500,$(OBJS)) $(subst PLATFORM,totto.mtx500,$(LIB_OBJS)) obj/totto.mtx500/rawdata.o obj/totto.mtx500/midres_vdp.o obj/totto.mtx500/midres_io.o
-	$(CC88) +mtx -m $(LDFLAGS88) obj/totto.mtx500/rawdata.o obj/totto.mtx500/midres_io.o obj/totto.mtx500/midres_vdp.o $(subst PLATFORM,totto.mtx500,$(LIB_OBJS)) $(subst PLATFORM,totto.mtx500,$(OBJS)) -o $(EXEDIR)/totto.mtx500 -create-app 
-	$(call COPYFILES,$(EXEDIR)/totto.mtx500,$(EXEDIR)/totto.mtx500.cas)
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/totto.mtx500/rawdata.o obj/totto.mtx500/midres_io.o obj/totto.mtx500/midres_vdp.o $(subst PLATFORM,totto.mtx500,$(LIB_OBJS)) $(subst PLATFORM,totto.mtx500,$(OBJS)) -o $(EXEDIR)/totto.mtx500 -create-app 
+	$(call COPYFILES,$(EXEDIR)/totto.cas,$(EXEDIR)/totto.mtx500.cas)
 
                     
 #!!! missing resources for joycheck (mtx500)
@@ -1021,8 +1021,8 @@ obj/alienstorm.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.coleco/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/alienstorm.coleco:	alienstorm.embedded.coleco $(subst PLATFORM,alienstorm.coleco,$(OBJS)) $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS)) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_vdp.o obj/alienstorm.coleco/midres_io.o
-	$(CC88) +coleco -m $(LDFLAGS88) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_io.o obj/alienstorm.coleco/midres_vdp.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.coleco,$(OBJS)) -o $(EXEDIR)/alienstorm.coleco -create-app 
-	$(call COPYFILES,$(EXEDIR)/alienstorm.coleco,$(EXEDIR)/alienstorm.coleco.rom)
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_io.o obj/alienstorm.coleco/midres_vdp.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.coleco,$(OBJS)) -o $(EXEDIR)/alienstorm.coleco -create-app 
+	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.coleco.rom)
 
 
 # -------------------------------------------------------------------
@@ -1043,8 +1043,8 @@ obj/elevator.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ELEVATOR__ -o $@ $(subst obj/elevator.coleco/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/elevator.coleco:	elevator.embedded.coleco $(subst PLATFORM,elevator.coleco,$(OBJS)) $(subst PLATFORM,elevator.coleco,$(LIB_OBJS)) obj/elevator.coleco/rawdata.o obj/elevator.coleco/midres_vdp.o obj/elevator.coleco/midres_io.o
-	$(CC88) +coleco -m $(LDFLAGS88) obj/elevator.coleco/rawdata.o obj/elevator.coleco/midres_io.o obj/elevator.coleco/midres_vdp.o $(subst PLATFORM,elevator.coleco,$(LIB_OBJS)) $(subst PLATFORM,elevator.coleco,$(OBJS)) -o $(EXEDIR)/elevator.coleco -create-app 
-	$(call COPYFILES,$(EXEDIR)/elevator.coleco,$(EXEDIR)/elevator.coleco.rom)
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/elevator.coleco/rawdata.o obj/elevator.coleco/midres_io.o obj/elevator.coleco/midres_vdp.o $(subst PLATFORM,elevator.coleco,$(LIB_OBJS)) $(subst PLATFORM,elevator.coleco,$(OBJS)) -o $(EXEDIR)/elevator.coleco -create-app 
+	$(call COPYFILES,$(EXEDIR)/elevator.rom,$(EXEDIR)/elevator.coleco.rom)
 
 
 # -------------------------------------------------------------------
@@ -1065,8 +1065,8 @@ obj/airattack.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__AIRATTACK__ -o $@ $(subst obj/airattack.coleco/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/airattack.coleco:	airattack.embedded.coleco $(subst PLATFORM,airattack.coleco,$(OBJS)) $(subst PLATFORM,airattack.coleco,$(LIB_OBJS)) obj/airattack.coleco/rawdata.o obj/airattack.coleco/midres_vdp.o obj/airattack.coleco/midres_io.o
-	$(CC88) +coleco -m $(LDFLAGS88) obj/airattack.coleco/rawdata.o obj/airattack.coleco/midres_io.o obj/airattack.coleco/midres_vdp.o $(subst PLATFORM,airattack.coleco,$(LIB_OBJS)) $(subst PLATFORM,airattack.coleco,$(OBJS)) -o $(EXEDIR)/airattack.coleco -create-app 
-	$(call COPYFILES,$(EXEDIR)/airattack.coleco,$(EXEDIR)/airattack.coleco.rom)
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/airattack.coleco/rawdata.o obj/airattack.coleco/midres_io.o obj/airattack.coleco/midres_vdp.o $(subst PLATFORM,airattack.coleco,$(LIB_OBJS)) $(subst PLATFORM,airattack.coleco,$(OBJS)) -o $(EXEDIR)/airattack.coleco -create-app 
+	$(call COPYFILES,$(EXEDIR)/airattack.rom,$(EXEDIR)/airattack.coleco.rom)
 
 
 # -------------------------------------------------------------------
@@ -1087,8 +1087,8 @@ obj/totto.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__TOTTO__ -o $@ $(subst obj/totto.coleco/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/totto.coleco:	totto.embedded.coleco $(subst PLATFORM,totto.coleco,$(OBJS)) $(subst PLATFORM,totto.coleco,$(LIB_OBJS)) obj/totto.coleco/rawdata.o obj/totto.coleco/midres_vdp.o obj/totto.coleco/midres_io.o
-	$(CC88) +coleco -m $(LDFLAGS88) obj/totto.coleco/rawdata.o obj/totto.coleco/midres_io.o obj/totto.coleco/midres_vdp.o $(subst PLATFORM,totto.coleco,$(LIB_OBJS)) $(subst PLATFORM,totto.coleco,$(OBJS)) -o $(EXEDIR)/totto.coleco -create-app 
-	$(call COPYFILES,$(EXEDIR)/totto.coleco,$(EXEDIR)/totto.coleco.rom)
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/totto.coleco/rawdata.o obj/totto.coleco/midres_io.o obj/totto.coleco/midres_vdp.o $(subst PLATFORM,totto.coleco,$(LIB_OBJS)) $(subst PLATFORM,totto.coleco,$(OBJS)) -o $(EXEDIR)/totto.coleco -create-app 
+	$(call COPYFILES,$(EXEDIR)/totto.rom,$(EXEDIR)/totto.coleco.rom)
 
                     
 #!!! missing resources for joycheck (coleco)

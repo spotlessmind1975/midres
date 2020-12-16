@@ -6,15 +6,15 @@
 ;  * DRAWING LIBRARY                                                          *
 ;  ****************************************************************************/
 
-PUBLIC _vdp_port_read
-PUBLIC _vdp_port_write
-PUBLIC _vdp_port
-PUBLIC _vdp_out
-PUBLIC _vdp_put
-PUBLIC _vdp_put8
-PUBLIC _vdp_fill8
-PUBLIC _vdp_fill
-PUBLIC _vdp_get
+PUBLIC _mr_vdp_port_read
+PUBLIC _mr_vdp_port_write
+PUBLIC _mr_vdp_port
+PUBLIC _mr_vdp_out
+PUBLIC _mr_vdp_put
+PUBLIC _mr_vdp_put8
+PUBLIC _mr_vdp_fill8
+PUBLIC _mr_vdp_fill
+PUBLIC _mr_vdp_get
 
 VdpWriteBit: equ     40h
 
@@ -216,7 +216,7 @@ VdpFillLoop8:
         ei
         ret
 
-_vdp_out:
+_mr_vdp_out:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; val
@@ -225,11 +225,11 @@ _vdp_out:
 	ld	e, (hl)			; reg
 	jp 	VdpSetReg
 
-_vdp_in:
+_mr_vdp_in:
 	call	VdpRegIn
 	ret
 
-_vdp_put:
+_mr_vdp_put:
 	ld	hl, 2
 	add	hl, sp
     ld c,(hl)
@@ -250,7 +250,7 @@ _vdp_put:
     ld l, a
     jp VdpWrite
 
-_vdp_put8:
+_mr_vdp_put8:
 	ld	hl, 2
 	add	hl, sp
     ld c,(hl)
@@ -271,7 +271,7 @@ _vdp_put8:
     ld l, a
     jp VdpWrite8
 
-_vdp_fill8:
+_mr_vdp_fill8:
 	ld	hl, 2
 	add	hl, sp
     ld c,(hl)
@@ -285,7 +285,7 @@ _vdp_fill8:
 	ld	a, (hl)			    ; value to fill
     jp VdpFill8
 
-_vdp_fill:
+_mr_vdp_fill:
 	ld	hl, 2
 	add	hl, sp
     ld c,(hl)
@@ -299,7 +299,7 @@ _vdp_fill:
 	ld	a, (hl)			    ; value to fill
     jp VdpFill
 
-_vdp_get:
+_mr_vdp_get:
 	ld	hl, 2
 	add	hl, sp
     ld e,(hl)
@@ -307,7 +307,7 @@ _vdp_get:
     ld d,(hl)              ; vram source address
     jp VdpRead
 
-_vdp_port:
+_mr_vdp_port:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; port
@@ -315,14 +315,14 @@ _vdp_port:
     ld (VdpPortWrite), a
     ret
 
-_vdp_port_read:
+_mr_vdp_port_read:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; port
     ld (VdpPortRead), a
     ret
 
-_vdp_port_write:
+_mr_vdp_port_write:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; port
