@@ -22,6 +22,8 @@
 #include "game_air_attack_tiles4.h"
 #elif __ATARI__
 #include "game_air_attack_tiles4.h"
+#elif __MSX__
+#include "game_air_attack_tiles4.h"
 #elif __VIC20__
 #include "game_air_attack_tiles20.h"
 #else
