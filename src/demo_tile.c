@@ -19,9 +19,7 @@
 #include "main.h"
 #include "midres.h"
 
-#ifdef MIDRES_EMBEDDED_FILES
 #include "rawdata.h"
-#endif
 
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION
