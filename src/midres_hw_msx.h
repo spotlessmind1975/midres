@@ -287,23 +287,30 @@ extern unsigned char auxBuffer[];
 
     #else
         #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
-        #define MR_CM(_screen)					((unsigned int)((0x2000*(_screen-0x0e))))
+        #define MR_CM(_screen)					((unsigned int)((_screen==0x0e)?0x2000:0x0000))
         #define MR_AM(_screen)					((unsigned int)(0x400*_screen))
-        #define MR_TM(_tileset)					((unsigned int)((_tileset==0x0e)?0x2000:0x0000))
+        #define MR_TM(_tileset)					((unsigned int)((_tileset==0x00)?0x0000:0x2000))
 
         #define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
                     mr_vdp_fill8(_tile, _screen + _offset, 1 );
 
+#define MR_WRITE_TILE_AUX(_colormap, _color) \
+                    { \
+                        unsigned char iMWT, oMWT = (_color & 0x0f); \
+                        for(iMWT=0; iMWT<8;++iMWT) { \
+                            mr_vdp_fill8(oMWT, _colormap+iMWT, 1 ); \
+                        } \
+                    }
+
         #define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-                    mr_vdp_fill8(_tile, _screen + _offset, 1 ); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8), 1 ); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 1, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 2, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 3, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 4, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 5, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 6, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 7, 1);
+                    { \
+                        int cMWT = _colormap + (_tile * 8); \
+                        int sMWT = _screen + _offset; \
+                        unsigned char oMWT = (_color & 0x0f); \
+                        MR_WRITE_TILE_AUX(cMWT, (_color)); \
+                        MR_WRITE_TILE_AUX(0x800 + cMWT, (_color)); \
+                        MR_WRITE_TILE_AUX(0x1000 + cMWT, (_color)); \
+                    }
 
         #define MR_READ_TILE(_screen, _offset) mr_vdp_get(_offset)
         #define MR_READ_TILE_COLOR(_colormap, _offset) mr_vdp_get(_offset)
