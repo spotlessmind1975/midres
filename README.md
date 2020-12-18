@@ -1,4 +1,6 @@
-# midres
-Portable midres library for retrocomputers
+# MIDRES (library)
+An isomorphic gamelib
 
-For detailed informations please visit [this page](https://retroprogramming.iwashere.eu/midres)
+by Marco Spedaletti (asimov@mclink.it)
+
+For detailed informations please visit [this page](https://retroprogramming.iwashere.eu/midres_library)
