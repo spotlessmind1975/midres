@@ -679,8 +679,27 @@ $(EXEDIR)/alienstorm.msx:	alienstorm.embedded.msx $(subst PLATFORM,alienstorm.ms
 	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_io.o obj/alienstorm.msx/midres_vdp_impl.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msx,$(OBJS)) -o $(EXEDIR)/alienstorm.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.msx.rom)
 
-                    
-#!!! missing resources for elevator (msx)
+
+# -------------------------------------------------------------------
+# --- ELEVATOR FOR MSX 
+# -------------------------------------------------------------------
+
+elevator.embedded.msx:
+	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevatora.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/elevator.msx/rawdata.o src/rawdata.c
+
+obj/elevator.msx/midres_vdp_impl.o:	src/midres_vdp_impl.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msx/midres_vdp_impl.o src/midres_vdp_impl.asm
+
+obj/elevator.msx/midres_io.o:	src/midres_io.asm
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msx/midres_io.o src/midres_io.asm
+
+obj/elevator.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ELEVATOR__ -o $@ $(subst obj/elevator.msx/,src/,$(@:.o=.c)) 
+
+$(EXEDIR)/elevator.msx:	elevator.embedded.msx $(subst PLATFORM,elevator.msx,$(OBJS)) $(subst PLATFORM,elevator.msx,$(LIB_OBJS)) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_vdp_impl.o obj/elevator.msx/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_io.o obj/elevator.msx/midres_vdp_impl.o $(subst PLATFORM,elevator.msx,$(LIB_OBJS)) $(subst PLATFORM,elevator.msx,$(OBJS)) -o $(EXEDIR)/elevator.msx -create-app 
+	$(call COPYFILES,$(EXEDIR)/elevator.rom,$(EXEDIR)/elevator.msx.rom)
 
 
 # -------------------------------------------------------------------
