@@ -129,12 +129,7 @@ VdpRamOut8:
 VdpRamIn:
         push    bc
         ld      bc, (VdpPortRead)
-VdpRamInDelay:
-        djnz    VdpRamInDelay
         in      a, (c)
-        ld      bc, (VdpPortRead)
-VdpRamInDelay2:
-        djnz    VdpRamInDelay2
         pop     bc
         ret
 
@@ -187,6 +182,7 @@ VdpRead:
         di
         call    VdpReadAddr
         call    VdpRamIn
+        ld      h, a
         ld      l, a
         ei
         ret
@@ -326,7 +322,7 @@ _mr_vdp_port_write:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; port
-    ld (VdpPortRead), a
+    ld (VdpPortWrite), a
     ret
 
 SECTION data

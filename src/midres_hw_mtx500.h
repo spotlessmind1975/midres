@@ -13,7 +13,7 @@
 #define GRAPHIC_MODE_I      1
 //#define GRAPHIC_MODE_II     1
 
-#define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_MTX500
+#define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_VDP
 
 // The maximum resolution is 80 x 50 pixels, equivalent to 
 // 40 x 25 mixels.
