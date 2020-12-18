@@ -270,30 +270,24 @@
     $resources['elevator']['c128'] = $resources['elevator']['c64'];
     $resources['elevator']['atari'] = $resources['elevator']['c64'];
 
-    $values = file('platforms.txt');
-    $platforms = [];
+    $values = file('docs/targets.md');
+    $targets = [];
     foreach ( $values as $value ) {
-        $value = trim($value);
-        if($value) {
-            $platforms[] = trim($value);
+        if ( preg_match('#- .([a-z0-9]+). \(#', $value, $matched) ) {
+            $value = trim($matched[1]);
+            if($value) {
+                $targets[] = trim($value);
+            }
         }
     }
-    //$demos = file('demos.txt');
-    //$tutorials = file('tutorials.txt');
-    $values = file('games.txt');
-    $games = [];
+    $values = file('docs/programs.md');
+    $programs = [];
     foreach ( $values as $value ) {
-        $value = trim($value);
-        if($value) {
-            $games[] = trim($value);
-        }
-    }
-    $values = file('utilities.txt');
-    $utilities = [];
-    foreach ( $values as $value ) {
-        $value = trim($value);
-        if($value) {
-            $utilities[] = trim($value);
+        if ( preg_match('#- .([a-z0-9]+). \(#', $value, $matched) ) {
+            $program = trim($matched[1]);
+            if($program) {
+                $programs[] = trim($program);
+            }
         }
     }
 
@@ -312,28 +306,28 @@
 ?>
 
 ###############################################################################
-## PLATFORMS' RULES
+## TARGETS' RULES
 ###############################################################################
 
-# Makefile generated for following platforms: <?=implode(',', $platforms);?>
+# Makefile generated for following targets: <?=implode(', ', $targets);?>
 <?php
 
-foreach( $platforms as $platform ) {
+foreach( $targets as $target ) {
         
-    switch( $platform ) {
+    switch( $target ) {
         case 'msx':
         case 'msxc':
         case 'svi':
         case 'mtx500':
         case 'coleco':
 
-            emit_rules_for_library_z88dk($platform);
-            emit_rules_for_ancillary_z88dk($platform, $resources[$platform] );
+            emit_rules_for_library_z88dk($target);
+            emit_rules_for_ancillary_z88dk($target, $resources[$target] );
 
             break;
 
         case 'atmos':
-            emit_rules_for_library_cc65($platform);
+            emit_rules_for_library_cc65($target);
             break;
 
         case 'atari':
@@ -343,28 +337,26 @@ foreach( $platforms as $platform ) {
         case 'c128':
         case 'c16':
         case 'plus4':
-            emit_rules_for_library_cc65($platform);
-            emit_rules_for_ancillary_cc65($platform, $resources[$platform] );
+            emit_rules_for_library_cc65($target);
+            emit_rules_for_ancillary_cc65($target, $resources[$target] );
     }
 }
 
-foreach( $platforms as $platform ) {
+foreach( $targets as $target ) {
         
-    $programs = array_merge( $games, $utilities );
-
     foreach( $programs as $program ) {
-        switch( $platform ) {
+        switch( $target ) {
             case 'msx':
             case 'msxc':
             case 'svi':
             case 'mtx500':
             case 'coleco':
     
-                if ( isset( $resources[$program][$platform]) ) {
-                    emit_rules_for_program_z88dk($platform,$program,$resources[$program][$platform]);
+                if ( isset( $resources[$program][$target]) ) {
+                    emit_rules_for_program_z88dk($target,$program,$resources[$program][$target]);
                 } else {
 ?>                    
-#!!! missing resources for <?=$program;?> (<?=$platform;?>)
+#!!! missing resources for <?=$program;?> (<?=$target;?>)
 
 <?php                    
                 }
@@ -380,11 +372,11 @@ foreach( $platforms as $platform ) {
             case 'c128':
             case 'c16':
             case 'plus4':
-                if ( isset( $resources[$program][$platform]) ) {
-                    emit_rules_for_program_cc65($platform, $program, $resources[$program][$platform] );
+                if ( isset( $resources[$program][$target]) ) {
+                    emit_rules_for_program_cc65($target, $program, $resources[$program][$target] );
                 } else {
 ?>                    
-#!!! missing resources for <?=$program;?> (<?=$platform;?>)
+#!!! missing resources for <?=$program;?> (<?=$target;?>)
 
 <?php                    
                 }
