@@ -408,7 +408,7 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
             $appMakeExtension = 'rom';
             break;
         case 'msx':
-            $options = '-DGRAPHIC_MODE_I';
+            $options = '-DGRAPHIC_MODE_I -DFRAME_BUFFER';
             $outputFormat = 'rom';
             $subtype = '-subtype=rom';
             $appMakeExtension = 'rom';
