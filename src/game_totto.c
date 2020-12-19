@@ -639,7 +639,7 @@ void gameloop() {
 			}
 
 			// Scroll the columns.
-			columnX -= ( 1 + ( level[1] < 3 ? level[1] : 3 ) );
+			columnX -= ( 2 + ( level[1] < 3 ? level[1] : 3 ) );
 
 			// If the bird has a vertical acceleration,
 			// we have to decrease it up to zero.
