@@ -53,6 +53,9 @@ extern void mr_vdp_fill8(uint8_t _value, uint16_t _dst, uint8_t _count);
 extern void mr_vdp_fill(uint8_t _value, uint16_t _dst, uint16_t _count);
 extern uint8_t mr_vdp_get(uint16_t _src);
 
+void mr_init_vdp_hd();
+void mr_init_multicolor_vdp_hd();
+
 #define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_VDP
 
 #define MR_SCREEN_WIDTH				32

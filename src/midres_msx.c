@@ -59,68 +59,17 @@
 
 void mr_init_hd() {
 
-#ifdef FRAME_BUFFER
-    memset(&frameBuffer[0], 0, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-    memset(&colorBuffer[0], 0, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-#endif
-
     mr_vdp_port(0x98);
-#ifdef GRAPHIC_MODE_I
-    mr_vdp_out(VDP_R0, 0x00);
-    mr_vdp_out(VDP_R1, 0xe0);
-    mr_vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
-    mr_vdp_out(VDP_RCOLORTABLE, 0x80);
-    mr_vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
 
-    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
-#else
-    mr_vdp_out(VDP_R0, 0x02);
-    mr_vdp_out(VDP_R1, 0xc0);
-    mr_vdp_out(VDP_RNAME, 0x0e);
-    mr_vdp_out(VDP_RCOLORTABLE, 0xff);
-    mr_vdp_out(VDP_RPATTERN, 0x03);
-
-    mr_vdp_put(&_includedFiles[0][0], 0x0000, 128);
-    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
-    mr_vdp_put(&_includedFiles[0][0], 0x1000, 128);
-#endif
-    mr_vdp_out(VDP_RSPRITEA, 0x76);
-    mr_vdp_out(VDP_RSPRITEP, 0x03);
-    mr_vdp_out(VDP_RCOLOR, 0x0f);
+    mr_init_vdp_hd();
 
 }
 
 void mr_init_multicolor_hd() {
 
-#ifdef FRAME_BUFFER
-    memset(&frameBuffer[0], 0, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-    memset(&colorBuffer[0], 0, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-#endif
-
     mr_vdp_port(0x98);
-#ifdef GRAPHIC_MODE_I
-    mr_vdp_out(VDP_R0, 0x00);
-    mr_vdp_out(VDP_R1, 0xe0);
-    mr_vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
-    mr_vdp_out(VDP_RCOLORTABLE, 0x80);
-    mr_vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
 
-    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
-#else
-    mr_vdp_out(VDP_R0, 0x02);
-    mr_vdp_out(VDP_R1, 0xc0);
-    mr_vdp_out(VDP_RNAME, 0x0e);
-    mr_vdp_out(VDP_RCOLORTABLE, 0xff);
-    mr_vdp_out(VDP_RPATTERN, 0x03);
-
-    mr_vdp_put(&_includedFiles[0][0], 0x0000, 128);
-    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
-    mr_vdp_put(&_includedFiles[0][0], 0x1000, 128);
-#endif
-    mr_vdp_out(VDP_RSPRITEA, 0x76);
-    mr_vdp_out(VDP_RSPRITEP, 0x03);
-    mr_vdp_out(VDP_RCOLOR, 0x0f);
-
+    mr_init_multicolor_vdp_hd();
 
 }
 
