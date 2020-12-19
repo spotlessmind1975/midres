@@ -5,8 +5,10 @@ by Marco Spedaletti (asimov@mclink.it)
 
 For detailed informations please visit [this page](https://retroprogramming.iwashere.eu/midres_library)
 
--------------------------------------------
-## LICENCE
+
+For a complete list of supported targets and status of buildings please visit [this page](https://github.com/spotlessmind1975/midres/blob/master/docs/status.md)
+
+## LICENSE
 Copyright 2020 Marco Spedaletti
 
 Licensed under the Apache License, Version 2.0 (the "License");
