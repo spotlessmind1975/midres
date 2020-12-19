@@ -198,4 +198,7 @@ void mr_tile_roll_vertical_hd(unsigned char _tileset, unsigned char _destination
 
 #define MR_WRITE_TILE_COLOR(_screen, _offset, _tile) MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile)
 
+#ifdef __IMG2MIDRES__
+
+#endif
 #endif

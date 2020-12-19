@@ -181,9 +181,19 @@
 #define MR_AM(_screen)						((mr_mixel*)((0x0000*(_screen))))
 #define MR_TM(_tileset)					((mr_mixel*)((0x0000*(_tileset))))
 
-// #define MIDRES_STANDALONE					1
+#define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
+		_screen[(_offset)] = (_tile);
+
+#define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
+		_screen[(_offset)] = (_tile); \
+		_colormap[(_offset)] = (_color);
+
+#define MR_READ_TILE(_screen, _offset) _screen[(_offset)]
+#define MR_READ_TILE_COLOR(_colormap, _offset) _colormap[(_offset)]
+
+#define MIDRES_STANDALONE					1
 // #define MIDRES_STANDALONE_BITBLIT			1
-// #define MIDRES_STANDALONE_DRAWING			1
+#define MIDRES_STANDALONE_DRAWING			1
 // #define MIDRES_STANDALONE_DRAWING2			1
 // #define MIDRES_STANDALONE_SCREEN			1
 // #define MIDRES_STANDALONE_SCREEN2			1

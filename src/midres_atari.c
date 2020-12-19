@@ -28,7 +28,7 @@
  * autorizzazioni e le limitazioni previste dalla medesima.
  ****************************************************************************/
 
-#ifdef __ATARI__
+#if defined(__ATARI__)
 
  /****************************************************************************
   ** INCLUDE SECTION
@@ -50,17 +50,6 @@
     // The functions defined at this level can only be called up if the current
     // module has been loaded into memory. On the other hand, they can call any 
     // function declared at the resident module level.
-
-#if defined(__IMG2MIDRES__) || defined(__ATARI__)
-
-unsigned char MR_RENDERED_MIXELS_ATARI[16] = {
-   0x00, 0x01, 0x02, 0x03,
-   0x04, 0x05, 0x06, 0x07,
-   0x87, 0x86, 0x85, 0x84,
-   0x83, 0x82, 0x81, 0x80
-};
-
-#endif
 
 mr_mixel* screenRam = NULL;
 
