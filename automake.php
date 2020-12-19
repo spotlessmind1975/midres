@@ -139,7 +139,7 @@
             'msx' => [
                 [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintroa.pic']
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic']
             ]
         ],
 
