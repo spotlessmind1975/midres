@@ -2,7 +2,7 @@
 
 target name     |alienstorm      |elevator        |airattack       |totto           |joycheck        |
 ----------------|----------------|----------------|----------------|----------------|----------------|
-**msx**         |YES             |NO[1]           |YES             |YES             |NO[4]           |
+**msx**         |YES             |YES             |YES             |YES             |NO[4]           |
 **msxc**        |NO[2]           |NO[1]           |YES             |NO[2]           |NO[4]           |
 **svi**         |YES             |YES             |YES             |YES             |NO[4]           |
 **mtx500**      |YES             |YES             |YES             |YES             |NO[4]           |
@@ -21,6 +21,9 @@ target name     |alienstorm      |elevator        |airattack       |totto       
 **Legend**
  
 [1] the program cannot fit into the retrocomputer memory
+
 [2] the program needs too much resources
+
 [3] severe error during compilation
+
 [4] the makefile rule is missing
