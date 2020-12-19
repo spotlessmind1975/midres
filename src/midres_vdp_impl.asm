@@ -16,14 +16,14 @@
 ; *  limitations under the License.
 ; *---------------------------------------------------------------------------
 ; *  Concesso in licenza secondo i termini della Licenza Apache, versione 2.0
-; *  (la "Licenza"); è proibito usare questo file se non in conformità alla
-; *  Licenza. Una copia della Licenza è disponibile all'indirizzo:
+; *  (la "Licenza"); ï¿½ proibito usare questo file se non in conformitï¿½ alla
+; *  Licenza. Una copia della Licenza ï¿½ disponibile all'indirizzo:
 ; * 
 ; *  http://www.apache.org/licenses/LICENSE-2.0
 ; * 
 ; *  Se non richiesto dalla legislazione vigente o concordato per iscritto,
-; *  il software distribuito nei termini della Licenza è distribuito
-; *  "COSÌ COM'È", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO, esplicite o
+; *  il software distribuito nei termini della Licenza ï¿½ distribuito
+; *  "COSï¿½ COM'ï¿½", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO, esplicite o
 ; *  implicite. Consultare la Licenza per il testo specifico che regola le
 ; *  autorizzazioni e le limitazioni previste dalla medesima.
 ; ***************************************************************************/
