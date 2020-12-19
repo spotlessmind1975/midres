@@ -686,7 +686,7 @@ $(EXEDIR)/midres.plus4: $(subst PLATFORM,plus4,$(OBJS))
 
 alienstorm.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/alienstorm.msx/rawdata.o src/rawdata.c
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/alienstorm.msx/rawdata.o src/rawdata.c
 
 obj/alienstorm.msx/midres_vdp_impl.o:	src/midres_vdp_impl.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.msx/midres_vdp_impl.o src/midres_vdp_impl.asm
@@ -695,7 +695,7 @@ obj/alienstorm.msx/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.msx/midres_io.o src/midres_io.asm
 
 obj/alienstorm.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.msx/,src/,$(@:.o=.c)) 
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.msx/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/alienstorm.msx:	alienstorm.embedded.msx $(subst PLATFORM,alienstorm.msx,$(OBJS)) $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_vdp_impl.o obj/alienstorm.msx/midres_io.o
 	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_io.o obj/alienstorm.msx/midres_vdp_impl.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msx,$(OBJS)) -o $(EXEDIR)/alienstorm.msx -create-app 
@@ -708,7 +708,7 @@ $(EXEDIR)/alienstorm.msx:	alienstorm.embedded.msx $(subst PLATFORM,alienstorm.ms
 
 elevator.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevatora.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/elevator.msx/rawdata.o src/rawdata.c
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/elevator.msx/rawdata.o src/rawdata.c
 
 obj/elevator.msx/midres_vdp_impl.o:	src/midres_vdp_impl.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msx/midres_vdp_impl.o src/midres_vdp_impl.asm
@@ -717,7 +717,7 @@ obj/elevator.msx/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msx/midres_io.o src/midres_io.asm
 
 obj/elevator.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ELEVATOR__ -o $@ $(subst obj/elevator.msx/,src/,$(@:.o=.c)) 
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -D__ELEVATOR__ -o $@ $(subst obj/elevator.msx/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/elevator.msx:	elevator.embedded.msx $(subst PLATFORM,elevator.msx,$(OBJS)) $(subst PLATFORM,elevator.msx,$(LIB_OBJS)) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_vdp_impl.o obj/elevator.msx/midres_io.o
 	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_io.o obj/elevator.msx/midres_vdp_impl.o $(subst PLATFORM,elevator.msx,$(LIB_OBJS)) $(subst PLATFORM,elevator.msx,$(OBJS)) -o $(EXEDIR)/elevator.msx -create-app 
@@ -729,8 +729,8 @@ $(EXEDIR)/elevator.msx:	elevator.embedded.msx $(subst PLATFORM,elevator.msx,$(OB
 # -------------------------------------------------------------------
 
 airattack.embedded.msx:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintroa.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/airattack.msx/rawdata.o src/rawdata.c
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/airattack.msx/rawdata.o src/rawdata.c
 
 obj/airattack.msx/midres_vdp_impl.o:	src/midres_vdp_impl.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/airattack.msx/midres_vdp_impl.o src/midres_vdp_impl.asm
@@ -739,7 +739,7 @@ obj/airattack.msx/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/airattack.msx/midres_io.o src/midres_io.asm
 
 obj/airattack.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__AIRATTACK__ -o $@ $(subst obj/airattack.msx/,src/,$(@:.o=.c)) 
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -D__AIRATTACK__ -o $@ $(subst obj/airattack.msx/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/airattack.msx:	airattack.embedded.msx $(subst PLATFORM,airattack.msx,$(OBJS)) $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_vdp_impl.o obj/airattack.msx/midres_io.o
 	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_io.o obj/airattack.msx/midres_vdp_impl.o $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) $(subst PLATFORM,airattack.msx,$(OBJS)) -o $(EXEDIR)/airattack.msx -create-app 
@@ -752,7 +752,7 @@ $(EXEDIR)/airattack.msx:	airattack.embedded.msx $(subst PLATFORM,airattack.msx,$
 
 totto.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/totto.msx/rawdata.o src/rawdata.c
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/totto.msx/rawdata.o src/rawdata.c
 
 obj/totto.msx/midres_vdp_impl.o:	src/midres_vdp_impl.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/totto.msx/midres_vdp_impl.o src/midres_vdp_impl.asm
@@ -761,7 +761,7 @@ obj/totto.msx/midres_io.o:	src/midres_io.asm
 	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/totto.msx/midres_io.o src/midres_io.asm
 
 obj/totto.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__TOTTO__ -o $@ $(subst obj/totto.msx/,src/,$(@:.o=.c)) 
+	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -D__TOTTO__ -o $@ $(subst obj/totto.msx/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/totto.msx:	totto.embedded.msx $(subst PLATFORM,totto.msx,$(OBJS)) $(subst PLATFORM,totto.msx,$(LIB_OBJS)) obj/totto.msx/rawdata.o obj/totto.msx/midres_vdp_impl.o obj/totto.msx/midres_io.o
 	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/totto.msx/rawdata.o obj/totto.msx/midres_io.o obj/totto.msx/midres_vdp_impl.o $(subst PLATFORM,totto.msx,$(LIB_OBJS)) $(subst PLATFORM,totto.msx,$(OBJS)) -o $(EXEDIR)/totto.msx -create-app 
@@ -820,7 +820,7 @@ $(EXEDIR)/elevator.msxc:	elevator.embedded.msxc $(subst PLATFORM,elevator.msxc,$
 # -------------------------------------------------------------------
 
 airattack.embedded.msxc:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintroa.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -o obj/airattack.msxc/rawdata.o src/rawdata.c
 
 obj/airattack.msxc/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -911,7 +911,7 @@ $(EXEDIR)/elevator.svi:	elevator.embedded.svi $(subst PLATFORM,elevator.svi,$(OB
 # -------------------------------------------------------------------
 
 airattack.embedded.svi:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintroa.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/airattack.svi/rawdata.o src/rawdata.c
 
 obj/airattack.svi/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -1002,7 +1002,7 @@ $(EXEDIR)/elevator.mtx500:	elevator.embedded.mtx500 $(subst PLATFORM,elevator.mt
 # -------------------------------------------------------------------
 
 airattack.embedded.mtx500:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintroa.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/airattack.mtx500/rawdata.o src/rawdata.c
 
 obj/airattack.mtx500/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -1093,7 +1093,7 @@ $(EXEDIR)/elevator.coleco:	elevator.embedded.coleco $(subst PLATFORM,elevator.co
 # -------------------------------------------------------------------
 
 airattack.embedded.coleco:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintroa.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/airattack.coleco/rawdata.o src/rawdata.c
 
 obj/airattack.coleco/midres_vdp_impl.o:	src/midres_vdp_impl.asm
