@@ -128,7 +128,7 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
 
     for (i = 0; i < 8; ++i) {
         for (b = 0; b < 8; ++b, ++source, ++destination) {
-            mr_mixel d = *((mr_mixel*)source);
+            mr_mixel d = mr_vdp_get(source);
             mr_mixel n = d & (0xff >> (7 - i));
             mr_vdp_fill8((n << (7 - i)), destination, 1);
 #ifdef GRAPHIC_MODE_II
