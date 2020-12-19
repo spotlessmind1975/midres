@@ -88,7 +88,7 @@ typedef struct {
 /////////////////////////////////////////////////////////////////////////////
 
 // Total number of floors
-#if(MR_SCREEN_HEIGHT>23)
+#if(MR_SCREEN_HEIGHT>32)
 #define	FLOOR_COUNT						5
 #else
 #define	FLOOR_COUNT						4
