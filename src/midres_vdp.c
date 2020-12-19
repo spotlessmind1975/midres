@@ -48,6 +48,11 @@ unsigned char MR_RENDERED_MIXELS_VDP[16] = {
    0xe2, 0xfb, 0xec, 0xa0
 };
 
+#ifdef FRAME_BUFFER
+unsigned char frameBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+unsigned char colorBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+#endif
+
 void mr_tileset_copy_hd(unsigned char _source, unsigned char _dest) {
     unsigned char i;
     for (i = 0; i < (MR_TILESET_TILE_COUNT - 1); ++i) {
