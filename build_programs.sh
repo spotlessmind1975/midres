@@ -98,8 +98,8 @@ for target in $targets; do
 	printf "\n" >> $tmp3
 done;
 
-cat docs/status_prologue1.md >>$results
-cat $tmp2 >>$results
+# cat docs/status_prologue1.md >>$results
+# cat $tmp2 >>$results
 cat docs/status_prologue2.md >>$results
 cat $tmp3 >>$results
 cat docs/status_epilogue.md >>$results
