@@ -38,4 +38,18 @@
 
 #if defined(MIDRES_STANDALONE_TILE_MULTICOLOR)
 
+// Draws a vertical line onto the bitmap.
+void _mr_vtiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color) {
+
+    mr_position y1 = _y1;
+    int offset = _y1 * MR_SCREEN_WIDTH + _x;
+
+    for (; y1 <= _y2; ++y1) {
+        _screen[offset] = _tile;
+        _colormap[offset] = (0x08 | (_color & 0x07));
+        offset += MR_SCREEN_WIDTH;
+    }
+
+}
+
 #endif

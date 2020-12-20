@@ -38,4 +38,17 @@
 
 #if defined(MIDRES_STANDALONE_TILE_MULTICOLOR)
 
+void _mr_puttiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color) {
+
+    int offset;
+
+    offset = _y * MR_SCREEN_WIDTH + _x;
+
+    for (; _tile_count != 0; --_tile_count, ++_tile_start) {
+        _screen[offset] = _tile_start;
+        _colormap[offset] = (0x08 | (_color & 0x07));
+        ++offset;
+    }
+
+}
 #endif

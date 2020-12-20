@@ -38,4 +38,19 @@
 
 #if defined(MIDRES_STANDALONE_TILE_MULTICOLOR)
 
+// Writes a tile into a bitmap at *precise* vertical position.
+void _mr_tile_moveto_vertical_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color) {
+
+    int offset;
+
+    offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
+
+    _screen[offset] = _tile + (_y & 0x07) + 1;
+    _colormap[offset] = (0x08 | (_color & 0x07));
+    if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
+        _colormap[offset + MR_SCREEN_WIDTH] = (0x08 | (_color & 0x07));
+        _screen[offset + MR_SCREEN_WIDTH] = _tile + (_y & 0x07) + 10;
+    }
+
+}
 #endif
