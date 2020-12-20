@@ -38,4 +38,14 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void mr_tileset_copy_memory_mapped(mr_tileset _source, mr_tileset _destination) {
+    mr_position w = 255, b = 0;
+    mr_mixel* source = MR_TM(_source);
+    mr_mixel* destination = MR_TM(_destination);
+    for (--w; w != 255; --w) {
+        for (b = 0; b < 8; ++b, ++source, ++destination) {
+            *destination = *source;
+        }
+    }
+}
 #endif

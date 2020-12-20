@@ -38,4 +38,16 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+// Reads a tile from a bitmap.
+mr_color _mr_gettile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y) {
+
+    int offset;
+
+    offset = _y * MR_SCREEN_WIDTH + _x;
+
+    _colormap = 0;
+
+    return MR_READ_TILE(_screen, offset);
+
+}
 #endif

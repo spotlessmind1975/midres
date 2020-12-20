@@ -38,4 +38,29 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+// Load a tileset (or part of it)
+void mr_tileset_load(unsigned char* _filename, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
+
+#ifdef MIDRES_STANDALONE_FILE
+
+#if defined(__ATARI__) || defined(__CBM__) 
+
+    FILE* f = fopen(_filename, "rb");
+    if (f == NULL) {
+        return;
+    }
+    fread(MR_TM(_tileset) + 8 * _starting, _count * 8, 1, f);
+    fclose(f);
+
+#ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
+    if (MR_MULTICOLOR) {
+        mr_tileset_multicolor_to_monocolor(_tileset, _starting, _count);
+    }
+#endif
+
+#endif
+
+#endif
+
+}
 #endif

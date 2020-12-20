@@ -38,4 +38,20 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void _mr_puttile_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);
+void _mr_puttile_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color);
+
+// Writes a tile into a bitmap.
+void _mr_puttile(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    if (MR_MULTICOLOR) {
+        _mr_puttile_multicolor(_screen, _colormap, _x, _y, _tile, _color);
+    }
+    else {
+#endif
+        _mr_puttile_monocolor(_screen, _colormap, _x, _y, _tile, _color);
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    }
+#endif
+}
 #endif

@@ -38,4 +38,20 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void _mr_tile_moveto_horizontal_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color);
+void _mr_tile_moveto_horizontal_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color);
+
+// Writes a tile into a bitmap at *precise* horizontal position.
+void _mr_tile_moveto_horizontal(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color) {
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    if (MR_MULTICOLOR) {
+        _mr_tile_moveto_horizontal_multicolor(_screen, _colormap, _x, _y, _tile, _color);
+    }
+    else {
+#endif
+        _mr_tile_moveto_horizontal_monocolor(_screen, _colormap, _x, _y, _tile, _color);
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    }
+#endif
+}
 #endif

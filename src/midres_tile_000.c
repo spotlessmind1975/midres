@@ -38,4 +38,9 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+// Set the visible tileset.
+void mr_tileset_visible(mr_tileset _tileset) {
+    mr_tileset_visible_hd(_tileset);
+}
+
 #endif

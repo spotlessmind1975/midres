@@ -38,4 +38,21 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void _mr_tile_moveto_vertical_extended_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color);
+void _mr_tile_moveto_vertical_extended_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color);
+
+// Writes a tile into a bitmap at *precise* vertical position.
+void _mr_tile_moveto_vertical_extended(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color) {
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    if (MR_MULTICOLOR) {
+        _mr_tile_moveto_vertical_extended_multicolor(_screen, _colormap, _x, _y, _tile, _w, _h, _color);
+    }
+    else {
+#endif
+        _mr_tile_moveto_vertical_extended_monocolor(_screen, _colormap, _x, _y, _tile, _w, _h, _color);
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    }
+#endif
+}
+
 #endif

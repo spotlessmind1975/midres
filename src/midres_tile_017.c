@@ -38,4 +38,20 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void mr_tileset_load_file_memory_mapped(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
+#ifdef MIDRES_STANDALONE_FILE
+    mr_read_file(_index, MR_TM(_tileset) + 8 * _starting, _count * 8);
+#endif
+
+#ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
+    if (MR_MULTICOLOR) {
+        mr_tileset_multicolor_to_monocolor(_tileset, _starting, _count);
+    }
+#endif
+    _index = 0;
+    _tileset = 0;
+    _starting = 0;
+    _count = 0;
+
+}
 #endif

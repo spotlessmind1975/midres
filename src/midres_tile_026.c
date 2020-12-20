@@ -38,4 +38,21 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void _mr_vtiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color);
+void _mr_vtiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color);
+
+// Draws a vertical line onto the bitmap.
+void _mr_vtiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color) {
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    if (MR_MULTICOLOR) {
+        _mr_vtiles_multicolor(_screen, _colormap, _x, _y1, _y2, _tile, _color);
+    }
+    else {
+#endif
+        _mr_vtiles_monocolor(_screen, _colormap, _x, _y1, _y2, _tile, _color);
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    }
+#endif
+}
+
 #endif

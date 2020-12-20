@@ -38,4 +38,9 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+// Set a set of colors for multicolor tiles
+void mr_tile_setcolors(mr_color _colors[4]) {
+    mr_tile_setcolors_hd(_colors);
+}
+
 #endif

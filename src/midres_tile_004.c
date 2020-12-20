@@ -38,4 +38,14 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+// Writes a tile into a bitmap.
+void _mr_puttile_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile, mr_color _color) {
+
+    int offset;
+
+    offset = _y * MR_SCREEN_WIDTH + _x;
+
+    MR_WRITE_TILE(_screen, _colormap, offset, _tile, _color);
+
+}
 #endif

@@ -38,4 +38,12 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void mr_tile_redefine_fill_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_mixel _data) {
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _tile * 8);
+    unsigned char b = 0;
+    for (b = 0; b < 8; ++destination, ++b) {
+        *destination = _data;
+    }
+}
+
 #endif

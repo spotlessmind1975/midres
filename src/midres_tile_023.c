@@ -38,4 +38,20 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void _mr_puttiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color);
+void _mr_puttiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color);
+
+void _mr_puttiles(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color) {
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    if (MR_MULTICOLOR) {
+        _mr_puttiles_multicolor(_screen, _colormap, _x, _y, _tile_start, _tile_count, _color);
+    }
+    else {
+#endif
+        _mr_puttiles_monocolor(_screen, _colormap, _x, _y, _tile_start, _tile_count, _color);
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    }
+#endif
+
+}
 #endif

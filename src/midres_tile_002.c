@@ -38,4 +38,14 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+// Downgrade a tileset from multicolor to monocolor.
+void mr_tileset_multicolor_to_monocolor_memory_mapped(mr_tileset _source, mr_position _starting, mr_position _count) {
+    mr_position w = _count, b = 0;
+    mr_mixel* source = MR_TM(_source) + _starting * 8;
+    for (--w; w != 255; --w) {
+        for (b = 0; b < 8; ++b, ++source) {
+            *source = (*source) | (*source >> 1);
+        }
+    }
+}
 #endif

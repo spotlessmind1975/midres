@@ -38,4 +38,13 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+// Redefine a tile using the given data.
+void mr_tile_redefine_memory_mapped(mr_tileset _tileset, mr_tile _tile, mr_mixel* _data) {
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _tile * 8);
+    mr_position b = 0;
+    for (b = 0; b < 8; ++b, ++destination, ++_data) {
+        *destination = *_data;
+    }
+}
+
 #endif

@@ -38,4 +38,17 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+void _mr_puttiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color) {
+
+    int offset;
+
+    offset = _y * MR_SCREEN_WIDTH + _x;
+
+    for (; _tile_count != 0; --_tile_count, ++_tile_start) {
+        MR_WRITE_TILE(_screen, _colormap, offset, _tile_start, _color);
+        ++offset;
+    }
+
+}
+
 #endif

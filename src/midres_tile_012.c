@@ -38,4 +38,27 @@
 
 #if defined(MIDRES_STANDALONE_TILE)
 
+// Writes a tile into a bitmap at *precise* vertical position.
+void _mr_tile_moveto_vertical_extended_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color) {
+
+    int offset;
+
+    mr_position w = _w;
+    mr_position i, j;
+
+    offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
+
+    for (j = 0; j < _w; ++j) {
+        for (i = 0; i <= _h; ++i) {
+            if ((offset + MR_SCREEN_WIDTH) < MR_SCREEN_RAM_SIZE) {
+                MR_WRITE_TILE(_screen, _colormap, offset, _tile + (_y & 0x07), _color);
+            }
+            offset += MR_SCREEN_WIDTH;
+            _tile += 9;
+        }
+        offset -= ((_h + 1) * MR_SCREEN_WIDTH);
+        ++offset;
+    }
+
+}
 #endif
