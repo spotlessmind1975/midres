@@ -38,6 +38,8 @@
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
-	mr_mixel rollBuffer[8];
-
+// Redefine a subset of N tiles by "shifting" vertically a tile
+void mr_tile_prepare_vertical(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+    mr_tile_prepare_vertical_hd(_tileset, _source, _destination);
+}
 #endif

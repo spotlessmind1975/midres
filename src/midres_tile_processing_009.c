@@ -38,6 +38,8 @@
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
-	mr_mixel rollBuffer[8];
+void mr_tile_prepare_vertical_extended(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination) {
+    mr_tile_prepare_vertical_extended_hd(_tileset, _source, _w, _h, _destination);
+}
 
 #endif

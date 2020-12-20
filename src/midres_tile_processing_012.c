@@ -38,6 +38,21 @@
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
-	mr_mixel rollBuffer[8];
+void mr_tile_prepare_roll_horizontal_multicolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+void mr_tile_prepare_roll_horizontal_monocolor(mr_tileset _tileset, mr_tile _source, mr_tile _destination);
+
+// Redefine a subset of N tiles by "rolling" horizontally a tile
+void mr_tile_prepare_roll_horizontal(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    if (MR_MULTICOLOR) {
+        mr_tile_prepare_roll_horizontal_multicolor(_tileset, _source, _destination);
+    }
+    else {
+#endif
+        mr_tile_prepare_roll_horizontal_monocolor(_tileset, _source, _destination);
+#ifdef MIDRES_STANDALONE_TILE_MULTICOLOR
+    }
+#endif
+}
 
 #endif

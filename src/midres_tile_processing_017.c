@@ -38,6 +38,23 @@
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
-	mr_mixel rollBuffer[8];
+// Redefine a subset of N tiles by "rolling" vertically a tile
+void mr_tile_prepare_roll_vertical_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _destination) {
+    mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
+
+    mr_position i, b;
+
+    for (i = 0; i < 8; ++i) {
+        for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
+            *destination = *(source + i);
+        }
+        source -= b;
+        for (b = 0; b < i; ++b, ++source, ++destination) {
+            *destination = *(source);
+        }
+        source -= b;
+    }
+}
 
 #endif

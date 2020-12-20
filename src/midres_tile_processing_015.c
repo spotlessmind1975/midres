@@ -38,6 +38,31 @@
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
-	mr_mixel rollBuffer[8];
+// Roll horizontally a tile
+void mr_tile_roll_horizontal_on_place_memory_mapped(mr_tileset _tileset, mr_tile _destination, mr_direction _direction, mr_tile _place, mr_position* _index) {
 
+    mr_mixel* source;
+    mr_mixel* destination;
+    mr_position b;
+
+    source = (mr_mixel*)(MR_TM(_tileset) + (_destination * 8) + (*_index) * 8);
+    destination = (mr_mixel*)(MR_TM(_tileset) + _place * 8);
+    if (_direction == mr_direction_right) {
+        ++(*_index);
+        if ((*_index) > 8) {
+            *_index = 0;
+        }
+    }
+    else {
+        --(*_index);
+        if ((*_index) == 255) {
+            *_index = 7;
+        }
+    }
+    for (b = 0; b < 8; ++b, ++source, ++destination) {
+        mr_mixel d = *((mr_mixel*)source);
+        *destination = d;
+    }
+
+}
 #endif

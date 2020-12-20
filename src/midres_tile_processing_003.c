@@ -38,6 +38,48 @@
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
-	mr_mixel rollBuffer[8];
+// Redefine a subset of N tiles by "shifting" horizontally a tile
+void mr_tile_prepare_horizontal_extended_monocolor_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_tile _w, mr_tile _h, mr_tile _destination) {
+    mr_mixel* source = (mr_mixel*)(MR_TM(_tileset) + _source * 8);
+    mr_mixel* destination = (mr_mixel*)(MR_TM(_tileset) + _destination * 8);
 
+    mr_position i, b;
+
+    mr_position j, k;
+
+    for (j = 0; j < _h; ++j) {
+        for (i = 0; i < 9; ++i) {
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                mr_mixel e = *((mr_mixel*)source);
+                mr_mixel m = e >> i;
+                *destination = m;
+            }
+            source -= 8;
+        }
+
+        for (k = 0; k < (_w - 1); ++k) {
+            for (i = 0; i < 9; ++i) {
+                for (b = 0; b < 8; ++b, ++source, ++destination) {
+                    mr_mixel d = *((mr_mixel*)source);
+                    mr_mixel e = *((mr_mixel*)source + 8);
+                    mr_mixel m = (e >> i) | (d << (8 - i));
+                    *destination = m;
+                }
+                source -= 8;
+            }
+            source += 8;
+        }
+
+        for (i = 0; i < 9; ++i) {
+            for (b = 0; b < 8; ++b, ++source, ++destination) {
+                mr_mixel d = *((mr_mixel*)source);
+                mr_mixel n = d & (0xff >> (8 - i));
+                *destination = (n << (8 - i));
+            }
+            source -= 8;
+        }
+        source += 8;
+    }
+
+}
 #endif

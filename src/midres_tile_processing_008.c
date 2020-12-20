@@ -38,6 +38,49 @@
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
-	mr_mixel rollBuffer[8];
+// Redefine a subset of N tiles by "shifting" vertically a tile
+void mr_tile_prepare_vertical_extended_memory_mapped(mr_tileset _tileset, mr_tile _source, mr_position _w, mr_position _h, mr_tile _destination) {
+    mr_tile* source = (mr_tile*)(MR_TM(_tileset) + _source * 8);
+    mr_tile* destination = (mr_tile*)(MR_TM(_tileset) + _destination * 8);
+
+    int i, b;
+    int w = _w, k = 0;
+
+    for (; w != 0; --w) {
+        for (i = 0; i < 9; ++i) {
+            for (b = 0; b < i; ++b, ++destination) {
+                *destination = 0x00;
+            }
+            for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
+                *destination = *(source);
+            }
+            source -= b;
+        }
+
+        for (k = 0; k < (_h - 1); ++k) {
+            for (i = 0; i < 9; ++i) {
+                for (b = 0; b < i; ++b, ++destination, ++source) {
+                    *destination = *(source + (k * _w * 8) + (8 - i));
+                }
+                source -= b;
+                for (b = 0; b < (8 - i); ++b, ++source, ++destination) {
+                    *destination = *(source + ((k + 1) * _w * 8));
+                }
+                source -= b;
+            }
+        }
+
+        for (i = 0; i < 9; ++i) {
+            for (b = 0; b < i; ++b, ++destination, ++source) {
+                *destination = *(source + ((_h - 1) * _w * 8) + (8 - i));
+            }
+            source -= b;
+            for (b = 0; b < (8 - i); ++b, ++destination) {
+                *destination = 0;
+            }
+        }
+        source += 8;
+    }
+}
 
 #endif
