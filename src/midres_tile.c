@@ -36,27 +36,7 @@
 
 #include "midres.h"
 
-#if ( !defined(__OVERLAY__MIDRES__) && defined(MIDRES_STANDALONE_TILE) ) || defined(__OVERLAY__MIDRES__)
-
-  // Overlay management is driven by the definition of the appropriate 
-  // compilation symbol (__OVERLAY__). In this case, we enable or disable the 
-  // compilation of the relevant code.
-
-#ifdef __OVERLAY__MIDRES__
-
-    // In general, the compiler places the executable code in the "CODE" 
-    // segment, while the non-modifiable data in the "RODATA" segment.
-    // In order to save space, both of these segments are moved to the 
-    // overlay segment, so that both the code and the data it uses are 
-    // removed from the resident module.
-    #pragma code-name ("OVERLAY6");
-    #pragma rodata-name ("OVERLAY6");
-
-#endif
-
-/****************************************************************************
- ** OVERLAYED FUNCTIONS SECTION
- ****************************************************************************/
+#if defined(MIDRES_STANDALONE_TILE)
 
 void _mr_tile_moveto_horizontal_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_color _color);
 void _mr_tile_moveto_horizontal_extended_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color);
@@ -68,10 +48,6 @@ void _mr_putetiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_positio
 void _mr_putftiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_position _w, mr_position _h, mr_color _color);
 void _mr_vtiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color);
 void _mr_htiles_multicolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _x2, mr_position _y, mr_tile _tile, mr_color _color);
-
- // The functions defined at this level can only be called up if the current
- // module has been loaded into memory. On the other hand, they can call any 
- // function declared at the resident module level.
 
 // Set the visible tilesect.
 void mr_tileset_visible(mr_tileset _tileset) {

@@ -31,22 +31,6 @@
 #ifndef _MIDRES_INT_H_
 #define _MIDRES_INT_H_
 
-    #ifdef __OVERLAY__MIDRES__
-
-         // These variables are defined by the linker, and allow to identify the 
-         // address where to store the pieces of codeand data loaded from the 
-         // mass memories.
-        extern void _OVERLAY1_LOAD__[], _OVERLAY1_SIZE__[];
-        extern void _OVERLAY2_LOAD__[], _OVERLAY2_SIZE__[];
-        extern void _OVERLAY3_LOAD__[], _OVERLAY3_SIZE__[];
-        extern void _OVERLAY4_LOAD__[], _OVERLAY4_SIZE__[];
-        extern void _OVERLAY4_LOAD__[], _OVERLAY4_SIZE__[];
-
-        unsigned char load_overlay(char* module_name, void* overlay_address,
-            void* overlay_size);
-
-    #endif
-
     /***
      * This value is used to check if the screen memory is corrupted.
      */

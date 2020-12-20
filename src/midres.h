@@ -225,45 +225,6 @@
 	 * ------ FUNCTIONS
 	 ************************************************************************/
 
-	 /*-----------------------------------------------------------------------
-	  --- OVERLAY SUPPORT
-	  -----------------------------------------------------------------------*/
-
-	// To be called before using screen load/uncompress/unpack functions.
-	#ifdef __OVERLAY__MIDRES__
-		#define mr_use_screen() load_overlay("mr1", _OVERLAY1_LOAD__, _OVERLAY1_SIZE__)
-	#else
-		#define mr_use_screen() 
-	#endif
-
-	// To be called before using drawing functions.
-	#ifdef __OVERLAY__MIDRES__
-		#define mr_use_drawing() load_overlay("mr2", _OVERLAY2_LOAD__, _OVERLAY2_SIZE__)
-	#else
-		#define mr_use_drawing() 
-	#endif
-	
-	// To be called before using screen save/compress/pack functions.
-	#ifdef __OVERLAY__MIDRES__
-		#define mr_use_screen2() load_overlay("mr3", _OVERLAY3_LOAD__, _OVERLAY3_SIZE__)
-	#else
-		#define mr_use_screen2() 
-	#endif
-
-	// To be called before using drawing functions.
-	#ifdef __OVERLAY__MIDRES__
-		#define mr_use_drawing2() load_overlay("mr4", _OVERLAY4_LOAD__, _OVERLAY4_SIZE__)
-	#else
-		#define mr_use_drawing2() 
-	#endif
-
-	// To be called before using drawing functions.
-	#ifdef __OVERLAY__MIDRES__
-		#define mr_use_bitblit() load_overlay("mr5", _OVERLAY5_LOAD__, _OVERLAY5_SIZE__)
-	#else
-		#define mr_use_bitblit() 
-	#endif
-
 	/*-----------------------------------------------------------------------
 	 --- LIBRARY MANAGEMENT
 	 -----------------------------------------------------------------------*/

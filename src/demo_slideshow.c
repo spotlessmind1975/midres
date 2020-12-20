@@ -60,18 +60,10 @@ unsigned char filename[16] = { 0 };
 ** RESIDENT MAIN FUNCTION
 ****************************************************************************/
 
-// This is the main function body. The purpose is to call the various 
-// functions present in the modules, taking care to load the relevant 
-// code / data into memory(in the "overlay" area).
-
 void demo_slideshow() {
 
     // Initialize the graphical subsystem.
     mr_init();
-
-    // We are going to use a "screen" function.
-    // [needed for overlay support]
-    mr_use_screen();
 
     // Clear the current screen and show it.
     mr_clear(MR_SCREEN_DEFAULT);

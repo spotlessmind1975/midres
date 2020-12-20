@@ -133,10 +133,6 @@ unsigned char* mr_translate_file_user(mr_file _file) {
 
 }
 
-// This is the main function body. The purpose is to call the various 
-// functions present in the modules, taking care to load the relevant 
-// code / data into memory(in the "overlay" area).
-
 void demo_tile() {
 
 	// Used as iterator.

@@ -151,10 +151,6 @@ void destroy_building(mr_position _number) {
  ** RESIDENT MAIN FUNCTION
  ****************************************************************************/
 
-// This is the main function body. The purpose is to call the various 
-// functions present in the modules, taking care to load the relevant 
-// code / data into memory(in the "overlay" area).
-
 void demo_drawing() {
 
     // Used as index.
@@ -163,16 +159,8 @@ void demo_drawing() {
     // Initialize the graphical subsystem.
     mr_init();
 
-    // We are going to use a "drawing2" (drawing v1.1) function.
-    // [needed for overlay support]
-    mr_use_screen();
-
     // Clear the current screen and show it.
     mr_show(MR_SCREEN_DEFAULT);
-
-    // We are going to use a "drawing2" (drawing v1.1) function.
-    // [needed for overlay support]
-    mr_use_drawing2();
 
     // Endless loop
     while (1) {

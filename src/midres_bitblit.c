@@ -36,31 +36,7 @@
 
 #include "midres.h"
 
-#if ( !defined(__OVERLAY__MIDRES__) && defined(MIDRES_STANDALONE_BITBLIT) ) || defined(__OVERLAY__MIDRES__)
-
-  // Overlay management is driven by the definition of the appropriate 
-// compilation symbol (__OVERLAY__). In this case, we enable or disable the 
-// compilation of the relevant code.
-
-#ifdef __OVERLAY__MIDRES__
-
-    // In general, the compiler places the executable code in the "CODE" 
-    // segment, while the non-modifiable data in the "RODATA" segment.
-    // In order to save space, both of these segments are moved to the 
-    // overlay segment, so that both the code and the data it uses are 
-    // removed from the resident module.
-    #pragma code-name ("OVERLAY5");
-    #pragma rodata-name ("OVERLAY5");
-
-#endif
-
-/****************************************************************************
- ** OVERLAYED FUNCTIONS SECTION
- ****************************************************************************/
-
- // The functions defined at this level can only be called up if the current
- // module has been loaded into memory. On the other hand, they can call any 
- // function declared at the resident module level.
+#if defined(MIDRES_STANDALONE_BITBLIT)
 
 void _mr_copy(mr_mixel* _source, mr_color* _source_color, mr_position _xs, mr_position _ys, mr_position _ws, mr_position _hs, mr_position _displs, mr_mixel* _destination, mr_color* _destination_color, mr_position _xd, mr_position _yd, mr_position _displd, mr_blitop _blitop) {
 
