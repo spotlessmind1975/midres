@@ -33,18 +33,33 @@
   ****************************************************************************/
 
 #include <stdio.h>
-#include <string.h>
 
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
-#if defined(MIDRES_STANDALONE_SCREEN)
+#if defined(MIDRES_STANDALONE_SCREEN2)
+
+void mr_pack(mr_screen _source, mr_screen _destination, mr_half_screen _half_screen) {
+
+    int i;
+    mr_mixel* source = MR_SM(_source);
+    mr_mixel* destination = MR_SM(_destination);
+
+    if (_half_screen == mr_half_up) {
+        destination += MR_SCREEN_RAM_SIZE >> 1;
+    }
+
+    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; i += 2) {
+        destination[i / 2] = mr_pack_mixels(get_mixel_bits(source[i + 1]), get_mixel_bits(source[i]));
+    }
+
+}
 
 #endif

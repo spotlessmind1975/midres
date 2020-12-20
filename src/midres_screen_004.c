@@ -38,13 +38,30 @@
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
 #if defined(MIDRES_STANDALONE_SCREEN)
+
+  // Switch double buffering
+void mr_doublebuffer_switch() {
+
+    mr_wait_vbl();
+
+    if (MR_VISIBLE_SCREEN == MR_DB1) {
+        mr_show(MR_DB2);
+        mr_doublebuffer_switch_hd(MR_DB1);
+        mr_enable(MR_DB1);
+    }
+    else {
+        mr_show(MR_DB1);
+        mr_doublebuffer_switch_hd(MR_DB2);
+        mr_enable(MR_DB2);
+    }
+}
 
 #endif

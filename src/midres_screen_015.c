@@ -33,18 +33,41 @@
   ****************************************************************************/
 
 #include <stdio.h>
-#include <string.h>
 
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
-#if defined(MIDRES_STANDALONE_SCREEN)
+#if defined(MIDRES_STANDALONE_SCREEN2)
+
+unsigned char mr_save_color(char* _filename, mr_screen _screen) {
+
+#ifdef MIDRES_STANDALONE_FILE
+
+#ifdef __ATARI__
+
+    FILE* f = fopen(_filename, "wb");
+    if (f == NULL) {
+        return 0;
+    }
+    fwrite(MR_CM(_screen), (unsigned)MR_SCREEN_RAM_SIZE, 1, f);
+    fclose(f);
+    return 1;
+
+#elif __CBM__
+
+    _screen = 0;
+    return cbm_save(_filename, getcurrentdevice(), MR_CM(_screen), MR_SCREEN_RAM_SIZE);
+
+#endif
+
+#endif
+}
 
 #endif

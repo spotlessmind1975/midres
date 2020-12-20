@@ -38,13 +38,17 @@
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
 #if defined(MIDRES_STANDALONE_SCREEN)
 
+unsigned char mr_load_screen(mr_file _index, mr_screen _screen) {
+    mr_read_file(_index, MR_SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    return 0;
+}
 #endif

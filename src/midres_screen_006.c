@@ -38,13 +38,37 @@
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
 #if defined(MIDRES_STANDALONE_SCREEN)
+
+unsigned char mr_load(char* _filename, mr_screen _screen) {
+
+#ifdef MIDRES_STANDALONE_FILE
+
+#if __ATARI__
+
+    FILE* f = fopen(_filename, "rb");
+    if (f == NULL) {
+        return 0;
+    }
+    fread(MR_SM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT, 1, f);
+    fclose(f);
+    return 1;
+
+#elif __CBM__
+
+    return cbm_load(_filename, getcurrentdevice(), MR_SM(_screen));
+
+#endif
+
+#endif
+
+}
 
 #endif

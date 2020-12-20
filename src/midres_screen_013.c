@@ -38,13 +38,17 @@
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
 #if defined(MIDRES_STANDALONE_SCREEN)
+
+void mr_set_border_color(mr_color _color) {
+    mr_set_border_color_hd(_color);
+}
 
 #endif

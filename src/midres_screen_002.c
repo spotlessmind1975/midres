@@ -38,13 +38,19 @@
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
 #if defined(MIDRES_STANDALONE_SCREEN)
+
+void mr_enable(mr_screen _screen) {
+
+    MR_ENABLED_SCREEN = _screen;
+
+}
 
 #endif

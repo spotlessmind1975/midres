@@ -38,13 +38,23 @@
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
 #if defined(MIDRES_STANDALONE_SCREEN)
+
+#ifdef MIDRES_STANDALONE_FILE
+
+unsigned char mr_load_screen_color(mr_file _index, mr_screen _screen) {
+    mr_read_file(_index, MR_CM(_screen), MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    _screen = 0;
+    return 0;
+}
+
+#endif
 
 #endif

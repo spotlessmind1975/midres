@@ -38,13 +38,19 @@
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
 #if defined(MIDRES_STANDALONE_SCREEN)
+
+// Setup the double buffer (using screens SCREEN_DB1 and SCREEN_DB2)
+void mr_doublebuffer_init() {
+    MR_VISIBLE_SCREEN = MR_DB1;
+    MR_ENABLED_SCREEN = MR_DB2;
+}
 
 #endif

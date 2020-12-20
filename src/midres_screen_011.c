@@ -38,13 +38,30 @@
 #include "midres.h"
 
 #ifdef __CBM__
-    #include <cc65.h>
-    #include <cbm.h>
-    #include <device.h>
+#include <cc65.h>
+#include <cbm.h>
+#include <device.h>
 #else
 
 #endif
 
 #if defined(MIDRES_STANDALONE_SCREEN)
+
+void mr_unpack(mr_screen _source, mr_screen _destination, mr_half_screen _half_screen) {
+
+    int i;
+    mr_mixel* source = MR_SM(_source);
+    mr_mixel* destination = MR_SM(_destination);
+
+    if (_half_screen == mr_half_up) {
+        source += (MR_SCREEN_RAM_SIZE >> 1);
+    }
+
+    for (i = 0; i < MR_SCREEN_WIDTH * (MR_SCREEN_HEIGHT >> 1); ++i) {
+        destination[(i << 1)] = MR_RENDERED_MIXELS[mr_unpack_pmixel_lo(source[i])];
+        destination[(i << 1) + 1] = MR_RENDERED_MIXELS[mr_unpack_pmixel_hi(source[i])];
+    }
+
+}
 
 #endif
