@@ -40,36 +40,8 @@
 
 #if defined(MIDRES_STANDALONE_KEYBOARD)
 
-void mr_sound_start(unsigned char _number) {
-    mr_sound_start_hd(0, _number);
-};
-
-void mr_sound_change(int _parameter) {
-    mr_sound_change_hd(0, _parameter);
-}
-
-void mr_sound_stop() {
-    mr_sound_stop_hd(0);
-};
-
-void mr_start_frame() {
-    mr_start_frame_hd();
-}
-
-void mr_end_frame(unsigned char _jiffies) {
-    mr_end_frame_hd(_jiffies);
-}
-
-void mr_sound_start_channel(unsigned char _channel, unsigned char _number) {
-    mr_sound_start_hd(_channel, _number);
-}
-
-void mr_sound_change_channel(unsigned char _channel, int _parameter) {
-    mr_sound_change_hd(_channel, _parameter);
-}
-
-void mr_sound_stop_channel(unsigned char _channel) {
-    mr_sound_stop_hd(_channel);
+void mr_wait(unsigned char _seconds) {
+    mr_wait_hd(_seconds);
 }
 
 #endif
