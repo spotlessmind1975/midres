@@ -38,6 +38,4 @@
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
-	mr_mixel rollBuffer[8];
-
 #endif

@@ -141,4 +141,10 @@ mr_screen MR_DB2 = MR_SCREEN_DB2;
 
 mr_boolean MR_MULTICOLOR = mr_false;
 
+#if defined(MIDRES_STANDALONE_TILE_PROCESSING)
+
+    mr_mixel rollBuffer[8];
+
+#endif
+
 #endif
