@@ -32,8 +32,16 @@
   ** INCLUDE SECTION
   ****************************************************************************/
 
+#include <stdio.h>
+
 #include "midres.h"
 
-#if defined(MIDRES_STANDALONE_DRAWING2)
+#if defined(MIDRES_STANDALONE_DRAWING)
+
+void mr_ink(mr_screen _screen, mr_color _color) {
+
+    MR_SCREEN_INK[_screen] = _color + MR_BRIGHTNESS;
+
+}
 
 #endif

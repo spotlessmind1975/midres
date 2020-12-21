@@ -36,4 +36,28 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+// Draws a filled rectangle.
+void _mr_rectfill(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color) {
+    mr_position w = (_x2 - _x1);
+    mr_position h = (_y2 - _y1);
+    if (w > h) {
+        for (--h; h != 255; --h) {
+            _mr_hline(_screen, _colormap,
+                _x1, _x2,
+                _y1 + h,
+                _color);
+        }
+    }
+    else {
+        for (--w; w != 255; --w) {
+            _mr_vline(_screen, _colormap,
+                _x1 + w,
+                _y1, _y2,
+                _color);
+        }
+
+    }
+
+}
+
 #endif

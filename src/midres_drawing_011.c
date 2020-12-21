@@ -36,4 +36,34 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+// Draws a horizontal line onto the bitmap.
+void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _x2, mr_position _y, mr_color _color) {
+
+    mr_position x1 = _x1;
+    mr_position mx, my;
+    mr_mixelbits abcd;
+    int offset;
+
+    mx = _x1 >> 1;
+    my = _y >> 1;
+    offset = my * MR_SCREEN_WIDTH + mx;
+
+    if (x1 & 1) {
+        abcd = mr_mixel_bits(x1, _y);
+        MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
+        ++offset;
+        ++x1;
+    }
+    for (; x1 <= _x2; x1 += 2) {
+        if (x1 + 1 <= _x2) {
+            abcd = mr_mixel_bits(x1, _y) | mr_mixel_bits(x1 + 1, _y);
+        }
+        else {
+            abcd = mr_mixel_bits(x1, _y);
+        }
+        MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
+        ++offset;
+    }
+
+}
 #endif

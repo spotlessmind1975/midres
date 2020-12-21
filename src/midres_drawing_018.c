@@ -36,4 +36,22 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+// Color a rectangle.
+void _mr_colorfill(mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color) {
+    mr_position x1b = (_x1 >> 1), y1b = (_y1 >> 1);
+    mr_position wb = ((_x2 >> 1) - x1b);
+    mr_position hb = ((_y2 >> 1) - y1b);
+    _colormap += (_y1 >> 1) * MR_SCREEN_WIDTH + _x1 >> 1;
+
+    for (; hb != 255; --hb) {
+        mr_position w = wb;
+        for (--w; w != 255; --w) {
+            *_colormap = _color;
+            ++_colormap;
+        }
+        _colormap += MR_SCREEN_WIDTH - wb;
+    }
+
+}
+
 #endif

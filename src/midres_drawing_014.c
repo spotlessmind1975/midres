@@ -36,4 +36,12 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+  // Draws a polygon.
+void _mr_polygon(mr_mixel* _screen, mr_color* _colormap, mr_position _vertices, mr_position _points[], mr_color _color) {
+    int i = 0;
+    for (i = 0; i < (_vertices - 1); ++i) {
+        _mr_line(_screen, _colormap, _points[i * 2], _points[(i * 2) + 1], _points[(i * 2) + 2], _points[(i * 2) + 3], _color);
+    }
+}
+
 #endif

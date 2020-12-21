@@ -36,4 +36,26 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+  // Writes a pixel into a bitmap.
+void _mr_putpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_color _color) {
+
+    mr_position mx, my;
+    mr_mixelbits abcd;
+    int offset;
+
+    mx = _x >> 1;
+    my = _y >> 1;
+    offset = my * MR_SCREEN_WIDTH + mx;
+
+    // x1 * y1 + ( (x1 - 1) * y1) * 2+ ( x1 * (y1-1)) * 4 + ( (x1 - 1 ) * (y1-1)) * 8;
+    // x1 * y1 + ((x1 - 1) * y1) * 2 + (x1 * (y1 - 1)) * 4 + ((x1 - 1) * (y1 - 1)) * 8;
+    // x1y1 + (x1y1 - y1) * 2 + (x1y1 - x1) * 4 + (x1y1 - y1 + 1 - x1) * 8;
+    // x1y1 + 2*x1y1 - 2*y1 + 4*x1y1 - 4*x1 + 8*x1y1 - 8*y1 + 8 - 8*x1;
+
+    abcd = mr_mixel_bits(_x, _y);
+
+    MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
+
+}
+
 #endif

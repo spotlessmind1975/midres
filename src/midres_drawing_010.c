@@ -36,4 +36,35 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+// Draws a vertical line onto the bitmap.
+void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_color _color) {
+
+    mr_position y1 = _y1;
+    mr_position mx, my;
+    mr_mixelbits abcd;
+    int offset;
+
+    mx = _x >> 1;
+    my = _y1 >> 1;
+    offset = my * MR_SCREEN_WIDTH + mx;
+
+    if (y1 & 1) {
+        abcd = mr_mixel_bits(_x, y1);
+        MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
+        offset += MR_SCREEN_WIDTH;
+        ++y1;
+    }
+    for (; y1 <= _y2; y1 += 2) {
+        if (y1 + 1 <= _y2) {
+            abcd = mr_mixel_bits(_x, y1) | mr_mixel_bits(_x, y1 + 1);
+        }
+        else {
+            abcd = mr_mixel_bits(_x, y1);
+        }
+        MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
+        offset += MR_SCREEN_WIDTH;
+    }
+
+}
+
 #endif

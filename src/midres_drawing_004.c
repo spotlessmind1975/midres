@@ -36,4 +36,13 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+char cabs(char _a) {
+    if (_a > 0) {
+        return _a;
+    }
+    else {
+        return -_a;
+    }
+}
+
 #endif

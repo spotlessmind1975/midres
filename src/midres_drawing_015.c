@@ -36,4 +36,13 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+// Draws an outline rectangle.
+void _mr_rect(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_color _color) {
+    _mr_hline(_screen, _colormap, _x1, _x2, _y1, _color);
+    _mr_hline(_screen, _colormap, _x1, _x2, _y2, _color);
+    _mr_vline(_screen, _colormap, _x1, _y1, _y2, _color);
+    _mr_vline(_screen, _colormap, _x2, _y1, _y2, _color);
+}
+
+
 #endif

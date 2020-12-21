@@ -36,4 +36,21 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+  // Clear a pixel into a bitmap.
+void _mr_clearpixel(mr_mixel* _screen, mr_position _x, mr_position _y) {
+
+    mr_position mx, my;
+    mr_mixelbits abcd;
+    int offset;
+
+    mx = _x >> 1;
+    my = _y >> 1;
+    offset = my * MR_SCREEN_WIDTH + mx;
+
+    abcd = mr_mixel_bits(_x, _y);
+
+    MR_WRITE_TILE_LUMINANCE(_screen, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd]);
+
+}
+
 #endif

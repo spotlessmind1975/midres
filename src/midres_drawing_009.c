@@ -36,4 +36,25 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+// Reads a pixel from a bitmap.
+mr_color _mr_getpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y) {
+
+    mr_position mx, my;
+    mr_mixelbits abcd;
+    int offset;
+
+    mx = _x >> 1;
+    my = _y >> 1;
+    abcd = mr_mixel_bits(_x, _y);
+    offset = my * MR_SCREEN_WIDTH + mx;
+
+    if ((MR_READ_TILE(_screen, offset) & abcd) == abcd) {
+        return MR_READ_TILE_COLOR(_colormap, offset);
+    }
+    else {
+        return MR_COLOR_BLACK;
+    }
+
+}
+
 #endif

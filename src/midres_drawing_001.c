@@ -32,8 +32,23 @@
   ** INCLUDE SECTION
   ****************************************************************************/
 
+#include <stdio.h>
+
 #include "midres.h"
 
-#if defined(MIDRES_STANDALONE_DRAWING2)
+#if defined(MIDRES_STANDALONE_DRAWING)
+
+void mr_pcolorop(mr_color* _screen, mr_position _x, mr_position _y, mr_color _color) {
+
+    mr_position mx, my;
+
+    // Find relative mixel coordinates.
+
+    mx = _x >> 1;
+    my = _y >> 1;
+
+    MR_WRITE_TILE_COLOR(_screen, my * MR_WIDTH + mx, _color + MR_BRIGHTNESS);
+
+}
 
 #endif

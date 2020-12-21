@@ -36,4 +36,11 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+// Draws a triangle.
+void _mr_triangle(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _y1, mr_position _x2, mr_position _y2, mr_position _x3, mr_position _y3, mr_color _color) {
+    _mr_line(_screen, _colormap, _x1, _y1, _x2, _y2, _color);
+    _mr_line(_screen, _colormap, _x2, _y2, _x3, _y3, _color);
+    _mr_line(_screen, _colormap, _x3, _y3, _x1, _y1, _color);
+}
+
 #endif

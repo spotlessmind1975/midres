@@ -32,8 +32,21 @@
   ** INCLUDE SECTION
   ****************************************************************************/
 
+#include <stdio.h>
+
 #include "midres.h"
 
-#if defined(MIDRES_STANDALONE_DRAWING2)
+#if defined(MIDRES_STANDALONE_DRAWING)
+
+  // Clears the bitmap to color BLACK.
+void _mr_clear_bitmap(mr_mixel* _screen, mr_color* _colormap) {
+
+    int i;
+
+    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
+        MR_WRITE_TILE(_screen, _colormap, i, MR_RENDERED_MIXELS[0], MR_COLOR_BLACK);
+    }
+
+}
 
 #endif

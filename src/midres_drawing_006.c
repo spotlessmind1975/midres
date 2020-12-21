@@ -36,4 +36,15 @@
 
 #if defined(MIDRES_STANDALONE_DRAWING2)
 
+  // Clears the bitmap to the specified color.
+void _mr_clear_to_color(mr_mixel* _screen, mr_color* _colormap, mr_color _color) {
+
+    int i;
+
+    for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
+        MR_WRITE_TILE(_screen, _colormap, i, MR_RENDERED_MIXELS[15], _color);
+    }
+
+}
+
 #endif
