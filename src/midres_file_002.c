@@ -37,3 +37,6 @@
 
 #include "midres.h"
 
+void mr_read_file_from_offset(mr_file _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
+	mr_read_file_hd(_file, _offset, _dest, _size);
+}

@@ -37,3 +37,6 @@
 
 #include "midres.h"
 
+unsigned char* mr_translate_file(mr_file _file) {
+	return mr_translate_file_user(_file);
+}
