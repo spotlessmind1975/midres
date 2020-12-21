@@ -30,6 +30,142 @@
     * autorizzazioni e le limitazioni previste dalla medesima.
     ****************************************************************************/
 
+    /////////////////////////////////////////////////////////////////////////////////
+
+function extract_symbols_from_sources( ) {
+
+    $symbols = [];
+    $aliases = [];
+    $files = glob('src/*.h');
+
+    foreach ( $files as $file ) {
+
+        $content = file($file);
+
+        foreach ( $content as $line ) {
+
+            if ( preg_match('/\s*#define\s*(mr\_[a-zA-Z0-9\_]+).*(_mr\_[a-zA-Z0-9\_]+)/', $line, $matched) ) {
+                $aliases[$matched[1]][] = $matched[2];
+            } else if ( preg_match('/\s*#define\s*(mr\_[a-zA-Z0-9\_]+).*(mr\_[a-zA-Z0-9\_]+)/', $line, $matched) ) {
+                $aliases[$matched[1]][] = $matched[2];
+            }
+
+        }
+
+    }
+
+    // foreach( $aliases as $alias => $texts ) {
+    //     print "# ".$alias." = \n";
+    //     foreach( $texts as $text ) {
+    //         print "#   ".$text."\n";
+    //     }
+    // }
+
+    $files = glob('src/*.c');
+
+    foreach ( $files as $file ) {
+
+        $content = file($file);
+
+        $symbols[$file]['export'] = [];
+        $symbols[$file]['import'] = [];
+
+        foreach ( $content as $line ) {
+
+            if ( preg_match('#^\s*[a-z\_]+ [a-z\_]+ (\_mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+                $symbols[$file]['export'][$matched[1]] = $matched[1];
+            } else if ( preg_match('#^\s*[a-z\_]+ [a-z\_]+ (mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+                $symbols[$file]['export'][$matched[1]] = $matched[1];
+            } else if ( preg_match('#^\s*[a-z\_]+ (\_mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+                $symbols[$file]['export'][$matched[1]] = $matched[1];
+            } else if ( preg_match('#^\s*[a-z\_]+ (mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+                $symbols[$file]['export'][$matched[1]] = $matched[1];
+            }
+
+        }
+
+        foreach ( $content as $line ) {
+
+            if ( preg_match('#(_mr\_[A-Za-z0-9\_]+)\s*\(#', $line, $matched) ) {
+                if ( !isset( $symbols[$file]['export'][$matched[1]] )) {
+                    $symbols[$file]['import'][$matched[1]] = $matched[1];
+                    if ( isset($aliases[$matched[1]]) ) {
+                        foreach( $aliases[$matched[1]] as $alias ) {
+                            $symbols[$file]['import'][$alias] = $alias;
+                        }
+                    }
+                }
+            } else if ( preg_match('#(mr\_[A-Za-z0-9\_]+)\s*\(#', $line, $matched) ) {
+                if ( !isset( $symbols[$file]['export'][$matched[1]] )) {
+                    $symbols[$file]['import'][$matched[1]] = $matched[1];
+                    if ( isset($aliases[$matched[1]]) ) {
+                        foreach( $aliases[$matched[1]] as $alias ) {
+                            $symbols[$file]['import'][$alias] = $alias;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    // foreach( $symbols as $module => $subsymbol ) {
+    //     print "# ".$module.":"."\n";
+    //     foreach( $subsymbol['export'] as $export ) {
+    //         print "#   export: ".$export.":"."\n";
+    //     }
+    //     foreach( $subsymbol['import'] as $import ) {
+    //         print "#   import: ".$import.":"."\n";
+    //     }
+    // }
+    return $symbols;
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+function build_list_of_needed_files( $symbols, $module, & $neededFiles = [] ) {
+
+    if ( isset( $symbols[$module] ) ) {
+
+        foreach( $symbols[$module]['import'] as $import ) {
+            foreach( $symbols as $module => $dependences ) {
+                if ( isset($neededFiles[$module]) ) {
+                    continue;
+                }
+                if ( isset( $dependences['export'][$import] ) ) {
+                    $neededFiles[$module] = $module;
+                    build_list_of_needed_files( $symbols, $module, $neededFiles );
+                }
+            }
+        }
+
+    }
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+function find_main_module( $application_name ) {
+
+    $files = glob('src/*.c');
+
+    foreach ( $files as $file ) {
+
+        $content = implode('', file($file));
+
+        if ( stripos( $content, '#ifdef __'.$application_name.'__' ) !== false ) {
+
+            return $file;
+
+        }
+
+    }
+
+    return null;
+
+}
+    
 //////////////////////////////////////////////////////////////////////////////////
 
 function is_commodore($platform) {
@@ -430,11 +566,39 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
             break;
     }
 
+    $mainModule = find_main_module($program);
+    $symbols = extract_symbols_from_sources();
+    $neededFiles = [];
+    build_list_of_needed_files( $symbols, $mainModule, $neededFiles );
+    $neededFiles[] = $mainModule;
+    $neededFiles[] = 'src/midres_data.c';
+    $neededFiles[] = 'src/main.c';
+
+    $neededObjectFiles = [];
+    foreach( $neededFiles as $neededFile ) {
+        $neededObjectFiles[] = preg_replace(['#src/#', '#\.c$#'],['obj/'.$outputPath.'/', '.o'], $neededFile);
+    }
+
 ?>
 
 # -------------------------------------------------------------------
 # --- <?=strtoupper($program);?> FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
+# 
+<?php
+
+    // print "#---> ".$mainModule."\n";
+    // foreach( $neededFiles as $neededFile ) {
+    //     print "# ".$neededFile."\n";
+    // }
+
+//    foreach( $symbols as $module => $subsymbol ) {
+//        print "# ".$module.":"."\n";
+//        print "# \texport:".implode(",", $subsymbol['export'])."\n";
+//        print "# \timport:".implode(",", $subsymbol['import'])."\n";
+//        print "#"."\n";
+//    }
+?>
 
 <?=$program;?>.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
@@ -455,10 +619,13 @@ obj/<?=$outputPath;?>/midres_io.o:	src/midres_io.asm
 obj/<?=$outputPath;?>/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +<?=$platform88;?> $(CFLAGS) -c $(CFLAGS88) <?=$options;?> -D__<?=strtoupper($program);?>__ -o $@ $(subst obj/<?=$outputPath;?>/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/<?=$program;?>.<?=$platform;?>:	<?=$program;?>.embedded.<?=$platform;?> $(subst PLATFORM,<?=$outputPath;?>,$(OBJS)) $(subst PLATFORM,<?=$outputPath;?>,$(LIB_OBJS)) obj/<?=$outputPath;?>/rawdata.o obj/<?=$outputPath;?>/midres_vdp_impl.o obj/<?=$outputPath;?>/midres_io.o
-	$(CC88) +<?=$platform88;?> <?=$subtype;?> -m $(LDFLAGS88) obj/<?=$outputPath;?>/rawdata.o obj/<?=$outputPath;?>/midres_io.o obj/<?=$outputPath;?>/midres_vdp_impl.o $(subst PLATFORM,<?=$outputPath;?>,$(LIB_OBJS)) $(subst PLATFORM,<?=$outputPath;?>,$(OBJS)) -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> -create-app 
+$(EXEDIR)/<?=$program;?>.<?=$platform;?>:	<?=$program;?>.embedded.<?=$platform;?> <?=implode(' ', $neededObjectFiles);?> obj/<?=$outputPath;?>/rawdata.o obj/<?=$outputPath;?>/midres_vdp_impl.o obj/<?=$outputPath;?>/midres_io.o
+	$(CC88) +<?=$platform88;?> <?=$subtype;?> -m $(LDFLAGS88) obj/<?=$outputPath;?>/rawdata.o obj/<?=$outputPath;?>/midres_io.o obj/<?=$outputPath;?>/midres_vdp_impl.o <?=implode(' ', $neededObjectFiles);?> -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> -create-app 
 	$(call COPYFILES,$(EXEDIR)/<?=$program;?>.<?=$appMakeExtension;?>,$(EXEDIR)/<?=$program;?>.<?=$platform;?>.<?=$outputFormat;?>)
 
 <?php
 }
+
+
+
 ?>
