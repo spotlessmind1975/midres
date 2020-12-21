@@ -40,4 +40,8 @@
 
 #if defined(MIDRES_STANDALONE_KEYBOARD)
 
+void mr_start_frame() {
+    mr_start_frame_hd();
+}
+
 #endif

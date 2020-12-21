@@ -40,4 +40,8 @@
 
 #if defined(MIDRES_STANDALONE_KEYBOARD)
 
+void mr_end_frame(unsigned char _jiffies) {
+    mr_end_frame_hd(_jiffies);
+}
+
 #endif
