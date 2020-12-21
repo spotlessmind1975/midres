@@ -40,12 +40,8 @@
 
 #if defined(MIDRES_STANDALONE_KEYBOARD)
 
-void mr_start_frame() {
-    mr_start_frame_hd();
-}
-
-void mr_end_frame(unsigned char _jiffies) {
-    mr_end_frame_hd(_jiffies);
-}
+void mr_sound_stop() {
+    mr_sound_stop_hd(0);
+};
 
 #endif
