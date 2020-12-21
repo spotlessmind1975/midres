@@ -679,10 +679,962 @@ $(EXEDIR)/midres.plus4: $(subst PLATFORM,plus4,$(OBJS))
 	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/midres.plus4.d64 
 	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/midres.plus4.d64 
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ALIENSTORM FOR MSX 
 # -------------------------------------------------------------------
+# 
 
 alienstorm.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
@@ -697,14 +1649,966 @@ obj/alienstorm.msx/midres_io.o:	src/midres_io.asm
 obj/alienstorm.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.msx/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/alienstorm.msx:	alienstorm.embedded.msx $(subst PLATFORM,alienstorm.msx,$(OBJS)) $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_vdp_impl.o obj/alienstorm.msx/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_io.o obj/alienstorm.msx/midres_vdp_impl.o $(subst PLATFORM,alienstorm.msx,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msx,$(OBJS)) -o $(EXEDIR)/alienstorm.msx -create-app 
+$(EXEDIR)/alienstorm.msx:	alienstorm.embedded.msx obj/alienstorm.msx/midres_tile_019.o obj/alienstorm.msx/midres_tile_multicolor_008.o obj/alienstorm.msx/midres_tile_018.o obj/alienstorm.msx/midres_tile_005.o obj/alienstorm.msx/midres_tile_004.o obj/alienstorm.msx/midres_tile_multicolor_003.o obj/alienstorm.msx/midres_control_005.o obj/alienstorm.msx/midres_control_003.o obj/alienstorm.msx/midres_atari.o obj/alienstorm.msx/midres_tile_016.o obj/alienstorm.msx/midres_tile_000.o obj/alienstorm.msx/midres_atmos.o obj/alienstorm.msx/midres_c128.o obj/alienstorm.msx/midres_c16.o obj/alienstorm.msx/midres_c64.o obj/alienstorm.msx/midres_coleco.o obj/alienstorm.msx/midres_vdp.o obj/alienstorm.msx/midres_msx.o obj/alienstorm.msx/midres_mtx500.o obj/alienstorm.msx/midres_plus4.o obj/alienstorm.msx/midres_svi.o obj/alienstorm.msx/midres_vic20.o obj/alienstorm.msx/midres_tile_021.o obj/alienstorm.msx/midres_tile_multicolor_009.o obj/alienstorm.msx/midres_tile_020.o obj/alienstorm.msx/midres_screen_013.o obj/alienstorm.msx/midres_screen_012.o obj/alienstorm.msx/midres_tile_processing_005.o obj/alienstorm.msx/midres_tile_multicolor_001.o obj/alienstorm.msx/midres_tile_processing_004.o obj/alienstorm.msx/midres_frame_000.o obj/alienstorm.msx/midres_screen_000.o obj/alienstorm.msx/midres_frame_001.o obj/alienstorm.msx/midres_sound_005.o obj/alienstorm.msx/midres_sound_006.o obj/alienstorm.msx/midres_sound_007.o obj/alienstorm.msx/midres_tile_009.o obj/alienstorm.msx/midres_tile_008.o obj/alienstorm.msx/midres_tile_multicolor_005.o obj/alienstorm.msx/midres_tile_028.o obj/alienstorm.msx/midres_tile_multicolor_012.o obj/alienstorm.msx/midres_tile_027.o obj/alienstorm.msx/midres_control_004.o obj/alienstorm.msx/midres_tile_015.o obj/alienstorm.msx/midres_control_007.o obj/alienstorm.msx/midres_control_001.o obj/alienstorm.msx/midres.o obj/alienstorm.msx/game_alien_storm.o obj/alienstorm.msx/midres_data.o obj/alienstorm.msx/main.o obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_vdp_impl.o obj/alienstorm.msx/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msx/rawdata.o obj/alienstorm.msx/midres_io.o obj/alienstorm.msx/midres_vdp_impl.o obj/alienstorm.msx/midres_tile_019.o obj/alienstorm.msx/midres_tile_multicolor_008.o obj/alienstorm.msx/midres_tile_018.o obj/alienstorm.msx/midres_tile_005.o obj/alienstorm.msx/midres_tile_004.o obj/alienstorm.msx/midres_tile_multicolor_003.o obj/alienstorm.msx/midres_control_005.o obj/alienstorm.msx/midres_control_003.o obj/alienstorm.msx/midres_atari.o obj/alienstorm.msx/midres_tile_016.o obj/alienstorm.msx/midres_tile_000.o obj/alienstorm.msx/midres_atmos.o obj/alienstorm.msx/midres_c128.o obj/alienstorm.msx/midres_c16.o obj/alienstorm.msx/midres_c64.o obj/alienstorm.msx/midres_coleco.o obj/alienstorm.msx/midres_vdp.o obj/alienstorm.msx/midres_msx.o obj/alienstorm.msx/midres_mtx500.o obj/alienstorm.msx/midres_plus4.o obj/alienstorm.msx/midres_svi.o obj/alienstorm.msx/midres_vic20.o obj/alienstorm.msx/midres_tile_021.o obj/alienstorm.msx/midres_tile_multicolor_009.o obj/alienstorm.msx/midres_tile_020.o obj/alienstorm.msx/midres_screen_013.o obj/alienstorm.msx/midres_screen_012.o obj/alienstorm.msx/midres_tile_processing_005.o obj/alienstorm.msx/midres_tile_multicolor_001.o obj/alienstorm.msx/midres_tile_processing_004.o obj/alienstorm.msx/midres_frame_000.o obj/alienstorm.msx/midres_screen_000.o obj/alienstorm.msx/midres_frame_001.o obj/alienstorm.msx/midres_sound_005.o obj/alienstorm.msx/midres_sound_006.o obj/alienstorm.msx/midres_sound_007.o obj/alienstorm.msx/midres_tile_009.o obj/alienstorm.msx/midres_tile_008.o obj/alienstorm.msx/midres_tile_multicolor_005.o obj/alienstorm.msx/midres_tile_028.o obj/alienstorm.msx/midres_tile_multicolor_012.o obj/alienstorm.msx/midres_tile_027.o obj/alienstorm.msx/midres_control_004.o obj/alienstorm.msx/midres_tile_015.o obj/alienstorm.msx/midres_control_007.o obj/alienstorm.msx/midres_control_001.o obj/alienstorm.msx/midres.o obj/alienstorm.msx/game_alien_storm.o obj/alienstorm.msx/midres_data.o obj/alienstorm.msx/main.o -o $(EXEDIR)/alienstorm.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.msx.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ELEVATOR FOR MSX 
 # -------------------------------------------------------------------
+# 
 
 elevator.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevatora.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
@@ -719,14 +2623,966 @@ obj/elevator.msx/midres_io.o:	src/midres_io.asm
 obj/elevator.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -D__ELEVATOR__ -o $@ $(subst obj/elevator.msx/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/elevator.msx:	elevator.embedded.msx $(subst PLATFORM,elevator.msx,$(OBJS)) $(subst PLATFORM,elevator.msx,$(LIB_OBJS)) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_vdp_impl.o obj/elevator.msx/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_io.o obj/elevator.msx/midres_vdp_impl.o $(subst PLATFORM,elevator.msx,$(LIB_OBJS)) $(subst PLATFORM,elevator.msx,$(OBJS)) -o $(EXEDIR)/elevator.msx -create-app 
+$(EXEDIR)/elevator.msx:	elevator.embedded.msx obj/elevator.msx/midres_sound_005.o obj/elevator.msx/midres_atari.o obj/elevator.msx/midres_tile_016.o obj/elevator.msx/midres_tile_000.o obj/elevator.msx/midres_atmos.o obj/elevator.msx/midres_c128.o obj/elevator.msx/midres_c16.o obj/elevator.msx/midres_c64.o obj/elevator.msx/midres_coleco.o obj/elevator.msx/midres_vdp.o obj/elevator.msx/midres_msx.o obj/elevator.msx/midres_mtx500.o obj/elevator.msx/midres_plus4.o obj/elevator.msx/midres_svi.o obj/elevator.msx/midres_vic20.o obj/elevator.msx/midres_sound_006.o obj/elevator.msx/midres_sound_007.o obj/elevator.msx/midres_tile_015.o obj/elevator.msx/midres_screen_012.o obj/elevator.msx/midres_screen_000.o obj/elevator.msx/midres_tile_021.o obj/elevator.msx/midres_tile_multicolor_009.o obj/elevator.msx/midres_tile_020.o obj/elevator.msx/midres_tile_005.o obj/elevator.msx/midres_tile_004.o obj/elevator.msx/midres_tile_multicolor_003.o obj/elevator.msx/midres_tile_019.o obj/elevator.msx/midres_tile_multicolor_008.o obj/elevator.msx/midres_tile_018.o obj/elevator.msx/midres_tile_026.o obj/elevator.msx/midres_tile_multicolor_011.o obj/elevator.msx/midres_tile_025.o obj/elevator.msx/midres_tile_028.o obj/elevator.msx/midres_tile_multicolor_012.o obj/elevator.msx/midres_tile_027.o obj/elevator.msx/midres_control_001.o obj/elevator.msx/midres_control_000.o obj/elevator.msx/midres_screen_013.o obj/elevator.msx/midres_screen_006.o obj/elevator.msx/midres_control_002.o obj/elevator.msx/midres_screen_007.o obj/elevator.msx/midres_file_001.o obj/elevator.msx/midres_vanilla.o obj/elevator.msx/midres_screen_010.o obj/elevator.msx/midres_frame_000.o obj/elevator.msx/midres_frame_001.o obj/elevator.msx/midres.o obj/elevator.msx/game_elevator.o obj/elevator.msx/midres_data.o obj/elevator.msx/main.o obj/elevator.msx/rawdata.o obj/elevator.msx/midres_vdp_impl.o obj/elevator.msx/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/elevator.msx/rawdata.o obj/elevator.msx/midres_io.o obj/elevator.msx/midres_vdp_impl.o obj/elevator.msx/midres_sound_005.o obj/elevator.msx/midres_atari.o obj/elevator.msx/midres_tile_016.o obj/elevator.msx/midres_tile_000.o obj/elevator.msx/midres_atmos.o obj/elevator.msx/midres_c128.o obj/elevator.msx/midres_c16.o obj/elevator.msx/midres_c64.o obj/elevator.msx/midres_coleco.o obj/elevator.msx/midres_vdp.o obj/elevator.msx/midres_msx.o obj/elevator.msx/midres_mtx500.o obj/elevator.msx/midres_plus4.o obj/elevator.msx/midres_svi.o obj/elevator.msx/midres_vic20.o obj/elevator.msx/midres_sound_006.o obj/elevator.msx/midres_sound_007.o obj/elevator.msx/midres_tile_015.o obj/elevator.msx/midres_screen_012.o obj/elevator.msx/midres_screen_000.o obj/elevator.msx/midres_tile_021.o obj/elevator.msx/midres_tile_multicolor_009.o obj/elevator.msx/midres_tile_020.o obj/elevator.msx/midres_tile_005.o obj/elevator.msx/midres_tile_004.o obj/elevator.msx/midres_tile_multicolor_003.o obj/elevator.msx/midres_tile_019.o obj/elevator.msx/midres_tile_multicolor_008.o obj/elevator.msx/midres_tile_018.o obj/elevator.msx/midres_tile_026.o obj/elevator.msx/midres_tile_multicolor_011.o obj/elevator.msx/midres_tile_025.o obj/elevator.msx/midres_tile_028.o obj/elevator.msx/midres_tile_multicolor_012.o obj/elevator.msx/midres_tile_027.o obj/elevator.msx/midres_control_001.o obj/elevator.msx/midres_control_000.o obj/elevator.msx/midres_screen_013.o obj/elevator.msx/midres_screen_006.o obj/elevator.msx/midres_control_002.o obj/elevator.msx/midres_screen_007.o obj/elevator.msx/midres_file_001.o obj/elevator.msx/midres_vanilla.o obj/elevator.msx/midres_screen_010.o obj/elevator.msx/midres_frame_000.o obj/elevator.msx/midres_frame_001.o obj/elevator.msx/midres.o obj/elevator.msx/game_elevator.o obj/elevator.msx/midres_data.o obj/elevator.msx/main.o -o $(EXEDIR)/elevator.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/elevator.rom,$(EXEDIR)/elevator.msx.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- AIRATTACK FOR MSX 
 # -------------------------------------------------------------------
+# 
 
 airattack.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
@@ -741,14 +3597,966 @@ obj/airattack.msx/midres_io.o:	src/midres_io.asm
 obj/airattack.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -D__AIRATTACK__ -o $@ $(subst obj/airattack.msx/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/airattack.msx:	airattack.embedded.msx $(subst PLATFORM,airattack.msx,$(OBJS)) $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_vdp_impl.o obj/airattack.msx/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_io.o obj/airattack.msx/midres_vdp_impl.o $(subst PLATFORM,airattack.msx,$(LIB_OBJS)) $(subst PLATFORM,airattack.msx,$(OBJS)) -o $(EXEDIR)/airattack.msx -create-app 
+$(EXEDIR)/airattack.msx:	airattack.embedded.msx obj/airattack.msx/midres_tile_005.o obj/airattack.msx/midres_tile_004.o obj/airattack.msx/midres_tile_multicolor_003.o obj/airattack.msx/midres_tile_026.o obj/airattack.msx/midres_tile_multicolor_011.o obj/airattack.msx/midres_tile_025.o obj/airattack.msx/midres_tile_processing_005.o obj/airattack.msx/midres_tile_multicolor_001.o obj/airattack.msx/midres_tile_processing_004.o obj/airattack.msx/midres_vdp.o obj/airattack.msx/midres_tile_processing_007.o obj/airattack.msx/midres_tile_000.o obj/airattack.msx/midres_atari.o obj/airattack.msx/midres_tile_016.o obj/airattack.msx/midres_atmos.o obj/airattack.msx/midres_c128.o obj/airattack.msx/midres_c16.o obj/airattack.msx/midres_c64.o obj/airattack.msx/midres_coleco.o obj/airattack.msx/midres_msx.o obj/airattack.msx/midres_mtx500.o obj/airattack.msx/midres_plus4.o obj/airattack.msx/midres_svi.o obj/airattack.msx/midres_vic20.o obj/airattack.msx/midres_tile_023.o obj/airattack.msx/midres_tile_022.o obj/airattack.msx/midres_tile_multicolor_010.o obj/airattack.msx/midres_frame_000.o obj/airattack.msx/midres_tile_014.o obj/airattack.msx/midres_tile_009.o obj/airattack.msx/midres_tile_008.o obj/airattack.msx/midres_tile_multicolor_005.o obj/airattack.msx/midres_sound_002.o obj/airattack.msx/midres_sound_001.o obj/airattack.msx/midres_tile_011.o obj/airattack.msx/midres_tile_multicolor_006.o obj/airattack.msx/midres_tile_010.o obj/airattack.msx/midres_control_000.o obj/airattack.msx/midres_sound_000.o obj/airattack.msx/midres_frame_001.o obj/airattack.msx/midres.o obj/airattack.msx/midres_screen_000.o obj/airattack.msx/midres_screen_006.o obj/airattack.msx/midres_control_002.o obj/airattack.msx/midres_screen_007.o obj/airattack.msx/midres_file_001.o obj/airattack.msx/midres_vanilla.o obj/airattack.msx/midres_screen_010.o obj/airattack.msx/midres_control_003.o obj/airattack.msx/game_air_attack.o obj/airattack.msx/midres_data.o obj/airattack.msx/main.o obj/airattack.msx/rawdata.o obj/airattack.msx/midres_vdp_impl.o obj/airattack.msx/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/airattack.msx/rawdata.o obj/airattack.msx/midres_io.o obj/airattack.msx/midres_vdp_impl.o obj/airattack.msx/midres_tile_005.o obj/airattack.msx/midres_tile_004.o obj/airattack.msx/midres_tile_multicolor_003.o obj/airattack.msx/midres_tile_026.o obj/airattack.msx/midres_tile_multicolor_011.o obj/airattack.msx/midres_tile_025.o obj/airattack.msx/midres_tile_processing_005.o obj/airattack.msx/midres_tile_multicolor_001.o obj/airattack.msx/midres_tile_processing_004.o obj/airattack.msx/midres_vdp.o obj/airattack.msx/midres_tile_processing_007.o obj/airattack.msx/midres_tile_000.o obj/airattack.msx/midres_atari.o obj/airattack.msx/midres_tile_016.o obj/airattack.msx/midres_atmos.o obj/airattack.msx/midres_c128.o obj/airattack.msx/midres_c16.o obj/airattack.msx/midres_c64.o obj/airattack.msx/midres_coleco.o obj/airattack.msx/midres_msx.o obj/airattack.msx/midres_mtx500.o obj/airattack.msx/midres_plus4.o obj/airattack.msx/midres_svi.o obj/airattack.msx/midres_vic20.o obj/airattack.msx/midres_tile_023.o obj/airattack.msx/midres_tile_022.o obj/airattack.msx/midres_tile_multicolor_010.o obj/airattack.msx/midres_frame_000.o obj/airattack.msx/midres_tile_014.o obj/airattack.msx/midres_tile_009.o obj/airattack.msx/midres_tile_008.o obj/airattack.msx/midres_tile_multicolor_005.o obj/airattack.msx/midres_sound_002.o obj/airattack.msx/midres_sound_001.o obj/airattack.msx/midres_tile_011.o obj/airattack.msx/midres_tile_multicolor_006.o obj/airattack.msx/midres_tile_010.o obj/airattack.msx/midres_control_000.o obj/airattack.msx/midres_sound_000.o obj/airattack.msx/midres_frame_001.o obj/airattack.msx/midres.o obj/airattack.msx/midres_screen_000.o obj/airattack.msx/midres_screen_006.o obj/airattack.msx/midres_control_002.o obj/airattack.msx/midres_screen_007.o obj/airattack.msx/midres_file_001.o obj/airattack.msx/midres_vanilla.o obj/airattack.msx/midres_screen_010.o obj/airattack.msx/midres_control_003.o obj/airattack.msx/game_air_attack.o obj/airattack.msx/midres_data.o obj/airattack.msx/main.o -o $(EXEDIR)/airattack.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/airattack.rom,$(EXEDIR)/airattack.msx.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- TOTTO FOR MSX 
 # -------------------------------------------------------------------
+# 
 
 totto.embedded.msx:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -c src/rawdata.c -h src/rawdata.h
@@ -763,17 +4571,969 @@ obj/totto.msx/midres_io.o:	src/midres_io.asm
 obj/totto.msx/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -D__TOTTO__ -o $@ $(subst obj/totto.msx/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/totto.msx:	totto.embedded.msx $(subst PLATFORM,totto.msx,$(OBJS)) $(subst PLATFORM,totto.msx,$(LIB_OBJS)) obj/totto.msx/rawdata.o obj/totto.msx/midres_vdp_impl.o obj/totto.msx/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/totto.msx/rawdata.o obj/totto.msx/midres_io.o obj/totto.msx/midres_vdp_impl.o $(subst PLATFORM,totto.msx,$(LIB_OBJS)) $(subst PLATFORM,totto.msx,$(OBJS)) -o $(EXEDIR)/totto.msx -create-app 
+$(EXEDIR)/totto.msx:	totto.embedded.msx obj/totto.msx/midres_tile_005.o obj/totto.msx/midres_tile_004.o obj/totto.msx/midres_tile_multicolor_003.o obj/totto.msx/midres_tile_023.o obj/totto.msx/midres_tile_022.o obj/totto.msx/midres_tile_multicolor_010.o obj/totto.msx/midres_tile_processing_009.o obj/totto.msx/midres_vdp.o obj/totto.msx/midres_tile_processing_012.o obj/totto.msx/midres_tile_multicolor_002.o obj/totto.msx/midres_tile_processing_011.o obj/totto.msx/midres_tile_processing_002.o obj/totto.msx/midres_tile_multicolor_000.o obj/totto.msx/midres_tile_processing_001.o obj/totto.msx/midres_tile_processing_005.o obj/totto.msx/midres_tile_multicolor_001.o obj/totto.msx/midres_tile_processing_004.o obj/totto.msx/midres_screen_000.o obj/totto.msx/midres_tile_000.o obj/totto.msx/midres_atari.o obj/totto.msx/midres_tile_016.o obj/totto.msx/midres_atmos.o obj/totto.msx/midres_c128.o obj/totto.msx/midres_c16.o obj/totto.msx/midres_c64.o obj/totto.msx/midres_coleco.o obj/totto.msx/midres_msx.o obj/totto.msx/midres_mtx500.o obj/totto.msx/midres_plus4.o obj/totto.msx/midres_svi.o obj/totto.msx/midres_vic20.o obj/totto.msx/midres_tile_007.o obj/totto.msx/midres_tile_006.o obj/totto.msx/midres_tile_multicolor_004.o obj/totto.msx/midres_tile_028.o obj/totto.msx/midres_tile_multicolor_012.o obj/totto.msx/midres_tile_027.o obj/totto.msx/midres_frame_000.o obj/totto.msx/midres_screen_012.o obj/totto.msx/midres_tile_019.o obj/totto.msx/midres_tile_multicolor_008.o obj/totto.msx/midres_tile_018.o obj/totto.msx/midres_frame_001.o obj/totto.msx/midres_control_002.o obj/totto.msx/midres_tile_013.o obj/totto.msx/midres_tile_multicolor_007.o obj/totto.msx/midres_tile_012.o obj/totto.msx/midres_tile_processing_016.o obj/totto.msx/midres_sound_000.o obj/totto.msx/midres_sound_001.o obj/totto.msx/midres_control_000.o obj/totto.msx/midres_sound_002.o obj/totto.msx/midres_tile_009.o obj/totto.msx/midres_tile_008.o obj/totto.msx/midres_tile_multicolor_005.o obj/totto.msx/midres_screen_006.o obj/totto.msx/midres_screen_010.o obj/totto.msx/midres.o obj/totto.msx/game_totto.o obj/totto.msx/midres_data.o obj/totto.msx/main.o obj/totto.msx/rawdata.o obj/totto.msx/midres_vdp_impl.o obj/totto.msx/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/totto.msx/rawdata.o obj/totto.msx/midres_io.o obj/totto.msx/midres_vdp_impl.o obj/totto.msx/midres_tile_005.o obj/totto.msx/midres_tile_004.o obj/totto.msx/midres_tile_multicolor_003.o obj/totto.msx/midres_tile_023.o obj/totto.msx/midres_tile_022.o obj/totto.msx/midres_tile_multicolor_010.o obj/totto.msx/midres_tile_processing_009.o obj/totto.msx/midres_vdp.o obj/totto.msx/midres_tile_processing_012.o obj/totto.msx/midres_tile_multicolor_002.o obj/totto.msx/midres_tile_processing_011.o obj/totto.msx/midres_tile_processing_002.o obj/totto.msx/midres_tile_multicolor_000.o obj/totto.msx/midres_tile_processing_001.o obj/totto.msx/midres_tile_processing_005.o obj/totto.msx/midres_tile_multicolor_001.o obj/totto.msx/midres_tile_processing_004.o obj/totto.msx/midres_screen_000.o obj/totto.msx/midres_tile_000.o obj/totto.msx/midres_atari.o obj/totto.msx/midres_tile_016.o obj/totto.msx/midres_atmos.o obj/totto.msx/midres_c128.o obj/totto.msx/midres_c16.o obj/totto.msx/midres_c64.o obj/totto.msx/midres_coleco.o obj/totto.msx/midres_msx.o obj/totto.msx/midres_mtx500.o obj/totto.msx/midres_plus4.o obj/totto.msx/midres_svi.o obj/totto.msx/midres_vic20.o obj/totto.msx/midres_tile_007.o obj/totto.msx/midres_tile_006.o obj/totto.msx/midres_tile_multicolor_004.o obj/totto.msx/midres_tile_028.o obj/totto.msx/midres_tile_multicolor_012.o obj/totto.msx/midres_tile_027.o obj/totto.msx/midres_frame_000.o obj/totto.msx/midres_screen_012.o obj/totto.msx/midres_tile_019.o obj/totto.msx/midres_tile_multicolor_008.o obj/totto.msx/midres_tile_018.o obj/totto.msx/midres_frame_001.o obj/totto.msx/midres_control_002.o obj/totto.msx/midres_tile_013.o obj/totto.msx/midres_tile_multicolor_007.o obj/totto.msx/midres_tile_012.o obj/totto.msx/midres_tile_processing_016.o obj/totto.msx/midres_sound_000.o obj/totto.msx/midres_sound_001.o obj/totto.msx/midres_control_000.o obj/totto.msx/midres_sound_002.o obj/totto.msx/midres_tile_009.o obj/totto.msx/midres_tile_008.o obj/totto.msx/midres_tile_multicolor_005.o obj/totto.msx/midres_screen_006.o obj/totto.msx/midres_screen_010.o obj/totto.msx/midres.o obj/totto.msx/game_totto.o obj/totto.msx/midres_data.o obj/totto.msx/main.o -o $(EXEDIR)/totto.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/totto.rom,$(EXEDIR)/totto.msx.rom)
 
                     
 #!!! missing resources for joycheck (msx)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ALIENSTORM FOR MSXC 
 # -------------------------------------------------------------------
+# 
 
 alienstorm.embedded.msxc:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
@@ -788,14 +5548,966 @@ obj/alienstorm.msxc/midres_io.o:	src/midres_io.asm
 obj/alienstorm.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.msxc/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/alienstorm.msxc:	alienstorm.embedded.msxc $(subst PLATFORM,alienstorm.msxc,$(OBJS)) $(subst PLATFORM,alienstorm.msxc,$(LIB_OBJS)) obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_vdp_impl.o obj/alienstorm.msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_io.o obj/alienstorm.msxc/midres_vdp_impl.o $(subst PLATFORM,alienstorm.msxc,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.msxc,$(OBJS)) -o $(EXEDIR)/alienstorm.msxc -create-app 
+$(EXEDIR)/alienstorm.msxc:	alienstorm.embedded.msxc obj/alienstorm.msxc/midres_tile_019.o obj/alienstorm.msxc/midres_tile_multicolor_008.o obj/alienstorm.msxc/midres_tile_018.o obj/alienstorm.msxc/midres_tile_005.o obj/alienstorm.msxc/midres_tile_004.o obj/alienstorm.msxc/midres_tile_multicolor_003.o obj/alienstorm.msxc/midres_control_005.o obj/alienstorm.msxc/midres_control_003.o obj/alienstorm.msxc/midres_atari.o obj/alienstorm.msxc/midres_tile_016.o obj/alienstorm.msxc/midres_tile_000.o obj/alienstorm.msxc/midres_atmos.o obj/alienstorm.msxc/midres_c128.o obj/alienstorm.msxc/midres_c16.o obj/alienstorm.msxc/midres_c64.o obj/alienstorm.msxc/midres_coleco.o obj/alienstorm.msxc/midres_vdp.o obj/alienstorm.msxc/midres_msx.o obj/alienstorm.msxc/midres_mtx500.o obj/alienstorm.msxc/midres_plus4.o obj/alienstorm.msxc/midres_svi.o obj/alienstorm.msxc/midres_vic20.o obj/alienstorm.msxc/midres_tile_021.o obj/alienstorm.msxc/midres_tile_multicolor_009.o obj/alienstorm.msxc/midres_tile_020.o obj/alienstorm.msxc/midres_screen_013.o obj/alienstorm.msxc/midres_screen_012.o obj/alienstorm.msxc/midres_tile_processing_005.o obj/alienstorm.msxc/midres_tile_multicolor_001.o obj/alienstorm.msxc/midres_tile_processing_004.o obj/alienstorm.msxc/midres_frame_000.o obj/alienstorm.msxc/midres_screen_000.o obj/alienstorm.msxc/midres_frame_001.o obj/alienstorm.msxc/midres_sound_005.o obj/alienstorm.msxc/midres_sound_006.o obj/alienstorm.msxc/midres_sound_007.o obj/alienstorm.msxc/midres_tile_009.o obj/alienstorm.msxc/midres_tile_008.o obj/alienstorm.msxc/midres_tile_multicolor_005.o obj/alienstorm.msxc/midres_tile_028.o obj/alienstorm.msxc/midres_tile_multicolor_012.o obj/alienstorm.msxc/midres_tile_027.o obj/alienstorm.msxc/midres_control_004.o obj/alienstorm.msxc/midres_tile_015.o obj/alienstorm.msxc/midres_control_007.o obj/alienstorm.msxc/midres_control_001.o obj/alienstorm.msxc/midres.o obj/alienstorm.msxc/game_alien_storm.o obj/alienstorm.msxc/midres_data.o obj/alienstorm.msxc/main.o obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_vdp_impl.o obj/alienstorm.msxc/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_io.o obj/alienstorm.msxc/midres_vdp_impl.o obj/alienstorm.msxc/midres_tile_019.o obj/alienstorm.msxc/midres_tile_multicolor_008.o obj/alienstorm.msxc/midres_tile_018.o obj/alienstorm.msxc/midres_tile_005.o obj/alienstorm.msxc/midres_tile_004.o obj/alienstorm.msxc/midres_tile_multicolor_003.o obj/alienstorm.msxc/midres_control_005.o obj/alienstorm.msxc/midres_control_003.o obj/alienstorm.msxc/midres_atari.o obj/alienstorm.msxc/midres_tile_016.o obj/alienstorm.msxc/midres_tile_000.o obj/alienstorm.msxc/midres_atmos.o obj/alienstorm.msxc/midres_c128.o obj/alienstorm.msxc/midres_c16.o obj/alienstorm.msxc/midres_c64.o obj/alienstorm.msxc/midres_coleco.o obj/alienstorm.msxc/midres_vdp.o obj/alienstorm.msxc/midres_msx.o obj/alienstorm.msxc/midres_mtx500.o obj/alienstorm.msxc/midres_plus4.o obj/alienstorm.msxc/midres_svi.o obj/alienstorm.msxc/midres_vic20.o obj/alienstorm.msxc/midres_tile_021.o obj/alienstorm.msxc/midres_tile_multicolor_009.o obj/alienstorm.msxc/midres_tile_020.o obj/alienstorm.msxc/midres_screen_013.o obj/alienstorm.msxc/midres_screen_012.o obj/alienstorm.msxc/midres_tile_processing_005.o obj/alienstorm.msxc/midres_tile_multicolor_001.o obj/alienstorm.msxc/midres_tile_processing_004.o obj/alienstorm.msxc/midres_frame_000.o obj/alienstorm.msxc/midres_screen_000.o obj/alienstorm.msxc/midres_frame_001.o obj/alienstorm.msxc/midres_sound_005.o obj/alienstorm.msxc/midres_sound_006.o obj/alienstorm.msxc/midres_sound_007.o obj/alienstorm.msxc/midres_tile_009.o obj/alienstorm.msxc/midres_tile_008.o obj/alienstorm.msxc/midres_tile_multicolor_005.o obj/alienstorm.msxc/midres_tile_028.o obj/alienstorm.msxc/midres_tile_multicolor_012.o obj/alienstorm.msxc/midres_tile_027.o obj/alienstorm.msxc/midres_control_004.o obj/alienstorm.msxc/midres_tile_015.o obj/alienstorm.msxc/midres_control_007.o obj/alienstorm.msxc/midres_control_001.o obj/alienstorm.msxc/midres.o obj/alienstorm.msxc/game_alien_storm.o obj/alienstorm.msxc/midres_data.o obj/alienstorm.msxc/main.o -o $(EXEDIR)/alienstorm.msxc -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.msxc.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ELEVATOR FOR MSXC 
 # -------------------------------------------------------------------
+# 
 
 elevator.embedded.msxc:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator64.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
@@ -810,14 +6522,966 @@ obj/elevator.msxc/midres_io.o:	src/midres_io.asm
 obj/elevator.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__ELEVATOR__ -o $@ $(subst obj/elevator.msxc/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/elevator.msxc:	elevator.embedded.msxc $(subst PLATFORM,elevator.msxc,$(OBJS)) $(subst PLATFORM,elevator.msxc,$(LIB_OBJS)) obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_vdp_impl.o obj/elevator.msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_io.o obj/elevator.msxc/midres_vdp_impl.o $(subst PLATFORM,elevator.msxc,$(LIB_OBJS)) $(subst PLATFORM,elevator.msxc,$(OBJS)) -o $(EXEDIR)/elevator.msxc -create-app 
+$(EXEDIR)/elevator.msxc:	elevator.embedded.msxc obj/elevator.msxc/midres_sound_005.o obj/elevator.msxc/midres_atari.o obj/elevator.msxc/midres_tile_016.o obj/elevator.msxc/midres_tile_000.o obj/elevator.msxc/midres_atmos.o obj/elevator.msxc/midres_c128.o obj/elevator.msxc/midres_c16.o obj/elevator.msxc/midres_c64.o obj/elevator.msxc/midres_coleco.o obj/elevator.msxc/midres_vdp.o obj/elevator.msxc/midres_msx.o obj/elevator.msxc/midres_mtx500.o obj/elevator.msxc/midres_plus4.o obj/elevator.msxc/midres_svi.o obj/elevator.msxc/midres_vic20.o obj/elevator.msxc/midres_sound_006.o obj/elevator.msxc/midres_sound_007.o obj/elevator.msxc/midres_tile_015.o obj/elevator.msxc/midres_screen_012.o obj/elevator.msxc/midres_screen_000.o obj/elevator.msxc/midres_tile_021.o obj/elevator.msxc/midres_tile_multicolor_009.o obj/elevator.msxc/midres_tile_020.o obj/elevator.msxc/midres_tile_005.o obj/elevator.msxc/midres_tile_004.o obj/elevator.msxc/midres_tile_multicolor_003.o obj/elevator.msxc/midres_tile_019.o obj/elevator.msxc/midres_tile_multicolor_008.o obj/elevator.msxc/midres_tile_018.o obj/elevator.msxc/midres_tile_026.o obj/elevator.msxc/midres_tile_multicolor_011.o obj/elevator.msxc/midres_tile_025.o obj/elevator.msxc/midres_tile_028.o obj/elevator.msxc/midres_tile_multicolor_012.o obj/elevator.msxc/midres_tile_027.o obj/elevator.msxc/midres_control_001.o obj/elevator.msxc/midres_control_000.o obj/elevator.msxc/midres_screen_013.o obj/elevator.msxc/midres_screen_006.o obj/elevator.msxc/midres_control_002.o obj/elevator.msxc/midres_screen_007.o obj/elevator.msxc/midres_file_001.o obj/elevator.msxc/midres_vanilla.o obj/elevator.msxc/midres_screen_010.o obj/elevator.msxc/midres_frame_000.o obj/elevator.msxc/midres_frame_001.o obj/elevator.msxc/midres.o obj/elevator.msxc/game_elevator.o obj/elevator.msxc/midres_data.o obj/elevator.msxc/main.o obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_vdp_impl.o obj/elevator.msxc/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_io.o obj/elevator.msxc/midres_vdp_impl.o obj/elevator.msxc/midres_sound_005.o obj/elevator.msxc/midres_atari.o obj/elevator.msxc/midres_tile_016.o obj/elevator.msxc/midres_tile_000.o obj/elevator.msxc/midres_atmos.o obj/elevator.msxc/midres_c128.o obj/elevator.msxc/midres_c16.o obj/elevator.msxc/midres_c64.o obj/elevator.msxc/midres_coleco.o obj/elevator.msxc/midres_vdp.o obj/elevator.msxc/midres_msx.o obj/elevator.msxc/midres_mtx500.o obj/elevator.msxc/midres_plus4.o obj/elevator.msxc/midres_svi.o obj/elevator.msxc/midres_vic20.o obj/elevator.msxc/midres_sound_006.o obj/elevator.msxc/midres_sound_007.o obj/elevator.msxc/midres_tile_015.o obj/elevator.msxc/midres_screen_012.o obj/elevator.msxc/midres_screen_000.o obj/elevator.msxc/midres_tile_021.o obj/elevator.msxc/midres_tile_multicolor_009.o obj/elevator.msxc/midres_tile_020.o obj/elevator.msxc/midres_tile_005.o obj/elevator.msxc/midres_tile_004.o obj/elevator.msxc/midres_tile_multicolor_003.o obj/elevator.msxc/midres_tile_019.o obj/elevator.msxc/midres_tile_multicolor_008.o obj/elevator.msxc/midres_tile_018.o obj/elevator.msxc/midres_tile_026.o obj/elevator.msxc/midres_tile_multicolor_011.o obj/elevator.msxc/midres_tile_025.o obj/elevator.msxc/midres_tile_028.o obj/elevator.msxc/midres_tile_multicolor_012.o obj/elevator.msxc/midres_tile_027.o obj/elevator.msxc/midres_control_001.o obj/elevator.msxc/midres_control_000.o obj/elevator.msxc/midres_screen_013.o obj/elevator.msxc/midres_screen_006.o obj/elevator.msxc/midres_control_002.o obj/elevator.msxc/midres_screen_007.o obj/elevator.msxc/midres_file_001.o obj/elevator.msxc/midres_vanilla.o obj/elevator.msxc/midres_screen_010.o obj/elevator.msxc/midres_frame_000.o obj/elevator.msxc/midres_frame_001.o obj/elevator.msxc/midres.o obj/elevator.msxc/game_elevator.o obj/elevator.msxc/midres_data.o obj/elevator.msxc/main.o -o $(EXEDIR)/elevator.msxc -create-app 
 	$(call COPYFILES,$(EXEDIR)/elevator.rom,$(EXEDIR)/elevator.msxc.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- AIRATTACK FOR MSXC 
 # -------------------------------------------------------------------
+# 
 
 airattack.embedded.msxc:
 	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
@@ -832,14 +7496,966 @@ obj/airattack.msxc/midres_io.o:	src/midres_io.asm
 obj/airattack.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__AIRATTACK__ -o $@ $(subst obj/airattack.msxc/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/airattack.msxc:	airattack.embedded.msxc $(subst PLATFORM,airattack.msxc,$(OBJS)) $(subst PLATFORM,airattack.msxc,$(LIB_OBJS)) obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_vdp_impl.o obj/airattack.msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_io.o obj/airattack.msxc/midres_vdp_impl.o $(subst PLATFORM,airattack.msxc,$(LIB_OBJS)) $(subst PLATFORM,airattack.msxc,$(OBJS)) -o $(EXEDIR)/airattack.msxc -create-app 
+$(EXEDIR)/airattack.msxc:	airattack.embedded.msxc obj/airattack.msxc/midres_tile_005.o obj/airattack.msxc/midres_tile_004.o obj/airattack.msxc/midres_tile_multicolor_003.o obj/airattack.msxc/midres_tile_026.o obj/airattack.msxc/midres_tile_multicolor_011.o obj/airattack.msxc/midres_tile_025.o obj/airattack.msxc/midres_tile_processing_005.o obj/airattack.msxc/midres_tile_multicolor_001.o obj/airattack.msxc/midres_tile_processing_004.o obj/airattack.msxc/midres_vdp.o obj/airattack.msxc/midres_tile_processing_007.o obj/airattack.msxc/midres_tile_000.o obj/airattack.msxc/midres_atari.o obj/airattack.msxc/midres_tile_016.o obj/airattack.msxc/midres_atmos.o obj/airattack.msxc/midres_c128.o obj/airattack.msxc/midres_c16.o obj/airattack.msxc/midres_c64.o obj/airattack.msxc/midres_coleco.o obj/airattack.msxc/midres_msx.o obj/airattack.msxc/midres_mtx500.o obj/airattack.msxc/midres_plus4.o obj/airattack.msxc/midres_svi.o obj/airattack.msxc/midres_vic20.o obj/airattack.msxc/midres_tile_023.o obj/airattack.msxc/midres_tile_022.o obj/airattack.msxc/midres_tile_multicolor_010.o obj/airattack.msxc/midres_frame_000.o obj/airattack.msxc/midres_tile_014.o obj/airattack.msxc/midres_tile_009.o obj/airattack.msxc/midres_tile_008.o obj/airattack.msxc/midres_tile_multicolor_005.o obj/airattack.msxc/midres_sound_002.o obj/airattack.msxc/midres_sound_001.o obj/airattack.msxc/midres_tile_011.o obj/airattack.msxc/midres_tile_multicolor_006.o obj/airattack.msxc/midres_tile_010.o obj/airattack.msxc/midres_control_000.o obj/airattack.msxc/midres_sound_000.o obj/airattack.msxc/midres_frame_001.o obj/airattack.msxc/midres.o obj/airattack.msxc/midres_screen_000.o obj/airattack.msxc/midres_screen_006.o obj/airattack.msxc/midres_control_002.o obj/airattack.msxc/midres_screen_007.o obj/airattack.msxc/midres_file_001.o obj/airattack.msxc/midres_vanilla.o obj/airattack.msxc/midres_screen_010.o obj/airattack.msxc/midres_control_003.o obj/airattack.msxc/game_air_attack.o obj/airattack.msxc/midres_data.o obj/airattack.msxc/main.o obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_vdp_impl.o obj/airattack.msxc/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_io.o obj/airattack.msxc/midres_vdp_impl.o obj/airattack.msxc/midres_tile_005.o obj/airattack.msxc/midres_tile_004.o obj/airattack.msxc/midres_tile_multicolor_003.o obj/airattack.msxc/midres_tile_026.o obj/airattack.msxc/midres_tile_multicolor_011.o obj/airattack.msxc/midres_tile_025.o obj/airattack.msxc/midres_tile_processing_005.o obj/airattack.msxc/midres_tile_multicolor_001.o obj/airattack.msxc/midres_tile_processing_004.o obj/airattack.msxc/midres_vdp.o obj/airattack.msxc/midres_tile_processing_007.o obj/airattack.msxc/midres_tile_000.o obj/airattack.msxc/midres_atari.o obj/airattack.msxc/midres_tile_016.o obj/airattack.msxc/midres_atmos.o obj/airattack.msxc/midres_c128.o obj/airattack.msxc/midres_c16.o obj/airattack.msxc/midres_c64.o obj/airattack.msxc/midres_coleco.o obj/airattack.msxc/midres_msx.o obj/airattack.msxc/midres_mtx500.o obj/airattack.msxc/midres_plus4.o obj/airattack.msxc/midres_svi.o obj/airattack.msxc/midres_vic20.o obj/airattack.msxc/midres_tile_023.o obj/airattack.msxc/midres_tile_022.o obj/airattack.msxc/midres_tile_multicolor_010.o obj/airattack.msxc/midres_frame_000.o obj/airattack.msxc/midres_tile_014.o obj/airattack.msxc/midres_tile_009.o obj/airattack.msxc/midres_tile_008.o obj/airattack.msxc/midres_tile_multicolor_005.o obj/airattack.msxc/midres_sound_002.o obj/airattack.msxc/midres_sound_001.o obj/airattack.msxc/midres_tile_011.o obj/airattack.msxc/midres_tile_multicolor_006.o obj/airattack.msxc/midres_tile_010.o obj/airattack.msxc/midres_control_000.o obj/airattack.msxc/midres_sound_000.o obj/airattack.msxc/midres_frame_001.o obj/airattack.msxc/midres.o obj/airattack.msxc/midres_screen_000.o obj/airattack.msxc/midres_screen_006.o obj/airattack.msxc/midres_control_002.o obj/airattack.msxc/midres_screen_007.o obj/airattack.msxc/midres_file_001.o obj/airattack.msxc/midres_vanilla.o obj/airattack.msxc/midres_screen_010.o obj/airattack.msxc/midres_control_003.o obj/airattack.msxc/game_air_attack.o obj/airattack.msxc/midres_data.o obj/airattack.msxc/main.o -o $(EXEDIR)/airattack.msxc -create-app 
 	$(call COPYFILES,$(EXEDIR)/airattack.rom,$(EXEDIR)/airattack.msxc.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- TOTTO FOR MSXC 
 # -------------------------------------------------------------------
+# 
 
 totto.embedded.msxc:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -c src/rawdata.c -h src/rawdata.h
@@ -854,17 +8470,969 @@ obj/totto.msxc/midres_io.o:	src/midres_io.asm
 obj/totto.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__TOTTO__ -o $@ $(subst obj/totto.msxc/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/totto.msxc:	totto.embedded.msxc $(subst PLATFORM,totto.msxc,$(OBJS)) $(subst PLATFORM,totto.msxc,$(LIB_OBJS)) obj/totto.msxc/rawdata.o obj/totto.msxc/midres_vdp_impl.o obj/totto.msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/totto.msxc/rawdata.o obj/totto.msxc/midres_io.o obj/totto.msxc/midres_vdp_impl.o $(subst PLATFORM,totto.msxc,$(LIB_OBJS)) $(subst PLATFORM,totto.msxc,$(OBJS)) -o $(EXEDIR)/totto.msxc -create-app 
+$(EXEDIR)/totto.msxc:	totto.embedded.msxc obj/totto.msxc/midres_tile_005.o obj/totto.msxc/midres_tile_004.o obj/totto.msxc/midres_tile_multicolor_003.o obj/totto.msxc/midres_tile_023.o obj/totto.msxc/midres_tile_022.o obj/totto.msxc/midres_tile_multicolor_010.o obj/totto.msxc/midres_tile_processing_009.o obj/totto.msxc/midres_vdp.o obj/totto.msxc/midres_tile_processing_012.o obj/totto.msxc/midres_tile_multicolor_002.o obj/totto.msxc/midres_tile_processing_011.o obj/totto.msxc/midres_tile_processing_002.o obj/totto.msxc/midres_tile_multicolor_000.o obj/totto.msxc/midres_tile_processing_001.o obj/totto.msxc/midres_tile_processing_005.o obj/totto.msxc/midres_tile_multicolor_001.o obj/totto.msxc/midres_tile_processing_004.o obj/totto.msxc/midres_screen_000.o obj/totto.msxc/midres_tile_000.o obj/totto.msxc/midres_atari.o obj/totto.msxc/midres_tile_016.o obj/totto.msxc/midres_atmos.o obj/totto.msxc/midres_c128.o obj/totto.msxc/midres_c16.o obj/totto.msxc/midres_c64.o obj/totto.msxc/midres_coleco.o obj/totto.msxc/midres_msx.o obj/totto.msxc/midres_mtx500.o obj/totto.msxc/midres_plus4.o obj/totto.msxc/midres_svi.o obj/totto.msxc/midres_vic20.o obj/totto.msxc/midres_tile_007.o obj/totto.msxc/midres_tile_006.o obj/totto.msxc/midres_tile_multicolor_004.o obj/totto.msxc/midres_tile_028.o obj/totto.msxc/midres_tile_multicolor_012.o obj/totto.msxc/midres_tile_027.o obj/totto.msxc/midres_frame_000.o obj/totto.msxc/midres_screen_012.o obj/totto.msxc/midres_tile_019.o obj/totto.msxc/midres_tile_multicolor_008.o obj/totto.msxc/midres_tile_018.o obj/totto.msxc/midres_frame_001.o obj/totto.msxc/midres_control_002.o obj/totto.msxc/midres_tile_013.o obj/totto.msxc/midres_tile_multicolor_007.o obj/totto.msxc/midres_tile_012.o obj/totto.msxc/midres_tile_processing_016.o obj/totto.msxc/midres_sound_000.o obj/totto.msxc/midres_sound_001.o obj/totto.msxc/midres_control_000.o obj/totto.msxc/midres_sound_002.o obj/totto.msxc/midres_tile_009.o obj/totto.msxc/midres_tile_008.o obj/totto.msxc/midres_tile_multicolor_005.o obj/totto.msxc/midres_screen_006.o obj/totto.msxc/midres_screen_010.o obj/totto.msxc/midres.o obj/totto.msxc/game_totto.o obj/totto.msxc/midres_data.o obj/totto.msxc/main.o obj/totto.msxc/rawdata.o obj/totto.msxc/midres_vdp_impl.o obj/totto.msxc/midres_io.o
+	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/totto.msxc/rawdata.o obj/totto.msxc/midres_io.o obj/totto.msxc/midres_vdp_impl.o obj/totto.msxc/midres_tile_005.o obj/totto.msxc/midres_tile_004.o obj/totto.msxc/midres_tile_multicolor_003.o obj/totto.msxc/midres_tile_023.o obj/totto.msxc/midres_tile_022.o obj/totto.msxc/midres_tile_multicolor_010.o obj/totto.msxc/midres_tile_processing_009.o obj/totto.msxc/midres_vdp.o obj/totto.msxc/midres_tile_processing_012.o obj/totto.msxc/midres_tile_multicolor_002.o obj/totto.msxc/midres_tile_processing_011.o obj/totto.msxc/midres_tile_processing_002.o obj/totto.msxc/midres_tile_multicolor_000.o obj/totto.msxc/midres_tile_processing_001.o obj/totto.msxc/midres_tile_processing_005.o obj/totto.msxc/midres_tile_multicolor_001.o obj/totto.msxc/midres_tile_processing_004.o obj/totto.msxc/midres_screen_000.o obj/totto.msxc/midres_tile_000.o obj/totto.msxc/midres_atari.o obj/totto.msxc/midres_tile_016.o obj/totto.msxc/midres_atmos.o obj/totto.msxc/midres_c128.o obj/totto.msxc/midres_c16.o obj/totto.msxc/midres_c64.o obj/totto.msxc/midres_coleco.o obj/totto.msxc/midres_msx.o obj/totto.msxc/midres_mtx500.o obj/totto.msxc/midres_plus4.o obj/totto.msxc/midres_svi.o obj/totto.msxc/midres_vic20.o obj/totto.msxc/midres_tile_007.o obj/totto.msxc/midres_tile_006.o obj/totto.msxc/midres_tile_multicolor_004.o obj/totto.msxc/midres_tile_028.o obj/totto.msxc/midres_tile_multicolor_012.o obj/totto.msxc/midres_tile_027.o obj/totto.msxc/midres_frame_000.o obj/totto.msxc/midres_screen_012.o obj/totto.msxc/midres_tile_019.o obj/totto.msxc/midres_tile_multicolor_008.o obj/totto.msxc/midres_tile_018.o obj/totto.msxc/midres_frame_001.o obj/totto.msxc/midres_control_002.o obj/totto.msxc/midres_tile_013.o obj/totto.msxc/midres_tile_multicolor_007.o obj/totto.msxc/midres_tile_012.o obj/totto.msxc/midres_tile_processing_016.o obj/totto.msxc/midres_sound_000.o obj/totto.msxc/midres_sound_001.o obj/totto.msxc/midres_control_000.o obj/totto.msxc/midres_sound_002.o obj/totto.msxc/midres_tile_009.o obj/totto.msxc/midres_tile_008.o obj/totto.msxc/midres_tile_multicolor_005.o obj/totto.msxc/midres_screen_006.o obj/totto.msxc/midres_screen_010.o obj/totto.msxc/midres.o obj/totto.msxc/game_totto.o obj/totto.msxc/midres_data.o obj/totto.msxc/main.o -o $(EXEDIR)/totto.msxc -create-app 
 	$(call COPYFILES,$(EXEDIR)/totto.rom,$(EXEDIR)/totto.msxc.rom)
 
                     
 #!!! missing resources for joycheck (msxc)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ALIENSTORM FOR SVI 
 # -------------------------------------------------------------------
+# 
 
 alienstorm.embedded.svi:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
@@ -879,14 +9447,966 @@ obj/alienstorm.svi/midres_io.o:	src/midres_io.asm
 obj/alienstorm.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.svi/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/alienstorm.svi:	alienstorm.embedded.svi $(subst PLATFORM,alienstorm.svi,$(OBJS)) $(subst PLATFORM,alienstorm.svi,$(LIB_OBJS)) obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_vdp_impl.o obj/alienstorm.svi/midres_io.o
-	$(CC88) +svi  -m $(LDFLAGS88) obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_io.o obj/alienstorm.svi/midres_vdp_impl.o $(subst PLATFORM,alienstorm.svi,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.svi,$(OBJS)) -o $(EXEDIR)/alienstorm.svi -create-app 
+$(EXEDIR)/alienstorm.svi:	alienstorm.embedded.svi obj/alienstorm.svi/midres_tile_019.o obj/alienstorm.svi/midres_tile_multicolor_008.o obj/alienstorm.svi/midres_tile_018.o obj/alienstorm.svi/midres_tile_005.o obj/alienstorm.svi/midres_tile_004.o obj/alienstorm.svi/midres_tile_multicolor_003.o obj/alienstorm.svi/midres_control_005.o obj/alienstorm.svi/midres_control_003.o obj/alienstorm.svi/midres_atari.o obj/alienstorm.svi/midres_tile_016.o obj/alienstorm.svi/midres_tile_000.o obj/alienstorm.svi/midres_atmos.o obj/alienstorm.svi/midres_c128.o obj/alienstorm.svi/midres_c16.o obj/alienstorm.svi/midres_c64.o obj/alienstorm.svi/midres_coleco.o obj/alienstorm.svi/midres_vdp.o obj/alienstorm.svi/midres_msx.o obj/alienstorm.svi/midres_mtx500.o obj/alienstorm.svi/midres_plus4.o obj/alienstorm.svi/midres_svi.o obj/alienstorm.svi/midres_vic20.o obj/alienstorm.svi/midres_tile_021.o obj/alienstorm.svi/midres_tile_multicolor_009.o obj/alienstorm.svi/midres_tile_020.o obj/alienstorm.svi/midres_screen_013.o obj/alienstorm.svi/midres_screen_012.o obj/alienstorm.svi/midres_tile_processing_005.o obj/alienstorm.svi/midres_tile_multicolor_001.o obj/alienstorm.svi/midres_tile_processing_004.o obj/alienstorm.svi/midres_frame_000.o obj/alienstorm.svi/midres_screen_000.o obj/alienstorm.svi/midres_frame_001.o obj/alienstorm.svi/midres_sound_005.o obj/alienstorm.svi/midres_sound_006.o obj/alienstorm.svi/midres_sound_007.o obj/alienstorm.svi/midres_tile_009.o obj/alienstorm.svi/midres_tile_008.o obj/alienstorm.svi/midres_tile_multicolor_005.o obj/alienstorm.svi/midres_tile_028.o obj/alienstorm.svi/midres_tile_multicolor_012.o obj/alienstorm.svi/midres_tile_027.o obj/alienstorm.svi/midres_control_004.o obj/alienstorm.svi/midres_tile_015.o obj/alienstorm.svi/midres_control_007.o obj/alienstorm.svi/midres_control_001.o obj/alienstorm.svi/midres.o obj/alienstorm.svi/game_alien_storm.o obj/alienstorm.svi/midres_data.o obj/alienstorm.svi/main.o obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_vdp_impl.o obj/alienstorm.svi/midres_io.o
+	$(CC88) +svi  -m $(LDFLAGS88) obj/alienstorm.svi/rawdata.o obj/alienstorm.svi/midres_io.o obj/alienstorm.svi/midres_vdp_impl.o obj/alienstorm.svi/midres_tile_019.o obj/alienstorm.svi/midres_tile_multicolor_008.o obj/alienstorm.svi/midres_tile_018.o obj/alienstorm.svi/midres_tile_005.o obj/alienstorm.svi/midres_tile_004.o obj/alienstorm.svi/midres_tile_multicolor_003.o obj/alienstorm.svi/midres_control_005.o obj/alienstorm.svi/midres_control_003.o obj/alienstorm.svi/midres_atari.o obj/alienstorm.svi/midres_tile_016.o obj/alienstorm.svi/midres_tile_000.o obj/alienstorm.svi/midres_atmos.o obj/alienstorm.svi/midres_c128.o obj/alienstorm.svi/midres_c16.o obj/alienstorm.svi/midres_c64.o obj/alienstorm.svi/midres_coleco.o obj/alienstorm.svi/midres_vdp.o obj/alienstorm.svi/midres_msx.o obj/alienstorm.svi/midres_mtx500.o obj/alienstorm.svi/midres_plus4.o obj/alienstorm.svi/midres_svi.o obj/alienstorm.svi/midres_vic20.o obj/alienstorm.svi/midres_tile_021.o obj/alienstorm.svi/midres_tile_multicolor_009.o obj/alienstorm.svi/midres_tile_020.o obj/alienstorm.svi/midres_screen_013.o obj/alienstorm.svi/midres_screen_012.o obj/alienstorm.svi/midres_tile_processing_005.o obj/alienstorm.svi/midres_tile_multicolor_001.o obj/alienstorm.svi/midres_tile_processing_004.o obj/alienstorm.svi/midres_frame_000.o obj/alienstorm.svi/midres_screen_000.o obj/alienstorm.svi/midres_frame_001.o obj/alienstorm.svi/midres_sound_005.o obj/alienstorm.svi/midres_sound_006.o obj/alienstorm.svi/midres_sound_007.o obj/alienstorm.svi/midres_tile_009.o obj/alienstorm.svi/midres_tile_008.o obj/alienstorm.svi/midres_tile_multicolor_005.o obj/alienstorm.svi/midres_tile_028.o obj/alienstorm.svi/midres_tile_multicolor_012.o obj/alienstorm.svi/midres_tile_027.o obj/alienstorm.svi/midres_control_004.o obj/alienstorm.svi/midres_tile_015.o obj/alienstorm.svi/midres_control_007.o obj/alienstorm.svi/midres_control_001.o obj/alienstorm.svi/midres.o obj/alienstorm.svi/game_alien_storm.o obj/alienstorm.svi/midres_data.o obj/alienstorm.svi/main.o -o $(EXEDIR)/alienstorm.svi -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.cas,$(EXEDIR)/alienstorm.svi.cas)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ELEVATOR FOR SVI 
 # -------------------------------------------------------------------
+# 
 
 elevator.embedded.svi:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator64.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
@@ -901,14 +10421,966 @@ obj/elevator.svi/midres_io.o:	src/midres_io.asm
 obj/elevator.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ELEVATOR__ -o $@ $(subst obj/elevator.svi/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/elevator.svi:	elevator.embedded.svi $(subst PLATFORM,elevator.svi,$(OBJS)) $(subst PLATFORM,elevator.svi,$(LIB_OBJS)) obj/elevator.svi/rawdata.o obj/elevator.svi/midres_vdp_impl.o obj/elevator.svi/midres_io.o
-	$(CC88) +svi  -m $(LDFLAGS88) obj/elevator.svi/rawdata.o obj/elevator.svi/midres_io.o obj/elevator.svi/midres_vdp_impl.o $(subst PLATFORM,elevator.svi,$(LIB_OBJS)) $(subst PLATFORM,elevator.svi,$(OBJS)) -o $(EXEDIR)/elevator.svi -create-app 
+$(EXEDIR)/elevator.svi:	elevator.embedded.svi obj/elevator.svi/midres_sound_005.o obj/elevator.svi/midres_atari.o obj/elevator.svi/midres_tile_016.o obj/elevator.svi/midres_tile_000.o obj/elevator.svi/midres_atmos.o obj/elevator.svi/midres_c128.o obj/elevator.svi/midres_c16.o obj/elevator.svi/midres_c64.o obj/elevator.svi/midres_coleco.o obj/elevator.svi/midres_vdp.o obj/elevator.svi/midres_msx.o obj/elevator.svi/midres_mtx500.o obj/elevator.svi/midres_plus4.o obj/elevator.svi/midres_svi.o obj/elevator.svi/midres_vic20.o obj/elevator.svi/midres_sound_006.o obj/elevator.svi/midres_sound_007.o obj/elevator.svi/midres_tile_015.o obj/elevator.svi/midres_screen_012.o obj/elevator.svi/midres_screen_000.o obj/elevator.svi/midres_tile_021.o obj/elevator.svi/midres_tile_multicolor_009.o obj/elevator.svi/midres_tile_020.o obj/elevator.svi/midres_tile_005.o obj/elevator.svi/midres_tile_004.o obj/elevator.svi/midres_tile_multicolor_003.o obj/elevator.svi/midres_tile_019.o obj/elevator.svi/midres_tile_multicolor_008.o obj/elevator.svi/midres_tile_018.o obj/elevator.svi/midres_tile_026.o obj/elevator.svi/midres_tile_multicolor_011.o obj/elevator.svi/midres_tile_025.o obj/elevator.svi/midres_tile_028.o obj/elevator.svi/midres_tile_multicolor_012.o obj/elevator.svi/midres_tile_027.o obj/elevator.svi/midres_control_001.o obj/elevator.svi/midres_control_000.o obj/elevator.svi/midres_screen_013.o obj/elevator.svi/midres_screen_006.o obj/elevator.svi/midres_control_002.o obj/elevator.svi/midres_screen_007.o obj/elevator.svi/midres_file_001.o obj/elevator.svi/midres_vanilla.o obj/elevator.svi/midres_screen_010.o obj/elevator.svi/midres_frame_000.o obj/elevator.svi/midres_frame_001.o obj/elevator.svi/midres.o obj/elevator.svi/game_elevator.o obj/elevator.svi/midres_data.o obj/elevator.svi/main.o obj/elevator.svi/rawdata.o obj/elevator.svi/midres_vdp_impl.o obj/elevator.svi/midres_io.o
+	$(CC88) +svi  -m $(LDFLAGS88) obj/elevator.svi/rawdata.o obj/elevator.svi/midres_io.o obj/elevator.svi/midres_vdp_impl.o obj/elevator.svi/midres_sound_005.o obj/elevator.svi/midres_atari.o obj/elevator.svi/midres_tile_016.o obj/elevator.svi/midres_tile_000.o obj/elevator.svi/midres_atmos.o obj/elevator.svi/midres_c128.o obj/elevator.svi/midres_c16.o obj/elevator.svi/midres_c64.o obj/elevator.svi/midres_coleco.o obj/elevator.svi/midres_vdp.o obj/elevator.svi/midres_msx.o obj/elevator.svi/midres_mtx500.o obj/elevator.svi/midres_plus4.o obj/elevator.svi/midres_svi.o obj/elevator.svi/midres_vic20.o obj/elevator.svi/midres_sound_006.o obj/elevator.svi/midres_sound_007.o obj/elevator.svi/midres_tile_015.o obj/elevator.svi/midres_screen_012.o obj/elevator.svi/midres_screen_000.o obj/elevator.svi/midres_tile_021.o obj/elevator.svi/midres_tile_multicolor_009.o obj/elevator.svi/midres_tile_020.o obj/elevator.svi/midres_tile_005.o obj/elevator.svi/midres_tile_004.o obj/elevator.svi/midres_tile_multicolor_003.o obj/elevator.svi/midres_tile_019.o obj/elevator.svi/midres_tile_multicolor_008.o obj/elevator.svi/midres_tile_018.o obj/elevator.svi/midres_tile_026.o obj/elevator.svi/midres_tile_multicolor_011.o obj/elevator.svi/midres_tile_025.o obj/elevator.svi/midres_tile_028.o obj/elevator.svi/midres_tile_multicolor_012.o obj/elevator.svi/midres_tile_027.o obj/elevator.svi/midres_control_001.o obj/elevator.svi/midres_control_000.o obj/elevator.svi/midres_screen_013.o obj/elevator.svi/midres_screen_006.o obj/elevator.svi/midres_control_002.o obj/elevator.svi/midres_screen_007.o obj/elevator.svi/midres_file_001.o obj/elevator.svi/midres_vanilla.o obj/elevator.svi/midres_screen_010.o obj/elevator.svi/midres_frame_000.o obj/elevator.svi/midres_frame_001.o obj/elevator.svi/midres.o obj/elevator.svi/game_elevator.o obj/elevator.svi/midres_data.o obj/elevator.svi/main.o -o $(EXEDIR)/elevator.svi -create-app 
 	$(call COPYFILES,$(EXEDIR)/elevator.cas,$(EXEDIR)/elevator.svi.cas)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- AIRATTACK FOR SVI 
 # -------------------------------------------------------------------
+# 
 
 airattack.embedded.svi:
 	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
@@ -923,14 +11395,966 @@ obj/airattack.svi/midres_io.o:	src/midres_io.asm
 obj/airattack.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__AIRATTACK__ -o $@ $(subst obj/airattack.svi/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/airattack.svi:	airattack.embedded.svi $(subst PLATFORM,airattack.svi,$(OBJS)) $(subst PLATFORM,airattack.svi,$(LIB_OBJS)) obj/airattack.svi/rawdata.o obj/airattack.svi/midres_vdp_impl.o obj/airattack.svi/midres_io.o
-	$(CC88) +svi  -m $(LDFLAGS88) obj/airattack.svi/rawdata.o obj/airattack.svi/midres_io.o obj/airattack.svi/midres_vdp_impl.o $(subst PLATFORM,airattack.svi,$(LIB_OBJS)) $(subst PLATFORM,airattack.svi,$(OBJS)) -o $(EXEDIR)/airattack.svi -create-app 
+$(EXEDIR)/airattack.svi:	airattack.embedded.svi obj/airattack.svi/midres_tile_005.o obj/airattack.svi/midres_tile_004.o obj/airattack.svi/midres_tile_multicolor_003.o obj/airattack.svi/midres_tile_026.o obj/airattack.svi/midres_tile_multicolor_011.o obj/airattack.svi/midres_tile_025.o obj/airattack.svi/midres_tile_processing_005.o obj/airattack.svi/midres_tile_multicolor_001.o obj/airattack.svi/midres_tile_processing_004.o obj/airattack.svi/midres_vdp.o obj/airattack.svi/midres_tile_processing_007.o obj/airattack.svi/midres_tile_000.o obj/airattack.svi/midres_atari.o obj/airattack.svi/midres_tile_016.o obj/airattack.svi/midres_atmos.o obj/airattack.svi/midres_c128.o obj/airattack.svi/midres_c16.o obj/airattack.svi/midres_c64.o obj/airattack.svi/midres_coleco.o obj/airattack.svi/midres_msx.o obj/airattack.svi/midres_mtx500.o obj/airattack.svi/midres_plus4.o obj/airattack.svi/midres_svi.o obj/airattack.svi/midres_vic20.o obj/airattack.svi/midres_tile_023.o obj/airattack.svi/midres_tile_022.o obj/airattack.svi/midres_tile_multicolor_010.o obj/airattack.svi/midres_frame_000.o obj/airattack.svi/midres_tile_014.o obj/airattack.svi/midres_tile_009.o obj/airattack.svi/midres_tile_008.o obj/airattack.svi/midres_tile_multicolor_005.o obj/airattack.svi/midres_sound_002.o obj/airattack.svi/midres_sound_001.o obj/airattack.svi/midres_tile_011.o obj/airattack.svi/midres_tile_multicolor_006.o obj/airattack.svi/midres_tile_010.o obj/airattack.svi/midres_control_000.o obj/airattack.svi/midres_sound_000.o obj/airattack.svi/midres_frame_001.o obj/airattack.svi/midres.o obj/airattack.svi/midres_screen_000.o obj/airattack.svi/midres_screen_006.o obj/airattack.svi/midres_control_002.o obj/airattack.svi/midres_screen_007.o obj/airattack.svi/midres_file_001.o obj/airattack.svi/midres_vanilla.o obj/airattack.svi/midres_screen_010.o obj/airattack.svi/midres_control_003.o obj/airattack.svi/game_air_attack.o obj/airattack.svi/midres_data.o obj/airattack.svi/main.o obj/airattack.svi/rawdata.o obj/airattack.svi/midres_vdp_impl.o obj/airattack.svi/midres_io.o
+	$(CC88) +svi  -m $(LDFLAGS88) obj/airattack.svi/rawdata.o obj/airattack.svi/midres_io.o obj/airattack.svi/midres_vdp_impl.o obj/airattack.svi/midres_tile_005.o obj/airattack.svi/midres_tile_004.o obj/airattack.svi/midres_tile_multicolor_003.o obj/airattack.svi/midres_tile_026.o obj/airattack.svi/midres_tile_multicolor_011.o obj/airattack.svi/midres_tile_025.o obj/airattack.svi/midres_tile_processing_005.o obj/airattack.svi/midres_tile_multicolor_001.o obj/airattack.svi/midres_tile_processing_004.o obj/airattack.svi/midres_vdp.o obj/airattack.svi/midres_tile_processing_007.o obj/airattack.svi/midres_tile_000.o obj/airattack.svi/midres_atari.o obj/airattack.svi/midres_tile_016.o obj/airattack.svi/midres_atmos.o obj/airattack.svi/midres_c128.o obj/airattack.svi/midres_c16.o obj/airattack.svi/midres_c64.o obj/airattack.svi/midres_coleco.o obj/airattack.svi/midres_msx.o obj/airattack.svi/midres_mtx500.o obj/airattack.svi/midres_plus4.o obj/airattack.svi/midres_svi.o obj/airattack.svi/midres_vic20.o obj/airattack.svi/midres_tile_023.o obj/airattack.svi/midres_tile_022.o obj/airattack.svi/midres_tile_multicolor_010.o obj/airattack.svi/midres_frame_000.o obj/airattack.svi/midres_tile_014.o obj/airattack.svi/midres_tile_009.o obj/airattack.svi/midres_tile_008.o obj/airattack.svi/midres_tile_multicolor_005.o obj/airattack.svi/midres_sound_002.o obj/airattack.svi/midres_sound_001.o obj/airattack.svi/midres_tile_011.o obj/airattack.svi/midres_tile_multicolor_006.o obj/airattack.svi/midres_tile_010.o obj/airattack.svi/midres_control_000.o obj/airattack.svi/midres_sound_000.o obj/airattack.svi/midres_frame_001.o obj/airattack.svi/midres.o obj/airattack.svi/midres_screen_000.o obj/airattack.svi/midres_screen_006.o obj/airattack.svi/midres_control_002.o obj/airattack.svi/midres_screen_007.o obj/airattack.svi/midres_file_001.o obj/airattack.svi/midres_vanilla.o obj/airattack.svi/midres_screen_010.o obj/airattack.svi/midres_control_003.o obj/airattack.svi/game_air_attack.o obj/airattack.svi/midres_data.o obj/airattack.svi/main.o -o $(EXEDIR)/airattack.svi -create-app 
 	$(call COPYFILES,$(EXEDIR)/airattack.cas,$(EXEDIR)/airattack.svi.cas)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- TOTTO FOR SVI 
 # -------------------------------------------------------------------
+# 
 
 totto.embedded.svi:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -c src/rawdata.c -h src/rawdata.h
@@ -945,17 +12369,969 @@ obj/totto.svi/midres_io.o:	src/midres_io.asm
 obj/totto.svi/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__TOTTO__ -o $@ $(subst obj/totto.svi/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/totto.svi:	totto.embedded.svi $(subst PLATFORM,totto.svi,$(OBJS)) $(subst PLATFORM,totto.svi,$(LIB_OBJS)) obj/totto.svi/rawdata.o obj/totto.svi/midres_vdp_impl.o obj/totto.svi/midres_io.o
-	$(CC88) +svi  -m $(LDFLAGS88) obj/totto.svi/rawdata.o obj/totto.svi/midres_io.o obj/totto.svi/midres_vdp_impl.o $(subst PLATFORM,totto.svi,$(LIB_OBJS)) $(subst PLATFORM,totto.svi,$(OBJS)) -o $(EXEDIR)/totto.svi -create-app 
+$(EXEDIR)/totto.svi:	totto.embedded.svi obj/totto.svi/midres_tile_005.o obj/totto.svi/midres_tile_004.o obj/totto.svi/midres_tile_multicolor_003.o obj/totto.svi/midres_tile_023.o obj/totto.svi/midres_tile_022.o obj/totto.svi/midres_tile_multicolor_010.o obj/totto.svi/midres_tile_processing_009.o obj/totto.svi/midres_vdp.o obj/totto.svi/midres_tile_processing_012.o obj/totto.svi/midres_tile_multicolor_002.o obj/totto.svi/midres_tile_processing_011.o obj/totto.svi/midres_tile_processing_002.o obj/totto.svi/midres_tile_multicolor_000.o obj/totto.svi/midres_tile_processing_001.o obj/totto.svi/midres_tile_processing_005.o obj/totto.svi/midres_tile_multicolor_001.o obj/totto.svi/midres_tile_processing_004.o obj/totto.svi/midres_screen_000.o obj/totto.svi/midres_tile_000.o obj/totto.svi/midres_atari.o obj/totto.svi/midres_tile_016.o obj/totto.svi/midres_atmos.o obj/totto.svi/midres_c128.o obj/totto.svi/midres_c16.o obj/totto.svi/midres_c64.o obj/totto.svi/midres_coleco.o obj/totto.svi/midres_msx.o obj/totto.svi/midres_mtx500.o obj/totto.svi/midres_plus4.o obj/totto.svi/midres_svi.o obj/totto.svi/midres_vic20.o obj/totto.svi/midres_tile_007.o obj/totto.svi/midres_tile_006.o obj/totto.svi/midres_tile_multicolor_004.o obj/totto.svi/midres_tile_028.o obj/totto.svi/midres_tile_multicolor_012.o obj/totto.svi/midres_tile_027.o obj/totto.svi/midres_frame_000.o obj/totto.svi/midres_screen_012.o obj/totto.svi/midres_tile_019.o obj/totto.svi/midres_tile_multicolor_008.o obj/totto.svi/midres_tile_018.o obj/totto.svi/midres_frame_001.o obj/totto.svi/midres_control_002.o obj/totto.svi/midres_tile_013.o obj/totto.svi/midres_tile_multicolor_007.o obj/totto.svi/midres_tile_012.o obj/totto.svi/midres_tile_processing_016.o obj/totto.svi/midres_sound_000.o obj/totto.svi/midres_sound_001.o obj/totto.svi/midres_control_000.o obj/totto.svi/midres_sound_002.o obj/totto.svi/midres_tile_009.o obj/totto.svi/midres_tile_008.o obj/totto.svi/midres_tile_multicolor_005.o obj/totto.svi/midres_screen_006.o obj/totto.svi/midres_screen_010.o obj/totto.svi/midres.o obj/totto.svi/game_totto.o obj/totto.svi/midres_data.o obj/totto.svi/main.o obj/totto.svi/rawdata.o obj/totto.svi/midres_vdp_impl.o obj/totto.svi/midres_io.o
+	$(CC88) +svi  -m $(LDFLAGS88) obj/totto.svi/rawdata.o obj/totto.svi/midres_io.o obj/totto.svi/midres_vdp_impl.o obj/totto.svi/midres_tile_005.o obj/totto.svi/midres_tile_004.o obj/totto.svi/midres_tile_multicolor_003.o obj/totto.svi/midres_tile_023.o obj/totto.svi/midres_tile_022.o obj/totto.svi/midres_tile_multicolor_010.o obj/totto.svi/midres_tile_processing_009.o obj/totto.svi/midres_vdp.o obj/totto.svi/midres_tile_processing_012.o obj/totto.svi/midres_tile_multicolor_002.o obj/totto.svi/midres_tile_processing_011.o obj/totto.svi/midres_tile_processing_002.o obj/totto.svi/midres_tile_multicolor_000.o obj/totto.svi/midres_tile_processing_001.o obj/totto.svi/midres_tile_processing_005.o obj/totto.svi/midres_tile_multicolor_001.o obj/totto.svi/midres_tile_processing_004.o obj/totto.svi/midres_screen_000.o obj/totto.svi/midres_tile_000.o obj/totto.svi/midres_atari.o obj/totto.svi/midres_tile_016.o obj/totto.svi/midres_atmos.o obj/totto.svi/midres_c128.o obj/totto.svi/midres_c16.o obj/totto.svi/midres_c64.o obj/totto.svi/midres_coleco.o obj/totto.svi/midres_msx.o obj/totto.svi/midres_mtx500.o obj/totto.svi/midres_plus4.o obj/totto.svi/midres_svi.o obj/totto.svi/midres_vic20.o obj/totto.svi/midres_tile_007.o obj/totto.svi/midres_tile_006.o obj/totto.svi/midres_tile_multicolor_004.o obj/totto.svi/midres_tile_028.o obj/totto.svi/midres_tile_multicolor_012.o obj/totto.svi/midres_tile_027.o obj/totto.svi/midres_frame_000.o obj/totto.svi/midres_screen_012.o obj/totto.svi/midres_tile_019.o obj/totto.svi/midres_tile_multicolor_008.o obj/totto.svi/midres_tile_018.o obj/totto.svi/midres_frame_001.o obj/totto.svi/midres_control_002.o obj/totto.svi/midres_tile_013.o obj/totto.svi/midres_tile_multicolor_007.o obj/totto.svi/midres_tile_012.o obj/totto.svi/midres_tile_processing_016.o obj/totto.svi/midres_sound_000.o obj/totto.svi/midres_sound_001.o obj/totto.svi/midres_control_000.o obj/totto.svi/midres_sound_002.o obj/totto.svi/midres_tile_009.o obj/totto.svi/midres_tile_008.o obj/totto.svi/midres_tile_multicolor_005.o obj/totto.svi/midres_screen_006.o obj/totto.svi/midres_screen_010.o obj/totto.svi/midres.o obj/totto.svi/game_totto.o obj/totto.svi/midres_data.o obj/totto.svi/main.o -o $(EXEDIR)/totto.svi -create-app 
 	$(call COPYFILES,$(EXEDIR)/totto.cas,$(EXEDIR)/totto.svi.cas)
 
                     
 #!!! missing resources for joycheck (svi)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ALIENSTORM FOR MTX500 
 # -------------------------------------------------------------------
+# 
 
 alienstorm.embedded.mtx500:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
@@ -970,14 +13346,966 @@ obj/alienstorm.mtx500/midres_io.o:	src/midres_io.asm
 obj/alienstorm.mtx500/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.mtx500/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/alienstorm.mtx500:	alienstorm.embedded.mtx500 $(subst PLATFORM,alienstorm.mtx500,$(OBJS)) $(subst PLATFORM,alienstorm.mtx500,$(LIB_OBJS)) obj/alienstorm.mtx500/rawdata.o obj/alienstorm.mtx500/midres_vdp_impl.o obj/alienstorm.mtx500/midres_io.o
-	$(CC88) +mtx  -m $(LDFLAGS88) obj/alienstorm.mtx500/rawdata.o obj/alienstorm.mtx500/midres_io.o obj/alienstorm.mtx500/midres_vdp_impl.o $(subst PLATFORM,alienstorm.mtx500,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.mtx500,$(OBJS)) -o $(EXEDIR)/alienstorm.mtx500 -create-app 
+$(EXEDIR)/alienstorm.mtx500:	alienstorm.embedded.mtx500 obj/alienstorm.mtx500/midres_tile_019.o obj/alienstorm.mtx500/midres_tile_multicolor_008.o obj/alienstorm.mtx500/midres_tile_018.o obj/alienstorm.mtx500/midres_tile_005.o obj/alienstorm.mtx500/midres_tile_004.o obj/alienstorm.mtx500/midres_tile_multicolor_003.o obj/alienstorm.mtx500/midres_control_005.o obj/alienstorm.mtx500/midres_control_003.o obj/alienstorm.mtx500/midres_atari.o obj/alienstorm.mtx500/midres_tile_016.o obj/alienstorm.mtx500/midres_tile_000.o obj/alienstorm.mtx500/midres_atmos.o obj/alienstorm.mtx500/midres_c128.o obj/alienstorm.mtx500/midres_c16.o obj/alienstorm.mtx500/midres_c64.o obj/alienstorm.mtx500/midres_coleco.o obj/alienstorm.mtx500/midres_vdp.o obj/alienstorm.mtx500/midres_msx.o obj/alienstorm.mtx500/midres_mtx500.o obj/alienstorm.mtx500/midres_plus4.o obj/alienstorm.mtx500/midres_svi.o obj/alienstorm.mtx500/midres_vic20.o obj/alienstorm.mtx500/midres_tile_021.o obj/alienstorm.mtx500/midres_tile_multicolor_009.o obj/alienstorm.mtx500/midres_tile_020.o obj/alienstorm.mtx500/midres_screen_013.o obj/alienstorm.mtx500/midres_screen_012.o obj/alienstorm.mtx500/midres_tile_processing_005.o obj/alienstorm.mtx500/midres_tile_multicolor_001.o obj/alienstorm.mtx500/midres_tile_processing_004.o obj/alienstorm.mtx500/midres_frame_000.o obj/alienstorm.mtx500/midres_screen_000.o obj/alienstorm.mtx500/midres_frame_001.o obj/alienstorm.mtx500/midres_sound_005.o obj/alienstorm.mtx500/midres_sound_006.o obj/alienstorm.mtx500/midres_sound_007.o obj/alienstorm.mtx500/midres_tile_009.o obj/alienstorm.mtx500/midres_tile_008.o obj/alienstorm.mtx500/midres_tile_multicolor_005.o obj/alienstorm.mtx500/midres_tile_028.o obj/alienstorm.mtx500/midres_tile_multicolor_012.o obj/alienstorm.mtx500/midres_tile_027.o obj/alienstorm.mtx500/midres_control_004.o obj/alienstorm.mtx500/midres_tile_015.o obj/alienstorm.mtx500/midres_control_007.o obj/alienstorm.mtx500/midres_control_001.o obj/alienstorm.mtx500/midres.o obj/alienstorm.mtx500/game_alien_storm.o obj/alienstorm.mtx500/midres_data.o obj/alienstorm.mtx500/main.o obj/alienstorm.mtx500/rawdata.o obj/alienstorm.mtx500/midres_vdp_impl.o obj/alienstorm.mtx500/midres_io.o
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/alienstorm.mtx500/rawdata.o obj/alienstorm.mtx500/midres_io.o obj/alienstorm.mtx500/midres_vdp_impl.o obj/alienstorm.mtx500/midres_tile_019.o obj/alienstorm.mtx500/midres_tile_multicolor_008.o obj/alienstorm.mtx500/midres_tile_018.o obj/alienstorm.mtx500/midres_tile_005.o obj/alienstorm.mtx500/midres_tile_004.o obj/alienstorm.mtx500/midres_tile_multicolor_003.o obj/alienstorm.mtx500/midres_control_005.o obj/alienstorm.mtx500/midres_control_003.o obj/alienstorm.mtx500/midres_atari.o obj/alienstorm.mtx500/midres_tile_016.o obj/alienstorm.mtx500/midres_tile_000.o obj/alienstorm.mtx500/midres_atmos.o obj/alienstorm.mtx500/midres_c128.o obj/alienstorm.mtx500/midres_c16.o obj/alienstorm.mtx500/midres_c64.o obj/alienstorm.mtx500/midres_coleco.o obj/alienstorm.mtx500/midres_vdp.o obj/alienstorm.mtx500/midres_msx.o obj/alienstorm.mtx500/midres_mtx500.o obj/alienstorm.mtx500/midres_plus4.o obj/alienstorm.mtx500/midres_svi.o obj/alienstorm.mtx500/midres_vic20.o obj/alienstorm.mtx500/midres_tile_021.o obj/alienstorm.mtx500/midres_tile_multicolor_009.o obj/alienstorm.mtx500/midres_tile_020.o obj/alienstorm.mtx500/midres_screen_013.o obj/alienstorm.mtx500/midres_screen_012.o obj/alienstorm.mtx500/midres_tile_processing_005.o obj/alienstorm.mtx500/midres_tile_multicolor_001.o obj/alienstorm.mtx500/midres_tile_processing_004.o obj/alienstorm.mtx500/midres_frame_000.o obj/alienstorm.mtx500/midres_screen_000.o obj/alienstorm.mtx500/midres_frame_001.o obj/alienstorm.mtx500/midres_sound_005.o obj/alienstorm.mtx500/midres_sound_006.o obj/alienstorm.mtx500/midres_sound_007.o obj/alienstorm.mtx500/midres_tile_009.o obj/alienstorm.mtx500/midres_tile_008.o obj/alienstorm.mtx500/midres_tile_multicolor_005.o obj/alienstorm.mtx500/midres_tile_028.o obj/alienstorm.mtx500/midres_tile_multicolor_012.o obj/alienstorm.mtx500/midres_tile_027.o obj/alienstorm.mtx500/midres_control_004.o obj/alienstorm.mtx500/midres_tile_015.o obj/alienstorm.mtx500/midres_control_007.o obj/alienstorm.mtx500/midres_control_001.o obj/alienstorm.mtx500/midres.o obj/alienstorm.mtx500/game_alien_storm.o obj/alienstorm.mtx500/midres_data.o obj/alienstorm.mtx500/main.o -o $(EXEDIR)/alienstorm.mtx500 -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.mtx500.cas,$(EXEDIR)/alienstorm.mtx500.mtx)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ELEVATOR FOR MTX500 
 # -------------------------------------------------------------------
+# 
 
 elevator.embedded.mtx500:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator64.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
@@ -992,14 +14320,966 @@ obj/elevator.mtx500/midres_io.o:	src/midres_io.asm
 obj/elevator.mtx500/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ELEVATOR__ -o $@ $(subst obj/elevator.mtx500/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/elevator.mtx500:	elevator.embedded.mtx500 $(subst PLATFORM,elevator.mtx500,$(OBJS)) $(subst PLATFORM,elevator.mtx500,$(LIB_OBJS)) obj/elevator.mtx500/rawdata.o obj/elevator.mtx500/midres_vdp_impl.o obj/elevator.mtx500/midres_io.o
-	$(CC88) +mtx  -m $(LDFLAGS88) obj/elevator.mtx500/rawdata.o obj/elevator.mtx500/midres_io.o obj/elevator.mtx500/midres_vdp_impl.o $(subst PLATFORM,elevator.mtx500,$(LIB_OBJS)) $(subst PLATFORM,elevator.mtx500,$(OBJS)) -o $(EXEDIR)/elevator.mtx500 -create-app 
+$(EXEDIR)/elevator.mtx500:	elevator.embedded.mtx500 obj/elevator.mtx500/midres_sound_005.o obj/elevator.mtx500/midres_atari.o obj/elevator.mtx500/midres_tile_016.o obj/elevator.mtx500/midres_tile_000.o obj/elevator.mtx500/midres_atmos.o obj/elevator.mtx500/midres_c128.o obj/elevator.mtx500/midres_c16.o obj/elevator.mtx500/midres_c64.o obj/elevator.mtx500/midres_coleco.o obj/elevator.mtx500/midres_vdp.o obj/elevator.mtx500/midres_msx.o obj/elevator.mtx500/midres_mtx500.o obj/elevator.mtx500/midres_plus4.o obj/elevator.mtx500/midres_svi.o obj/elevator.mtx500/midres_vic20.o obj/elevator.mtx500/midres_sound_006.o obj/elevator.mtx500/midres_sound_007.o obj/elevator.mtx500/midres_tile_015.o obj/elevator.mtx500/midres_screen_012.o obj/elevator.mtx500/midres_screen_000.o obj/elevator.mtx500/midres_tile_021.o obj/elevator.mtx500/midres_tile_multicolor_009.o obj/elevator.mtx500/midres_tile_020.o obj/elevator.mtx500/midres_tile_005.o obj/elevator.mtx500/midres_tile_004.o obj/elevator.mtx500/midres_tile_multicolor_003.o obj/elevator.mtx500/midres_tile_019.o obj/elevator.mtx500/midres_tile_multicolor_008.o obj/elevator.mtx500/midres_tile_018.o obj/elevator.mtx500/midres_tile_026.o obj/elevator.mtx500/midres_tile_multicolor_011.o obj/elevator.mtx500/midres_tile_025.o obj/elevator.mtx500/midres_tile_028.o obj/elevator.mtx500/midres_tile_multicolor_012.o obj/elevator.mtx500/midres_tile_027.o obj/elevator.mtx500/midres_control_001.o obj/elevator.mtx500/midres_control_000.o obj/elevator.mtx500/midres_screen_013.o obj/elevator.mtx500/midres_screen_006.o obj/elevator.mtx500/midres_control_002.o obj/elevator.mtx500/midres_screen_007.o obj/elevator.mtx500/midres_file_001.o obj/elevator.mtx500/midres_vanilla.o obj/elevator.mtx500/midres_screen_010.o obj/elevator.mtx500/midres_frame_000.o obj/elevator.mtx500/midres_frame_001.o obj/elevator.mtx500/midres.o obj/elevator.mtx500/game_elevator.o obj/elevator.mtx500/midres_data.o obj/elevator.mtx500/main.o obj/elevator.mtx500/rawdata.o obj/elevator.mtx500/midres_vdp_impl.o obj/elevator.mtx500/midres_io.o
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/elevator.mtx500/rawdata.o obj/elevator.mtx500/midres_io.o obj/elevator.mtx500/midres_vdp_impl.o obj/elevator.mtx500/midres_sound_005.o obj/elevator.mtx500/midres_atari.o obj/elevator.mtx500/midres_tile_016.o obj/elevator.mtx500/midres_tile_000.o obj/elevator.mtx500/midres_atmos.o obj/elevator.mtx500/midres_c128.o obj/elevator.mtx500/midres_c16.o obj/elevator.mtx500/midres_c64.o obj/elevator.mtx500/midres_coleco.o obj/elevator.mtx500/midres_vdp.o obj/elevator.mtx500/midres_msx.o obj/elevator.mtx500/midres_mtx500.o obj/elevator.mtx500/midres_plus4.o obj/elevator.mtx500/midres_svi.o obj/elevator.mtx500/midres_vic20.o obj/elevator.mtx500/midres_sound_006.o obj/elevator.mtx500/midres_sound_007.o obj/elevator.mtx500/midres_tile_015.o obj/elevator.mtx500/midres_screen_012.o obj/elevator.mtx500/midres_screen_000.o obj/elevator.mtx500/midres_tile_021.o obj/elevator.mtx500/midres_tile_multicolor_009.o obj/elevator.mtx500/midres_tile_020.o obj/elevator.mtx500/midres_tile_005.o obj/elevator.mtx500/midres_tile_004.o obj/elevator.mtx500/midres_tile_multicolor_003.o obj/elevator.mtx500/midres_tile_019.o obj/elevator.mtx500/midres_tile_multicolor_008.o obj/elevator.mtx500/midres_tile_018.o obj/elevator.mtx500/midres_tile_026.o obj/elevator.mtx500/midres_tile_multicolor_011.o obj/elevator.mtx500/midres_tile_025.o obj/elevator.mtx500/midres_tile_028.o obj/elevator.mtx500/midres_tile_multicolor_012.o obj/elevator.mtx500/midres_tile_027.o obj/elevator.mtx500/midres_control_001.o obj/elevator.mtx500/midres_control_000.o obj/elevator.mtx500/midres_screen_013.o obj/elevator.mtx500/midres_screen_006.o obj/elevator.mtx500/midres_control_002.o obj/elevator.mtx500/midres_screen_007.o obj/elevator.mtx500/midres_file_001.o obj/elevator.mtx500/midres_vanilla.o obj/elevator.mtx500/midres_screen_010.o obj/elevator.mtx500/midres_frame_000.o obj/elevator.mtx500/midres_frame_001.o obj/elevator.mtx500/midres.o obj/elevator.mtx500/game_elevator.o obj/elevator.mtx500/midres_data.o obj/elevator.mtx500/main.o -o $(EXEDIR)/elevator.mtx500 -create-app 
 	$(call COPYFILES,$(EXEDIR)/elevator.mtx500.cas,$(EXEDIR)/elevator.mtx500.mtx)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- AIRATTACK FOR MTX500 
 # -------------------------------------------------------------------
+# 
 
 airattack.embedded.mtx500:
 	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
@@ -1014,14 +15294,966 @@ obj/airattack.mtx500/midres_io.o:	src/midres_io.asm
 obj/airattack.mtx500/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__AIRATTACK__ -o $@ $(subst obj/airattack.mtx500/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/airattack.mtx500:	airattack.embedded.mtx500 $(subst PLATFORM,airattack.mtx500,$(OBJS)) $(subst PLATFORM,airattack.mtx500,$(LIB_OBJS)) obj/airattack.mtx500/rawdata.o obj/airattack.mtx500/midres_vdp_impl.o obj/airattack.mtx500/midres_io.o
-	$(CC88) +mtx  -m $(LDFLAGS88) obj/airattack.mtx500/rawdata.o obj/airattack.mtx500/midres_io.o obj/airattack.mtx500/midres_vdp_impl.o $(subst PLATFORM,airattack.mtx500,$(LIB_OBJS)) $(subst PLATFORM,airattack.mtx500,$(OBJS)) -o $(EXEDIR)/airattack.mtx500 -create-app 
+$(EXEDIR)/airattack.mtx500:	airattack.embedded.mtx500 obj/airattack.mtx500/midres_tile_005.o obj/airattack.mtx500/midres_tile_004.o obj/airattack.mtx500/midres_tile_multicolor_003.o obj/airattack.mtx500/midres_tile_026.o obj/airattack.mtx500/midres_tile_multicolor_011.o obj/airattack.mtx500/midres_tile_025.o obj/airattack.mtx500/midres_tile_processing_005.o obj/airattack.mtx500/midres_tile_multicolor_001.o obj/airattack.mtx500/midres_tile_processing_004.o obj/airattack.mtx500/midres_vdp.o obj/airattack.mtx500/midres_tile_processing_007.o obj/airattack.mtx500/midres_tile_000.o obj/airattack.mtx500/midres_atari.o obj/airattack.mtx500/midres_tile_016.o obj/airattack.mtx500/midres_atmos.o obj/airattack.mtx500/midres_c128.o obj/airattack.mtx500/midres_c16.o obj/airattack.mtx500/midres_c64.o obj/airattack.mtx500/midres_coleco.o obj/airattack.mtx500/midres_msx.o obj/airattack.mtx500/midres_mtx500.o obj/airattack.mtx500/midres_plus4.o obj/airattack.mtx500/midres_svi.o obj/airattack.mtx500/midres_vic20.o obj/airattack.mtx500/midres_tile_023.o obj/airattack.mtx500/midres_tile_022.o obj/airattack.mtx500/midres_tile_multicolor_010.o obj/airattack.mtx500/midres_frame_000.o obj/airattack.mtx500/midres_tile_014.o obj/airattack.mtx500/midres_tile_009.o obj/airattack.mtx500/midres_tile_008.o obj/airattack.mtx500/midres_tile_multicolor_005.o obj/airattack.mtx500/midres_sound_002.o obj/airattack.mtx500/midres_sound_001.o obj/airattack.mtx500/midres_tile_011.o obj/airattack.mtx500/midres_tile_multicolor_006.o obj/airattack.mtx500/midres_tile_010.o obj/airattack.mtx500/midres_control_000.o obj/airattack.mtx500/midres_sound_000.o obj/airattack.mtx500/midres_frame_001.o obj/airattack.mtx500/midres.o obj/airattack.mtx500/midres_screen_000.o obj/airattack.mtx500/midres_screen_006.o obj/airattack.mtx500/midres_control_002.o obj/airattack.mtx500/midres_screen_007.o obj/airattack.mtx500/midres_file_001.o obj/airattack.mtx500/midres_vanilla.o obj/airattack.mtx500/midres_screen_010.o obj/airattack.mtx500/midres_control_003.o obj/airattack.mtx500/game_air_attack.o obj/airattack.mtx500/midres_data.o obj/airattack.mtx500/main.o obj/airattack.mtx500/rawdata.o obj/airattack.mtx500/midres_vdp_impl.o obj/airattack.mtx500/midres_io.o
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/airattack.mtx500/rawdata.o obj/airattack.mtx500/midres_io.o obj/airattack.mtx500/midres_vdp_impl.o obj/airattack.mtx500/midres_tile_005.o obj/airattack.mtx500/midres_tile_004.o obj/airattack.mtx500/midres_tile_multicolor_003.o obj/airattack.mtx500/midres_tile_026.o obj/airattack.mtx500/midres_tile_multicolor_011.o obj/airattack.mtx500/midres_tile_025.o obj/airattack.mtx500/midres_tile_processing_005.o obj/airattack.mtx500/midres_tile_multicolor_001.o obj/airattack.mtx500/midres_tile_processing_004.o obj/airattack.mtx500/midres_vdp.o obj/airattack.mtx500/midres_tile_processing_007.o obj/airattack.mtx500/midres_tile_000.o obj/airattack.mtx500/midres_atari.o obj/airattack.mtx500/midres_tile_016.o obj/airattack.mtx500/midres_atmos.o obj/airattack.mtx500/midres_c128.o obj/airattack.mtx500/midres_c16.o obj/airattack.mtx500/midres_c64.o obj/airattack.mtx500/midres_coleco.o obj/airattack.mtx500/midres_msx.o obj/airattack.mtx500/midres_mtx500.o obj/airattack.mtx500/midres_plus4.o obj/airattack.mtx500/midres_svi.o obj/airattack.mtx500/midres_vic20.o obj/airattack.mtx500/midres_tile_023.o obj/airattack.mtx500/midres_tile_022.o obj/airattack.mtx500/midres_tile_multicolor_010.o obj/airattack.mtx500/midres_frame_000.o obj/airattack.mtx500/midres_tile_014.o obj/airattack.mtx500/midres_tile_009.o obj/airattack.mtx500/midres_tile_008.o obj/airattack.mtx500/midres_tile_multicolor_005.o obj/airattack.mtx500/midres_sound_002.o obj/airattack.mtx500/midres_sound_001.o obj/airattack.mtx500/midres_tile_011.o obj/airattack.mtx500/midres_tile_multicolor_006.o obj/airattack.mtx500/midres_tile_010.o obj/airattack.mtx500/midres_control_000.o obj/airattack.mtx500/midres_sound_000.o obj/airattack.mtx500/midres_frame_001.o obj/airattack.mtx500/midres.o obj/airattack.mtx500/midres_screen_000.o obj/airattack.mtx500/midres_screen_006.o obj/airattack.mtx500/midres_control_002.o obj/airattack.mtx500/midres_screen_007.o obj/airattack.mtx500/midres_file_001.o obj/airattack.mtx500/midres_vanilla.o obj/airattack.mtx500/midres_screen_010.o obj/airattack.mtx500/midres_control_003.o obj/airattack.mtx500/game_air_attack.o obj/airattack.mtx500/midres_data.o obj/airattack.mtx500/main.o -o $(EXEDIR)/airattack.mtx500 -create-app 
 	$(call COPYFILES,$(EXEDIR)/airattack.mtx500.cas,$(EXEDIR)/airattack.mtx500.mtx)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- TOTTO FOR MTX500 
 # -------------------------------------------------------------------
+# 
 
 totto.embedded.mtx500:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -c src/rawdata.c -h src/rawdata.h
@@ -1036,17 +16268,969 @@ obj/totto.mtx500/midres_io.o:	src/midres_io.asm
 obj/totto.mtx500/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__TOTTO__ -o $@ $(subst obj/totto.mtx500/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/totto.mtx500:	totto.embedded.mtx500 $(subst PLATFORM,totto.mtx500,$(OBJS)) $(subst PLATFORM,totto.mtx500,$(LIB_OBJS)) obj/totto.mtx500/rawdata.o obj/totto.mtx500/midres_vdp_impl.o obj/totto.mtx500/midres_io.o
-	$(CC88) +mtx  -m $(LDFLAGS88) obj/totto.mtx500/rawdata.o obj/totto.mtx500/midres_io.o obj/totto.mtx500/midres_vdp_impl.o $(subst PLATFORM,totto.mtx500,$(LIB_OBJS)) $(subst PLATFORM,totto.mtx500,$(OBJS)) -o $(EXEDIR)/totto.mtx500 -create-app 
+$(EXEDIR)/totto.mtx500:	totto.embedded.mtx500 obj/totto.mtx500/midres_tile_005.o obj/totto.mtx500/midres_tile_004.o obj/totto.mtx500/midres_tile_multicolor_003.o obj/totto.mtx500/midres_tile_023.o obj/totto.mtx500/midres_tile_022.o obj/totto.mtx500/midres_tile_multicolor_010.o obj/totto.mtx500/midres_tile_processing_009.o obj/totto.mtx500/midres_vdp.o obj/totto.mtx500/midres_tile_processing_012.o obj/totto.mtx500/midres_tile_multicolor_002.o obj/totto.mtx500/midres_tile_processing_011.o obj/totto.mtx500/midres_tile_processing_002.o obj/totto.mtx500/midres_tile_multicolor_000.o obj/totto.mtx500/midres_tile_processing_001.o obj/totto.mtx500/midres_tile_processing_005.o obj/totto.mtx500/midres_tile_multicolor_001.o obj/totto.mtx500/midres_tile_processing_004.o obj/totto.mtx500/midres_screen_000.o obj/totto.mtx500/midres_tile_000.o obj/totto.mtx500/midres_atari.o obj/totto.mtx500/midres_tile_016.o obj/totto.mtx500/midres_atmos.o obj/totto.mtx500/midres_c128.o obj/totto.mtx500/midres_c16.o obj/totto.mtx500/midres_c64.o obj/totto.mtx500/midres_coleco.o obj/totto.mtx500/midres_msx.o obj/totto.mtx500/midres_mtx500.o obj/totto.mtx500/midres_plus4.o obj/totto.mtx500/midres_svi.o obj/totto.mtx500/midres_vic20.o obj/totto.mtx500/midres_tile_007.o obj/totto.mtx500/midres_tile_006.o obj/totto.mtx500/midres_tile_multicolor_004.o obj/totto.mtx500/midres_tile_028.o obj/totto.mtx500/midres_tile_multicolor_012.o obj/totto.mtx500/midres_tile_027.o obj/totto.mtx500/midres_frame_000.o obj/totto.mtx500/midres_screen_012.o obj/totto.mtx500/midres_tile_019.o obj/totto.mtx500/midres_tile_multicolor_008.o obj/totto.mtx500/midres_tile_018.o obj/totto.mtx500/midres_frame_001.o obj/totto.mtx500/midres_control_002.o obj/totto.mtx500/midres_tile_013.o obj/totto.mtx500/midres_tile_multicolor_007.o obj/totto.mtx500/midres_tile_012.o obj/totto.mtx500/midres_tile_processing_016.o obj/totto.mtx500/midres_sound_000.o obj/totto.mtx500/midres_sound_001.o obj/totto.mtx500/midres_control_000.o obj/totto.mtx500/midres_sound_002.o obj/totto.mtx500/midres_tile_009.o obj/totto.mtx500/midres_tile_008.o obj/totto.mtx500/midres_tile_multicolor_005.o obj/totto.mtx500/midres_screen_006.o obj/totto.mtx500/midres_screen_010.o obj/totto.mtx500/midres.o obj/totto.mtx500/game_totto.o obj/totto.mtx500/midres_data.o obj/totto.mtx500/main.o obj/totto.mtx500/rawdata.o obj/totto.mtx500/midres_vdp_impl.o obj/totto.mtx500/midres_io.o
+	$(CC88) +mtx  -m $(LDFLAGS88) obj/totto.mtx500/rawdata.o obj/totto.mtx500/midres_io.o obj/totto.mtx500/midres_vdp_impl.o obj/totto.mtx500/midres_tile_005.o obj/totto.mtx500/midres_tile_004.o obj/totto.mtx500/midres_tile_multicolor_003.o obj/totto.mtx500/midres_tile_023.o obj/totto.mtx500/midres_tile_022.o obj/totto.mtx500/midres_tile_multicolor_010.o obj/totto.mtx500/midres_tile_processing_009.o obj/totto.mtx500/midres_vdp.o obj/totto.mtx500/midres_tile_processing_012.o obj/totto.mtx500/midres_tile_multicolor_002.o obj/totto.mtx500/midres_tile_processing_011.o obj/totto.mtx500/midres_tile_processing_002.o obj/totto.mtx500/midres_tile_multicolor_000.o obj/totto.mtx500/midres_tile_processing_001.o obj/totto.mtx500/midres_tile_processing_005.o obj/totto.mtx500/midres_tile_multicolor_001.o obj/totto.mtx500/midres_tile_processing_004.o obj/totto.mtx500/midres_screen_000.o obj/totto.mtx500/midres_tile_000.o obj/totto.mtx500/midres_atari.o obj/totto.mtx500/midres_tile_016.o obj/totto.mtx500/midres_atmos.o obj/totto.mtx500/midres_c128.o obj/totto.mtx500/midres_c16.o obj/totto.mtx500/midres_c64.o obj/totto.mtx500/midres_coleco.o obj/totto.mtx500/midres_msx.o obj/totto.mtx500/midres_mtx500.o obj/totto.mtx500/midres_plus4.o obj/totto.mtx500/midres_svi.o obj/totto.mtx500/midres_vic20.o obj/totto.mtx500/midres_tile_007.o obj/totto.mtx500/midres_tile_006.o obj/totto.mtx500/midres_tile_multicolor_004.o obj/totto.mtx500/midres_tile_028.o obj/totto.mtx500/midres_tile_multicolor_012.o obj/totto.mtx500/midres_tile_027.o obj/totto.mtx500/midres_frame_000.o obj/totto.mtx500/midres_screen_012.o obj/totto.mtx500/midres_tile_019.o obj/totto.mtx500/midres_tile_multicolor_008.o obj/totto.mtx500/midres_tile_018.o obj/totto.mtx500/midres_frame_001.o obj/totto.mtx500/midres_control_002.o obj/totto.mtx500/midres_tile_013.o obj/totto.mtx500/midres_tile_multicolor_007.o obj/totto.mtx500/midres_tile_012.o obj/totto.mtx500/midres_tile_processing_016.o obj/totto.mtx500/midres_sound_000.o obj/totto.mtx500/midres_sound_001.o obj/totto.mtx500/midres_control_000.o obj/totto.mtx500/midres_sound_002.o obj/totto.mtx500/midres_tile_009.o obj/totto.mtx500/midres_tile_008.o obj/totto.mtx500/midres_tile_multicolor_005.o obj/totto.mtx500/midres_screen_006.o obj/totto.mtx500/midres_screen_010.o obj/totto.mtx500/midres.o obj/totto.mtx500/game_totto.o obj/totto.mtx500/midres_data.o obj/totto.mtx500/main.o -o $(EXEDIR)/totto.mtx500 -create-app 
 	$(call COPYFILES,$(EXEDIR)/totto.mtx500.cas,$(EXEDIR)/totto.mtx500.mtx)
 
                     
 #!!! missing resources for joycheck (mtx500)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ALIENSTORM FOR COLECO 
 # -------------------------------------------------------------------
+# 
 
 alienstorm.embedded.coleco:
 	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
@@ -1061,14 +17245,966 @@ obj/alienstorm.coleco/midres_io.o:	src/midres_io.asm
 obj/alienstorm.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.coleco/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/alienstorm.coleco:	alienstorm.embedded.coleco $(subst PLATFORM,alienstorm.coleco,$(OBJS)) $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS)) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_vdp_impl.o obj/alienstorm.coleco/midres_io.o
-	$(CC88) +coleco  -m $(LDFLAGS88) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_io.o obj/alienstorm.coleco/midres_vdp_impl.o $(subst PLATFORM,alienstorm.coleco,$(LIB_OBJS)) $(subst PLATFORM,alienstorm.coleco,$(OBJS)) -o $(EXEDIR)/alienstorm.coleco -create-app 
+$(EXEDIR)/alienstorm.coleco:	alienstorm.embedded.coleco obj/alienstorm.coleco/midres_tile_019.o obj/alienstorm.coleco/midres_tile_multicolor_008.o obj/alienstorm.coleco/midres_tile_018.o obj/alienstorm.coleco/midres_tile_005.o obj/alienstorm.coleco/midres_tile_004.o obj/alienstorm.coleco/midres_tile_multicolor_003.o obj/alienstorm.coleco/midres_control_005.o obj/alienstorm.coleco/midres_control_003.o obj/alienstorm.coleco/midres_atari.o obj/alienstorm.coleco/midres_tile_016.o obj/alienstorm.coleco/midres_tile_000.o obj/alienstorm.coleco/midres_atmos.o obj/alienstorm.coleco/midres_c128.o obj/alienstorm.coleco/midres_c16.o obj/alienstorm.coleco/midres_c64.o obj/alienstorm.coleco/midres_coleco.o obj/alienstorm.coleco/midres_vdp.o obj/alienstorm.coleco/midres_msx.o obj/alienstorm.coleco/midres_mtx500.o obj/alienstorm.coleco/midres_plus4.o obj/alienstorm.coleco/midres_svi.o obj/alienstorm.coleco/midres_vic20.o obj/alienstorm.coleco/midres_tile_021.o obj/alienstorm.coleco/midres_tile_multicolor_009.o obj/alienstorm.coleco/midres_tile_020.o obj/alienstorm.coleco/midres_screen_013.o obj/alienstorm.coleco/midres_screen_012.o obj/alienstorm.coleco/midres_tile_processing_005.o obj/alienstorm.coleco/midres_tile_multicolor_001.o obj/alienstorm.coleco/midres_tile_processing_004.o obj/alienstorm.coleco/midres_frame_000.o obj/alienstorm.coleco/midres_screen_000.o obj/alienstorm.coleco/midres_frame_001.o obj/alienstorm.coleco/midres_sound_005.o obj/alienstorm.coleco/midres_sound_006.o obj/alienstorm.coleco/midres_sound_007.o obj/alienstorm.coleco/midres_tile_009.o obj/alienstorm.coleco/midres_tile_008.o obj/alienstorm.coleco/midres_tile_multicolor_005.o obj/alienstorm.coleco/midres_tile_028.o obj/alienstorm.coleco/midres_tile_multicolor_012.o obj/alienstorm.coleco/midres_tile_027.o obj/alienstorm.coleco/midres_control_004.o obj/alienstorm.coleco/midres_tile_015.o obj/alienstorm.coleco/midres_control_007.o obj/alienstorm.coleco/midres_control_001.o obj/alienstorm.coleco/midres.o obj/alienstorm.coleco/game_alien_storm.o obj/alienstorm.coleco/midres_data.o obj/alienstorm.coleco/main.o obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_vdp_impl.o obj/alienstorm.coleco/midres_io.o
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/alienstorm.coleco/rawdata.o obj/alienstorm.coleco/midres_io.o obj/alienstorm.coleco/midres_vdp_impl.o obj/alienstorm.coleco/midres_tile_019.o obj/alienstorm.coleco/midres_tile_multicolor_008.o obj/alienstorm.coleco/midres_tile_018.o obj/alienstorm.coleco/midres_tile_005.o obj/alienstorm.coleco/midres_tile_004.o obj/alienstorm.coleco/midres_tile_multicolor_003.o obj/alienstorm.coleco/midres_control_005.o obj/alienstorm.coleco/midres_control_003.o obj/alienstorm.coleco/midres_atari.o obj/alienstorm.coleco/midres_tile_016.o obj/alienstorm.coleco/midres_tile_000.o obj/alienstorm.coleco/midres_atmos.o obj/alienstorm.coleco/midres_c128.o obj/alienstorm.coleco/midres_c16.o obj/alienstorm.coleco/midres_c64.o obj/alienstorm.coleco/midres_coleco.o obj/alienstorm.coleco/midres_vdp.o obj/alienstorm.coleco/midres_msx.o obj/alienstorm.coleco/midres_mtx500.o obj/alienstorm.coleco/midres_plus4.o obj/alienstorm.coleco/midres_svi.o obj/alienstorm.coleco/midres_vic20.o obj/alienstorm.coleco/midres_tile_021.o obj/alienstorm.coleco/midres_tile_multicolor_009.o obj/alienstorm.coleco/midres_tile_020.o obj/alienstorm.coleco/midres_screen_013.o obj/alienstorm.coleco/midres_screen_012.o obj/alienstorm.coleco/midres_tile_processing_005.o obj/alienstorm.coleco/midres_tile_multicolor_001.o obj/alienstorm.coleco/midres_tile_processing_004.o obj/alienstorm.coleco/midres_frame_000.o obj/alienstorm.coleco/midres_screen_000.o obj/alienstorm.coleco/midres_frame_001.o obj/alienstorm.coleco/midres_sound_005.o obj/alienstorm.coleco/midres_sound_006.o obj/alienstorm.coleco/midres_sound_007.o obj/alienstorm.coleco/midres_tile_009.o obj/alienstorm.coleco/midres_tile_008.o obj/alienstorm.coleco/midres_tile_multicolor_005.o obj/alienstorm.coleco/midres_tile_028.o obj/alienstorm.coleco/midres_tile_multicolor_012.o obj/alienstorm.coleco/midres_tile_027.o obj/alienstorm.coleco/midres_control_004.o obj/alienstorm.coleco/midres_tile_015.o obj/alienstorm.coleco/midres_control_007.o obj/alienstorm.coleco/midres_control_001.o obj/alienstorm.coleco/midres.o obj/alienstorm.coleco/game_alien_storm.o obj/alienstorm.coleco/midres_data.o obj/alienstorm.coleco/main.o -o $(EXEDIR)/alienstorm.coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.coleco.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- ELEVATOR FOR COLECO 
 # -------------------------------------------------------------------
+# 
 
 elevator.embedded.coleco:
 	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator64.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
@@ -1083,14 +18219,966 @@ obj/elevator.coleco/midres_io.o:	src/midres_io.asm
 obj/elevator.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__ELEVATOR__ -o $@ $(subst obj/elevator.coleco/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/elevator.coleco:	elevator.embedded.coleco $(subst PLATFORM,elevator.coleco,$(OBJS)) $(subst PLATFORM,elevator.coleco,$(LIB_OBJS)) obj/elevator.coleco/rawdata.o obj/elevator.coleco/midres_vdp_impl.o obj/elevator.coleco/midres_io.o
-	$(CC88) +coleco  -m $(LDFLAGS88) obj/elevator.coleco/rawdata.o obj/elevator.coleco/midres_io.o obj/elevator.coleco/midres_vdp_impl.o $(subst PLATFORM,elevator.coleco,$(LIB_OBJS)) $(subst PLATFORM,elevator.coleco,$(OBJS)) -o $(EXEDIR)/elevator.coleco -create-app 
+$(EXEDIR)/elevator.coleco:	elevator.embedded.coleco obj/elevator.coleco/midres_sound_005.o obj/elevator.coleco/midres_atari.o obj/elevator.coleco/midres_tile_016.o obj/elevator.coleco/midres_tile_000.o obj/elevator.coleco/midres_atmos.o obj/elevator.coleco/midres_c128.o obj/elevator.coleco/midres_c16.o obj/elevator.coleco/midres_c64.o obj/elevator.coleco/midres_coleco.o obj/elevator.coleco/midres_vdp.o obj/elevator.coleco/midres_msx.o obj/elevator.coleco/midres_mtx500.o obj/elevator.coleco/midres_plus4.o obj/elevator.coleco/midres_svi.o obj/elevator.coleco/midres_vic20.o obj/elevator.coleco/midres_sound_006.o obj/elevator.coleco/midres_sound_007.o obj/elevator.coleco/midres_tile_015.o obj/elevator.coleco/midres_screen_012.o obj/elevator.coleco/midres_screen_000.o obj/elevator.coleco/midres_tile_021.o obj/elevator.coleco/midres_tile_multicolor_009.o obj/elevator.coleco/midres_tile_020.o obj/elevator.coleco/midres_tile_005.o obj/elevator.coleco/midres_tile_004.o obj/elevator.coleco/midres_tile_multicolor_003.o obj/elevator.coleco/midres_tile_019.o obj/elevator.coleco/midres_tile_multicolor_008.o obj/elevator.coleco/midres_tile_018.o obj/elevator.coleco/midres_tile_026.o obj/elevator.coleco/midres_tile_multicolor_011.o obj/elevator.coleco/midres_tile_025.o obj/elevator.coleco/midres_tile_028.o obj/elevator.coleco/midres_tile_multicolor_012.o obj/elevator.coleco/midres_tile_027.o obj/elevator.coleco/midres_control_001.o obj/elevator.coleco/midres_control_000.o obj/elevator.coleco/midres_screen_013.o obj/elevator.coleco/midres_screen_006.o obj/elevator.coleco/midres_control_002.o obj/elevator.coleco/midres_screen_007.o obj/elevator.coleco/midres_file_001.o obj/elevator.coleco/midres_vanilla.o obj/elevator.coleco/midres_screen_010.o obj/elevator.coleco/midres_frame_000.o obj/elevator.coleco/midres_frame_001.o obj/elevator.coleco/midres.o obj/elevator.coleco/game_elevator.o obj/elevator.coleco/midres_data.o obj/elevator.coleco/main.o obj/elevator.coleco/rawdata.o obj/elevator.coleco/midres_vdp_impl.o obj/elevator.coleco/midres_io.o
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/elevator.coleco/rawdata.o obj/elevator.coleco/midres_io.o obj/elevator.coleco/midres_vdp_impl.o obj/elevator.coleco/midres_sound_005.o obj/elevator.coleco/midres_atari.o obj/elevator.coleco/midres_tile_016.o obj/elevator.coleco/midres_tile_000.o obj/elevator.coleco/midres_atmos.o obj/elevator.coleco/midres_c128.o obj/elevator.coleco/midres_c16.o obj/elevator.coleco/midres_c64.o obj/elevator.coleco/midres_coleco.o obj/elevator.coleco/midres_vdp.o obj/elevator.coleco/midres_msx.o obj/elevator.coleco/midres_mtx500.o obj/elevator.coleco/midres_plus4.o obj/elevator.coleco/midres_svi.o obj/elevator.coleco/midres_vic20.o obj/elevator.coleco/midres_sound_006.o obj/elevator.coleco/midres_sound_007.o obj/elevator.coleco/midres_tile_015.o obj/elevator.coleco/midres_screen_012.o obj/elevator.coleco/midres_screen_000.o obj/elevator.coleco/midres_tile_021.o obj/elevator.coleco/midres_tile_multicolor_009.o obj/elevator.coleco/midres_tile_020.o obj/elevator.coleco/midres_tile_005.o obj/elevator.coleco/midres_tile_004.o obj/elevator.coleco/midres_tile_multicolor_003.o obj/elevator.coleco/midres_tile_019.o obj/elevator.coleco/midres_tile_multicolor_008.o obj/elevator.coleco/midres_tile_018.o obj/elevator.coleco/midres_tile_026.o obj/elevator.coleco/midres_tile_multicolor_011.o obj/elevator.coleco/midres_tile_025.o obj/elevator.coleco/midres_tile_028.o obj/elevator.coleco/midres_tile_multicolor_012.o obj/elevator.coleco/midres_tile_027.o obj/elevator.coleco/midres_control_001.o obj/elevator.coleco/midres_control_000.o obj/elevator.coleco/midres_screen_013.o obj/elevator.coleco/midres_screen_006.o obj/elevator.coleco/midres_control_002.o obj/elevator.coleco/midres_screen_007.o obj/elevator.coleco/midres_file_001.o obj/elevator.coleco/midres_vanilla.o obj/elevator.coleco/midres_screen_010.o obj/elevator.coleco/midres_frame_000.o obj/elevator.coleco/midres_frame_001.o obj/elevator.coleco/midres.o obj/elevator.coleco/game_elevator.o obj/elevator.coleco/midres_data.o obj/elevator.coleco/main.o -o $(EXEDIR)/elevator.coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/elevator.rom,$(EXEDIR)/elevator.coleco.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- AIRATTACK FOR COLECO 
 # -------------------------------------------------------------------
+# 
 
 airattack.embedded.coleco:
 	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
@@ -1105,14 +19193,966 @@ obj/airattack.coleco/midres_io.o:	src/midres_io.asm
 obj/airattack.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__AIRATTACK__ -o $@ $(subst obj/airattack.coleco/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/airattack.coleco:	airattack.embedded.coleco $(subst PLATFORM,airattack.coleco,$(OBJS)) $(subst PLATFORM,airattack.coleco,$(LIB_OBJS)) obj/airattack.coleco/rawdata.o obj/airattack.coleco/midres_vdp_impl.o obj/airattack.coleco/midres_io.o
-	$(CC88) +coleco  -m $(LDFLAGS88) obj/airattack.coleco/rawdata.o obj/airattack.coleco/midres_io.o obj/airattack.coleco/midres_vdp_impl.o $(subst PLATFORM,airattack.coleco,$(LIB_OBJS)) $(subst PLATFORM,airattack.coleco,$(OBJS)) -o $(EXEDIR)/airattack.coleco -create-app 
+$(EXEDIR)/airattack.coleco:	airattack.embedded.coleco obj/airattack.coleco/midres_tile_005.o obj/airattack.coleco/midres_tile_004.o obj/airattack.coleco/midres_tile_multicolor_003.o obj/airattack.coleco/midres_tile_026.o obj/airattack.coleco/midres_tile_multicolor_011.o obj/airattack.coleco/midres_tile_025.o obj/airattack.coleco/midres_tile_processing_005.o obj/airattack.coleco/midres_tile_multicolor_001.o obj/airattack.coleco/midres_tile_processing_004.o obj/airattack.coleco/midres_vdp.o obj/airattack.coleco/midres_tile_processing_007.o obj/airattack.coleco/midres_tile_000.o obj/airattack.coleco/midres_atari.o obj/airattack.coleco/midres_tile_016.o obj/airattack.coleco/midres_atmos.o obj/airattack.coleco/midres_c128.o obj/airattack.coleco/midres_c16.o obj/airattack.coleco/midres_c64.o obj/airattack.coleco/midres_coleco.o obj/airattack.coleco/midres_msx.o obj/airattack.coleco/midres_mtx500.o obj/airattack.coleco/midres_plus4.o obj/airattack.coleco/midres_svi.o obj/airattack.coleco/midres_vic20.o obj/airattack.coleco/midres_tile_023.o obj/airattack.coleco/midres_tile_022.o obj/airattack.coleco/midres_tile_multicolor_010.o obj/airattack.coleco/midres_frame_000.o obj/airattack.coleco/midres_tile_014.o obj/airattack.coleco/midres_tile_009.o obj/airattack.coleco/midres_tile_008.o obj/airattack.coleco/midres_tile_multicolor_005.o obj/airattack.coleco/midres_sound_002.o obj/airattack.coleco/midres_sound_001.o obj/airattack.coleco/midres_tile_011.o obj/airattack.coleco/midres_tile_multicolor_006.o obj/airattack.coleco/midres_tile_010.o obj/airattack.coleco/midres_control_000.o obj/airattack.coleco/midres_sound_000.o obj/airattack.coleco/midres_frame_001.o obj/airattack.coleco/midres.o obj/airattack.coleco/midres_screen_000.o obj/airattack.coleco/midres_screen_006.o obj/airattack.coleco/midres_control_002.o obj/airattack.coleco/midres_screen_007.o obj/airattack.coleco/midres_file_001.o obj/airattack.coleco/midres_vanilla.o obj/airattack.coleco/midres_screen_010.o obj/airattack.coleco/midres_control_003.o obj/airattack.coleco/game_air_attack.o obj/airattack.coleco/midres_data.o obj/airattack.coleco/main.o obj/airattack.coleco/rawdata.o obj/airattack.coleco/midres_vdp_impl.o obj/airattack.coleco/midres_io.o
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/airattack.coleco/rawdata.o obj/airattack.coleco/midres_io.o obj/airattack.coleco/midres_vdp_impl.o obj/airattack.coleco/midres_tile_005.o obj/airattack.coleco/midres_tile_004.o obj/airattack.coleco/midres_tile_multicolor_003.o obj/airattack.coleco/midres_tile_026.o obj/airattack.coleco/midres_tile_multicolor_011.o obj/airattack.coleco/midres_tile_025.o obj/airattack.coleco/midres_tile_processing_005.o obj/airattack.coleco/midres_tile_multicolor_001.o obj/airattack.coleco/midres_tile_processing_004.o obj/airattack.coleco/midres_vdp.o obj/airattack.coleco/midres_tile_processing_007.o obj/airattack.coleco/midres_tile_000.o obj/airattack.coleco/midres_atari.o obj/airattack.coleco/midres_tile_016.o obj/airattack.coleco/midres_atmos.o obj/airattack.coleco/midres_c128.o obj/airattack.coleco/midres_c16.o obj/airattack.coleco/midres_c64.o obj/airattack.coleco/midres_coleco.o obj/airattack.coleco/midres_msx.o obj/airattack.coleco/midres_mtx500.o obj/airattack.coleco/midres_plus4.o obj/airattack.coleco/midres_svi.o obj/airattack.coleco/midres_vic20.o obj/airattack.coleco/midres_tile_023.o obj/airattack.coleco/midres_tile_022.o obj/airattack.coleco/midres_tile_multicolor_010.o obj/airattack.coleco/midres_frame_000.o obj/airattack.coleco/midres_tile_014.o obj/airattack.coleco/midres_tile_009.o obj/airattack.coleco/midres_tile_008.o obj/airattack.coleco/midres_tile_multicolor_005.o obj/airattack.coleco/midres_sound_002.o obj/airattack.coleco/midres_sound_001.o obj/airattack.coleco/midres_tile_011.o obj/airattack.coleco/midres_tile_multicolor_006.o obj/airattack.coleco/midres_tile_010.o obj/airattack.coleco/midres_control_000.o obj/airattack.coleco/midres_sound_000.o obj/airattack.coleco/midres_frame_001.o obj/airattack.coleco/midres.o obj/airattack.coleco/midres_screen_000.o obj/airattack.coleco/midres_screen_006.o obj/airattack.coleco/midres_control_002.o obj/airattack.coleco/midres_screen_007.o obj/airattack.coleco/midres_file_001.o obj/airattack.coleco/midres_vanilla.o obj/airattack.coleco/midres_screen_010.o obj/airattack.coleco/midres_control_003.o obj/airattack.coleco/game_air_attack.o obj/airattack.coleco/midres_data.o obj/airattack.coleco/main.o -o $(EXEDIR)/airattack.coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/airattack.rom,$(EXEDIR)/airattack.coleco.rom)
 
+# src/demo_bitblit.c:
+#   import: mr_recte:
+#   import: _mr_rect:
+#   import: mr_linee:
+#   import: _mr_line:
+#   import: mr_blit_from_screene:
+#   import: _mr_copy:
+#   import: mr_clear_bitmape:
+#   import: _mr_clear_bitmap:
+#   import: mr_blit_to_screene:
+#   import: mr_init:
+#   import: mr_doublebuffer_init:
+#   import: mr_clear_bitmap:
+#   import: mr_clear_bitmapv:
+#   import: mr_doublebuffer_switch:
+# src/demo_drawing.c:
+#   import: mr_vline:
+#   import: _mr_vline:
+#   import: mr_rect:
+#   import: _mr_rect:
+#   import: mr_hline:
+#   import: _mr_hline:
+#   import: mr_init:
+#   import: mr_show:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/demo_slideshow.c:
+#   import: mr_init:
+#   import: mr_clear:
+#   import: mr_show:
+#   import: mr_load:
+#   import: mr_load_color:
+#   import: mr_uncompress:
+#   import: mr_wait:
+# src/demo_test_card.c:
+#   import: mr_init_multicolor:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_tile_setcolor:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+# src/demo_tile.c:
+#   import: mr_translate_file_user:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_puttile:
+#   import: _mr_puttile:
+#   import: mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_end_frame:
+# src/game_air_attack.c:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_vertical:
+#   import: mr_tileset_visible:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_start_frame:
+#   import: mr_cleartilev:
+#   import: _mr_cleartile:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_sound_stop:
+#   import: mr_sound_change:
+#   import: mr_tile_moveto_verticalv:
+#   import: _mr_tile_moveto_vertical:
+#   import: mr_key_pressed:
+#   import: mr_sound_start:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_wait_jiffies:
+# src/game_alien_storm.c:
+#   import: mr_translate_file_user:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_wait_or_get_keypressed:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_start_frame:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_end_frame:
+#   import: mr_tileset_visible:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_wait_or_keypress:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_joy:
+#   import: mr_tile_redefine_fill:
+#   import: mr_get_key_pressed:
+#   import: mr_init:
+# src/game_elevator.c:
+#   import: mr_translate_file_user:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_gettilev:
+#   import: _mr_gettile:
+#   import: mr_tileset_load_file:
+#   import: mr_set_background_color:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_get_key_pressed:
+#   import: mr_key_pressed:
+#   import: mr_set_border_color:
+#   import: mr_load:
+#   import: mr_wait:
+#   import: mr_load_screen:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+# src/game_elevator_naif.c:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_putftilesv:
+#   import: _mr_putftiles:
+#   import: mr_get_key_pressed:
+#   import: mr_sound_start_channel:
+#   import: mr_sound_change_channel:
+#   import: mr_sound_stop_channel:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+#   import: mr_init:
+#   import: mr_clearv:
+#   import: mr_clear:
+# src/game_totto.c:
+#   import: mr_calculate_prepared_tile_size_vertical:
+#   import: mr_calculate_prepared_tile_size_horizontal:
+#   import: mr_calculate_prepared_tile_size:
+#   import: mr_translate_file_user:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_puttilesv:
+#   import: _mr_puttiles:
+#   import: mr_tileset_load_file:
+#   import: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_tileset_visible:
+#   import: mr_tile_moveto_horizontalv:
+#   import: _mr_tile_moveto_horizontal:
+#   import: mr_htilesv:
+#   import: _mr_htiles:
+#   import: mr_start_frame:
+#   import: mr_set_background_color:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_end_frame:
+#   import: mr_wait:
+#   import: mr_tile_moveto_vertical_extendedv:
+#   import: _mr_tile_moveto_vertical_extended:
+#   import: mr_tile_roll_horizontal_on_place:
+#   import: mr_sound_start:
+#   import: mr_sound_change:
+#   import: mr_key_pressed:
+#   import: mr_sound_stop:
+#   import: mr_tile_moveto_horizontal_extendedv:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_load:
+#   import: mr_uncompressv:
+#   import: mr_uncompress:
+#   import: mr_init:
+# src/main.c:
+# src/midres.c:
+#   export: mr_init:
+#   export: mr_init_multicolor:
+#   export: mr_cleanup:
+#   import: mr_init_hd:
+#   import: mr_init_multicolor_hd:
+#   import: mr_cleanup_hd:
+# src/midres_atari.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_atmos.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+# src/midres_bitblit.c:
+#   export: _mr_copy:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_c128.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c16.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_c64.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_cbm.c:
+# src/midres_coleco.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_translate_file_hd:
+# src/midres_control_000.c:
+#   export: mr_key_pressed:
+#   import: mr_key_pressed_hd:
+# src/midres_control_001.c:
+#   export: mr_get_key_pressed:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_002.c:
+#   export: mr_wait:
+#   import: mr_wait_hd:
+# src/midres_control_003.c:
+#   export: mr_wait_jiffies:
+#   import: mr_wait_jiffies_hd:
+# src/midres_control_004.c:
+#   export: mr_wait_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_005.c:
+#   export: mr_wait_or_get_keypressed:
+#   import: mr_wait_jiffies:
+#   import: mr_get_key_pressed_hd:
+# src/midres_control_006.c:
+#   export: mr_wait_jiffies_or_keypress:
+#   import: mr_wait_jiffies:
+#   import: mr_key_pressed_hd:
+# src/midres_control_007.c:
+#   export: mr_joy:
+#   import: mr_joy_hd:
+# src/midres_data.c:
+# src/midres_drawing.c:
+# src/midres_drawing2.c:
+# src/midres_drawing_001.c:
+#   export: mr_pcolorop:
+# src/midres_drawing_002.c:
+#   export: mr_ink:
+# src/midres_drawing_003.c:
+#   export: _mr_clear_bitmap:
+# src/midres_drawing_004.c:
+# src/midres_drawing_005.c:
+# src/midres_drawing_006.c:
+#   export: _mr_clear_to_color:
+# src/midres_drawing_007.c:
+#   export: _mr_putpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_008.c:
+#   export: _mr_clearpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_009.c:
+#   export: _mr_getpixel:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_010.c:
+#   export: _mr_vline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_011.c:
+#   export: _mr_hline:
+#   import: mr_mixel_bits:
+#   import: mr_mixel_combination:
+# src/midres_drawing_012.c:
+#   export: _mr_line:
+#   import: _mr_putpixel:
+# src/midres_drawing_013.c:
+#   export: _mr_triangle:
+#   import: _mr_line:
+# src/midres_drawing_014.c:
+#   export: _mr_polygon:
+#   import: _mr_line:
+# src/midres_drawing_015.c:
+#   export: _mr_rect:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_016.c:
+#   export: _mr_rectfill:
+#   import: _mr_hline:
+#   import: _mr_vline:
+# src/midres_drawing_017.c:
+#   export: _mr_circle:
+#   import: _mr_putpixel:
+# src/midres_drawing_018.c:
+#   export: _mr_colorfill:
+# src/midres_file.c:
+# src/midres_file_000.c:
+#   import: mr_translate_file:
+#   import: mr_translate_file_user:
+# src/midres_file_001.c:
+#   export: mr_read_file:
+#   import: mr_read_file_hd:
+# src/midres_file_002.c:
+#   export: mr_read_file_from_offset:
+#   import: mr_read_file_hd:
+# src/midres_frame_000.c:
+#   export: mr_start_frame:
+#   import: mr_start_frame_hd:
+# src/midres_frame_001.c:
+#   export: mr_end_frame:
+#   import: mr_end_frame_hd:
+# src/midres_keyboard.c:
+# src/midres_msx.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_mtx500.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_plus4.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/midres_screen.c:
+# src/midres_screen2.c:
+# src/midres_screen_000.c:
+#   export: mr_clear:
+# src/midres_screen_001.c:
+#   export: mr_show:
+#   import: mr_show_hd:
+# src/midres_screen_002.c:
+#   export: mr_enable:
+# src/midres_screen_003.c:
+#   export: mr_doublebuffer_init:
+# src/midres_screen_004.c:
+#   export: mr_doublebuffer_switch:
+#   import: mr_wait_vbl:
+#   import: mr_show:
+#   import: mr_doublebuffer_switch_hd:
+#   import: mr_enable:
+# src/midres_screen_006.c:
+#   export: mr_load:
+# src/midres_screen_007.c:
+#   export: mr_load_screen:
+#   import: mr_read_file:
+# src/midres_screen_008.c:
+#   export: mr_load_color:
+# src/midres_screen_009.c:
+#   export: mr_load_screen_color:
+#   import: mr_read_file:
+# src/midres_screen_010.c:
+#   export: mr_uncompress:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_011.c:
+#   export: mr_unpack:
+#   import: mr_unpack_pmixel_lo:
+#   import: mr_unpack_pmixel_hi:
+# src/midres_screen_012.c:
+#   export: mr_set_background_color:
+#   import: mr_set_background_color_hd:
+# src/midres_screen_013.c:
+#   export: mr_set_border_color:
+#   import: mr_set_border_color_hd:
+# src/midres_screen_014.c:
+#   export: mr_save:
+# src/midres_screen_015.c:
+#   export: mr_save_color:
+# src/midres_screen_016.c:
+#   export: mr_compress:
+#   import: mr_pack_mixels:
+# src/midres_screen_017.c:
+#   export: mr_pack:
+#   import: mr_pack_mixels:
+# src/midres_sound_000.c:
+#   export: mr_sound_start:
+#   import: mr_sound_start_hd:
+# src/midres_sound_001.c:
+#   export: mr_sound_change:
+#   import: mr_sound_change_hd:
+# src/midres_sound_002.c:
+#   export: mr_sound_stop:
+#   import: mr_sound_stop_hd:
+# src/midres_sound_004.c:
+# src/midres_sound_005.c:
+#   export: mr_sound_start_channel:
+#   import: mr_sound_start_hd:
+# src/midres_sound_006.c:
+#   export: mr_sound_change_channel:
+#   import: mr_sound_change_hd:
+# src/midres_sound_007.c:
+#   export: mr_sound_stop_channel:
+#   import: mr_sound_stop_hd:
+# src/midres_svi.c:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_vdp_port_write:
+#   import: mr_vdp_port_read:
+#   import: mr_init_vdp_hd:
+#   import: mr_init_multicolor_vdp_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_put8:
+#   import: mr_translate_file_hd:
+# src/midres_tile.c:
+# src/midres_tile_000.c:
+#   export: mr_tileset_visible:
+#   import: mr_tileset_visible_hd:
+# src/midres_tile_001.c:
+#   export: mr_tileset_copy_memory_mapped:
+# src/midres_tile_002.c:
+#   export: mr_tileset_multicolor_to_monocolor_memory_mapped:
+# src/midres_tile_003.c:
+#   export: mr_tile_redefine_memory_mapped:
+# src/midres_tile_004.c:
+#   export: _mr_puttile_monocolor:
+# src/midres_tile_005.c:
+#   export: _mr_puttile:
+#   import: _mr_puttile_monocolor:
+#   import: _mr_puttile_multicolor:
+# src/midres_tile_006.c:
+#   export: _mr_tile_moveto_horizontal_monocolor:
+# src/midres_tile_007.c:
+#   export: _mr_tile_moveto_horizontal:
+#   import: _mr_tile_moveto_horizontal_monocolor:
+#   import: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_008.c:
+#   export: _mr_tile_moveto_horizontal_extended_monocolor:
+# src/midres_tile_009.c:
+#   export: _mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended_monocolor:
+#   import: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_010.c:
+#   export: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_011.c:
+#   export: _mr_tile_moveto_vertical:
+#   import: _mr_tile_moveto_vertical_multicolor:
+#   import: _mr_tile_moveto_vertical_monocolor:
+# src/midres_tile_012.c:
+#   export: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_013.c:
+#   export: _mr_tile_moveto_vertical_extended:
+#   import: _mr_tile_moveto_vertical_extended_multicolor:
+#   import: _mr_tile_moveto_vertical_extended_monocolor:
+# src/midres_tile_014.c:
+#   export: _mr_cleartile:
+# src/midres_tile_015.c:
+#   export: _mr_gettile:
+# src/midres_tile_016.c:
+#   export: mr_tileset_load:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_017.c:
+#   export: mr_tileset_load_file_memory_mapped:
+#   import: mr_read_file:
+#   import: mr_tileset_multicolor_to_monocolor:
+# src/midres_tile_018.c:
+#   export: _mr_putetiles_monocolor:
+# src/midres_tile_019.c:
+#   export: _mr_putetiles:
+#   import: _mr_putetiles_multicolor:
+#   import: _mr_putetiles_monocolor:
+# src/midres_tile_020.c:
+#   export: _mr_putftiles_monocolor:
+# src/midres_tile_021.c:
+#   export: _mr_putftiles:
+#   import: _mr_putftiles_multicolor:
+#   import: _mr_putftiles_monocolor:
+# src/midres_tile_022.c:
+#   export: _mr_puttiles_monocolor:
+# src/midres_tile_023.c:
+#   export: _mr_puttiles:
+#   import: _mr_puttiles_monocolor:
+#   import: _mr_puttiles_multicolor:
+# src/midres_tile_024.c:
+# src/midres_tile_025.c:
+#   export: _mr_vtiles_monocolor:
+# src/midres_tile_026.c:
+#   export: _mr_vtiles:
+#   import: _mr_vtiles_multicolor:
+#   import: _mr_vtiles_monocolor:
+# src/midres_tile_027.c:
+#   export: _mr_htiles_monocolor:
+# src/midres_tile_028.c:
+#   export: _mr_htiles:
+#   import: _mr_htiles_multicolor:
+#   import: _mr_htiles_monocolor:
+# src/midres_tile_030.c:
+#   export: mr_tile_setcolor:
+#   import: mr_tile_setcolor_hd:
+# src/midres_tile_031.c:
+#   export: mr_tile_setcolors:
+#   import: mr_tile_setcolors_hd:
+# src/midres_tile_032.c:
+#   export: mr_tile_redefine_fill_memory_mapped:
+# src/midres_tile_multicolor.c:
+# src/midres_tile_multicolor_000.c:
+#   export: mr_tile_prepare_horizontal_multicolor:
+# src/midres_tile_multicolor_001.c:
+#   export: mr_tile_prepare_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_002.c:
+#   export: mr_tile_prepare_roll_horizontal_multicolor:
+# src/midres_tile_multicolor_003.c:
+#   export: _mr_puttile_multicolor:
+# src/midres_tile_multicolor_004.c:
+#   export: _mr_tile_moveto_horizontal_multicolor:
+# src/midres_tile_multicolor_005.c:
+#   export: _mr_tile_moveto_horizontal_extended_multicolor:
+# src/midres_tile_multicolor_006.c:
+#   export: _mr_tile_moveto_vertical_multicolor:
+# src/midres_tile_multicolor_007.c:
+#   export: _mr_tile_moveto_vertical_extended_multicolor:
+# src/midres_tile_multicolor_008.c:
+#   export: _mr_putetiles_multicolor:
+# src/midres_tile_multicolor_009.c:
+#   export: _mr_putftiles_multicolor:
+# src/midres_tile_multicolor_010.c:
+#   export: _mr_puttiles_multicolor:
+# src/midres_tile_multicolor_011.c:
+#   export: _mr_vtiles_multicolor:
+# src/midres_tile_multicolor_012.c:
+#   export: _mr_htiles_multicolor:
+# src/midres_tile_processing.c:
+# src/midres_tile_processing_000.c:
+#   export: mr_tile_prepare_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_001.c:
+#   export: mr_tile_prepare_horizontal_monocolor:
+#   import: mr_tile_prepare_horizontal_monocolor_hd:
+# src/midres_tile_processing_002.c:
+#   export: mr_tile_prepare_horizontal:
+#   import: mr_tile_prepare_horizontal_multicolor:
+#   import: mr_tile_prepare_horizontal_monocolor:
+# src/midres_tile_processing_003.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_memory_mapped:
+# src/midres_tile_processing_004.c:
+#   export: mr_tile_prepare_horizontal_extended_monocolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor_hd:
+# src/midres_tile_processing_005.c:
+#   export: mr_tile_prepare_horizontal_extended:
+#   import: mr_tile_prepare_horizontal_extended_multicolor:
+#   import: mr_tile_prepare_horizontal_extended_monocolor:
+# src/midres_tile_processing_006.c:
+#   export: mr_tile_prepare_vertical_memory_mapped:
+# src/midres_tile_processing_007.c:
+#   export: mr_tile_prepare_vertical:
+#   import: mr_tile_prepare_vertical_hd:
+# src/midres_tile_processing_008.c:
+#   export: mr_tile_prepare_vertical_extended_memory_mapped:
+# src/midres_tile_processing_009.c:
+#   export: mr_tile_prepare_vertical_extended:
+#   import: mr_tile_prepare_vertical_extended_hd:
+# src/midres_tile_processing_010.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_memory_mapped:
+# src/midres_tile_processing_011.c:
+#   export: mr_tile_prepare_roll_horizontal_monocolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor_hd:
+# src/midres_tile_processing_012.c:
+#   export: mr_tile_prepare_roll_horizontal:
+#   import: mr_tile_prepare_roll_horizontal_multicolor:
+#   import: mr_tile_prepare_roll_horizontal_monocolor:
+# src/midres_tile_processing_013.c:
+#   export: mr_tile_roll_horizontal_memory_mapped:
+# src/midres_tile_processing_014.c:
+#   export: mr_tile_roll_horizontal:
+#   import: mr_tile_roll_horizontal_hd:
+# src/midres_tile_processing_015.c:
+#   export: mr_tile_roll_horizontal_on_place_memory_mapped:
+# src/midres_tile_processing_016.c:
+#   export: mr_tile_roll_horizontal_on_place:
+#   import: mr_tile_roll_horizontal_on_place_hd:
+# src/midres_tile_processing_017.c:
+#   export: mr_tile_prepare_roll_vertical_memory_mapped:
+# src/midres_tile_processing_018.c:
+#   export: mr_tile_prepare_roll_vertical:
+#   import: mr_tile_prepare_roll_vertical_hd:
+# src/midres_tile_processing_020.c:
+#   export: mr_tile_roll_vertical_memory_mapped:
+# src/midres_tile_processing_021.c:
+#   export: mr_tile_roll_vertical:
+#   import: mr_tile_roll_vertical_hd:
+# src/midres_tile_processing_022.c:
+#   export: mr_tile_roll_vertical_on_place:
+#   import: mr_tile_roll_horizontal_on_place:
+# src/midres_vanilla.c:
+#   export: mr_read_file_hd:
+#   import: mr_translate_file_hd:
+# src/midres_vdp.c:
+#   export: mr_init_vdp_hd:
+#   export: mr_init_multicolor_vdp_hd:
+#   export: mr_tileset_copy_hd:
+#   export: mr_tileset_multicolor_to_monocolor_hd:
+#   export: mr_tile_redefine_hd:
+#   export: mr_tile_redefine_fill_hd:
+#   export: mr_tile_prepare_horizontal_monocolor_hd:
+#   export: mr_tile_prepare_horizontal_extended_monocolor_hd:
+#   export: mr_tile_prepare_vertical_hd:
+#   export: mr_tile_prepare_vertical_extended_hd:
+#   export: mr_tile_prepare_roll_horizontal_monocolor_hd:
+#   export: mr_tile_roll_horizontal_hd:
+#   export: mr_tile_roll_horizontal_on_place_hd:
+#   export: mr_tile_prepare_roll_vertical_hd:
+#   export: mr_tile_roll_vertical_hd:
+#   export: mr_tileset_load_file_hd:
+#   import: mr_vdp_out:
+#   import: mr_vdp_put:
+#   import: mr_vdp_fill8:
+#   import: mr_vdp_get:
+# src/midres_vic20.c:
+#   export: mr_init_base_hd:
+#   export: mr_init_hd:
+#   export: mr_init_multicolor_hd:
+#   export: mr_tile_setcolor_hd:
+#   export: mr_tile_setcolors_hd:
+#   export: mr_show_hd:
+#   export: mr_cleanup_hd:
+#   export: mr_wait_vbl:
+#   export: mr_doublebuffer_switch_hd:
+#   export: mr_tileset_visible_hd:
+#   export: mr_key_pressed_hd:
+#   export: mr_get_key_pressed_hd:
+#   export: mr_wait_hd:
+#   export: mr_wait_jiffies_hd:
+#   export: mr_sound_start_hd:
+#   export: mr_sound_change_hd:
+#   export: mr_sound_stop_hd:
+#   export: mr_set_background_color_hd:
+#   export: mr_set_border_color_hd:
+#   export: mr_start_frame_hd:
+#   export: mr_end_frame_hd:
+#   export: mr_read_file_hd:
+#   export: mr_joy_hd:
+#   import: mr_translate_file_hd:
+#   import: mr_translate_file_user:
+# src/rawdata.c:
+# src/tutorial_mctile.c:
+#   import: mr_init_multicolor:
+#   import: mr_clear_bitmap:
+#   import: _mr_clear_bitmap:
+#   import: mr_tile_setcolor:
+#   import: mr_tileset_load:
+#   import: mr_tile_prepare_horizontal_extended:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_tile_moveto_horizontal_extended:
+#   import: _mr_tile_moveto_horizontal_extended:
+#   import: mr_end_frame:
+# src/tutorial_protothread1.c:
+# src/tutorial_protothread2.c:
+#   import: mr_vtilesv:
+#   import: _mr_vtiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_init:
+#   import: mr_tileset_load:
+#   import: mr_set_background_color:
+#   import: mr_clear_bitmapv:
+#   import: _mr_clear_bitmap:
+#   import: mr_tileset_visible:
+#   import: mr_start_frame:
+#   import: mr_end_frame:
+# src/utility_joycheck.c:
+#   import: mr_init:
+#   import: mr_set_border_color:
+#   import: mr_set_background_color:
+#   import: mr_tileset_load:
+#   import: mr_tileset_visible:
+#   import: mr_clearv:
+#   import: mr_clear:
+#   import: mr_putetilesv:
+#   import: _mr_putetiles:
+#   import: mr_puttilev:
+#   import: _mr_puttile:
+#   import: mr_joy:
 
 # -------------------------------------------------------------------
 # --- TOTTO FOR COLECO 
 # -------------------------------------------------------------------
+# 
 
 totto.embedded.coleco:
 	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -c src/rawdata.c -h src/rawdata.h
@@ -1127,8 +20167,8 @@ obj/totto.coleco/midres_io.o:	src/midres_io.asm
 obj/totto.coleco/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -D__TOTTO__ -o $@ $(subst obj/totto.coleco/,src/,$(@:.o=.c)) 
 
-$(EXEDIR)/totto.coleco:	totto.embedded.coleco $(subst PLATFORM,totto.coleco,$(OBJS)) $(subst PLATFORM,totto.coleco,$(LIB_OBJS)) obj/totto.coleco/rawdata.o obj/totto.coleco/midres_vdp_impl.o obj/totto.coleco/midres_io.o
-	$(CC88) +coleco  -m $(LDFLAGS88) obj/totto.coleco/rawdata.o obj/totto.coleco/midres_io.o obj/totto.coleco/midres_vdp_impl.o $(subst PLATFORM,totto.coleco,$(LIB_OBJS)) $(subst PLATFORM,totto.coleco,$(OBJS)) -o $(EXEDIR)/totto.coleco -create-app 
+$(EXEDIR)/totto.coleco:	totto.embedded.coleco obj/totto.coleco/midres_tile_005.o obj/totto.coleco/midres_tile_004.o obj/totto.coleco/midres_tile_multicolor_003.o obj/totto.coleco/midres_tile_023.o obj/totto.coleco/midres_tile_022.o obj/totto.coleco/midres_tile_multicolor_010.o obj/totto.coleco/midres_tile_processing_009.o obj/totto.coleco/midres_vdp.o obj/totto.coleco/midres_tile_processing_012.o obj/totto.coleco/midres_tile_multicolor_002.o obj/totto.coleco/midres_tile_processing_011.o obj/totto.coleco/midres_tile_processing_002.o obj/totto.coleco/midres_tile_multicolor_000.o obj/totto.coleco/midres_tile_processing_001.o obj/totto.coleco/midres_tile_processing_005.o obj/totto.coleco/midres_tile_multicolor_001.o obj/totto.coleco/midres_tile_processing_004.o obj/totto.coleco/midres_screen_000.o obj/totto.coleco/midres_tile_000.o obj/totto.coleco/midres_atari.o obj/totto.coleco/midres_tile_016.o obj/totto.coleco/midres_atmos.o obj/totto.coleco/midres_c128.o obj/totto.coleco/midres_c16.o obj/totto.coleco/midres_c64.o obj/totto.coleco/midres_coleco.o obj/totto.coleco/midres_msx.o obj/totto.coleco/midres_mtx500.o obj/totto.coleco/midres_plus4.o obj/totto.coleco/midres_svi.o obj/totto.coleco/midres_vic20.o obj/totto.coleco/midres_tile_007.o obj/totto.coleco/midres_tile_006.o obj/totto.coleco/midres_tile_multicolor_004.o obj/totto.coleco/midres_tile_028.o obj/totto.coleco/midres_tile_multicolor_012.o obj/totto.coleco/midres_tile_027.o obj/totto.coleco/midres_frame_000.o obj/totto.coleco/midres_screen_012.o obj/totto.coleco/midres_tile_019.o obj/totto.coleco/midres_tile_multicolor_008.o obj/totto.coleco/midres_tile_018.o obj/totto.coleco/midres_frame_001.o obj/totto.coleco/midres_control_002.o obj/totto.coleco/midres_tile_013.o obj/totto.coleco/midres_tile_multicolor_007.o obj/totto.coleco/midres_tile_012.o obj/totto.coleco/midres_tile_processing_016.o obj/totto.coleco/midres_sound_000.o obj/totto.coleco/midres_sound_001.o obj/totto.coleco/midres_control_000.o obj/totto.coleco/midres_sound_002.o obj/totto.coleco/midres_tile_009.o obj/totto.coleco/midres_tile_008.o obj/totto.coleco/midres_tile_multicolor_005.o obj/totto.coleco/midres_screen_006.o obj/totto.coleco/midres_screen_010.o obj/totto.coleco/midres.o obj/totto.coleco/game_totto.o obj/totto.coleco/midres_data.o obj/totto.coleco/main.o obj/totto.coleco/rawdata.o obj/totto.coleco/midres_vdp_impl.o obj/totto.coleco/midres_io.o
+	$(CC88) +coleco  -m $(LDFLAGS88) obj/totto.coleco/rawdata.o obj/totto.coleco/midres_io.o obj/totto.coleco/midres_vdp_impl.o obj/totto.coleco/midres_tile_005.o obj/totto.coleco/midres_tile_004.o obj/totto.coleco/midres_tile_multicolor_003.o obj/totto.coleco/midres_tile_023.o obj/totto.coleco/midres_tile_022.o obj/totto.coleco/midres_tile_multicolor_010.o obj/totto.coleco/midres_tile_processing_009.o obj/totto.coleco/midres_vdp.o obj/totto.coleco/midres_tile_processing_012.o obj/totto.coleco/midres_tile_multicolor_002.o obj/totto.coleco/midres_tile_processing_011.o obj/totto.coleco/midres_tile_processing_002.o obj/totto.coleco/midres_tile_multicolor_000.o obj/totto.coleco/midres_tile_processing_001.o obj/totto.coleco/midres_tile_processing_005.o obj/totto.coleco/midres_tile_multicolor_001.o obj/totto.coleco/midres_tile_processing_004.o obj/totto.coleco/midres_screen_000.o obj/totto.coleco/midres_tile_000.o obj/totto.coleco/midres_atari.o obj/totto.coleco/midres_tile_016.o obj/totto.coleco/midres_atmos.o obj/totto.coleco/midres_c128.o obj/totto.coleco/midres_c16.o obj/totto.coleco/midres_c64.o obj/totto.coleco/midres_coleco.o obj/totto.coleco/midres_msx.o obj/totto.coleco/midres_mtx500.o obj/totto.coleco/midres_plus4.o obj/totto.coleco/midres_svi.o obj/totto.coleco/midres_vic20.o obj/totto.coleco/midres_tile_007.o obj/totto.coleco/midres_tile_006.o obj/totto.coleco/midres_tile_multicolor_004.o obj/totto.coleco/midres_tile_028.o obj/totto.coleco/midres_tile_multicolor_012.o obj/totto.coleco/midres_tile_027.o obj/totto.coleco/midres_frame_000.o obj/totto.coleco/midres_screen_012.o obj/totto.coleco/midres_tile_019.o obj/totto.coleco/midres_tile_multicolor_008.o obj/totto.coleco/midres_tile_018.o obj/totto.coleco/midres_frame_001.o obj/totto.coleco/midres_control_002.o obj/totto.coleco/midres_tile_013.o obj/totto.coleco/midres_tile_multicolor_007.o obj/totto.coleco/midres_tile_012.o obj/totto.coleco/midres_tile_processing_016.o obj/totto.coleco/midres_sound_000.o obj/totto.coleco/midres_sound_001.o obj/totto.coleco/midres_control_000.o obj/totto.coleco/midres_sound_002.o obj/totto.coleco/midres_tile_009.o obj/totto.coleco/midres_tile_008.o obj/totto.coleco/midres_tile_multicolor_005.o obj/totto.coleco/midres_screen_006.o obj/totto.coleco/midres_screen_010.o obj/totto.coleco/midres.o obj/totto.coleco/game_totto.o obj/totto.coleco/midres_data.o obj/totto.coleco/main.o -o $(EXEDIR)/totto.coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/totto.rom,$(EXEDIR)/totto.coleco.rom)
 
                     
