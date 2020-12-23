@@ -3,10 +3,13 @@ An isomorphic gamelib for retrocomputers
 
 by Marco Spedaletti (asimov@mclink.it)
 
-For detailed informations please visit [this page](https://retroprogramming.iwashere.eu/midres_library)
+## ABOUT THIS LIBRARY
+The MIDRES library allows to create **WORA** (*Write Once Run Anywhere*) programs that are [very efficient "by design"](https://retroprogramming.iwashere.eu/midres_library:isomorphism) on various 8-bit platforms, without the need for "fine tuning" them and without compromises of other dev-kits. The isomorphic approach is different from abstraction. It is based on mapping the underlying hardware without making use of third-party libraries and by matching complex and heterogeneous structures, albeit homologous, to each other. The code written with this approach, when it works well that is when it is satisfactory in terms of execution speed or use of resources, is already optimized on any other platform. For more information on this library, please [click here](https://retroprogramming.iwashere.eu/midres_library:isomorphism). 
 
+## SUPPORTED ARCHITECTURES
 
-For a complete list of supported targets and status of buildings please visit [this page](https://github.com/spotlessmind1975/midres/blob/master/docs/status.md)
+The [programs](docs/programs.md) can be built on [many vintage systems](docs/targets.md). Due to limitations in the resources of the various retrocomputers, it is possible that not all programs can be compiled on all platforms. For a complete list of supported targets and status of buildings please visit [this page](docs/status.md)
+
 
 ## LICENSE
 Copyright 2020 Marco Spedaletti
