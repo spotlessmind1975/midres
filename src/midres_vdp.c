@@ -41,18 +41,6 @@
    ** RESIDENT VARIABLES SECTION
    ****************************************************************************/
 
-unsigned char MR_RENDERED_MIXELS_VDP[16] = {
-   0x20, 0x6c, 0x7b, 0x62,
-   0x7c, 0xe1, 0xff, 0xfe,
-   0x7e, 0x7f, 0x61, 0xfc,
-   0xe2, 0xfb, 0xec, 0xa0
-};
-
-#ifdef FRAME_BUFFER
-unsigned char frameBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
-unsigned char colorBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
-#endif
-
 void mr_init_vdp_hd() {
 
 #ifdef FRAME_BUFFER

@@ -74,6 +74,11 @@ unsigned char MR_RENDERED_MIXELS_VDP[16] = {
 };
 #endif
 
+#ifdef FRAME_BUFFER
+unsigned char frameBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+unsigned char colorBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
+#endif
+
 /***
  * This value is used to check if the screen memory is corrupted.
  */
