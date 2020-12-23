@@ -41,7 +41,7 @@ rm $tmp2 2>/dev/null
 rm $tmp3 2>/dev/null
 
 function make_program() {
-	make game=$1 target=$2 all >/dev/null 2>$tmp
+	make program=$1 target=$2 all >/dev/null 2>$tmp
 	if [ $? -ne 0 ]; then
 		errors=`cat $tmp`
 		if [[ $errors == *"exceeds ROM address range"* ]]; then
