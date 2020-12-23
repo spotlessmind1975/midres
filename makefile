@@ -278,7 +278,7 @@ DATADIR := data
 ## TARGETS' RULES
 ###############################################################################
 
-# Makefile generated for following targets: msx, msxc, svi, mtx500, coleco, atmos, atari, vic20, vic2024, c64, c128, c16, plus4
+# Makefile generated for following targets: msx, svi, mtx500, coleco, atari, vic20, vic2024, c64, c128, c16, plus4
 # -------------------------------------------------------------------
 # --- MIDRES LIBRARY FOR MSX 
 # -------------------------------------------------------------------
@@ -305,33 +305,6 @@ obj/msx/%.o:	$(SOURCES)
 $(EXEDIR)/midres.msx:	midres.embedded.msx $(subst PLATFORM,msx,$(OBJS)) $(subst PLATFORM,msx,$(LIB_OBJS)) obj/msx/rawdata.o obj/msx/midres_vdp_impl.o obj/msx/midres_io.o
 	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/msx/rawdata.o obj/msx/midres_io.o obj/msx/midres_vdp_impl.o $(subst PLATFORM,msx,$(LIB_OBJS)) $(subst PLATFORM,msx,$(OBJS)) -o $(EXEDIR)/midres.msx -create-app 
 	$(call COPYFILES,$(EXEDIR)/midres.rom,$(EXEDIR)/midres.msx.rom)
-
-# -------------------------------------------------------------------
-# --- MIDRES LIBRARY FOR MSXC 
-# -------------------------------------------------------------------
-
-lib/midres.msxc.lib:
-
-# -------------------------------------------------------------------
-# --- DEMO/TUTORIALS FOR MSXC 
-# -------------------------------------------------------------------
-
-midres.embedded.msxc:
-	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -o obj/msxc/rawdata.o src/rawdata.c
-
-obj/msxc/midres_vdp_impl.o:	src/midres_vdp_impl.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/msxc/midres_vdp_impl.o src/midres_vdp_impl.asm
-
-obj/msxc/midres_io.o:	src/midres_io.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/msxc/midres_io.o src/midres_io.asm
-
-obj/msxc/%.o:	$(SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -o $@ $(subst obj/msxc/,src/,$(@:.o=.c))
-
-$(EXEDIR)/midres.msxc:	midres.embedded.msxc $(subst PLATFORM,msxc,$(OBJS)) $(subst PLATFORM,msxc,$(LIB_OBJS)) obj/msxc/rawdata.o obj/msxc/midres_vdp_impl.o obj/msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/msxc/rawdata.o obj/msxc/midres_io.o obj/msxc/midres_vdp_impl.o $(subst PLATFORM,msxc,$(LIB_OBJS)) $(subst PLATFORM,msxc,$(OBJS)) -o $(EXEDIR)/midres.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/midres.rom,$(EXEDIR)/midres.msxc.rom)
 
 # -------------------------------------------------------------------
 # --- MIDRES LIBRARY FOR SVI 
@@ -413,17 +386,6 @@ obj/coleco/%.o:	$(SOURCES)
 $(EXEDIR)/midres.coleco:	midres.embedded.coleco $(subst PLATFORM,coleco,$(OBJS)) $(subst PLATFORM,coleco,$(LIB_OBJS)) obj/coleco/rawdata.o obj/coleco/midres_vdp_impl.o obj/coleco/midres_io.o
 	$(CC88) +coleco  -m $(LDFLAGS88) obj/coleco/rawdata.o obj/coleco/midres_io.o obj/coleco/midres_vdp_impl.o $(subst PLATFORM,coleco,$(LIB_OBJS)) $(subst PLATFORM,coleco,$(OBJS)) -o $(EXEDIR)/midres.coleco -create-app 
 	$(call COPYFILES,$(EXEDIR)/midres.rom,$(EXEDIR)/midres.coleco.rom)
-
-# -------------------------------------------------------------------
-# --- MIDRES LIBRARY FOR ATMOS 
-# -------------------------------------------------------------------
-
-obj/atmos/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t atmos -c $(CFLAGS)  -Osir -Cl   -o $@ $(subst obj/atmos/,src/,$(@:.o=.c))
-
-$(LIBDIR)/midres.atmos.lib:	$(LIB_INCLUDES) $(subst PLATFORM,atmos,$(LIB_OBJS))
-	$(AR) r $(LIBDIR)/midres.atmos.lib $(subst PLATFORM,atmos,$(LIB_OBJS))
-
 
 # -------------------------------------------------------------------
 # --- MIDRES LIBRARY FOR ATARI 
@@ -764,101 +726,6 @@ $(EXEDIR)/totto.msx:	totto.embedded.msx obj/totto.msx/midres_tile_005.o obj/tott
 
                     
 #!!! missing resources for joycheck (msx)
-
-
-# -------------------------------------------------------------------
-# --- ALIENSTORM FOR MSXC 
-# -------------------------------------------------------------------
-# 
-
-alienstorm.embedded.msxc:
-	$(FILE2INCLUDE) -i $(DATADIR)/astiles.bin -n zstiles.bin -i $(DATADIR)/astiles1.bin -n zstiles1.bin -i $(DATADIR)/astiles2.bin -n zstiles2.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -o obj/alienstorm.msxc/rawdata.o src/rawdata.c
-
-obj/alienstorm.msxc/midres_vdp_impl.o:	src/midres_vdp_impl.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.msxc/midres_vdp_impl.o src/midres_vdp_impl.asm
-
-obj/alienstorm.msxc/midres_io.o:	src/midres_io.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/alienstorm.msxc/midres_io.o src/midres_io.asm
-
-obj/alienstorm.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__ALIENSTORM__ -o $@ $(subst obj/alienstorm.msxc/,src/,$(@:.o=.c)) 
-
-$(EXEDIR)/alienstorm.msxc:	alienstorm.embedded.msxc obj/alienstorm.msxc/midres_tile_019.o obj/alienstorm.msxc/midres_tile_multicolor_008.o obj/alienstorm.msxc/midres_tile_018.o obj/alienstorm.msxc/midres_tile_005.o obj/alienstorm.msxc/midres_tile_004.o obj/alienstorm.msxc/midres_tile_multicolor_003.o obj/alienstorm.msxc/midres_control_005.o obj/alienstorm.msxc/midres_control_003.o obj/alienstorm.msxc/midres_atari.o obj/alienstorm.msxc/midres_tile_016.o obj/alienstorm.msxc/midres_tile_000.o obj/alienstorm.msxc/midres_atmos.o obj/alienstorm.msxc/midres_c128.o obj/alienstorm.msxc/midres_c16.o obj/alienstorm.msxc/midres_c64.o obj/alienstorm.msxc/midres_coleco.o obj/alienstorm.msxc/midres_vdp.o obj/alienstorm.msxc/midres_msx.o obj/alienstorm.msxc/midres_mtx500.o obj/alienstorm.msxc/midres_plus4.o obj/alienstorm.msxc/midres_svi.o obj/alienstorm.msxc/midres_vic20.o obj/alienstorm.msxc/midres_tile_021.o obj/alienstorm.msxc/midres_tile_multicolor_009.o obj/alienstorm.msxc/midres_tile_020.o obj/alienstorm.msxc/midres_screen_013.o obj/alienstorm.msxc/midres_screen_012.o obj/alienstorm.msxc/midres_tile_processing_005.o obj/alienstorm.msxc/midres_tile_multicolor_001.o obj/alienstorm.msxc/midres_tile_processing_004.o obj/alienstorm.msxc/midres_frame_000.o obj/alienstorm.msxc/midres_screen_000.o obj/alienstorm.msxc/midres_frame_001.o obj/alienstorm.msxc/midres_sound_005.o obj/alienstorm.msxc/midres_sound_006.o obj/alienstorm.msxc/midres_sound_007.o obj/alienstorm.msxc/midres_tile_009.o obj/alienstorm.msxc/midres_tile_008.o obj/alienstorm.msxc/midres_tile_multicolor_005.o obj/alienstorm.msxc/midres_tile_028.o obj/alienstorm.msxc/midres_tile_multicolor_012.o obj/alienstorm.msxc/midres_tile_027.o obj/alienstorm.msxc/midres_control_004.o obj/alienstorm.msxc/midres_tile_015.o obj/alienstorm.msxc/midres_control_007.o obj/alienstorm.msxc/midres_control_001.o obj/alienstorm.msxc/midres.o obj/alienstorm.msxc/game_alien_storm.o obj/alienstorm.msxc/midres_data.o obj/alienstorm.msxc/main.o obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_vdp_impl.o obj/alienstorm.msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/alienstorm.msxc/rawdata.o obj/alienstorm.msxc/midres_io.o obj/alienstorm.msxc/midres_vdp_impl.o obj/alienstorm.msxc/midres_tile_019.o obj/alienstorm.msxc/midres_tile_multicolor_008.o obj/alienstorm.msxc/midres_tile_018.o obj/alienstorm.msxc/midres_tile_005.o obj/alienstorm.msxc/midres_tile_004.o obj/alienstorm.msxc/midres_tile_multicolor_003.o obj/alienstorm.msxc/midres_control_005.o obj/alienstorm.msxc/midres_control_003.o obj/alienstorm.msxc/midres_atari.o obj/alienstorm.msxc/midres_tile_016.o obj/alienstorm.msxc/midres_tile_000.o obj/alienstorm.msxc/midres_atmos.o obj/alienstorm.msxc/midres_c128.o obj/alienstorm.msxc/midres_c16.o obj/alienstorm.msxc/midres_c64.o obj/alienstorm.msxc/midres_coleco.o obj/alienstorm.msxc/midres_vdp.o obj/alienstorm.msxc/midres_msx.o obj/alienstorm.msxc/midres_mtx500.o obj/alienstorm.msxc/midres_plus4.o obj/alienstorm.msxc/midres_svi.o obj/alienstorm.msxc/midres_vic20.o obj/alienstorm.msxc/midres_tile_021.o obj/alienstorm.msxc/midres_tile_multicolor_009.o obj/alienstorm.msxc/midres_tile_020.o obj/alienstorm.msxc/midres_screen_013.o obj/alienstorm.msxc/midres_screen_012.o obj/alienstorm.msxc/midres_tile_processing_005.o obj/alienstorm.msxc/midres_tile_multicolor_001.o obj/alienstorm.msxc/midres_tile_processing_004.o obj/alienstorm.msxc/midres_frame_000.o obj/alienstorm.msxc/midres_screen_000.o obj/alienstorm.msxc/midres_frame_001.o obj/alienstorm.msxc/midres_sound_005.o obj/alienstorm.msxc/midres_sound_006.o obj/alienstorm.msxc/midres_sound_007.o obj/alienstorm.msxc/midres_tile_009.o obj/alienstorm.msxc/midres_tile_008.o obj/alienstorm.msxc/midres_tile_multicolor_005.o obj/alienstorm.msxc/midres_tile_028.o obj/alienstorm.msxc/midres_tile_multicolor_012.o obj/alienstorm.msxc/midres_tile_027.o obj/alienstorm.msxc/midres_control_004.o obj/alienstorm.msxc/midres_tile_015.o obj/alienstorm.msxc/midres_control_007.o obj/alienstorm.msxc/midres_control_001.o obj/alienstorm.msxc/midres.o obj/alienstorm.msxc/game_alien_storm.o obj/alienstorm.msxc/midres_data.o obj/alienstorm.msxc/main.o -o $(EXEDIR)/alienstorm.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/alienstorm.rom,$(EXEDIR)/alienstorm.msxc.rom)
-
-
-# -------------------------------------------------------------------
-# --- ELEVATOR FOR MSXC 
-# -------------------------------------------------------------------
-# 
-
-elevator.embedded.msxc:
-	$(FILE2INCLUDE) -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/elevator64.mpic -n zelintro.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -o obj/elevator.msxc/rawdata.o src/rawdata.c
-
-obj/elevator.msxc/midres_vdp_impl.o:	src/midres_vdp_impl.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msxc/midres_vdp_impl.o src/midres_vdp_impl.asm
-
-obj/elevator.msxc/midres_io.o:	src/midres_io.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/elevator.msxc/midres_io.o src/midres_io.asm
-
-obj/elevator.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__ELEVATOR__ -o $@ $(subst obj/elevator.msxc/,src/,$(@:.o=.c)) 
-
-$(EXEDIR)/elevator.msxc:	elevator.embedded.msxc obj/elevator.msxc/midres_sound_005.o obj/elevator.msxc/midres_atari.o obj/elevator.msxc/midres_tile_016.o obj/elevator.msxc/midres_tile_000.o obj/elevator.msxc/midres_atmos.o obj/elevator.msxc/midres_c128.o obj/elevator.msxc/midres_c16.o obj/elevator.msxc/midres_c64.o obj/elevator.msxc/midres_coleco.o obj/elevator.msxc/midres_vdp.o obj/elevator.msxc/midres_msx.o obj/elevator.msxc/midres_mtx500.o obj/elevator.msxc/midres_plus4.o obj/elevator.msxc/midres_svi.o obj/elevator.msxc/midres_vic20.o obj/elevator.msxc/midres_sound_006.o obj/elevator.msxc/midres_sound_007.o obj/elevator.msxc/midres_tile_015.o obj/elevator.msxc/midres_screen_012.o obj/elevator.msxc/midres_screen_000.o obj/elevator.msxc/midres_tile_021.o obj/elevator.msxc/midres_tile_multicolor_009.o obj/elevator.msxc/midres_tile_020.o obj/elevator.msxc/midres_tile_005.o obj/elevator.msxc/midres_tile_004.o obj/elevator.msxc/midres_tile_multicolor_003.o obj/elevator.msxc/midres_tile_019.o obj/elevator.msxc/midres_tile_multicolor_008.o obj/elevator.msxc/midres_tile_018.o obj/elevator.msxc/midres_tile_026.o obj/elevator.msxc/midres_tile_multicolor_011.o obj/elevator.msxc/midres_tile_025.o obj/elevator.msxc/midres_tile_028.o obj/elevator.msxc/midres_tile_multicolor_012.o obj/elevator.msxc/midres_tile_027.o obj/elevator.msxc/midres_control_001.o obj/elevator.msxc/midres_control_000.o obj/elevator.msxc/midres_screen_013.o obj/elevator.msxc/midres_screen_006.o obj/elevator.msxc/midres_control_002.o obj/elevator.msxc/midres_screen_007.o obj/elevator.msxc/midres_file_001.o obj/elevator.msxc/midres_vanilla.o obj/elevator.msxc/midres_screen_010.o obj/elevator.msxc/midres_frame_000.o obj/elevator.msxc/midres_frame_001.o obj/elevator.msxc/midres.o obj/elevator.msxc/game_elevator.o obj/elevator.msxc/midres_data.o obj/elevator.msxc/main.o obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_vdp_impl.o obj/elevator.msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/elevator.msxc/rawdata.o obj/elevator.msxc/midres_io.o obj/elevator.msxc/midres_vdp_impl.o obj/elevator.msxc/midres_sound_005.o obj/elevator.msxc/midres_atari.o obj/elevator.msxc/midres_tile_016.o obj/elevator.msxc/midres_tile_000.o obj/elevator.msxc/midres_atmos.o obj/elevator.msxc/midres_c128.o obj/elevator.msxc/midres_c16.o obj/elevator.msxc/midres_c64.o obj/elevator.msxc/midres_coleco.o obj/elevator.msxc/midres_vdp.o obj/elevator.msxc/midres_msx.o obj/elevator.msxc/midres_mtx500.o obj/elevator.msxc/midres_plus4.o obj/elevator.msxc/midres_svi.o obj/elevator.msxc/midres_vic20.o obj/elevator.msxc/midres_sound_006.o obj/elevator.msxc/midres_sound_007.o obj/elevator.msxc/midres_tile_015.o obj/elevator.msxc/midres_screen_012.o obj/elevator.msxc/midres_screen_000.o obj/elevator.msxc/midres_tile_021.o obj/elevator.msxc/midres_tile_multicolor_009.o obj/elevator.msxc/midres_tile_020.o obj/elevator.msxc/midres_tile_005.o obj/elevator.msxc/midres_tile_004.o obj/elevator.msxc/midres_tile_multicolor_003.o obj/elevator.msxc/midres_tile_019.o obj/elevator.msxc/midres_tile_multicolor_008.o obj/elevator.msxc/midres_tile_018.o obj/elevator.msxc/midres_tile_026.o obj/elevator.msxc/midres_tile_multicolor_011.o obj/elevator.msxc/midres_tile_025.o obj/elevator.msxc/midres_tile_028.o obj/elevator.msxc/midres_tile_multicolor_012.o obj/elevator.msxc/midres_tile_027.o obj/elevator.msxc/midres_control_001.o obj/elevator.msxc/midres_control_000.o obj/elevator.msxc/midres_screen_013.o obj/elevator.msxc/midres_screen_006.o obj/elevator.msxc/midres_control_002.o obj/elevator.msxc/midres_screen_007.o obj/elevator.msxc/midres_file_001.o obj/elevator.msxc/midres_vanilla.o obj/elevator.msxc/midres_screen_010.o obj/elevator.msxc/midres_frame_000.o obj/elevator.msxc/midres_frame_001.o obj/elevator.msxc/midres.o obj/elevator.msxc/game_elevator.o obj/elevator.msxc/midres_data.o obj/elevator.msxc/main.o -o $(EXEDIR)/elevator.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/elevator.rom,$(EXEDIR)/elevator.msxc.rom)
-
-
-# -------------------------------------------------------------------
-# --- AIRATTACK FOR MSXC 
-# -------------------------------------------------------------------
-# 
-
-airattack.embedded.msxc:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -o obj/airattack.msxc/rawdata.o src/rawdata.c
-
-obj/airattack.msxc/midres_vdp_impl.o:	src/midres_vdp_impl.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/airattack.msxc/midres_vdp_impl.o src/midres_vdp_impl.asm
-
-obj/airattack.msxc/midres_io.o:	src/midres_io.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/airattack.msxc/midres_io.o src/midres_io.asm
-
-obj/airattack.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__AIRATTACK__ -o $@ $(subst obj/airattack.msxc/,src/,$(@:.o=.c)) 
-
-$(EXEDIR)/airattack.msxc:	airattack.embedded.msxc obj/airattack.msxc/midres_tile_005.o obj/airattack.msxc/midres_tile_004.o obj/airattack.msxc/midres_tile_multicolor_003.o obj/airattack.msxc/midres_tile_026.o obj/airattack.msxc/midres_tile_multicolor_011.o obj/airattack.msxc/midres_tile_025.o obj/airattack.msxc/midres_tile_processing_005.o obj/airattack.msxc/midres_tile_multicolor_001.o obj/airattack.msxc/midres_tile_processing_004.o obj/airattack.msxc/midres_vdp.o obj/airattack.msxc/midres_tile_processing_007.o obj/airattack.msxc/midres_tile_000.o obj/airattack.msxc/midres_atari.o obj/airattack.msxc/midres_tile_016.o obj/airattack.msxc/midres_atmos.o obj/airattack.msxc/midres_c128.o obj/airattack.msxc/midres_c16.o obj/airattack.msxc/midres_c64.o obj/airattack.msxc/midres_coleco.o obj/airattack.msxc/midres_msx.o obj/airattack.msxc/midres_mtx500.o obj/airattack.msxc/midres_plus4.o obj/airattack.msxc/midres_svi.o obj/airattack.msxc/midres_vic20.o obj/airattack.msxc/midres_tile_023.o obj/airattack.msxc/midres_tile_022.o obj/airattack.msxc/midres_tile_multicolor_010.o obj/airattack.msxc/midres_frame_000.o obj/airattack.msxc/midres_tile_014.o obj/airattack.msxc/midres_tile_009.o obj/airattack.msxc/midres_tile_008.o obj/airattack.msxc/midres_tile_multicolor_005.o obj/airattack.msxc/midres_sound_002.o obj/airattack.msxc/midres_sound_001.o obj/airattack.msxc/midres_tile_011.o obj/airattack.msxc/midres_tile_multicolor_006.o obj/airattack.msxc/midres_tile_010.o obj/airattack.msxc/midres_control_000.o obj/airattack.msxc/midres_sound_000.o obj/airattack.msxc/midres_frame_001.o obj/airattack.msxc/midres.o obj/airattack.msxc/midres_screen_000.o obj/airattack.msxc/midres_screen_006.o obj/airattack.msxc/midres_control_002.o obj/airattack.msxc/midres_screen_007.o obj/airattack.msxc/midres_file_001.o obj/airattack.msxc/midres_vanilla.o obj/airattack.msxc/midres_screen_010.o obj/airattack.msxc/midres_control_003.o obj/airattack.msxc/game_air_attack.o obj/airattack.msxc/midres_data.o obj/airattack.msxc/main.o obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_vdp_impl.o obj/airattack.msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/airattack.msxc/rawdata.o obj/airattack.msxc/midres_io.o obj/airattack.msxc/midres_vdp_impl.o obj/airattack.msxc/midres_tile_005.o obj/airattack.msxc/midres_tile_004.o obj/airattack.msxc/midres_tile_multicolor_003.o obj/airattack.msxc/midres_tile_026.o obj/airattack.msxc/midres_tile_multicolor_011.o obj/airattack.msxc/midres_tile_025.o obj/airattack.msxc/midres_tile_processing_005.o obj/airattack.msxc/midres_tile_multicolor_001.o obj/airattack.msxc/midres_tile_processing_004.o obj/airattack.msxc/midres_vdp.o obj/airattack.msxc/midres_tile_processing_007.o obj/airattack.msxc/midres_tile_000.o obj/airattack.msxc/midres_atari.o obj/airattack.msxc/midres_tile_016.o obj/airattack.msxc/midres_atmos.o obj/airattack.msxc/midres_c128.o obj/airattack.msxc/midres_c16.o obj/airattack.msxc/midres_c64.o obj/airattack.msxc/midres_coleco.o obj/airattack.msxc/midres_msx.o obj/airattack.msxc/midres_mtx500.o obj/airattack.msxc/midres_plus4.o obj/airattack.msxc/midres_svi.o obj/airattack.msxc/midres_vic20.o obj/airattack.msxc/midres_tile_023.o obj/airattack.msxc/midres_tile_022.o obj/airattack.msxc/midres_tile_multicolor_010.o obj/airattack.msxc/midres_frame_000.o obj/airattack.msxc/midres_tile_014.o obj/airattack.msxc/midres_tile_009.o obj/airattack.msxc/midres_tile_008.o obj/airattack.msxc/midres_tile_multicolor_005.o obj/airattack.msxc/midres_sound_002.o obj/airattack.msxc/midres_sound_001.o obj/airattack.msxc/midres_tile_011.o obj/airattack.msxc/midres_tile_multicolor_006.o obj/airattack.msxc/midres_tile_010.o obj/airattack.msxc/midres_control_000.o obj/airattack.msxc/midres_sound_000.o obj/airattack.msxc/midres_frame_001.o obj/airattack.msxc/midres.o obj/airattack.msxc/midres_screen_000.o obj/airattack.msxc/midres_screen_006.o obj/airattack.msxc/midres_control_002.o obj/airattack.msxc/midres_screen_007.o obj/airattack.msxc/midres_file_001.o obj/airattack.msxc/midres_vanilla.o obj/airattack.msxc/midres_screen_010.o obj/airattack.msxc/midres_control_003.o obj/airattack.msxc/game_air_attack.o obj/airattack.msxc/midres_data.o obj/airattack.msxc/main.o -o $(EXEDIR)/airattack.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/airattack.rom,$(EXEDIR)/airattack.msxc.rom)
-
-
-# -------------------------------------------------------------------
-# --- TOTTO FOR MSXC 
-# -------------------------------------------------------------------
-# 
-
-totto.embedded.msxc:
-	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -c src/rawdata.c -h src/rawdata.h
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -o obj/totto.msxc/rawdata.o src/rawdata.c
-
-obj/totto.msxc/midres_vdp_impl.o:	src/midres_vdp_impl.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/totto.msxc/midres_vdp_impl.o src/midres_vdp_impl.asm
-
-obj/totto.msxc/midres_io.o:	src/midres_io.asm
-	$(ASM88) -D__SCCZ80 -m -s -mz80 -oobj/totto.msxc/midres_io.o src/midres_io.asm
-
-obj/totto.msxc/%.o:	$(SOURCES) $(LIB_SOURCES)
-	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_II -D__TOTTO__ -o $@ $(subst obj/totto.msxc/,src/,$(@:.o=.c)) 
-
-$(EXEDIR)/totto.msxc:	totto.embedded.msxc obj/totto.msxc/midres_tile_005.o obj/totto.msxc/midres_tile_004.o obj/totto.msxc/midres_tile_multicolor_003.o obj/totto.msxc/midres_tile_023.o obj/totto.msxc/midres_tile_022.o obj/totto.msxc/midres_tile_multicolor_010.o obj/totto.msxc/midres_tile_processing_009.o obj/totto.msxc/midres_vdp.o obj/totto.msxc/midres_tile_processing_012.o obj/totto.msxc/midres_tile_multicolor_002.o obj/totto.msxc/midres_tile_processing_011.o obj/totto.msxc/midres_tile_processing_002.o obj/totto.msxc/midres_tile_multicolor_000.o obj/totto.msxc/midres_tile_processing_001.o obj/totto.msxc/midres_tile_processing_005.o obj/totto.msxc/midres_tile_multicolor_001.o obj/totto.msxc/midres_tile_processing_004.o obj/totto.msxc/midres_screen_000.o obj/totto.msxc/midres_tile_000.o obj/totto.msxc/midres_atari.o obj/totto.msxc/midres_tile_016.o obj/totto.msxc/midres_atmos.o obj/totto.msxc/midres_c128.o obj/totto.msxc/midres_c16.o obj/totto.msxc/midres_c64.o obj/totto.msxc/midres_coleco.o obj/totto.msxc/midres_msx.o obj/totto.msxc/midres_mtx500.o obj/totto.msxc/midres_plus4.o obj/totto.msxc/midres_svi.o obj/totto.msxc/midres_vic20.o obj/totto.msxc/midres_tile_007.o obj/totto.msxc/midres_tile_006.o obj/totto.msxc/midres_tile_multicolor_004.o obj/totto.msxc/midres_tile_028.o obj/totto.msxc/midres_tile_multicolor_012.o obj/totto.msxc/midres_tile_027.o obj/totto.msxc/midres_frame_000.o obj/totto.msxc/midres_screen_012.o obj/totto.msxc/midres_tile_019.o obj/totto.msxc/midres_tile_multicolor_008.o obj/totto.msxc/midres_tile_018.o obj/totto.msxc/midres_frame_001.o obj/totto.msxc/midres_control_002.o obj/totto.msxc/midres_tile_013.o obj/totto.msxc/midres_tile_multicolor_007.o obj/totto.msxc/midres_tile_012.o obj/totto.msxc/midres_tile_processing_016.o obj/totto.msxc/midres_sound_000.o obj/totto.msxc/midres_sound_001.o obj/totto.msxc/midres_control_000.o obj/totto.msxc/midres_sound_002.o obj/totto.msxc/midres_tile_009.o obj/totto.msxc/midres_tile_008.o obj/totto.msxc/midres_tile_multicolor_005.o obj/totto.msxc/midres_screen_006.o obj/totto.msxc/midres_screen_010.o obj/totto.msxc/midres.o obj/totto.msxc/game_totto.o obj/totto.msxc/midres_data.o obj/totto.msxc/main.o obj/totto.msxc/rawdata.o obj/totto.msxc/midres_vdp_impl.o obj/totto.msxc/midres_io.o
-	$(CC88) +msx -subtype=rom -m $(LDFLAGS88) obj/totto.msxc/rawdata.o obj/totto.msxc/midres_io.o obj/totto.msxc/midres_vdp_impl.o obj/totto.msxc/midres_tile_005.o obj/totto.msxc/midres_tile_004.o obj/totto.msxc/midres_tile_multicolor_003.o obj/totto.msxc/midres_tile_023.o obj/totto.msxc/midres_tile_022.o obj/totto.msxc/midres_tile_multicolor_010.o obj/totto.msxc/midres_tile_processing_009.o obj/totto.msxc/midres_vdp.o obj/totto.msxc/midres_tile_processing_012.o obj/totto.msxc/midres_tile_multicolor_002.o obj/totto.msxc/midres_tile_processing_011.o obj/totto.msxc/midres_tile_processing_002.o obj/totto.msxc/midres_tile_multicolor_000.o obj/totto.msxc/midres_tile_processing_001.o obj/totto.msxc/midres_tile_processing_005.o obj/totto.msxc/midres_tile_multicolor_001.o obj/totto.msxc/midres_tile_processing_004.o obj/totto.msxc/midres_screen_000.o obj/totto.msxc/midres_tile_000.o obj/totto.msxc/midres_atari.o obj/totto.msxc/midres_tile_016.o obj/totto.msxc/midres_atmos.o obj/totto.msxc/midres_c128.o obj/totto.msxc/midres_c16.o obj/totto.msxc/midres_c64.o obj/totto.msxc/midres_coleco.o obj/totto.msxc/midres_msx.o obj/totto.msxc/midres_mtx500.o obj/totto.msxc/midres_plus4.o obj/totto.msxc/midres_svi.o obj/totto.msxc/midres_vic20.o obj/totto.msxc/midres_tile_007.o obj/totto.msxc/midres_tile_006.o obj/totto.msxc/midres_tile_multicolor_004.o obj/totto.msxc/midres_tile_028.o obj/totto.msxc/midres_tile_multicolor_012.o obj/totto.msxc/midres_tile_027.o obj/totto.msxc/midres_frame_000.o obj/totto.msxc/midres_screen_012.o obj/totto.msxc/midres_tile_019.o obj/totto.msxc/midres_tile_multicolor_008.o obj/totto.msxc/midres_tile_018.o obj/totto.msxc/midres_frame_001.o obj/totto.msxc/midres_control_002.o obj/totto.msxc/midres_tile_013.o obj/totto.msxc/midres_tile_multicolor_007.o obj/totto.msxc/midres_tile_012.o obj/totto.msxc/midres_tile_processing_016.o obj/totto.msxc/midres_sound_000.o obj/totto.msxc/midres_sound_001.o obj/totto.msxc/midres_control_000.o obj/totto.msxc/midres_sound_002.o obj/totto.msxc/midres_tile_009.o obj/totto.msxc/midres_tile_008.o obj/totto.msxc/midres_tile_multicolor_005.o obj/totto.msxc/midres_screen_006.o obj/totto.msxc/midres_screen_010.o obj/totto.msxc/midres.o obj/totto.msxc/game_totto.o obj/totto.msxc/midres_data.o obj/totto.msxc/main.o -o $(EXEDIR)/totto.msxc -create-app 
-	$(call COPYFILES,$(EXEDIR)/totto.rom,$(EXEDIR)/totto.msxc.rom)
-
-                    
-#!!! missing resources for joycheck (msxc)
 
 
 # -------------------------------------------------------------------

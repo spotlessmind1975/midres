@@ -273,7 +273,7 @@
     $values = file('docs/targets.md');
     $targets = [];
     foreach ( $values as $value ) {
-        if ( preg_match('#- .([a-z0-9]+). \(#', $value, $matched) ) {
+        if ( preg_match('#- .([a-z0-9]+). -#', $value, $matched) ) {
             $value = trim($matched[1]);
             if($value) {
                 $targets[] = trim($value);
