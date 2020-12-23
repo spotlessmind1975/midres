@@ -33,6 +33,8 @@
 
 #include <stdint.h>
 
+#define __VDP__			1
+
 #define VDP_R0          0x80
 #define VDP_R1          0x81
 #define VDP_RNAME       0x82
