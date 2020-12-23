@@ -283,7 +283,7 @@
     $values = file('docs/programs.md');
     $programs = [];
     foreach ( $values as $value ) {
-        if ( preg_match('#- .([a-z0-9]+). \(#', $value, $matched) ) {
+        if ( preg_match('#- .([a-z0-9]+). - #', $value, $matched) ) {
             $program = trim($matched[1]);
             if($program) {
                 $programs[] = trim($program);

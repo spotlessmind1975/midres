@@ -1,24 +1,20 @@
-## GAMES/UTILITIES
+## PROGRAMS
 
 This is the list of programs (games and utilities) that can be compiled directly with the MIDRES library. 
 
-To compile a `game` for a specific `target` just run the command:
+To compile a `program` for a specific `target` just run the command:
 
-    make game=[name] target=[target] all
-
-To compile an `utility` for a specific `target` just run the command:
-
-    make utility=[name] target=[target] all
+    make program=[name] target=[target] all
 
 To compile all programs for all platforms, run the command:
 
     ./build_programs.sh
 
-## LIST OF GAMES/UTILITIES
+## LIST OF PROGRAMS
 
-- `alienstorm` ([ita](https://retroprogramming.iwashere.eu/it:alienstorm) - [eng](https://retroprogramming.iwashere.eu/alienstorm))
-- `elevator` ([ita](https://retroprogramming.iwashere.eu/it:elevator) - [eng](https://retroprogramming.iwashere.eu/elevator))
-- `airattack` ([ita](https://retroprogramming.iwashere.eu/it:airattack) - [eng](https://retroprogramming.iwashere.eu/airattack))
-- `totto` ([ita](https://retroprogramming.iwashere.eu/it:totto) - [eng](https://retroprogramming.iwashere.eu/totto))
-- `joycheck` ([ita](https://retroprogramming.iwashere.eu/it:joycheck) - [eng](https://retroprogramming.iwashere.eu/joycheck))
+- `alienstorm` - “remake” of the Space Invaders (スペースインベーダー) game developed by Tomohiro Nishikado and released in 1978 ([italian page](https://retroprogramming.iwashere.eu/it:alienstorm) - [english page](https://retroprogramming.iwashere.eu/alienstorm))
+- `elevator` - a simulation / tactical / cooperative game based onan  elevator simulation ([italian page](https://retroprogramming.iwashere.eu/it:elevator) - [english page](https://retroprogramming.iwashere.eu/elevator))
+- `airattack` - an arcade game clone of "Blitz" ([italian page](https://retroprogramming.iwashere.eu/it:airattack) - [english page](https://retroprogramming.iwashere.eu/airattack))
+- `totto` - “remake” of the Flappy Bird game ([italian page](https://retroprogramming.iwashere.eu/it:totto) - [english page](https://retroprogramming.iwashere.eu/totto))
+- `joycheck` - the program has the purpose of verifying if the digital joystick and/or the port to which it is connected works correctly ([italian page](https://retroprogramming.iwashere.eu/it:joycheck) - [english page](https://retroprogramming.iwashere.eu/joycheck))
 

@@ -108,25 +108,16 @@ TARGETS ?= $(target)
 endif
 endif
 
-# Given GAMES:
+# Given PROGRAMS:
 #  - totto
 #  - airattack
 #  - alienstorm
 #  - elevator
-
-ifdef game
-ifdef target
-ATARGETS ?= $(game).$(target)
-LTARGETS ?= $(target)
-endif
-endif
-
-# Given UTILITY:
 #  - joycheck
 
-ifdef utility
+ifdef program
 ifdef target
-ATARGETS ?= $(utility).$(target)
+ATARGETS ?= $(program).$(target)
 LTARGETS ?= $(target)
 endif
 endif
