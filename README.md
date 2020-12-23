@@ -6,13 +6,15 @@ by Marco Spedaletti (asimov@mclink.it)
 ## ABOUT THIS LIBRARY
 The MIDRES library allows to create **WORA** (*Write Once Run Anywhere*) programs that are [very efficient "by design"](https://retroprogramming.iwashere.eu/midres_library:isomorphism) on various 8-bit platforms, without the need for "fine tuning" them and without compromises of other dev-kits. 
 
-**The isomorphic approach is different from abstraction.** It is based on mapping the underlying hardware without making use of third-party libraries and by matching complex and heterogeneous structures, albeit homologous, to each other. When the code written with this approach is satisfactory (in terms of execution speed or use of resources), then **it is already optimized for any other platform**. 
+**The isomorphic approach is different from abstraction.** It is based on mapping the underlying hardware without making use of third-party libraries and by matching complex and heterogeneous structures, albeit homologous, to each other. 
 
-For more information on this library, please [click here](https://retroprogramming.iwashere.eu/midres_library:isomorphism). 
+When the (client) code written with this approach is satisfactory (in terms of execution speed or use of resources), then **it is already optimized for any other platform**. 
+
+For more information on this library, please [click here](https://retroprogramming.iwashere.eu/midres_library). 
 
 ## SUPPORTED ARCHITECTURES
 
-The [programs](docs/programs.md) can be built on [many vintage systems](docs/targets.md). Due to limitations in the resources of the various retrocomputers, it is possible that not all programs can be compiled on all platforms. For a complete list of supported targets and status of buildings please visit [this page](docs/status.md)
+The [programs](docs/programs.md) can be cross compiled for [many vintage systems](docs/targets.md). Due to limitations in the resources of the various retrocomputers, it is possible that not all programs can be compiled on all platforms. For a complete list of supported targets and status of buildings please visit [this page](docs/status.md)
 
 
 ## LICENSE
