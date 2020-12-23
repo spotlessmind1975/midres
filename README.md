@@ -4,7 +4,9 @@ An isomorphic gamelib for retrocomputers
 by Marco Spedaletti (asimov@mclink.it)
 
 ## ABOUT THIS LIBRARY
-The MIDRES library allows to create **WORA** (*Write Once Run Anywhere*) programs that are [very efficient "by design"](https://retroprogramming.iwashere.eu/midres_library:isomorphism) on various 8-bit platforms, without the need for "fine tuning" them and without compromises of other dev-kits. The isomorphic approach is different from abstraction. It is based on mapping the underlying hardware without making use of third-party libraries and by matching complex and heterogeneous structures, albeit homologous, to each other. When the code written with this approach is satisfactory (in terms of execution speed or use of resources) **is already optimized for any other platform**. 
+The MIDRES library allows to create **WORA** (*Write Once Run Anywhere*) programs that are [very efficient "by design"](https://retroprogramming.iwashere.eu/midres_library:isomorphism) on various 8-bit platforms, without the need for "fine tuning" them and without compromises of other dev-kits. 
+
+**The isomorphic approach is different from abstraction.** It is based on mapping the underlying hardware without making use of third-party libraries and by matching complex and heterogeneous structures, albeit homologous, to each other. When the code written with this approach is satisfactory (in terms of execution speed or use of resources), then **it is already optimized for any other platform**. 
 
 For more information on this library, please [click here](https://retroprogramming.iwashere.eu/midres_library:isomorphism). 
 
