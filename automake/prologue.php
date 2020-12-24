@@ -220,8 +220,9 @@ endif
 ###############################################################################
 
 CFLAGS := -D__DEMO_$(DEMO)__ -D__GAME_$(GAME)__ -D__TUTORIAL_$(TUTORIAL)__ -W -const-comparison
-CFLAGS88 := -D__Z80__
+CFLAGS88 := -D__Z80__ -O3
 LDFLAGS := 
+LDFLAGS88 :=
 CRT :=
 REMOVES :=
 
