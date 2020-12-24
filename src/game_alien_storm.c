@@ -125,7 +125,7 @@ unsigned char alienFrame = 0;
 // alien. When an alien placed in position(x, y) is present on the 
 // screen, the alien type number (1, 2 or 3) is entered into this matrix.
 // When removed because hit, it is assigned a value of zero(0).
-// Finally, the intermediate state uses the placeholder value 0xff.
+// Finally, the intermediate state uses the placeholder value 0x6f.
 unsigned char alienMatrix[ALIEN_ROW_COUNT][ALIEN_COLUMN_COUNT];
 
 // This vector is filled in with the pre-calculated values of the abscissa 
@@ -1122,7 +1122,7 @@ void draw_aliens() {
 
 	// We initialize the control structures.
 	for (i = 0; i < ALIEN_COLUMN_COUNT; ++i) {
-		alienMaxRowPerColumn[i] = 0xff;
+		alienMaxRowPerColumn[i] = 0x6f;
 	}
 
 	alienMaxRow = 0;
@@ -1156,7 +1156,7 @@ void draw_aliens() {
 				if (alienMatrix[i][j]) {
 
 					// Is it an exploding alien?
-					if (alienMatrix[i][j] == 0xff) {
+					if (alienMatrix[i][j] == 0x6f) {
 						clear_alien(j, i);
 						alienMatrix[i][j] = 0;
 
@@ -1178,7 +1178,7 @@ void draw_aliens() {
 
 	leftFreeColumns = 0;
 	for (i = 0; i < (ALIEN_COLUMN_COUNT>>1); ++i) {
-		if (alienMaxRowPerColumn[i] == 0xff) {
+		if (alienMaxRowPerColumn[i] == 0x6f) {
 			leftFreeColumns = (i+1);
 		}
 		else {
@@ -1188,7 +1188,7 @@ void draw_aliens() {
 
 	rightFreeColumns = 0;
 	for (i = (ALIEN_COLUMN_COUNT-1); i > (ALIEN_COLUMN_COUNT >> 1); --i) {
-		if (alienMaxRowPerColumn[i] == 0xff) {
+		if (alienMaxRowPerColumn[i] == 0x6f) {
 			rightFreeColumns = (ALIEN_COLUMN_COUNT-i);
 		}
 		else {
@@ -1326,7 +1326,7 @@ void check_player_fire() {
 
 			// We update the status matrix, representing that 
 			// specific position as an "explosion".
-			alienMatrix[i][j] = 0xff;
+			alienMatrix[i][j] = 0x6f;
 			
 			// Explode the alien and stop fire.
 			explode_alien(j, i);
@@ -1349,67 +1349,65 @@ void check_alien_fire() {
 	unsigned char i;
 
 	// Move the alien's fire on correct frame.
-	if (alienFireY > 0) {
-		--alienFireDelayFrameCount;
-		if (alienFireDelayFrameCount == 0) {
+	--alienFireDelayFrameCount;
+	if (alienFireDelayFrameCount == 0) {
 
-			// We have to look for the only active shots.
-			for (i = 0; i < ALIEN_COLUMN_COUNT; ++i) {
+		// We have to look for the only active shots.
+		for (i = 0; i < ALIEN_COLUMN_COUNT; ++i) {
 
-				// Skip if not active.
-				if (alienFireY[i] == 0) continue;
+			// Skip if not active.
+			if (alienFireY[i] == 0) continue;
+
+			// If the shot can still move.
+			if (alienFireY[i] <= (MR_SCREEN_HEIGHT - 2)) {
+
+				// We recover the tile it is about to overwrite.
+				mr_tile tile = mr_gettilev(alienFireX[i], alienFireY[i]);
+				// We clear the previous.
+				mr_puttilev(alienFireX[i], alienFireY[i] - 1, TILE_EMPTY, MR_COLOR_BLACK);
 
 				// If the shot can still move.
-				if (alienFireY[i] <= (MR_SCREEN_HEIGHT - 2)) {
+				if (alienFireY[i] < (MR_SCREEN_HEIGHT - 2)) {
+					mr_puttilev(alienFireX[i], alienFireY[i], TILE_LASER2, MR_COLOR_WHITE);
+				}
 
-					// We recover the tile it is about to overwrite.
-					mr_tile tile = mr_gettilev(alienFireX[i], alienFireY[i]);
-					// We clear the previous.
-					mr_puttilev(alienFireX[i], alienFireY[i] - 1, TILE_EMPTY, MR_COLOR_BLACK);
+				// Check if the alien hit a bunker.
+				if ((tile >= TILE_DEFENSE) && (tile < (TILE_DEFENSE + (TILE_DEFENSE_WIDTH * TILE_DEFENSE_HEIGHT)))) {
+					// Destroy the bunker and stop it.
+					mr_puttilev(alienFireX[i], alienFireY[i], TILE_EMPTY, MR_COLOR_BLACK);
+					alienFireY[i] = 0;
+				}
 
-					// If the shot can still move.
-					if (alienFireY[i] < (MR_SCREEN_HEIGHT - 2)) {
-						mr_puttilev(alienFireX[i], alienFireY[i], TILE_LASER2, MR_COLOR_WHITE);
+				// Check if the alien hit the player.
+				else if (( alienFireX[i] == (cannonX>>3) || alienFireX[i] == ((cannonX >> 3)+1) ) && alienFireY[i] == CANNON_START_Y) {
+
+					// Reset and stop the shot.
+					mr_puttilev(alienFireX[i], alienFireY[i], TILE_EMPTY, MR_COLOR_BLACK);
+					alienFireY[i] = 0;
+
+					// Player has been hit: explode the cannon and decrease the cannons.
+					cannonHit = 40;
+					clear_cannon();
+					if (cannonLives[currentPlayer] > 0) {
+						--cannonLives[currentPlayer];
 					}
+					draw_cannons();
 
-					// Check if the alien hit a bunker.
-					if ((tile >= TILE_DEFENSE) && (tile < (TILE_DEFENSE + (TILE_DEFENSE_WIDTH * TILE_DEFENSE_HEIGHT)))) {
-						// Destroy the bunker and stop it.
-						mr_puttilev(alienFireX[i], alienFireY[i], TILE_EMPTY, MR_COLOR_BLACK);
-						alienFireY[i] = 0;
-					}
+				}
 
-					// Check if the alien hit the player.
-					else if (( alienFireX[i] == (cannonX>>3) || alienFireX[i] == ((cannonX >> 3)+1) ) && alienFireY[i] == CANNON_START_Y) {
-
-						// Reset and stop the shot.
-						mr_puttilev(alienFireX[i], alienFireY[i], TILE_EMPTY, MR_COLOR_BLACK);
-						alienFireY[i] = 0;
-
-						// Player has been hit: explode the cannon and decrease the cannons.
-						cannonHit = 40;
-						clear_cannon();
-						if (cannonLives[currentPlayer] > 0) {
-							--cannonLives[currentPlayer];
-						}
-						draw_cannons();
-
-					}
-
-					// If the shot can still move.
-					else if (alienFireY[i] < (MR_SCREEN_HEIGHT - 2)) {
-						++alienFireY[i];
-					}
-					// Otherwise, stop & clear.
-					else {
-						mr_puttilev(alienFireX[i], alienFireY[i], TILE_EMPTY, MR_COLOR_BLACK);
-						alienFireY[i] = 0;
-					}
+				// If the shot can still move.
+				else if (alienFireY[i] < (MR_SCREEN_HEIGHT - 2)) {
+					++alienFireY[i];
+				}
+				// Otherwise, stop & clear.
+				else {
+					mr_puttilev(alienFireX[i], alienFireY[i], TILE_EMPTY, MR_COLOR_BLACK);
+					alienFireY[i] = 0;
 				}
 			}
-			// Reset the delay timing.
-			alienFireDelayFrameCount = ALIEN_FIRE_DELAY_FRAME_COUNT;
 		}
+		// Reset the delay timing.
+		alienFireDelayFrameCount = ALIEN_FIRE_DELAY_FRAME_COUNT;
 	}
 }
 
@@ -1492,7 +1490,7 @@ void move_aliens() {
 		// We look to see if there are spaces to shoot.
 		for (i = 0; i < ALIEN_COLUMN_COUNT; ++i) {
 			if (rand() > (RAND_MAX >> 1)) continue;
-			if ((alienFireY[i] == 0) && (alienMaxRowPerColumn[i] > 0) && (alienMaxRowPerColumn[i] != 0xff)) {
+			if ((alienFireY[i] == 0) && (alienMaxRowPerColumn[i] > 0) && (alienMaxRowPerColumn[i] != 0x6f)) {
 				alienFireY[i] = alienY + ALIEN_VERTICAL_OFFSET + (alienMaxRowPerColumn[i] + 1) * (TILE_ALIEN1A_HEIGHT + TILE_ALIEN1A_HEIGHT) + 1;
 				alienFireX[i] = alienX + ALIEN_HORIZONTAL_OFFSET + alienColumn[i];
 				break;
