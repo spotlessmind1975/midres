@@ -746,10 +746,11 @@ void show_titles() {
 
 	while (!exitLoop) {
 
-		mr_start_frame();
 
 		// Move the birds horizzontally
 		for (i = -2 * TILE1_BIRD1_WIDTH; i < (MR_SCREEN_WIDTH * 8 + 4 * 8 * TILE1_BIRD1_WIDTH); i+=2) {
+
+			mr_start_frame();
 
 			// Exit if a key is pressed.
 			if (mr_key_pressed()) {
@@ -794,12 +795,13 @@ void show_titles() {
 				}
 			}
 
+			mr_end_frame(0);
+
 		}
 
 		// Pass to next color.
 		c = MR_NEXT_COLOR(c);
 
-		mr_end_frame(0);
 
 	}
 
