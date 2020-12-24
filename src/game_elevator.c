@@ -204,8 +204,8 @@ mr_protothread inputThread;
 // we decrease effectively the remaining time, that is the
 // second variable. In other words, the first variable is a "demultiplexer"
 // for the second variable.
-unsigned char timeRemainCount = TIME_REMAIN_COUNT;
-unsigned char timeRemain = TIME_REMAIN_MAX;
+mr_counter timeRemainCount = TIME_REMAIN_COUNT;
+mr_counter timeRemain = TIME_REMAIN_MAX;
 
 // Temporary space to store an addendum.
 unsigned char addendum[4] = { 0, 0, 0, 0 };

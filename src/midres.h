@@ -86,6 +86,14 @@
 
 	typedef unsigned char mr_level;
 
+	// This type is handy to manage unsigned 8 bit counters
+
+	#ifdef __Z80__
+		typedef int mr_counter;
+	#else
+		typedef unsigned char mr_counter;
+	#endif
+
 	// The position of the pixel on the screen is represented by a specific 
 	// data type. Since the maximum resolution is 80 x 50, the type used is 
 	// the one that represents these two numbers with the lowest numer of bits.
