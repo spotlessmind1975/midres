@@ -121,10 +121,12 @@
                 [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro64.mpic']
             ],
             'vic2024' => [
+                [ 'loader' => 'airattack_loader2024.prg'],
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles20.bin' ],
                 [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro20.mpic']
             ],
             'plus4' => [
+                [ 'loader' => 'airattack_loader4.prg'],
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
                 [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro16.mpic']
             ],
@@ -153,6 +155,7 @@
                 ['destination' => 'ttfinal4.mpic', 'source' => '$(DATADIR)/ttfinal464.mpic' ]
             ],
             'vic2024' => [
+                [ 'loader' => 'totto_loader2024.prg'],
                 ['destination' => 'tttiles.bin', 'source' => '$(DATADIR)/tttiles.bin' ],
                 ['destination' => 'tttiles1.bin', 'source' => '$(DATADIR)/tttiles1.bin' ],
                 ['destination' => 'ttfinal1.mpic', 'source' => '$(DATADIR)/ttfinal120.mpic' ],
@@ -161,6 +164,7 @@
                 ['destination' => 'ttfinal4.mpic', 'source' => '$(DATADIR)/ttfinal420.mpic' ]
             ],
             'plus4' => [
+                [ 'loader' => 'totto_loader4.prg'],
                 ['destination' => 'tttiles.bin', 'source' => '$(DATADIR)/tttiles.bin' ],
                 ['destination' => 'tttiles1.bin', 'source' => '$(DATADIR)/tttiles1.bin' ],
                 ['destination' => 'ttfinal1.mpic', 'source' => '$(DATADIR)/ttfinal116.mpic' ],
@@ -179,11 +183,31 @@
                 ['destination' => 'zstiles.bin', 'source' => '$(DATADIR)/astiles.bin' ],
                 ['destination' => 'zstiles1.bin', 'source' => '$(DATADIR)/astiles1.bin' ],
                 ['destination' => 'zstiles2.bin', 'source' => '$(DATADIR)/astiles2.bin' ]
+            ],
+            'vic2024' => [
+                [ 'loader' => 'asloader2024.prg'],
+                ['destination' => 'zstiles.bin', 'source' => '$(DATADIR)/astiles.bin' ],
+                ['destination' => 'zstiles1.bin', 'source' => '$(DATADIR)/astiles1.bin' ],
+                ['destination' => 'zstiles2.bin', 'source' => '$(DATADIR)/astiles2.bin' ]
+            ],
+            'plus4' => [
+                [ 'loader' => 'asloader4.prg'],
+                ['destination' => 'zstiles.bin', 'source' => '$(DATADIR)/astiles.bin' ],
+                ['destination' => 'zstiles1.bin', 'source' => '$(DATADIR)/astiles1.bin' ],
+                ['destination' => 'zstiles2.bin', 'source' => '$(DATADIR)/astiles2.bin' ]
             ]
         ], 
 
         'joycheck' => [
             'c64' => [
+                ['destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ]
+            ],
+            'vic2024' => [
+                [ 'loader' => 'jcloader2024.prg'],
+                ['destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ]
+            ],
+            'plus4' => [
+                [ 'loader' => 'jcloader4.prg'],
                 ['destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ]
             ]
         ], 
@@ -194,10 +218,12 @@
                 ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator64.mpic' ]
             ],
             'vic2024' => [
+                [ 'loader' => 'elloader2024.prg'],
                 ['destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
                 ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator20.mpic' ]
             ],
             'plus4' => [
+                [ 'loader' => 'elloader4.prg'],
                 ['destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
                 ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator16.mpic' ]
             ],
@@ -239,8 +265,6 @@
 
     $resources['alienstorm']['c16'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['vic20'] = $resources['alienstorm']['c64'];
-    $resources['alienstorm']['vic2024'] = $resources['alienstorm']['c64'];
-    $resources['alienstorm']['plus4'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['c128'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['atari'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['coleco'] = $resources['alienstorm']['c64'];
@@ -251,9 +275,6 @@
     $resources['alienstorm']['atmos'] = $resources['alienstorm']['atari'];
 
     $resources['joycheck']['c16'] = $resources['joycheck']['plus4'];
-    $resources['joycheck']['vic20'] = $resources['joycheck']['c64'];
-    $resources['joycheck']['vic2024'] = $resources['joycheck']['c64'];
-    $resources['joycheck']['plus4'] = $resources['joycheck']['c64'];
     $resources['joycheck']['c128'] = $resources['joycheck']['c64'];
     $resources['joycheck']['atari'] = $resources['joycheck']['c64'];
     $resources['joycheck']['atmos'] = $resources['joycheck']['atari'];

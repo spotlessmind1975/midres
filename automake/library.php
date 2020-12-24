@@ -268,7 +268,7 @@ function emit_commands_for_create_1541_disk($platform,$filename,$files = []) {
     foreach( $files as $file ) {
         $destination = $file['destination'];
         $source = $file['source'];
-?>	$(CC1541) -f <?=$destination;?> -w <?=$source;?> $(EXEDIR)/<?=$diskImage;?> 
+?>	$(CC1541) -f <?=basename($destination);?> -w <?=$source;?> $(EXEDIR)/<?=$diskImage;?> 
 <?php        
     }
 
@@ -324,6 +324,7 @@ function emit_rules_for_ancillary_cc65($platform, $resources = [], $embedded = f
 midres.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
+        if ( isset($resource['loader'] ) ) continue;
         $source = $resource['source'];
         $destination = $resource['destination'];
 ?>-i <?=$source;?> -n <?=$destination;?> <?php 
@@ -343,9 +344,7 @@ $(EXEDIR)/midres.<?=$platform;?>: $(subst PLATFORM,<?=$platform;?>,$(OBJS))
     switch( $platform ) {
         case 'c64':
         case 'vic20':
-        case 'vic2024':
         case 'c16':
-        case 'plus4':
         case 'c128':
             $executable = [
                 "destination" => "midres-single",
@@ -357,6 +356,25 @@ $(EXEDIR)/midres.<?=$platform;?>: $(subst PLATFORM,<?=$platform;?>,$(OBJS))
             } else {
                 emit_commands_for_create_1541_disk($platform65, "midres", array_merge([ $executable ], $resources));
             }
+            break;
+        case 'vic2024':
+        case 'plus4':
+            $loader = array_shift($resources);
+            $loader = [
+                "destination" => "loader",
+                "source" => "$(DATADIR)/".$loader['loader']
+            ];
+            $executable = [
+                "destination" => "midres-single",
+                "source" => "$(EXEDIR)/midres.".$platform65,
+            ];
+
+            if ( $embedded ) {
+                emit_commands_for_create_1541_disk($platform65, "midres", [ $loader, $executable ]);
+            } else {
+                emit_commands_for_create_1541_disk($platform65, "midres", array_merge([ $loader, $executable ], $resources));
+            }
+            break;
             break;
         case 'atari':
         case 'atarilo':
@@ -400,6 +418,7 @@ function emit_rules_for_program_cc65($platform, $program, $resources = [], $embe
 <?=$program;?>.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
+        if ( isset($resource['loader'] ) ) continue;
         $source = $resource['source'];
         $destination = $resource['destination'];
 ?>-i <?=$source;?> -n <?=$destination;?> <?php 
@@ -420,11 +439,26 @@ $(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> 
 <?php 
 
     switch( $platform ) {
+        case 'vic2024':
+        case 'plus4':
+            $loader = array_shift($resources);
+            $loader = [
+                "destination" => "loader",
+                "source" => "$(DATADIR)/".$loader['loader']
+            ];
+            $executable = [
+                "destination" => "$(EXEDIR)/".$program,
+                "source" => "$(EXEDIR)/".$program.".".$platform,
+            ];
+            if ( $embedded ) {
+                emit_commands_for_create_1541_disk($platform, $program, [ $loader, $executable ]);
+            } else {
+                emit_commands_for_create_1541_disk($platform, $program, array_merge( [ $loader, $executable ] , $resources));
+            }
+            break;
         case 'c64':
         case 'vic20':
-        case 'vic2024':
-        case 'c16':
-        case 'plus4':
+        case 'c16':        
         case 'c128':
             $executable = [
                 "destination" => "$(EXEDIR)/".$program,
@@ -504,6 +538,7 @@ function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
 midres.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
+        if ( isset($resource['loader'] ) ) continue;
         $source = $resource['source'];
         $destination = $resource['destination'];
 ?>-i <?=$source;?> -n <?=$destination;?> <?php 
@@ -603,6 +638,7 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
 <?=$program;?>.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
+        if ( isset($resource['loader'] ) ) continue;
         $source = $resource['source'];
         $destination = $resource['destination'];
 ?>-i <?=$source;?> -n <?=$destination;?> <?php 
