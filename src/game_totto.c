@@ -832,9 +832,9 @@ void show_level() {
 	// Show level
 	draw_level(MR_SCREEN_HEIGHT >> 1);
 
-	mr_wait(2);
-
 	mr_end_frame(0);
+
+	mr_wait(2);
 
 }
 
@@ -873,8 +873,12 @@ void game_totto() {
 	// Initialize graphical subsystem
 	mr_init();
 
+	mr_start_frame();
+
 	// Clear screen bitmap.
 	mr_clearv();
+
+	mr_end_frame(0);
 
 	// Prepare the graphics.
 	prepare_graphics();
