@@ -211,7 +211,7 @@ unsigned char timeRemain = TIME_REMAIN_MAX;
 unsigned char addendum[4] = { 0, 0, 0, 0 };
 
 // Store the current score.
-mr_position score[4] = { 0, 0, 0, 0 };
+mr_score score[4] = { 0, 0, 0, 0 };
 
 // Store the current key pressed.
 unsigned char currentKey = 0;

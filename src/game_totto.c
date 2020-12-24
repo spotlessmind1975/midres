@@ -169,10 +169,10 @@ mr_tile_position columnX = MR_SCREEN_WIDTH * 8;
 mr_tile_position enterColumn = COLUMN_COUNT+1;
 
 // Store the score of the player
-mr_position score[4] = { 0, 0, 0, 0 };
+mr_score score[4] = { 0, 0, 0, 0 };
 
 // Store the hiscore of the player
-mr_position hiscore[4] = { 0, 0, 0, 0 };
+mr_score hiscore[4] = { 0, 0, 0, 0 };
 
 // Where is the "hole" inside the column? If we represent 
 // the column as a column of characters, this value will
@@ -197,7 +197,7 @@ mr_position groundFrame = 0;
 mr_position forestFrame = 0;
 
 // Store the level
-mr_position level[2] = { 1, 0 };
+mr_level level[2] = { 1, 0 };
 
 // Index of the forest ground.
 mr_position columnCount = 0;

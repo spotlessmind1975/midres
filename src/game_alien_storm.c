@@ -281,10 +281,10 @@ mr_boolean gameOver = mr_false;
 mr_boolean levelFinished = mr_false;
 
 // This is each player's score.
-mr_position score[2][4] = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+mr_score score[2][4] = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
 // Store the hiscore of the best player
-mr_position hiscore[4] = { 0, 0, 0, 0 };
+mr_score hiscore[4] = { 0, 0, 0, 0 };
 
 // Store the credit available.
 mr_position credit = 0;
@@ -299,7 +299,7 @@ unsigned char currentPlayer = 0;
 unsigned char addendum[4] = { 0, 0, 0, 0 };
 
 // Current level
-unsigned char level = 0;
+mr_level level = 0;
 
 ///////////////////////////// WELCOME SCREEN ////////////////////////////////
 

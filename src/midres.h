@@ -78,6 +78,14 @@
 
 	typedef unsigned char mr_pop;
 
+	// This type is handy to manage score in BCD format.
+
+	typedef unsigned char mr_score;
+
+	// This type is handy to manage levels in BCD format.
+
+	typedef unsigned char mr_level;
+
 	// The position of the pixel on the screen is represented by a specific 
 	// data type. Since the maximum resolution is 80 x 50, the type used is 
 	// the one that represents these two numbers with the lowest numer of bits.

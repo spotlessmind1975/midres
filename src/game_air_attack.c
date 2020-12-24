@@ -129,13 +129,13 @@ mr_tile_position bomb_x, bomb_y;
 mr_position building_index = 0;
 
 // Store the score of the player
-mr_position score[4] = { 0, 0, 0, 0 };
+mr_score score[4] = { 0, 0, 0, 0 };
 
 // Store the bombs dropped by the player
-mr_position drops[4] = { 0, 0, 0, 0 };
+mr_score drops[4] = { 0, 0, 0, 0 };
 
 // Store the level
-mr_position level[2] = { 1, 0 };
+mr_level level[2] = { 1, 0 };
 
 unsigned char* mr_translate_file_user(mr_file _file) {
 
