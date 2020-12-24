@@ -6,13 +6,13 @@ target name     |alienstorm      |elevator        |airattack       |totto       
 **svi**         |YES             |YES             |YES             |YES             |NO[4]           |
 **mtx500**      |YES             |YES             |YES             |YES             |NO[4]           |
 **coleco**      |YES             |YES             |YES             |YES             |NO[4]           |
-**atari**       |YES             |YES             |YES             |NO[4]           |NO[3]           |
-**vic20**       |NO[2]           |NO[1]           |NO[1]           |NO[2]           |NO[1]           |
-**vic2024**     |YES             |YES             |YES             |YES             |NO[3]           |
-**c64**         |YES             |YES             |YES             |YES             |NO[3]           |
-**c128**        |YES             |YES             |YES             |YES             |NO[3]           |
-**c16**         |NO[1]           |NO[1]           |NO[3]           |NO[1]           |NO[4]           |
-**plus4**       |YES             |YES             |YES             |YES             |NO[3]           |
+**atari**       |YES             |YES             |YES             |NO[4]           |YES             |
+**vic20**       |NO[2]           |NO[1]           |NO[1]           |NO[2]           |NO[4]           |
+**vic2024**     |YES             |YES             |YES             |YES             |YES             |
+**c64**         |YES             |YES             |YES             |YES             |YES             |
+**c128**        |YES             |YES             |YES             |YES             |YES             |
+**c16**         |NO[1]           |NO[1]           |NO[3]           |NO[1]           |NO[3]           |
+**plus4**       |YES             |YES             |YES             |YES             |YES             |
 
 </div>
 
