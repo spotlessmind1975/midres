@@ -40,6 +40,8 @@
 // Include generated tiles reference.
 #include "utility_joycheck_tiles.h"
 
+#include "rawdata.h"
+
 /****************************************************************************
  ** DEFINES AND VARIABLES SECTION
  ****************************************************************************/
@@ -62,6 +64,18 @@ unsigned char registerBitIndex = 0;
 // Joystick to be tested
 unsigned char joystickIndex = 0;
 
+
+unsigned char* mr_translate_file_user(mr_file _file) {
+
+	switch (_file) {
+		case FILE_ZDJTILES_BIN:
+			return "zdjtiles.bin";
+	}
+
+	return 0;
+
+}
+
 // Main program
 void utility_joycheck() {
 
@@ -74,8 +88,8 @@ void utility_joycheck() {
 
 	// Load the tiles from the disk on the first tileset space.
 	// We load all tiles (TILE_COUNT) from first position (0).
-	mr_tileset_load("zdjtiles.bin", MR_TILESET_0, TILE_START, TILE_COUNT);
-
+	mr_tileset_load_file(FILE_ZDJTILES_BIN, MR_TILESET_0, TILE_START, TILE_COUNT);
+	
 	// This little "trick" allows us to quickly clean the screen 
 	// using the prepared empty tile.
 	MR_RENDERED_MIXELS[0] = TILE_EMPTY;
