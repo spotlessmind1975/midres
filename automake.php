@@ -96,10 +96,10 @@
 
         'atari' => [
             [ 'destination' => 'slideshow', 'source' => '$(DATADIR)/slideshowa.dat' ],
-            [ 'destination' => 'imagea01.mpic', 'source' => '$(DATADIR)/imagea01.mpic' ],
-            [ 'destination' => 'imagea02.mpic', 'source' => '$(DATADIR)/imagea02.mpic' ],
-            [ 'destination' => 'imagea03.mpic', 'source' => '$(DATADIR)/imagea03.mpic' ],
-            [ 'destination' => 'imagea04.mpic', 'source' => '$(DATADIR)/imagea04.mpic' ],
+            [ 'destination' => 'imagea01.mpic', 'source' => '$(DATADIR)/imagea01.pic' ],
+            [ 'destination' => 'imagea02.mpic', 'source' => '$(DATADIR)/imagea02.pic' ],
+            [ 'destination' => 'imagea03.mpic', 'source' => '$(DATADIR)/imagea03.pic' ],
+            [ 'destination' => 'imagea04.mpic', 'source' => '$(DATADIR)/imagea04.pic' ],
             [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
             [ 'destination' => 'mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
