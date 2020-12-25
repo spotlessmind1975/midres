@@ -317,10 +317,6 @@ function emit_rules_for_ancillary_cc65($platform, $resources = [], $embedded = f
 # --- DEMO/TUTORIALS FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
 
-<?php
-    if ( $embedded ) {
-?>
-
 midres.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
@@ -330,14 +326,18 @@ midres.embedded.<?=$platform;?>:
 ?>-i <?=$source;?> -n <?=$destination;?> <?php 
     }
     ?>-c src/rawdata.c -h src/rawdata.h
+<?php
+    if ( $embedded ) {
+?>
 	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl <?=$cbm?'-D__CBM__':'';?> -o obj/<?=$platform65;?>/rawdata.o src/rawdata.c
 <?php
     }
 ?>
+
 obj/<?=$platform;?>/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl <?=$cbm?'-D__CBM__':'';?> -o $@ $(subst obj/<?=$platform;?>/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.<?=$platform;?>: $(subst PLATFORM,<?=$platform;?>,$(OBJS))
+$(EXEDIR)/midres.<?=$platform;?>: midres.embedded.<?=$platform;?> $(subst PLATFORM,<?=$platform;?>,$(OBJS))
 	$(CC) -Ln demo<?=$platform;?>.lbl -t <?=$platform65;?> -C cfg/<?=$platform;?>.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.<?=$platform;?>.map -o $(EXEDIR)/midres.<?=$platform;?> $(subst PLATFORM,<?=$platform;?>,$(OBJS)) $(LIBDIR)/midres.<?=$platform;?>.lib
 <?php 
 
