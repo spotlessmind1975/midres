@@ -251,7 +251,18 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     if (f == NULL) {
         return;
     }
-    fseek(f, _offset, SEEK_SET);
+    if (_offset > 0) {
+        while (_offset != 0) {
+            if (_offset > 192) {
+                fread((unsigned char*)(0x033c), 192, 1, f);
+                _offset -= 192;
+            }
+            else {
+                fread((unsigned char*)(0x033c), _offset, 1, f);
+                _offset = 0;
+            }
+        }
+    }
     fread(_dest, _size, 1, f);
     fclose(f);
 }
