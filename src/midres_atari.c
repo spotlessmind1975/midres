@@ -222,8 +222,10 @@ void mr_start_frame_hd() {
 
 void mr_end_frame_hd(unsigned char _jiffies) {
 
-    while ((*((unsigned char*)0x14) - storedJiffy) < _jiffies) {
-        ; // nop!
+    if (_jiffies > 0) {
+        while ((*((unsigned char*)0x14) - storedJiffy) < _jiffies) {
+            ; // nop!
+        }
     }
 
 }
