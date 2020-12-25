@@ -379,8 +379,8 @@ $(EXEDIR)/midres.<?=$platform;?>: midres.embedded.<?=$platform;?> $(subst PLATFO
         case 'atari':
         case 'atarilo':
             $executable = [
-                "destination" => "midres-single",
-                "source" => "$(EXEDIR)/midres.exe"
+                "destination" => "midres.exe",
+                "source" => "$(EXEDIR)/midres.".$platform
             ];
             if ( $embedded ) {
                 emit_commands_for_create_atr_disk($platform65, "midres", [ $executable ]);
@@ -478,9 +478,9 @@ $(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> 
                 "source" => "$(EXEDIR)/".$program.".".$platform
             ];
             if ( $embedded ) {
-                emit_commands_for_create_atr_disk($platform, "midres", [ $executable ]);
+                emit_commands_for_create_atr_disk($platform, $program, [ $executable ]);
             } else {
-                emit_commands_for_create_atr_disk($platform, "midres", array_merge( [ $executable ] , $resources));
+                emit_commands_for_create_atr_disk($platform, $program, array_merge( [ $executable ] , $resources));
             }
             break;
     }
