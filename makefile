@@ -402,19 +402,22 @@ $(LIBDIR)/midres.atari.lib:	$(LIB_INCLUDES) $(subst PLATFORM,atari,$(LIB_OBJS))
 # --- DEMO/TUTORIALS FOR ATARI 
 # -------------------------------------------------------------------
 
+midres.embedded.atari:
+	$(FILE2INCLUDE) -i $(DATADIR)/slideshowa.dat -n slideshow -i $(DATADIR)/imagea01.pic -n imagea01.mpic -i $(DATADIR)/imagea02.pic -n imagea02.mpic -i $(DATADIR)/imagea03.pic -n imagea03.mpic -i $(DATADIR)/imagea04.pic -n imagea04.mpic -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+
 obj/atari/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl  -o $@ $(subst obj/atari/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.atari: $(subst PLATFORM,atari,$(OBJS))
+$(EXEDIR)/midres.atari: midres.embedded.atari $(subst PLATFORM,atari,$(OBJS))
 	$(CC) -Ln demoatari.lbl -t atari -C cfg/atari.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.atari.map -o $(EXEDIR)/midres.atari $(subst PLATFORM,atari,$(OBJS)) $(LIBDIR)/midres.atari.lib
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
-	$(call COPYFILES,$(EXEDIR)/midres.exe,$(EXEDIR)/atr/midres-single)
+	$(call COPYFILES,$(EXEDIR)/midres.atari,$(EXEDIR)/atr/midres.exe)
 	$(call COPYFILES,$(DATADIR)/slideshowa.dat,$(EXEDIR)/atr/slideshow)
-	$(call COPYFILES,$(DATADIR)/imagea01.mpic,$(EXEDIR)/atr/imagea01.mpic)
-	$(call COPYFILES,$(DATADIR)/imagea02.mpic,$(EXEDIR)/atr/imagea02.mpic)
-	$(call COPYFILES,$(DATADIR)/imagea03.mpic,$(EXEDIR)/atr/imagea03.mpic)
-	$(call COPYFILES,$(DATADIR)/imagea04.mpic,$(EXEDIR)/atr/imagea04.mpic)
+	$(call COPYFILES,$(DATADIR)/imagea01.pic,$(EXEDIR)/atr/imagea01.mpic)
+	$(call COPYFILES,$(DATADIR)/imagea02.pic,$(EXEDIR)/atr/imagea02.mpic)
+	$(call COPYFILES,$(DATADIR)/imagea03.pic,$(EXEDIR)/atr/imagea03.mpic)
+	$(call COPYFILES,$(DATADIR)/imagea04.pic,$(EXEDIR)/atr/imagea04.mpic)
 	$(call COPYFILES,$(DATADIR)/ztiles.bin,$(EXEDIR)/atr/ztiles.bin)
 	$(call COPYFILES,$(DATADIR)/tiles.bin,$(EXEDIR)/atr/tiles.bin)
 	$(call COPYFILES,$(DATADIR)/tutorial_mctile.bin,$(EXEDIR)/atr/mctile.bin)
@@ -422,7 +425,7 @@ $(EXEDIR)/midres.atari: $(subst PLATFORM,atari,$(OBJS))
 	$(call COPYFILES,$(DATADIR)/zdjtiles.bin,$(EXEDIR)/atr/zdjtiles.bin)
 	$(call COPYFILES,$(DATADIR)/zeltiles.bin,$(EXEDIR)/atr/zeltiles.bin)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/midres.atari.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/midres.atari.atr -o $(EXEDIR)/midres.atari.atr -f midres-single
+	$(ATRAUTORUN) -i $(EXEDIR)/midres.atari.atr -o $(EXEDIR)/midres.atari.atr -f midres.exe
 
 # -------------------------------------------------------------------
 # --- MIDRES LIBRARY FOR VIC20 
@@ -438,10 +441,13 @@ $(LIBDIR)/midres.vic20.lib:	$(LIB_INCLUDES) $(subst PLATFORM,vic20,$(LIB_OBJS))
 # --- DEMO/TUTORIALS FOR VIC20 
 # -------------------------------------------------------------------
 
+midres.embedded.vic20:
+	$(FILE2INCLUDE) -i $(DATADIR)/slideshow20.dat -n slideshow -i $(DATADIR)/image2001.mpic -n image2001.mpic -i $(DATADIR)/image2002.mpic -n image2002.mpic -i $(DATADIR)/image2003.mpic -n image2003.mpic -i $(DATADIR)/image2004.mpic -n image2004.mpic -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aatiles20.bin -n aatiles.bin -i $(DATADIR)/aaintro20.mpic -n aaintro.mpic -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+
 obj/vic20/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.vic20: $(subst PLATFORM,vic20,$(OBJS))
+$(EXEDIR)/midres.vic20: midres.embedded.vic20 $(subst PLATFORM,vic20,$(OBJS))
 	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.vic20.map -o $(EXEDIR)/midres.vic20 $(subst PLATFORM,vic20,$(OBJS)) $(LIBDIR)/midres.vic20.lib
 	$(call RMFILES,$(EXEDIR)/midres.vic20.d64)
 	$(CC1541) -f midres-single -w $(EXEDIR)/midres.vic20 $(EXEDIR)/midres.vic20.d64 
@@ -473,10 +479,13 @@ $(LIBDIR)/midres.vic2024.lib:	$(LIB_INCLUDES) $(subst PLATFORM,vic2024,$(LIB_OBJ
 # --- DEMO/TUTORIALS FOR VIC2024 
 # -------------------------------------------------------------------
 
+midres.embedded.vic2024:
+	$(FILE2INCLUDE) -i $(DATADIR)/slideshow20.dat -n slideshow -i $(DATADIR)/image2001.mpic -n image2001.mpic -i $(DATADIR)/image2002.mpic -n image2002.mpic -i $(DATADIR)/image2003.mpic -n image2003.mpic -i $(DATADIR)/image2004.mpic -n image2004.mpic -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aatiles20.bin -n aatiles.bin -i $(DATADIR)/aaintro20.mpic -n aaintro.mpic -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+
 obj/vic2024/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/vic2024/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.vic2024: $(subst PLATFORM,vic2024,$(OBJS))
+$(EXEDIR)/midres.vic2024: midres.embedded.vic2024 $(subst PLATFORM,vic2024,$(OBJS))
 	$(CC) -Ln demovic2024.lbl -t vic20 -C cfg/vic2024.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.vic2024.map -o $(EXEDIR)/midres.vic2024 $(subst PLATFORM,vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
 	$(call RMFILES,$(EXEDIR)/midres.vic20.d64)
 	$(CC1541) -f loader -w $(DATADIR)/ $(EXEDIR)/midres.vic20.d64 
@@ -508,10 +517,13 @@ $(LIBDIR)/midres.c64.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c64,$(LIB_OBJS))
 # --- DEMO/TUTORIALS FOR C64 
 # -------------------------------------------------------------------
 
+midres.embedded.c64:
+	$(FILE2INCLUDE) -i $(DATADIR)/slideshow64.dat -n slideshow -i $(DATADIR)/image6401.mpic -n image6401.mpic -i $(DATADIR)/image6402.mpic -n image6402.mpic -i $(DATADIR)/image6403.mpic -n image6403.mpic -i $(DATADIR)/image6404.mpic -n image6404.mpic -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aatiles.bin -n aatiles.bin -i $(DATADIR)/aaintro64.mpic -n aaintro.mpic -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+
 obj/c64/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/c64/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.c64: $(subst PLATFORM,c64,$(OBJS))
+$(EXEDIR)/midres.c64: midres.embedded.c64 $(subst PLATFORM,c64,$(OBJS))
 	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.c64.map -o $(EXEDIR)/midres.c64 $(subst PLATFORM,c64,$(OBJS)) $(LIBDIR)/midres.c64.lib
 	$(call RMFILES,$(EXEDIR)/midres.c64.d64)
 	$(CC1541) -f midres-single -w $(EXEDIR)/midres.c64 $(EXEDIR)/midres.c64.d64 
@@ -543,10 +555,13 @@ $(LIBDIR)/midres.c128.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c128,$(LIB_OBJS))
 # --- DEMO/TUTORIALS FOR C128 
 # -------------------------------------------------------------------
 
+midres.embedded.c128:
+	$(FILE2INCLUDE) -i $(DATADIR)/slideshow64.dat -n slideshow -i $(DATADIR)/image6401.mpic -n image6401.mpic -i $(DATADIR)/image6402.mpic -n image6402.mpic -i $(DATADIR)/image6403.mpic -n image6403.mpic -i $(DATADIR)/image6404.mpic -n image6404.mpic -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aatiles.bin -n aatiles.bin -i $(DATADIR)/aaintro64.mpic -n aaintro.mpic -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+
 obj/c128/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/c128/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.c128: $(subst PLATFORM,c128,$(OBJS))
+$(EXEDIR)/midres.c128: midres.embedded.c128 $(subst PLATFORM,c128,$(OBJS))
 	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.c128.map -o $(EXEDIR)/midres.c128 $(subst PLATFORM,c128,$(OBJS)) $(LIBDIR)/midres.c128.lib
 	$(call RMFILES,$(EXEDIR)/midres.c128.d64)
 	$(CC1541) -f midres-single -w $(EXEDIR)/midres.c128 $(EXEDIR)/midres.c128.d64 
@@ -578,10 +593,13 @@ $(LIBDIR)/midres.c16.lib:	$(LIB_INCLUDES) $(subst PLATFORM,c16,$(LIB_OBJS))
 # --- DEMO/TUTORIALS FOR C16 
 # -------------------------------------------------------------------
 
+midres.embedded.c16:
+	$(FILE2INCLUDE) -i $(DATADIR)/slideshow16.dat -n slideshow -i $(DATADIR)/image1601.mpic -n image1601.mpic -i $(DATADIR)/image1602.mpic -n image1602.mpic -i $(DATADIR)/image1603.mpic -n image1603.mpic -i $(DATADIR)/image1604.mpic -n image1604.mpic -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aatiles4.bin -n aatiles.bin -i $(DATADIR)/aaintro16.mpic -n aaintro.mpic -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+
 obj/c16/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/c16/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.c16: $(subst PLATFORM,c16,$(OBJS))
+$(EXEDIR)/midres.c16: midres.embedded.c16 $(subst PLATFORM,c16,$(OBJS))
 	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.c16.map -o $(EXEDIR)/midres.c16 $(subst PLATFORM,c16,$(OBJS)) $(LIBDIR)/midres.c16.lib
 	$(call RMFILES,$(EXEDIR)/midres.c16.d64)
 	$(CC1541) -f midres-single -w $(EXEDIR)/midres.c16 $(EXEDIR)/midres.c16.d64 
@@ -613,10 +631,13 @@ $(LIBDIR)/midres.plus4.lib:	$(LIB_INCLUDES) $(subst PLATFORM,plus4,$(LIB_OBJS))
 # --- DEMO/TUTORIALS FOR PLUS4 
 # -------------------------------------------------------------------
 
+midres.embedded.plus4:
+	$(FILE2INCLUDE) -i $(DATADIR)/slideshow16.dat -n slideshow -i $(DATADIR)/image1601.mpic -n image1601.mpic -i $(DATADIR)/image1602.mpic -n image1602.mpic -i $(DATADIR)/image1603.mpic -n image1603.mpic -i $(DATADIR)/image1604.mpic -n image1604.mpic -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aatiles4.bin -n aatiles.bin -i $(DATADIR)/aaintro16.mpic -n aaintro.mpic -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -c src/rawdata.c -h src/rawdata.h
+
 obj/plus4/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__CBM__ -o $@ $(subst obj/plus4/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.plus4: $(subst PLATFORM,plus4,$(OBJS))
+$(EXEDIR)/midres.plus4: midres.embedded.plus4 $(subst PLATFORM,plus4,$(OBJS))
 	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.plus4.map -o $(EXEDIR)/midres.plus4 $(subst PLATFORM,plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
 	$(call RMFILES,$(EXEDIR)/midres.plus4.d64)
 	$(CC1541) -f loader -w $(DATADIR)/ $(EXEDIR)/midres.plus4.d64 
@@ -1032,8 +1053,8 @@ $(EXEDIR)/alienstorm.atari: alienstorm.embedded.atari $(subst PLATFORM,alienstor
 	$(call COPYFILES,$(DATADIR)/astiles.bin,$(EXEDIR)/atr/zstiles.bin)
 	$(call COPYFILES,$(DATADIR)/astiles1.bin,$(EXEDIR)/atr/zstiles1.bin)
 	$(call COPYFILES,$(DATADIR)/astiles2.bin,$(EXEDIR)/atr/zstiles2.bin)
-	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/midres.atari.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/midres.atari.atr -o $(EXEDIR)/midres.atari.atr -f game.exe
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/alienstorm.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/alienstorm.atari.atr -o $(EXEDIR)/alienstorm.atari.atr -f game.exe
 
 # -------------------------------------------------------------------
 # --- ELEVATOR FOR ATARI 
@@ -1052,8 +1073,8 @@ $(EXEDIR)/elevator.atari: elevator.embedded.atari $(subst PLATFORM,elevator.atar
 	$(call COPYFILES,$(EXEDIR)/elevator.atari,$(EXEDIR)/atr/game.exe)
 	$(call COPYFILES,$(DATADIR)/zeltiles.bin,$(EXEDIR)/atr/zeltiles.bin)
 	$(call COPYFILES,$(DATADIR)/elevator64.mpic,$(EXEDIR)/atr/zelintro.bin)
-	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/midres.atari.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/midres.atari.atr -o $(EXEDIR)/midres.atari.atr -f game.exe
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/elevator.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/elevator.atari.atr -o $(EXEDIR)/elevator.atari.atr -f game.exe
 
 # -------------------------------------------------------------------
 # --- AIRATTACK FOR ATARI 
@@ -1072,8 +1093,8 @@ $(EXEDIR)/airattack.atari: airattack.embedded.atari $(subst PLATFORM,airattack.a
 	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.exe)
 	$(call COPYFILES,$(DATADIR)/aatiles4.bin,$(EXEDIR)/atr/zztiles.bin)
 	$(call COPYFILES,$(DATADIR)/aaintroa.pic,$(EXEDIR)/atr/zzintro.pic)
-	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/midres.atari.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/midres.atari.atr -o $(EXEDIR)/midres.atari.atr -f game.exe
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/airattack.atari.atr -o $(EXEDIR)/airattack.atari.atr -f game.exe
                     
 #!!! missing resources for totto (atari)
 
@@ -1094,8 +1115,8 @@ $(EXEDIR)/joycheck.atari: joycheck.embedded.atari $(subst PLATFORM,joycheck.atar
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
 	$(call COPYFILES,$(EXEDIR)/joycheck.atari,$(EXEDIR)/atr/game.exe)
 	$(call COPYFILES,$(DATADIR)/zdjtiles.bin,$(EXEDIR)/atr/zdjtiles.bin)
-	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/midres.atari.atr $(EXEDIR)/atr
-	$(ATRAUTORUN) -i $(EXEDIR)/midres.atari.atr -o $(EXEDIR)/midres.atari.atr -f game.exe
+	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/joycheck.atari.atr $(EXEDIR)/atr
+	$(ATRAUTORUN) -i $(EXEDIR)/joycheck.atari.atr -o $(EXEDIR)/joycheck.atari.atr -f game.exe
 
 # -------------------------------------------------------------------
 # --- ALIENSTORM FOR VIC20 
