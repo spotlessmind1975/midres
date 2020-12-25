@@ -75,8 +75,6 @@
 
 #endif
 
-#define		FILE_TILES_BIN		1
-
 // Tile with the ground dawing in "tiles.bin" (currently not used)
 #define		TILE_GROUND			TILE_START
 
@@ -119,12 +117,8 @@ mr_tile wheels[4];
 unsigned char* mr_translate_file_user(mr_file _file) {
 
 	switch (_file) {
-		case FILE_MTILES_BIN:
-			return "mtiles.bin";
 		case FILE_TILES_BIN:
 			return "tiles.bin";
-		case FILE_TUTORIAL_MCTILE_BIN:
-			return "tutorial_mctile.bin";
 		case FILE_ZELTILES_BIN:
 			return "zeltiles.bin";
 	}
