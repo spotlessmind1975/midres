@@ -196,8 +196,17 @@ void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
 // Hardware dependent sound library
 void mr_sound_change_hd(unsigned char _channel, int _parameter) {
 
-    *((unsigned char*)0xff0e + (_channel & 0x01)) = _parameter & 0xff;
-    *((unsigned char*)0xff10 + ((1 - (_channel & 0x01)) << 1)) = ((_parameter & 0x100) >> 8);
+    int v = 1024 - (111841 / _parameter);
+
+    switch ((_channel & 0x01)) {
+    case 0:
+        *((unsigned char*)0xff0e) = v & 0xff;
+        *((unsigned char*)0xff12) = ((int)((unsigned char*)0xff12) & ~0x03) | (((v & 0x300) >> 8) & 0x03);
+        break;
+    case 1:
+        *((unsigned char*)0xff0f) = v & 0xff;
+        *((unsigned char*)0xff10) = ((int)((unsigned char*)0xff10) & ~0x03) | (((v & 0x300) >> 8) & 0x03);
+    }
 
 }
 
