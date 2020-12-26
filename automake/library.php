@@ -596,7 +596,7 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
             $appMakeExtension = 'cas';
             break;
         case 'mtx500':
-            $options = '-DGRAPHIC_MODE_I';
+            $options = '-DGRAPHIC_MODE_I -DFRAME_BUFFER';
             $outputFormat = [ 'wav', 'mtx' ];
             $appMakeExtension = [ 'wav', 'mtx' ];
             break;
