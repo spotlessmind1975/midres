@@ -42,8 +42,26 @@
 #include "midres.h"
 #include "rawdata.h"
 
-#define PSG_R14         0x14
-#define PSG_R15         0x15
+#define PSG_AP          0xa0
+#define PSG_WP          0xa1
+#define PSG_RP          0xa2
+
+#define PSG_R0           0
+#define PSG_R1           1
+#define PSG_R2           2
+#define PSG_R3           3
+#define PSG_R4           4
+#define PSG_R5           5
+#define PSG_R6           6
+#define PSG_R7           7
+#define PSG_R8           8
+#define PSG_R9           9
+#define PSG_R10         10
+#define PSG_R11         11
+#define PSG_R12         12
+#define PSG_R13         13
+#define PSG_R14         14
+#define PSG_R15         15
 
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION
@@ -255,45 +273,86 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
-
+    unsigned char value;
+    switch ((_channel & 0x3)) {
+        case 0:
+        case 3:
+            io_put(PSG_AP, PSG_R7);
+            value = io_get(PSG_RP);
+            io_put(PSG_AP, PSG_R7);
+            io_put(PSG_WP, value & 0xfe);
+            break;
+        case 1:
+            io_put(PSG_AP, PSG_R7);
+            value = io_get(PSG_RP);
+            io_put(PSG_AP, PSG_R7);
+            io_put(PSG_WP, value & 0xfd);
+            break;
+        case 2:
+            io_put(PSG_AP, PSG_R7);
+            value = io_get(PSG_RP);
+            io_put(PSG_AP, PSG_R7);
+            io_put(PSG_WP, value & 0xfb);
+        break;
+    }
 }
 
 // Hardware dependent sound library
 void mr_sound_change_hd(unsigned char _channel, int _parameter) {
-
+    int f = 111861 / _parameter;
+    switch ((_channel & 0x3)) {
+        case 0:
+        case 3:
+            io_put(PSG_AP, PSG_R0);
+            io_put(PSG_WP, f & 0xff);
+            io_put(PSG_AP, PSG_R1);
+            io_put(PSG_WP, (f>>8) & 0x0f);
+            io_put(PSG_AP, PSG_R8);
+            io_put(PSG_WP, 0x0f);
+            break;
+        case 1:
+            io_put(PSG_AP, PSG_R2);
+            io_put(PSG_WP, f & 0xff);
+            io_put(PSG_AP, PSG_R3);
+            io_put(PSG_WP, (f >> 8) & 0x0f);
+            io_put(PSG_AP, PSG_R9);
+            io_put(PSG_WP, 0x0f);
+            break;
+        case 2:
+            io_put(PSG_AP, PSG_R4);
+            io_put(PSG_WP, f & 0xff);
+            io_put(PSG_AP, PSG_R5);
+            io_put(PSG_WP, (f >> 8) & 0x0f);
+            io_put(PSG_AP, PSG_R10);
+            io_put(PSG_WP, 0x0f);
+            break;
+    }
 }
 
 // Hardware dependent sound library
 void mr_sound_stop_hd(unsigned char _channel) {
-
-}
-
-void mr_set_background_color_hd(unsigned char _color) {
-
-}
-
-void mr_set_border_color_hd(unsigned char _color) {
-    mr_vdp_out(VDP_RCOLOR, _color & 0x0f );
-}
-
-unsigned int storedJiffy = 0;
-
-void mr_start_frame_hd() {
-    storedJiffy = *((unsigned int*)0xFC9E);
-}
-
-void mr_end_frame_hd(unsigned char _jiffies) {
-    while ((*((unsigned int*)0xFC9E) - storedJiffy) < _jiffies) {
-
+    unsigned char value;
+    switch ((_channel & 0x3)) {
+    case 0:
+    case 3:
+        io_put(PSG_AP, PSG_R7);
+        value = io_get(PSG_RP);
+        io_put(PSG_AP, PSG_R7);
+        io_put(PSG_WP, ( value & 0xfe ) | 0x01);
+        break;
+    case 1:
+        io_put(PSG_AP, PSG_R7);
+        value = io_get(PSG_RP);
+        io_put(PSG_AP, PSG_R7);
+        io_put(PSG_WP, (value & 0xfd) | 0x02);
+        break;
+    case 2:
+        io_put(PSG_AP, PSG_R7);
+        value = io_get(PSG_RP);
+        io_put(PSG_AP, PSG_R7);
+        io_put(PSG_WP, (value & 0xfb) | 0x04);
+        break;
     }
-#ifdef FRAME_BUFFER
-#ifdef GRAPHIC_MODE_I
-    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-#else
-    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x3800 : 0x4000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-    mr_vdp_put8(&colorBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x2000 : 0x0000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-#endif
-#endif
 }
 
 unsigned char* mr_translate_file_hd(mr_file _file) {
