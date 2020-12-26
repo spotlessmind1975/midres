@@ -125,7 +125,7 @@ Alternatively, if you don't have a physical machine, you can use [MEMU v0.91b](h
 
 You can give the `program`'s executable name (with extension `mtx`) directly on the command line, with the proper option.
 
-    memu -mem-mtx500 -vid-win -cassette-in exe\totto.mtx500.mtx
+    memu -mem-mtx500 -vid-win-big exe\[program].mtx500.mtx
 
 ### Spectravideo SVI-318 and SVI-328 `svi`
 
@@ -134,9 +134,3 @@ MIDRES produces a cassette file (`.cas`) that can be used to create an audio cas
 Alternatively, if you don't have a physical machine, you can use one of those emulators:
    * [openMSX v0.15.0](https://openmsx.org/)
    * [blueMSX v2.8.2](http://bluemsx.msxblue.com/)
-
-With [openMSX](https://openmsx.org/) you can give the `program`'s executable name directly on the command line, with the proper options.
-
-    openmsx -cassetteplayer [program].svi.cas
-
-Using [blueMSX](http://bluemsx.msxblue.com/) you must use its user interface to select the hardware configuration and to load the ROM.
