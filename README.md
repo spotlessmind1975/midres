@@ -14,8 +14,7 @@ For more information on this library, please [click here](https://retroprogrammi
 
 ## SUPPORTED ARCHITECTURES
 
-The [programs](docs/programs.md) can be cross compiled for [many vintage systems](docs/targets.md). Due to limitations in the resources of the various retrocomputers, it is possible that not all programs can be compiled on all platforms. For a complete list of supported targets and status of buildings please visit [this page](docs/status.md)
-
+The [programs](docs/programs.md) can be cross compiled for [many vintage systems](docs/targets.md). Due to limitations in the resources of the various retrocomputers, it is possible that not all programs can be compiled on all platforms. For a complete list of supported targets and status of buildings please visit [this page](docs/status.md). The instructions for running the programs on the various platforms can be found on [this page](docs/running.md)
 
 ## LICENSE
 Copyright 2020 Marco Spedaletti
