@@ -127,6 +127,14 @@
 #define MR_KEY_DOWN                     150
 #define MR_KEY_RIGHT                    151
 #define MR_KEY_DIVISION                 154
+#define MR_KEY_EOL                      155
+#define MR_KEY_PAGE                     156
+#define MR_KEY_BREAK                    157
+#define MR_KEY_LF                       158
+#define MR_KEY_CAPS_LOCK                159
+#define MR_KEY_LESS_THAN                160
+#define MR_KEY_QUESTION_MARK            161
+#define MR_KEY_GREATER_THAN             162
 
 #define MR_JOYSTICK_0					0
 #define MR_JOYSTICK_1					1
