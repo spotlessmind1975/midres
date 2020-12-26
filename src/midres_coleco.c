@@ -156,4 +156,21 @@ unsigned char mr_joy_hd(unsigned char _number) {
 
 }
 
+void mr_start_frame_hd() {
+
+}
+
+void mr_end_frame_hd(unsigned char _jiffies) {
+
+#ifdef FRAME_BUFFER
+#ifdef GRAPHIC_MODE_I
+    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    // mr_vdp_put(&colorBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x2000 : 0x0000, 32);
+#else
+    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x3800 : 0x4000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    mr_vdp_put8(&colorBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x2000 : 0x0000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+#endif
+#endif
+}
+
 #endif
