@@ -273,34 +273,6 @@ void mr_sound_stop_hd(unsigned char _channel) {
 
 }
 
-void mr_set_background_color_hd(unsigned char _color) {
-
-}
-
-void mr_set_border_color_hd(unsigned char _color) {
-    mr_vdp_out(VDP_RCOLOR, _color & 0x0f);
-}
-
-unsigned int storedJiffy = 0;
-
-void mr_start_frame_hd() {
-    storedJiffy = *((unsigned int*)0xFC9E);
-}
-
-void mr_end_frame_hd(unsigned char _jiffies) {
-    while ((*((unsigned int*)0xFC9E) - storedJiffy) < _jiffies) {
-
-    }
-#ifdef FRAME_BUFFER
-#ifdef GRAPHIC_MODE_I
-    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-#else
-    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x3800 : 0x4000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-    mr_vdp_put8(&colorBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x2000 : 0x0000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
-#endif
-#endif
-}
-
 unsigned char* mr_translate_file_hd(mr_file _file) {
 
 }

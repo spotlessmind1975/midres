@@ -580,4 +580,39 @@ void mr_tileset_load_file_hd(unsigned int _index, unsigned char _tileset, unsign
 #endif
 }
 
+void mr_set_background_color_hd(unsigned char _color) {
+#ifdef GRAPHIC_MODE_II
+#else
+    unsigned char i;
+    for (i = 0; i < 32; ++i) {
+        mr_vdp_fill8(( mr_vdp_get(0x2000 + i) & 0xf0 ) | ( _color & 0x0f ), 0x2000 + i, 1);
+    }
+#endif
+}
+
+void mr_set_border_color_hd(unsigned char _color) {
+    mr_vdp_out(VDP_RCOLOR, _color & 0x0f);
+}
+
+unsigned int storedJiffy = 0;
+
+void mr_start_frame_hd() {
+    storedJiffy = *((unsigned int*)0xFC9E);
+}
+
+void mr_end_frame_hd(unsigned char _jiffies) {
+    while ((*((unsigned int*)0xFC9E) - storedJiffy) < _jiffies) {
+
+    }
+#ifdef FRAME_BUFFER
+#ifdef GRAPHIC_MODE_I
+    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN * 0x400, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    // mr_vdp_put(&colorBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x2000 : 0x0000, 32);
+#else
+    mr_vdp_put(&frameBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x3800 : 0x4000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+    mr_vdp_put8(&colorBuffer[0], MR_VISIBLE_SCREEN == MR_SCREEN_0 ? 0x2000 : 0x0000, MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT);
+#endif
+#endif
+}
+
 #endif

@@ -144,24 +144,6 @@ void mr_sound_stop_hd(unsigned char _channel) {
 
 }
 
-void mr_set_background_color_hd(unsigned char _color) {
-
-}
-
-void mr_set_border_color_hd(unsigned char _color) {
-
-}
-
-unsigned char storedJiffy = 0;
-
-void mr_start_frame_hd() {
-
-}
-
-void mr_end_frame_hd(unsigned char _jiffies) {
-
-}
-
 unsigned char* mr_translate_file_hd(mr_file _file) {
 
 }

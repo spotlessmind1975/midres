@@ -147,48 +147,6 @@
 #define MR_TILE_COLOR1					2
 #define MR_TILE_COLOR2					3
 
-#ifdef GRAPHIC_MODE_I
-#define MR_SM(_screen)					((unsigned int)(0x400*_screen))
-#define MR_CM(_screen)					((unsigned int)((0x40*(_screen+0x80))))
-#define MR_AM(_screen)					((unsigned int)(0x400*_screen))
-#define MR_TM(_tileset)					((unsigned int)(0x800*_tileset))
-
-#define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
-                mr_vdp_fill8(_tile, _screen + _offset, 1 );
-
-#define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-                mr_vdp_fill8(_tile, _screen + _offset, 1 ); \
-                mr_vdp_fill8(_color, _colormap + ( _tile >> 3 ), 1 );
-
-#define MR_READ_TILE(_screen, _offset) mr_vdp_get(_offset)
-#define MR_READ_TILE_COLOR(_colormap, _offset) mr_vdp_get(_offset)
-
-#else
-#define MR_SM(_screen)					((unsigned int)(0x400*_screen))
-#define MR_CM(_screen)					((unsigned int)((0x2000*(_screen-0x0e))))
-#define MR_AM(_screen)					((unsigned int)(0x400*_screen))
-#define MR_TM(_tileset)					((unsigned int)((_tileset==0x0e)?0x2000:0x0000))
-
-#define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
-                    mr_vdp_fill8(_tile, _screen + _offset, 1 );
-
-#define MR_WRITE_TILE(_screen, _colormap, _offset, _tile, _color) \
-                    mr_vdp_fill8(_tile, _screen + _offset, 1 ); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8), 1 ); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 1, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 2, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 3, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 4, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 5, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 6, 1); \
-                    mr_vdp_fill8((_color & 0x0f), _colormap + (_offset * 8) + 7, 1);
-
-#define MR_READ_TILE(_screen, _offset) mr_vdp_get(_offset)
-#define MR_READ_TILE_COLOR(_colormap, _offset) mr_vdp_get(_offset)
-#endif
-
-
-
 #define MIDRES_STANDALONE					1
 //#define MIDRES_STANDALONE_BITBLIT			1	
 //#define MIDRES_STANDALONE_DRAWING			1
