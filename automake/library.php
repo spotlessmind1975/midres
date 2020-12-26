@@ -523,8 +523,8 @@ function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
             break;
         case 'mtx500':
             $options = '-DGRAPHIC_MODE_I';
-            $outputFormat = 'mtx';
-            $appMakeExtension = 'mtx500.cas';
+            $outputFormat = 'wav';
+            $appMakeExtension = 'mtx500.wav';
             break;
     }
 
@@ -556,8 +556,9 @@ obj/<?=$platform;?>/%.o:	$(SOURCES)
 	$(CC88) +<?=$platform88;?> $(CFLAGS) -c $(CFLAGS88) <?=$options;?> -o $@ $(subst obj/<?=$platform;?>/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.<?=$platform;?>:	midres.embedded.<?=$platform;?> $(subst PLATFORM,<?=$platform;?>,$(OBJS)) $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) obj/<?=$platform;?>/rawdata.o obj/<?=$platform;?>/midres_vdp_impl.o obj/<?=$platform;?>/midres_io.o
-	$(CC88) +<?=$platform88;?> <?=$subtype;?> -m $(LDFLAGS88) obj/<?=$platform;?>/rawdata.o obj/<?=$platform;?>/midres_io.o obj/<?=$platform;?>/midres_vdp_impl.o $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) $(subst PLATFORM,<?=$platform;?>,$(OBJS)) -o $(EXEDIR)/midres.<?=$platform;?> -create-app 
-	$(call COPYFILES,$(EXEDIR)/midres.<?=$appMakeExtension;?>,$(EXEDIR)/midres.<?=$platform;?>.<?=$outputFormat;?>)
+	$(CC88) +<?=$platform88;?> <?=$subtype;?> -m $(LDFLAGS88) obj/<?=$platform;?>/rawdata.o obj/<?=$platform;?>/midres_io.o obj/<?=$platform;?>/midres_vdp_impl.o $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) $(subst PLATFORM,<?=$platform;?>,$(OBJS)) -create-app 
+	$(call COPYFILES,a.<?=$appMakeExtension;?>,$(EXEDIR)/midres.<?=$platform;?>.<?=$outputFormat;?>)
+	$(call RMFILES,a.*)
 <?php
 }
 
@@ -596,8 +597,8 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
             break;
         case 'mtx500':
             $options = '-DGRAPHIC_MODE_I';
-            $outputFormat = 'mtx';
-            $appMakeExtension = 'mtx500.cas';
+            $outputFormat = [ 'wav', 'mtx' ];
+            $appMakeExtension = [ 'wav', 'mtx' ];
             break;
     }
 
@@ -656,8 +657,23 @@ obj/<?=$outputPath;?>/%.o:	$(SOURCES) $(LIB_SOURCES)
 	$(CC88) +<?=$platform88;?> $(CFLAGS) -c $(CFLAGS88) <?=$options;?> -D__<?=strtoupper($program);?>__ -o $@ $(subst obj/<?=$outputPath;?>/,src/,$(@:.o=.c)) 
 
 $(EXEDIR)/<?=$program;?>.<?=$platform;?>:	<?=$program;?>.embedded.<?=$platform;?> <?=implode(' ', $neededObjectFiles);?> obj/<?=$outputPath;?>/rawdata.o obj/<?=$outputPath;?>/midres_vdp_impl.o obj/<?=$outputPath;?>/midres_io.o
-	$(CC88) +<?=$platform88;?> <?=$subtype;?> -m $(LDFLAGS88) obj/<?=$outputPath;?>/rawdata.o obj/<?=$outputPath;?>/midres_io.o obj/<?=$outputPath;?>/midres_vdp_impl.o <?=implode(' ', $neededObjectFiles);?> -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> -create-app 
-	$(call COPYFILES,$(EXEDIR)/<?=$program;?>.<?=$appMakeExtension;?>,$(EXEDIR)/<?=$program;?>.<?=$platform;?>.<?=$outputFormat;?>)
+	$(CC88) +<?=$platform88;?> <?=$subtype;?> -m $(LDFLAGS88) obj/<?=$outputPath;?>/rawdata.o obj/<?=$outputPath;?>/midres_io.o obj/<?=$outputPath;?>/midres_vdp_impl.o <?=implode(' ', $neededObjectFiles);?> -create-app 
+<?php
+    if ( is_array($appMakeExtension) ) {
+        foreach( $appMakeExtension as $extension ) {
+?>
+	$(call COPYFILES,a.<?=$extension;?>,$(EXEDIR)/<?=$program;?>.<?=$platform;?>.<?=$extension;?>)
+<?php
+        }
+?>
+<?php
+    } else {
+?>
+	$(call COPYFILES,a.<?=$appMakeExtension;?>,$(EXEDIR)/<?=$program;?>.<?=$platform;?>.<?=$outputFormat;?>)
+<?php
+    }
+?>
+	$(call RMFILES,a.*)
 
 <?php
 }
