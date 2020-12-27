@@ -14,7 +14,11 @@ For more information on this library, please [click here](https://retroprogrammi
 
 ## SUPPORTED ARCHITECTURES
 
-The [programs](docs/programs.md) can be cross compiled for [many vintage systems](docs/targets.md). Due to limitations in the resources of the various retrocomputers, it is possible that not all programs can be compiled on all platforms. For a complete list of supported targets and status of buildings please visit [this page](docs/status.md). The instructions for running the programs on the various platforms can be found on [this page](docs/running.md)
+The [programs](docs/programs.md) can be cross compiled for [many vintage systems](docs/targets.md). Due to limitations in the resources of the various retrocomputers, it is possible that not all programs can be compiled on all platforms. For a complete list of supported targets and status of buildings please visit [this page](docs/status.md). The instructions for running the programs on the various platforms can be found on [this page](docs/running.md).
+
+## DIFFERENCES v1.x <-> v2.x
+
+There are numerous differences between the v1.x version (no longer maintained) and the v2.x version. In addition to the ability to compile for Z80 processors (and more to come), the most important is **the optimization in terms of occupied space**: for example, the game ["The Elevator"](https://retroprogramming.iwashere.eu/elevator) for Commodore 64 goes from 109 total blocks (27.904 bytes) to only 86 blocks (22.016 bytes), with a memory saving of 23%.
 
 ## LICENSE
 Copyright 2020 Marco Spedaletti
