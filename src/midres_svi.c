@@ -57,11 +57,6 @@
   // module has been loaded into memory. On the other hand, they can call any 
   // function declared at the resident module level.
 
-#ifdef FRAME_BUFFER
-unsigned char frameBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
-unsigned char colorBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
-#endif
-
 void mr_init_hd() {
 
     mr_vdp_port_write(0x80);
