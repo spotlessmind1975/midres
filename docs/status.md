@@ -11,7 +11,7 @@ target name     |alienstorm      |elevator        |airattack       |totto       
 **vic2024**     |YES             |YES             |YES             |YES             |YES             |
 **c64**         |YES             |YES             |YES             |YES             |YES             |
 **c128**        |YES             |YES             |YES             |YES             |YES             |
-**c16**         |NO[1]           |NO[1]           |NO[3]           |NO[1]           |NO[3]           |
+**c16**         |NO[1]           |NO[1]           |NO[3]           |NO[1]           |YES             |
 **plus4**       |YES             |YES             |YES             |YES             |YES             |
 
 </div>
