@@ -58,6 +58,13 @@ clean-library:
 
 all: $(LIBDIR) $(EXEDIR) $(EXEDIR)/atr $(TARGETOBJDIR) $(LIBS) $(EXES)
 
+probe:
+	$(CC) -t $(target) -o probe src/probe.c
+
+probe80:
+	$(CC88) +$(target) -D__Z80__ -o probe src/probe.c -create-app
+
+
 clean:
 	$(call RMFILES,$(EXEDIR)/midres.c64.d64)
 	$(call RMFILES,$(EXEDIR)/midres.vic20.d64)
