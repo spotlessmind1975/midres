@@ -41,28 +41,35 @@
 // Writes a tile into a bitmap at *precise* horizontal position.
 void _mr_tile_moveto_horizontal_extended_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_tile_position _x, mr_tile_position _y, mr_tile _tile, mr_position _w, mr_position _h, mr_color _color) {
 
-    int offset;
-
     signed char i, j;
+    int offset = CALCULATE_OFFSET((_x >> 3), (_y >> 3));
 
-    offset = (_y >> 3) * MR_SCREEN_WIDTH + (_x >> 3);
+    _screen += offset;
+    if (_colormap) {
+        _colormap += offset;
+    }
 
     for (i = 0; i < _h; ++i) {
         for (j = 0; j < _w + 1; ++j) {
             if (((_x >> 3) + j) >= 0) {
                 if (((_x >> 3) + j) < MR_SCREEN_WIDTH) {
-                    MR_WRITE_TILE(_screen, _colormap, offset, _tile + (_x & 0x07), _color);
+                    mr_tile t = _tile + (_x & 0x07);
+                    MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_screen, t));
+                    if (_colormap) {
+                        MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_colormap, _color));
+                    }
                 }
             }
-            ++offset;
+            ++_screen;
+            if (_colormap) {
+                ++_colormap;
+            }
             _tile += 9;
         }
-        /*if (((_x >> 3) + j + 1) < MR_SCREEN_WIDTH) {
-            _screen[offset + 1] = _tile + (_x & 0x07) + 1;
-            _colormap[offset + 1] = _color;
-            _tile += 9;
-        }*/
-        offset += MR_SCREEN_WIDTH - (_w + 1);
+        _screen += (MR_SCREEN_ROW_WIDTH - (_w + 1));
+        if (_colormap) {
+            _colormap += (MR_SCREEN_ROW_WIDTH - (_w + 1));
+        }
     }
 
 }

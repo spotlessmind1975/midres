@@ -46,7 +46,7 @@ void _mr_hline(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_posit
 
     mx = _x1 >> 1;
     my = _y >> 1;
-    offset = my * MR_SCREEN_WIDTH + mx;
+    offset = my * MR_SCREEN_ROW_WIDTH + mx;
 
     if (x1 & 1) {
         abcd = mr_mixel_bits(x1, _y);

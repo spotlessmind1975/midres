@@ -31,6 +31,10 @@
 #ifndef _MIDRES_HW_H_
 #define _MIDRES_HW_H_
 
+#define CALCULATE_OFFSET(_x, _y)    ((_y) * MR_SCREEN_ROW_WIDTH + (_x))
+#define MR_WRITE_VRAM_MM(x,v)          (*(x) = (v))
+#define MR_READ_VRAM_MM(x)				(*(x))
+
 #ifdef __C64__
 #include "midres_hw_cbm.h"
 #include "midres_hw_c64.h"

@@ -45,7 +45,7 @@ void _mr_putpixel(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_pos
 
     mx = _x >> 1;
     my = _y >> 1;
-    offset = my * MR_SCREEN_WIDTH + mx;
+    offset = my * MR_SCREEN_ROW_WIDTH + mx;
 
     // x1 * y1 + ( (x1 - 1) * y1) * 2+ ( x1 * (y1-1)) * 4 + ( (x1 - 1 ) * (y1-1)) * 8;
     // x1 * y1 + ((x1 - 1) * y1) * 2 + (x1 * (y1 - 1)) * 4 + ((x1 - 1) * (y1 - 1)) * 8;

@@ -61,6 +61,7 @@ void mr_init_multicolor_vdp_hd();
 #define MR_RENDERED_MIXELS MR_RENDERED_MIXELS_VDP
 
 #define MR_SCREEN_WIDTH				32
+#define MR_SCREEN_ROW_WIDTH			32
 #define MR_SCREEN_HEIGHT			24
 #define MR_SCREEN_RAM_SIZE			768
 
@@ -170,6 +171,14 @@ void mr_init_multicolor_vdp_hd();
 		        _screen[(_offset)] = (_tile); \
 		        _colormap[(_tile>>3)] = _colormap[(_tile>>3)]|((MR_COLOR_WHITE<<4));
 
+#define MR_PROTECTED_ACCESS_VRAM( f ) \
+		{ \
+			f; \
+		}
+
+#define MR_WRITE_VRAM(x,v)          MR_WRITE_VRAM_MM(x, v)
+#define MR_READ_VRAM(x)				MR_READ_VRAM_MM(x)
+
 #define MR_READ_TILE(_screen, _offset) _screen[(_offset)]
 #define MR_READ_TILE_COLOR(_colormap, _offset) _colormap[(_offset)]
 
@@ -191,6 +200,13 @@ extern unsigned char auxBuffer[];
 		            _screen[(_offset)] = (_tile); \
                     _colormap[(_offset)] = (_color<<4);
 
+#define MR_PROTECTED_ACCESS_VRAM( f ) \
+		{ \
+			f; \
+		}
+
+#define MR_WRITE_VRAM(x,v)          MR_WRITE_VRAM_MM(x, v)
+#define MR_READ_VRAM(x)				MR_READ_VRAM_MM(x)
 
 #define MR_READ_TILE(_screen, _offset) _screen[(_offset)]
 #define MR_READ_TILE_COLOR(_colormap, _offset) _colormap[(_offset)]
@@ -211,6 +227,14 @@ extern unsigned char auxBuffer[];
 
 #define MR_READ_TILE(_screen, _offset) mr_vdp_get(_screen + _offset)
 #define MR_READ_TILE_COLOR(_colormap, _offset) mr_vdp_get(_colormap + _offset)
+
+#define MR_PROTECTED_ACCESS_VRAM( f ) \
+		{ \
+			f; \
+		}
+
+#define MR_WRITE_VRAM(x,v)          mr_vdp_fill8(v, x, 1)
+#define MR_READ_VRAM(x)				mr_vdp_get(x)
 
 #else
 #define MR_SM(_screen)					((unsigned int)(0x400*_screen))
@@ -241,6 +265,15 @@ extern unsigned char auxBuffer[];
 
 #define MR_READ_TILE(_screen, _offset) mr_vdp_get(_screen+_offset)
 #define MR_READ_TILE_COLOR(_colormap, _offset) mr_vdp_get(_colormap+_offset)
+
+#define MR_PROTECTED_ACCESS_VRAM( f ) \
+		{ \
+			f; \
+		}
+
+#define MR_WRITE_VRAM(x,v)          mr_vdp_fill8(v, x, 1)
+#define MR_READ_VRAM(x)				mr_vdp_get(x)
+
 #endif
 
 #endif

@@ -45,7 +45,7 @@ void _mr_clearpixel(mr_mixel* _screen, mr_position _x, mr_position _y) {
 
     mx = _x >> 1;
     my = _y >> 1;
-    offset = my * MR_SCREEN_WIDTH + mx;
+    offset = my * MR_SCREEN_ROW_WIDTH + mx;
 
     abcd = mr_mixel_bits(_x, _y);
 

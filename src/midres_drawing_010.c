@@ -46,12 +46,12 @@ void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_positi
 
     mx = _x >> 1;
     my = _y1 >> 1;
-    offset = my * MR_SCREEN_WIDTH + mx;
+    offset = my * MR_SCREEN_ROW_WIDTH + mx;
 
     if (y1 & 1) {
         abcd = mr_mixel_bits(_x, y1);
         MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
-        offset += MR_SCREEN_WIDTH;
+        offset += MR_SCREEN_ROW_WIDTH;
         ++y1;
     }
     for (; y1 <= _y2; y1 += 2) {
@@ -62,7 +62,7 @@ void _mr_vline(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_positi
             abcd = mr_mixel_bits(_x, y1);
         }
         MR_WRITE_TILE(_screen, _colormap, offset, MR_RENDERED_MIXELS[get_mixel_bits(MR_READ_TILE(_screen, offset)) | abcd], _color);
-        offset += MR_SCREEN_WIDTH;
+        offset += MR_SCREEN_ROW_WIDTH;
     }
 
 }

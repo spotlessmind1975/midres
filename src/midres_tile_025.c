@@ -41,12 +41,23 @@
 // Draws a vertical line onto the bitmap.
 void _mr_vtiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y1, mr_position _y2, mr_tile _tile, mr_color _color) {
 
+    int offset = CALCULATE_OFFSET(_x,_y1);
     mr_position y1 = _y1;
-    int offset = _y1 * MR_SCREEN_WIDTH + _x;
+
+    _screen += offset;
+    if (_colormap) {
+        _colormap += offset;
+    }
 
     for (; y1 <= _y2; ++y1) {
-        MR_WRITE_TILE(_screen, _colormap, offset, _tile, _color);
-        offset += MR_SCREEN_WIDTH;
+        MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_screen, _tile));
+        if (_colormap) {
+            MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_colormap, _color));
+        }
+        _screen += MR_SCREEN_ROW_WIDTH;
+        if (_colormap) {
+            _colormap += MR_SCREEN_ROW_WIDTH;
+        }
     }
 
 }

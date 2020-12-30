@@ -41,6 +41,7 @@
   // 40 x 25 mixels.
 #define MR_SCREEN_WIDTH				20
 #define MR_SCREEN_HEIGHT			24
+#define MR_SCREEN_ROW_WIDTH			MR_SCREEN_WIDTH
 #define MR_SCREEN_RAM_SIZE				0x0400
 
 // List of available screens:
@@ -198,6 +199,14 @@ extern mr_mixel* screenRam;
 
 #define MR_READ_TILE(_screen, _offset) ( _screen[(_offset)] & 0x3f )
 #define MR_READ_TILE_COLOR(_colormap, _offset) _colormap[(_offset)]
+
+#define MR_PROTECTED_ACCESS_VRAM( f ) \
+		{ \
+			f; \
+		}
+
+#define MR_WRITE_VRAM(x,v)             MR_WRITE_VRAM_MM(x,v)
+#define MR_READ_VRAM(x)				MR_READ_VRAM_MM(x)
 
 #define MIDRES_STANDALONE					1
 #define MIDRES_STANDALONE_BITBLIT			1	

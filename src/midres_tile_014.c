@@ -40,13 +40,7 @@
 
 // Clear a tile of a bitmap.
 void _mr_cleartile(mr_mixel* _screen, mr_position _x, mr_position _y) {
-
-    int offset;
-    offset = _y * MR_SCREEN_WIDTH + _x;
-
-    // _screen[offset] = MR_RENDERED_MIXELS[0];
-    MR_WRITE_TILE_LUMINANCE(_screen, offset, MR_RENDERED_MIXELS[0]);
-
+    _mr_puttile(_screen, NULL, _x, _y, MR_RENDERED_MIXELS[0], MR_COLOR_BLACK);
 }
 
 #endif

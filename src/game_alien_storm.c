@@ -1688,8 +1688,6 @@ void gameloop() {
 
 }
 
-#include <stdio.h>
-
 void game_alien_storm() {
 
 	// Initialize random number generator
@@ -1709,7 +1707,7 @@ void game_alien_storm() {
 		gameloop();
 
 	}
-		
+
 }
 
 #endif

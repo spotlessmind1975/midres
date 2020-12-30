@@ -52,10 +52,17 @@ void mr_clear(mr_screen _screen) {
     int i;
     mr_mixel* screen = MR_SM(_screen);
     mr_color* color = MR_CM(_screen);
+    mr_mixel empty = MR_RENDERED_MIXELS[0];
 
-    for (i = 0; i < MR_SCREEN_HEIGHT * MR_SCREEN_WIDTH; ++i) {
-        MR_WRITE_TILE(screen, color, i, MR_RENDERED_MIXELS[0], MR_COLOR_BLACK)
+    for (i = 0; i < MR_SCREEN_HEIGHT * MR_SCREEN_ROW_WIDTH; ++i) {
+        MR_PROTECTED_ACCESS_VRAM(*screen = empty);
+        ++screen;
+        if (color) {
+            *color = MR_COLOR_BLACK;
+            ++color;
+        }
     }
+
 }
 
 

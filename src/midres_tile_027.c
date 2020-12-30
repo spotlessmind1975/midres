@@ -41,12 +41,23 @@
 // Draws a horizontal line onto the bitmap.
 void _mr_htiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x1, mr_position _x2, mr_position _y, mr_tile _tile, mr_color _color) {
 
+    int offset = CALCULATE_OFFSET(_x1, _y) ;
     mr_position x1 = _x1;
-    int offset = _y * MR_SCREEN_WIDTH + x1;
+
+    _screen += offset;
+    if (_colormap) {
+        _colormap += offset;
+    }
 
     for (; x1 <= _x2; ++x1) {
-        MR_WRITE_TILE(_screen, _colormap, offset, _tile, _color);
-        ++offset;
+        MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_screen, _tile));
+        if (_colormap) {
+            MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_colormap, _color));
+        }
+        ++_screen;
+        if (_colormap) {
+            ++_colormap;
+        }
     }
 
 }

@@ -40,13 +40,21 @@
 
 void _mr_puttiles_monocolor(mr_mixel* _screen, mr_color* _colormap, mr_position _x, mr_position _y, mr_tile _tile_start, mr_tile _tile_count, mr_color _color) {
 
-    int offset;
-
-    offset = _y * MR_SCREEN_WIDTH + _x;
+    int offset = CALCULATE_OFFSET(_x,_y);
+    _screen += offset;
+    if (_colormap) {
+        _colormap += offset;
+    }
 
     for (; _tile_count != 0; --_tile_count, ++_tile_start) {
-        MR_WRITE_TILE(_screen, _colormap, offset, _tile_start, _color);
-        ++offset;
+        MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_screen, _tile_start));
+        if (_colormap) {
+            MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_colormap, _color));
+        }
+        ++_screen;
+        if (_colormap) {
+            ++_colormap;
+        }
     }
 
 }
