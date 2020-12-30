@@ -142,7 +142,17 @@
                 [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
                 [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic']
-            ]
+            ],
+            'gb' => [
+                [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
+                [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic']
+            ],
+            'lm80c' => [
+                [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
+                [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic']
+            ],
         ],
 
         'totto' => [
@@ -173,6 +183,14 @@
                 ['destination' => 'ttfinal4.mpic', 'source' => '$(DATADIR)/ttfinal416.mpic' ]
             ],
             'msx' => [
+                ['destination' => 'tttiles.bin', 'source' => '$(DATADIR)/tttiles.bin' ],
+                ['destination' => 'tttiles1.bin', 'source' => '$(DATADIR)/tttiles1.bin' ]
+            ],
+            'gb' => [
+                ['destination' => 'tttiles.bin', 'source' => '$(DATADIR)/tttiles.bin' ],
+                ['destination' => 'tttiles1.bin', 'source' => '$(DATADIR)/tttiles1.bin' ]
+            ],
+            'lm80c' => [
                 ['destination' => 'tttiles.bin', 'source' => '$(DATADIR)/tttiles.bin' ],
                 ['destination' => 'tttiles1.bin', 'source' => '$(DATADIR)/tttiles1.bin' ]
             ]
@@ -245,6 +263,8 @@
     $resources['svi'] = $resources['coleco'];
     $resources['mtx500'] = $resources['coleco'];
     $resources['atmos'] = $resources['atari'];
+    $resources['gb'] = $resources['coleco'];
+    $resources['lm80c'] = $resources['coleco'];
 
     $resources['airattack']['c16'] = $resources['airattack']['plus4'];
     $resources['airattack']['vic20'] = $resources['airattack']['vic2024'];
@@ -253,6 +273,8 @@
     $resources['airattack']['svi'] = $resources['airattack']['msx'];
     $resources['airattack']['mtx500'] = $resources['airattack']['msx'];
     $resources['airattack']['atmos'] = $resources['airattack']['atari'];
+    $resources['airattack']['gb'] = $resources['airattack']['msx'];
+    $resources['airattack']['lm80c'] = $resources['airattack']['msx'];
 
     $resources['totto']['c16'] = $resources['totto']['plus4'];
     $resources['totto']['vic20'] = $resources['totto']['vic2024'];
@@ -262,6 +284,8 @@
     $resources['totto']['svi'] = $resources['totto']['msx'];
     $resources['totto']['mtx500'] = $resources['totto']['msx'];
     $resources['totto']['atmos'] = $resources['totto']['atari'];
+    $resources['totto']['gb'] = $resources['totto']['msx'];
+    $resources['totto']['lm80c'] = $resources['totto']['msx'];
 
     $resources['alienstorm']['c16'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['vic20'] = $resources['alienstorm']['c64'];
@@ -273,6 +297,8 @@
     $resources['alienstorm']['svi'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['mtx500'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['atmos'] = $resources['alienstorm']['atari'];
+    $resources['alienstorm']['gb'] = $resources['alienstorm']['msx'];
+    // $resources['alienstorm']['lm80c'] = $resources['alienstorm']['msx']; // it does not work?
 
     $resources['joycheck']['c16'] = $resources['joycheck']['plus4'];
     $resources['joycheck']['c128'] = $resources['joycheck']['c64'];
@@ -290,6 +316,8 @@
     $resources['elevator']['msxc'] = $resources['elevator']['c64'];
     $resources['elevator']['c128'] = $resources['elevator']['c64'];
     $resources['elevator']['atari'] = $resources['elevator']['c64'];
+    $resources['elevator']['gb'] = $resources['elevator']['msx'];
+    $resources['elevator']['lm80c'] = $resources['elevator']['msx'];
 
     $values = file('docs/targets.md');
     $targets = [];
@@ -341,6 +369,8 @@ foreach( $targets as $target ) {
         case 'svi':
         case 'mtx500':
         case 'coleco':
+        case 'gb':
+        case 'lm80c':
 
             emit_rules_for_library_z88dk($target);
             emit_rules_for_ancillary_z88dk($target, $resources[$target] );
@@ -372,6 +402,8 @@ foreach( $targets as $target ) {
             case 'svi':
             case 'mtx500':
             case 'coleco':
+            case 'gb':
+            case 'lm80c':
     
                 if ( isset( $resources[$program][$target]) ) {
                     emit_rules_for_program_z88dk($target,$program,$resources[$program][$target]);

@@ -46,8 +46,12 @@
 #include "game_air_attack_tiles4.h"
 #elif __MSX__
 #include "game_air_attack_tiles4.h"
+#elif __GAMEBOY__
+#include "game_air_attack_tiles4.h"
 #elif __VIC20__
 #include "game_air_attack_tiles20.h"
+#elif __LM80C__
+#include "game_air_attack_tiles4.h"
 #else
 #include "game_air_attack_tiles.h"
 #endif
@@ -662,6 +666,8 @@ void game_air_attack() {
 	mr_end_frame(0);
 
 	mr_wait(2);
+
+#elif __GAMEBOY__
 
 #elif MIDRES_EMBEDDED_FILES
 

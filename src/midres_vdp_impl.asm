@@ -28,9 +28,15 @@
 ; *  autorizzazioni e le limitazioni previste dalla medesima.
 ; ***************************************************************************/
 
+PUBLIC _mr_vdp_port
 PUBLIC _mr_vdp_port_read
 PUBLIC _mr_vdp_port_write
-PUBLIC _mr_vdp_port
+PUBLIC _mr_vdp_data_port
+PUBLIC _mr_vdp_data_port_read
+PUBLIC _mr_vdp_data_port_write
+PUBLIC _mr_vdp_control_port
+PUBLIC _mr_vdp_control_port_read
+PUBLIC _mr_vdp_control_port_write
 PUBLIC _mr_vdp_out
 PUBLIC _mr_vdp_put
 PUBLIC _mr_vdp_put8
@@ -45,16 +51,14 @@ VdpSetReg:
         ld      a, e
 VdpRegOut:
         push    bc
-        ld      bc, (VdpPortWrite)
-        inc     c
+        ld      bc, (VdpControlPortWrite)
         out     (c), a
         pop     bc
         ret
 
 VdpRegIn:
         push    bc
-        ld      bc, (VdpPortRead)
-        inc     c
+        ld      bc, (VdpControlPortRead)
         in      a, (c)
         pop     bc
         ret
@@ -62,7 +66,7 @@ VdpRegIn:
 VdpRamOut:
         di
         push    bc
-        ld      bc, (VdpPortWrite)
+        ld      bc, (VdpDataPortWrite)
         out     (c), a
         pop     bc
         ei
@@ -71,7 +75,7 @@ VdpRamOut:
 VdpRamOut8:
         di
         push    bc
-        ld      bc, (VdpPortWrite)
+        ld      bc, (VdpDataPortWrite)
         out     (c), a
         nop
         nop
@@ -150,7 +154,7 @@ VdpRamOut8:
 
 VdpRamIn:
         push    bc
-        ld      bc, (VdpPortRead)
+        ld      bc, (VdpDataPortRead)
         in      a, (c)
         pop     bc
         ret
@@ -329,27 +333,82 @@ _mr_vdp_port:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; port
-    ld (VdpPortRead), a
-    ld (VdpPortWrite), a
+    ld (VdpDataPortRead), a
+    ld (VdpDataPortWrite), a
+    inc a
+    ld (VdpControlPortRead), a
+    ld (VdpControlPortWrite), a
     ret
 
 _mr_vdp_port_read:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; port
-    ld (VdpPortRead), a
+    ld (VdpDataPortRead), a
+    inc a
+    ld (VdpControlPortRead), a
     ret
 
 _mr_vdp_port_write:
 	ld	hl, 2
 	add	hl, sp
 	ld	a, (hl)			; port
-    ld (VdpPortWrite), a
+    ld (VdpDataPortWrite), a
+    inc a
+    ld (VdpControlPortWrite), a
+    ret
+
+_mr_vdp_data_port:
+	ld	hl, 2
+	add	hl, sp
+	ld	a, (hl)			; port
+    ld (VdpDataPortRead), a
+    ld (VdpDataPortWrite), a
+    ret
+
+_mr_vdp_data_port_read:
+	ld	hl, 2
+	add	hl, sp
+	ld	a, (hl)			; port
+    ld (VdpDataPortRead), a
+    ret
+
+_mr_vdp_data_port_write:
+	ld	hl, 2
+	add	hl, sp
+	ld	a, (hl)			; port
+    ld (VdpDataPortWrite), a
+    ret
+
+_mr_vdp_control_port:
+	ld	hl, 2
+	add	hl, sp
+	ld	a, (hl)			; port
+    ld (VdpControlPortRead), a
+    ld (VdpControlPortWrite), a
+    ret
+
+_mr_vdp_control_port_read:
+	ld	hl, 2
+	add	hl, sp
+	ld	a, (hl)			; port
+    ld (VdpControlPortRead), a
+    ret
+
+_mr_vdp_control_port_write:
+	ld	hl, 2
+	add	hl, sp
+	ld	a, (hl)			; port
+    ld (VdpControlPortWrite), a
     ret
 
 SECTION data
-VdpPortRead:
+VdpDataPortRead:
     defb    0beh
-VdpPortWrite:
+VdpDataPortWrite:
     defb    0beh
+VdpControlPortRead:
+    defb    0bfh
+VdpControlPortWrite:
+    defb    0bfh
 

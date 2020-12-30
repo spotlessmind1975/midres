@@ -74,6 +74,15 @@ unsigned char MR_RENDERED_MIXELS_VDP[16] = {
 };
 #endif
 
+#if defined(__IMG2MIDRES__) || defined(__GAMEBOY__)
+unsigned char MR_RENDERED_MIXELS_GB[16] = {
+   0x00, 0x01, 0x02, 0x03,
+   0x04, 0x05, 0x06, 0x07,
+   0x08, 0x09, 0x0a, 0x0b,
+   0x0c, 0x0d, 0x0e, 0x0f
+};
+#endif
+
 #ifdef FRAME_BUFFER
 unsigned char frameBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
 unsigned char colorBuffer[MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT];
@@ -148,7 +157,11 @@ mr_boolean MR_MULTICOLOR = mr_false;
 
 #if defined(MIDRES_STANDALONE_TILE_PROCESSING)
 
+#ifdef __GAMEBOY__
+    mr_mixel rollBuffer[16];
+#else
     mr_mixel rollBuffer[8];
+#endif
 
 #endif
 

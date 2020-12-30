@@ -19,3 +19,5 @@ To compile a `program` for a specific `target` just run the command:
 - `c128` - Commodore 128 [1541 Disk Image] 
 - `c16` - Commodore 16 [1541 Disk Image]
 - `plus4` - Commodore PLUS/4 [1541 Disk Image]
+- `gb` - Gameboy [ROM cartridge]
+- `lm80c` - LM80C Color Computer [single executable]

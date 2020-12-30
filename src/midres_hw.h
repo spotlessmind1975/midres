@@ -79,6 +79,12 @@
 #include "midres_hw_io.h"
 #include "midres_hw_vdp.h"
 #include "midres_hw_svi.h"
+#elif __GAMEBOY__
+#include "midres_hw_gb.h"
+#elif __LM80C__
+#include "midres_hw_io.h"
+#include "midres_hw_vdp.h"
+#include "midres_hw_lm80c.h"
 #else
 #include "midres_hw_vanilla.h"
 #endif

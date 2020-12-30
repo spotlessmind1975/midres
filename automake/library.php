@@ -526,7 +526,18 @@ function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
             $outputFormat = 'wav';
             $appMakeExtension = 'mtx500.wav';
             break;
-    }
+        case 'gb':
+            $options = '';
+            $outputFormat = 'gb';
+            $appMakeExtension = 'gb';
+            break;
+        case 'lm80c':
+            $options = '-DGRAPHIC_MODE_I';
+            $outputFormat = 'prg';
+            $subtype = '';
+            $appMakeExtension = 'PRG';
+            break;
+        }
 
 
 ?>
@@ -599,6 +610,17 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
             $options = '-DGRAPHIC_MODE_I -DFRAME_BUFFER';
             $outputFormat = [ 'wav', 'mtx' ];
             $appMakeExtension = [ 'wav', 'mtx' ];
+            break;
+        case 'gb':
+            $options = '';
+            $outputFormat = 'gb';
+            $appMakeExtension = 'gb';
+            break;
+        case 'lm80c':
+            $options = '-DGRAPHIC_MODE_I -DFRAME_BUFFER';
+            $outputFormat = 'prg';
+            $subtype = '';
+            $appMakeExtension = 'PRG';
             break;
     }
 

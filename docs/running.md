@@ -103,6 +103,25 @@ You can give the `program`'s executable name directly on the command line, with 
 
     xvic [program].vic20.d64
     xvic --memory 24k [program].vic20.d64
+
+### GAMEBOY (B/W)
+
+MIDRES can produce a ROM cartidge that can be fit into a classic Gameboy. You can find some instructions on [this page](https://dhole.github.io/post/gameboy_cartridge_rw_1/).
+
+Alternatively, if you don't have a physical machine, you can use the [Visual Boy Advance Emulator 2.1.4](https://github.com/visualboyadvance-m/visualboyadvance-m). 
+
+You can give the `program`'s ROM name directly on the command line.
+
+    visualboyadvance-m [program].gb.gb
+
+### LM80C Color Computer (32KB)
+
+MIDRES can produce an executable (PRG) that can be load it on the real LM80C. To do this you should create a loader that writes it into memory by reading it from the serial port. After loading it, it is necessary to modify the BASIC pointers.
+
+Alternatively, if you don't have a physical machine, you can use the [online LM80C emulator](https://nippur72.github.io/lm80c-emu/). 
+
+It is sufficient to drag'n'drop the executable over the emulator's window to start it.
+
 ### MSX1 `msx`
 
 MIDRES produces cartridge images that can be stored into EPROMs. On [this page](https://www.msx-center.com/articles/12/review-manufacturers-of-msx-cartridges) you can find out how to maufacture those cartridges, to be inserted into the computer.

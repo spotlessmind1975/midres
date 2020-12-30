@@ -499,6 +499,7 @@ void prepare_graphics() {
 	// This little "trick" allows us to quickly clean the screen 
 	// using the prepared empty tile.
 	MR_RENDERED_MIXELS[0] = TILE_EMPTY;
+
 }
 
 // This routine draws the presentation (or welcome) screen. This screen suggests 
