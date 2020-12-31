@@ -55,8 +55,6 @@ void mr_init_vdp_hd() {
     mr_vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
     mr_vdp_out(VDP_RCOLORTABLE, 0x80);
     mr_vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
-
-    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
 #else
     mr_vdp_out(VDP_R0, 0x02);
     mr_vdp_out(VDP_R1, 0xc0);
@@ -71,6 +69,14 @@ void mr_init_vdp_hd() {
     mr_vdp_out(VDP_RSPRITEA, 0x76);
     mr_vdp_out(VDP_RSPRITEP, 0x03);
     mr_vdp_out(VDP_RCOLOR, 0x0f);
+
+#if __LM80C__ 
+    // Wait for 1 seconds to avoid VDP hysteresis
+    // on FPGA version and (some) emulators.
+    mr_wait(1);
+#endif
+
+    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
 
 }
 
@@ -87,23 +93,30 @@ void mr_init_multicolor_vdp_hd() {
     mr_vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
     mr_vdp_out(VDP_RCOLORTABLE, 0x80);
     mr_vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
-
-    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
 #else
     mr_vdp_out(VDP_R0, 0x02);
     mr_vdp_out(VDP_R1, 0xc0);
     mr_vdp_out(VDP_RNAME, 0x0e);
     mr_vdp_out(VDP_RCOLORTABLE, 0xff);
     mr_vdp_out(VDP_RPATTERN, 0x03);
-
-    mr_vdp_put(&_includedFiles[0][0], 0x0000, 128);
-    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
-    mr_vdp_put(&_includedFiles[0][0], 0x1000, 128);
 #endif
     mr_vdp_out(VDP_RSPRITEA, 0x76);
     mr_vdp_out(VDP_RSPRITEP, 0x03);
     mr_vdp_out(VDP_RCOLOR, 0x0f);
 
+#if __LM80C__ 
+    // Wait for 1 seconds to avoid VDP hysteresis
+    // on FPGA version and (some) emulators.
+    mr_wait(1);
+#endif
+
+#ifdef GRAPHIC_MODE_I
+    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
+#else
+    mr_vdp_put(&_includedFiles[0][0], 0x0000, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
+    mr_vdp_put(&_includedFiles[0][0], 0x1000, 128);
+#endif
 
 }
 
