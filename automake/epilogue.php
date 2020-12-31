@@ -62,8 +62,8 @@ probe:
 	$(CC) -t $(target) -o probe src/probe.c
 
 probe80:
-	$(CC88) +$(target) -D__Z80__ -o probe src/probe.c -create-app
-
+	$(ASM88) -D__SCCZ80 -m -s -mz80 -omidres_io.o src/midres_io.asm
+	$(CC88) +$(target) -D__Z80__ src/probe.c midres_io.o -create-app
 
 clean:
 	$(call RMFILES,$(EXEDIR)/midres.c64.d64)
