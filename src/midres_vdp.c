@@ -71,9 +71,9 @@ void mr_init_vdp_hd() {
     mr_vdp_out(VDP_RCOLOR, 0x0f);
 
 #if __LM80C__ 
-    // Wait for 1 seconds to avoid VDP hysteresis
+    // Wait for 2 seconds to avoid VDP hysteresis
     // on FPGA version and (some) emulators.
-    mr_wait(1);
+    mr_wait(2);
 #endif
 
     mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
@@ -105,9 +105,9 @@ void mr_init_multicolor_vdp_hd() {
     mr_vdp_out(VDP_RCOLOR, 0x0f);
 
 #if __LM80C__ 
-    // Wait for 1 seconds to avoid VDP hysteresis
+    // Wait for 2 seconds to avoid VDP hysteresis
     // on FPGA version and (some) emulators.
-    mr_wait(1);
+    mr_wait(2);
 #endif
 
 #ifdef GRAPHIC_MODE_I
