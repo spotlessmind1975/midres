@@ -599,7 +599,8 @@ void mr_set_background_color_hd(unsigned char _color) {
 #else
     unsigned char i;
     for (i = 0; i < 32; ++i) {
-        mr_vdp_fill8(( mr_vdp_get(0x2000 + i) & 0xf0 ) | ( _color & 0x0f ), 0x2000 + i, 1);
+        unsigned char v = mr_vdp_get(0x2000 + i) & 0xf0;
+        mr_vdp_fill8(( v ) | ( _color & 0x0f ), 0x2000 + i, 1);
     }
 #endif
 }
