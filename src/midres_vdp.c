@@ -51,7 +51,12 @@ void mr_init_vdp_hd() {
 
 #ifdef GRAPHIC_MODE_I
     mr_vdp_out(VDP_R0, 0x00);
+#if __LM80C__ 
+    // Avoid enabling IRQ (under LM80C is connected to Z80 NMI)
+    mr_vdp_out(VDP_R1, 0xc0);
+#else
     mr_vdp_out(VDP_R1, 0xe0);
+#endif
     mr_vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
     mr_vdp_out(VDP_RCOLORTABLE, 0x80);
     mr_vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
@@ -70,12 +75,6 @@ void mr_init_vdp_hd() {
     mr_vdp_out(VDP_RSPRITEP, 0x03);
     mr_vdp_out(VDP_RCOLOR, 0x0f);
 
-#if __LM80C__ 
-    // Wait for 2 seconds to avoid VDP hysteresis
-    // on FPGA version and (some) emulators.
-    mr_wait(2);
-#endif
-
     mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
 
 }
@@ -89,7 +88,12 @@ void mr_init_multicolor_vdp_hd() {
 
 #ifdef GRAPHIC_MODE_I
     mr_vdp_out(VDP_R0, 0x00);
+#if __LM80C__ 
+    // Avoid enabling IRQ (under LM80C is connected to Z80 NMI)
+    mr_vdp_out(VDP_R1, 0xc0);
+#else
     mr_vdp_out(VDP_R1, 0xe0);
+#endif
     mr_vdp_out(VDP_RNAME, MR_SCREEN_DEFAULT);
     mr_vdp_out(VDP_RCOLORTABLE, 0x80);
     mr_vdp_out(VDP_RPATTERN, MR_TILESET_DEFAULT);
@@ -103,12 +107,6 @@ void mr_init_multicolor_vdp_hd() {
     mr_vdp_out(VDP_RSPRITEA, 0x76);
     mr_vdp_out(VDP_RSPRITEP, 0x03);
     mr_vdp_out(VDP_RCOLOR, 0x0f);
-
-#if __LM80C__ 
-    // Wait for 2 seconds to avoid VDP hysteresis
-    // on FPGA version and (some) emulators.
-    mr_wait(2);
-#endif
 
 #ifdef GRAPHIC_MODE_I
     mr_vdp_put(&_includedFiles[0][0], 0x0800, 128);
