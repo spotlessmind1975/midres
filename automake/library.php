@@ -54,13 +54,6 @@ function extract_symbols_from_sources( ) {
 
     }
 
-    // foreach( $aliases as $alias => $texts ) {
-    //     print "# ".$alias." = \n";
-    //     foreach( $texts as $text ) {
-    //         print "#   ".$text."\n";
-    //     }
-    // }
-
     $files = glob('src/*.c');
 
     foreach ( $files as $file ) {
@@ -72,13 +65,15 @@ function extract_symbols_from_sources( ) {
 
         foreach ( $content as $line ) {
 
-            if ( preg_match('#^\s*[a-z\_]+ [a-z\_]+ (\_mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+            if ( preg_match('#^\s*[a-z\_]+ [a-z\_\*]+ [\*]?(\_mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
                 $symbols[$file]['export'][$matched[1]] = $matched[1];
-            } else if ( preg_match('#^\s*[a-z\_]+ [a-z\_]+ (mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+            } else if ( preg_match('#^\s*[a-z\_]+ [a-z\_\*]+ [\*]?(mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
                 $symbols[$file]['export'][$matched[1]] = $matched[1];
-            } else if ( preg_match('#^\s*[a-z\_]+ (\_mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+            } else if ( preg_match('#^\s*[a-z\_\*]+ [\*]?(\_mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
                 $symbols[$file]['export'][$matched[1]] = $matched[1];
-            } else if ( preg_match('#^\s*[a-z\_]+ (mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+            } else if ( preg_match('#^\s*[a-z\_\*]+ [\*]?(mr\_[A-Za-z0-9\_]+).*{\s*#', $line, $matched) ) {
+                $symbols[$file]['export'][$matched[1]] = $matched[1];
+            } else if ( preg_match('#MR_PT_THREAD_EXT\((mr\_[A-Za-z0-9\_]+)#', $line, $matched ) ) {
                 $symbols[$file]['export'][$matched[1]] = $matched[1];
             }
 
@@ -124,18 +119,46 @@ function extract_symbols_from_sources( ) {
 
 //////////////////////////////////////////////////////////////////////////////////
 
-function build_list_of_needed_files( $symbols, $module, & $neededFiles = [] ) {
+function build_list_of_needed_files( $symbols, $module, & $neededFiles = [] /*, $dump = false*/ ) {
+
+    // print "# build_list_of_needed_files( [], ".$module.", [], false )\n";
+
+    // if ( $module == 'src/utility_musician.c' ) {
+    //     $dump = true;        
+    // }
+
+    // if ( $dump ) {
+    //     print "# ".$module."\n";
+    // }
 
     if ( isset( $symbols[$module] ) ) {
 
+        // if ( $dump ) {
+        //     print "#  [found]\n";
+        // }
+
         foreach( $symbols[$module]['import'] as $import ) {
+            
+            // if ( $dump ) {
+            //     print "#  looking for ".$import."\n";
+            // }
+    
             foreach( $symbols as $module => $dependences ) {
+                // if ( $dump ) {
+                //     print "#  >> ".$module." -> [..]\n";
+                // }
                 if ( isset($neededFiles[$module]) ) {
+                    // if ( $dump ) {
+                    //     print "#  >> (skipped)\n";
+                    // }
                     continue;
                 }
                 if ( isset( $dependences['export'][$import] ) ) {
+                    // if ( $dump ) {
+                    //     print "#  >> found!\n";
+                    // }
                     $neededFiles[$module] = $module;
-                    build_list_of_needed_files( $symbols, $module, $neededFiles );
+                    build_list_of_needed_files( $symbols, $module, $neededFiles, $dump );
                 }
             }
         }
@@ -148,14 +171,17 @@ function build_list_of_needed_files( $symbols, $module, & $neededFiles = [] ) {
 
 function find_main_module( $application_name ) {
 
+    print "# find_main_module(".$application_name.")\n";
+
     $files = glob('src/*.c');
 
     foreach ( $files as $file ) {
 
         $content = implode('', file($file));
 
-        if ( stripos( $content, '#ifdef __'.$application_name.'__' ) !== false ) {
+        if ( stripos( $content, '#ifdef __'.$application_name.'__' ) !== false && $file != 'src/main.c') {
 
+            print "# -> ".$file."\n";
             return $file;
 
         }
@@ -233,11 +259,20 @@ function emit_rules_for_library_cc65($platform) {
 # --- MIDRES LIBRARY FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
 
+obj/<?=$platform;?>/midres_sid_impl.o:	src/midres_sid_impl.asm
+	$(ASM) -t <?=$platform65;?> -oobj/<?=$platform;?>/midres_sid_impl.o src/midres_sid_impl.asm
+
+obj/<?=$platform;?>/midres_ted_impl.o:	src/midres_ted_impl.asm
+	$(ASM) -t <?=$platform65;?> -oobj/<?=$platform;?>/midres_ted_impl.o src/midres_ted_impl.asm
+
+obj/<?=$platform;?>/midres_pokey_impl.o:	src/midres_pokey_impl.asm
+	$(ASM) -t <?=$platform65;?> -oobj/<?=$platform;?>/midres_pokey_impl.o src/midres_pokey_impl.asm
+
 obj/<?=$platform;?>/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl <?=$cbm?'-D__CBM__':'';?>  -o $@ $(subst obj/<?=$platform;?>/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.<?=$platform;?>.lib:	$(LIB_INCLUDES) $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS))
-	$(AR) r $(LIBDIR)/midres.<?=$platform;?>.lib $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS))
+$(LIBDIR)/midres.<?=$platform;?>.lib:	$(LIB_INCLUDES) $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) obj/<?=$platform;?>/midres_sid_impl.o obj/<?=$platform;?>/midres_ted_impl.o obj/<?=$platform;?>/midres_pokey_impl.o
+	$(AR) r $(LIBDIR)/midres.<?=$platform;?>.lib $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) obj/<?=$platform;?>/midres_sid_impl.o obj/<?=$platform;?>/midres_ted_impl.o obj/<?=$platform;?>/midres_pokey_impl.o
 
 <?php
 }
@@ -316,6 +351,8 @@ function emit_rules_for_ancillary_cc65($platform, $resources = [], $embedded = f
 # -------------------------------------------------------------------
 # --- DEMO/TUTORIALS FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
+
+.PHONY: midres.embedded.<?=$platform;?>
 
 midres.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
@@ -415,6 +452,8 @@ function emit_rules_for_program_cc65($platform, $program, $resources = [], $embe
 # --- <?=strtoupper($program);?> FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
 
+.PHONY: <?=$program;?>.embedded.<?=$platform;?>
+
 <?=$program;?>.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
@@ -435,7 +474,7 @@ obj/<?=$outputPath;?>/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl -D__<?=strtoupper($program);?>__ <?=$cbm?'-D__CBM__':'';?> -o $@ $(subst obj/<?=$outputPath;?>/,src/,$(@:.o=.c))
 
 $(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> $(subst PLATFORM,<?=$outputPath;?>,$(OBJS))
-	$(CC) -Ln demo<?=$platform65;?>.lbl -t <?=$platform65;?> -C cfg/<?=$platform;?>.cfg $(LDFLAGS) -m $(EXEDIR)/<?=$program;?>.<?=$platform65;?>.map -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> $(subst PLATFORM,<?=$outputPath;?>,$(OBJS)) $(LIBDIR)/midres.<?=$platform;?>.lib
+	$(CC) -Ln demo<?=$platform65;?>.lbl -t <?=$platform65;?> -C cfg/<?=$platform;?>.cfg $(LDFLAGS) -m $(EXEDIR)/<?=$program;?>.<?=$platform65;?>.map -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> <?=$embedded?("obj/".$outputPath."/rawdata.o"):"";?> $(subst PLATFORM,<?=$outputPath;?>,$(OBJS)) $(LIBDIR)/midres.<?=$platform;?>.lib
 <?php 
 
     switch( $platform ) {
@@ -546,6 +585,8 @@ function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
 # --- DEMO/TUTORIALS FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
 
+.PHONY: midres.embedded.<?=$platform;?>
+
 midres.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
@@ -629,6 +670,9 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
     $neededFiles = [];
     build_list_of_needed_files( $symbols, $mainModule, $neededFiles );
     $neededFiles[] = $mainModule;
+
+    sort($neededFiles);
+    $neededFiles = array_unique($neededFiles);
     $neededFiles[] = 'src/midres_data.c';
     $neededFiles[] = 'src/main.c';
 
@@ -657,6 +701,8 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
 //        print "#"."\n";
 //    }
 ?>
+
+.PHONY: <?=$program;?>.embedded.<?=$platform;?>
 
 <?=$program;?>.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php

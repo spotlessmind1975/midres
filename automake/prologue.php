@@ -168,9 +168,11 @@ endef
 ifdef CC65_HOME
   CC := $(CC65_HOME)/bin/cl65
   AR := $(CC65_HOME)/bin/ar65
+  ASM := $(CC65_HOME)/bin/ca65
 else
   CC := cl65
   AR := ar65
+  ASM := ca65
 endif
 
 # On Windows it is mandatory to have CC1541_HOME set. So do not unnecessarily
