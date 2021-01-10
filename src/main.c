@@ -53,6 +53,8 @@
  ** RESIDENT MAIN FUNCTION
  ****************************************************************************/
 
+#include <stdio.h>
+
 void main(void) {
 
 #ifdef __DEMO_SLIDESHOW__

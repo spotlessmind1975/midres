@@ -34,6 +34,11 @@
   ** INCLUDE SECTION
   ****************************************************************************/
 
+  // Needed for system call.
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+
   // Needed for MIDRES library call.
 #include "midres.h"
 
@@ -46,32 +51,47 @@
 unsigned char* mr_translate_file_user(mr_file _file) {
 
 	switch (_file) {
-		case FILE_TOCCATINA_IMF:
-			return "toccatina.imf";
-		case FILE_ALICE_IMF:
-			return "alice.imf";
-		case FILE_ISLAND_IMF:
-			return "island.imf";
+		case FILE_TETRIS_IMF:
+			return "tetris.imf";
 	}
 
 	return 0;
 
 }
 
+
 // Main program
 void demo_music() {
+
+	unsigned char i;
+
+	mr_boolean backgroundColor = mr_false;
 
 	mr_musicplayer_protothread mpPt;
 
 	mr_init();
 
+	mr_set_border_color(MR_COLOR_WHITE);
+	mr_set_background_color(MR_COLOR_WHITE);
+
 	mpPt.done = mr_false;
-	mpPt.buffer = mr_map_file(FILE_TOCCATINA_IMF, FILE_TOCCATINA_IMF_SIZE);
-	mpPt.eof = mpPt.buffer + FILE_TOCCATINA_IMF_SIZE;
+	mpPt.buffer = mr_map_file(FILE_TETRIS_IMF, FILE_TETRIS_IMF_SIZE);
+	mpPt.eof = mpPt.buffer + FILE_TETRIS_IMF_SIZE;
 
 	while (!mpPt.done) {
 		mr_musicplayer(&mpPt);
+		if (backgroundColor) {
+			mr_set_border_color(MR_COLOR_RED);
+			mr_set_background_color(MR_COLOR_RED);
+			backgroundColor = mr_false;
+		} else {
+			mr_set_border_color(MR_COLOR_YELLOW);
+			mr_set_background_color(MR_COLOR_YELLOW);
+			backgroundColor = mr_true;
+		}
 	}
+
+	mr_set_background_color(MR_COLOR_BLACK);
 
 	while(1) { }
 
