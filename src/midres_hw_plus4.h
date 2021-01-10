@@ -76,7 +76,7 @@
 #define MR_AUX_4						6
 #define MR_AUX_5						7
 #define MR_AUX_COUNT					6
-#define MR_AUX_DEFAULT					MR_AUX_0
+#define MR_AUX_DEFAULT					MR_AUX_2
 
 // Offset for correct brightness.
 #define MR_COLOR_LOWBRIGHTNESS			(3<<4)

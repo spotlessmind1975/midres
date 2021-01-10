@@ -46,7 +46,10 @@
             [ 'destination' => 'mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
             [ 'destination' => 'testcard.bin', 'source' => '$(DATADIR)/testcard.bin' ],
             [ 'destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ],
-            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ]
+            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
+            [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
+            [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
+            [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
         ],
 
         'vic20' => [
@@ -61,7 +64,10 @@
             [ 'destination' => 'mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
             [ 'destination' => 'testcard.bin', 'source' => '$(DATADIR)/testcard.bin' ],
             [ 'destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ],
-            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ]
+            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
+            [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
+            [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
+            [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
         ],
 
         'c16' => [
@@ -76,7 +82,10 @@
             [ 'destination' => 'mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
             [ 'destination' => 'testcard.bin', 'source' => '$(DATADIR)/testcard.bin' ],
             [ 'destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ],
-            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ]
+            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
+            [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
+            [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
+            [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
         ],
 
         'plus4' => [
@@ -91,7 +100,10 @@
             [ 'destination' => 'mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
             [ 'destination' => 'testcard.bin', 'source' => '$(DATADIR)/testcard.bin' ],
             [ 'destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ],
-            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ]
+            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
+            [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
+            [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
+            [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
         ],
 
         'atari' => [
@@ -105,14 +117,20 @@
             [ 'destination' => 'mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
             [ 'destination' => 'testcard.bin', 'source' => '$(DATADIR)/testcard.bin' ],
             [ 'destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ],
-            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ]
+            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
+            [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
+            [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
+            [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
         ],
 
         'coleco' => [
             [ 'destination' => 'mtiles.bin', 'source' => '$(DATADIR)/mtiles.bin' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
             [ 'destination' => 'tutorial_mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
-            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ]
+            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
+            [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
+            [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
+            [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
         ],
 
         'airattack' => [

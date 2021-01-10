@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include <cc65.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "midres.h"
 
@@ -96,6 +97,8 @@ void mr_init_base_hd() {
     for (i = 0; i < MR_SCREEN_WIDTH * MR_SCREEN_HEIGHT; ++i) {
         *(dst + i) = *(src + i);
     }
+
+    //mr_sid_init();
 
 }
 
