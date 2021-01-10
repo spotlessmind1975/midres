@@ -336,7 +336,7 @@ function emit_commands_for_create_atr_disk($platform,$filename,$files = []) {
 
 //////////////////////////////////////////////////////////////////////////////////
 
-function emit_rules_for_ancillary_cc65($platform, $resources = [], $embedded = false ) {
+function emit_rules_for_ancillary_cc65($platform, $demo, $resources = [], $embedded = false ) {
 
     $cbm = is_commodore($platform);
 
@@ -352,9 +352,9 @@ function emit_rules_for_ancillary_cc65($platform, $resources = [], $embedded = f
 # --- DEMO/TUTORIALS FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
 
-.PHONY: midres.embedded.<?=$platform;?>
+.PHONY: midres.<?=$demo;?>.embedded.<?=$platform;?> midres.<?=$demo;?>.<?=$platform;?>
 
-midres.embedded.<?=$platform;?>:
+midres.<?=$demo;?>.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
         if ( isset($resource['loader'] ) ) continue;
@@ -374,7 +374,7 @@ midres.embedded.<?=$platform;?>:
 obj/<?=$platform;?>/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl <?=$cbm?'-D__CBM__':'';?> -o $@ $(subst obj/<?=$platform;?>/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.<?=$platform;?>: midres.embedded.<?=$platform;?> $(subst PLATFORM,<?=$platform;?>,$(OBJS))
+$(EXEDIR)/midres.<?=$demo;?>.<?=$platform;?>: midres.<?=$demo;?>.embedded.<?=$platform;?> $(subst PLATFORM,<?=$platform;?>,$(OBJS))
 	$(CC) -Ln demo<?=$platform;?>.lbl -t <?=$platform65;?> -C cfg/<?=$platform;?>.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.<?=$platform;?>.map -o $(EXEDIR)/midres.<?=$platform;?> $(subst PLATFORM,<?=$platform;?>,$(OBJS)) $(LIBDIR)/midres.<?=$platform;?>.lib
 <?php 
 
@@ -530,8 +530,9 @@ $(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> 
 
 //////////////////////////////////////////////////////////////////////////////////
 
-function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
+function emit_rules_for_ancillary_z88dk($platform, $demo, $resources = [] ) {
 
+    $outputPath = $platform;
     $platform88 = get_platform88($platform);
     $options = '';
     $subtype = '';
@@ -545,7 +546,7 @@ function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
             $appMakeExtension = 'rom';
             break;
         case 'msx':
-            $options = '-DGRAPHIC_MODE_I';
+            $options = '-DGRAPHIC_MODE_I -DFRAME_BUFFER';
             $outputFormat = 'rom';
             $subtype = '-subtype=rom';
             $appMakeExtension = 'rom';
@@ -561,9 +562,9 @@ function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
             $appMakeExtension = 'cas';
             break;
         case 'mtx500':
-            $options = '-DGRAPHIC_MODE_I';
-            $outputFormat = 'wav';
-            $appMakeExtension = 'mtx500.wav';
+            $options = '-DGRAPHIC_MODE_I -DFRAME_BUFFER';
+            $outputFormat = [ 'wav', 'mtx' ];
+            $appMakeExtension = [ 'wav', 'mtx' ];
             break;
         case 'gb':
             $options = '';
@@ -571,13 +572,28 @@ function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
             $appMakeExtension = 'gb';
             break;
         case 'lm80c':
-            $options = '-DGRAPHIC_MODE_I';
+            $options = '-DGRAPHIC_MODE_I -DFRAME_BUFFER';
             $outputFormat = 'prg';
             $subtype = '';
             $appMakeExtension = 'PRG';
             break;
-        }
+    }
 
+        $mainModule = find_main_module("DEMO_".$demo);
+        $symbols = extract_symbols_from_sources();
+        $neededFiles = [];
+        build_list_of_needed_files( $symbols, $mainModule, $neededFiles );
+        $neededFiles[] = $mainModule;
+    
+        sort($neededFiles);
+        $neededFiles = array_unique($neededFiles);
+        $neededFiles[] = 'src/midres_data.c';
+        $neededFiles[] = 'src/main.c';
+    
+        $neededObjectFiles = [];
+        foreach( $neededFiles as $neededFile ) {
+            $neededObjectFiles[] = preg_replace(['#src/#', '#\.c$#'],['obj/'.$outputPath.'/', '.o'], $neededFile);
+        }
 
 ?>
 
@@ -585,9 +601,9 @@ function emit_rules_for_ancillary_z88dk($platform, $resources = [] ) {
 # --- DEMO/TUTORIALS FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
 
-.PHONY: midres.embedded.<?=$platform;?>
+.PHONY: midres.<?=$demo;?>.embedded.<?=$platform;?> midres.<?=$demo;?>.<?=$platform;?>
 
-midres.embedded.<?=$platform;?>:
+midres.<?=$demo;?>.embedded.<?=$platform;?>:
 	$(FILE2INCLUDE) <?php
     foreach( $resources as $resource ) {
         if ( isset($resource['loader'] ) ) continue;
@@ -607,8 +623,8 @@ obj/<?=$platform;?>/midres_io.o:	src/midres_io.asm
 obj/<?=$platform;?>/%.o:	$(SOURCES)
 	$(CC88) +<?=$platform88;?> $(CFLAGS) -c $(CFLAGS88) <?=$options;?> -o $@ $(subst obj/<?=$platform;?>/,src/,$(@:.o=.c))
 
-$(EXEDIR)/midres.<?=$platform;?>:	midres.embedded.<?=$platform;?> $(subst PLATFORM,<?=$platform;?>,$(OBJS)) $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) obj/<?=$platform;?>/rawdata.o obj/<?=$platform;?>/midres_vdp_impl.o obj/<?=$platform;?>/midres_io.o
-	$(CC88) +<?=$platform88;?> <?=$subtype;?> -m $(LDFLAGS88) obj/<?=$platform;?>/rawdata.o obj/<?=$platform;?>/midres_io.o obj/<?=$platform;?>/midres_vdp_impl.o $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) $(subst PLATFORM,<?=$platform;?>,$(OBJS)) -create-app 
+$(EXEDIR)/midres.<?=$demo;?>.<?=$platform;?>:	midres.<?=$demo;?>.embedded.<?=$platform;?> $(subst PLATFORM,<?=$platform;?>,$(OBJS)) $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) obj/<?=$platform;?>/rawdata.o obj/<?=$platform;?>/midres_vdp_impl.o obj/<?=$platform;?>/midres_io.o
+	$(CC88) +<?=$platform88;?> <?=$subtype;?> -m $(LDFLAGS88) obj/<?=$platform;?>/rawdata.o obj/<?=$platform;?>/midres_io.o obj/<?=$platform;?>/midres_vdp_impl.o <?=implode(' ', $neededObjectFiles);?> -create-app 
 	$(call COPYFILES,a.<?=$appMakeExtension;?>,$(EXEDIR)/midres.<?=$platform;?>.<?=$outputFormat;?>)
 	$(call RMFILES,a.*)
 <?php

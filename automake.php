@@ -50,6 +50,7 @@
             [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
             [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
             [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
         ],
 
         'vic20' => [
@@ -68,6 +69,7 @@
             [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
             [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
             [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
         ],
 
         'c16' => [
@@ -86,6 +88,7 @@
             [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
             [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
             [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
         ],
 
         'plus4' => [
@@ -104,6 +107,7 @@
             [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
             [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
             [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
         ],
 
         'atari' => [
@@ -121,6 +125,7 @@
             [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
             [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
             [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
         ],
 
         'coleco' => [
@@ -131,6 +136,11 @@
             [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
             [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
             [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
+        ],
+
+        'msx' => [
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
         ],
 
         'airattack' => [
@@ -279,7 +289,6 @@
     $resources['vic2024'] = $resources['vic20'];
     $resources['c128'] = $resources['c64'];
     $resources['atarilo'] = $resources['atari'];
-    $resources['msx'] = $resources['coleco'];
     $resources['msxc'] = $resources['coleco'];
     $resources['svi'] = $resources['coleco'];
     $resources['mtx500'] = $resources['coleco'];
@@ -350,6 +359,16 @@
             }
         }
     }
+    $values = file('docs/demos.md');
+    $demos = [];
+    foreach ( $values as $value ) {
+        if ( preg_match('#- .([A-Za-z0-9]+). -#', $value, $matched) ) {
+            $demo = trim($matched[1]);
+            if($demo) {
+                $demos[] = trim($demo);
+            }
+        }
+    }
     $values = file('docs/programs.md');
     $programs = [];
     foreach ( $values as $value ) {
@@ -394,7 +413,9 @@ foreach( $targets as $target ) {
         case 'lm80c':
 
             emit_rules_for_library_z88dk($target);
-            emit_rules_for_ancillary_z88dk($target, $resources[$target] );
+            foreach( $demos as $demo ) {
+                emit_rules_for_ancillary_z88dk($target, $demo, $resources[$target] );
+            }
 
             break;
 
@@ -410,7 +431,9 @@ foreach( $targets as $target ) {
         case 'c16':
         case 'plus4':
             emit_rules_for_library_cc65($target);
-            emit_rules_for_ancillary_cc65($target, $resources[$target] );
+            foreach( $demos as $demo ) {
+                emit_rules_for_ancillary_cc65($target, $demo, $resources[$target] );
+            }
     }
 }
 

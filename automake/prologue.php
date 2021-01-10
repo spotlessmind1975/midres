@@ -94,6 +94,7 @@ endif
 
 ifdef demo
 DEMO := $(demo)
+ATARGETS ?= midres.$(demo).$(target)
 ifdef target
 TARGETS ?= $(target)
 endif
@@ -301,7 +302,7 @@ EXEDIR := exe
 LIBDIR := lib
 
 # Similarly, we expand the set of executables that are required.
-EXES := $(foreach TARGET,$(TARGETS),$(EXEDIR)/midres.$(TARGET))
+#EXES := $(foreach TARGET,$(TARGETS),$(EXEDIR)/midres.$(TARGET))
 EXES += $(foreach ATARGET,$(ATARGETS),$(EXEDIR)/$(ATARGET))
 
 LIBS := $(foreach TARGET,$(TARGETS),$(LIBDIR)/midres.$(TARGET).lib)
