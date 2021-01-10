@@ -231,12 +231,12 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     }
     if (_offset > 0) {
         while (_offset != 0) {
-            if (_offset > 192) {
-                fread((unsigned char*)(0x033c), 192, 1, f);
-                _offset -= 192;
+            if (_offset > 30) {
+                fread((unsigned char*)(0x0461), 30, 1, f);
+                _offset -= 30;
             }
             else {
-                fread((unsigned char*)(0x033c), _offset, 1, f);
+                fread((unsigned char*)(0x0461), _offset, 1, f);
                 _offset = 0;
             }
         }
