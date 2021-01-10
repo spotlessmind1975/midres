@@ -251,24 +251,27 @@
         'elevator' => [
             'c64' => [
                 ['destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
-                ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator64.mpic' ]
-            ],
+                ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator64.mpic' ],
+                ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
+                ],
             'vic2024' => [
                 [ 'loader' => 'elloader2024.prg'],
                 ['destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
-                ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator20.mpic' ]
+                ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator20.mpic' ],
+                ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
             ],
             'plus4' => [
                 [ 'loader' => 'elloader4.prg'],
                 ['destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
-                ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator16.mpic' ]
+                ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevator16.mpic' ],
+                ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
             ],
             'atari' => [
                 ['destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
-                ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevatora.mpic' ]
+                ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevatora.mpic' ],
+                ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
             ]
         ]
-
 
     ];
 

@@ -216,6 +216,13 @@ mr_score score[4] = { 0, 0, 0, 0 };
 // Store the current key pressed.
 unsigned char currentKey = 0;
 
+// Music player
+mr_musicplayer_protothread musicPlayer;
+
+// Soundtrack for end titles
+mr_maudio* finalScreenSoundtrack;
+
+
 /////////////////////////////////////////////////////////////////////////////
 /// ELEVATOR'S VARIABLES
 /////////////////////////////////////////////////////////////////////////////
@@ -314,7 +321,9 @@ unsigned char* mr_translate_file_user(mr_file _file) {
 		case FILE_ZELINTRO_BIN:
 			return "zelintro.bin";
 		case FILE_ZELTILES_BIN:
-			return "zeltile.bin";
+			return "zeltiles.bin";
+		case FILE_ELEVATOR1_IMF:
+			return "elevator1.imf";
 	}
 
 	return 0;
@@ -1657,6 +1666,8 @@ MR_PT_THREAD(input) {
 // Final screen, when the game over arrives.
 void show_final_screen() {
 
+	mr_start_frame();
+
 	// Clear the screen.
 	mr_clearv();
 
@@ -1666,8 +1677,14 @@ void show_final_screen() {
 	// Draw the reached score.
 	draw_score_at((MR_SCREEN_WIDTH - 6) >> 1, (MR_SCREEN_HEIGHT >> 1));
 
-	// Wait for a key press.
-	while(!mr_key_pressed()) { }
+	mr_end_frame(0);
+
+	musicPlayer.done = mr_false;
+	musicPlayer.buffer = finalScreenSoundtrack;
+	musicPlayer.eof = musicPlayer.buffer + FILE_ELEVATOR1_IMF_SIZE;
+	while (!mr_key_pressed() && !musicPlayer.done) {
+		mr_musicplayer(&musicPlayer);
+	}
 
 }
 
@@ -1841,6 +1858,8 @@ void game_elevator() {
 	mr_init();
 
 	show_title_screen();
+
+	finalScreenSoundtrack = mr_map_file(FILE_ELEVATOR1_IMF, FILE_ELEVATOR1_IMF_SIZE);
 
 	// We prepare the graphics.
 	prepare_graphics();
