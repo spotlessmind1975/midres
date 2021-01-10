@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include <cc65.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "midres.h"
 
@@ -299,6 +300,42 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     }
     fread(_dest, _size, 1, f);
     fclose(f);
+}
+
+unsigned char* availableMemoryAddress = MR_AM(MR_AUX_DEFAULT);
+unsigned int availableMemorySize = MR_AUX_COUNT * MR_SCREEN_RAM_SIZE;
+
+unsigned char* mr_map_file_hd(mr_file _file, unsigned int _projected_size) {
+    FILE* f = NULL;
+    unsigned char* storage = NULL;
+    if (availableMemorySize < _projected_size) {
+        return NULL;
+    }
+    f = fopen(mr_translate_file_hd(_file), "rb");
+    if (f == NULL) {
+        return NULL;
+    }
+    storage = availableMemoryAddress;
+    availableMemoryAddress -= _projected_size;
+    fread(storage, _projected_size, 1, f);
+    fclose(f);
+    return storage;
+}
+
+#else
+
+#include "rawdata.h"
+
+unsigned char* mr_translate_file_hd(mr_file _file) {
+
+}
+
+void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size) {
+    memcpy(_dest, &_includedFiles[_file][_offset], _size);
+}
+
+unsigned char* mr_map_file_hd(mr_file _file, unsigned int _projected_size) {
+    return &_includedFiles[_file][0];
 }
 
 #endif

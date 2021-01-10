@@ -1093,7 +1093,8 @@
 										return MR_PT_YIELDED;				\
 									}										\
 								} while(0)
-	#define MR_PTI_YIELD_UNTIL(cond) \
+
+#define MR_PTI_YIELD_UNTIL(cond) \
 								do {										\
 									MR_PT_YIELD_FLAG = 0;					\
 									MR_LC_SET((_mr_pt)->lc);				\
@@ -1400,6 +1401,8 @@
 	void mr_read_file(mr_file _file, unsigned char* _dest, unsigned int _size);
 
 	void mr_read_file_from_offset(mr_file _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);
+
+	unsigned char * mr_map_file(mr_file _file, unsigned int _projected_size);
 
 	unsigned char mr_joy(unsigned char _number);
 

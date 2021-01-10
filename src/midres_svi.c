@@ -278,6 +278,10 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     memcpy(_dest, &_includedFiles[_file][_offset], _size);
 }
 
+unsigned char* mr_map_file_hd(mr_file _file, unsigned int _projected_size) {
+    return &_includedFiles[_file][0];
+}
+
 unsigned char mr_joy_hd(unsigned char _number) {
 
     unsigned char r14;

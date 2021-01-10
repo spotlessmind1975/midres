@@ -172,6 +172,9 @@ unsigned char* mr_translate_file_user(unsigned int _file);
 // Hardware dependent read external data
 void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);
 
+// Hardware dependent map external data
+unsigned char *mr_map_file_hd(unsigned int _file, unsigned int _projected_size);
+
 unsigned char mr_joy_hd(unsigned char _number);
 
 void mr_sound_control_channel_hd(unsigned char _channel, unsigned char _parameter, unsigned char _value);

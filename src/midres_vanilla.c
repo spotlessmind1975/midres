@@ -61,4 +61,8 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     
 }
 
+unsigned char* mr_map_file_hd(mr_file _file, unsigned int _projected_size) {
+
+}
+
 #endif

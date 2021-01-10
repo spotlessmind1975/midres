@@ -28,20 +28,15 @@
  * autorizzazioni e le limitazioni previste dalla medesima.
  ****************************************************************************/
 
-void demo_slideshow();
-void demo_drawing();
-void demo_bitblit();
-void demo_tile();
-void demo_test_card();
-void demo_music();
+ /****************************************************************************
+  ** INCLUDE SECTION
+  ****************************************************************************/
 
-void game_air_attack();
-void game_totto();
-void game_alien_storm();
-void game_elevator();
+#include <stdio.h>
+#include <stdlib.h>
 
-void tutorial_mctile();
-void tutorial_protothread1();
-void tutorial_protothread2();
+#include "midres.h"
 
-void utility_joycheck();
+unsigned char* mr_map_file( mr_file _file, unsigned int _projected_size) {
+	return mr_map_file_hd(_file, _projected_size);
+}

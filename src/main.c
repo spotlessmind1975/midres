@@ -87,6 +87,12 @@ void main(void) {
 
 #endif
 
+#ifdef __DEMO_MUSIC__
+
+    demo_music();
+
+#endif
+
 #ifdef __DEMO_TEST_CARD__
 
     demo_test_card();

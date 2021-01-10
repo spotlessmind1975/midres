@@ -28,20 +28,53 @@
  * autorizzazioni e le limitazioni previste dalla medesima.
  ****************************************************************************/
 
-void demo_slideshow();
-void demo_drawing();
-void demo_bitblit();
-void demo_tile();
-void demo_test_card();
-void demo_music();
+#ifdef __DEMO_MUSIC__
 
-void game_air_attack();
-void game_totto();
-void game_alien_storm();
-void game_elevator();
+ /****************************************************************************
+  ** INCLUDE SECTION
+  ****************************************************************************/
 
-void tutorial_mctile();
-void tutorial_protothread1();
-void tutorial_protothread2();
+  // Needed for MIDRES library call.
+#include "midres.h"
 
-void utility_joycheck();
+#include "rawdata.h"
+
+/****************************************************************************
+ ** DEFINES AND VARIABLES SECTION
+ ****************************************************************************/
+
+unsigned char* mr_translate_file_user(mr_file _file) {
+
+	switch (_file) {
+		case FILE_TOCCATINA_IMF:
+			return "toccatina.imf";
+		case FILE_ALICE_IMF:
+			return "alice.imf";
+		case FILE_ISLAND_IMF:
+			return "island.imf";
+	}
+
+	return 0;
+
+}
+
+// Main program
+void demo_music() {
+
+	mr_musicplayer_protothread mpPt;
+
+	mr_init();
+
+	mpPt.done = mr_false;
+	mpPt.buffer = mr_map_file(FILE_TOCCATINA_IMF, FILE_TOCCATINA_IMF_SIZE);
+	mpPt.eof = mpPt.buffer + FILE_TOCCATINA_IMF_SIZE;
+
+	while (!mpPt.done) {
+		mr_musicplayer(&mpPt);
+	}
+
+	while(1) { }
+
+}
+
+#endif
