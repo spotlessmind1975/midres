@@ -190,6 +190,17 @@
 
 	typedef unsigned int mr_file;
 
+	typedef unsigned char mr_channel;
+	typedef unsigned char mr_audio_parameter;
+	typedef unsigned char mr_audio_value;
+	typedef unsigned char mr_note;
+	typedef unsigned char mr_instrument;
+	typedef unsigned char mr_frequency;
+	typedef unsigned char mr_amplitude;
+	typedef unsigned char mr_maudio;
+	typedef int mr_maudio_pos;
+	typedef int mr_maudio_size;
+
 	// We include some hardware-dependent data type and constants.
 	#include "midres_hw.h"
 
@@ -1118,6 +1129,231 @@
 
 
 	/*-----------------------------------------------------------------------
+      --- ISOMORPHIC PLAYER
+      -----------------------------------------------------------------------*/
+
+	#define	IMF_TOKEN_WAIT1								0xff
+	#define	IMF_TOKEN_WAIT2								0xfe
+	#define	IMF_TOKEN_CONTROL							0xd0
+	#define	IMF_TOKEN_PROGRAM_CHANGE					0xe0
+	#define	IMF_TOKEN_NOTE								0x40
+
+	#define	IMF_PARAMETER_BANK_SELECT_MSB_GS			0x00
+	#define	IMF_PARAMETER_MODULATION_WHEEL_MSB			0x01
+	#define	IMF_PARAMETER_BREATH						0x02
+	#define	IMF_PARAMETER_FOOT							0x04
+	#define	IMF_PARAMETER_PORTAMENTO_TIME				0x05
+	#define	IMF_PARAMETER_DATA_ENTRY_MSB				0x06
+	#define	IMF_PARAMETER_VOLUME						0x07
+	#define	IMF_PARAMETER_BALANCE						0x08
+	#define	IMF_PARAMETER_PAN							0x0A
+	#define	IMF_PARAMETER_EXPRESSION					0x0B
+	#define	IMF_PARAMETER_EFFECT_CONTROL1				0x0C
+	#define	IMF_PARAMETER_EFFECT_CONTROL2				0x0D
+	#define	IMF_PARAMETER_GENERAL_PURPOSE1				0x10
+	#define	IMF_PARAMETER_GENERAL_PURPOSE2				0x11
+	#define	IMF_PARAMETER_GENERAL_PURPOSE3				0x12
+	#define	IMF_PARAMETER_GENERAL_PURPOSE4				0x13
+	#define	IMF_PARAMETER_BANK_SELECT_LSB_GS			0x20
+	#define	IMF_PARAMETER_MODULATION_WHEEL_LSB			0x21
+	#define	IMF_PARAMETER_BREATH_GS						0x22
+	#define	IMF_PARAMETER_FOOT_LSB						0x24
+	#define	IMF_PARAMETER_PORTAMENTO_TIME_LSB			0x25
+	#define	IMF_PARAMETER_DATA_ENTRY_LSB				0x26
+	#define	IMF_PARAMETER_VOLUME_LSB					0x27
+	#define	IMF_PARAMETER_BALANCE_LSB					0x28
+	#define	IMF_PARAMETER_PAN_LSB						0x2A
+	#define	IMF_PARAMETER_EXPRESSION_LSB				0x2B
+	#define	IMF_PARAMETER_EFFECT_CONTROL1_GS			0x2C
+	#define	IMF_PARAMETER_EFFECT_CONTROL2_GS			0x2D
+	#define	IMF_PARAMETER_EFFECT_CONTROL1_LSB			0x30
+	#define	IMF_PARAMETER_EFFECT_CONTROL2_LSB			0x31
+	#define	IMF_PARAMETER_EFFECT_CONTROL3_LSB			0x32
+	#define	IMF_PARAMETER_EFFECT_CONTROL4_LSB			0x33
+	#define	IMF_PARAMETER_HOLD_PEDAL1					0x40
+	#define	IMF_PARAMETER_PORTAMENTO_GS					0x41
+	#define	IMF_PARAMETER_SOSTENUTO_GS					0x42
+	#define	IMF_PARAMETER_SOFT_PEDAL_GS					0x43
+	#define	IMF_PARAMETER_LEGATO_PEDAL					0x44
+	#define	IMF_PARAMETER_HOLD_PEDAL					0x45
+	#define	IMF_PARAMETER_SOUND_VARIATION				0x46
+	#define	IMF_PARAMETER_SOUND_TIMBRE					0x47
+	#define	IMF_PARAMETER_RELEASE_TIME					0x48
+	#define	IMF_PARAMETER_ATTACK_TIME					0x49
+	#define	IMF_PARAMETER_SOUND_BRIGHTNESS				0x4A
+	#define	IMF_PARAMETER_SOUND_CONTROL6				0x4B
+	#define	IMF_PARAMETER_SOUND_CONTROL7				0x4C
+	#define	IMF_PARAMETER_SOUND_CONTROL8				0x4D
+	#define	IMF_PARAMETER_SOUND_CONTROL9				0x4E
+	#define	IMF_PARAMETER_SOUND_CONTROL10				0x4F
+	#define	IMF_PARAMETER_GENERAL_PURPOSE5				0x50
+	#define	IMF_PARAMETER_GENERAL_PURPOSE6				0x51
+	#define	IMF_PARAMETER_GENERAL_PURPOSE7				0x52
+	#define	IMF_PARAMETER_GENERAL_PURPOSE8				0x53
+	#define	IMF_PARAMETER_PORTAMENTO_CONTROL_GS			0x54
+	#define	IMF_PARAMETER_REVERB_LEVEL_GS				0x5B
+	#define	IMF_PARAMETER_TREMOLO_DEPTH					0x5C
+	#define	IMF_PARAMETER_CHORUS_LEVEL_GS				0x5D
+	#define	IMF_PARAMETER_CELESTE_DEPTH					0x5E
+	#define	IMF_PARAMETER_PHASER_DEPTH					0x5F
+	#define	IMF_PARAMETER_DATA_INCREMENT				0x60
+	#define	IMF_PARAMETER_DATA_DECREMENT				0x61
+	#define	IMF_PARAMETER_NRPN_PARAMETER_LSB			0x62
+	#define	IMF_PARAMETER_NRPN_PARAMETER_MSB			0x63
+	#define	IMF_PARAMETER_RPN_PARAMETER_LSB				0x64
+	#define	IMF_PARAMETER_RPN_PARAMETER_MSB				0x65
+	#define	IMF_PARAMETER_ALL_SOUND_OFF_GS				0x78
+	#define	IMF_PARAMETER_RESET_ALL_CONTROLLERS			0x79
+	#define	IMF_PARAMETER_LOCAL_ON_OFF					0x7A
+	#define	IMF_PARAMETER_ALL_NOTES_OFF					0x7B
+	#define	IMF_PARAMETER_OMNI_MODE_OFF					0x7C
+	#define	IMF_PARAMETER_OMNI_MODE_ON					0x7D
+	#define	IMF_PARAMETER_MONO_MODE_ON					0x7E
+	#define	IMF_PARAMETER_POLY_MODE_ON					0x7F
+
+	#define IMF_INSTRUMENT_ACOUSTIC_GRAND_PIANO			0x01
+	#define IMF_INSTRUMENT_BRIGHT_ACOUSTIC_PIANO		0x02
+	#define IMF_INSTRUMENT_ELECTRIC_GRAND_PIANO			0x03
+	#define IMF_INSTRUMENT_HONKY_TONK_PIANO				0x04
+	#define IMF_INSTRUMENT_ELECTRIC_PIANO1				0x05
+	#define IMF_INSTRUMENT_ELECTRIC_PIANO2				0x06
+	#define IMF_INSTRUMENT_HARPSICHORD					0x07
+	#define IMF_INSTRUMENT_CLAVI						0x08
+	#define IMF_INSTRUMENT_CELESTA						0x09
+	#define IMF_INSTRUMENT_GLOCKENSPIEL					0x0A
+	#define IMF_INSTRUMENT_MUSIC_BOX					0x0B
+	#define IMF_INSTRUMENT_VIBRAPHONE					0x0C
+	#define IMF_INSTRUMENT_MARIMBA						0x0D
+	#define IMF_INSTRUMENT_XYLOPHONE					0x0E
+	#define IMF_INSTRUMENT_TUBULAR_BELLS				0x0F
+	#define IMF_INSTRUMENT_DULCIMER						0x10
+	#define IMF_INSTRUMENT_DRAWBAR_ORGAN				0x11
+	#define IMF_INSTRUMENT_PERCUSSIVE_ORGAN				0x12
+	#define IMF_INSTRUMENT_ROCK_ORGAN					0x13
+	#define IMF_INSTRUMENT_CHURCH_ORGAN					0x14
+	#define IMF_INSTRUMENT_REED_ORGAN					0x15
+	#define IMF_INSTRUMENT_ACCORDION					0x16
+	#define IMF_INSTRUMENT_HARMONICA					0x17
+	#define IMF_INSTRUMENT_TANGO_ACCORDION				0x18
+	#define IMF_INSTRUMENT_ACOUSTIC_GUITAR_NYLON		0x19
+	#define IMF_INSTRUMENT_ACOUSTIC_GUITAR_STEEL		0x1A
+	#define IMF_INSTRUMENT_ELECTRIC_GUITAR_JAZZ			0x1B
+	#define IMF_INSTRUMENT_ELECTRIC_GUITAR_CLEAN		0x1C
+	#define IMF_INSTRUMENT_ELECTRIC_GUITAR_MUTED		0x1D
+	#define IMF_INSTRUMENT_OVERDRIVEN_GUITAR			0x1E
+	#define IMF_INSTRUMENT_DISTORTION_GUITAR			0x1F
+	#define IMF_INSTRUMENT_GUITAR_HARMONICS				0x20
+	#define IMF_INSTRUMENT_ACOUSTIC_BASS				0x21
+	#define IMF_INSTRUMENT_ELECTRIC_BASS_FINGER			0x22
+	#define IMF_INSTRUMENT_ELECTRIC_BASS_PICK			0x23
+	#define IMF_INSTRUMENT_FRETLESS_BASS				0x24
+	#define IMF_INSTRUMENT_SLAP_BASS_1					0x25
+	#define IMF_INSTRUMENT_SLAP_BASS_2					0x26
+	#define IMF_INSTRUMENT_SYNTH_BASS_1					0x27
+	#define IMF_INSTRUMENT_SYNTH_BASS_2					0x28
+	#define IMF_INSTRUMENT_VIOLIN						0x29
+	#define IMF_INSTRUMENT_VIOLA						0x2A
+	#define IMF_INSTRUMENT_CELLO						0x2B
+	#define IMF_INSTRUMENT_CONTRABASS					0x2C
+	#define IMF_INSTRUMENT_TREMOLO_STRINGS				0x2D
+	#define IMF_INSTRUMENT_PIZZICATO_STRINGS			0x2E
+	#define IMF_INSTRUMENT_ORCHESTRAL_HARP				0x2F
+	#define IMF_INSTRUMENT_TIMPANI						0x30
+	#define IMF_INSTRUMENT_STRING_ENSEMBLE_1			0x31
+	#define IMF_INSTRUMENT_STRING_ENSEMBLE_2			0x32
+	#define IMF_INSTRUMENT_SYNTHSTRINGS_1				0x33
+	#define IMF_INSTRUMENT_SYNTHSTRINGS_2				0x34
+	#define IMF_INSTRUMENT_CHOIR_AAHS					0x35
+	#define IMF_INSTRUMENT_VOICE_OOHS					0x36
+	#define IMF_INSTRUMENT_SYNTH_VOICE					0x37
+	#define IMF_INSTRUMENT_ORCHESTRA_HIT				0x38
+	#define IMF_INSTRUMENT_TRUMPET						0x39
+	#define IMF_INSTRUMENT_TROMBONE						0x3A
+	#define IMF_INSTRUMENT_TUBA							0x3B
+	#define IMF_INSTRUMENT_MUTED_TRUMPET				0x3C
+	#define IMF_INSTRUMENT_FRENCH_HORN					0x3D
+	#define IMF_INSTRUMENT_BRASS_SECTION				0x3E
+	#define IMF_INSTRUMENT_SYNTHBRASS_1					0x3F
+	#define IMF_INSTRUMENT_SYNTHBRASS_2					0x40
+	#define IMF_INSTRUMENT_SOPRANO_SAX					0x41
+	#define IMF_INSTRUMENT_ALTO_SAX						0x42
+	#define IMF_INSTRUMENT_TENOR_SAX					0x43
+	#define IMF_INSTRUMENT_BARITONE_SAX					0x44
+	#define IMF_INSTRUMENT_OBOE							0x45
+	#define IMF_INSTRUMENT_ENGLISH_HORN					0x46
+	#define IMF_INSTRUMENT_BASSOON						0x47
+	#define IMF_INSTRUMENT_CLARINET						0x48
+	#define IMF_INSTRUMENT_PICCOLO						0x49
+	#define IMF_INSTRUMENT_FLUTE						0x4A
+	#define IMF_INSTRUMENT_RECORDER						0x4B
+	#define IMF_INSTRUMENT_PAN_FLUTE					0x4C
+	#define IMF_INSTRUMENT_BLOWN_BOTTLE					0x4D
+	#define IMF_INSTRUMENT_SHAKUHACHI					0x4E
+	#define IMF_INSTRUMENT_WHISTLE						0x4F
+	#define IMF_INSTRUMENT_OCARINA						0x50
+	#define IMF_INSTRUMENT_LEAD_1_SQUARE				0x51
+	#define IMF_INSTRUMENT_LEAD_2_SAWTOOTH				0x52
+	#define IMF_INSTRUMENT_LEAD_3_CALLIOPE				0x53
+	#define IMF_INSTRUMENT_LEAD_4_CHIFF					0x54
+	#define IMF_INSTRUMENT_LEAD_5_CHARANG				0x55
+	#define IMF_INSTRUMENT_LEAD_6_VOICE					0x56
+	#define IMF_INSTRUMENT_LEAD_7_FIFTHS				0x57
+	#define IMF_INSTRUMENT_LEAD_8_BASS_LEAD				0x58
+	#define IMF_INSTRUMENT_PAD_1_NEW_AGE				0x59
+	#define IMF_INSTRUMENT_PAD_2_WARM					0x5A
+	#define IMF_INSTRUMENT_PAD_3_POLYSYNTH				0x5B
+	#define IMF_INSTRUMENT_PAD_4_CHOIR					0x5C
+	#define IMF_INSTRUMENT_PAD_5_BOWED					0x5D
+	#define IMF_INSTRUMENT_PAD_6_METALLIC				0x5E
+	#define IMF_INSTRUMENT_PAD_7_HALO					0x5F
+	#define IMF_INSTRUMENT_PAD_8_SWEEP					0x60
+	#define IMF_INSTRUMENT_FX_1_RAIN					0x61
+	#define IMF_INSTRUMENT_FX_2_SOUNDTRACK				0x62
+	#define IMF_INSTRUMENT_FX_3_CRYSTAL					0x63
+	#define IMF_INSTRUMENT_FX_4_ATMOSPHERE				0x64
+	#define IMF_INSTRUMENT_FX_5_BRIGHTNESS				0x65
+	#define IMF_INSTRUMENT_FX_6_GOBLINS					0x66
+	#define IMF_INSTRUMENT_FX_7_ECHOES					0x67
+	#define IMF_INSTRUMENT_FX_8_SCI_FI					0x68
+	#define IMF_INSTRUMENT_SITAR						0x69
+	#define IMF_INSTRUMENT_BANJO						0x6A
+	#define IMF_INSTRUMENT_SHAMISEN						0x6B
+	#define IMF_INSTRUMENT_KOTO							0x6C
+	#define IMF_INSTRUMENT_KALIMBA						0x6D
+	#define IMF_INSTRUMENT_BAG_PIPE						0x6E
+	#define IMF_INSTRUMENT_FIDDLE						0x6F
+	#define IMF_INSTRUMENT_SHANAI						0x70
+	#define IMF_INSTRUMENT_TINKLE_BELL					0x71
+	#define IMF_INSTRUMENT_AGOGO						0x72
+	#define IMF_INSTRUMENT_STEEL_DRUMS					0x73
+	#define IMF_INSTRUMENT_WOODBLOCK					0x74
+	#define IMF_INSTRUMENT_TAIKO_DRUM					0x75
+	#define IMF_INSTRUMENT_MELODIC_TOM					0x76
+	#define IMF_INSTRUMENT_SYNTH_DRUM					0x77
+	#define IMF_INSTRUMENT_REVERSE_CYMBAL				0x78
+	#define IMF_INSTRUMENT_GUITAR_FRET_NOISE			0x79
+	#define IMF_INSTRUMENT_BREATH_NOISE					0x7A
+	#define IMF_INSTRUMENT_SEASHORE						0x7B
+	#define IMF_INSTRUMENT_BIRD_TWEET					0x7C
+	#define IMF_INSTRUMENT_TELEPHONE_RING				0x7D
+	#define IMF_INSTRUMENT_HELICOPTER					0x7E
+	#define IMF_INSTRUMENT_APPLAUSE						0x7F
+	#define IMF_INSTRUMENT_GUNSHOT						0x80
+
+	void mr_sound_init();
+
+	void mr_sound_control_channel(mr_channel channel, mr_audio_parameter parameter, mr_audio_value value);
+
+	void mr_sound_program_change_channel(mr_channel _channel, mr_instrument _instrument);
+
+	void mr_sound_note_on_channel(mr_channel channel, mr_note note, mr_amplitude velocity);
+
+	void mr_sound_note_off_channel(mr_channel channel, mr_amplitude velocity);
+
+	MR_PT_CTX(mr_musicplayer, mr_maudio* buffer; mr_maudio* eof; int old_jiffies; int jiffies; mr_boolean done; unsigned char last_opcode; );
+	MR_PT_THREAD_EXT(mr_musicplayer, mr_musicplayer_protothread);
+
+	/*-----------------------------------------------------------------------
 	 --- KEYBOARD & OTHER
 	 -----------------------------------------------------------------------*/
 
@@ -1128,6 +1364,12 @@
 	void mr_wait(unsigned char _seconds);
 
 	void mr_wait_jiffies(unsigned char _jiffies);
+
+	void mr_wait_jiffies_int(int _jiffies);
+
+	unsigned char mr_get_jiffies();
+
+	int mr_get_jiffies_int();
 
 	mr_boolean mr_wait_or_keypress(unsigned char _seconds);
 
@@ -1146,6 +1388,8 @@
 	void mr_sound_change_channel(unsigned char _channel, int _parameter);
 
 	void mr_sound_stop_channel(unsigned char _channel);
+
+	void mr_sound_frequency_channel(mr_channel _channel, mr_frequency _frequency, mr_amplitude _amplitude);
 
 	void mr_start_frame();
 

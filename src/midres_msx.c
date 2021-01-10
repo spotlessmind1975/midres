@@ -42,27 +42,6 @@
 #include "midres.h"
 #include "rawdata.h"
 
-#define PSG_AP          0xa0
-#define PSG_WP          0xa1
-#define PSG_RP          0xa2
-
-#define PSG_R0           0
-#define PSG_R1           1
-#define PSG_R2           2
-#define PSG_R3           3
-#define PSG_R4           4
-#define PSG_R5           5
-#define PSG_R6           6
-#define PSG_R7           7
-#define PSG_R8           8
-#define PSG_R9           9
-#define PSG_R10         10
-#define PSG_R11         11
-#define PSG_R12         12
-#define PSG_R13         13
-#define PSG_R14         14
-#define PSG_R15         15
-
 /****************************************************************************
  ** RESIDENT VARIABLES SECTION
  ****************************************************************************/
@@ -74,6 +53,9 @@
   // The functions defined at this level can only be called up if the current
   // module has been loaded into memory. On the other hand, they can call any 
   // function declared at the resident module level.
+
+#define PSG_R14         14
+#define PSG_R15         15
 
 void mr_init_hd() {
 
@@ -271,90 +253,6 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
     }    
 }
 
-// Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
-    unsigned char value;
-    switch ((_channel & 0x3)) {
-        case 0:
-        case 3:
-            io_put(PSG_AP, PSG_R7);
-            value = io_get(PSG_RP);
-            io_put(PSG_AP, PSG_R7);
-            io_put(PSG_WP, value & 0xfe);
-            break;
-        case 1:
-            io_put(PSG_AP, PSG_R7);
-            value = io_get(PSG_RP);
-            io_put(PSG_AP, PSG_R7);
-            io_put(PSG_WP, value & 0xfd);
-            break;
-        case 2:
-            io_put(PSG_AP, PSG_R7);
-            value = io_get(PSG_RP);
-            io_put(PSG_AP, PSG_R7);
-            io_put(PSG_WP, value & 0xfb);
-        break;
-    }
-}
-
-// Hardware dependent sound library
-void mr_sound_change_hd(unsigned char _channel, int _parameter) {
-    int f = 111861 / _parameter;
-    switch ((_channel & 0x3)) {
-        case 0:
-        case 3:
-            io_put(PSG_AP, PSG_R0);
-            io_put(PSG_WP, f & 0xff);
-            io_put(PSG_AP, PSG_R1);
-            io_put(PSG_WP, (f>>8) & 0x0f);
-            io_put(PSG_AP, PSG_R8);
-            io_put(PSG_WP, 0x0f);
-            break;
-        case 1:
-            io_put(PSG_AP, PSG_R2);
-            io_put(PSG_WP, f & 0xff);
-            io_put(PSG_AP, PSG_R3);
-            io_put(PSG_WP, (f >> 8) & 0x0f);
-            io_put(PSG_AP, PSG_R9);
-            io_put(PSG_WP, 0x0f);
-            break;
-        case 2:
-            io_put(PSG_AP, PSG_R4);
-            io_put(PSG_WP, f & 0xff);
-            io_put(PSG_AP, PSG_R5);
-            io_put(PSG_WP, (f >> 8) & 0x0f);
-            io_put(PSG_AP, PSG_R10);
-            io_put(PSG_WP, 0x0f);
-            break;
-    }
-}
-
-// Hardware dependent sound library
-void mr_sound_stop_hd(unsigned char _channel) {
-    unsigned char value;
-    switch ((_channel & 0x3)) {
-    case 0:
-    case 3:
-        io_put(PSG_AP, PSG_R7);
-        value = io_get(PSG_RP);
-        io_put(PSG_AP, PSG_R7);
-        io_put(PSG_WP, ( value & 0xfe ) | 0x01);
-        break;
-    case 1:
-        io_put(PSG_AP, PSG_R7);
-        value = io_get(PSG_RP);
-        io_put(PSG_AP, PSG_R7);
-        io_put(PSG_WP, (value & 0xfd) | 0x02);
-        break;
-    case 2:
-        io_put(PSG_AP, PSG_R7);
-        value = io_get(PSG_RP);
-        io_put(PSG_AP, PSG_R7);
-        io_put(PSG_WP, (value & 0xfb) | 0x04);
-        break;
-    }
-}
-
 unsigned char* mr_translate_file_hd(mr_file _file) {
 
 }
@@ -371,6 +269,14 @@ unsigned char mr_joy_hd(unsigned char _number) {
     r14 = io_get(PSG_R14);
 
     return ~r14;
+}
+
+int mr_get_jiffies_int_hd() {
+    return *((unsigned int*)0xFC9E);
+}
+
+unsigned char mr_get_jiffies_hd() {
+    return *((unsigned int*)0xFC9E);
 }
 
 unsigned int storedJiffy = 0;

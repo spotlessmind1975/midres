@@ -37,25 +37,30 @@
 
 #ifdef __C64__
 #include "midres_hw_cbm.h"
+#include "midres_hw_sid.h"
 #include "midres_hw_c64.h"
 #elif __VIC20__
-#ifdef __24K__
 #include "midres_hw_cbm.h"
+#include "midres_hw_vic.h"
+#ifdef __24K__
 #include "midres_hw_vic20_32k.h"
 #else
-#include "midres_hw_cbm.h"
 #include "midres_hw_vic20.h"
 #endif
 #elif __PLUS4__
 #include "midres_hw_cbm.h"
+#include "midres_hw_ted.h"
 #include "midres_hw_plus4.h"
 #elif __C16__
 #include "midres_hw_cbm.h"
+#include "midres_hw_ted.h"
 #include "midres_hw_c16.h"
 #elif __C128__
 #include "midres_hw_cbm.h"
+#include "midres_hw_sid.h"
 #include "midres_hw_c128_40.h"
 #elif __ATARI__
+#include "midres_hw_pokey.h"
 #ifdef __LORES__
 #include "midres_hw_atari_lores.h"
 #else
@@ -70,6 +75,7 @@
 #elif __MSX__
 #include "midres_hw_io.h"
 #include "midres_hw_vdp.h"
+#include "midres_hw_ay8910.h"
 #include "midres_hw_msx.h"
 #elif __MTX__
 #include "midres_hw_io.h"
@@ -84,6 +90,7 @@
 #elif __LM80C__
 #include "midres_hw_io.h"
 #include "midres_hw_vdp.h"
+#include "midres_hw_ay8910.h"
 #include "midres_hw_lm80c.h"
 #else
 #include "midres_hw_vanilla.h"
@@ -138,6 +145,12 @@ void mr_wait_hd(unsigned char _seconds);
 // Hardware dependent jiffies
 void mr_wait_jiffies_hd(unsigned char _jiffies);
 
+// Hardware dependent jiffies
+unsigned char mr_get_jiffies_hd();
+
+// Hardware dependent jiffies
+int mr_get_jiffies_int_hd();
+
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _channel, unsigned char _number);
 
@@ -160,6 +173,12 @@ unsigned char* mr_translate_file_user(unsigned int _file);
 void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _dest, unsigned int _size);
 
 unsigned char mr_joy_hd(unsigned char _number);
+
+void mr_sound_control_channel_hd(unsigned char _channel, unsigned char _parameter, unsigned char _value);
+
+void mr_sound_program_change_channel_hd(unsigned char _channel, unsigned char _instrument);
+
+void mr_sound_frequency_channel_hd(unsigned char _channel, unsigned int _frequency, unsigned char _amplitude);
 
 #ifndef _MIDRES_TILE_PROCESSING_H_
 

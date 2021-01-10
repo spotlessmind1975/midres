@@ -171,56 +171,22 @@ void mr_wait_hd(unsigned char _seconds) {
 
 }
 
+int mr_get_jiffies_int_hd() {
+    return (*((unsigned char*)0xa4) << 8) + *((unsigned char*)0xa5);
+}
+
+unsigned char mr_get_jiffies_hd() {
+    return *((unsigned char*)0xa5);
+}
+
 void mr_wait_jiffies_hd(unsigned char _jiffies) {
 
-    unsigned char now = *((unsigned char*)0xa5);
+    unsigned int now = ((*((unsigned char*)0xa4) << 8) + *((unsigned char*)0xa5));
 
-    while ((*((unsigned char*)0xa5) - now) < _jiffies) {
+    while ((((*((unsigned char*)0xa4) << 8) + *((unsigned char*)0xa5)) - now) < _jiffies) {
         ; // nop!
     }
 
-}
-
-// Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
-
-    //@todo: support _number under plus4 for mr_sound_start_hd
-    _number = 0;
-
-    switch ((_channel & 0x01)) {
-        case 0:
-            *((unsigned char*)0xff0e) = 769 & 0xff;
-            *((unsigned char*)0xff12) = ((int)((unsigned char*)0xff12) & ~0x03) | (((769 & 0x300) >> 8) & 0x03);
-            break;
-        case 1:
-            *((unsigned char*)0xff0f) = 769 & 0xff;
-            *((unsigned char*)0xff10) = ((int)((unsigned char*)0xff10) & ~0x03) | (((769 & 0x300) >> 8) & 0x03);
-    }
-
-    *((unsigned char*)0xff11) = 0x14;
-
-}
-
-// Hardware dependent sound library
-void mr_sound_change_hd(unsigned char _channel, int _parameter) {
-
-    int v = 1024 - (111841 / _parameter);
-
-    switch ((_channel & 0x01)) {
-        case 0:
-            *((unsigned char*)0xff0e) = v & 0xff;
-            *((unsigned char*)0xff12) = ((int)((unsigned char*)0xff12) & ~0x03) | (((v & 0x300) >> 8) & 0x03);
-            break;
-        case 1:
-            *((unsigned char*)0xff0f) = v & 0xff;
-            *((unsigned char*)0xff10) = ((int)((unsigned char*)0xff10) & ~0x03) | (((v & 0x300) >> 8) & 0x03);
-    }
-
-}
-
-// Hardware dependent sound library
-void mr_sound_stop_hd(unsigned char _channel) {
-    *((unsigned char*)0xff11) = *((unsigned char*)0xff11) && ~(1 << (4 + (_channel & 0x01)));
 }
 
 void mr_set_background_color_hd(unsigned char _color) {

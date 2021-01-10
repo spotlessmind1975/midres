@@ -41,6 +41,21 @@
 
 #include "rawdata.h"
 
+unsigned int MIDRES_SOUND_FREQUENCIES_GB[] = {
+    65,		65,		65,		65,		65,		65,		65,		65,		65,		65,
+    65,		65,		65,		65,		65,		65,		65,		65,		65,		65,
+    65,		65,		65,		65,     65,     65,     65,     65,     65,     65,
+    65,     65,     65,     65,     65,     65,     65,     65,     65,     65,
+    65,     65,     66,     66,     66,     66,     66,     66,     66,     66,
+    67,     67,     67,     67,     67,     67,     68,     68,     68,     68,
+    69,     69,     69,     70,     70,     70,     71,     71,     72,     72,
+    73,     73,     74,     75,     75,     76,     77,     78,     79,     80,
+    82,     83,     84,     86,     88,     90,     92,     94,     97,     100,
+    104,    108,    112,    117,    124,    131,    140,    150,    163,    180,
+    201,    231,    273,    339,    455,    715,    1809,   2000,   2047,   2047,
+    2047,   2047,   2047,   2047,   2047,   2047,   2047,   2047,   2047    
+};
+
 void MR_DI() {
 #asm
 di
@@ -165,6 +180,14 @@ void mr_wait_hd(unsigned char _seconds) {
     sleep(_seconds);
 }
 
+int mr_get_jiffies_int_hd() {
+    return *((unsigned char*)0xff04);
+}
+
+unsigned char mr_get_jiffies_hd() {
+    return *((unsigned char*)0xff04);
+}
+
 void mr_wait_jiffies_hd(unsigned char _jiffies) {
     unsigned char actualJiffies = *((unsigned char*)0xff04);
     unsigned char c;
@@ -176,17 +199,91 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
 // Hardware dependent sound library
 void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
 
+    //@todo: support _number under plus4 for mr_sound_start_hd
+    _number = 0;
+
+    switch ((_channel & 0x01)) {
+    case 0:
+        *((unsigned char*)0xff10) = 0x10;
+        *((unsigned char*)0xff11) = 0x9f;
+        *((unsigned char*)0xff12) = 0xf1;
+        *((unsigned char*)0xff13) = 0x00;
+        *((unsigned char*)0xff14) = 0x8f;
+        break;
+    case 1:
+        *((unsigned char*)0xff16) = 0x10;
+        *((unsigned char*)0xff17) = 0x9f;
+        *((unsigned char*)0xff18) = 0xff;
+        *((unsigned char*)0xff19) = 0x8f;
+        break;
+    }
+
 }
 
 // Hardware dependent sound library
 void mr_sound_change_hd(unsigned char _channel, int _parameter) {
+
+    unsigned int freq = MIDRES_SOUND_FREQUENCIES_GB[_parameter];
+
+    switch ((_channel & 0x01)) {
+    case 0:
+        *((unsigned char*)0xff10) = 0x10;
+        *((unsigned char*)0xff11) = 0x9f;
+        *((unsigned char*)0xff12) = 0xf1;
+        *((unsigned char*)0xff13) = freq & 0xff;
+        *((unsigned char*)0xff14) = (*((unsigned char*)0xff14) & ~0x03 ) | ( ( freq >> 8 ) & 0x03 );
+        break;
+    case 1:
+        *((unsigned char*)0xff16) = 0x10;
+        *((unsigned char*)0xff17) = 0x9f;
+        *((unsigned char*)0xff18) = 0xff;
+        *((unsigned char*)0xff19) = (*((unsigned char*)0xff19) & ~0x03) | ((freq >> 8) & 0x03);
+        break;
+    }
 
 }
 
 // Hardware dependent sound library
 void mr_sound_stop_hd(unsigned char _channel) {
 
+    switch ((_channel & 0x01)) {
+    case 0:
+        *((unsigned char*)0xff12) = 0x00;
+        break;
+    case 1:
+        *((unsigned char*)0xff17) = 0x00;
+        break;
+    }
+
 }
+
+
+void mr_sound_program_change_channel_hd(unsigned char _channel, unsigned char _instrument) {
+
+}
+
+#include <stdio.h>
+
+void mr_sound_frequency_channel_hd(unsigned char _channel, unsigned int _frequency, unsigned char _amplitude) {
+
+    switch ((_channel & 0x01)) {
+    case 0:
+        *((unsigned char*)0xff10) = 0x10;
+        *((unsigned char*)0xff11) = 0x9f;
+        *((unsigned char*)0xff12) = 0xf1;
+        *((unsigned char*)0xff13) = freq & 0xff;
+        *((unsigned char*)0xff14) = 0x80 | ((freq >> 8) & 0x03);
+        break;
+    case 1:
+        *((unsigned char*)0xff16) = 0x10;
+        *((unsigned char*)0xff17) = 0x9f;
+        *((unsigned char*)0xff18) = 0xff;
+        *((unsigned char*)0xff19) = 0x80 | ((freq >> 8) & 0x03);
+        break;
+    }
+
+}
+
 
 void mr_set_background_color_hd(unsigned char _color) {
 

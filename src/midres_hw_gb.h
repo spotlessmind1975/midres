@@ -168,10 +168,14 @@ void MR_EI();
 #define MIDRES_STANDALONE_KEYBOARD			1
 // #define MIDRES_STANDALONE_FILE				1
 #define MIDRES_EMBEDDED_FILES				1
+#define MIDRES_STANDALONE_MUSIC				1
 
 #include "midres_tile_hd.h"
 
 #include <time.h>
 clock_t clock();
+
+extern unsigned int MIDRES_SOUND_FREQUENCIES_GB[];
+#define MIDRES_SOUND_FREQUENCIES MIDRES_SOUND_FREQUENCIES_GB
 
 #endif

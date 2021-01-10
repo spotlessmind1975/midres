@@ -228,67 +228,26 @@ unsigned char mr_get_key_pressed_hd() {
 
 void mr_wait_hd(unsigned char _seconds) {
 
-    unsigned char now = *((unsigned char*)0xa1);
+    unsigned int now = (*((unsigned char*)0xa1) << 8) + *((unsigned char*)0xa2);
 
-    while ((*((unsigned char*)0xa1) - now) < _seconds) {
+    while ((((*((unsigned char*)0xa1) << 8) + *((unsigned char*)0xa2)) - now) < (_seconds * 60)) {
         ; // nop!
     }
-
 }
 
 void mr_wait_jiffies_hd(unsigned char _jiffies) {
-    unsigned char now = *((unsigned char*)0xa2);
-
-    while ((*((unsigned char*)0xa2) - now) < _jiffies) {
+    unsigned int now = (*((unsigned char*)0xa1) << 8) + *((unsigned char*)0xa2);
+    while ((((*((unsigned char*)0xa1) << 8) + *((unsigned char*)0xa2)) - now) < _jiffies) {
         ; // nop!
     }
-
 }
 
-// Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
-
-    _channel = 0;
-    _number = 0;
-
-    *((unsigned char*)0x900e) = 10;
-
+int mr_get_jiffies_int_hd() {
+    return (*((unsigned char*)0xa1) << 8) + *((unsigned char*)0xa2);
 }
 
-// Hardware dependent sound library
-void mr_sound_change_hd(unsigned char _channel, int _parameter) {
-
-    switch ((_channel & 0x03)) {
-        case 0: case 3:
-            *((unsigned char*)0x900a) = 128 + (_parameter >> 9);
-            break;
-        case 1:
-            *((unsigned char*)0x900b) = 128 + (_parameter >> 9);
-            break;
-        case 2:
-            *((unsigned char*)0x900c) = 128 + (_parameter >> 9);
-            break;
-    }
-
-}
-
-// Hardware dependent sound library
-void mr_sound_stop_hd(unsigned char _channel) {
-
-    // *((unsigned char*)0x900e) = 0;
-
-    switch ((_channel & 0x03)) {
-    case 0: case 3:
-        *((unsigned char*)0x900a) = 0;
-        break;
-    case 1:
-        *((unsigned char*)0x900b) = 0;
-        break;
-    case 2:
-        *((unsigned char*)0x900c) = 0;
-        break;
-    }
-
+unsigned char mr_get_jiffies_hd() {
+    return *((unsigned char*)0xa2);
 }
 
 void mr_set_background_color_hd(unsigned char _color) {
