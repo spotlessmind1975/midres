@@ -72,6 +72,26 @@
             [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
         ],
 
+        'vic2024' => [
+            [ 'loader' => 'loader2024.prg'],
+            [ 'destination' => 'image2001.mpic', 'source' => '$(DATADIR)/image2001.mpic' ],
+            [ 'destination' => 'image2002.mpic', 'source' => '$(DATADIR)/image2002.mpic' ],
+            [ 'destination' => 'image2003.mpic', 'source' => '$(DATADIR)/image2003.mpic' ],
+            [ 'destination' => 'image2004.mpic', 'source' => '$(DATADIR)/image2004.mpic' ],
+            [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
+            [ 'destination' => 'aatiles.bin', 'source' => '$(DATADIR)/aatiles20.bin' ],
+            [ 'destination' => 'aaintro.mpic', 'source' => '$(DATADIR)/aaintro20.mpic' ],
+            [ 'destination' => 'mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
+            [ 'destination' => 'testcard.bin', 'source' => '$(DATADIR)/testcard.bin' ],
+            [ 'destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ],
+            [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
+            [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
+            [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
+            [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
+        ],
+        
+
         'c16' => [
             [ 'destination' => 'slideshow', 'source' => '$(DATADIR)/slideshow16.dat' ],
             [ 'destination' => 'image1601.mpic', 'source' => '$(DATADIR)/image1601.mpic' ],
@@ -286,7 +306,6 @@
     ];
 
     $resources['c16'] = $resources['plus4'];
-    $resources['vic2024'] = $resources['vic20'];
     $resources['c128'] = $resources['c64'];
     $resources['atarilo'] = $resources['atari'];
     $resources['msxc'] = $resources['coleco'];
