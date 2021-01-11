@@ -389,9 +389,9 @@ $(EXEDIR)/midres.<?=$demo;?>.<?=$platform;?>: midres.<?=$demo;?>.embedded.<?=$pl
             ];
 
             if ( $embedded ) {
-                emit_commands_for_create_1541_disk($platform65, "midres", [ $executable ]);
+                emit_commands_for_create_1541_disk($platform, "midres", [ $executable ]);
             } else {
-                emit_commands_for_create_1541_disk($platform65, "midres", array_merge([ $executable ], $resources));
+                emit_commands_for_create_1541_disk($platform, "midres", array_merge([ $executable ], $resources));
             }
             break;
         case 'vic2024':
@@ -403,13 +403,13 @@ $(EXEDIR)/midres.<?=$demo;?>.<?=$platform;?>: midres.<?=$demo;?>.embedded.<?=$pl
             ];
             $executable = [
                 "destination" => "midres-single",
-                "source" => "$(EXEDIR)/midres.".$platform65,
+                "source" => "$(EXEDIR)/midres.".$platform,
             ];
 
             if ( $embedded ) {
-                emit_commands_for_create_1541_disk($platform65, "midres", [ $loader, $executable ]);
+                emit_commands_for_create_1541_disk($platform, "midres", [ $loader, $executable ]);
             } else {
-                emit_commands_for_create_1541_disk($platform65, "midres", array_merge([ $loader, $executable ], $resources));
+                emit_commands_for_create_1541_disk($platform, "midres", array_merge([ $loader, $executable ], $resources));
             }
             break;
             break;

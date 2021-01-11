@@ -308,7 +308,7 @@ $(LIBDIR)/midres.atari.lib:	$(LIB_INCLUDES) $(subst PLATFORM,atari,$(LIB_OBJS)) 
 
 .PHONY: midres.MUSIC.embedded.atari midres.MUSIC.atari
 midres.MUSIC.embedded.atari:
-	$(FILE2INCLUDE) -i $(DATADIR)/slideshowa.dat -n slideshow -i $(DATADIR)/imagea01.pic -n imagea01.mpic -i $(DATADIR)/imagea02.pic -n imagea02.mpic -i $(DATADIR)/imagea03.pic -n imagea03.mpic -i $(DATADIR)/imagea04.pic -n imagea04.mpic -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/slideshowa.dat -n slideshow -i $(DATADIR)/imagea01.pic -n imagea01.mpic -i $(DATADIR)/imagea02.pic -n imagea02.mpic -i $(DATADIR)/imagea03.pic -n imagea03.mpic -i $(DATADIR)/imagea04.pic -n imagea04.mpic -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/atari/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl  -o $@ $(subst obj/atari/,src/,$(@:.o=.c))
@@ -330,7 +330,6 @@ $(EXEDIR)/midres.MUSIC.atari: midres.MUSIC.embedded.atari $(subst PLATFORM,atari
 	$(call COPYFILES,$(DATADIR)/zdjtiles.bin,$(EXEDIR)/atr/zdjtiles.bin)
 	$(call COPYFILES,$(DATADIR)/zeltiles.bin,$(EXEDIR)/atr/zeltiles.bin)
 	$(call COPYFILES,$(DATADIR)/toccatina.imf,$(EXEDIR)/atr/toccatina.imf)
-	$(call COPYFILES,$(DATADIR)/alice.imf,$(EXEDIR)/atr/alice.imf)
 	$(call COPYFILES,$(DATADIR)/island.imf,$(EXEDIR)/atr/island.imf)
 	$(call COPYFILES,$(DATADIR)/tetris.imf,$(EXEDIR)/atr/tetris.imf)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/midres.atari.atr $(EXEDIR)/atr
@@ -422,6 +421,7 @@ $(EXEDIR)/midres.MUSIC.c16: midres.MUSIC.embedded.c16 $(subst PLATFORM,c16,$(OBJ
 	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.c16.map -o $(EXEDIR)/midres.c16 $(subst PLATFORM,c16,$(OBJS)) $(LIBDIR)/midres.c16.lib
 	$(call RMFILES,$(EXEDIR)/midres.c16.d64)
 	$(CC1541) -f midres-single -w $(EXEDIR)/midres.c16 $(EXEDIR)/midres.c16.d64 
+	$(CC1541) -f  -w  $(EXEDIR)/midres.c16.d64 
 	$(CC1541) -f slideshow -w $(DATADIR)/slideshow16.dat $(EXEDIR)/midres.c16.d64 
 	$(CC1541) -f image1601.mpic -w $(DATADIR)/image1601.mpic $(EXEDIR)/midres.c16.d64 
 	$(CC1541) -f image1602.mpic -w $(DATADIR)/image1602.mpic $(EXEDIR)/midres.c16.d64 
@@ -568,7 +568,7 @@ lib/midres.lm80c.lib:
 
 .PHONY: midres.MUSIC.embedded.lm80c midres.MUSIC.lm80c
 midres.MUSIC.embedded.lm80c:
-	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +lm80c $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/lm80c/rawdata.o src/rawdata.c
 
 obj/lm80c/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -680,8 +680,9 @@ obj/plus4/%.o:	$(SOURCES)
 $(EXEDIR)/midres.MUSIC.plus4: midres.MUSIC.embedded.plus4 $(subst PLATFORM,plus4,$(OBJS))
 	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.plus4.map -o $(EXEDIR)/midres.plus4 $(subst PLATFORM,plus4,$(OBJS)) $(LIBDIR)/midres.plus4.lib
 	$(call RMFILES,$(EXEDIR)/midres.plus4.d64)
-	$(CC1541) -f loader -w $(DATADIR)/ $(EXEDIR)/midres.plus4.d64 
+	$(CC1541) -f loader -w $(DATADIR)/loader4.prg $(EXEDIR)/midres.plus4.d64 
 	$(CC1541) -f midres-single -w $(EXEDIR)/midres.plus4 $(EXEDIR)/midres.plus4.d64 
+	$(CC1541) -f slideshow -w $(DATADIR)/slideshow16.dat $(EXEDIR)/midres.plus4.d64 
 	$(CC1541) -f image1601.mpic -w $(DATADIR)/image1601.mpic $(EXEDIR)/midres.plus4.d64 
 	$(CC1541) -f image1602.mpic -w $(DATADIR)/image1602.mpic $(EXEDIR)/midres.plus4.d64 
 	$(CC1541) -f image1603.mpic -w $(DATADIR)/image1603.mpic $(EXEDIR)/midres.plus4.d64 
@@ -807,31 +808,31 @@ $(LIBDIR)/midres.vic2024.lib:	$(LIB_INCLUDES) $(subst PLATFORM,vic2024,$(LIB_OBJ
 
 .PHONY: midres.MUSIC.embedded.vic2024 midres.MUSIC.vic2024
 midres.MUSIC.embedded.vic2024:
-	$(FILE2INCLUDE) -i $(DATADIR)/slideshow20.dat -n slideshow -i $(DATADIR)/image2001.mpic -n image2001.mpic -i $(DATADIR)/image2002.mpic -n image2002.mpic -i $(DATADIR)/image2003.mpic -n image2003.mpic -i $(DATADIR)/image2004.mpic -n image2004.mpic -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aatiles20.bin -n aatiles.bin -i $(DATADIR)/aaintro20.mpic -n aaintro.mpic -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/image2001.mpic -n image2001.mpic -i $(DATADIR)/image2002.mpic -n image2002.mpic -i $(DATADIR)/image2003.mpic -n image2003.mpic -i $(DATADIR)/image2004.mpic -n image2004.mpic -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aatiles20.bin -n aatiles.bin -i $(DATADIR)/aaintro20.mpic -n aaintro.mpic -i $(DATADIR)/tutorial_mctile.bin -n mctile.bin -i $(DATADIR)/testcard.bin -n testcard.bin -i $(DATADIR)/zdjtiles.bin -n zdjtiles.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/vic2024/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__CBM__ -o $@ $(subst obj/vic2024/,src/,$(@:.o=.c))
 
 $(EXEDIR)/midres.MUSIC.vic2024: midres.MUSIC.embedded.vic2024 $(subst PLATFORM,vic2024,$(OBJS))
 	$(CC) -Ln demovic2024.lbl -t vic20 -C cfg/vic2024.cfg  $(LDFLAGS) -m $(EXEDIR)/midres.vic2024.map -o $(EXEDIR)/midres.vic2024 $(subst PLATFORM,vic2024,$(OBJS)) $(LIBDIR)/midres.vic2024.lib
-	$(call RMFILES,$(EXEDIR)/midres.vic20.d64)
-	$(CC1541) -f loader -w $(DATADIR)/ $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f midres-single -w $(EXEDIR)/midres.vic20 $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f image2001.mpic -w $(DATADIR)/image2001.mpic $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f toccatina.imf -w $(DATADIR)/toccatina.imf $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f alice.imf -w $(DATADIR)/alice.imf $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f island.imf -w $(DATADIR)/island.imf $(EXEDIR)/midres.vic20.d64 
-	$(CC1541) -f tetris.imf -w $(DATADIR)/tetris.imf $(EXEDIR)/midres.vic20.d64 
+	$(call RMFILES,$(EXEDIR)/midres.vic2024.d64)
+	$(CC1541) -f loader -w $(DATADIR)/loader2024.prg $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f midres-single -w $(EXEDIR)/midres.vic2024 $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f image2001.mpic -w $(DATADIR)/image2001.mpic $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f image2002.mpic -w $(DATADIR)/image2002.mpic $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f image2003.mpic -w $(DATADIR)/image2003.mpic $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f image2004.mpic -w $(DATADIR)/image2004.mpic $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f tiles.bin -w $(DATADIR)/tiles.bin $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f aatiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f aaintro.mpic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f mctile.bin -w $(DATADIR)/tutorial_mctile.bin $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f testcard.bin -w $(DATADIR)/testcard.bin $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f zdjtiles.bin -w $(DATADIR)/zdjtiles.bin $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f zeltiles.bin -w $(DATADIR)/zeltiles.bin $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f toccatina.imf -w $(DATADIR)/toccatina.imf $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f alice.imf -w $(DATADIR)/alice.imf $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f island.imf -w $(DATADIR)/island.imf $(EXEDIR)/midres.vic2024.d64 
+	$(CC1541) -f tetris.imf -w $(DATADIR)/tetris.imf $(EXEDIR)/midres.vic2024.d64 
 
 
 # -------------------------------------------------------------------
