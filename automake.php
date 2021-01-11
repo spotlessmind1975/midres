@@ -112,6 +112,7 @@
         ],
 
         'plus4' => [
+            [ 'loader' => 'loader4.prg'],
             [ 'destination' => 'slideshow', 'source' => '$(DATADIR)/slideshow16.dat' ],
             [ 'destination' => 'image1601.mpic', 'source' => '$(DATADIR)/image1601.mpic' ],
             [ 'destination' => 'image1602.mpic', 'source' => '$(DATADIR)/image1602.mpic' ],
