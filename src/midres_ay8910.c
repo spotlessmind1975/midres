@@ -209,7 +209,7 @@ void mr_sound_frequency_channel_hd(unsigned char _channel, unsigned int _frequen
         io_put(PSG_AP, PSG_R1);
         io_put(PSG_WP, (_frequency >> 8) & 0x0f);
         io_put(PSG_AP, PSG_R8);
-        io_put(PSG_WP, 0x08);
+        io_put(PSG_WP, 0x0e);
         break;
     case 1:
         io_put(PSG_AP, PSG_R7);
@@ -225,7 +225,7 @@ void mr_sound_frequency_channel_hd(unsigned char _channel, unsigned int _frequen
         io_put(PSG_AP, PSG_R3);
         io_put(PSG_WP, (_frequency >> 8) & 0x0f);
         io_put(PSG_AP, PSG_R9);
-        io_put(PSG_WP, 0x08);
+        io_put(PSG_WP, 0x0e);
         break;
     case 2:
         io_put(PSG_AP, PSG_R7);
@@ -241,7 +241,7 @@ void mr_sound_frequency_channel_hd(unsigned char _channel, unsigned int _frequen
         io_put(PSG_AP, PSG_R5);
         io_put(PSG_WP, (_frequency >> 8) & 0x0f);
         io_put(PSG_AP, PSG_R10);
-        io_put(PSG_WP, 0x08);
+        io_put(PSG_WP, 0x0e);
         break;
     }
 
