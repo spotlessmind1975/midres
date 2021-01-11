@@ -144,7 +144,7 @@
             [ 'destination' => 'zdjtiles.bin', 'source' => '$(DATADIR)/zdjtiles.bin' ],
             [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
             [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
-            [ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],
+            /*[ 'destination' => 'alice.imf', 'source' => '$(DATADIR)/alice.imf' ],*/
             [ 'destination' => 'island.imf', 'source' => '$(DATADIR)/island.imf' ],
             [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
         ],
@@ -314,7 +314,7 @@
     $resources['mtx500'] = $resources['coleco'];
     $resources['atmos'] = $resources['atari'];
     $resources['gb'] = $resources['coleco'];
-    $resources['lm80c'] = $resources['coleco'];
+    $resources['lm80c'] = $resources['msx'];
 
     $resources['airattack']['c16'] = $resources['airattack']['plus4'];
     $resources['airattack']['vic20'] = $resources['airattack']['vic2024'];
