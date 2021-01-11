@@ -71,6 +71,12 @@ void demo_music() {
 
 	mr_init();
 
+	MR_RENDERED_MIXELS[0] = 32;
+
+	mr_start_frame();
+	mr_clearv();
+	mr_end_frame(0);
+
 	mr_set_border_color(MR_COLOR_WHITE);
 	mr_set_background_color(MR_COLOR_WHITE);
 
@@ -91,6 +97,7 @@ void demo_music() {
 		}
 	}
 
+	mr_set_border_color(MR_COLOR_BLACK);
 	mr_set_background_color(MR_COLOR_BLACK);
 
 	while(1) { }
