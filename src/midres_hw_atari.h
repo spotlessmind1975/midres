@@ -188,7 +188,7 @@ extern mr_mixel* screenRam;
 
 #define MR_SM(_screen)						((mr_mixel*)(screenRam)+(_screen*0))
 #define MR_CM(_screen)						((mr_color*)(screenRam+0x400)+(_screen*0))
-#define MR_AM(_screen)						((mr_mixel*)((0x0400*(_screen))))
+#define MR_AM(_screen)						((mr_mixel*)((0x8000*(_screen))))
 #define MR_TM(_tileset)					((mr_mixel*)((0x0400*(_tileset))))
 
 #define MR_WRITE_TILE_LUMINANCE(_screen, _offset, _tile) \
