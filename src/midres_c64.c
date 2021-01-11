@@ -98,7 +98,7 @@ void mr_init_base_hd() {
         *(dst + i) = *(src + i);
     }
 
-    //mr_sid_init();
+    mr_sid_init();
 
 }
 
