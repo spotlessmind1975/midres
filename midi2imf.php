@@ -103,6 +103,9 @@
     // Transpose program change commands?
     $transposeProgramChangeCommands = false;
 
+    // Forced tempo (ignoring the one into the score)
+    $forcedTempo = -1;
+
     // Count the jiffies needed for delays
     $jiffies = 0;
 
@@ -147,6 +150,7 @@
         echo "               By default, like the input with the .imf extension.\n";
         echo " -P            transpose the 'program change' command(s)\n";
         echo " -s <b>        limit output to <b> bytes \n";
+        echo " -t <t>        set tempo to <t>\n";
         echo " -v            enable MIDI decode verbosity\n";
         echo "\n";
         exit(0);
@@ -245,6 +249,17 @@
                     show_usage_and_exit();
                 }
                 $maximumOutputSize = (int)$argv[$i];
+                break;
+
+            // -t <t>        set tempo to <t>
+            case 't':
+                ++$i;
+                if ( !isset($argv[$i]) || !is_numeric($argv[$i]) ) {
+                    echo "Missing tempo (<t>) for option -t.\n";
+                    show_usage_and_exit();
+                }
+                $forcedTempo = (int)$argv[$i];
+                $tempo = $forcedTempo;
                 break;
 
             // -v            enable MIDI decode verbosity
@@ -376,7 +391,7 @@
 
             // We intercept the time change to take it into account 
             // in terms of delay(s).
-            } else if ($chunk instanceof Event\SetTempoEvent ) {
+            } else if ($chunk instanceof Event\SetTempoEvent && $forcedTempo == -1 ) {
 
                 list($a, $b, $c) = $chunk->getData();
 
