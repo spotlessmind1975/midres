@@ -1112,7 +1112,7 @@ $(EXEDIR)/joycheck.c16: joycheck.embedded.c16 $(subst PLATFORM,joycheck.c16,$(OB
 
 .PHONY: totto.embedded.c16
 totto.embedded.c16:
-	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal116.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal216.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal316.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal416.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal116.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal216.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal316.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal416.mpic -n ttfinal4.mpic -i $(DATADIR)/totto.imf -n totto.imf -i $(DATADIR)/totto2.imf -n totto2.imf -i $(DATADIR)/totto3.imf -n totto3.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.c16/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.c16/,src/,$(@:.o=.c))
@@ -1128,6 +1128,9 @@ $(EXEDIR)/totto.c16: totto.embedded.c16 $(subst PLATFORM,totto.c16,$(OBJS))
 	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal216.mpic $(EXEDIR)/totto.c16.d64 
 	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal316.mpic $(EXEDIR)/totto.c16.d64 
 	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal416.mpic $(EXEDIR)/totto.c16.d64 
+	$(CC1541) -f totto.imf -w $(DATADIR)/totto.imf $(EXEDIR)/totto.c16.d64 
+	$(CC1541) -f totto2.imf -w $(DATADIR)/totto2.imf $(EXEDIR)/totto.c16.d64 
+	$(CC1541) -f totto3.imf -w $(DATADIR)/totto3.imf $(EXEDIR)/totto.c16.d64 
 
 
 # -------------------------------------------------------------------
@@ -1855,7 +1858,7 @@ $(EXEDIR)/joycheck.plus4: joycheck.embedded.plus4 $(subst PLATFORM,joycheck.plus
 
 .PHONY: totto.embedded.plus4
 totto.embedded.plus4:
-	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal116.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal216.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal316.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal416.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal116.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal216.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal316.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal416.mpic -n ttfinal4.mpic -i $(DATADIR)/totto.imf -n totto.imf -i $(DATADIR)/totto2.imf -n totto2.imf -i $(DATADIR)/totto3.imf -n totto3.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.plus4/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.plus4/,src/,$(@:.o=.c))
@@ -1871,6 +1874,9 @@ $(EXEDIR)/totto.plus4: totto.embedded.plus4 $(subst PLATFORM,totto.plus4,$(OBJS)
 	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal216.mpic $(EXEDIR)/totto.plus4.d64 
 	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal316.mpic $(EXEDIR)/totto.plus4.d64 
 	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal416.mpic $(EXEDIR)/totto.plus4.d64 
+	$(CC1541) -f totto.imf -w $(DATADIR)/totto.imf $(EXEDIR)/totto.plus4.d64 
+	$(CC1541) -f totto2.imf -w $(DATADIR)/totto2.imf $(EXEDIR)/totto.plus4.d64 
+	$(CC1541) -f totto3.imf -w $(DATADIR)/totto3.imf $(EXEDIR)/totto.plus4.d64 
 
 # find_main_module(airattack)
 # -> src/game_air_attack.c
