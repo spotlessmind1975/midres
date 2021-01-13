@@ -64,6 +64,16 @@ void _mr_tile_moveto_horizontal_monocolor(mr_mixel* _screen, mr_color* _colormap
             MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_colormap, _color));
         }
     }
+
+    if ((_x + 16) >= 0 && ((_x >> 3) + 2) < MR_SCREEN_WIDTH) {
+        ++_screen;
+        t = _tile + 0x08;
+        MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_screen, t));
+        if (_colormap) {
+            ++_colormap;
+            MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(_colormap, _color));
+        }
+    }
     
 }
 #endif
