@@ -267,6 +267,10 @@ void mr_start_frame_hd() {
 
 }
 
+int mr_get_start_frame_int_hd() {
+    return storedJiffy;
+}
+
 void mr_end_frame_hd(unsigned char _jiffies) {
 
     while ((*((unsigned char*)0xa2) - storedJiffy) < _jiffies) {

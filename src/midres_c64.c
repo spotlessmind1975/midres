@@ -222,19 +222,24 @@ void mr_set_border_color_hd(unsigned char _color) {
     SET_BORDER_COLOR(_color);
 }
 
-unsigned char storedJiffy = 0;
+int storedJiffy = 0;
 
 void mr_start_frame_hd() {
 
-    storedJiffy = *((unsigned char*)0xa2);
+    storedJiffy = (*((unsigned char*)0xa1) << 8) + *((unsigned char*)0xa2);
 
+}
+
+int mr_get_start_frame_int_hd() {
+    return storedJiffy;
 }
 
 void mr_end_frame_hd(unsigned char _jiffies) {
 
-    while ((*((unsigned char*)0xa2) - storedJiffy) < _jiffies) {
+    while ((((*((unsigned char*)0xa1) << 8) + *((unsigned char*)0xa2)) - storedJiffy) < _jiffies) {
         ; // nop!
     }
+    mr_wait_vbl();
 
 }
 

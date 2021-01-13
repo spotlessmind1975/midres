@@ -161,6 +161,10 @@ void mr_start_frame_hd() {
     storedJiffy = (*((unsigned int*)0x81CE)) >> 1;
 }
 
+int mr_get_start_frame_int_hd() {
+    return storedJiffy;
+}
+
 void mr_end_frame_hd(unsigned char _jiffies) {
     while ((((*((unsigned int*)0x81CE)>>1)) - storedJiffy) < (_jiffies)) {
 

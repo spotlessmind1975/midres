@@ -1409,6 +1409,8 @@
 
 	void mr_start_frame();
 
+	int mr_get_start_frame_int();
+
 	void mr_end_frame(unsigned char _jiffies);
 
 	unsigned char *mr_translate_file(mr_file _file);

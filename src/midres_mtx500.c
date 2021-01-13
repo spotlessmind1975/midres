@@ -312,6 +312,10 @@ void mr_start_frame_hd() {
     storedJiffies = *((unsigned char*)0xfd5d)-48;
 }
 
+int mr_get_start_frame_int_hd() {
+    return storedJiffies;
+}
+
 void mr_end_frame_hd(unsigned char _jiffies) {
     if (_jiffies > 0) {
         while ((((*(unsigned char*)0xfd5d)-48) - storedJiffies) < (_jiffies * 2)) {

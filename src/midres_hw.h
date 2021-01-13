@@ -162,6 +162,8 @@ void mr_sound_stop_hd(unsigned char _channel);
 
 void mr_start_frame_hd();
 
+int mr_get_start_frame_int_hd();
+
 void mr_end_frame_hd(unsigned char _jiffies);
 
 // Hardware dependent translate filename (if needed)
