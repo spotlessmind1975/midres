@@ -1366,7 +1366,7 @@
 
 	void mr_sound_note_off_channel(mr_channel channel, mr_amplitude velocity);
 
-	MR_PT_CTX(mr_musicplayer, mr_maudio* buffer; mr_maudio* eof; int old_jiffies; int jiffies; mr_boolean done; unsigned char last_opcode; );
+	MR_PT_CTX(mr_musicplayer, mr_maudio* buffer; mr_maudio* eof; int old_jiffies; int jiffies; mr_boolean done; unsigned char last_opcode; mr_boolean auto_restart; mr_maudio* auto_restart_buffer; );
 	MR_PT_THREAD_EXT(mr_musicplayer, mr_musicplayer_protothread);
 
 	/*-----------------------------------------------------------------------

@@ -42,6 +42,10 @@ MR_PT_THREAD_EXT(mr_musicplayer, mr_musicplayer_protothread) {
 
 	MR_PTI_BEGIN();
 
+	if (MR_PTI_CTX()->auto_restart_buffer == NULL) {
+		MR_PTI_CTX()->auto_restart_buffer = MR_PTI_CTX()->buffer;
+	}
+
 	mr_sound_init();
 
 	if (MR_PTI_CTX()->buffer != NULL && ( MR_PTI_CTX()->buffer < MR_PTI_CTX()->eof ) ) {
@@ -94,9 +98,14 @@ MR_PT_THREAD_EXT(mr_musicplayer, mr_musicplayer_protothread) {
 
 		mr_sound_init();
 
-		MR_PTI_CTX()->done = mr_true;
-		MR_PTI_CTX()->buffer = NULL;
-		MR_PTI_CTX()->eof = NULL;
+		if (MR_PTI_CTX()->auto_restart) {
+			MR_PTI_CTX()->done = mr_false;
+			MR_PTI_CTX()->buffer = MR_PTI_CTX()->auto_restart_buffer;
+		} else {
+			MR_PTI_CTX()->done = mr_true;
+			MR_PTI_CTX()->buffer = NULL;
+			MR_PTI_CTX()->eof = NULL;
+		}
 		
 	}
 
