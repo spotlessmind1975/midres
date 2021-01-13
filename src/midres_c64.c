@@ -169,7 +169,7 @@ void mr_cleanup_hd() {
 }
 
 void mr_wait_vbl() {
-    while (*((unsigned char*)0xd012) != 0xff) {}
+    while (*((unsigned char*)0xd012) < 200) {}
 }
 
 void mr_doublebuffer_switch_hd(unsigned char _screen) {
