@@ -306,8 +306,8 @@ void mr_read_file_hd(unsigned int _file, unsigned int _offset, unsigned char* _d
     fclose(f);
 }
 
-unsigned char* availableMemoryAddress = MR_AM(MR_AUX_DEFAULT);
-unsigned int availableMemorySize = MR_AUX_COUNT * MR_SCREEN_RAM_SIZE;
+unsigned char* availableMemoryAddress = 0x7000;
+unsigned int availableMemorySize = 0x1000;
 
 unsigned char* mr_map_file_hd(mr_file _file, unsigned int _projected_size) {
     FILE* f = NULL;
