@@ -2054,7 +2054,7 @@ $(EXEDIR)/elevator.vic20: elevator.embedded.vic20 $(subst PLATFORM,elevator.vic2
 
 .PHONY: totto.embedded.vic20
 totto.embedded.vic20:
-	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal120.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal220.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal320.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal420.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal120.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal220.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal320.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal420.mpic -n ttfinal4.mpic -i $(DATADIR)/totto.imf -n totto.imf -i $(DATADIR)/totto3.imf -n totto3.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.vic20/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.vic20/,src/,$(@:.o=.c))
@@ -2070,6 +2070,8 @@ $(EXEDIR)/totto.vic20: totto.embedded.vic20 $(subst PLATFORM,totto.vic20,$(OBJS)
 	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal220.mpic $(EXEDIR)/totto.vic20.d64 
 	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal320.mpic $(EXEDIR)/totto.vic20.d64 
 	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal420.mpic $(EXEDIR)/totto.vic20.d64 
+	$(CC1541) -f totto.imf -w $(DATADIR)/totto.imf $(EXEDIR)/totto.vic20.d64 
+	$(CC1541) -f totto3.imf -w $(DATADIR)/totto3.imf $(EXEDIR)/totto.vic20.d64 
 
 
 # -------------------------------------------------------------------
@@ -2159,7 +2161,7 @@ $(EXEDIR)/joycheck.vic2024: joycheck.embedded.vic2024 $(subst PLATFORM,joycheck.
 
 .PHONY: totto.embedded.vic2024
 totto.embedded.vic2024:
-	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal120.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal220.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal320.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal420.mpic -n ttfinal4.mpic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/tttiles.bin -n tttiles.bin -i $(DATADIR)/tttiles1.bin -n tttiles1.bin -i $(DATADIR)/ttfinal120.mpic -n ttfinal1.mpic -i $(DATADIR)/ttfinal220.mpic -n ttfinal2.mpic -i $(DATADIR)/ttfinal320.mpic -n ttfinal3.mpic -i $(DATADIR)/ttfinal420.mpic -n ttfinal4.mpic -i $(DATADIR)/totto.imf -n totto.imf -i $(DATADIR)/totto3.imf -n totto3.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/totto.vic2024/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__TOTTO__ -D__CBM__ -o $@ $(subst obj/totto.vic2024/,src/,$(@:.o=.c))
@@ -2175,6 +2177,8 @@ $(EXEDIR)/totto.vic2024: totto.embedded.vic2024 $(subst PLATFORM,totto.vic2024,$
 	$(CC1541) -f ttfinal2.mpic -w $(DATADIR)/ttfinal220.mpic $(EXEDIR)/totto.vic2024.d64 
 	$(CC1541) -f ttfinal3.mpic -w $(DATADIR)/ttfinal320.mpic $(EXEDIR)/totto.vic2024.d64 
 	$(CC1541) -f ttfinal4.mpic -w $(DATADIR)/ttfinal420.mpic $(EXEDIR)/totto.vic2024.d64 
+	$(CC1541) -f totto.imf -w $(DATADIR)/totto.imf $(EXEDIR)/totto.vic2024.d64 
+	$(CC1541) -f totto3.imf -w $(DATADIR)/totto3.imf $(EXEDIR)/totto.vic2024.d64 
 
 ###############################################################################
 ## FINAL RULES

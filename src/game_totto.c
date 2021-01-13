@@ -230,8 +230,10 @@ unsigned char* mr_translate_file_user(mr_file _file) {
 		return "tttiles1.bin";
 	case FILE_TOTTO_IMF:
 		return "totto.imf";
+#ifdef FILE_TOTTO2_IMF
 	case FILE_TOTTO2_IMF:
 		return "totto2.imf";
+#endif
 	case FILE_TOTTO3_IMF:
 		return "totto3.imf";
 	}
@@ -705,7 +707,7 @@ void gameloop() {
 		//}
 
 		if (birdPlaying) {
-			mr_musicplayer(&musicPlayerGame);
+			MR_PTI_END_FRAME_RUNNING(3, mr_musicplayer, musicPlayerGame);
 		}
 		else {
 			MR_PTI_END_FRAME_RUNNING(6, mr_musicplayer, musicPlayerTitles);
@@ -921,13 +923,23 @@ void game_totto() {
 
 	musicPlayerTitles.done = mr_false;
 	musicPlayerTitles.buffer = mr_map_file(FILE_TOTTO_IMF, FILE_TOTTO_IMF_SIZE);
+	musicPlayerTitles.auto_restart_buffer = musicPlayerTitles.buffer;
 	musicPlayerTitles.eof = musicPlayerTitles.buffer + FILE_TOTTO_IMF_SIZE;
 	musicPlayerTitles.auto_restart = mr_true;
 
+#ifdef FILE_TOTTO2_IMF
 	musicPlayerGame.done = mr_false;
 	musicPlayerGame.buffer = mr_map_file(FILE_TOTTO2_IMF, FILE_TOTTO2_IMF_SIZE);
+	musicPlayerGame.auto_restart_buffer = musicPlayerGame.buffer;
 	musicPlayerGame.eof = musicPlayerGame.buffer + FILE_TOTTO2_IMF_SIZE;
 	musicPlayerGame.auto_restart = mr_true;
+#else
+	musicPlayerGame.done = mr_false;
+	musicPlayerGame.buffer = musicPlayerTitles.buffer;
+	musicPlayerGame.auto_restart_buffer = musicPlayerTitles.buffer;
+	musicPlayerGame.eof = musicPlayerTitles.eof;
+	musicPlayerGame.auto_restart = mr_true;
+#endif
 
 	musicPlayerGameOver.done = mr_false;
 	musicPlayerGameOver.buffer = mr_map_file(FILE_TOTTO3_IMF, FILE_TOTTO3_IMF_SIZE);
@@ -938,7 +950,7 @@ void game_totto() {
 	// Endless loop...
 	while (1) {
 
-		musicPlayerTitles.buffer = musicPlayerGameOver.auto_restart_buffer;
+		musicPlayerTitles.buffer = musicPlayerTitles.auto_restart_buffer;
 
 		mr_musicplayer(&musicPlayerTitles);
 

@@ -223,7 +223,9 @@
                 ['destination' => 'ttfinal1.mpic', 'source' => '$(DATADIR)/ttfinal120.mpic' ],
                 ['destination' => 'ttfinal2.mpic', 'source' => '$(DATADIR)/ttfinal220.mpic' ],
                 ['destination' => 'ttfinal3.mpic', 'source' => '$(DATADIR)/ttfinal320.mpic' ],
-                ['destination' => 'ttfinal4.mpic', 'source' => '$(DATADIR)/ttfinal420.mpic' ]
+                ['destination' => 'ttfinal4.mpic', 'source' => '$(DATADIR)/ttfinal420.mpic' ],
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto.imf' ],
+                ['destination' => 'totto3.imf', 'source' => '$(DATADIR)/totto3.imf' ]
             ],
             'plus4' => [
                 [ 'loader' => 'totto_loader4.prg'],
