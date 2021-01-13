@@ -579,21 +579,22 @@ function emit_rules_for_ancillary_z88dk($platform, $demo, $resources = [] ) {
             break;
     }
 
-        $mainModule = find_main_module("DEMO_".$demo);
-        $symbols = extract_symbols_from_sources();
-        $neededFiles = [];
-        build_list_of_needed_files( $symbols, $mainModule, $neededFiles );
-        $neededFiles[] = $mainModule;
-    
-        sort($neededFiles);
-        $neededFiles = array_unique($neededFiles);
-        $neededFiles[] = 'src/midres_data.c';
-        $neededFiles[] = 'src/main.c';
-    
-        $neededObjectFiles = [];
-        foreach( $neededFiles as $neededFile ) {
-            $neededObjectFiles[] = preg_replace(['#src/#', '#\.c$#'],['obj/'.$outputPath.'/', '.o'], $neededFile);
-        }
+    $mainModule = find_main_module("DEMO_".$demo);
+    $symbols = extract_symbols_from_sources();
+    $neededFiles = [];
+    build_list_of_needed_files( $symbols, $mainModule, $neededFiles );
+    $neededFiles[] = $mainModule;
+    $neededFiles[] = 'src/midres_control_011.c';
+
+    sort($neededFiles);
+    $neededFiles = array_unique($neededFiles);
+    $neededFiles[] = 'src/midres_data.c';
+    $neededFiles[] = 'src/main.c';
+
+    $neededObjectFiles = [];
+    foreach( $neededFiles as $neededFile ) {
+        $neededObjectFiles[] = preg_replace(['#src/#', '#\.c$#'],['obj/'.$outputPath.'/', '.o'], $neededFile);
+    }
 
 ?>
 
@@ -689,6 +690,7 @@ function emit_rules_for_program_z88dk($platform, $program, $resources = [] ) {
 
     sort($neededFiles);
     $neededFiles = array_unique($neededFiles);
+    $neededFiles[] = 'src/midres_control_011.c';
     $neededFiles[] = 'src/midres_data.c';
     $neededFiles[] = 'src/main.c';
 
