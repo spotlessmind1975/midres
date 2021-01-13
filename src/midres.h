@@ -1094,7 +1094,7 @@
 									}										\
 								} while(0)
 
-#define MR_PTI_YIELD_UNTIL(cond) \
+	#define MR_PTI_YIELD_UNTIL(cond) \
 								do {										\
 									MR_PT_YIELD_FLAG = 0;					\
 									MR_LC_SET((_mr_pt)->lc);				\
@@ -1128,6 +1128,21 @@
 	#define MR_PTI_RESET(s, c) \
 								(s)->count = c;
 
+	#define MR_PTI_WAIT_RUNNING(t, m, c) { \
+									int now##__LINE__ = mr_get_jiffies_int(); \
+									while ((mr_get_jiffies_int() - now##__LINE__) < t) { \
+										m(&c); \
+									} \
+								}
+
+	#define MR_PTI_END_FRAME_RUNNING(t, m, c) { \
+									int now##__LINE__ = mr_get_start_frame_int(); \
+									while ((mr_get_jiffies_int() - now##__LINE__) < t) { \
+										m(&c); \
+									} \
+									mr_end_frame(0); \
+								}
+	
 
 	/*-----------------------------------------------------------------------
       --- ISOMORPHIC PLAYER
