@@ -85,6 +85,9 @@
     // Output file name (*.imf)
     $ouputFileName = null;
 
+    // Debug file name (*.dbg)
+    $debugFileName = null;
+
     // Associative array of the channels and notes.
     $channels = [];
 
@@ -143,7 +146,8 @@
         echo "\n";
         echo " -C            transpose the 'controller' command(s)\n";
         echo " -c <n>        truncate channels to <n> (ordered by notes)\n";
-        echo " -d            additional MIDI debug verbosity\n";
+        echo " -d            enable debugging\n";
+        echo " -D <f>        put debug info on file <f>\n";
         echo " -f <a> <b>    force channel <a> to be <b> \n";
         echo " -F            force all channels to be 0 (monochannel) \n";
         echo " -o <filename> output filename ([ext: *.imf])\n";
@@ -188,8 +192,19 @@
                 $allowedChannels = (int)$argv[$i];
                 break;
 
-            // -d            additional MIDI debug verbosity
+            // -d            enable debugging
             case 'd':
+                $debug = true;
+                break;
+
+            // -D <f> put debug info on file <f>
+            case 'd':
+                ++$i;
+                if ( !isset($argv[$i]) ) {
+                    echo "Missing filename <f> for option -D.\n";
+                    show_usage_and_exit();
+                }
+                $debugFileName = $argv[$i];
                 $debug = true;
                 break;
 
@@ -285,6 +300,14 @@
     // extension (.mid -> .imf).
     if ( is_null($outputFilename) ) {
         $outputFileName = preg_replace("#.mid$#", ".imf", $inputFileName);
+    }
+
+    // If the debug file name is missing and the debug is enabled, the
+    // debug file name has the same name of the output file name but 
+    // different extension (.imf -> .dbg).
+    if ( is_null($debugFileName) && $debug ) {
+        $debugFileName = preg_replace("#.imf$#", ".dbg", $outputFileName);
+        @unlink($debugFileName);
     }
 
     /*************************************************************************
@@ -618,28 +641,32 @@
                 if ( $jiffies < 255 ) {
                     fputs($fh, chr(IMF_TOKEN_WAIT1), 1 );
                     fputs($fh, chr($jiffies), 1 );
-                    echo "w";
                 } else {
                     fputs($fh, chr(IMF_TOKEN_WAIT2), 1 );
                     fputs($fh, chr($jiffies & 0xff), 1 );
                     fputs($fh, chr(( $jiffies >> 8 )), 1 );
-                    echo "W (".dechex($jiffies).") ";
                 }
 
+                if ( !is_null($debugFileName) ) {
+                    file_put_contents($debugFileName, "WAIT ".$jiffies."\n", FILE_APPEND);
+                }
                 // Reset the jiffies' count.
                 $jiffies = 0;
             }
 
             list($channel, $noteNumber, $velocity) = $chunk->getData();
 
+            if ( !is_null($debugFileName) ) {
+                file_put_contents($debugFileName, "NOTE ".str_pad(Note::getNoteName($noteNumber).'('.$noteNumber.')',STR_PAD_LEFT, " ", 6)."\n", FILE_APPEND);
+            }
+
             // We replace the channel if necessary.
             if ( isset($remapChannels[$channel]) ) {
                 $channel = $remapChannels[$channel];
             }
+
             fputs($fh, chr($channel | ( ( $velocity >> 6) << 4 ) | IMF_TOKEN_NOTE), 1 );
             fputs($fh, chr($noteNumber), 1 );
-
-            echo "N";
 
         } else if ($chunk instanceof Event\NoteOffEvent) {
 
@@ -653,12 +680,14 @@
                 if ( $jiffies < 255 ) {
                     fputs($fh, chr(IMF_TOKEN_WAIT1), 1 );
                     fputs($fh, chr($jiffies), 1 );
-                    echo "w";
                 } else {
                     fputs($fh, chr(IMF_TOKEN_WAIT2), 1 );
                     fputs($fh, chr($jiffies & 0xff), 1 );
                     fputs($fh, chr(( $jiffies >> 8 )), 1 );
-                    echo "W (".dechex($jiffies).") ";
+                }
+
+                if ( !is_null($debugFileName) ) {
+                    file_put_contents($debugFileName, "WAIT ".$jiffies."\n", FILE_APPEND);
                 }
 
                 // Reset the jiffies' count.
@@ -667,13 +696,15 @@
 
             list($channel, $noteNumber, $velocity) = $chunk->getData();
 
+            if ( !is_null($debugFileName) ) {
+                file_put_contents($debugFileName, "OFF  ".str_pad(Note::getNoteName($noteNumber),STR_PAD_LEFT, " ", 6)."\n", FILE_APPEND);
+            }
+
             // We replace the channel if necessary.
             if ( isset($remapChannels[$channel]) ) {
                 $channel = $remapChannels[$channel];
             }
             fputs($fh, chr($channel), 1 );
-
-            echo "O";
 
         } else if ($chunk instanceof Event\ControllerEvent) {
 
@@ -683,12 +714,15 @@
             if ( isset($remapChannels[$channel]) ) {
                 $channel = $remapChannels[$channel];
             }
+
+            if ( !is_null($debugFileName) ) {
+                file_put_contents($debugFileName, "CTRL ".str_pad($parameterNumber.' := '.$value,STR_PAD_LEFT, " ", 6)."\n", FILE_APPEND);
+            }
+
             fputs($fh, chr($channel | IMF_TOKEN_CONTROL), 1);
             fputs($fh, chr($parameterNumber), 1);
             fputs($fh, chr($value), 1);
             
-            echo "C";
-
         } else if ($chunk instanceof ProgramChangeEvent) {
 
             list($channel, $instrument) = $chunk->getData();
@@ -698,11 +732,13 @@
                 $channel = $remapChannels[$channel];
             }
 
+            if ( !is_null($debugFileName) ) {
+                file_put_contents($debugFileName, "PRGC ".str_pad($instrument,STR_PAD_LEFT, " ", 6)."\n", FILE_APPEND);
+            }
+
             fputs($fh, chr($channel | IMF_TOKEN_PROGRAM_CHANGE), 1);
             fputs($fh, chr($instrument), 1);
             
-            echo "P";
-
         }
 
         // We limit the size of the output file to this value,
