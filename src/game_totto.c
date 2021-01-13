@@ -206,7 +206,16 @@ mr_position columnCount = 0;
 mr_position holeHeight = HOLE_HEIGHT;
 
 // Sound duration counter (in jiffies)
-signed char soundDuration = 0;
+// signed char soundDuration = 0;
+
+// title song
+mr_musicplayer_protothread musicPlayerTitles;
+
+// game song
+mr_musicplayer_protothread musicPlayerGame;
+
+// game over song
+mr_musicplayer_protothread musicPlayerGameOver;
 
 /****************************************************************************
  ** RESIDENT FUNCTIONS SECTION
@@ -219,6 +228,12 @@ unsigned char* mr_translate_file_user(mr_file _file) {
 		return "tttiles.bin";
 	case FILE_TTTILES1_BIN:
 		return "tttiles1.bin";
+	case FILE_TOTTO_IMF:
+		return "totto.imf";
+	case FILE_TOTTO2_IMF:
+		return "totto2.imf";
+	case FILE_TOTTO3_IMF:
+		return "totto3.imf";
 	}
 
 	return 0;
@@ -445,10 +460,13 @@ void show_game_over() {
 	// Draw level reached
 	draw_level(( (MR_SCREEN_HEIGHT) >> 1 ) + 4);
 
-	mr_end_frame(2);
+	mr_end_frame(0);
 
-	// Wait for two seconds.
-	mr_wait(2);
+	musicPlayerGameOver.done = mr_false;
+	musicPlayerGameOver.buffer = musicPlayerGameOver.auto_restart_buffer;
+	while (!musicPlayerGameOver.done) {
+		mr_musicplayer(&musicPlayerGameOver);
+	}
 
 }
 
@@ -542,9 +560,9 @@ void gameloop() {
 
 							// Bird passed the pipe. Now, we can start a "beep"
 							// that will last for 24 jiffies.
-							mr_sound_start(0);
-							mr_sound_change(2000);
-							soundDuration = 24;
+							//mr_sound_start(0);
+							//mr_sound_change(2000);
+							//soundDuration = 24;
 
 							// Increase (and draw) the score.
 							increase(score);
@@ -639,7 +657,7 @@ void gameloop() {
 			}
 
 			// Scroll the columns.
-			columnX -= ( 2 + ( level[1] < 3 ? level[1] : 3 ) );
+			columnX -= ( 3 + ( level[1] < 3 ? level[1] : 3 ) );
 
 			// If the bird has a vertical acceleration,
 			// we have to decrease it up to zero.
@@ -677,22 +695,29 @@ void gameloop() {
 		birdY += birdVY;
 		birdVY += birdAY;
 
-		// Stop sound if duration passed.
-		if (soundDuration > 0) {
-			soundDuration -= 4;
-			if (soundDuration <= 0) {
-				mr_sound_stop();
-				soundDuration = 0;
-			}
+		//// Stop sound if duration passed.
+		//if (soundDuration > 0) {
+		//	soundDuration -= 4;
+		//	if (soundDuration <= 0) {
+		//		mr_sound_stop();
+		//		soundDuration = 0;
+		//	}
+		//}
+
+		if (birdPlaying) {
+			mr_musicplayer(&musicPlayerGame);
+		}
+		else {
+			MR_PTI_END_FRAME_RUNNING(6, mr_musicplayer, musicPlayerTitles);
 		}
 
 		// Wait for up to 4 jiffies before continuing.
-		mr_end_frame(4);
+		//mr_end_frame(4);
 
 	}
 
 	// Stop sound if playing.
-	mr_sound_stop();
+	//mr_sound_stop();
 
 }
 
@@ -746,6 +771,7 @@ void show_titles() {
 
 	while (!exitLoop) {
 
+		mr_musicplayer(&musicPlayerTitles);
 
 		// Move the birds horizzontally
 		for (i = -2 * TILE1_BIRD1_WIDTH; i < (MR_SCREEN_WIDTH * 8 + 4 * 8 * TILE1_BIRD1_WIDTH); i+=2) {
@@ -770,6 +796,7 @@ void show_titles() {
 					TILE1_MOVING_BIRD1,
 					TILE1_BIRD1_WIDTH, TILE1_BIRD1_HEIGHT,
 					c);
+				mr_musicplayer(&musicPlayerTitles);
 			}
 
 			// Move small birds.
@@ -782,6 +809,7 @@ void show_titles() {
 					MR_SCREEN_WIDTH * 8 + (j * TILE1_MINIBIRD_WIDTH * 8) - i, birdTitleY[j],
 					TILE1_MOVING_MINIBIRD,
 					c);
+				mr_musicplayer(&musicPlayerTitles);
 			}
 
 			// Alternate titles on timing condition.
@@ -796,6 +824,7 @@ void show_titles() {
 			}
 
 			mr_end_frame(0);
+			mr_musicplayer(&musicPlayerTitles);
 
 		}
 
@@ -818,6 +847,8 @@ void show_titles() {
 	// Enable the custom tileset for viewing.
 	mr_tileset_visible(MR_TILESET_0);
 
+	mr_musicplayer(&musicPlayerTitles);
+
 	mr_end_frame(0);
 }
 
@@ -834,7 +865,7 @@ void show_level() {
 
 	mr_end_frame(0);
 
-	mr_wait(2);
+	MR_PTI_WAIT_RUNNING(120, mr_musicplayer, musicPlayerTitles);
 
 }
 
@@ -858,7 +889,9 @@ void show_winning_screen() {
 			mr_load("ttfinal4.mpic", MR_AUX_DEFAULT);
 			break;
 	}
+	mr_musicplayer(&musicPlayerTitles);
 	mr_uncompressv(MR_AUX_DEFAULT);
+	mr_musicplayer(&musicPlayerTitles);
 
 	mr_end_frame(0);
 
@@ -875,6 +908,9 @@ void game_totto() {
 
 	mr_start_frame();
 
+	mr_set_background_color(SKY_COLOR);
+	mr_set_border_color(SKY_COLOR);
+
 	// Clear screen bitmap.
 	mr_clearv();
 
@@ -883,8 +919,28 @@ void game_totto() {
 	// Prepare the graphics.
 	prepare_graphics();
 
+	musicPlayerTitles.done = mr_false;
+	musicPlayerTitles.buffer = mr_map_file(FILE_TOTTO_IMF, FILE_TOTTO_IMF_SIZE);
+	musicPlayerTitles.eof = musicPlayerTitles.buffer + FILE_TOTTO_IMF_SIZE;
+	musicPlayerTitles.auto_restart = mr_true;
+
+	musicPlayerGame.done = mr_false;
+	musicPlayerGame.buffer = mr_map_file(FILE_TOTTO2_IMF, FILE_TOTTO2_IMF_SIZE);
+	musicPlayerGame.eof = musicPlayerGame.buffer + FILE_TOTTO2_IMF_SIZE;
+	musicPlayerGame.auto_restart = mr_true;
+
+	musicPlayerGameOver.done = mr_false;
+	musicPlayerGameOver.buffer = mr_map_file(FILE_TOTTO3_IMF, FILE_TOTTO3_IMF_SIZE);
+	musicPlayerGameOver.auto_restart_buffer = musicPlayerGameOver.buffer;
+	musicPlayerGameOver.eof = musicPlayerGameOver.buffer + FILE_TOTTO3_IMF_SIZE;
+	musicPlayerGameOver.auto_restart = mr_false;
+
 	// Endless loop...
 	while (1) {
+
+		musicPlayerTitles.buffer = musicPlayerGameOver.auto_restart_buffer;
+
+		mr_musicplayer(&musicPlayerTitles);
 
 		// Show titles.
 		show_titles();
@@ -902,11 +958,17 @@ void game_totto() {
 		// Endless loop...
 		while (1) {
 
+			mr_musicplayer(&musicPlayerTitles);
+
 			// Show the level screen.
 			show_level();
 
+			mr_musicplayer(&musicPlayerGame);
+
 			// Play the game.
 			gameloop();
+
+			mr_musicplayer(&musicPlayerGame);
 
 			// Game finished: exit if player lose it.
 			if (!playerWin) {
