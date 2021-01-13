@@ -297,6 +297,11 @@ void mr_start_frame_hd() {
     *((unsigned char*)0xff04) = 0;
 }
 
+int mr_get_start_frame_int_hd() {
+    return ((unsigned char*)0xff04);
+}
+
+
 void mr_end_frame_hd(unsigned char _jiffies) {
     while ((*((unsigned char*)0xff04)) < _jiffies ) {
         ;
