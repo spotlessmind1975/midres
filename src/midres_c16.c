@@ -263,7 +263,8 @@ unsigned char* mr_map_file_hd(mr_file _file, unsigned int _projected_size) {
         return NULL;
     }
     storage = availableMemoryAddress;
-    availableMemoryAddress -= _projected_size;
+    availableMemoryAddress += _projected_size;
+    availableMemorySize -= _projected_size;
     fread(storage, _projected_size, 1, f);
     fclose(f);
     return storage;
