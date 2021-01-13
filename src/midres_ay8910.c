@@ -158,6 +158,8 @@ void mr_sound_stop_hd(unsigned char _channel) {
 #elif __LM80C__
         io_put(PSG_WP, 0xf8 | (value & 0x07) | 0x01);
 #endif
+        io_put(PSG_AP, PSG_R8);
+        io_put(PSG_WP, 0x00);
 
         break;
     case 1:
@@ -169,6 +171,9 @@ void mr_sound_stop_hd(unsigned char _channel) {
 #elif __LM80C__
         io_put(PSG_WP, 0xf8 | (value & 0x07) | 0x02);
 #endif
+        io_put(PSG_AP, PSG_R9);
+        io_put(PSG_WP, 0x00);
+
         break;
     case 2:
         io_put(PSG_AP, PSG_R7);
@@ -179,6 +184,9 @@ void mr_sound_stop_hd(unsigned char _channel) {
 #elif __LM80C__
         io_put(PSG_WP, 0xf8 | (value & 0x07) | 0x04);
 #endif
+        io_put(PSG_AP, PSG_R10);
+        io_put(PSG_WP, 0x00);
+
         break;
     }
 }
