@@ -250,7 +250,9 @@
             ],
             'lm80c' => [
                 ['destination' => 'tttiles.bin', 'source' => '$(DATADIR)/tttiles.bin' ],
-                ['destination' => 'tttiles1.bin', 'source' => '$(DATADIR)/tttiles1.bin' ]
+                ['destination' => 'tttiles1.bin', 'source' => '$(DATADIR)/tttiles1.bin' ],
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto.imf' ],
+                ['destination' => 'totto3.imf', 'source' => '$(DATADIR)/totto3.imf' ]
             ]
         ],
 

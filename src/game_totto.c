@@ -206,7 +206,7 @@ mr_position columnCount = 0;
 mr_position holeHeight = HOLE_HEIGHT;
 
 // Sound duration counter (in jiffies)
-// signed char soundDuration = 0;
+signed char soundDuration = 0;
 
 // title song
 mr_musicplayer_protothread musicPlayerTitles;
@@ -562,9 +562,9 @@ void gameloop() {
 
 							// Bird passed the pipe. Now, we can start a "beep"
 							// that will last for 24 jiffies.
-							//mr_sound_start(0);
-							//mr_sound_change(2000);
-							//soundDuration = 24;
+							mr_sound_start(0);
+							mr_sound_change(2000);
+							soundDuration = 24;
 
 							// Increase (and draw) the score.
 							increase(score);
@@ -697,14 +697,14 @@ void gameloop() {
 		birdY += birdVY;
 		birdVY += birdAY;
 
-		//// Stop sound if duration passed.
-		//if (soundDuration > 0) {
-		//	soundDuration -= 4;
-		//	if (soundDuration <= 0) {
-		//		mr_sound_stop();
-		//		soundDuration = 0;
-		//	}
-		//}
+		// Stop sound if duration passed.
+		if (soundDuration > 0) {
+			soundDuration -= 4;
+			if (soundDuration <= 0) {
+				mr_sound_stop();
+				soundDuration = 0;
+			}
+		}
 
 		if (birdPlaying) {
 			MR_PTI_END_FRAME_RUNNING(3, mr_musicplayer, musicPlayerGame);
@@ -719,7 +719,7 @@ void gameloop() {
 	}
 
 	// Stop sound if playing.
-	//mr_sound_stop();
+	mr_sound_stop();
 
 }
 
@@ -935,10 +935,10 @@ void game_totto() {
 	musicPlayerGame.auto_restart = mr_true;
 #else
 	musicPlayerGame.done = mr_false;
-	musicPlayerGame.buffer = musicPlayerTitles.buffer;
-	musicPlayerGame.auto_restart_buffer = musicPlayerTitles.buffer;
-	musicPlayerGame.eof = musicPlayerTitles.eof;
-	musicPlayerGame.auto_restart = mr_true;
+	musicPlayerGame.buffer = NULL;
+	musicPlayerGame.auto_restart_buffer = NULL;
+	musicPlayerGame.eof = NULL;
+	musicPlayerGame.auto_restart = mr_false;
 #endif
 
 	musicPlayerGameOver.done = mr_false;
