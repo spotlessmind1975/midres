@@ -94,6 +94,10 @@ MR_PT_THREAD_EXT(mr_musicplayer, mr_musicplayer_protothread) {
 
 			MR_PTI_YIELD();
 
+			if (MR_PTI_CTX()->buffer == NULL) {
+				break;
+			}
+
 		}
 
 		mr_sound_init();
