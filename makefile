@@ -841,7 +841,7 @@ $(EXEDIR)/midres.MUSIC.vic2024: midres.MUSIC.embedded.vic2024 $(subst PLATFORM,v
 
 .PHONY: airattack.embedded.atari
 airattack.embedded.atari:
-	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintroa.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintroa.pic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.atari/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__  -o $@ $(subst obj/airattack.atari/,src/,$(@:.o=.c))
@@ -853,6 +853,8 @@ $(EXEDIR)/airattack.atari: airattack.embedded.atari $(subst PLATFORM,airattack.a
 	$(call COPYFILES,$(EXEDIR)/airattack.atari,$(EXEDIR)/atr/game.exe)
 	$(call COPYFILES,$(DATADIR)/aatiles4.bin,$(EXEDIR)/atr/zztiles.bin)
 	$(call COPYFILES,$(DATADIR)/aaintroa.pic,$(EXEDIR)/atr/zzintro.pic)
+	$(call COPYFILES,$(DATADIR)/zamusic.imf,$(EXEDIR)/atr/zamusic.imf)
+	$(call COPYFILES,$(DATADIR)/zamusic2.imf,$(EXEDIR)/atr/zamusic2.imf)
 	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/airattack.atari.atr $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/airattack.atari.atr -o $(EXEDIR)/airattack.atari.atr -f game.exe
 
@@ -929,7 +931,7 @@ $(EXEDIR)/joycheck.atari: joycheck.embedded.atari $(subst PLATFORM,joycheck.atar
 
 .PHONY: airattack.embedded.c128
 airattack.embedded.c128:
-	$(FILE2INCLUDE) -i $(DATADIR)/aatiles.bin -n zztiles.bin -i $(DATADIR)/aaintro64.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/aatiles.bin -n zztiles.bin -i $(DATADIR)/aaintro64.mpic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.c128/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.c128/,src/,$(@:.o=.c))
@@ -940,6 +942,8 @@ $(EXEDIR)/airattack.c128: airattack.embedded.c128 $(subst PLATFORM,airattack.c12
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.c128 $(EXEDIR)/airattack.c128.d64 
 	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles.bin $(EXEDIR)/airattack.c128.d64 
 	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro64.mpic $(EXEDIR)/airattack.c128.d64 
+	$(CC1541) -f zamusic.imf -w $(DATADIR)/zamusic.imf $(EXEDIR)/airattack.c128.d64 
+	$(CC1541) -f zamusic2.imf -w $(DATADIR)/zamusic2.imf $(EXEDIR)/airattack.c128.d64 
 
 
 # -------------------------------------------------------------------
@@ -1029,7 +1033,7 @@ $(EXEDIR)/totto.c128: totto.embedded.c128 $(subst PLATFORM,totto.c128,$(OBJS))
 
 .PHONY: airattack.embedded.c16
 airattack.embedded.c16:
-	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintro16.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintro16.mpic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.c16/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.c16/,src/,$(@:.o=.c))
@@ -1041,6 +1045,8 @@ $(EXEDIR)/airattack.c16: airattack.embedded.c16 $(subst PLATFORM,airattack.c16,$
 	$(CC1541) -f  -w  $(EXEDIR)/airattack.c16.d64 
 	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles4.bin $(EXEDIR)/airattack.c16.d64 
 	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/airattack.c16.d64 
+	$(CC1541) -f zamusic.imf -w $(DATADIR)/zamusic.imf $(EXEDIR)/airattack.c16.d64 
+	$(CC1541) -f zamusic2.imf -w $(DATADIR)/zamusic2.imf $(EXEDIR)/airattack.c16.d64 
 
 
 # -------------------------------------------------------------------
@@ -1240,7 +1246,7 @@ $(EXEDIR)/totto.c64: totto.embedded.c64 $(subst PLATFORM,totto.c64,$(OBJS))
 
 .PHONY: airattack.embedded.coleco
 airattack.embedded.coleco:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/airattack.coleco/rawdata.o src/rawdata.c
 
 obj/airattack.coleco/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -1351,7 +1357,7 @@ $(EXEDIR)/totto.coleco:	totto.embedded.coleco obj/totto.coleco/demo_music.o obj/
 
 .PHONY: airattack.embedded.gb
 airattack.embedded.gb:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +gb $(CFLAGS) -c $(CFLAGS88)  -o obj/airattack.gb/rawdata.o src/rawdata.c
 
 obj/airattack.gb/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -1462,7 +1468,7 @@ $(EXEDIR)/totto.gb:	totto.embedded.gb obj/totto.gb/demo_music.o obj/totto.gb/dem
 
 .PHONY: airattack.embedded.lm80c
 airattack.embedded.lm80c:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +lm80c $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/airattack.lm80c/rawdata.o src/rawdata.c
 
 obj/airattack.lm80c/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -1549,7 +1555,7 @@ $(EXEDIR)/totto.lm80c:	totto.embedded.lm80c obj/totto.lm80c/demo_music.o obj/tot
 
 .PHONY: airattack.embedded.msx
 airattack.embedded.msx:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/airattack.msx/rawdata.o src/rawdata.c
 
 obj/airattack.msx/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -1660,7 +1666,7 @@ $(EXEDIR)/totto.msx:	totto.embedded.msx obj/totto.msx/demo_music.o obj/totto.msx
 
 .PHONY: airattack.embedded.mtx500
 airattack.embedded.mtx500:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/airattack.mtx500/rawdata.o src/rawdata.c
 
 obj/airattack.mtx500/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -1772,7 +1778,7 @@ $(EXEDIR)/totto.mtx500:	totto.embedded.mtx500 obj/totto.mtx500/demo_music.o obj/
 
 .PHONY: airattack.embedded.plus4
 airattack.embedded.plus4:
-	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintro16.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintro16.mpic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.plus4/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.plus4/,src/,$(@:.o=.c))
@@ -1784,6 +1790,8 @@ $(EXEDIR)/airattack.plus4: airattack.embedded.plus4 $(subst PLATFORM,airattack.p
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.plus4 $(EXEDIR)/airattack.plus4.d64 
 	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles4.bin $(EXEDIR)/airattack.plus4.d64 
 	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro16.mpic $(EXEDIR)/airattack.plus4.d64 
+	$(CC1541) -f zamusic.imf -w $(DATADIR)/zamusic.imf $(EXEDIR)/airattack.plus4.d64 
+	$(CC1541) -f zamusic2.imf -w $(DATADIR)/zamusic2.imf $(EXEDIR)/airattack.plus4.d64 
 
 
 # -------------------------------------------------------------------
@@ -1882,7 +1890,7 @@ $(EXEDIR)/totto.plus4: totto.embedded.plus4 $(subst PLATFORM,totto.plus4,$(OBJS)
 
 .PHONY: airattack.embedded.svi
 airattack.embedded.svi:
-	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/ztiles.bin -n ztiles.bin -i $(DATADIR)/aatiles4.bin -n zztiles.bin -i $(DATADIR)/aaintrox.pic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/airattack.svi/rawdata.o src/rawdata.c
 
 obj/airattack.svi/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -1990,7 +1998,7 @@ $(EXEDIR)/totto.svi:	totto.embedded.svi obj/totto.svi/demo_music.o obj/totto.svi
 
 .PHONY: airattack.embedded.vic20
 airattack.embedded.vic20:
-	$(FILE2INCLUDE) -i $(DATADIR)/aatiles20.bin -n zztiles.bin -i $(DATADIR)/aaintro20.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/aatiles20.bin -n zztiles.bin -i $(DATADIR)/aaintro20.mpic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.vic20/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.vic20/,src/,$(@:.o=.c))
@@ -2002,6 +2010,8 @@ $(EXEDIR)/airattack.vic20: airattack.embedded.vic20 $(subst PLATFORM,airattack.v
 	$(CC1541) -f  -w  $(EXEDIR)/airattack.vic20.d64 
 	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/airattack.vic20.d64 
 	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/airattack.vic20.d64 
+	$(CC1541) -f zamusic.imf -w $(DATADIR)/zamusic.imf $(EXEDIR)/airattack.vic20.d64 
+	$(CC1541) -f zamusic2.imf -w $(DATADIR)/zamusic2.imf $(EXEDIR)/airattack.vic20.d64 
 
 
 # -------------------------------------------------------------------
@@ -2080,7 +2090,7 @@ $(EXEDIR)/totto.vic20: totto.embedded.vic20 $(subst PLATFORM,totto.vic20,$(OBJS)
 
 .PHONY: airattack.embedded.vic2024
 airattack.embedded.vic2024:
-	$(FILE2INCLUDE) -i $(DATADIR)/aatiles20.bin -n zztiles.bin -i $(DATADIR)/aaintro20.mpic -n zzintro.pic -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/aatiles20.bin -n zztiles.bin -i $(DATADIR)/aaintro20.mpic -n zzintro.pic -i $(DATADIR)/zamusic.imf -n zamusic.imf -i $(DATADIR)/zamusic2.imf -n zamusic2.imf -c src/rawdata.c -h src/rawdata.h
 
 obj/airattack.vic2024/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__AIRATTACK__ -D__CBM__ -o $@ $(subst obj/airattack.vic2024/,src/,$(@:.o=.c))
@@ -2092,6 +2102,8 @@ $(EXEDIR)/airattack.vic2024: airattack.embedded.vic2024 $(subst PLATFORM,airatta
 	$(CC1541) -f airattack -w $(EXEDIR)/airattack.vic2024 $(EXEDIR)/airattack.vic2024.d64 
 	$(CC1541) -f zztiles.bin -w $(DATADIR)/aatiles20.bin $(EXEDIR)/airattack.vic2024.d64 
 	$(CC1541) -f zzintro.pic -w $(DATADIR)/aaintro20.mpic $(EXEDIR)/airattack.vic2024.d64 
+	$(CC1541) -f zamusic.imf -w $(DATADIR)/zamusic.imf $(EXEDIR)/airattack.vic2024.d64 
+	$(CC1541) -f zamusic2.imf -w $(DATADIR)/zamusic2.imf $(EXEDIR)/airattack.vic2024.d64 
 
 
 # -------------------------------------------------------------------

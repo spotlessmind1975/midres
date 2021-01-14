@@ -174,25 +174,35 @@
             'vic2024' => [
                 [ 'loader' => 'airattack_loader2024.prg'],
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles20.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro20.mpic']
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro20.mpic'],
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic2.imf' ]
             ],
             'plus4' => [
                 [ 'loader' => 'airattack_loader4.prg'],
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro16.mpic']
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro16.mpic'],
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic2.imf' ]
             ],
             'c128' => [
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro64.mpic']
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro64.mpic'],
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic2.imf' ]
             ],
             'atari' => [
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintroa.pic']
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintroa.pic'],
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic2.imf' ]
             ],
             'msx' => [
                 [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic']
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic'],
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic2.imf' ]
             ],
             'gb' => [
                 [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
@@ -202,7 +212,9 @@
             'lm80c' => [
                 [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic']
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic'],
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic2.imf' ]
             ],
         ],
 
@@ -213,7 +225,9 @@
                 ['destination' => 'ttfinal1.mpic', 'source' => '$(DATADIR)/ttfinal164.mpic' ],
                 ['destination' => 'ttfinal2.mpic', 'source' => '$(DATADIR)/ttfinal264.mpic' ],
                 ['destination' => 'ttfinal3.mpic', 'source' => '$(DATADIR)/ttfinal364.mpic' ],
-                ['destination' => 'ttfinal4.mpic', 'source' => '$(DATADIR)/ttfinal464.mpic' ]
+                ['destination' => 'ttfinal4.mpic', 'source' => '$(DATADIR)/ttfinal464.mpic' ],
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto.imf' ],
+                ['destination' => 'totto3.imf', 'source' => '$(DATADIR)/totto3.imf' ]
             ],
             'vic2024' => [
                 [ 'loader' => 'totto_loader2024.prg'],
