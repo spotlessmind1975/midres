@@ -141,6 +141,12 @@ mr_score drops[4] = { 0, 0, 0, 0 };
 // Store the level
 mr_level level[2] = { 1, 0 };
 
+// title song
+mr_musicplayer_protothread musicPlayerTitles;
+
+// game over song
+mr_musicplayer_protothread musicPlayerGameOver;
+
 unsigned char* mr_translate_file_user(mr_file _file) {
 
 	switch (_file) {
@@ -152,6 +158,10 @@ unsigned char* mr_translate_file_user(mr_file _file) {
 			return "zztiles.bin";
 		case FILE_ZZINTRO_PIC:
 			return "zzintro.pic";
+		case FILE_ZAMUSIC_IMF:
+			return "zamusic.imf";
+		case FILE_ZAMUSIC2_IMF:
+			return "zamusic2.imf";
 	}
 
 	return 0;
@@ -689,6 +699,18 @@ void game_air_attack() {
 
 #endif
 
+	musicPlayerTitles.done = mr_false;
+	musicPlayerTitles.buffer = mr_map_file(FILE_ZAMUSIC_IMF, FILE_ZAMUSIC_IMF_SIZE);
+	musicPlayerTitles.auto_restart_buffer = musicPlayerTitles.buffer;
+	musicPlayerTitles.eof = musicPlayerTitles.buffer + FILE_ZAMUSIC_IMF_SIZE;
+	musicPlayerTitles.auto_restart = mr_true;
+
+	musicPlayerGameOver.done = mr_false;
+	musicPlayerGameOver.buffer = mr_map_file(FILE_ZAMUSIC2_IMF, FILE_ZAMUSIC2_IMF_SIZE);
+	musicPlayerGameOver.auto_restart_buffer = musicPlayerGameOver.buffer;
+	musicPlayerGameOver.eof = musicPlayerGameOver.buffer + FILE_ZAMUSIC2_IMF_SIZE;
+	musicPlayerGameOver.auto_restart = mr_false;
+
 	// Prepare graphics (it can take some time).
 	prepare_graphics();
 
@@ -709,6 +731,7 @@ void game_air_attack() {
 #ifdef TILE_PRESSANYKEY
 
 		while (!mr_key_pressed()) {
+			mr_musicplayer(&musicPlayerTitles);
 			mr_start_frame();
 			i = i ^ 1;
 			if (i == 0) {
@@ -719,12 +742,14 @@ void game_air_attack() {
 					mr_cleartilev(((MR_SCREEN_WIDTH - TILE_PRESSANYKEY_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
 				}
 			}
-			mr_end_frame(4);
+			
+			MR_PTI_WAIT_RUNNING(4, mr_musicplayer, musicPlayerTitles);
+
 		}
 
 #else
 
-		mr_wait(2);
+		MR_PTI_WAIT_RUNNING(120, mr_musicplayer, musicPlayerTitles);
 
 #endif
 
@@ -804,6 +829,11 @@ void game_air_attack() {
 		// Show "GAME OVER" only if the relative tile is present.
 #ifdef TILE_GAMEOVER
 
+		musicPlayerGameOver.done = mr_false;
+		musicPlayerGameOver.buffer = musicPlayerGameOver.auto_restart_buffer;
+
+		mr_musicplayer(&musicPlayerGameOver);
+
 		mr_start_frame();
 
 		mr_clearv();
@@ -825,7 +855,7 @@ void game_air_attack() {
 					mr_cleartilev(((MR_SCREEN_WIDTH - TILE_GAMEOVER_WIDTH) >> 1) + j, (MR_SCREEN_HEIGHT - 1) >> 1);
 				}
 			}
-			mr_end_frame(2);
+			MR_PTI_WAIT_RUNNING(2, mr_musicplayer, musicPlayerGameOver);
 		}
 
 #endif

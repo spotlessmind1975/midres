@@ -167,7 +167,9 @@
         'airattack' => [
             'c64' => [
                 [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro64.mpic']
+                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintro64.mpic'],
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic2.imf' ]
             ],
             'vic2024' => [
                 [ 'loader' => 'airattack_loader2024.prg'],
