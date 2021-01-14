@@ -746,6 +746,7 @@ void game_air_attack() {
 			MR_PTI_WAIT_RUNNING(4, mr_musicplayer, musicPlayerTitles);
 
 		}
+		mr_sound_init();
 
 #else
 
