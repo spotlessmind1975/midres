@@ -154,21 +154,24 @@ void mr_tileset_visible_hd(unsigned char _tileset) {
 }
 
 unsigned char mr_key_pressed_hd() {
+    unsigned char a;
+    unsigned char b;
+    unsigned char port;
     *((unsigned char*)0xff00) = *(((unsigned char*)0xff00)) & ~0x10;
-    unsigned char a = *((unsigned char*)0xff00);
+    a = *((unsigned char*)0xff00);
     a = *((unsigned char*)0xff00);
     a = *((unsigned char*)0xff00);
     a = *((unsigned char*)0xff00);
     a = ~a;
     a = a & 0x0f;
     *((unsigned char*)0xff00) = *(((unsigned char*)0xff00)) & ~0x08;
-    unsigned char b = *((unsigned char*)0xff00);
+    b = *((unsigned char*)0xff00);
     b = *((unsigned char*)0xff00);
     b = *((unsigned char*)0xff00);
     b = *((unsigned char*)0xff00);
     b = ~b;
     b = b & 0x0f;
-    unsigned char port = (a << 4) | b;
+    port = (a << 4) | b;
     return port != 0;
 }
     
@@ -271,14 +274,14 @@ void mr_sound_frequency_channel_hd(unsigned char _channel, unsigned int _frequen
         *((unsigned char*)0xff10) = 0x10;
         *((unsigned char*)0xff11) = 0x9f;
         *((unsigned char*)0xff12) = 0xf1;
-        *((unsigned char*)0xff13) = freq & 0xff;
-        *((unsigned char*)0xff14) = 0x80 | ((freq >> 8) & 0x03);
+        *((unsigned char*)0xff13) = _frequency & 0xff;
+        *((unsigned char*)0xff14) = 0x80 | ((_frequency >> 8) & 0x03);
         break;
     case 1:
         *((unsigned char*)0xff16) = 0x10;
         *((unsigned char*)0xff17) = 0x9f;
         *((unsigned char*)0xff18) = 0xff;
-        *((unsigned char*)0xff19) = 0x80 | ((freq >> 8) & 0x03);
+        *((unsigned char*)0xff19) = 0x80 | ((_frequency >> 8) & 0x03);
         break;
     }
 
@@ -309,21 +312,24 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 }
 
 unsigned char mr_joy_hd(unsigned char _number) {
+    unsigned char a;
+    unsigned char b;
+    unsigned char port;
     *((unsigned char*)0xff00) = *(((unsigned char*)0xff00)) & ~0x10;
-    unsigned char a = *((unsigned char*)0xff00);
+    a = *((unsigned char*)0xff00);
     a = *((unsigned char*)0xff00);
     a = *((unsigned char*)0xff00);
     a = *((unsigned char*)0xff00);
     a = ~a;
     a = a & 0x0f;
     *((unsigned char*)0xff00) = *(((unsigned char*)0xff00)) & ~0x08;
-    unsigned char b = *((unsigned char*)0xff00);
+    b = *((unsigned char*)0xff00);
     b = *((unsigned char*)0xff00);
     b = *((unsigned char*)0xff00);
     b = *((unsigned char*)0xff00);
     b = ~b;
     b = b & 0x0f;
-    unsigned char port = (a << 4) | b;
+    port = (a << 4) | b;
 
     if (port & 0x20) {
         return MR_JOYSTICK_FIRE;
@@ -360,7 +366,7 @@ void mr_tileset_copy_hd(unsigned char _source, unsigned char _dest) {
 
 void mr_tileset_multicolor_to_monocolor_hd(unsigned char _source, unsigned char _starting, unsigned char _count) {
     mr_position w = _count, b = 0;
-    unsigned char *source = (unsigned int* )(MR_TM(_source) + _starting * 16);
+    unsigned char *source = (unsigned char* )(MR_TM(_source) + _starting * 16);
     for (--w; w != 255; --w) {
         for (b = 0; b < 16; ++b, ++source) {
             unsigned int s;
@@ -403,9 +409,9 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
 
     for (i = 0; i < 9; ++i) {
         for (b = 0; b < 8; ++b) {
-            mr_mixel d;
+            mr_mixel d, m;
             MR_PROTECTED_ACCESS_VRAM( d = MR_READ_VRAM(source) );
-            mr_mixel m = d >> i;
+            m = d >> i;
             MR_PROTECTED_ACCESS_VRAM( MR_WRITE_VRAM(destination, m ) );
             ++destination; ++source;
             //MR_PROTECTED_ACCESS_VRAM( d = *source );
@@ -418,9 +424,9 @@ void mr_tile_prepare_horizontal_monocolor_hd(unsigned char _tileset, unsigned ch
 
     for (i = 0; i < 8; ++i) {
         for (b = 0; b < 8; ++b) {
-            mr_mixel d;
+            mr_mixel d, n;
             MR_PROTECTED_ACCESS_VRAM( d = MR_READ_VRAM(source) );
-            mr_mixel n = d & (0xff >> (7 - i));
+            n = d & (0xff >> (7 - i));
             n = (n << (7 - i));
             MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(destination, n ) );
             ++destination; ++source;
@@ -445,9 +451,9 @@ void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, un
     for (j = 0; j < _h; ++j) {
         for (i = 0; i < 9; ++i) {
             for (b = 0; b < 8; ++b) {
-                mr_mixel e;
+                mr_mixel e, m;
                 MR_PROTECTED_ACCESS_VRAM(e = MR_READ_VRAM(source));
-                mr_mixel m = e >> i;
+                m = e >> i;
                 MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(destination, m));
                 ++source; ++destination;
                 //MR_PROTECTED_ACCESS_VRAM( e = *(source) );
@@ -461,10 +467,10 @@ void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, un
         for (k = 0; k < (_w - 1); ++k) {
             for (i = 0; i < 9; ++i) {
                 for (b = 0; b < 8; ++b) {
-                    mr_mixel d,e;
+                    mr_mixel d,e,m;
                     MR_PROTECTED_ACCESS_VRAM(d = MR_READ_VRAM(source));
                     MR_PROTECTED_ACCESS_VRAM(e = MR_READ_VRAM(source + 16));
-                    mr_mixel m = (e >> i) | (d << (8 - i));
+                    m = (e >> i) | (d << (8 - i));
                     MR_PROTECTED_ACCESS_VRAM(MR_WRITE_VRAM(destination, m));
                     ++source, ++destination;
                     //MR_PROTECTED_ACCESS_VRAM( d = *source );
@@ -480,9 +486,9 @@ void mr_tile_prepare_horizontal_extended_monocolor_hd(unsigned char _tileset, un
 
         for (i = 0; i < 9; ++i) {
             for (b = 0; b < 8; ++b) {
-                mr_mixel d;
+                mr_mixel d, n;
                 MR_PROTECTED_ACCESS_VRAM(d = MR_READ_VRAM(source));
-                mr_mixel n = d & (0xff >> (8 - i));
+                n = d & (0xff >> (8 - i));
                 n = (n << (8 - i));
                 MR_PROTECTED_ACCESS_VRAM( MR_WRITE_VRAM(destination, n ) );
                 ++source; ++destination;
@@ -618,9 +624,10 @@ void mr_tile_prepare_roll_horizontal_monocolor_hd(unsigned char _tileset, unsign
 
     for (i = 0; i < 8; ++i) {
         for (b = 0; b < 8; ++b) {
-            mr_mixel d;
+            mr_mixel d, m, n;
             MR_PROTECTED_ACCESS_VRAM( d = MR_READ_VRAM(source) );
-            mr_mixel m = d >> i, n = d & (0xff >> (8 - i));
+            m = d >> i;
+            n = d & (0xff >> (8 - i));
             m = m | (n << (8 - i));
             MR_PROTECTED_ACCESS_VRAM( MR_WRITE_VRAM(destination, m ) );
             ++source; ++destination;
