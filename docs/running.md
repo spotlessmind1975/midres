@@ -89,7 +89,7 @@ You can give the `program`'s executable name directly on the command line, with 
     yape [program].plus4.d64
     xplus4 [program].plus4.d64
 
-### Commodore VIC-20
+### Commodore VIC-20 `vic20` `vic2024`
 
 MIDRES can produce two versions of executables, one that works without any memory expansion and another that uses expansions of 24 KB (first, second and 3rd extension blocks). Disk images use the electronic form of a physical 1541 disk (`.d64`) as [defined by Immers/Neufeld, and supported by Wolfgang Moser](http://unusedino.de/ec64/technical/formats/d64.html). Those disk images can be transferred into real disks using an hardware/software combination like the one described on [this page](http://www.6502.org/users/sjgray/software/cbmxfer/cbmxfer.html).
 
@@ -104,7 +104,7 @@ You can give the `program`'s executable name directly on the command line, with 
     xvic [program].vic20.d64
     xvic --memory 24k [program].vic20.d64
 
-### GAMEBOY (B/W)
+### GAMEBOY (B/W) `gb`
 
 MIDRES can produce a ROM cartidge that can be fit into a classic Gameboy. You can find some instructions on [this page](https://dhole.github.io/post/gameboy_cartridge_rw_1/).
 
@@ -114,7 +114,7 @@ You can give the `program`'s ROM name directly on the command line.
 
     visualboyadvance-m [program].gb.gb
 
-### LM80C Color Computer (32KB)
+### LM80C Color Computer (32KB) `lm80c`
 
 MIDRES can produce an executable (PRG) that can be load it on the real LM80C. To do this you should create a loader that writes it into memory by reading it from the serial port. After loading it, it is necessary to modify the BASIC pointers.
 
