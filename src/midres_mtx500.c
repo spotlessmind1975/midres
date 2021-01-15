@@ -276,19 +276,12 @@ void mr_wait_jiffies_hd(unsigned char _jiffies) {
     }
 }
 
-// Hardware dependent sound library
-void mr_sound_start_hd(unsigned char _channel, unsigned char _number) {
-
+int mr_get_jiffies_int_hd() {
+    return *((unsigned int*)0xfd5d);
 }
 
-// Hardware dependent sound library
-void mr_sound_change_hd(unsigned char _channel, int _parameter) {
-
-}
-
-// Hardware dependent sound library
-void mr_sound_stop_hd(unsigned char _channel) {
-
+unsigned char mr_get_jiffies_hd() {
+    return *((unsigned int*)0xfd5d);
 }
 
 unsigned char* mr_translate_file_hd(mr_file _file) {
