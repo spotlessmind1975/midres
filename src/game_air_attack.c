@@ -40,18 +40,10 @@
 
 #include "main.h"
 #include "midres.h"
-#ifdef __PLUS4__
+#if defined(__PLUS4__) || defined(__ATARI__)|| defined(__MSX__) || defined(__MTX__) || defined(__LM80C__)
 #include "game_air_attack_tiles4.h"
-#elif __ATARI__
-#include "game_air_attack_tiles4.h"
-#elif __MSX__
-#include "game_air_attack_tiles4.h"
-#elif __GAMEBOY__
-#include "game_air_attack_tiles4.h"
-#elif __VIC20__
+#elsif defined(__VIC20__)
 #include "game_air_attack_tiles20.h"
-#elif __LM80C__
-#include "game_air_attack_tiles4.h"
 #else
 #include "game_air_attack_tiles.h"
 #endif
