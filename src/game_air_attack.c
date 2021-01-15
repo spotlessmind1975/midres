@@ -42,7 +42,7 @@
 #include "midres.h"
 #if defined(__PLUS4__) || defined(__ATARI__)|| defined(__MSX__) || defined(__MTX__) || defined(__LM80C__)
 #include "game_air_attack_tiles4.h"
-#elsif defined(__VIC20__)
+#elif defined(__VIC20__)
 #include "game_air_attack_tiles20.h"
 #else
 #include "game_air_attack_tiles.h"
