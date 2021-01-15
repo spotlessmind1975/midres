@@ -342,36 +342,34 @@
 
     $resources['airattack']['c16'] = $resources['airattack']['plus4'];
     $resources['airattack']['vic20'] = $resources['airattack']['vic2024'];
-    $resources['airattack']['coleco'] = $resources['airattack']['msx'];
+    //$resources['airattack']['coleco'] = $resources['airattack']['msx'];
     $resources['airattack']['msxc'] = $resources['airattack']['msx'];
     $resources['airattack']['svi'] = $resources['airattack']['msx'];
     $resources['airattack']['mtx500'] = $resources['airattack']['msx'];
     $resources['airattack']['atmos'] = $resources['airattack']['atari'];
-    $resources['airattack']['gb'] = $resources['airattack']['msx'];
     $resources['airattack']['lm80c'] = $resources['airattack']['msx'];
 
     $resources['totto']['c16'] = $resources['totto']['plus4'];
     $resources['totto']['vic20'] = $resources['totto']['vic2024'];
     $resources['totto']['c128'] = $resources['totto']['c64'];
-    $resources['totto']['coleco'] = $resources['totto']['msx'];
+    //$resources['totto']['coleco'] = $resources['totto']['msx'];
     $resources['totto']['msxc'] = $resources['totto']['msx'];
     $resources['totto']['svi'] = $resources['totto']['msx'];
     $resources['totto']['mtx500'] = $resources['totto']['msx'];
     $resources['totto']['atmos'] = $resources['totto']['atari'];
-    $resources['totto']['gb'] = $resources['totto']['msx'];
     $resources['totto']['lm80c'] = $resources['totto']['msx'];
 
     $resources['alienstorm']['c16'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['vic20'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['c128'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['atari'] = $resources['alienstorm']['c64'];
-    $resources['alienstorm']['coleco'] = $resources['alienstorm']['c64'];
+    //$resources['alienstorm']['coleco'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['msx'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['msxc'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['svi'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['mtx500'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['atmos'] = $resources['alienstorm']['atari'];
-    $resources['alienstorm']['gb'] = $resources['alienstorm']['msx'];
+    // $resources['alienstorm']['gb'] = $resources['alienstorm']['msx'];
     // $resources['alienstorm']['lm80c'] = $resources['alienstorm']['msx']; // it does not work?
 
     $resources['joycheck']['c16'] = $resources['joycheck']['plus4'];
@@ -386,7 +384,7 @@
     $resources['elevator']['msxc'] = $resources['elevator']['c64'];
     $resources['elevator']['svi'] = $resources['elevator']['c64'];
     $resources['elevator']['mtx500'] = $resources['elevator']['c64'];
-    $resources['elevator']['coleco'] = $resources['elevator']['c64'];
+    //$resources['elevator']['coleco'] = $resources['elevator']['c64'];
     $resources['elevator']['msxc'] = $resources['elevator']['c64'];
     $resources['elevator']['c128'] = $resources['elevator']['c64'];
     $resources['elevator']['atari'] = $resources['elevator']['c64'];
