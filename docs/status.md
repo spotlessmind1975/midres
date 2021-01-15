@@ -6,11 +6,11 @@ target name     |airattack       |alienstorm      |elevator        |joycheck    
 **c128**        |YES             |YES             |YES             |YES             |YES             |
 **c16**         |NO[1]           |NO[1]           |NO[1]           |YES             |NO[1]           |
 **c64**         |YES             |YES             |YES             |YES             |YES             |
-**coleco**      |NO[3]           |NO[3]           |NO[3]           |NO[4]           |NO[3]           |
-**gb**          |NO[3]           |NO[3]           |NO[3]           |NO[4]           |NO[3]           |
+**coleco**      |NO[4]           |NO[4]           |NO[4]           |NO[4]           |NO[4]           |
+**gb**          |NO[3]           |NO[4]           |NO[3]           |NO[4]           |NO[1]           |
 **lm80c**       |YES             |NO[4]           |YES             |NO[4]           |YES             |
 **msx**         |YES             |YES             |YES             |NO[4]           |YES             |
-**mtx500**      |NO[3]           |NO[3]           |NO[3]           |NO[4]           |NO[3]           |
+**mtx500**      |YES             |YES             |YES             |NO[4]           |YES             |
 **plus4**       |YES             |YES             |YES             |YES             |YES             |
 **svi**         |NO[3]           |NO[3]           |NO[3]           |NO[4]           |NO[3]           |
 **vic20**       |NO[1]           |NO[2]           |NO[1]           |NO[4]           |NO[2]           |
