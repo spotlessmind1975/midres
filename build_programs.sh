@@ -47,6 +47,9 @@ function make_program() {
 		if [[ $errors == *"exceeds ROM address range"* ]]; then
   			printf "%-15s |" "NO[1]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: pink; }\n" $targetIndex $programIndex >>$tmp2
+		elif [[ $errors == *"Main output binary exceeds"* ]]; then
+  			printf "%-15s |" "NO[1]" >>$tmp3;
+			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: pink; }\n" $targetIndex $programIndex >>$tmp2
 		elif [[ $errors == *"Cannot generate most of the files due to memory area overflow"* ]]; then
   			printf "%-15s |" "NO[1]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: pink; }\n" $targetIndex $programIndex >>$tmp2
