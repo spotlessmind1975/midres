@@ -1129,8 +1129,8 @@
 								(s)->count = c;
 
 	#define MR_PTI_WAIT_RUNNING(t, m, c) { \
-									mr_end_frame(0); \
 									int now##__LINE__ = mr_get_jiffies_int(); \
+									mr_end_frame(0); \
 									while ((mr_get_jiffies_int() - now##__LINE__) < t) { \
 										m(&c); \
 									} \
