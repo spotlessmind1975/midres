@@ -50,6 +50,9 @@ MR_PT_THREAD_EXT(mr_musicplayer, mr_musicplayer_protothread) {
 
 	if (MR_PTI_CTX()->buffer != NULL && ( MR_PTI_CTX()->buffer < MR_PTI_CTX()->eof ) ) {
 
+		// skip version
+		++MR_PTI_CTX()->buffer;
+
 		while (MR_PTI_CTX()->buffer < MR_PTI_CTX()->eof) {
 
 			MR_PTI_CTX()->last_opcode = *(MR_PTI_CTX()->buffer);

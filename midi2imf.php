@@ -620,6 +620,9 @@
 
     $fh = fopen($outputFileName, "wb");
 
+    // version
+    fputs($fh, chr(1), 1 );
+
     // We write the consolidated data.
     foreach( $imfData as $chunk ) {
 
