@@ -144,7 +144,7 @@ Alternatively, if you don't have a physical machine, you can use [MEMU v0.91b](h
 
 You can give the `program`'s executable name (with extension `mtx`) directly on the command line, with the proper option.
 
-    memu -mem-mtx500 -vid-win-big [program].mtx500.mtx
+    memu -s -mem-mtx500 -vid-win-big [program].mtx500.mtx
 
 Then, when the screen appears, giving the commands:
 
