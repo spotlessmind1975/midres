@@ -206,8 +206,7 @@
             ],
             'gb' => [
                 [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
-                [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
-                [ 'destination' => 'zzintro.pic', 'source' => '$(DATADIR)/aaintrox.pic']
+                [ 'destination' => 'zztiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ]
             ],
             'lm80c' => [
                 [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
