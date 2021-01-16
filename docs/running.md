@@ -77,7 +77,9 @@ You can give the `program`'s executable name directly on the command line, with 
 MIDRES produces disk images that use the electronic form of a physical 1541 disk (`.d64`) as [defined by Immers/Neufeld, and supported by Wolfgang Moser](http://unusedino.de/ec64/technical/formats/d64.html). Those disk images can be transferred into real disks using an hardware/software combination like the one described on [this page](http://www.6502.org/users/sjgray/software/cbmxfer/cbmxfer.html).
 
 Alternatively, if you don't have a physical machine, you can use one of those emulators:
-   * [YAPE 1.1.7](http://yape.homeserver.hu/)
+   * [YAPE Emulator](http://yape.homeserver.hu/)
+      * YAPE 1.1.8
+      * YAPE 1.1.7
    * [VICE emulator](https://vice-emu.sourceforge.io/).
       * VICE 3.5
       * VICE 3.4
