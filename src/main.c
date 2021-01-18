@@ -149,4 +149,10 @@ void main(void) {
 
 #endif
 
+#if defined(__IMFPLAYER__) || defined(__AIRATTACK_INTRO__) || defined(__AIRATTACK_ENDING__) || defined(__TOTTO_INTRO__) || defined(__TOTTO_ENDING__) || defined(__ELEVATOR_ENDING__) 
+
+    utility_imfplayer();
+
+#endif
+
 }

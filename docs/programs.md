@@ -19,3 +19,12 @@ The list of targets is available [on this page](targets.md).
 - `joycheck` - the program has the purpose of verifying if the digital joystick and/or the port to which it is connected works correctly ([italian page](https://retroprogramming.iwashere.eu/it:joycheck) - [english page](https://retroprogramming.iwashere.eu/joycheck))
 - `totto` - “remake” of the Flappy Bird game ([italian page](https://retroprogramming.iwashere.eu/it:totto) - [english page](https://retroprogramming.iwashere.eu/totto))
 
+## SOUNDTRACK PLAYERS
+
+In order to compile a collection of soundtracks, it is possible to produce executables with music alone. For this purpose the "IMF" file is incorporated with a generic player. This is the list of executables that can be generated:
+
+- `airattack_intro` - Intro tune for "Air Attack!"
+- `airattack_ending` - Ending tune for "Air Attack!"
+- `totto_intro` - Intro tune for "Totto!"
+- `totto_ending` - Ending tune for "Totto!"
+- `elevator_ending` - Ending tune for "The Elevator"

@@ -217,6 +217,56 @@
             ],
         ],
 
+        'airattack_intro' => [
+            'c64' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+            ],
+            'vic2024' => [
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic.imf' ]
+            ],
+            'plus4' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+            ],
+            'c128' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+            ],
+            'atari' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+            ],
+            'msx' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+            ],
+            'lm80c' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic.imf' ],
+            ],
+        ],
+
+        'airattack_ending' => [
+            'c64' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic2.imf' ],
+            ],
+            'vic2024' => [
+                [ 'loader' => 'airattack_loader2024.prg'],
+                ['destination' => 'zamusic2.imf', 'source' => '$(DATADIR)/zamusic2.imf' ]
+            ],
+            'plus4' => [
+                [ 'loader' => 'airattack_loader4.prg'],
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic2.imf' ],
+            ],
+            'c128' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic2.imf' ],
+            ],
+            'atari' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic2.imf' ],
+            ],
+            'msx' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic2.imf' ],
+            ],
+            'lm80c' => [
+                ['destination' => 'zamusic.imf', 'source' => '$(DATADIR)/zamusic2.imf' ],
+            ],
+        ],
+
         'totto' => [
             'c64' => [
                 ['destination' => 'tttiles.bin', 'source' => '$(DATADIR)/tttiles.bin' ],
@@ -268,6 +318,46 @@
             ]
         ],
 
+        'totto_intro' => [
+            'c64' => [
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto.imf' ]
+            ],
+            'vic2024' => [
+                [ 'loader' => 'totto_loader2024.prg'],
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto.imf' ]
+            ],
+            'plus4' => [
+                [ 'loader' => 'totto_loader4.prg'],
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto.imf' ]
+            ],
+            'msx' => [
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto.imf' ]
+            ],
+            'lm80c' => [
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto.imf' ]
+            ]
+        ],
+
+        'totto_ending' => [
+            'c64' => [
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto3.imf' ]
+            ],
+            'vic2024' => [
+                [ 'loader' => 'totto_loader2024.prg'],
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto3.imf' ]
+            ],
+            'plus4' => [
+                [ 'loader' => 'totto_loader4.prg'],
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto3.imf' ]
+            ],
+            'msx' => [
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto3.imf' ]
+            ],
+            'lm80c' => [
+                ['destination' => 'totto.imf', 'source' => '$(DATADIR)/totto3.imf' ]
+            ]
+        ],
+        
         'alienstorm' => [
             'c64' => [
                 ['destination' => 'zstiles.bin', 'source' => '$(DATADIR)/astiles.bin' ],
@@ -325,6 +415,23 @@
                 ['destination' => 'zelintro.bin', 'source' => '$(DATADIR)/elevatora.mpic' ],
                 ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
             ]
+        ],
+
+        'elevator_ending' => [
+            'c64' => [
+                ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
+                ],
+            'vic2024' => [
+                [ 'loader' => 'elloader2024.prg'],
+                ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
+            ],
+            'plus4' => [
+                [ 'loader' => 'elloader4.prg'],
+                ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
+            ],
+            'atari' => [
+                ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
+            ]
         ]
 
     ];
@@ -348,6 +455,24 @@
     $resources['airattack']['atmos'] = $resources['airattack']['atari'];
     $resources['airattack']['lm80c'] = $resources['airattack']['msx'];
 
+    $resources['airattack_intro']['c16'] = $resources['airattack_intro']['plus4'];
+    $resources['airattack_intro']['vic20'] = $resources['airattack_intro']['vic2024'];
+    //$resources['airattack_intro']['coleco'] = $resources['airattack_intro']['msx'];
+    $resources['airattack_intro']['msxc'] = $resources['airattack_intro']['msx'];
+    $resources['airattack_intro']['svi'] = $resources['airattack_intro']['msx'];
+    $resources['airattack_intro']['mtx500'] = $resources['airattack_intro']['msx'];
+    $resources['airattack_intro']['atmos'] = $resources['airattack_intro']['atari'];
+    $resources['airattack_intro']['lm80c'] = $resources['airattack_intro']['msx'];
+
+    $resources['airattack_ending']['c16'] = $resources['airattack_ending']['plus4'];
+    $resources['airattack_ending']['vic20'] = $resources['airattack_ending']['vic2024'];
+    //$resources['airattack_ending']['coleco'] = $resources['airattack_ending']['msx'];
+    $resources['airattack_ending']['msxc'] = $resources['airattack_ending']['msx'];
+    $resources['airattack_ending']['svi'] = $resources['airattack_ending']['msx'];
+    $resources['airattack_ending']['mtx500'] = $resources['airattack_ending']['msx'];
+    $resources['airattack_ending']['atmos'] = $resources['airattack_ending']['atari'];
+    $resources['airattack_ending']['lm80c'] = $resources['airattack_ending']['msx'];
+    
     $resources['totto']['c16'] = $resources['totto']['plus4'];
     $resources['totto']['vic20'] = $resources['totto']['vic2024'];
     $resources['totto']['c128'] = $resources['totto']['c64'];
@@ -357,6 +482,26 @@
     $resources['totto']['mtx500'] = $resources['totto']['msx'];
     $resources['totto']['atmos'] = $resources['totto']['atari'];
     $resources['totto']['lm80c'] = $resources['totto']['msx'];
+
+    $resources['totto_intro']['c16'] = $resources['totto_intro']['plus4'];
+    $resources['totto_intro']['vic20'] = $resources['totto_intro']['vic2024'];
+    $resources['totto_intro']['c128'] = $resources['totto_intro']['c64'];
+    //$resources['totto_intro']['coleco'] = $resources['totto_intro']['msx'];
+    $resources['totto_intro']['msxc'] = $resources['totto_intro']['msx'];
+    $resources['totto_intro']['svi'] = $resources['totto_intro']['msx'];
+    $resources['totto_intro']['mtx500'] = $resources['totto_intro']['msx'];
+    $resources['totto_intro']['atmos'] = $resources['totto_intro']['atari'];
+    $resources['totto_intro']['lm80c'] = $resources['totto_intro']['msx'];
+
+    $resources['totto_ending']['c16'] = $resources['totto_ending']['plus4'];
+    $resources['totto_ending']['vic20'] = $resources['totto_ending']['vic2024'];
+    $resources['totto_ending']['c128'] = $resources['totto_ending']['c64'];
+    //$resources['totto_ending']['coleco'] = $resources['totto_ending']['msx'];
+    $resources['totto_ending']['msxc'] = $resources['totto_ending']['msx'];
+    $resources['totto_ending']['svi'] = $resources['totto_ending']['msx'];
+    $resources['totto_ending']['mtx500'] = $resources['totto_ending']['msx'];
+    $resources['totto_ending']['atmos'] = $resources['totto_ending']['atari'];
+    $resources['totto_ending']['lm80c'] = $resources['totto_ending']['msx'];
 
     $resources['alienstorm']['c16'] = $resources['alienstorm']['c64'];
     $resources['alienstorm']['vic20'] = $resources['alienstorm']['c64'];
@@ -393,7 +538,7 @@
     $values = file('docs/targets.md');
     $targets = [];
     foreach ( $values as $value ) {
-        if ( preg_match('#- .([a-z0-9]+). -#', $value, $matched) ) {
+        if ( preg_match('#- .([a-z0-9\_]+). -#', $value, $matched) ) {
             $value = trim($matched[1]);
             if($value) {
                 $targets[] = trim($value);

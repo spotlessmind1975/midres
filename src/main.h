@@ -45,3 +45,4 @@ void tutorial_protothread1();
 void tutorial_protothread2();
 
 void utility_joycheck();
+void utility_imfplayer();
