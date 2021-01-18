@@ -159,8 +159,6 @@ void mr_sound_frequency_channel_hd(unsigned char _channel, unsigned int _frequen
 
     unsigned char value;
 
-    printf("f = %d\n", _frequency);
-
     switch ((_channel & 0x3)) {
     case 0:
     case 3:
