@@ -403,7 +403,7 @@
     $values = file('docs/demos.md');
     $demos = [];
     foreach ( $values as $value ) {
-        if ( preg_match('#- .([A-Za-z0-9]+). -#', $value, $matched) ) {
+        if ( preg_match('#- .([A-Za-z0-9\_]+). -#', $value, $matched) ) {
             $demo = trim($matched[1]);
             if($demo) {
                 $demos[] = trim($demo);
@@ -413,7 +413,7 @@
     $values = file('docs/programs.md');
     $programs = [];
     foreach ( $values as $value ) {
-        if ( preg_match('#- .([a-z0-9]+). - #', $value, $matched) ) {
+        if ( preg_match('#- .([a-z0-9\_]+). - #', $value, $matched) ) {
             $program = trim($matched[1]);
             if($program) {
                 $programs[] = trim($program);
@@ -481,6 +481,12 @@ foreach( $targets as $target ) {
 foreach( $targets as $target ) {
         
     foreach( $programs as $program ) {
+
+        $embedded = false;
+        if ( stripos( $program, '_' ) !== false ) {
+            $embedded = true;
+        }
+
         switch( $target ) {
             case 'msx':
             case 'msxc':
@@ -511,7 +517,7 @@ foreach( $targets as $target ) {
             case 'c16':
             case 'plus4':
                 if ( isset( $resources[$program][$target]) ) {
-                    emit_rules_for_program_cc65($target, $program, $resources[$program][$target] );
+                    emit_rules_for_program_cc65($target, $program, $resources[$program][$target], $embedded );
                 } else {
 ?>                    
 #!!! missing resources for <?=$program;?> (<?=$target;?>)

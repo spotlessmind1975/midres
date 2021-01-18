@@ -371,6 +371,14 @@ midres.<?=$demo;?>.embedded.<?=$platform;?>:
     }
 ?>
 
+<?php
+    if ( $embedded ) {
+?>
+	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl <?=$cbm?'-D__CBM__':'';?> -o obj/<?=$platform65;?>/rawdata.o src/rawdata.c
+<?php
+    }
+?>
+
 obj/<?=$platform;?>/%.o:	$(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl <?=$cbm?'-D__CBM__':'';?> -o $@ $(subst obj/<?=$platform;?>/,src/,$(@:.o=.c))
 
@@ -466,15 +474,26 @@ function emit_rules_for_program_cc65($platform, $program, $resources = [], $embe
 <?php
     if ( $embedded ) {
 ?>	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl <?=$cbm?'-D__CBM__':'';?> -o obj/<?=$outputPath;?>/rawdata.o src/rawdata.c
+
+obj/<?=$outputPath;?>/midres_sid_impl.o:	src/midres_sid_impl.asm
+	$(ASM) -t <?=$platform65;?> -oobj/<?=$outputPath;?>/midres_sid_impl.o src/midres_sid_impl.asm
+
+obj/<?=$outputPath;?>/midres_ted_impl.o:	src/midres_ted_impl.asm
+	$(ASM) -t <?=$platform65;?> -oobj/<?=$outputPath;?>/midres_ted_impl.o src/midres_ted_impl.asm
+
+obj/<?=$outputPath;?>/midres_pokey_impl.o:	src/midres_pokey_impl.asm
+	$(ASM) -t <?=$platform65;?> -oobj/<?=$outputPath;?>/midres_pokey_impl.o src/midres_pokey_impl.asm
+
 <?php
     }
 ?>
 
-obj/<?=$outputPath;?>/%.o:	$(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl -D__<?=strtoupper($program);?>__ <?=$cbm?'-D__CBM__':'';?> -o $@ $(subst obj/<?=$outputPath;?>/,src/,$(@:.o=.c))
+obj/<?=$outputPath;?>/%.o: <?=($embedded)?'$(LIB_INCLUDES) $(LIB_SOURCES)':'';?> $(SOURCES)
+	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl -D__<?=strtoupper($program);?>__ <?=$cbm?'-D__CBM__':'';?> <?=$embedded?'-DMIDRES_EMBEDDED_FILES':'';?> -o $@ $(subst obj/<?=$outputPath;?>/,src/,$(@:.o=.c))
 
-$(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> $(subst PLATFORM,<?=$outputPath;?>,$(OBJS))
-	$(CC) -Ln demo<?=$platform65;?>.lbl -t <?=$platform65;?> -C cfg/<?=$platform;?>.cfg $(LDFLAGS) -m $(EXEDIR)/<?=$program;?>.<?=$platform65;?>.map -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> <?=$embedded?("obj/".$outputPath."/rawdata.o"):"";?> $(subst PLATFORM,<?=$outputPath;?>,$(OBJS)) $(LIBDIR)/midres.<?=$platform;?>.lib
+$(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> <?=$embedded?("obj/".$outputPath."/rawdata.o obj/".$outputPath."/midres_pokey_impl.o obj/".$outputPath."/midres_ted_impl.o obj/".$outputPath."/midres_sid_impl.o"):"";?> $(subst PLATFORM,<?=$outputPath;?>,$(LIB_OBJS)) $(subst PLATFORM,<?=$outputPath;?>,$(OBJS))
+	$(CC) -Ln demo<?=$platform65;?>.lbl -t <?=$platform65;?> -C cfg/<?=$platform;?>.cfg $(LDFLAGS) -m $(EXEDIR)/<?=$program;?>.<?=$platform65;?>.map -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> <?=$embedded?("obj/".$outputPath."/rawdata.o obj/".$outputPath."/midres_pokey_impl.o obj/".$outputPath."/midres_ted_impl.o obj/".$outputPath."/midres_sid_impl.o"):"";?> $(subst PLATFORM,<?=$outputPath;?>,$(LIB_OBJS)) $(subst PLATFORM,<?=$outputPath;?>,$(OBJS)) <?=(($embedded)?'':'$(LIBDIR)/midres.'.$platform.'.lib');?>
+
 <?php 
 
     switch( $platform ) {
