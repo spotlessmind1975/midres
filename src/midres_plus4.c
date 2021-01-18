@@ -87,7 +87,7 @@ void mr_init_base_hd() {
     MR_VISIBLE_SCREEN = MR_SCREEN_DEFAULT;
     MR_ENABLED_SCREEN = MR_SCREEN_DEFAULT;
 
-    //mr_ted_init();
+    mr_ted_init();
 
 }
 
