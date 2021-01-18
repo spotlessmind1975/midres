@@ -220,7 +220,7 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 
 }
 
-#ifdef MIDRES_STANDALONE_FILE
+#ifndef MIDRES_EMBEDDED_FILES
 
 unsigned char* mr_translate_file_hd(mr_file _file) {
     return mr_translate_file_user(_file);
