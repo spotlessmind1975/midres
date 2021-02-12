@@ -107,6 +107,18 @@ function extract_symbols_from_sources( ) {
             }
 
         }
+
+        foreach ( $symbols[$file]['import'] as $alias => $symbol ) {
+            if ( substr($symbol, strlen($symbol)-3, 3) == '_hd' ) {
+                $newSymbol = str_replace('_hd', '_memory_mapped', $symbol);
+                $symbols[$file]['import'][$newSymbol] = $newSymbol;
+            }
+            if ( substr($symbol, strlen($symbol)-5, 5) == '_file' ) {
+                $newSymbol = str_replace('_file', '_file_memory_mapped', $symbol);
+                $symbols[$file]['import'][$newSymbol] = $newSymbol;
+            }
+        }
+    
     }
 
     // foreach( $symbols as $module => $subsymbol ) {
@@ -176,7 +188,7 @@ function build_list_of_needed_files( $symbols, $module, & $neededFiles = [] /*, 
 
 function find_main_module( $application_name ) {
 
-    print "# find_main_module(".$application_name.")\n";
+    // print "# find_main_module(".$application_name.")\n";
 
     $files = glob('src/*.c');
 
@@ -184,9 +196,13 @@ function find_main_module( $application_name ) {
 
         $content = implode('', file($file));
 
-        if ( stripos( $content, '#ifdef __'.$application_name.'__' ) !== false && $file != 'src/main.c') {
+        if ( 
+                ( stripos( $content, '#ifdef __'.str_replace('_','',$application_name).'__' ) !== false 
+                ||
+                stripos( $content, 'defined(__'.str_replace('_','',$application_name).'__)' ) !== false )
+            && $file != 'src/main.c') {
 
-            print "# -> ".$file."\n";
+            // print "# -> ".$file."\n";
             return $file;
 
         }
@@ -263,6 +279,7 @@ function emit_rules_for_library_cc65($platform) {
 # -------------------------------------------------------------------
 # --- MIDRES LIBRARY FOR <?=strtoupper($platform);?> 
 # -------------------------------------------------------------------
+midres.embedded.<?=$platform;?>:
 
 obj/<?=$platform;?>/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t <?=$platform65;?> -oobj/<?=$platform;?>/midres_sid_impl.o src/midres_sid_impl.asm
@@ -276,7 +293,7 @@ obj/<?=$platform;?>/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/<?=$platform;?>/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl <?=$cbm?'-D__CBM__':'';?>  -o $@ $(subst obj/<?=$platform;?>/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.<?=$platform;?>.lib:	$(LIB_INCLUDES) $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) obj/<?=$platform;?>/midres_sid_impl.o obj/<?=$platform;?>/midres_ted_impl.o obj/<?=$platform;?>/midres_pokey_impl.o
+$(LIBDIR)/midres.<?=$platform;?>.lib:	midres.embedded.<?=$platform;?> $(LIB_INCLUDES) $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) obj/<?=$platform;?>/midres_sid_impl.o obj/<?=$platform;?>/midres_ted_impl.o obj/<?=$platform;?>/midres_pokey_impl.o
 	$(AR) r $(LIBDIR)/midres.<?=$platform;?>.lib $(subst PLATFORM,<?=$platform;?>,$(LIB_OBJS)) obj/<?=$platform;?>/midres_sid_impl.o obj/<?=$platform;?>/midres_ted_impl.o obj/<?=$platform;?>/midres_pokey_impl.o
 
 <?php
@@ -449,31 +466,23 @@ $(EXEDIR)/midres.<?=$demo;?>.<?=$platform;?>: midres.<?=$demo;?>.embedded.<?=$pl
 <?php 
 
     switch( $platform ) {
-        case 'c64reu':
         case 'c64':
         case 'vic20':
         case 'c16':
         case 'c128':
-        case 'c128reu':
             $executable = [
                 "destination" => "midres-single",
                 "source" => "$(EXEDIR)/midres.".$platform65,
             ];
 
-            if($platform == 'c64reu') {
+            if ( $embedded ) {
                 emit_commands_for_create_1541_disk($platform, "midres", [ $executable ]);
                 emit_commands_for_create_1571_disk($platform, "midres", [ $executable ]);
                 emit_commands_for_create_1581_disk($platform, "midres", [ $executable ]);
             } else {
-                if ( $embedded ) {
-                    emit_commands_for_create_1541_disk($platform, "midres", [ $executable ]);
-                    emit_commands_for_create_1571_disk($platform, "midres", [ $executable ]);
-                    emit_commands_for_create_1581_disk($platform, "midres", [ $executable ]);
-                } else {
-                    emit_commands_for_create_1541_disk($platform, "midres", array_merge([ $executable ], $resources));
-                    emit_commands_for_create_1571_disk($platform, "midres", array_merge([ $executable ], $resources));
-                    emit_commands_for_create_1581_disk($platform, "midres", array_merge([ $executable ], $resources));
-                }
+                emit_commands_for_create_1541_disk($platform, "midres", array_merge([ $executable ], $resources));
+                emit_commands_for_create_1571_disk($platform, "midres", array_merge([ $executable ], $resources));
+                emit_commands_for_create_1581_disk($platform, "midres", array_merge([ $executable ], $resources));
             }
             break;
         case 'vic2024':
@@ -538,6 +547,34 @@ function emit_rules_for_program_cc65($platform, $program, $resources = [], $embe
 
     $outputPath = $program.".".$platform;
 
+    if ( $embedded ) {
+        $mainModule = find_main_module($program);
+        $symbols = extract_symbols_from_sources();
+        $neededFiles = [];
+        build_list_of_needed_files( $symbols, $mainModule, $neededFiles );
+        $neededFiles[] = $mainModule;
+        $neededFiles[] = 'src/midres_control_011.c';
+        $neededFiles[] = 'src/midres_data.c';
+        $neededFiles[] = 'src/midres_cbm.c';
+        $neededFiles[] = 'src/midres_data.c';
+        $neededFiles[] = 'src/main.c';
+        sort($neededFiles);
+        $neededFiles = array_unique($neededFiles);
+    
+        $neededObjectFiles = [];
+        foreach( $neededFiles as $neededFile ) {
+            $neededObjectFiles[] = preg_replace(['#src/#', '#\.c$#'],['obj/'.$outputPath.'/', '.o'], $neededFile);
+        }
+
+#        foreach( $symbols as $module => $subsymbol ) {
+#            print "# ".$module.":"."\n";
+#            print "# \texport:".implode(",", $subsymbol['export'])."\n";
+#            print "# \timport:".implode(",", $subsymbol['import'])."\n";
+#            print "#"."\n";
+#        }
+    
+    }
+
 ?>
 
 # -------------------------------------------------------------------
@@ -573,10 +610,10 @@ obj/<?=$outputPath;?>/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 ?>
 
 obj/<?=$outputPath;?>/%.o: <?=($embedded)?'$(LIB_INCLUDES) $(LIB_SOURCES)':'';?> $(SOURCES)
-	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl -D__<?=strtoupper($program);?>__ <?=$cbm?'-D__CBM__':'';?> <?=$embedded?'-DMIDRES_EMBEDDED_FILES':'';?> -o $@ $(subst obj/<?=$outputPath;?>/,src/,$(@:.o=.c))
+	$(CC) -T -l $(@:.o=.asm) -t <?=$platform65;?> -c $(CFLAGS) <?=$options;?> -Osir -Cl -D__<?=strtoupper(trim($program,'_'));?>__ <?=$cbm?'-D__CBM__':'';?> <?=$embedded?'-DMIDRES_EMBEDDED_FILES':'';?> -o $@ $(subst obj/<?=$outputPath;?>/,src/,$(@:.o=.c))
 
 $(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> <?=$embedded?("obj/".$outputPath."/rawdata.o obj/".$outputPath."/midres_pokey_impl.o obj/".$outputPath."/midres_ted_impl.o obj/".$outputPath."/midres_sid_impl.o"):"";?> $(subst PLATFORM,<?=$outputPath;?>,$(LIB_OBJS)) $(subst PLATFORM,<?=$outputPath;?>,$(OBJS))
-	$(CC) -Ln demo<?=$platform65;?>.lbl -t <?=$platform65;?> -C cfg/<?=$platform;?>.cfg $(LDFLAGS) -m $(EXEDIR)/<?=$program;?>.<?=$platform65;?>.map -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> <?=$embedded?("obj/".$outputPath."/rawdata.o obj/".$outputPath."/midres_pokey_impl.o obj/".$outputPath."/midres_ted_impl.o obj/".$outputPath."/midres_sid_impl.o"):"";?> $(subst PLATFORM,<?=$outputPath;?>,$(LIB_OBJS)) $(subst PLATFORM,<?=$outputPath;?>,$(OBJS)) <?=(($embedded)?'':'$(LIBDIR)/midres.'.$platform.'.lib');?>
+	$(CC) -Ln demo<?=$platform65;?>.lbl -t <?=$platform65;?> -C cfg/<?=$platform;?>.cfg $(LDFLAGS) -m $(EXEDIR)/<?=trim($program,'_');?>.<?=$platform65;?>.map -o $(EXEDIR)/<?=$program;?>.<?=$platform;?> <?=$embedded?("obj/".$outputPath."/rawdata.o obj/".$outputPath."/midres_pokey_impl.o obj/".$outputPath."/midres_ted_impl.o obj/".$outputPath."/midres_sid_impl.o ".implode(' ', $neededObjectFiles)):" $(subst PLATFORM,".$outputPath.",$(OBJS))";?> <?=(($embedded)?'':'$(LIBDIR)/midres.'.$platform.'.lib');?>
 
 <?php 
 
@@ -603,38 +640,22 @@ $(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> 
             }
             break;
         case 'c64':
-        case 'c64reu':
         case 'vic20':
         case 'c16':        
         case 'c128':
-        case 'c128reu':
             $executable = [
                 "destination" => "$(EXEDIR)/".$program,
                 "source" => "$(EXEDIR)/".$program.".".$platform,
             ];
 
-            if ( $platform == 'c64reu' || $platform == 'c128reu' ) {
-                $realResources = [];
-                foreach( $resources as $resource ){
-                    if ( isset( $resource['on'] ) && $resource['on'] == 'reu' ) {
-
-                    } else {
-                        $realResources[] = $resource;
-                    }
-                }
-                emit_commands_for_create_1541_disk($platform, $program, array_merge( [ $executable ] , $realResources));
-                emit_commands_for_create_1571_disk($platform, $program, array_merge( [ $executable ] , $realResources));
-                emit_commands_for_create_1581_disk($platform, $program, array_merge( [ $executable ] , $realResources));
+            if ( $embedded ) {
+                emit_commands_for_create_1541_disk($platform, $program, [ $executable ]);
+                emit_commands_for_create_1571_disk($platform, $program, [ $executable ]);
+                emit_commands_for_create_1581_disk($platform, $program, [ $executable ]);
             } else {
-                if ( $embedded ) {
-                    emit_commands_for_create_1541_disk($platform, $program, [ $executable ]);
-                    emit_commands_for_create_1571_disk($platform, $program, [ $executable ]);
-                    emit_commands_for_create_1581_disk($platform, $program, [ $executable ]);
-                } else {
-                    emit_commands_for_create_1541_disk($platform, $program, array_merge( [ $executable ] , $resources));
-                    emit_commands_for_create_1571_disk($platform, $program, array_merge( [ $executable ] , $resources));
-                    emit_commands_for_create_1581_disk($platform, $program, array_merge( [ $executable ] , $resources));
-                }
+                emit_commands_for_create_1541_disk($platform, $program, array_merge( [ $executable ] , $resources));
+                emit_commands_for_create_1571_disk($platform, $program, array_merge( [ $executable ] , $resources));
+                emit_commands_for_create_1581_disk($platform, $program, array_merge( [ $executable ] , $resources));
             }
             break;
         case 'atari':
