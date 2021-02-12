@@ -432,6 +432,35 @@
             'atari' => [
                 ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
             ]
+        ],
+        'benchmarks' => [
+            'c64' => [ 
+                ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
+                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
+            ],
+            'c128' => [ 
+                ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
+                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
+            ],
+            'plus4' => [ 
+                ['loader' => 'bmloader4.prg' ],
+                ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
+                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
+            ],
+            'c16' => [ 
+                ['loader' => 'bmloader4.prg' ],
+                ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
+                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
+            ],
+            'vic2024' => [ 
+                ['loader' => 'bmloader2024.prg' ],
+                ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
+                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
+            ],
+            'atari' => [ 
+                ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
+                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
+            ]
         ]
 
     ];

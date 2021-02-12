@@ -30,6 +30,11 @@
     * autorizzazioni e le limitazioni previste dalla medesima.
     ****************************************************************************/
 
+    define('ATR_DENSITY_SINGLE', 0);
+    define('ATR_DENSITY_EXTENDED', 1);
+    define('ATR_DENSITY_DOUBLE', 2);
+    define('ATR_DENSITY_QUAD', 3);
+
     /////////////////////////////////////////////////////////////////////////////////
 
 function extract_symbols_from_sources( ) {
@@ -311,9 +316,65 @@ function emit_commands_for_create_1541_disk($platform,$filename,$files = []) {
 
 //////////////////////////////////////////////////////////////////////////////////
 
-function emit_commands_for_create_atr_disk($platform,$filename,$files = []) {
+function emit_commands_for_create_1571_disk($platform,$filename,$files = []) {
 
-    $diskImage = $filename.'.'.$platform.'.atr';
+    $diskImage = $filename.'.'.$platform.'.d71';
+
+?>
+	$(call RMFILES,$(EXEDIR)/<?=$diskImage;?>)
+<?php
+    foreach( $files as $file ) {
+        $destination = $file['destination'];
+        $source = $file['source'];
+?>	$(CC1541) -f <?=basename($destination);?> -w <?=$source;?> $(EXEDIR)/<?=$diskImage;?> 
+<?php        
+    }
+
+}
+
+function emit_commands_for_create_1581_disk($platform,$filename,$files = []) {
+
+    $diskImage = $filename.'.'.$platform.'.d81';
+
+?>
+	$(call RMFILES,$(EXEDIR)/<?=$diskImage;?>)
+<?php
+    foreach( $files as $file ) {
+        $destination = $file['destination'];
+        $source = $file['source'];
+?>	$(CC1541) -f <?=basename($destination);?> -w <?=$source;?> $(EXEDIR)/<?=$diskImage;?> 
+<?php        
+    }
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+function emit_commands_for_create_atr_disk($platform,$filename,$files = [], $density = ATR_DENSITY_SINGLE) {
+
+    $extension = '.atr';
+
+    switch( $density ) {
+        default:
+        case ATR_DENSITY_SINGLE:
+            $densityFlag='-S';
+            $extension = 'atr';
+            break;
+        case ATR_DENSITY_EXTENDED:
+            $densityFlag='-E';
+            $extension = 'ed.atr';
+            break;
+        case ATR_DENSITY_DOUBLE:
+            $densityFlag='-D';
+            $extension = 'dd.atr';
+            break;
+        case ATR_DENSITY_QUAD:
+            $densityFlag='-Q';
+            $extension = 'qd.atr';
+            break;
+    }
+
+    $diskImage = $filename.'.'.$platform.'.'.$extension;
 
     $first = current($files);
     
@@ -328,8 +389,9 @@ function emit_commands_for_create_atr_disk($platform,$filename,$files = []) {
 <?php        
     }
 ?>
-	$(DIR2ATR) -S -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/<?=$diskImage;?> $(EXEDIR)/atr
+	$(DIR2ATR) <?=$densityFlag;?> -p -B $(DIR2ATR_HOME)/dos25/bootcode $(EXEDIR)/<?=$diskImage;?> $(EXEDIR)/atr
 	$(ATRAUTORUN) -i $(EXEDIR)/<?=$diskImage;?> -o $(EXEDIR)/<?=$diskImage;?> -f <?=str_replace('$(EXEDIR)/','',$first['destination']);?>
+
 <?php
 
 }
@@ -387,19 +449,31 @@ $(EXEDIR)/midres.<?=$demo;?>.<?=$platform;?>: midres.<?=$demo;?>.embedded.<?=$pl
 <?php 
 
     switch( $platform ) {
+        case 'c64reu':
         case 'c64':
         case 'vic20':
         case 'c16':
         case 'c128':
+        case 'c128reu':
             $executable = [
                 "destination" => "midres-single",
                 "source" => "$(EXEDIR)/midres.".$platform65,
             ];
 
-            if ( $embedded ) {
+            if($platform == 'c64reu') {
                 emit_commands_for_create_1541_disk($platform, "midres", [ $executable ]);
+                emit_commands_for_create_1571_disk($platform, "midres", [ $executable ]);
+                emit_commands_for_create_1581_disk($platform, "midres", [ $executable ]);
             } else {
-                emit_commands_for_create_1541_disk($platform, "midres", array_merge([ $executable ], $resources));
+                if ( $embedded ) {
+                    emit_commands_for_create_1541_disk($platform, "midres", [ $executable ]);
+                    emit_commands_for_create_1571_disk($platform, "midres", [ $executable ]);
+                    emit_commands_for_create_1581_disk($platform, "midres", [ $executable ]);
+                } else {
+                    emit_commands_for_create_1541_disk($platform, "midres", array_merge([ $executable ], $resources));
+                    emit_commands_for_create_1571_disk($platform, "midres", array_merge([ $executable ], $resources));
+                    emit_commands_for_create_1581_disk($platform, "midres", array_merge([ $executable ], $resources));
+                }
             }
             break;
         case 'vic2024':
@@ -416,8 +490,12 @@ $(EXEDIR)/midres.<?=$demo;?>.<?=$platform;?>: midres.<?=$demo;?>.embedded.<?=$pl
 
             if ( $embedded ) {
                 emit_commands_for_create_1541_disk($platform, "midres", [ $loader, $executable ]);
+                emit_commands_for_create_1571_disk($platform, "midres", [ $loader, $executable ]);
+                emit_commands_for_create_1581_disk($platform, "midres", [ $loader, $executable ]);
             } else {
                 emit_commands_for_create_1541_disk($platform, "midres", array_merge([ $loader, $executable ], $resources));
+                emit_commands_for_create_1571_disk($platform, "midres", array_merge([ $loader, $executable ], $resources));
+                emit_commands_for_create_1581_disk($platform, "midres", array_merge([ $loader, $executable ], $resources));
             }
             break;
             break;
@@ -428,9 +506,15 @@ $(EXEDIR)/midres.<?=$demo;?>.<?=$platform;?>: midres.<?=$demo;?>.embedded.<?=$pl
                 "source" => "$(EXEDIR)/midres.".$platform
             ];
             if ( $embedded ) {
-                emit_commands_for_create_atr_disk($platform65, "midres", [ $executable ]);
+                emit_commands_for_create_atr_disk($platform65, "midres", [ $executable ], ATR_DENSITY_SINGLE);
+                emit_commands_for_create_atr_disk($platform65, "midres", [ $executable ], ATR_DENSITY_EXTENDED);
+                // emit_commands_for_create_atr_disk($platform65, "midres", [ $executable ], ATR_DENSITY_DOUBLE);
+                // emit_commands_for_create_atr_disk($platform65, "midres", [ $executable ], ATR_DENSITY_QUAD);
             } else {
-                emit_commands_for_create_atr_disk($platform65, "midres", array_merge( [ $executable ], $resources));
+                emit_commands_for_create_atr_disk($platform65, "midres", array_merge( [ $executable ], $resources), ATR_DENSITY_SINGLE);
+                emit_commands_for_create_atr_disk($platform65, "midres", array_merge( [ $executable ], $resources), ATR_DENSITY_EXTENDED);
+                // emit_commands_for_create_atr_disk($platform65, "midres", array_merge( [ $executable ], $resources), ATR_DENSITY_DOUBLE);
+                // emit_commands_for_create_atr_disk($platform65, "midres", array_merge( [ $executable ], $resources), ATR_DENSITY_QUAD);
             }
             break;
     }
@@ -510,23 +594,47 @@ $(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> 
             ];
             if ( $embedded ) {
                 emit_commands_for_create_1541_disk($platform, $program, [ $loader, $executable ]);
+                emit_commands_for_create_1571_disk($platform, $program, [ $loader, $executable ]);
+                emit_commands_for_create_1581_disk($platform, $program, [ $loader, $executable ]);
             } else {
                 emit_commands_for_create_1541_disk($platform, $program, array_merge( [ $loader, $executable ] , $resources));
+                emit_commands_for_create_1571_disk($platform, $program, array_merge( [ $loader, $executable ] , $resources));
+                emit_commands_for_create_1581_disk($platform, $program, array_merge( [ $loader, $executable ] , $resources));
             }
             break;
         case 'c64':
+        case 'c64reu':
         case 'vic20':
         case 'c16':        
         case 'c128':
+        case 'c128reu':
             $executable = [
                 "destination" => "$(EXEDIR)/".$program,
                 "source" => "$(EXEDIR)/".$program.".".$platform,
             ];
 
-            if ( $embedded ) {
-                emit_commands_for_create_1541_disk($platform, $program, [ $executable ]);
+            if ( $platform == 'c64reu' || $platform == 'c128reu' ) {
+                $realResources = [];
+                foreach( $resources as $resource ){
+                    if ( isset( $resource['on'] ) && $resource['on'] == 'reu' ) {
+
+                    } else {
+                        $realResources[] = $resource;
+                    }
+                }
+                emit_commands_for_create_1541_disk($platform, $program, array_merge( [ $executable ] , $realResources));
+                emit_commands_for_create_1571_disk($platform, $program, array_merge( [ $executable ] , $realResources));
+                emit_commands_for_create_1581_disk($platform, $program, array_merge( [ $executable ] , $realResources));
             } else {
-                emit_commands_for_create_1541_disk($platform, $program, array_merge( [ $executable ] , $resources));
+                if ( $embedded ) {
+                    emit_commands_for_create_1541_disk($platform, $program, [ $executable ]);
+                    emit_commands_for_create_1571_disk($platform, $program, [ $executable ]);
+                    emit_commands_for_create_1581_disk($platform, $program, [ $executable ]);
+                } else {
+                    emit_commands_for_create_1541_disk($platform, $program, array_merge( [ $executable ] , $resources));
+                    emit_commands_for_create_1571_disk($platform, $program, array_merge( [ $executable ] , $resources));
+                    emit_commands_for_create_1581_disk($platform, $program, array_merge( [ $executable ] , $resources));
+                }
             }
             break;
         case 'atari':
@@ -536,9 +644,15 @@ $(EXEDIR)/<?=$program;?>.<?=$platform;?>: <?=$program.'.embedded.'.$platform;?> 
                 "source" => "$(EXEDIR)/".$program.".".$platform
             ];
             if ( $embedded ) {
-                emit_commands_for_create_atr_disk($platform, $program, [ $executable ]);
+                emit_commands_for_create_atr_disk($platform, $program, [ $executable ], ATR_DENSITY_SINGLE);
+                emit_commands_for_create_atr_disk($platform, $program, [ $executable ], ATR_DENSITY_EXTENDED);
+                // emit_commands_for_create_atr_disk($platform, $program, [ $executable ], ATR_DENSITY_DOUBLE);
+                // emit_commands_for_create_atr_disk($platform, $program, [ $executable ], ATR_DENSITY_QUAD);
             } else {
-                emit_commands_for_create_atr_disk($platform, $program, array_merge( [ $executable ] , $resources));
+                emit_commands_for_create_atr_disk($platform, $program, array_merge( [ $executable ] , $resources), ATR_DENSITY_SINGLE);
+                emit_commands_for_create_atr_disk($platform, $program, array_merge( [ $executable ] , $resources), ATR_DENSITY_EXTENDED);
+                // emit_commands_for_create_atr_disk($platform, $program, array_merge( [ $executable ] , $resources), ATR_DENSITY_DOUBLE);
+                // emit_commands_for_create_atr_disk($platform, $program, array_merge( [ $executable ] , $resources), ATR_DENSITY_QUAD);
             }
             break;
     }

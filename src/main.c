@@ -155,4 +155,10 @@ void main(void) {
 
 #endif
 
+#if defined(__BENCHMARKS__)
+
+    utility_benchmarks();
+
+#endif
+
 }

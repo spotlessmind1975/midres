@@ -1,4 +1,4 @@
-## PLATFORMS AND TARGETS
+# PLATFORMS AND TARGETS
 
 This is the list of supported compilation targets.
 

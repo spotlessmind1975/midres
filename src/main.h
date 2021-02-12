@@ -46,3 +46,4 @@ void tutorial_protothread2();
 
 void utility_joycheck();
 void utility_imfplayer();
+void utility_benchmarks();
