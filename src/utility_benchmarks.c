@@ -28,7 +28,6 @@
  * autorizzazioni e le limitazioni previste dalla medesima.
  ****************************************************************************/
 
-#define __BENCHMARKS__ 1
 #if defined(__BENCHMARKS__)
 
  /****************************************************************************

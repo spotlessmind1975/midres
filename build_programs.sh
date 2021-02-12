@@ -41,34 +41,45 @@ rm $tmp2 2>/dev/null
 rm $tmp3 2>/dev/null
 
 function make_program() {
+	
+	echo -n "Building $1 on $2...";
+
 	make program=$1 target=$2 all >/dev/null 2>$tmp
 	if [ $? -ne 0 ]; then
 		errors=`cat $tmp`
 		if [[ $errors == *"exceeds ROM address range"* ]]; then
   			printf "%-15s |" "NO[1]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: pink; }\n" $targetIndex $programIndex >>$tmp2
+			echo "FAILED"
 		elif [[ $errors == *"Main output binary exceeds"* ]]; then
   			printf "%-15s |" "NO[1]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: pink; }\n" $targetIndex $programIndex >>$tmp2
+			echo "FAILED"
 		elif [[ $errors == *"Cannot generate most of the files due to memory area overflow"* ]]; then
   			printf "%-15s |" "NO[1]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: pink; }\n" $targetIndex $programIndex >>$tmp2
+			echo "FAILED"
 		elif [[ $errors == *"No rule to make target"* ]]; then
 			printf "%-15s |" "NO[4]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: yellow; }\n" $targetIndex $programIndex >>$tmp2
+			echo "FAILED"
 		elif [[ $errors == *"MR_TILESET_1"* ]]; then
 			printf "%-15s |" "NO[2]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: cyan; }\n" $targetIndex $programIndex >>$tmp2
+			echo "FAILED"
 		elif [[ $errors == *"Error 1" ]]; then
 			printf "%-15s |" "NO[3]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: orange; }\n" $targetIndex $programIndex >>$tmp2
+			echo "FAILED"
 		else 
 			printf "%-15s |" "NO[3]" >>$tmp3;
 			printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: orange; }\n" $targetIndex $programIndex >>$tmp2
+			echo "FAILED"
 		fi
 	else
 		printf "%-15s |" "YES" >>$tmp3;
 		printf ".statusTable tr:nth-child(%d) > td:nth-child(%d) { background-color: lightgreen; }\n" $targetIndex $programIndex >>$tmp2
+		echo "OK"
 	fi;
 }
 
