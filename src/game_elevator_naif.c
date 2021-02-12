@@ -3,7 +3,7 @@
 /****************************************************************************
  * midres - Portable midres library for retrocomputers                      *
  *                                                                          *
- * Copyright (c) 2020 by Marco Spedaletti. Licensed under CC-BY-NC-SA       *
+ * Copyright (c) 2020-2021 by Marco Spedaletti. Licensed under CC-BY-NC-SA       *
  *--------------------------------------------------------------------------*
  * RESIDENT MODULE                                                          *
  ****************************************************************************/
