@@ -45,6 +45,7 @@
     use \Tmont\Midi\FileHeader as FileHeader;
     use \Tmont\Midi\TrackHeader as TrackHeader;
     use \Tmont\Midi\Event\ProgramChangeEvent as ProgramChangeEvent;
+    use \Tmont\Midi\Event\ChannelEvent as ChannelEvent;
     use \Tmont\Midi\Util\Note as Note;
     spl_autoload_register(function($className)
     {
@@ -75,6 +76,9 @@
 
     // Remap channels
     $remapChannels = [];
+
+    // Translate from tracks to channels
+    $translateFromTracksToChannels = false;
 
     // Maximum output size (in bytes, 0 = no limit)
     $maximumOutputSize = 0;
@@ -155,6 +159,7 @@
         echo " -P            transpose the 'program change' command(s)\n";
         echo " -s <b>        limit output to <b> bytes \n";
         echo " -t <t>        set tempo to <t>\n";
+        echo " -T            translate from tracks to channels\n";
         echo " -v            enable MIDI decode verbosity\n";
         echo "\n";
         exit(0);
@@ -277,6 +282,13 @@
                 $tempo = $forcedTempo;
                 break;
 
+
+            // -T            translate from tracks to channels
+            case 'T':
+                $translateFromTracksToChannels = true;
+                break;
+
+                
             // -v            enable MIDI decode verbosity
             case 'v':
                 $verbose = true;
@@ -604,6 +616,9 @@
                 // We transcribe the commands (except the pauses).
                 for($track=0; $track<count($imfTracks); ++$track) {
                     if ( isset($imfTracks[$track][$command]) && !($imfTracks[$track][$command] instanceof PauseMark) ) {
+                        if ( $translateFromTracksToChannels ) {
+                            $imfTracks[$track][$command]->setChannel($track);
+                        }
                         $imfData[] = $imfTracks[$track][$command];
                     }
                 }
