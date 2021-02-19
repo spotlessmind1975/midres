@@ -32,16 +32,22 @@
   ** INCLUDE SECTION
   ****************************************************************************/
 
-#include <stdio.h>
-
 #include "midres.h"
+
+extern unsigned char* _includedfiles[][];
 
 #if defined(MIDRES_STANDALONE_TILE)
 
 void mr_tileset_load_file_memory_mapped(mr_file _index, mr_tileset _tileset, mr_tile _starting, mr_tile _count) {
-#ifdef MIDRES_STANDALONE_FILE
+
+/*#ifdef MIDRES_EMBEDDED_FILES
+    int i = 0;
+    for (i = 0; i < (_count * 8); ++i) {
+        *(MR_TM(_tileset) + (8 * _starting) + i) = _includedFiles[_index][i];
+    }
+#else*/
     mr_read_file(_index, MR_TM(_tileset) + 8 * _starting, _count * 8);
-#endif
+/*#endif*/
 
 #ifndef MIDRES_STANDALONE_TILE_MULTICOLOR 
     if (MR_MULTICOLOR) {
