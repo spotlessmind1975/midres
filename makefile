@@ -297,6 +297,9 @@ obj/atari/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/atari/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t atari -oobj/atari/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/atari/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t atari -oobj/atari/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/atari/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t atari -oobj/atari/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -309,8 +312,8 @@ obj/atari/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/atari/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl   -o $@ $(subst obj/atari/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.atari.lib:	midres.embedded.atari $(LIB_INCLUDES) $(subst PLATFORM,atari,$(LIB_OBJS)) obj/atari/midres_atari_impl.o  obj/atari/midres_c64_impl.o obj/atari/midres_plus4_impl.o obj/atari/midres_sid_impl.o obj/atari/midres_ted_impl.o obj/atari/midres_pokey_impl.o
-	$(AR) r $(LIBDIR)/midres.atari.lib $(subst PLATFORM,atari,$(LIB_OBJS)) obj/atari/midres_atari_impl.o obj/atari/midres_c64_impl.o obj/atari/midres_plus4_impl.o obj/atari/midres_sid_impl.o obj/atari/midres_ted_impl.o obj/atari/midres_pokey_impl.o
+$(LIBDIR)/midres.atari.lib:	midres.embedded.atari $(LIB_INCLUDES) $(subst PLATFORM,atari,$(LIB_OBJS)) obj/atari/midres_atari_impl.o obj/atari/midres_c64_impl.o obj/atari/midres_vic20_impl.o obj/atari/midres_plus4_impl.o obj/atari/midres_sid_impl.o obj/atari/midres_ted_impl.o obj/atari/midres_pokey_impl.o
+	$(AR) r $(LIBDIR)/midres.atari.lib $(subst PLATFORM,atari,$(LIB_OBJS)) obj/atari/midres_atari_impl.o obj/atari/midres_c64_impl.o obj/atari/midres_vic20_impl.o obj/atari/midres_plus4_impl.o obj/atari/midres_sid_impl.o obj/atari/midres_ted_impl.o obj/atari/midres_pokey_impl.o
 
 # -------------------------------------------------------------------
 # --- DEMO/TUTORIALS FOR ATARI 
@@ -382,6 +385,9 @@ obj/c128/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/c128/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c128 -oobj/c128/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/c128/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c128 -oobj/c128/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/c128/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c128 -oobj/c128/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -394,8 +400,8 @@ obj/c128/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/c128/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/c128/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.c128.lib:	midres.embedded.c128 $(LIB_INCLUDES) $(subst PLATFORM,c128,$(LIB_OBJS)) obj/c128/midres_atari_impl.o  obj/c128/midres_c64_impl.o obj/c128/midres_plus4_impl.o obj/c128/midres_sid_impl.o obj/c128/midres_ted_impl.o obj/c128/midres_pokey_impl.o
-	$(AR) r $(LIBDIR)/midres.c128.lib $(subst PLATFORM,c128,$(LIB_OBJS)) obj/c128/midres_atari_impl.o obj/c128/midres_c64_impl.o obj/c128/midres_plus4_impl.o obj/c128/midres_sid_impl.o obj/c128/midres_ted_impl.o obj/c128/midres_pokey_impl.o
+$(LIBDIR)/midres.c128.lib:	midres.embedded.c128 $(LIB_INCLUDES) $(subst PLATFORM,c128,$(LIB_OBJS)) obj/c128/midres_atari_impl.o obj/c128/midres_c64_impl.o obj/c128/midres_vic20_impl.o obj/c128/midres_plus4_impl.o obj/c128/midres_sid_impl.o obj/c128/midres_ted_impl.o obj/c128/midres_pokey_impl.o
+	$(AR) r $(LIBDIR)/midres.c128.lib $(subst PLATFORM,c128,$(LIB_OBJS)) obj/c128/midres_atari_impl.o obj/c128/midres_c64_impl.o obj/c128/midres_vic20_impl.o obj/c128/midres_plus4_impl.o obj/c128/midres_sid_impl.o obj/c128/midres_ted_impl.o obj/c128/midres_pokey_impl.o
 
 # -------------------------------------------------------------------
 # --- DEMO/TUTORIALS FOR C128 
@@ -484,6 +490,9 @@ obj/c16/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/c16/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c16 -oobj/c16/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/c16/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c16 -oobj/c16/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/c16/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c16 -oobj/c16/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -496,8 +505,8 @@ obj/c16/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/c16/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/c16/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.c16.lib:	midres.embedded.c16 $(LIB_INCLUDES) $(subst PLATFORM,c16,$(LIB_OBJS)) obj/c16/midres_atari_impl.o  obj/c16/midres_c64_impl.o obj/c16/midres_plus4_impl.o obj/c16/midres_sid_impl.o obj/c16/midres_ted_impl.o obj/c16/midres_pokey_impl.o
-	$(AR) r $(LIBDIR)/midres.c16.lib $(subst PLATFORM,c16,$(LIB_OBJS)) obj/c16/midres_atari_impl.o obj/c16/midres_c64_impl.o obj/c16/midres_plus4_impl.o obj/c16/midres_sid_impl.o obj/c16/midres_ted_impl.o obj/c16/midres_pokey_impl.o
+$(LIBDIR)/midres.c16.lib:	midres.embedded.c16 $(LIB_INCLUDES) $(subst PLATFORM,c16,$(LIB_OBJS)) obj/c16/midres_atari_impl.o obj/c16/midres_c64_impl.o obj/c16/midres_vic20_impl.o obj/c16/midres_plus4_impl.o obj/c16/midres_sid_impl.o obj/c16/midres_ted_impl.o obj/c16/midres_pokey_impl.o
+	$(AR) r $(LIBDIR)/midres.c16.lib $(subst PLATFORM,c16,$(LIB_OBJS)) obj/c16/midres_atari_impl.o obj/c16/midres_c64_impl.o obj/c16/midres_vic20_impl.o obj/c16/midres_plus4_impl.o obj/c16/midres_sid_impl.o obj/c16/midres_ted_impl.o obj/c16/midres_pokey_impl.o
 
 # -------------------------------------------------------------------
 # --- DEMO/TUTORIALS FOR C16 
@@ -589,6 +598,9 @@ obj/c64/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/c64/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c64 -oobj/c64/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/c64/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c64 -oobj/c64/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/c64/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c64 -oobj/c64/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -601,8 +613,8 @@ obj/c64/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/c64/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/c64/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.c64.lib:	midres.embedded.c64 $(LIB_INCLUDES) $(subst PLATFORM,c64,$(LIB_OBJS)) obj/c64/midres_atari_impl.o  obj/c64/midres_c64_impl.o obj/c64/midres_plus4_impl.o obj/c64/midres_sid_impl.o obj/c64/midres_ted_impl.o obj/c64/midres_pokey_impl.o
-	$(AR) r $(LIBDIR)/midres.c64.lib $(subst PLATFORM,c64,$(LIB_OBJS)) obj/c64/midres_atari_impl.o obj/c64/midres_c64_impl.o obj/c64/midres_plus4_impl.o obj/c64/midres_sid_impl.o obj/c64/midres_ted_impl.o obj/c64/midres_pokey_impl.o
+$(LIBDIR)/midres.c64.lib:	midres.embedded.c64 $(LIB_INCLUDES) $(subst PLATFORM,c64,$(LIB_OBJS)) obj/c64/midres_atari_impl.o obj/c64/midres_c64_impl.o obj/c64/midres_vic20_impl.o obj/c64/midres_plus4_impl.o obj/c64/midres_sid_impl.o obj/c64/midres_ted_impl.o obj/c64/midres_pokey_impl.o
+	$(AR) r $(LIBDIR)/midres.c64.lib $(subst PLATFORM,c64,$(LIB_OBJS)) obj/c64/midres_atari_impl.o obj/c64/midres_c64_impl.o obj/c64/midres_vic20_impl.o obj/c64/midres_plus4_impl.o obj/c64/midres_sid_impl.o obj/c64/midres_ted_impl.o obj/c64/midres_pokey_impl.o
 
 # -------------------------------------------------------------------
 # --- DEMO/TUTORIALS FOR C64 
@@ -836,6 +848,9 @@ obj/plus4/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/plus4/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t plus4 -oobj/plus4/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/plus4/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t plus4 -oobj/plus4/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/plus4/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t plus4 -oobj/plus4/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -848,8 +863,8 @@ obj/plus4/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/plus4/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/plus4/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.plus4.lib:	midres.embedded.plus4 $(LIB_INCLUDES) $(subst PLATFORM,plus4,$(LIB_OBJS)) obj/plus4/midres_atari_impl.o  obj/plus4/midres_c64_impl.o obj/plus4/midres_plus4_impl.o obj/plus4/midres_sid_impl.o obj/plus4/midres_ted_impl.o obj/plus4/midres_pokey_impl.o
-	$(AR) r $(LIBDIR)/midres.plus4.lib $(subst PLATFORM,plus4,$(LIB_OBJS)) obj/plus4/midres_atari_impl.o obj/plus4/midres_c64_impl.o obj/plus4/midres_plus4_impl.o obj/plus4/midres_sid_impl.o obj/plus4/midres_ted_impl.o obj/plus4/midres_pokey_impl.o
+$(LIBDIR)/midres.plus4.lib:	midres.embedded.plus4 $(LIB_INCLUDES) $(subst PLATFORM,plus4,$(LIB_OBJS)) obj/plus4/midres_atari_impl.o obj/plus4/midres_c64_impl.o obj/plus4/midres_vic20_impl.o obj/plus4/midres_plus4_impl.o obj/plus4/midres_sid_impl.o obj/plus4/midres_ted_impl.o obj/plus4/midres_pokey_impl.o
+	$(AR) r $(LIBDIR)/midres.plus4.lib $(subst PLATFORM,plus4,$(LIB_OBJS)) obj/plus4/midres_atari_impl.o obj/plus4/midres_c64_impl.o obj/plus4/midres_vic20_impl.o obj/plus4/midres_plus4_impl.o obj/plus4/midres_sid_impl.o obj/plus4/midres_ted_impl.o obj/plus4/midres_pokey_impl.o
 
 # -------------------------------------------------------------------
 # --- DEMO/TUTORIALS FOR PLUS4 
@@ -970,6 +985,9 @@ obj/vic20/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/vic20/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/vic20/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/vic20/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/vic20/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/vic20/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/vic20/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -982,8 +1000,8 @@ obj/vic20/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/vic20/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__CBM__  -o $@ $(subst obj/vic20/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.vic20.lib:	midres.embedded.vic20 $(LIB_INCLUDES) $(subst PLATFORM,vic20,$(LIB_OBJS)) obj/vic20/midres_atari_impl.o  obj/vic20/midres_c64_impl.o obj/vic20/midres_plus4_impl.o obj/vic20/midres_sid_impl.o obj/vic20/midres_ted_impl.o obj/vic20/midres_pokey_impl.o
-	$(AR) r $(LIBDIR)/midres.vic20.lib $(subst PLATFORM,vic20,$(LIB_OBJS)) obj/vic20/midres_atari_impl.o obj/vic20/midres_c64_impl.o obj/vic20/midres_plus4_impl.o obj/vic20/midres_sid_impl.o obj/vic20/midres_ted_impl.o obj/vic20/midres_pokey_impl.o
+$(LIBDIR)/midres.vic20.lib:	midres.embedded.vic20 $(LIB_INCLUDES) $(subst PLATFORM,vic20,$(LIB_OBJS)) obj/vic20/midres_atari_impl.o obj/vic20/midres_c64_impl.o obj/vic20/midres_vic20_impl.o obj/vic20/midres_plus4_impl.o obj/vic20/midres_sid_impl.o obj/vic20/midres_ted_impl.o obj/vic20/midres_pokey_impl.o
+	$(AR) r $(LIBDIR)/midres.vic20.lib $(subst PLATFORM,vic20,$(LIB_OBJS)) obj/vic20/midres_atari_impl.o obj/vic20/midres_c64_impl.o obj/vic20/midres_vic20_impl.o obj/vic20/midres_plus4_impl.o obj/vic20/midres_sid_impl.o obj/vic20/midres_ted_impl.o obj/vic20/midres_pokey_impl.o
 
 # -------------------------------------------------------------------
 # --- DEMO/TUTORIALS FOR VIC20 
@@ -1072,6 +1090,9 @@ obj/vic2024/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/vic2024/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/vic2024/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/vic2024/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/vic2024/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/vic2024/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/vic2024/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -1084,8 +1105,8 @@ obj/vic2024/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/vic2024/%.o:	$(LIB_INCLUDES) $(LIB_SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__CBM__  -o $@ $(subst obj/vic2024/,src/,$(@:.o=.c))
 
-$(LIBDIR)/midres.vic2024.lib:	midres.embedded.vic2024 $(LIB_INCLUDES) $(subst PLATFORM,vic2024,$(LIB_OBJS)) obj/vic2024/midres_atari_impl.o  obj/vic2024/midres_c64_impl.o obj/vic2024/midres_plus4_impl.o obj/vic2024/midres_sid_impl.o obj/vic2024/midres_ted_impl.o obj/vic2024/midres_pokey_impl.o
-	$(AR) r $(LIBDIR)/midres.vic2024.lib $(subst PLATFORM,vic2024,$(LIB_OBJS)) obj/vic2024/midres_atari_impl.o obj/vic2024/midres_c64_impl.o obj/vic2024/midres_plus4_impl.o obj/vic2024/midres_sid_impl.o obj/vic2024/midres_ted_impl.o obj/vic2024/midres_pokey_impl.o
+$(LIBDIR)/midres.vic2024.lib:	midres.embedded.vic2024 $(LIB_INCLUDES) $(subst PLATFORM,vic2024,$(LIB_OBJS)) obj/vic2024/midres_atari_impl.o obj/vic2024/midres_c64_impl.o obj/vic2024/midres_vic20_impl.o obj/vic2024/midres_plus4_impl.o obj/vic2024/midres_sid_impl.o obj/vic2024/midres_ted_impl.o obj/vic2024/midres_pokey_impl.o
+	$(AR) r $(LIBDIR)/midres.vic2024.lib $(subst PLATFORM,vic2024,$(LIB_OBJS)) obj/vic2024/midres_atari_impl.o obj/vic2024/midres_c64_impl.o obj/vic2024/midres_vic20_impl.o obj/vic2024/midres_plus4_impl.o obj/vic2024/midres_sid_impl.o obj/vic2024/midres_ted_impl.o obj/vic2024/midres_pokey_impl.o
 
 # -------------------------------------------------------------------
 # --- DEMO/TUTORIALS FOR VIC2024 
@@ -1330,6 +1351,9 @@ obj/airattack_intro.atari/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_intro.atari/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t atari -oobj/airattack_intro.atari/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_intro.atari/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t atari -oobj/airattack_intro.atari/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_intro.atari/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t atari -oobj/airattack_intro.atari/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -1343,8 +1367,8 @@ obj/airattack_intro.atari/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_intro.atari/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_INTRO__  -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_intro.atari/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_intro.atari: airattack_intro.embedded.atari obj/airattack_intro.atari/rawdata.o obj/airattack_intro.atari/midres_pokey_impl.o obj/airattack_intro.atari/midres_ted_impl.o obj/airattack_intro.atari/midres_atari_impl.o obj/airattack_intro.atari/midres_c64_impl.o obj/airattack_intro.atari/midres_plus4_impl.o obj/airattack_intro.atari/midres_sid_impl.o $(subst PLATFORM,airattack_intro.atari,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.atari,$(OBJS))
-	$(CC) -Ln demoatari.lbl -t atari -C cfg/atari.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.atari.map -o $(EXEDIR)/airattack_intro.atari obj/airattack_intro.atari/rawdata.o obj/airattack_intro.atari/midres_pokey_impl.o obj/airattack_intro.atari/midres_ted_impl.o obj/airattack_intro.atari/midres_atari_impl.o obj/airattack_intro.atari/midres_c64_impl.o obj/airattack_intro.atari/midres_plus4_impl.o obj/airattack_intro.atari/midres_sid_impl.o  obj/airattack_intro.atari/main.o obj/airattack_intro.atari/midres_cbm.o obj/airattack_intro.atari/midres_control_011.o obj/airattack_intro.atari/midres_data.o 
+$(EXEDIR)/airattack_intro.atari: airattack_intro.embedded.atari obj/airattack_intro.atari/rawdata.o obj/airattack_intro.atari/midres_pokey_impl.o obj/airattack_intro.atari/midres_ted_impl.o obj/airattack_intro.atari/midres_atari_impl.o obj/airattack_intro.atari/midres_c64_impl.o obj/airattack_intro.atari/midres_vic20_impl.o obj/airattack_intro.atari/midres_plus4_impl.o obj/airattack_intro.atari/midres_sid_impl.o $(subst PLATFORM,airattack_intro.atari,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.atari,$(OBJS))
+	$(CC) -Ln demoatari.lbl -t atari -C cfg/atari.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.atari.map -o $(EXEDIR)/airattack_intro.atari obj/airattack_intro.atari/rawdata.o obj/airattack_intro.atari/midres_pokey_impl.o obj/airattack_intro.atari/midres_ted_impl.o obj/airattack_intro.atari/midres_atari_impl.o obj/airattack_intro.atari/midres_c64_impl.o obj/airattack_intro.atari/midres_vic20_impl.o obj/airattack_intro.atari/midres_plus4_impl.o obj/airattack_intro.atari/midres_sid_impl.o  obj/airattack_intro.atari/main.o obj/airattack_intro.atari/midres_cbm.o obj/airattack_intro.atari/midres_control_011.o obj/airattack_intro.atari/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
 	$(call COPYFILES,$(EXEDIR)/airattack_intro.atari,$(EXEDIR)/atr/game.exe)
@@ -1375,6 +1399,9 @@ obj/airattack_ending.atari/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_ending.atari/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t atari -oobj/airattack_ending.atari/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_ending.atari/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t atari -oobj/airattack_ending.atari/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_ending.atari/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t atari -oobj/airattack_ending.atari/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -1388,8 +1415,8 @@ obj/airattack_ending.atari/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_ending.atari/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_ENDING__  -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_ending.atari/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_ending.atari: airattack_ending.embedded.atari obj/airattack_ending.atari/rawdata.o obj/airattack_ending.atari/midres_pokey_impl.o obj/airattack_ending.atari/midres_ted_impl.o obj/airattack_ending.atari/midres_atari_impl.o obj/airattack_ending.atari/midres_c64_impl.o obj/airattack_ending.atari/midres_plus4_impl.o obj/airattack_ending.atari/midres_sid_impl.o $(subst PLATFORM,airattack_ending.atari,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.atari,$(OBJS))
-	$(CC) -Ln demoatari.lbl -t atari -C cfg/atari.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.atari.map -o $(EXEDIR)/airattack_ending.atari obj/airattack_ending.atari/rawdata.o obj/airattack_ending.atari/midres_pokey_impl.o obj/airattack_ending.atari/midres_ted_impl.o obj/airattack_ending.atari/midres_atari_impl.o obj/airattack_ending.atari/midres_c64_impl.o obj/airattack_ending.atari/midres_plus4_impl.o obj/airattack_ending.atari/midres_sid_impl.o  obj/airattack_ending.atari/main.o obj/airattack_ending.atari/midres_cbm.o obj/airattack_ending.atari/midres_control_011.o obj/airattack_ending.atari/midres_data.o 
+$(EXEDIR)/airattack_ending.atari: airattack_ending.embedded.atari obj/airattack_ending.atari/rawdata.o obj/airattack_ending.atari/midres_pokey_impl.o obj/airattack_ending.atari/midres_ted_impl.o obj/airattack_ending.atari/midres_atari_impl.o obj/airattack_ending.atari/midres_c64_impl.o obj/airattack_ending.atari/midres_vic20_impl.o obj/airattack_ending.atari/midres_plus4_impl.o obj/airattack_ending.atari/midres_sid_impl.o $(subst PLATFORM,airattack_ending.atari,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.atari,$(OBJS))
+	$(CC) -Ln demoatari.lbl -t atari -C cfg/atari.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.atari.map -o $(EXEDIR)/airattack_ending.atari obj/airattack_ending.atari/rawdata.o obj/airattack_ending.atari/midres_pokey_impl.o obj/airattack_ending.atari/midres_ted_impl.o obj/airattack_ending.atari/midres_atari_impl.o obj/airattack_ending.atari/midres_c64_impl.o obj/airattack_ending.atari/midres_vic20_impl.o obj/airattack_ending.atari/midres_plus4_impl.o obj/airattack_ending.atari/midres_sid_impl.o  obj/airattack_ending.atari/main.o obj/airattack_ending.atari/midres_cbm.o obj/airattack_ending.atari/midres_control_011.o obj/airattack_ending.atari/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
 	$(call COPYFILES,$(EXEDIR)/airattack_ending.atari,$(EXEDIR)/atr/game.exe)
@@ -1426,6 +1453,9 @@ obj/elevator_ending.atari/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/elevator_ending.atari/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t atari -oobj/elevator_ending.atari/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/elevator_ending.atari/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t atari -oobj/elevator_ending.atari/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/elevator_ending.atari/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t atari -oobj/elevator_ending.atari/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -1439,8 +1469,8 @@ obj/elevator_ending.atari/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/elevator_ending.atari/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t atari -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR_ENDING__  -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/elevator_ending.atari/,src/,$(@:.o=.c))
 
-$(EXEDIR)/elevator_ending.atari: elevator_ending.embedded.atari obj/elevator_ending.atari/rawdata.o obj/elevator_ending.atari/midres_pokey_impl.o obj/elevator_ending.atari/midres_ted_impl.o obj/elevator_ending.atari/midres_atari_impl.o obj/elevator_ending.atari/midres_c64_impl.o obj/elevator_ending.atari/midres_plus4_impl.o obj/elevator_ending.atari/midres_sid_impl.o $(subst PLATFORM,elevator_ending.atari,$(LIB_OBJS)) $(subst PLATFORM,elevator_ending.atari,$(OBJS))
-	$(CC) -Ln demoatari.lbl -t atari -C cfg/atari.cfg $(LDFLAGS) -m $(EXEDIR)/elevator_ending.atari.map -o $(EXEDIR)/elevator_ending.atari obj/elevator_ending.atari/rawdata.o obj/elevator_ending.atari/midres_pokey_impl.o obj/elevator_ending.atari/midres_ted_impl.o obj/elevator_ending.atari/midres_atari_impl.o obj/elevator_ending.atari/midres_c64_impl.o obj/elevator_ending.atari/midres_plus4_impl.o obj/elevator_ending.atari/midres_sid_impl.o  obj/elevator_ending.atari/main.o obj/elevator_ending.atari/midres_cbm.o obj/elevator_ending.atari/midres_control_011.o obj/elevator_ending.atari/midres_data.o 
+$(EXEDIR)/elevator_ending.atari: elevator_ending.embedded.atari obj/elevator_ending.atari/rawdata.o obj/elevator_ending.atari/midres_pokey_impl.o obj/elevator_ending.atari/midres_ted_impl.o obj/elevator_ending.atari/midres_atari_impl.o obj/elevator_ending.atari/midres_c64_impl.o obj/elevator_ending.atari/midres_vic20_impl.o obj/elevator_ending.atari/midres_plus4_impl.o obj/elevator_ending.atari/midres_sid_impl.o $(subst PLATFORM,elevator_ending.atari,$(LIB_OBJS)) $(subst PLATFORM,elevator_ending.atari,$(OBJS))
+	$(CC) -Ln demoatari.lbl -t atari -C cfg/atari.cfg $(LDFLAGS) -m $(EXEDIR)/elevator_ending.atari.map -o $(EXEDIR)/elevator_ending.atari obj/elevator_ending.atari/rawdata.o obj/elevator_ending.atari/midres_pokey_impl.o obj/elevator_ending.atari/midres_ted_impl.o obj/elevator_ending.atari/midres_atari_impl.o obj/elevator_ending.atari/midres_c64_impl.o obj/elevator_ending.atari/midres_vic20_impl.o obj/elevator_ending.atari/midres_plus4_impl.o obj/elevator_ending.atari/midres_sid_impl.o  obj/elevator_ending.atari/main.o obj/elevator_ending.atari/midres_cbm.o obj/elevator_ending.atari/midres_control_011.o obj/elevator_ending.atari/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/atr/*.*)
 	$(call COPYFILES,$(DIR2ATR_HOME)/dos25/dos.sys,$(EXEDIR)/atr/dos.sys)
 	$(call COPYFILES,$(EXEDIR)/elevator_ending.atari,$(EXEDIR)/atr/game.exe)
@@ -1657,6 +1687,9 @@ obj/airattack_intro.c128/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_intro.c128/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c128 -oobj/airattack_intro.c128/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_intro.c128/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c128 -oobj/airattack_intro.c128/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_intro.c128/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c128 -oobj/airattack_intro.c128/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -1670,8 +1703,8 @@ obj/airattack_intro.c128/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_intro.c128/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_intro.c128/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_intro.c128: airattack_intro.embedded.c128 obj/airattack_intro.c128/rawdata.o obj/airattack_intro.c128/midres_pokey_impl.o obj/airattack_intro.c128/midres_ted_impl.o obj/airattack_intro.c128/midres_atari_impl.o obj/airattack_intro.c128/midres_c64_impl.o obj/airattack_intro.c128/midres_plus4_impl.o obj/airattack_intro.c128/midres_sid_impl.o $(subst PLATFORM,airattack_intro.c128,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.c128,$(OBJS))
-	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.c128.map -o $(EXEDIR)/airattack_intro.c128 obj/airattack_intro.c128/rawdata.o obj/airattack_intro.c128/midres_pokey_impl.o obj/airattack_intro.c128/midres_ted_impl.o obj/airattack_intro.c128/midres_atari_impl.o obj/airattack_intro.c128/midres_c64_impl.o obj/airattack_intro.c128/midres_plus4_impl.o obj/airattack_intro.c128/midres_sid_impl.o  obj/airattack_intro.c128/main.o obj/airattack_intro.c128/midres_cbm.o obj/airattack_intro.c128/midres_control_011.o obj/airattack_intro.c128/midres_data.o 
+$(EXEDIR)/airattack_intro.c128: airattack_intro.embedded.c128 obj/airattack_intro.c128/rawdata.o obj/airattack_intro.c128/midres_pokey_impl.o obj/airattack_intro.c128/midres_ted_impl.o obj/airattack_intro.c128/midres_atari_impl.o obj/airattack_intro.c128/midres_c64_impl.o obj/airattack_intro.c128/midres_vic20_impl.o obj/airattack_intro.c128/midres_plus4_impl.o obj/airattack_intro.c128/midres_sid_impl.o $(subst PLATFORM,airattack_intro.c128,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.c128,$(OBJS))
+	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.c128.map -o $(EXEDIR)/airattack_intro.c128 obj/airattack_intro.c128/rawdata.o obj/airattack_intro.c128/midres_pokey_impl.o obj/airattack_intro.c128/midres_ted_impl.o obj/airattack_intro.c128/midres_atari_impl.o obj/airattack_intro.c128/midres_c64_impl.o obj/airattack_intro.c128/midres_vic20_impl.o obj/airattack_intro.c128/midres_plus4_impl.o obj/airattack_intro.c128/midres_sid_impl.o  obj/airattack_intro.c128/main.o obj/airattack_intro.c128/midres_cbm.o obj/airattack_intro.c128/midres_control_011.o obj/airattack_intro.c128/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.c128.d64)
 	$(CC1541) -f airattack_intro -w $(EXEDIR)/airattack_intro.c128 $(EXEDIR)/airattack_intro.c128.d64 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.c128.d71)
@@ -1698,6 +1731,9 @@ obj/airattack_ending.c128/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_ending.c128/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c128 -oobj/airattack_ending.c128/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_ending.c128/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c128 -oobj/airattack_ending.c128/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_ending.c128/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c128 -oobj/airattack_ending.c128/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -1711,8 +1747,8 @@ obj/airattack_ending.c128/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_ending.c128/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_ending.c128/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_ending.c128: airattack_ending.embedded.c128 obj/airattack_ending.c128/rawdata.o obj/airattack_ending.c128/midres_pokey_impl.o obj/airattack_ending.c128/midres_ted_impl.o obj/airattack_ending.c128/midres_atari_impl.o obj/airattack_ending.c128/midres_c64_impl.o obj/airattack_ending.c128/midres_plus4_impl.o obj/airattack_ending.c128/midres_sid_impl.o $(subst PLATFORM,airattack_ending.c128,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.c128,$(OBJS))
-	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.c128.map -o $(EXEDIR)/airattack_ending.c128 obj/airattack_ending.c128/rawdata.o obj/airattack_ending.c128/midres_pokey_impl.o obj/airattack_ending.c128/midres_ted_impl.o obj/airattack_ending.c128/midres_atari_impl.o obj/airattack_ending.c128/midres_c64_impl.o obj/airattack_ending.c128/midres_plus4_impl.o obj/airattack_ending.c128/midres_sid_impl.o  obj/airattack_ending.c128/main.o obj/airattack_ending.c128/midres_cbm.o obj/airattack_ending.c128/midres_control_011.o obj/airattack_ending.c128/midres_data.o 
+$(EXEDIR)/airattack_ending.c128: airattack_ending.embedded.c128 obj/airattack_ending.c128/rawdata.o obj/airattack_ending.c128/midres_pokey_impl.o obj/airattack_ending.c128/midres_ted_impl.o obj/airattack_ending.c128/midres_atari_impl.o obj/airattack_ending.c128/midres_c64_impl.o obj/airattack_ending.c128/midres_vic20_impl.o obj/airattack_ending.c128/midres_plus4_impl.o obj/airattack_ending.c128/midres_sid_impl.o $(subst PLATFORM,airattack_ending.c128,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.c128,$(OBJS))
+	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.c128.map -o $(EXEDIR)/airattack_ending.c128 obj/airattack_ending.c128/rawdata.o obj/airattack_ending.c128/midres_pokey_impl.o obj/airattack_ending.c128/midres_ted_impl.o obj/airattack_ending.c128/midres_atari_impl.o obj/airattack_ending.c128/midres_c64_impl.o obj/airattack_ending.c128/midres_vic20_impl.o obj/airattack_ending.c128/midres_plus4_impl.o obj/airattack_ending.c128/midres_sid_impl.o  obj/airattack_ending.c128/main.o obj/airattack_ending.c128/midres_cbm.o obj/airattack_ending.c128/midres_control_011.o obj/airattack_ending.c128/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.c128.d64)
 	$(CC1541) -f airattack_ending -w $(EXEDIR)/airattack_ending.c128 $(EXEDIR)/airattack_ending.c128.d64 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.c128.d71)
@@ -1739,6 +1775,9 @@ obj/totto_intro.c128/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_intro.c128/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c128 -oobj/totto_intro.c128/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_intro.c128/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c128 -oobj/totto_intro.c128/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_intro.c128/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c128 -oobj/totto_intro.c128/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -1752,8 +1791,8 @@ obj/totto_intro.c128/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_intro.c128/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_intro.c128/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_intro.c128: totto_intro.embedded.c128 obj/totto_intro.c128/rawdata.o obj/totto_intro.c128/midres_pokey_impl.o obj/totto_intro.c128/midres_ted_impl.o obj/totto_intro.c128/midres_atari_impl.o obj/totto_intro.c128/midres_c64_impl.o obj/totto_intro.c128/midres_plus4_impl.o obj/totto_intro.c128/midres_sid_impl.o $(subst PLATFORM,totto_intro.c128,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.c128,$(OBJS))
-	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.c128.map -o $(EXEDIR)/totto_intro.c128 obj/totto_intro.c128/rawdata.o obj/totto_intro.c128/midres_pokey_impl.o obj/totto_intro.c128/midres_ted_impl.o obj/totto_intro.c128/midres_atari_impl.o obj/totto_intro.c128/midres_c64_impl.o obj/totto_intro.c128/midres_plus4_impl.o obj/totto_intro.c128/midres_sid_impl.o  obj/totto_intro.c128/main.o obj/totto_intro.c128/midres_cbm.o obj/totto_intro.c128/midres_control_011.o obj/totto_intro.c128/midres_data.o 
+$(EXEDIR)/totto_intro.c128: totto_intro.embedded.c128 obj/totto_intro.c128/rawdata.o obj/totto_intro.c128/midres_pokey_impl.o obj/totto_intro.c128/midres_ted_impl.o obj/totto_intro.c128/midres_atari_impl.o obj/totto_intro.c128/midres_c64_impl.o obj/totto_intro.c128/midres_vic20_impl.o obj/totto_intro.c128/midres_plus4_impl.o obj/totto_intro.c128/midres_sid_impl.o $(subst PLATFORM,totto_intro.c128,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.c128,$(OBJS))
+	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.c128.map -o $(EXEDIR)/totto_intro.c128 obj/totto_intro.c128/rawdata.o obj/totto_intro.c128/midres_pokey_impl.o obj/totto_intro.c128/midres_ted_impl.o obj/totto_intro.c128/midres_atari_impl.o obj/totto_intro.c128/midres_c64_impl.o obj/totto_intro.c128/midres_vic20_impl.o obj/totto_intro.c128/midres_plus4_impl.o obj/totto_intro.c128/midres_sid_impl.o  obj/totto_intro.c128/main.o obj/totto_intro.c128/midres_cbm.o obj/totto_intro.c128/midres_control_011.o obj/totto_intro.c128/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_intro.c128.d64)
 	$(CC1541) -f totto_intro -w $(EXEDIR)/totto_intro.c128 $(EXEDIR)/totto_intro.c128.d64 
 	$(call RMFILES,$(EXEDIR)/totto_intro.c128.d71)
@@ -1780,6 +1819,9 @@ obj/totto_ending.c128/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_ending.c128/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c128 -oobj/totto_ending.c128/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_ending.c128/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c128 -oobj/totto_ending.c128/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_ending.c128/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c128 -oobj/totto_ending.c128/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -1793,8 +1835,8 @@ obj/totto_ending.c128/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_ending.c128/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c128 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_ending.c128/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_ending.c128: totto_ending.embedded.c128 obj/totto_ending.c128/rawdata.o obj/totto_ending.c128/midres_pokey_impl.o obj/totto_ending.c128/midres_ted_impl.o obj/totto_ending.c128/midres_atari_impl.o obj/totto_ending.c128/midres_c64_impl.o obj/totto_ending.c128/midres_plus4_impl.o obj/totto_ending.c128/midres_sid_impl.o $(subst PLATFORM,totto_ending.c128,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.c128,$(OBJS))
-	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.c128.map -o $(EXEDIR)/totto_ending.c128 obj/totto_ending.c128/rawdata.o obj/totto_ending.c128/midres_pokey_impl.o obj/totto_ending.c128/midres_ted_impl.o obj/totto_ending.c128/midres_atari_impl.o obj/totto_ending.c128/midres_c64_impl.o obj/totto_ending.c128/midres_plus4_impl.o obj/totto_ending.c128/midres_sid_impl.o  obj/totto_ending.c128/main.o obj/totto_ending.c128/midres_cbm.o obj/totto_ending.c128/midres_control_011.o obj/totto_ending.c128/midres_data.o 
+$(EXEDIR)/totto_ending.c128: totto_ending.embedded.c128 obj/totto_ending.c128/rawdata.o obj/totto_ending.c128/midres_pokey_impl.o obj/totto_ending.c128/midres_ted_impl.o obj/totto_ending.c128/midres_atari_impl.o obj/totto_ending.c128/midres_c64_impl.o obj/totto_ending.c128/midres_vic20_impl.o obj/totto_ending.c128/midres_plus4_impl.o obj/totto_ending.c128/midres_sid_impl.o $(subst PLATFORM,totto_ending.c128,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.c128,$(OBJS))
+	$(CC) -Ln democ128.lbl -t c128 -C cfg/c128.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.c128.map -o $(EXEDIR)/totto_ending.c128 obj/totto_ending.c128/rawdata.o obj/totto_ending.c128/midres_pokey_impl.o obj/totto_ending.c128/midres_ted_impl.o obj/totto_ending.c128/midres_atari_impl.o obj/totto_ending.c128/midres_c64_impl.o obj/totto_ending.c128/midres_vic20_impl.o obj/totto_ending.c128/midres_plus4_impl.o obj/totto_ending.c128/midres_sid_impl.o  obj/totto_ending.c128/main.o obj/totto_ending.c128/midres_cbm.o obj/totto_ending.c128/midres_control_011.o obj/totto_ending.c128/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_ending.c128.d64)
 	$(CC1541) -f totto_ending -w $(EXEDIR)/totto_ending.c128 $(EXEDIR)/totto_ending.c128.d64 
 	$(call RMFILES,$(EXEDIR)/totto_ending.c128.d71)
@@ -2025,6 +2067,9 @@ obj/airattack_intro.c16/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_intro.c16/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c16 -oobj/airattack_intro.c16/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_intro.c16/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c16 -oobj/airattack_intro.c16/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_intro.c16/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c16 -oobj/airattack_intro.c16/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2038,8 +2083,8 @@ obj/airattack_intro.c16/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_intro.c16/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_intro.c16/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_intro.c16: airattack_intro.embedded.c16 obj/airattack_intro.c16/rawdata.o obj/airattack_intro.c16/midres_pokey_impl.o obj/airattack_intro.c16/midres_ted_impl.o obj/airattack_intro.c16/midres_atari_impl.o obj/airattack_intro.c16/midres_c64_impl.o obj/airattack_intro.c16/midres_plus4_impl.o obj/airattack_intro.c16/midres_sid_impl.o $(subst PLATFORM,airattack_intro.c16,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.c16,$(OBJS))
-	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.c16.map -o $(EXEDIR)/airattack_intro.c16 obj/airattack_intro.c16/rawdata.o obj/airattack_intro.c16/midres_pokey_impl.o obj/airattack_intro.c16/midres_ted_impl.o obj/airattack_intro.c16/midres_atari_impl.o obj/airattack_intro.c16/midres_c64_impl.o obj/airattack_intro.c16/midres_plus4_impl.o obj/airattack_intro.c16/midres_sid_impl.o  obj/airattack_intro.c16/main.o obj/airattack_intro.c16/midres_cbm.o obj/airattack_intro.c16/midres_control_011.o obj/airattack_intro.c16/midres_data.o 
+$(EXEDIR)/airattack_intro.c16: airattack_intro.embedded.c16 obj/airattack_intro.c16/rawdata.o obj/airattack_intro.c16/midres_pokey_impl.o obj/airattack_intro.c16/midres_ted_impl.o obj/airattack_intro.c16/midres_atari_impl.o obj/airattack_intro.c16/midres_c64_impl.o obj/airattack_intro.c16/midres_vic20_impl.o obj/airattack_intro.c16/midres_plus4_impl.o obj/airattack_intro.c16/midres_sid_impl.o $(subst PLATFORM,airattack_intro.c16,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.c16,$(OBJS))
+	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.c16.map -o $(EXEDIR)/airattack_intro.c16 obj/airattack_intro.c16/rawdata.o obj/airattack_intro.c16/midres_pokey_impl.o obj/airattack_intro.c16/midres_ted_impl.o obj/airattack_intro.c16/midres_atari_impl.o obj/airattack_intro.c16/midres_c64_impl.o obj/airattack_intro.c16/midres_vic20_impl.o obj/airattack_intro.c16/midres_plus4_impl.o obj/airattack_intro.c16/midres_sid_impl.o  obj/airattack_intro.c16/main.o obj/airattack_intro.c16/midres_cbm.o obj/airattack_intro.c16/midres_control_011.o obj/airattack_intro.c16/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.c16.d64)
 	$(CC1541) -f airattack_intro -w $(EXEDIR)/airattack_intro.c16 $(EXEDIR)/airattack_intro.c16.d64 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.c16.d71)
@@ -2066,6 +2111,9 @@ obj/airattack_ending.c16/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_ending.c16/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c16 -oobj/airattack_ending.c16/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_ending.c16/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c16 -oobj/airattack_ending.c16/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_ending.c16/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c16 -oobj/airattack_ending.c16/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2079,8 +2127,8 @@ obj/airattack_ending.c16/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_ending.c16/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_ending.c16/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_ending.c16: airattack_ending.embedded.c16 obj/airattack_ending.c16/rawdata.o obj/airattack_ending.c16/midres_pokey_impl.o obj/airattack_ending.c16/midres_ted_impl.o obj/airattack_ending.c16/midres_atari_impl.o obj/airattack_ending.c16/midres_c64_impl.o obj/airattack_ending.c16/midres_plus4_impl.o obj/airattack_ending.c16/midres_sid_impl.o $(subst PLATFORM,airattack_ending.c16,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.c16,$(OBJS))
-	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.c16.map -o $(EXEDIR)/airattack_ending.c16 obj/airattack_ending.c16/rawdata.o obj/airattack_ending.c16/midres_pokey_impl.o obj/airattack_ending.c16/midres_ted_impl.o obj/airattack_ending.c16/midres_atari_impl.o obj/airattack_ending.c16/midres_c64_impl.o obj/airattack_ending.c16/midres_plus4_impl.o obj/airattack_ending.c16/midres_sid_impl.o  obj/airattack_ending.c16/main.o obj/airattack_ending.c16/midres_cbm.o obj/airattack_ending.c16/midres_control_011.o obj/airattack_ending.c16/midres_data.o 
+$(EXEDIR)/airattack_ending.c16: airattack_ending.embedded.c16 obj/airattack_ending.c16/rawdata.o obj/airattack_ending.c16/midres_pokey_impl.o obj/airattack_ending.c16/midres_ted_impl.o obj/airattack_ending.c16/midres_atari_impl.o obj/airattack_ending.c16/midres_c64_impl.o obj/airattack_ending.c16/midres_vic20_impl.o obj/airattack_ending.c16/midres_plus4_impl.o obj/airattack_ending.c16/midres_sid_impl.o $(subst PLATFORM,airattack_ending.c16,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.c16,$(OBJS))
+	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.c16.map -o $(EXEDIR)/airattack_ending.c16 obj/airattack_ending.c16/rawdata.o obj/airattack_ending.c16/midres_pokey_impl.o obj/airattack_ending.c16/midres_ted_impl.o obj/airattack_ending.c16/midres_atari_impl.o obj/airattack_ending.c16/midres_c64_impl.o obj/airattack_ending.c16/midres_vic20_impl.o obj/airattack_ending.c16/midres_plus4_impl.o obj/airattack_ending.c16/midres_sid_impl.o  obj/airattack_ending.c16/main.o obj/airattack_ending.c16/midres_cbm.o obj/airattack_ending.c16/midres_control_011.o obj/airattack_ending.c16/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.c16.d64)
 	$(CC1541) -f airattack_ending -w $(EXEDIR)/airattack_ending.c16 $(EXEDIR)/airattack_ending.c16.d64 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.c16.d71)
@@ -2107,6 +2155,9 @@ obj/totto_intro.c16/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_intro.c16/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c16 -oobj/totto_intro.c16/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_intro.c16/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c16 -oobj/totto_intro.c16/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_intro.c16/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c16 -oobj/totto_intro.c16/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2120,8 +2171,8 @@ obj/totto_intro.c16/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_intro.c16/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_intro.c16/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_intro.c16: totto_intro.embedded.c16 obj/totto_intro.c16/rawdata.o obj/totto_intro.c16/midres_pokey_impl.o obj/totto_intro.c16/midres_ted_impl.o obj/totto_intro.c16/midres_atari_impl.o obj/totto_intro.c16/midres_c64_impl.o obj/totto_intro.c16/midres_plus4_impl.o obj/totto_intro.c16/midres_sid_impl.o $(subst PLATFORM,totto_intro.c16,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.c16,$(OBJS))
-	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.c16.map -o $(EXEDIR)/totto_intro.c16 obj/totto_intro.c16/rawdata.o obj/totto_intro.c16/midres_pokey_impl.o obj/totto_intro.c16/midres_ted_impl.o obj/totto_intro.c16/midres_atari_impl.o obj/totto_intro.c16/midres_c64_impl.o obj/totto_intro.c16/midres_plus4_impl.o obj/totto_intro.c16/midres_sid_impl.o  obj/totto_intro.c16/main.o obj/totto_intro.c16/midres_cbm.o obj/totto_intro.c16/midres_control_011.o obj/totto_intro.c16/midres_data.o 
+$(EXEDIR)/totto_intro.c16: totto_intro.embedded.c16 obj/totto_intro.c16/rawdata.o obj/totto_intro.c16/midres_pokey_impl.o obj/totto_intro.c16/midres_ted_impl.o obj/totto_intro.c16/midres_atari_impl.o obj/totto_intro.c16/midres_c64_impl.o obj/totto_intro.c16/midres_vic20_impl.o obj/totto_intro.c16/midres_plus4_impl.o obj/totto_intro.c16/midres_sid_impl.o $(subst PLATFORM,totto_intro.c16,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.c16,$(OBJS))
+	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.c16.map -o $(EXEDIR)/totto_intro.c16 obj/totto_intro.c16/rawdata.o obj/totto_intro.c16/midres_pokey_impl.o obj/totto_intro.c16/midres_ted_impl.o obj/totto_intro.c16/midres_atari_impl.o obj/totto_intro.c16/midres_c64_impl.o obj/totto_intro.c16/midres_vic20_impl.o obj/totto_intro.c16/midres_plus4_impl.o obj/totto_intro.c16/midres_sid_impl.o  obj/totto_intro.c16/main.o obj/totto_intro.c16/midres_cbm.o obj/totto_intro.c16/midres_control_011.o obj/totto_intro.c16/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_intro.c16.d64)
 	$(CC1541) -f totto_intro -w $(EXEDIR)/totto_intro.c16 $(EXEDIR)/totto_intro.c16.d64 
 	$(call RMFILES,$(EXEDIR)/totto_intro.c16.d71)
@@ -2148,6 +2199,9 @@ obj/totto_ending.c16/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_ending.c16/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c16 -oobj/totto_ending.c16/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_ending.c16/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c16 -oobj/totto_ending.c16/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_ending.c16/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c16 -oobj/totto_ending.c16/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2161,8 +2215,8 @@ obj/totto_ending.c16/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_ending.c16/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c16 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_ending.c16/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_ending.c16: totto_ending.embedded.c16 obj/totto_ending.c16/rawdata.o obj/totto_ending.c16/midres_pokey_impl.o obj/totto_ending.c16/midres_ted_impl.o obj/totto_ending.c16/midres_atari_impl.o obj/totto_ending.c16/midres_c64_impl.o obj/totto_ending.c16/midres_plus4_impl.o obj/totto_ending.c16/midres_sid_impl.o $(subst PLATFORM,totto_ending.c16,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.c16,$(OBJS))
-	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.c16.map -o $(EXEDIR)/totto_ending.c16 obj/totto_ending.c16/rawdata.o obj/totto_ending.c16/midres_pokey_impl.o obj/totto_ending.c16/midres_ted_impl.o obj/totto_ending.c16/midres_atari_impl.o obj/totto_ending.c16/midres_c64_impl.o obj/totto_ending.c16/midres_plus4_impl.o obj/totto_ending.c16/midres_sid_impl.o  obj/totto_ending.c16/main.o obj/totto_ending.c16/midres_cbm.o obj/totto_ending.c16/midres_control_011.o obj/totto_ending.c16/midres_data.o 
+$(EXEDIR)/totto_ending.c16: totto_ending.embedded.c16 obj/totto_ending.c16/rawdata.o obj/totto_ending.c16/midres_pokey_impl.o obj/totto_ending.c16/midres_ted_impl.o obj/totto_ending.c16/midres_atari_impl.o obj/totto_ending.c16/midres_c64_impl.o obj/totto_ending.c16/midres_vic20_impl.o obj/totto_ending.c16/midres_plus4_impl.o obj/totto_ending.c16/midres_sid_impl.o $(subst PLATFORM,totto_ending.c16,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.c16,$(OBJS))
+	$(CC) -Ln democ16.lbl -t c16 -C cfg/c16.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.c16.map -o $(EXEDIR)/totto_ending.c16 obj/totto_ending.c16/rawdata.o obj/totto_ending.c16/midres_pokey_impl.o obj/totto_ending.c16/midres_ted_impl.o obj/totto_ending.c16/midres_atari_impl.o obj/totto_ending.c16/midres_c64_impl.o obj/totto_ending.c16/midres_vic20_impl.o obj/totto_ending.c16/midres_plus4_impl.o obj/totto_ending.c16/midres_sid_impl.o  obj/totto_ending.c16/main.o obj/totto_ending.c16/midres_cbm.o obj/totto_ending.c16/midres_control_011.o obj/totto_ending.c16/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_ending.c16.d64)
 	$(CC1541) -f totto_ending -w $(EXEDIR)/totto_ending.c16 $(EXEDIR)/totto_ending.c16.d64 
 	$(call RMFILES,$(EXEDIR)/totto_ending.c16.d71)
@@ -2378,6 +2432,9 @@ obj/airattack_intro.c64/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_intro.c64/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c64 -oobj/airattack_intro.c64/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_intro.c64/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c64 -oobj/airattack_intro.c64/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_intro.c64/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c64 -oobj/airattack_intro.c64/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2391,8 +2448,8 @@ obj/airattack_intro.c64/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_intro.c64/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_intro.c64/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_intro.c64: airattack_intro.embedded.c64 obj/airattack_intro.c64/rawdata.o obj/airattack_intro.c64/midres_pokey_impl.o obj/airattack_intro.c64/midres_ted_impl.o obj/airattack_intro.c64/midres_atari_impl.o obj/airattack_intro.c64/midres_c64_impl.o obj/airattack_intro.c64/midres_plus4_impl.o obj/airattack_intro.c64/midres_sid_impl.o $(subst PLATFORM,airattack_intro.c64,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.c64,$(OBJS))
-	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.c64.map -o $(EXEDIR)/airattack_intro.c64 obj/airattack_intro.c64/rawdata.o obj/airattack_intro.c64/midres_pokey_impl.o obj/airattack_intro.c64/midres_ted_impl.o obj/airattack_intro.c64/midres_atari_impl.o obj/airattack_intro.c64/midres_c64_impl.o obj/airattack_intro.c64/midres_plus4_impl.o obj/airattack_intro.c64/midres_sid_impl.o  obj/airattack_intro.c64/main.o obj/airattack_intro.c64/midres_cbm.o obj/airattack_intro.c64/midres_control_011.o obj/airattack_intro.c64/midres_data.o 
+$(EXEDIR)/airattack_intro.c64: airattack_intro.embedded.c64 obj/airattack_intro.c64/rawdata.o obj/airattack_intro.c64/midres_pokey_impl.o obj/airattack_intro.c64/midres_ted_impl.o obj/airattack_intro.c64/midres_atari_impl.o obj/airattack_intro.c64/midres_c64_impl.o obj/airattack_intro.c64/midres_vic20_impl.o obj/airattack_intro.c64/midres_plus4_impl.o obj/airattack_intro.c64/midres_sid_impl.o $(subst PLATFORM,airattack_intro.c64,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.c64,$(OBJS))
+	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.c64.map -o $(EXEDIR)/airattack_intro.c64 obj/airattack_intro.c64/rawdata.o obj/airattack_intro.c64/midres_pokey_impl.o obj/airattack_intro.c64/midres_ted_impl.o obj/airattack_intro.c64/midres_atari_impl.o obj/airattack_intro.c64/midres_c64_impl.o obj/airattack_intro.c64/midres_vic20_impl.o obj/airattack_intro.c64/midres_plus4_impl.o obj/airattack_intro.c64/midres_sid_impl.o  obj/airattack_intro.c64/main.o obj/airattack_intro.c64/midres_cbm.o obj/airattack_intro.c64/midres_control_011.o obj/airattack_intro.c64/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.c64.d64)
 	$(CC1541) -f airattack_intro -w $(EXEDIR)/airattack_intro.c64 $(EXEDIR)/airattack_intro.c64.d64 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.c64.d71)
@@ -2419,6 +2476,9 @@ obj/airattack_ending.c64/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_ending.c64/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c64 -oobj/airattack_ending.c64/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_ending.c64/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c64 -oobj/airattack_ending.c64/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_ending.c64/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c64 -oobj/airattack_ending.c64/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2432,8 +2492,8 @@ obj/airattack_ending.c64/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_ending.c64/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_ending.c64/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_ending.c64: airattack_ending.embedded.c64 obj/airattack_ending.c64/rawdata.o obj/airattack_ending.c64/midres_pokey_impl.o obj/airattack_ending.c64/midres_ted_impl.o obj/airattack_ending.c64/midres_atari_impl.o obj/airattack_ending.c64/midres_c64_impl.o obj/airattack_ending.c64/midres_plus4_impl.o obj/airattack_ending.c64/midres_sid_impl.o $(subst PLATFORM,airattack_ending.c64,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.c64,$(OBJS))
-	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.c64.map -o $(EXEDIR)/airattack_ending.c64 obj/airattack_ending.c64/rawdata.o obj/airattack_ending.c64/midres_pokey_impl.o obj/airattack_ending.c64/midres_ted_impl.o obj/airattack_ending.c64/midres_atari_impl.o obj/airattack_ending.c64/midres_c64_impl.o obj/airattack_ending.c64/midres_plus4_impl.o obj/airattack_ending.c64/midres_sid_impl.o  obj/airattack_ending.c64/main.o obj/airattack_ending.c64/midres_cbm.o obj/airattack_ending.c64/midres_control_011.o obj/airattack_ending.c64/midres_data.o 
+$(EXEDIR)/airattack_ending.c64: airattack_ending.embedded.c64 obj/airattack_ending.c64/rawdata.o obj/airattack_ending.c64/midres_pokey_impl.o obj/airattack_ending.c64/midres_ted_impl.o obj/airattack_ending.c64/midres_atari_impl.o obj/airattack_ending.c64/midres_c64_impl.o obj/airattack_ending.c64/midres_vic20_impl.o obj/airattack_ending.c64/midres_plus4_impl.o obj/airattack_ending.c64/midres_sid_impl.o $(subst PLATFORM,airattack_ending.c64,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.c64,$(OBJS))
+	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.c64.map -o $(EXEDIR)/airattack_ending.c64 obj/airattack_ending.c64/rawdata.o obj/airattack_ending.c64/midres_pokey_impl.o obj/airattack_ending.c64/midres_ted_impl.o obj/airattack_ending.c64/midres_atari_impl.o obj/airattack_ending.c64/midres_c64_impl.o obj/airattack_ending.c64/midres_vic20_impl.o obj/airattack_ending.c64/midres_plus4_impl.o obj/airattack_ending.c64/midres_sid_impl.o  obj/airattack_ending.c64/main.o obj/airattack_ending.c64/midres_cbm.o obj/airattack_ending.c64/midres_control_011.o obj/airattack_ending.c64/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.c64.d64)
 	$(CC1541) -f airattack_ending -w $(EXEDIR)/airattack_ending.c64 $(EXEDIR)/airattack_ending.c64.d64 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.c64.d71)
@@ -2460,6 +2520,9 @@ obj/totto_intro.c64/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_intro.c64/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c64 -oobj/totto_intro.c64/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_intro.c64/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c64 -oobj/totto_intro.c64/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_intro.c64/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c64 -oobj/totto_intro.c64/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2473,8 +2536,8 @@ obj/totto_intro.c64/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_intro.c64/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_intro.c64/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_intro.c64: totto_intro.embedded.c64 obj/totto_intro.c64/rawdata.o obj/totto_intro.c64/midres_pokey_impl.o obj/totto_intro.c64/midres_ted_impl.o obj/totto_intro.c64/midres_atari_impl.o obj/totto_intro.c64/midres_c64_impl.o obj/totto_intro.c64/midres_plus4_impl.o obj/totto_intro.c64/midres_sid_impl.o $(subst PLATFORM,totto_intro.c64,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.c64,$(OBJS))
-	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.c64.map -o $(EXEDIR)/totto_intro.c64 obj/totto_intro.c64/rawdata.o obj/totto_intro.c64/midres_pokey_impl.o obj/totto_intro.c64/midres_ted_impl.o obj/totto_intro.c64/midres_atari_impl.o obj/totto_intro.c64/midres_c64_impl.o obj/totto_intro.c64/midres_plus4_impl.o obj/totto_intro.c64/midres_sid_impl.o  obj/totto_intro.c64/main.o obj/totto_intro.c64/midres_cbm.o obj/totto_intro.c64/midres_control_011.o obj/totto_intro.c64/midres_data.o 
+$(EXEDIR)/totto_intro.c64: totto_intro.embedded.c64 obj/totto_intro.c64/rawdata.o obj/totto_intro.c64/midres_pokey_impl.o obj/totto_intro.c64/midres_ted_impl.o obj/totto_intro.c64/midres_atari_impl.o obj/totto_intro.c64/midres_c64_impl.o obj/totto_intro.c64/midres_vic20_impl.o obj/totto_intro.c64/midres_plus4_impl.o obj/totto_intro.c64/midres_sid_impl.o $(subst PLATFORM,totto_intro.c64,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.c64,$(OBJS))
+	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.c64.map -o $(EXEDIR)/totto_intro.c64 obj/totto_intro.c64/rawdata.o obj/totto_intro.c64/midres_pokey_impl.o obj/totto_intro.c64/midres_ted_impl.o obj/totto_intro.c64/midres_atari_impl.o obj/totto_intro.c64/midres_c64_impl.o obj/totto_intro.c64/midres_vic20_impl.o obj/totto_intro.c64/midres_plus4_impl.o obj/totto_intro.c64/midres_sid_impl.o  obj/totto_intro.c64/main.o obj/totto_intro.c64/midres_cbm.o obj/totto_intro.c64/midres_control_011.o obj/totto_intro.c64/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_intro.c64.d64)
 	$(CC1541) -f totto_intro -w $(EXEDIR)/totto_intro.c64 $(EXEDIR)/totto_intro.c64.d64 
 	$(call RMFILES,$(EXEDIR)/totto_intro.c64.d71)
@@ -2501,6 +2564,9 @@ obj/totto_ending.c64/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_ending.c64/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c64 -oobj/totto_ending.c64/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_ending.c64/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c64 -oobj/totto_ending.c64/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_ending.c64/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c64 -oobj/totto_ending.c64/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2514,8 +2580,8 @@ obj/totto_ending.c64/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_ending.c64/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_ending.c64/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_ending.c64: totto_ending.embedded.c64 obj/totto_ending.c64/rawdata.o obj/totto_ending.c64/midres_pokey_impl.o obj/totto_ending.c64/midres_ted_impl.o obj/totto_ending.c64/midres_atari_impl.o obj/totto_ending.c64/midres_c64_impl.o obj/totto_ending.c64/midres_plus4_impl.o obj/totto_ending.c64/midres_sid_impl.o $(subst PLATFORM,totto_ending.c64,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.c64,$(OBJS))
-	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.c64.map -o $(EXEDIR)/totto_ending.c64 obj/totto_ending.c64/rawdata.o obj/totto_ending.c64/midres_pokey_impl.o obj/totto_ending.c64/midres_ted_impl.o obj/totto_ending.c64/midres_atari_impl.o obj/totto_ending.c64/midres_c64_impl.o obj/totto_ending.c64/midres_plus4_impl.o obj/totto_ending.c64/midres_sid_impl.o  obj/totto_ending.c64/main.o obj/totto_ending.c64/midres_cbm.o obj/totto_ending.c64/midres_control_011.o obj/totto_ending.c64/midres_data.o 
+$(EXEDIR)/totto_ending.c64: totto_ending.embedded.c64 obj/totto_ending.c64/rawdata.o obj/totto_ending.c64/midres_pokey_impl.o obj/totto_ending.c64/midres_ted_impl.o obj/totto_ending.c64/midres_atari_impl.o obj/totto_ending.c64/midres_c64_impl.o obj/totto_ending.c64/midres_vic20_impl.o obj/totto_ending.c64/midres_plus4_impl.o obj/totto_ending.c64/midres_sid_impl.o $(subst PLATFORM,totto_ending.c64,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.c64,$(OBJS))
+	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.c64.map -o $(EXEDIR)/totto_ending.c64 obj/totto_ending.c64/rawdata.o obj/totto_ending.c64/midres_pokey_impl.o obj/totto_ending.c64/midres_ted_impl.o obj/totto_ending.c64/midres_atari_impl.o obj/totto_ending.c64/midres_c64_impl.o obj/totto_ending.c64/midres_vic20_impl.o obj/totto_ending.c64/midres_plus4_impl.o obj/totto_ending.c64/midres_sid_impl.o  obj/totto_ending.c64/main.o obj/totto_ending.c64/midres_cbm.o obj/totto_ending.c64/midres_control_011.o obj/totto_ending.c64/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_ending.c64.d64)
 	$(CC1541) -f totto_ending -w $(EXEDIR)/totto_ending.c64 $(EXEDIR)/totto_ending.c64.d64 
 	$(call RMFILES,$(EXEDIR)/totto_ending.c64.d71)
@@ -2542,6 +2608,9 @@ obj/elevator_ending.c64/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/elevator_ending.c64/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t c64 -oobj/elevator_ending.c64/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/elevator_ending.c64/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t c64 -oobj/elevator_ending.c64/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/elevator_ending.c64/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t c64 -oobj/elevator_ending.c64/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -2555,8 +2624,8 @@ obj/elevator_ending.c64/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/elevator_ending.c64/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t c64 -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/elevator_ending.c64/,src/,$(@:.o=.c))
 
-$(EXEDIR)/elevator_ending.c64: elevator_ending.embedded.c64 obj/elevator_ending.c64/rawdata.o obj/elevator_ending.c64/midres_pokey_impl.o obj/elevator_ending.c64/midres_ted_impl.o obj/elevator_ending.c64/midres_atari_impl.o obj/elevator_ending.c64/midres_c64_impl.o obj/elevator_ending.c64/midres_plus4_impl.o obj/elevator_ending.c64/midres_sid_impl.o $(subst PLATFORM,elevator_ending.c64,$(LIB_OBJS)) $(subst PLATFORM,elevator_ending.c64,$(OBJS))
-	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/elevator_ending.c64.map -o $(EXEDIR)/elevator_ending.c64 obj/elevator_ending.c64/rawdata.o obj/elevator_ending.c64/midres_pokey_impl.o obj/elevator_ending.c64/midres_ted_impl.o obj/elevator_ending.c64/midres_atari_impl.o obj/elevator_ending.c64/midres_c64_impl.o obj/elevator_ending.c64/midres_plus4_impl.o obj/elevator_ending.c64/midres_sid_impl.o  obj/elevator_ending.c64/main.o obj/elevator_ending.c64/midres_cbm.o obj/elevator_ending.c64/midres_control_011.o obj/elevator_ending.c64/midres_data.o 
+$(EXEDIR)/elevator_ending.c64: elevator_ending.embedded.c64 obj/elevator_ending.c64/rawdata.o obj/elevator_ending.c64/midres_pokey_impl.o obj/elevator_ending.c64/midres_ted_impl.o obj/elevator_ending.c64/midres_atari_impl.o obj/elevator_ending.c64/midres_c64_impl.o obj/elevator_ending.c64/midres_vic20_impl.o obj/elevator_ending.c64/midres_plus4_impl.o obj/elevator_ending.c64/midres_sid_impl.o $(subst PLATFORM,elevator_ending.c64,$(LIB_OBJS)) $(subst PLATFORM,elevator_ending.c64,$(OBJS))
+	$(CC) -Ln democ64.lbl -t c64 -C cfg/c64.cfg $(LDFLAGS) -m $(EXEDIR)/elevator_ending.c64.map -o $(EXEDIR)/elevator_ending.c64 obj/elevator_ending.c64/rawdata.o obj/elevator_ending.c64/midres_pokey_impl.o obj/elevator_ending.c64/midres_ted_impl.o obj/elevator_ending.c64/midres_atari_impl.o obj/elevator_ending.c64/midres_c64_impl.o obj/elevator_ending.c64/midres_vic20_impl.o obj/elevator_ending.c64/midres_plus4_impl.o obj/elevator_ending.c64/midres_sid_impl.o  obj/elevator_ending.c64/main.o obj/elevator_ending.c64/midres_cbm.o obj/elevator_ending.c64/midres_control_011.o obj/elevator_ending.c64/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/elevator_ending.c64.d64)
 	$(CC1541) -f elevator_ending -w $(EXEDIR)/elevator_ending.c64 $(EXEDIR)/elevator_ending.c64.d64 
 	$(call RMFILES,$(EXEDIR)/elevator_ending.c64.d71)
@@ -3532,6 +3601,9 @@ obj/airattack_intro.plus4/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_intro.plus4/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t plus4 -oobj/airattack_intro.plus4/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_intro.plus4/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t plus4 -oobj/airattack_intro.plus4/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_intro.plus4/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t plus4 -oobj/airattack_intro.plus4/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -3545,8 +3617,8 @@ obj/airattack_intro.plus4/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_intro.plus4/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_intro.plus4/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_intro.plus4: airattack_intro.embedded.plus4 obj/airattack_intro.plus4/rawdata.o obj/airattack_intro.plus4/midres_pokey_impl.o obj/airattack_intro.plus4/midres_ted_impl.o obj/airattack_intro.plus4/midres_atari_impl.o obj/airattack_intro.plus4/midres_c64_impl.o obj/airattack_intro.plus4/midres_plus4_impl.o obj/airattack_intro.plus4/midres_sid_impl.o $(subst PLATFORM,airattack_intro.plus4,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.plus4,$(OBJS))
-	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.plus4.map -o $(EXEDIR)/airattack_intro.plus4 obj/airattack_intro.plus4/rawdata.o obj/airattack_intro.plus4/midres_pokey_impl.o obj/airattack_intro.plus4/midres_ted_impl.o obj/airattack_intro.plus4/midres_atari_impl.o obj/airattack_intro.plus4/midres_c64_impl.o obj/airattack_intro.plus4/midres_plus4_impl.o obj/airattack_intro.plus4/midres_sid_impl.o  obj/airattack_intro.plus4/main.o obj/airattack_intro.plus4/midres_cbm.o obj/airattack_intro.plus4/midres_control_011.o obj/airattack_intro.plus4/midres_data.o 
+$(EXEDIR)/airattack_intro.plus4: airattack_intro.embedded.plus4 obj/airattack_intro.plus4/rawdata.o obj/airattack_intro.plus4/midres_pokey_impl.o obj/airattack_intro.plus4/midres_ted_impl.o obj/airattack_intro.plus4/midres_atari_impl.o obj/airattack_intro.plus4/midres_c64_impl.o obj/airattack_intro.plus4/midres_vic20_impl.o obj/airattack_intro.plus4/midres_plus4_impl.o obj/airattack_intro.plus4/midres_sid_impl.o $(subst PLATFORM,airattack_intro.plus4,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.plus4,$(OBJS))
+	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.plus4.map -o $(EXEDIR)/airattack_intro.plus4 obj/airattack_intro.plus4/rawdata.o obj/airattack_intro.plus4/midres_pokey_impl.o obj/airattack_intro.plus4/midres_ted_impl.o obj/airattack_intro.plus4/midres_atari_impl.o obj/airattack_intro.plus4/midres_c64_impl.o obj/airattack_intro.plus4/midres_vic20_impl.o obj/airattack_intro.plus4/midres_plus4_impl.o obj/airattack_intro.plus4/midres_sid_impl.o  obj/airattack_intro.plus4/main.o obj/airattack_intro.plus4/midres_cbm.o obj/airattack_intro.plus4/midres_control_011.o obj/airattack_intro.plus4/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.plus4.d64)
 	$(CC1541) -f loader -w $(DATADIR)/ $(EXEDIR)/airattack_intro.plus4.d64 
 	$(CC1541) -f airattack_intro -w $(EXEDIR)/airattack_intro.plus4 $(EXEDIR)/airattack_intro.plus4.d64 
@@ -3576,6 +3648,9 @@ obj/airattack_ending.plus4/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_ending.plus4/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t plus4 -oobj/airattack_ending.plus4/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_ending.plus4/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t plus4 -oobj/airattack_ending.plus4/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_ending.plus4/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t plus4 -oobj/airattack_ending.plus4/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -3589,8 +3664,8 @@ obj/airattack_ending.plus4/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_ending.plus4/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_ending.plus4/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_ending.plus4: airattack_ending.embedded.plus4 obj/airattack_ending.plus4/rawdata.o obj/airattack_ending.plus4/midres_pokey_impl.o obj/airattack_ending.plus4/midres_ted_impl.o obj/airattack_ending.plus4/midres_atari_impl.o obj/airattack_ending.plus4/midres_c64_impl.o obj/airattack_ending.plus4/midres_plus4_impl.o obj/airattack_ending.plus4/midres_sid_impl.o $(subst PLATFORM,airattack_ending.plus4,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.plus4,$(OBJS))
-	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.plus4.map -o $(EXEDIR)/airattack_ending.plus4 obj/airattack_ending.plus4/rawdata.o obj/airattack_ending.plus4/midres_pokey_impl.o obj/airattack_ending.plus4/midres_ted_impl.o obj/airattack_ending.plus4/midres_atari_impl.o obj/airattack_ending.plus4/midres_c64_impl.o obj/airattack_ending.plus4/midres_plus4_impl.o obj/airattack_ending.plus4/midres_sid_impl.o  obj/airattack_ending.plus4/main.o obj/airattack_ending.plus4/midres_cbm.o obj/airattack_ending.plus4/midres_control_011.o obj/airattack_ending.plus4/midres_data.o 
+$(EXEDIR)/airattack_ending.plus4: airattack_ending.embedded.plus4 obj/airattack_ending.plus4/rawdata.o obj/airattack_ending.plus4/midres_pokey_impl.o obj/airattack_ending.plus4/midres_ted_impl.o obj/airattack_ending.plus4/midres_atari_impl.o obj/airattack_ending.plus4/midres_c64_impl.o obj/airattack_ending.plus4/midres_vic20_impl.o obj/airattack_ending.plus4/midres_plus4_impl.o obj/airattack_ending.plus4/midres_sid_impl.o $(subst PLATFORM,airattack_ending.plus4,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.plus4,$(OBJS))
+	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.plus4.map -o $(EXEDIR)/airattack_ending.plus4 obj/airattack_ending.plus4/rawdata.o obj/airattack_ending.plus4/midres_pokey_impl.o obj/airattack_ending.plus4/midres_ted_impl.o obj/airattack_ending.plus4/midres_atari_impl.o obj/airattack_ending.plus4/midres_c64_impl.o obj/airattack_ending.plus4/midres_vic20_impl.o obj/airattack_ending.plus4/midres_plus4_impl.o obj/airattack_ending.plus4/midres_sid_impl.o  obj/airattack_ending.plus4/main.o obj/airattack_ending.plus4/midres_cbm.o obj/airattack_ending.plus4/midres_control_011.o obj/airattack_ending.plus4/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.plus4.d64)
 	$(CC1541) -f loader -w $(DATADIR)/airattack_loader4.prg $(EXEDIR)/airattack_ending.plus4.d64 
 	$(CC1541) -f airattack_ending -w $(EXEDIR)/airattack_ending.plus4 $(EXEDIR)/airattack_ending.plus4.d64 
@@ -3620,6 +3695,9 @@ obj/totto_intro.plus4/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_intro.plus4/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t plus4 -oobj/totto_intro.plus4/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_intro.plus4/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t plus4 -oobj/totto_intro.plus4/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_intro.plus4/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t plus4 -oobj/totto_intro.plus4/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -3633,8 +3711,8 @@ obj/totto_intro.plus4/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_intro.plus4/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_intro.plus4/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_intro.plus4: totto_intro.embedded.plus4 obj/totto_intro.plus4/rawdata.o obj/totto_intro.plus4/midres_pokey_impl.o obj/totto_intro.plus4/midres_ted_impl.o obj/totto_intro.plus4/midres_atari_impl.o obj/totto_intro.plus4/midres_c64_impl.o obj/totto_intro.plus4/midres_plus4_impl.o obj/totto_intro.plus4/midres_sid_impl.o $(subst PLATFORM,totto_intro.plus4,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.plus4,$(OBJS))
-	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.plus4.map -o $(EXEDIR)/totto_intro.plus4 obj/totto_intro.plus4/rawdata.o obj/totto_intro.plus4/midres_pokey_impl.o obj/totto_intro.plus4/midres_ted_impl.o obj/totto_intro.plus4/midres_atari_impl.o obj/totto_intro.plus4/midres_c64_impl.o obj/totto_intro.plus4/midres_plus4_impl.o obj/totto_intro.plus4/midres_sid_impl.o  obj/totto_intro.plus4/main.o obj/totto_intro.plus4/midres_cbm.o obj/totto_intro.plus4/midres_control_011.o obj/totto_intro.plus4/midres_data.o 
+$(EXEDIR)/totto_intro.plus4: totto_intro.embedded.plus4 obj/totto_intro.plus4/rawdata.o obj/totto_intro.plus4/midres_pokey_impl.o obj/totto_intro.plus4/midres_ted_impl.o obj/totto_intro.plus4/midres_atari_impl.o obj/totto_intro.plus4/midres_c64_impl.o obj/totto_intro.plus4/midres_vic20_impl.o obj/totto_intro.plus4/midres_plus4_impl.o obj/totto_intro.plus4/midres_sid_impl.o $(subst PLATFORM,totto_intro.plus4,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.plus4,$(OBJS))
+	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.plus4.map -o $(EXEDIR)/totto_intro.plus4 obj/totto_intro.plus4/rawdata.o obj/totto_intro.plus4/midres_pokey_impl.o obj/totto_intro.plus4/midres_ted_impl.o obj/totto_intro.plus4/midres_atari_impl.o obj/totto_intro.plus4/midres_c64_impl.o obj/totto_intro.plus4/midres_vic20_impl.o obj/totto_intro.plus4/midres_plus4_impl.o obj/totto_intro.plus4/midres_sid_impl.o  obj/totto_intro.plus4/main.o obj/totto_intro.plus4/midres_cbm.o obj/totto_intro.plus4/midres_control_011.o obj/totto_intro.plus4/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_intro.plus4.d64)
 	$(CC1541) -f loader -w $(DATADIR)/totto_loader4.prg $(EXEDIR)/totto_intro.plus4.d64 
 	$(CC1541) -f totto_intro -w $(EXEDIR)/totto_intro.plus4 $(EXEDIR)/totto_intro.plus4.d64 
@@ -3664,6 +3742,9 @@ obj/totto_ending.plus4/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_ending.plus4/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t plus4 -oobj/totto_ending.plus4/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_ending.plus4/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t plus4 -oobj/totto_ending.plus4/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_ending.plus4/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t plus4 -oobj/totto_ending.plus4/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -3677,8 +3758,8 @@ obj/totto_ending.plus4/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_ending.plus4/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_ending.plus4/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_ending.plus4: totto_ending.embedded.plus4 obj/totto_ending.plus4/rawdata.o obj/totto_ending.plus4/midres_pokey_impl.o obj/totto_ending.plus4/midres_ted_impl.o obj/totto_ending.plus4/midres_atari_impl.o obj/totto_ending.plus4/midres_c64_impl.o obj/totto_ending.plus4/midres_plus4_impl.o obj/totto_ending.plus4/midres_sid_impl.o $(subst PLATFORM,totto_ending.plus4,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.plus4,$(OBJS))
-	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.plus4.map -o $(EXEDIR)/totto_ending.plus4 obj/totto_ending.plus4/rawdata.o obj/totto_ending.plus4/midres_pokey_impl.o obj/totto_ending.plus4/midres_ted_impl.o obj/totto_ending.plus4/midres_atari_impl.o obj/totto_ending.plus4/midres_c64_impl.o obj/totto_ending.plus4/midres_plus4_impl.o obj/totto_ending.plus4/midres_sid_impl.o  obj/totto_ending.plus4/main.o obj/totto_ending.plus4/midres_cbm.o obj/totto_ending.plus4/midres_control_011.o obj/totto_ending.plus4/midres_data.o 
+$(EXEDIR)/totto_ending.plus4: totto_ending.embedded.plus4 obj/totto_ending.plus4/rawdata.o obj/totto_ending.plus4/midres_pokey_impl.o obj/totto_ending.plus4/midres_ted_impl.o obj/totto_ending.plus4/midres_atari_impl.o obj/totto_ending.plus4/midres_c64_impl.o obj/totto_ending.plus4/midres_vic20_impl.o obj/totto_ending.plus4/midres_plus4_impl.o obj/totto_ending.plus4/midres_sid_impl.o $(subst PLATFORM,totto_ending.plus4,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.plus4,$(OBJS))
+	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.plus4.map -o $(EXEDIR)/totto_ending.plus4 obj/totto_ending.plus4/rawdata.o obj/totto_ending.plus4/midres_pokey_impl.o obj/totto_ending.plus4/midres_ted_impl.o obj/totto_ending.plus4/midres_atari_impl.o obj/totto_ending.plus4/midres_c64_impl.o obj/totto_ending.plus4/midres_vic20_impl.o obj/totto_ending.plus4/midres_plus4_impl.o obj/totto_ending.plus4/midres_sid_impl.o  obj/totto_ending.plus4/main.o obj/totto_ending.plus4/midres_cbm.o obj/totto_ending.plus4/midres_control_011.o obj/totto_ending.plus4/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_ending.plus4.d64)
 	$(CC1541) -f loader -w $(DATADIR)/totto_loader4.prg $(EXEDIR)/totto_ending.plus4.d64 
 	$(CC1541) -f totto_ending -w $(EXEDIR)/totto_ending.plus4 $(EXEDIR)/totto_ending.plus4.d64 
@@ -3708,6 +3789,9 @@ obj/elevator_ending.plus4/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/elevator_ending.plus4/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t plus4 -oobj/elevator_ending.plus4/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/elevator_ending.plus4/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t plus4 -oobj/elevator_ending.plus4/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/elevator_ending.plus4/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t plus4 -oobj/elevator_ending.plus4/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -3721,8 +3805,8 @@ obj/elevator_ending.plus4/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/elevator_ending.plus4/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t plus4 -c $(CFLAGS)  -Osir -Cl -D__ELEVATOR_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/elevator_ending.plus4/,src/,$(@:.o=.c))
 
-$(EXEDIR)/elevator_ending.plus4: elevator_ending.embedded.plus4 obj/elevator_ending.plus4/rawdata.o obj/elevator_ending.plus4/midres_pokey_impl.o obj/elevator_ending.plus4/midres_ted_impl.o obj/elevator_ending.plus4/midres_atari_impl.o obj/elevator_ending.plus4/midres_c64_impl.o obj/elevator_ending.plus4/midres_plus4_impl.o obj/elevator_ending.plus4/midres_sid_impl.o $(subst PLATFORM,elevator_ending.plus4,$(LIB_OBJS)) $(subst PLATFORM,elevator_ending.plus4,$(OBJS))
-	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/elevator_ending.plus4.map -o $(EXEDIR)/elevator_ending.plus4 obj/elevator_ending.plus4/rawdata.o obj/elevator_ending.plus4/midres_pokey_impl.o obj/elevator_ending.plus4/midres_ted_impl.o obj/elevator_ending.plus4/midres_atari_impl.o obj/elevator_ending.plus4/midres_c64_impl.o obj/elevator_ending.plus4/midres_plus4_impl.o obj/elevator_ending.plus4/midres_sid_impl.o  obj/elevator_ending.plus4/main.o obj/elevator_ending.plus4/midres_cbm.o obj/elevator_ending.plus4/midres_control_011.o obj/elevator_ending.plus4/midres_data.o 
+$(EXEDIR)/elevator_ending.plus4: elevator_ending.embedded.plus4 obj/elevator_ending.plus4/rawdata.o obj/elevator_ending.plus4/midres_pokey_impl.o obj/elevator_ending.plus4/midres_ted_impl.o obj/elevator_ending.plus4/midres_atari_impl.o obj/elevator_ending.plus4/midres_c64_impl.o obj/elevator_ending.plus4/midres_vic20_impl.o obj/elevator_ending.plus4/midres_plus4_impl.o obj/elevator_ending.plus4/midres_sid_impl.o $(subst PLATFORM,elevator_ending.plus4,$(LIB_OBJS)) $(subst PLATFORM,elevator_ending.plus4,$(OBJS))
+	$(CC) -Ln demoplus4.lbl -t plus4 -C cfg/plus4.cfg $(LDFLAGS) -m $(EXEDIR)/elevator_ending.plus4.map -o $(EXEDIR)/elevator_ending.plus4 obj/elevator_ending.plus4/rawdata.o obj/elevator_ending.plus4/midres_pokey_impl.o obj/elevator_ending.plus4/midres_ted_impl.o obj/elevator_ending.plus4/midres_atari_impl.o obj/elevator_ending.plus4/midres_c64_impl.o obj/elevator_ending.plus4/midres_vic20_impl.o obj/elevator_ending.plus4/midres_plus4_impl.o obj/elevator_ending.plus4/midres_sid_impl.o  obj/elevator_ending.plus4/main.o obj/elevator_ending.plus4/midres_cbm.o obj/elevator_ending.plus4/midres_control_011.o obj/elevator_ending.plus4/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/elevator_ending.plus4.d64)
 	$(CC1541) -f loader -w $(DATADIR)/elloader4.prg $(EXEDIR)/elevator_ending.plus4.d64 
 	$(CC1541) -f elevator_ending -w $(EXEDIR)/elevator_ending.plus4 $(EXEDIR)/elevator_ending.plus4.d64 
@@ -4114,6 +4198,9 @@ obj/airattack_intro.vic20/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_intro.vic20/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/airattack_intro.vic20/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_intro.vic20/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/airattack_intro.vic20/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_intro.vic20/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/airattack_intro.vic20/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4127,8 +4214,8 @@ obj/airattack_intro.vic20/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_intro.vic20/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_intro.vic20/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_intro.vic20: airattack_intro.embedded.vic20 obj/airattack_intro.vic20/rawdata.o obj/airattack_intro.vic20/midres_pokey_impl.o obj/airattack_intro.vic20/midres_ted_impl.o obj/airattack_intro.vic20/midres_atari_impl.o obj/airattack_intro.vic20/midres_c64_impl.o obj/airattack_intro.vic20/midres_plus4_impl.o obj/airattack_intro.vic20/midres_sid_impl.o $(subst PLATFORM,airattack_intro.vic20,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.vic20,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.vic20.map -o $(EXEDIR)/airattack_intro.vic20 obj/airattack_intro.vic20/rawdata.o obj/airattack_intro.vic20/midres_pokey_impl.o obj/airattack_intro.vic20/midres_ted_impl.o obj/airattack_intro.vic20/midres_atari_impl.o obj/airattack_intro.vic20/midres_c64_impl.o obj/airattack_intro.vic20/midres_plus4_impl.o obj/airattack_intro.vic20/midres_sid_impl.o  obj/airattack_intro.vic20/main.o obj/airattack_intro.vic20/midres_cbm.o obj/airattack_intro.vic20/midres_control_011.o obj/airattack_intro.vic20/midres_data.o 
+$(EXEDIR)/airattack_intro.vic20: airattack_intro.embedded.vic20 obj/airattack_intro.vic20/rawdata.o obj/airattack_intro.vic20/midres_pokey_impl.o obj/airattack_intro.vic20/midres_ted_impl.o obj/airattack_intro.vic20/midres_atari_impl.o obj/airattack_intro.vic20/midres_c64_impl.o obj/airattack_intro.vic20/midres_vic20_impl.o obj/airattack_intro.vic20/midres_plus4_impl.o obj/airattack_intro.vic20/midres_sid_impl.o $(subst PLATFORM,airattack_intro.vic20,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.vic20,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.vic20.map -o $(EXEDIR)/airattack_intro.vic20 obj/airattack_intro.vic20/rawdata.o obj/airattack_intro.vic20/midres_pokey_impl.o obj/airattack_intro.vic20/midres_ted_impl.o obj/airattack_intro.vic20/midres_atari_impl.o obj/airattack_intro.vic20/midres_c64_impl.o obj/airattack_intro.vic20/midres_vic20_impl.o obj/airattack_intro.vic20/midres_plus4_impl.o obj/airattack_intro.vic20/midres_sid_impl.o  obj/airattack_intro.vic20/main.o obj/airattack_intro.vic20/midres_cbm.o obj/airattack_intro.vic20/midres_control_011.o obj/airattack_intro.vic20/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.vic20.d64)
 	$(CC1541) -f airattack_intro -w $(EXEDIR)/airattack_intro.vic20 $(EXEDIR)/airattack_intro.vic20.d64 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.vic20.d71)
@@ -4155,6 +4242,9 @@ obj/airattack_ending.vic20/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_ending.vic20/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/airattack_ending.vic20/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_ending.vic20/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/airattack_ending.vic20/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_ending.vic20/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/airattack_ending.vic20/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4168,8 +4258,8 @@ obj/airattack_ending.vic20/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_ending.vic20/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__AIRATTACK_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_ending.vic20/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_ending.vic20: airattack_ending.embedded.vic20 obj/airattack_ending.vic20/rawdata.o obj/airattack_ending.vic20/midres_pokey_impl.o obj/airattack_ending.vic20/midres_ted_impl.o obj/airattack_ending.vic20/midres_atari_impl.o obj/airattack_ending.vic20/midres_c64_impl.o obj/airattack_ending.vic20/midres_plus4_impl.o obj/airattack_ending.vic20/midres_sid_impl.o $(subst PLATFORM,airattack_ending.vic20,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.vic20,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.vic20.map -o $(EXEDIR)/airattack_ending.vic20 obj/airattack_ending.vic20/rawdata.o obj/airattack_ending.vic20/midres_pokey_impl.o obj/airattack_ending.vic20/midres_ted_impl.o obj/airattack_ending.vic20/midres_atari_impl.o obj/airattack_ending.vic20/midres_c64_impl.o obj/airattack_ending.vic20/midres_plus4_impl.o obj/airattack_ending.vic20/midres_sid_impl.o  obj/airattack_ending.vic20/main.o obj/airattack_ending.vic20/midres_cbm.o obj/airattack_ending.vic20/midres_control_011.o obj/airattack_ending.vic20/midres_data.o 
+$(EXEDIR)/airattack_ending.vic20: airattack_ending.embedded.vic20 obj/airattack_ending.vic20/rawdata.o obj/airattack_ending.vic20/midres_pokey_impl.o obj/airattack_ending.vic20/midres_ted_impl.o obj/airattack_ending.vic20/midres_atari_impl.o obj/airattack_ending.vic20/midres_c64_impl.o obj/airattack_ending.vic20/midres_vic20_impl.o obj/airattack_ending.vic20/midres_plus4_impl.o obj/airattack_ending.vic20/midres_sid_impl.o $(subst PLATFORM,airattack_ending.vic20,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.vic20,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.vic20.map -o $(EXEDIR)/airattack_ending.vic20 obj/airattack_ending.vic20/rawdata.o obj/airattack_ending.vic20/midres_pokey_impl.o obj/airattack_ending.vic20/midres_ted_impl.o obj/airattack_ending.vic20/midres_atari_impl.o obj/airattack_ending.vic20/midres_c64_impl.o obj/airattack_ending.vic20/midres_vic20_impl.o obj/airattack_ending.vic20/midres_plus4_impl.o obj/airattack_ending.vic20/midres_sid_impl.o  obj/airattack_ending.vic20/main.o obj/airattack_ending.vic20/midres_cbm.o obj/airattack_ending.vic20/midres_control_011.o obj/airattack_ending.vic20/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.vic20.d64)
 	$(CC1541) -f airattack_ending -w $(EXEDIR)/airattack_ending.vic20 $(EXEDIR)/airattack_ending.vic20.d64 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.vic20.d71)
@@ -4196,6 +4286,9 @@ obj/totto_intro.vic20/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_intro.vic20/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/totto_intro.vic20/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_intro.vic20/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/totto_intro.vic20/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_intro.vic20/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/totto_intro.vic20/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4209,8 +4302,8 @@ obj/totto_intro.vic20/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_intro.vic20/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_intro.vic20/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_intro.vic20: totto_intro.embedded.vic20 obj/totto_intro.vic20/rawdata.o obj/totto_intro.vic20/midres_pokey_impl.o obj/totto_intro.vic20/midres_ted_impl.o obj/totto_intro.vic20/midres_atari_impl.o obj/totto_intro.vic20/midres_c64_impl.o obj/totto_intro.vic20/midres_plus4_impl.o obj/totto_intro.vic20/midres_sid_impl.o $(subst PLATFORM,totto_intro.vic20,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.vic20,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.vic20.map -o $(EXEDIR)/totto_intro.vic20 obj/totto_intro.vic20/rawdata.o obj/totto_intro.vic20/midres_pokey_impl.o obj/totto_intro.vic20/midres_ted_impl.o obj/totto_intro.vic20/midres_atari_impl.o obj/totto_intro.vic20/midres_c64_impl.o obj/totto_intro.vic20/midres_plus4_impl.o obj/totto_intro.vic20/midres_sid_impl.o  obj/totto_intro.vic20/main.o obj/totto_intro.vic20/midres_cbm.o obj/totto_intro.vic20/midres_control_011.o obj/totto_intro.vic20/midres_data.o 
+$(EXEDIR)/totto_intro.vic20: totto_intro.embedded.vic20 obj/totto_intro.vic20/rawdata.o obj/totto_intro.vic20/midres_pokey_impl.o obj/totto_intro.vic20/midres_ted_impl.o obj/totto_intro.vic20/midres_atari_impl.o obj/totto_intro.vic20/midres_c64_impl.o obj/totto_intro.vic20/midres_vic20_impl.o obj/totto_intro.vic20/midres_plus4_impl.o obj/totto_intro.vic20/midres_sid_impl.o $(subst PLATFORM,totto_intro.vic20,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.vic20,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.vic20.map -o $(EXEDIR)/totto_intro.vic20 obj/totto_intro.vic20/rawdata.o obj/totto_intro.vic20/midres_pokey_impl.o obj/totto_intro.vic20/midres_ted_impl.o obj/totto_intro.vic20/midres_atari_impl.o obj/totto_intro.vic20/midres_c64_impl.o obj/totto_intro.vic20/midres_vic20_impl.o obj/totto_intro.vic20/midres_plus4_impl.o obj/totto_intro.vic20/midres_sid_impl.o  obj/totto_intro.vic20/main.o obj/totto_intro.vic20/midres_cbm.o obj/totto_intro.vic20/midres_control_011.o obj/totto_intro.vic20/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_intro.vic20.d64)
 	$(CC1541) -f totto_intro -w $(EXEDIR)/totto_intro.vic20 $(EXEDIR)/totto_intro.vic20.d64 
 	$(call RMFILES,$(EXEDIR)/totto_intro.vic20.d71)
@@ -4237,6 +4330,9 @@ obj/totto_ending.vic20/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_ending.vic20/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/totto_ending.vic20/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_ending.vic20/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/totto_ending.vic20/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_ending.vic20/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/totto_ending.vic20/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4250,8 +4346,8 @@ obj/totto_ending.vic20/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_ending.vic20/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS)  -Osir -Cl -D__TOTTO_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_ending.vic20/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_ending.vic20: totto_ending.embedded.vic20 obj/totto_ending.vic20/rawdata.o obj/totto_ending.vic20/midres_pokey_impl.o obj/totto_ending.vic20/midres_ted_impl.o obj/totto_ending.vic20/midres_atari_impl.o obj/totto_ending.vic20/midres_c64_impl.o obj/totto_ending.vic20/midres_plus4_impl.o obj/totto_ending.vic20/midres_sid_impl.o $(subst PLATFORM,totto_ending.vic20,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.vic20,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.vic20.map -o $(EXEDIR)/totto_ending.vic20 obj/totto_ending.vic20/rawdata.o obj/totto_ending.vic20/midres_pokey_impl.o obj/totto_ending.vic20/midres_ted_impl.o obj/totto_ending.vic20/midres_atari_impl.o obj/totto_ending.vic20/midres_c64_impl.o obj/totto_ending.vic20/midres_plus4_impl.o obj/totto_ending.vic20/midres_sid_impl.o  obj/totto_ending.vic20/main.o obj/totto_ending.vic20/midres_cbm.o obj/totto_ending.vic20/midres_control_011.o obj/totto_ending.vic20/midres_data.o 
+$(EXEDIR)/totto_ending.vic20: totto_ending.embedded.vic20 obj/totto_ending.vic20/rawdata.o obj/totto_ending.vic20/midres_pokey_impl.o obj/totto_ending.vic20/midres_ted_impl.o obj/totto_ending.vic20/midres_atari_impl.o obj/totto_ending.vic20/midres_c64_impl.o obj/totto_ending.vic20/midres_vic20_impl.o obj/totto_ending.vic20/midres_plus4_impl.o obj/totto_ending.vic20/midres_sid_impl.o $(subst PLATFORM,totto_ending.vic20,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.vic20,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic20.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.vic20.map -o $(EXEDIR)/totto_ending.vic20 obj/totto_ending.vic20/rawdata.o obj/totto_ending.vic20/midres_pokey_impl.o obj/totto_ending.vic20/midres_ted_impl.o obj/totto_ending.vic20/midres_atari_impl.o obj/totto_ending.vic20/midres_c64_impl.o obj/totto_ending.vic20/midres_vic20_impl.o obj/totto_ending.vic20/midres_plus4_impl.o obj/totto_ending.vic20/midres_sid_impl.o  obj/totto_ending.vic20/main.o obj/totto_ending.vic20/midres_cbm.o obj/totto_ending.vic20/midres_control_011.o obj/totto_ending.vic20/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_ending.vic20.d64)
 	$(CC1541) -f totto_ending -w $(EXEDIR)/totto_ending.vic20 $(EXEDIR)/totto_ending.vic20.d64 
 	$(call RMFILES,$(EXEDIR)/totto_ending.vic20.d71)
@@ -4485,6 +4581,9 @@ obj/airattack_intro.vic2024/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_intro.vic2024/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/airattack_intro.vic2024/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_intro.vic2024/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/airattack_intro.vic2024/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_intro.vic2024/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/airattack_intro.vic2024/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4498,8 +4597,8 @@ obj/airattack_intro.vic2024/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_intro.vic2024/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__AIRATTACK_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_intro.vic2024/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_intro.vic2024: airattack_intro.embedded.vic2024 obj/airattack_intro.vic2024/rawdata.o obj/airattack_intro.vic2024/midres_pokey_impl.o obj/airattack_intro.vic2024/midres_ted_impl.o obj/airattack_intro.vic2024/midres_atari_impl.o obj/airattack_intro.vic2024/midres_c64_impl.o obj/airattack_intro.vic2024/midres_plus4_impl.o obj/airattack_intro.vic2024/midres_sid_impl.o $(subst PLATFORM,airattack_intro.vic2024,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.vic2024,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.vic20.map -o $(EXEDIR)/airattack_intro.vic2024 obj/airattack_intro.vic2024/rawdata.o obj/airattack_intro.vic2024/midres_pokey_impl.o obj/airattack_intro.vic2024/midres_ted_impl.o obj/airattack_intro.vic2024/midres_atari_impl.o obj/airattack_intro.vic2024/midres_c64_impl.o obj/airattack_intro.vic2024/midres_plus4_impl.o obj/airattack_intro.vic2024/midres_sid_impl.o  obj/airattack_intro.vic2024/main.o obj/airattack_intro.vic2024/midres_cbm.o obj/airattack_intro.vic2024/midres_control_011.o obj/airattack_intro.vic2024/midres_data.o 
+$(EXEDIR)/airattack_intro.vic2024: airattack_intro.embedded.vic2024 obj/airattack_intro.vic2024/rawdata.o obj/airattack_intro.vic2024/midres_pokey_impl.o obj/airattack_intro.vic2024/midres_ted_impl.o obj/airattack_intro.vic2024/midres_atari_impl.o obj/airattack_intro.vic2024/midres_c64_impl.o obj/airattack_intro.vic2024/midres_vic20_impl.o obj/airattack_intro.vic2024/midres_plus4_impl.o obj/airattack_intro.vic2024/midres_sid_impl.o $(subst PLATFORM,airattack_intro.vic2024,$(LIB_OBJS)) $(subst PLATFORM,airattack_intro.vic2024,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_intro.vic20.map -o $(EXEDIR)/airattack_intro.vic2024 obj/airattack_intro.vic2024/rawdata.o obj/airattack_intro.vic2024/midres_pokey_impl.o obj/airattack_intro.vic2024/midres_ted_impl.o obj/airattack_intro.vic2024/midres_atari_impl.o obj/airattack_intro.vic2024/midres_c64_impl.o obj/airattack_intro.vic2024/midres_vic20_impl.o obj/airattack_intro.vic2024/midres_plus4_impl.o obj/airattack_intro.vic2024/midres_sid_impl.o  obj/airattack_intro.vic2024/main.o obj/airattack_intro.vic2024/midres_cbm.o obj/airattack_intro.vic2024/midres_control_011.o obj/airattack_intro.vic2024/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_intro.vic2024.d64)
 	$(CC1541) -f loader -w $(DATADIR)/ $(EXEDIR)/airattack_intro.vic2024.d64 
 	$(CC1541) -f airattack_intro -w $(EXEDIR)/airattack_intro.vic2024 $(EXEDIR)/airattack_intro.vic2024.d64 
@@ -4529,6 +4628,9 @@ obj/airattack_ending.vic2024/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/airattack_ending.vic2024/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/airattack_ending.vic2024/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/airattack_ending.vic2024/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/airattack_ending.vic2024/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/airattack_ending.vic2024/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/airattack_ending.vic2024/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4542,8 +4644,8 @@ obj/airattack_ending.vic2024/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/airattack_ending.vic2024/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__AIRATTACK_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/airattack_ending.vic2024/,src/,$(@:.o=.c))
 
-$(EXEDIR)/airattack_ending.vic2024: airattack_ending.embedded.vic2024 obj/airattack_ending.vic2024/rawdata.o obj/airattack_ending.vic2024/midres_pokey_impl.o obj/airattack_ending.vic2024/midres_ted_impl.o obj/airattack_ending.vic2024/midres_atari_impl.o obj/airattack_ending.vic2024/midres_c64_impl.o obj/airattack_ending.vic2024/midres_plus4_impl.o obj/airattack_ending.vic2024/midres_sid_impl.o $(subst PLATFORM,airattack_ending.vic2024,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.vic2024,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.vic20.map -o $(EXEDIR)/airattack_ending.vic2024 obj/airattack_ending.vic2024/rawdata.o obj/airattack_ending.vic2024/midres_pokey_impl.o obj/airattack_ending.vic2024/midres_ted_impl.o obj/airattack_ending.vic2024/midres_atari_impl.o obj/airattack_ending.vic2024/midres_c64_impl.o obj/airattack_ending.vic2024/midres_plus4_impl.o obj/airattack_ending.vic2024/midres_sid_impl.o  obj/airattack_ending.vic2024/main.o obj/airattack_ending.vic2024/midres_cbm.o obj/airattack_ending.vic2024/midres_control_011.o obj/airattack_ending.vic2024/midres_data.o 
+$(EXEDIR)/airattack_ending.vic2024: airattack_ending.embedded.vic2024 obj/airattack_ending.vic2024/rawdata.o obj/airattack_ending.vic2024/midres_pokey_impl.o obj/airattack_ending.vic2024/midres_ted_impl.o obj/airattack_ending.vic2024/midres_atari_impl.o obj/airattack_ending.vic2024/midres_c64_impl.o obj/airattack_ending.vic2024/midres_vic20_impl.o obj/airattack_ending.vic2024/midres_plus4_impl.o obj/airattack_ending.vic2024/midres_sid_impl.o $(subst PLATFORM,airattack_ending.vic2024,$(LIB_OBJS)) $(subst PLATFORM,airattack_ending.vic2024,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/airattack_ending.vic20.map -o $(EXEDIR)/airattack_ending.vic2024 obj/airattack_ending.vic2024/rawdata.o obj/airattack_ending.vic2024/midres_pokey_impl.o obj/airattack_ending.vic2024/midres_ted_impl.o obj/airattack_ending.vic2024/midres_atari_impl.o obj/airattack_ending.vic2024/midres_c64_impl.o obj/airattack_ending.vic2024/midres_vic20_impl.o obj/airattack_ending.vic2024/midres_plus4_impl.o obj/airattack_ending.vic2024/midres_sid_impl.o  obj/airattack_ending.vic2024/main.o obj/airattack_ending.vic2024/midres_cbm.o obj/airattack_ending.vic2024/midres_control_011.o obj/airattack_ending.vic2024/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/airattack_ending.vic2024.d64)
 	$(CC1541) -f loader -w $(DATADIR)/airattack_loader2024.prg $(EXEDIR)/airattack_ending.vic2024.d64 
 	$(CC1541) -f airattack_ending -w $(EXEDIR)/airattack_ending.vic2024 $(EXEDIR)/airattack_ending.vic2024.d64 
@@ -4573,6 +4675,9 @@ obj/totto_intro.vic2024/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_intro.vic2024/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/totto_intro.vic2024/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_intro.vic2024/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/totto_intro.vic2024/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_intro.vic2024/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/totto_intro.vic2024/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4586,8 +4691,8 @@ obj/totto_intro.vic2024/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_intro.vic2024/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__TOTTO_INTRO__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_intro.vic2024/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_intro.vic2024: totto_intro.embedded.vic2024 obj/totto_intro.vic2024/rawdata.o obj/totto_intro.vic2024/midres_pokey_impl.o obj/totto_intro.vic2024/midres_ted_impl.o obj/totto_intro.vic2024/midres_atari_impl.o obj/totto_intro.vic2024/midres_c64_impl.o obj/totto_intro.vic2024/midres_plus4_impl.o obj/totto_intro.vic2024/midres_sid_impl.o $(subst PLATFORM,totto_intro.vic2024,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.vic2024,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.vic20.map -o $(EXEDIR)/totto_intro.vic2024 obj/totto_intro.vic2024/rawdata.o obj/totto_intro.vic2024/midres_pokey_impl.o obj/totto_intro.vic2024/midres_ted_impl.o obj/totto_intro.vic2024/midres_atari_impl.o obj/totto_intro.vic2024/midres_c64_impl.o obj/totto_intro.vic2024/midres_plus4_impl.o obj/totto_intro.vic2024/midres_sid_impl.o  obj/totto_intro.vic2024/main.o obj/totto_intro.vic2024/midres_cbm.o obj/totto_intro.vic2024/midres_control_011.o obj/totto_intro.vic2024/midres_data.o 
+$(EXEDIR)/totto_intro.vic2024: totto_intro.embedded.vic2024 obj/totto_intro.vic2024/rawdata.o obj/totto_intro.vic2024/midres_pokey_impl.o obj/totto_intro.vic2024/midres_ted_impl.o obj/totto_intro.vic2024/midres_atari_impl.o obj/totto_intro.vic2024/midres_c64_impl.o obj/totto_intro.vic2024/midres_vic20_impl.o obj/totto_intro.vic2024/midres_plus4_impl.o obj/totto_intro.vic2024/midres_sid_impl.o $(subst PLATFORM,totto_intro.vic2024,$(LIB_OBJS)) $(subst PLATFORM,totto_intro.vic2024,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/totto_intro.vic20.map -o $(EXEDIR)/totto_intro.vic2024 obj/totto_intro.vic2024/rawdata.o obj/totto_intro.vic2024/midres_pokey_impl.o obj/totto_intro.vic2024/midres_ted_impl.o obj/totto_intro.vic2024/midres_atari_impl.o obj/totto_intro.vic2024/midres_c64_impl.o obj/totto_intro.vic2024/midres_vic20_impl.o obj/totto_intro.vic2024/midres_plus4_impl.o obj/totto_intro.vic2024/midres_sid_impl.o  obj/totto_intro.vic2024/main.o obj/totto_intro.vic2024/midres_cbm.o obj/totto_intro.vic2024/midres_control_011.o obj/totto_intro.vic2024/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_intro.vic2024.d64)
 	$(CC1541) -f loader -w $(DATADIR)/totto_loader2024.prg $(EXEDIR)/totto_intro.vic2024.d64 
 	$(CC1541) -f totto_intro -w $(EXEDIR)/totto_intro.vic2024 $(EXEDIR)/totto_intro.vic2024.d64 
@@ -4617,6 +4722,9 @@ obj/totto_ending.vic2024/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/totto_ending.vic2024/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/totto_ending.vic2024/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/totto_ending.vic2024/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/totto_ending.vic2024/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/totto_ending.vic2024/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/totto_ending.vic2024/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4630,8 +4738,8 @@ obj/totto_ending.vic2024/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/totto_ending.vic2024/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__TOTTO_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/totto_ending.vic2024/,src/,$(@:.o=.c))
 
-$(EXEDIR)/totto_ending.vic2024: totto_ending.embedded.vic2024 obj/totto_ending.vic2024/rawdata.o obj/totto_ending.vic2024/midres_pokey_impl.o obj/totto_ending.vic2024/midres_ted_impl.o obj/totto_ending.vic2024/midres_atari_impl.o obj/totto_ending.vic2024/midres_c64_impl.o obj/totto_ending.vic2024/midres_plus4_impl.o obj/totto_ending.vic2024/midres_sid_impl.o $(subst PLATFORM,totto_ending.vic2024,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.vic2024,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.vic20.map -o $(EXEDIR)/totto_ending.vic2024 obj/totto_ending.vic2024/rawdata.o obj/totto_ending.vic2024/midres_pokey_impl.o obj/totto_ending.vic2024/midres_ted_impl.o obj/totto_ending.vic2024/midres_atari_impl.o obj/totto_ending.vic2024/midres_c64_impl.o obj/totto_ending.vic2024/midres_plus4_impl.o obj/totto_ending.vic2024/midres_sid_impl.o  obj/totto_ending.vic2024/main.o obj/totto_ending.vic2024/midres_cbm.o obj/totto_ending.vic2024/midres_control_011.o obj/totto_ending.vic2024/midres_data.o 
+$(EXEDIR)/totto_ending.vic2024: totto_ending.embedded.vic2024 obj/totto_ending.vic2024/rawdata.o obj/totto_ending.vic2024/midres_pokey_impl.o obj/totto_ending.vic2024/midres_ted_impl.o obj/totto_ending.vic2024/midres_atari_impl.o obj/totto_ending.vic2024/midres_c64_impl.o obj/totto_ending.vic2024/midres_vic20_impl.o obj/totto_ending.vic2024/midres_plus4_impl.o obj/totto_ending.vic2024/midres_sid_impl.o $(subst PLATFORM,totto_ending.vic2024,$(LIB_OBJS)) $(subst PLATFORM,totto_ending.vic2024,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/totto_ending.vic20.map -o $(EXEDIR)/totto_ending.vic2024 obj/totto_ending.vic2024/rawdata.o obj/totto_ending.vic2024/midres_pokey_impl.o obj/totto_ending.vic2024/midres_ted_impl.o obj/totto_ending.vic2024/midres_atari_impl.o obj/totto_ending.vic2024/midres_c64_impl.o obj/totto_ending.vic2024/midres_vic20_impl.o obj/totto_ending.vic2024/midres_plus4_impl.o obj/totto_ending.vic2024/midres_sid_impl.o  obj/totto_ending.vic2024/main.o obj/totto_ending.vic2024/midres_cbm.o obj/totto_ending.vic2024/midres_control_011.o obj/totto_ending.vic2024/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/totto_ending.vic2024.d64)
 	$(CC1541) -f loader -w $(DATADIR)/totto_loader2024.prg $(EXEDIR)/totto_ending.vic2024.d64 
 	$(CC1541) -f totto_ending -w $(EXEDIR)/totto_ending.vic2024 $(EXEDIR)/totto_ending.vic2024.d64 
@@ -4661,6 +4769,9 @@ obj/elevator_ending.vic2024/midres_c64_impl.o:	src/midres_c64_impl.asm
 obj/elevator_ending.vic2024/midres_plus4_impl.o:	src/midres_plus4_impl.asm
 	$(ASM) -t vic20 -oobj/elevator_ending.vic2024/midres_plus4_impl.o src/midres_plus4_impl.asm
 
+obj/elevator_ending.vic2024/midres_vic20_impl.o:	src/midres_vic20_impl.asm
+	$(ASM) -t vic20 -oobj/elevator_ending.vic2024/midres_vic20_impl.o src/midres_vic20_impl.asm
+
 obj/elevator_ending.vic2024/midres_sid_impl.o:	src/midres_sid_impl.asm
 	$(ASM) -t vic20 -oobj/elevator_ending.vic2024/midres_sid_impl.o src/midres_sid_impl.asm
 
@@ -4674,8 +4785,8 @@ obj/elevator_ending.vic2024/midres_pokey_impl.o:	src/midres_pokey_impl.asm
 obj/elevator_ending.vic2024/%.o: $(LIB_INCLUDES) $(LIB_SOURCES) $(SOURCES)
 	$(CC) -T -l $(@:.o=.asm) -t vic20 -c $(CFLAGS) -D__24K__ -Osir -Cl -D__ELEVATOR_ENDING__ -D__CBM__ -DMIDRES_EMBEDDED_FILES -o $@ $(subst obj/elevator_ending.vic2024/,src/,$(@:.o=.c))
 
-$(EXEDIR)/elevator_ending.vic2024: elevator_ending.embedded.vic2024 obj/elevator_ending.vic2024/rawdata.o obj/elevator_ending.vic2024/midres_pokey_impl.o obj/elevator_ending.vic2024/midres_ted_impl.o obj/elevator_ending.vic2024/midres_atari_impl.o obj/elevator_ending.vic2024/midres_c64_impl.o obj/elevator_ending.vic2024/midres_plus4_impl.o obj/elevator_ending.vic2024/midres_sid_impl.o $(subst PLATFORM,elevator_ending.vic2024,$(LIB_OBJS)) $(subst PLATFORM,elevator_ending.vic2024,$(OBJS))
-	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/elevator_ending.vic20.map -o $(EXEDIR)/elevator_ending.vic2024 obj/elevator_ending.vic2024/rawdata.o obj/elevator_ending.vic2024/midres_pokey_impl.o obj/elevator_ending.vic2024/midres_ted_impl.o obj/elevator_ending.vic2024/midres_atari_impl.o obj/elevator_ending.vic2024/midres_c64_impl.o obj/elevator_ending.vic2024/midres_plus4_impl.o obj/elevator_ending.vic2024/midres_sid_impl.o  obj/elevator_ending.vic2024/main.o obj/elevator_ending.vic2024/midres_cbm.o obj/elevator_ending.vic2024/midres_control_011.o obj/elevator_ending.vic2024/midres_data.o 
+$(EXEDIR)/elevator_ending.vic2024: elevator_ending.embedded.vic2024 obj/elevator_ending.vic2024/rawdata.o obj/elevator_ending.vic2024/midres_pokey_impl.o obj/elevator_ending.vic2024/midres_ted_impl.o obj/elevator_ending.vic2024/midres_atari_impl.o obj/elevator_ending.vic2024/midres_c64_impl.o obj/elevator_ending.vic2024/midres_vic20_impl.o obj/elevator_ending.vic2024/midres_plus4_impl.o obj/elevator_ending.vic2024/midres_sid_impl.o $(subst PLATFORM,elevator_ending.vic2024,$(LIB_OBJS)) $(subst PLATFORM,elevator_ending.vic2024,$(OBJS))
+	$(CC) -Ln demovic20.lbl -t vic20 -C cfg/vic2024.cfg $(LDFLAGS) -m $(EXEDIR)/elevator_ending.vic20.map -o $(EXEDIR)/elevator_ending.vic2024 obj/elevator_ending.vic2024/rawdata.o obj/elevator_ending.vic2024/midres_pokey_impl.o obj/elevator_ending.vic2024/midres_ted_impl.o obj/elevator_ending.vic2024/midres_atari_impl.o obj/elevator_ending.vic2024/midres_c64_impl.o obj/elevator_ending.vic2024/midres_vic20_impl.o obj/elevator_ending.vic2024/midres_plus4_impl.o obj/elevator_ending.vic2024/midres_sid_impl.o  obj/elevator_ending.vic2024/main.o obj/elevator_ending.vic2024/midres_cbm.o obj/elevator_ending.vic2024/midres_control_011.o obj/elevator_ending.vic2024/midres_data.o 
 	$(call RMFILES,$(EXEDIR)/elevator_ending.vic2024.d64)
 	$(CC1541) -f loader -w $(DATADIR)/elloader2024.prg $(EXEDIR)/elevator_ending.vic2024.d64 
 	$(CC1541) -f elevator_ending -w $(EXEDIR)/elevator_ending.vic2024 $(EXEDIR)/elevator_ending.vic2024.d64 

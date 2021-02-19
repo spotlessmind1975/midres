@@ -158,6 +158,7 @@
         'coleco' => [
             [ 'destination' => 'mtiles.bin', 'source' => '$(DATADIR)/mtiles.bin' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
+            [ 'destination' => 'zzintro.ms1', 'source' => '$(DATADIR)/aaintro64.msc1' ],
             [ 'destination' => 'tutorial_mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
             [ 'destination' => 'zeltiles.bin', 'source' => '$(DATADIR)/zeltiles.bin' ],
             [ 'destination' => 'toccatina.imf', 'source' => '$(DATADIR)/toccatina.imf' ],
@@ -167,7 +168,8 @@
         ],
 
         'msx' => [
-            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ]
+            [ 'destination' => 'tetris.imf', 'source' => '$(DATADIR)/tetris.imf' ],
+            [ 'destination' => 'zzintro.ms1', 'source' => '$(DATADIR)/aaintro64.msc1' ],
         ],
 
         'airattack' => [
