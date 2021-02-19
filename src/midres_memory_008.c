@@ -1,7 +1,7 @@
 /*****************************************************************************
  * MIDRES Library - an isomorphic gamelib for retrocomputers                 *
  *****************************************************************************
- * Copyright 2020-2021 Marco Spedaletti (asimov@mclink.it)
+ * Copyright 2020 Marco Spedaletti (asimov@mclink.it)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,23 +28,47 @@
  * autorizzazioni e le limitazioni previste dalla medesima.
  ****************************************************************************/
 
-void demo_slideshow();
-void demo_drawing();
-void demo_bitblit();
-void demo_tile();
-void demo_test_card();
-void demo_music();
-void demo_msc1();
+ /****************************************************************************
+  ** INCLUDE SECTION
+  ****************************************************************************/
 
-void game_air_attack();
-void game_totto();
-void game_alien_storm();
-void game_elevator();
+#include <stdio.h>
+#include <string.h>
 
-void tutorial_mctile();
-void tutorial_protothread1();
-void tutorial_protothread2();
+#include "midres.h"
 
-void utility_joycheck();
-void utility_imfplayer();
-void utility_benchmarks();
+#if defined(MIDRES_STANDALONE_MEMORY)
+
+void mr_msc1_uncompress_memory(unsigned char* _destination, unsigned char* _source) {
+
+	unsigned char token, count, tmp;
+	unsigned int offset;
+	unsigned char* start = _destination;
+	unsigned char* source = _source;
+
+	do {
+		token = *source;
+		++source;
+		if (token == 0) {
+
+		}
+		else if ((token & 0x80) == 0x00) {
+			count = token & 0x7f;
+			memcpy(_destination, source, count);
+			_destination += count;
+			source += count;
+		}
+		else if ((token & 0x80) == 0x80) {
+			count = (token & 0x7f) >> 2;
+			tmp = *source;
+			++source;
+			offset = tmp | ((token & 0x03) << 8);
+			if (count == 0) count = 32;
+			mr_memfill4(_destination, start + offset, count);
+			_destination += (count << 2);
+		}
+	} while (token);
+
+}
+
+#endif

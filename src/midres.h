@@ -1425,6 +1425,11 @@
 
 	void mr_end_frame(unsigned char _jiffies);
 
+	#include <stdio.h>
+
+	void mr_msc1_uncompress_memory(unsigned char* _destination, unsigned char *_source);
+	void mr_msc1_uncompress_file(unsigned char *_destination, FILE *_handle);
+
 	// We include internal function declaration (needed for overlay support)
 	#include "midres_int.h"
 

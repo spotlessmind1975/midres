@@ -226,4 +226,7 @@
 #include "midres_tile.h"
 #include "midres_tile_processing.h"
 
+extern void __fastcall__ mr_memcpy_filtered(void* dest, const void* src, int count);
+extern void __fastcall__ mr_memfill4(void* dest, const void* src, int count);
+
 #endif

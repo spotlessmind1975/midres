@@ -40,6 +40,7 @@
             [ 'destination' => 'image6402.mpic', 'source' => '$(DATADIR)/image6402.mpic' ],
             [ 'destination' => 'image6403.mpic', 'source' => '$(DATADIR)/image6403.mpic' ],
             [ 'destination' => 'image6404.mpic', 'source' => '$(DATADIR)/image6404.mpic' ],
+            [ 'destination' => 'zzintro.ms1', 'source' => '$(DATADIR)/aaintro64.msc1' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
             [ 'destination' => 'aatiles.bin', 'source' => '$(DATADIR)/aatiles.bin' ],
             [ 'destination' => 'aaintro.mpic', 'source' => '$(DATADIR)/aaintro64.mpic' ],
@@ -59,6 +60,7 @@
             [ 'destination' => 'image2002.mpic', 'source' => '$(DATADIR)/image2002.mpic' ],
             [ 'destination' => 'image2003.mpic', 'source' => '$(DATADIR)/image2003.mpic' ],
             [ 'destination' => 'image2004.mpic', 'source' => '$(DATADIR)/image2004.mpic' ],
+            [ 'destination' => 'zzintro.ms1', 'source' => '$(DATADIR)/aaintro20.msc1' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
             [ 'destination' => 'aatiles.bin', 'source' => '$(DATADIR)/aatiles20.bin' ],
             [ 'destination' => 'aaintro.mpic', 'source' => '$(DATADIR)/aaintro20.mpic' ],
@@ -78,6 +80,7 @@
             [ 'destination' => 'image2002.mpic', 'source' => '$(DATADIR)/image2002.mpic' ],
             [ 'destination' => 'image2003.mpic', 'source' => '$(DATADIR)/image2003.mpic' ],
             [ 'destination' => 'image2004.mpic', 'source' => '$(DATADIR)/image2004.mpic' ],
+            [ 'destination' => 'zzintro.ms1', 'source' => '$(DATADIR)/aaintro20.msc1' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
             [ 'destination' => 'aatiles.bin', 'source' => '$(DATADIR)/aatiles20.bin' ],
             [ 'destination' => 'aaintro.mpic', 'source' => '$(DATADIR)/aaintro20.mpic' ],
@@ -98,6 +101,7 @@
             [ 'destination' => 'image1602.mpic', 'source' => '$(DATADIR)/image1602.mpic' ],
             [ 'destination' => 'image1603.mpic', 'source' => '$(DATADIR)/image1603.mpic' ],
             [ 'destination' => 'image1604.mpic', 'source' => '$(DATADIR)/image1604.mpic' ],
+            [ 'destination' => 'zzintro.ms1', 'source' => '$(DATADIR)/aaintro16.msc1' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
             [ 'destination' => 'aatiles.bin', 'source' => '$(DATADIR)/aatiles.bin' ],
             [ 'destination' => 'aaintro.mpic', 'source' => '$(DATADIR)/aaintro16.mpic' ],
@@ -118,6 +122,7 @@
             [ 'destination' => 'image1602.mpic', 'source' => '$(DATADIR)/image1602.mpic' ],
             [ 'destination' => 'image1603.mpic', 'source' => '$(DATADIR)/image1603.mpic' ],
             [ 'destination' => 'image1604.mpic', 'source' => '$(DATADIR)/image1604.mpic' ],
+            [ 'destination' => 'zzintro.ms1', 'source' => '$(DATADIR)/aaintro16.msc1' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
             [ 'destination' => 'aatiles.bin', 'source' => '$(DATADIR)/aatiles4.bin' ],
             [ 'destination' => 'aaintro.mpic', 'source' => '$(DATADIR)/aaintro16.mpic' ],
@@ -137,6 +142,7 @@
             [ 'destination' => 'imagea02.mpic', 'source' => '$(DATADIR)/imagea02.pic' ],
             [ 'destination' => 'imagea03.mpic', 'source' => '$(DATADIR)/imagea03.pic' ],
             [ 'destination' => 'imagea04.mpic', 'source' => '$(DATADIR)/imagea04.pic' ],
+            [ 'destination' => 'zzintro.ms1', 'source' => '$(DATADIR)/aaintroa.msc1' ],
             [ 'destination' => 'ztiles.bin', 'source' => '$(DATADIR)/ztiles.bin' ],
             [ 'destination' => 'tiles.bin', 'source' => '$(DATADIR)/tiles.bin' ],
             [ 'destination' => 'mctile.bin', 'source' => '$(DATADIR)/tutorial_mctile.bin' ],
@@ -433,33 +439,39 @@
                 ['destination' => 'elevator1.imf', 'source' => '$(DATADIR)/elevator1.imf' ]
             ]
         ],
+        'iavplayer_' => [
+            'c64' => [
+                ['destination' => 'petscii.bin', 'source' => '$(DATADIR)/petscii.bin' ],
+                ['destination' => 'ralph1.iav', 'source' => '$(DATADIR)/ralph1.iav' ],
+                ['destination' => 'ralph1.imf', 'source' => '$(DATADIR)/ralph1.imf' ]
+            ],
+            'c128' => [
+                ['destination' => 'petscii.bin', 'source' => '$(DATADIR)/petscii.bin' ],
+                ['destination' => 'ralph1.iav', 'source' => '$(DATADIR)/ralph1.iav' ],
+                ['destination' => 'ralph1.imf', 'source' => '$(DATADIR)/ralph1.imf' ]
+            ]
+        ],
         'benchmarks' => [
             'c64' => [ 
                 ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
-                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
             ],
             'c128' => [ 
                 ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
-                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
             ],
             'plus4' => [ 
                 ['loader' => 'bmloader4.prg' ],
                 ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
-                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
             ],
             'c16' => [ 
                 ['loader' => 'bmloader4.prg' ],
                 ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
-                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
             ],
             'vic2024' => [ 
                 ['loader' => 'bmloader2024.prg' ],
                 ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
-                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
             ],
             'atari' => [ 
                 ['destination' => 'zdata.dat', 'source' => '$(DATADIR)/zdata.dat' ],
-                // ['destination' => 'automan.imf', 'source' => '$(DATADIR)/automan.imf', 'on' => 'reu' ],
             ]
         ]
 
@@ -659,6 +671,9 @@ foreach( $targets as $target ) {
         $embedded = false;
         if ( stripos( $program, '_' ) !== false ) {
             $embedded = true;
+        } else if ( isset($resources[$program][$target]['embedded'])) {
+            $embedded = $resources[$program][$target]['embedded'];
+            unset($resources[$program][$target]['embedded']);
         }
 
         switch( $target ) {

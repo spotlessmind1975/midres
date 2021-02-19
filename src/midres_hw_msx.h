@@ -173,4 +173,7 @@
 
 #include "midres_tile_hd.h"
 
+extern void mr_memcpy_filtered(void* dest, const void* src, int count);
+extern void mr_memfill4(void* dest, const void* src, int count);
+
 #endif

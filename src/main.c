@@ -101,6 +101,12 @@ void main(void) {
 
 #endif
 
+#ifdef __DEMO_MSC1__
+
+    demo_msc1();
+
+#endif
+
 #ifdef __AIRATTACK__
 
     game_air_attack();

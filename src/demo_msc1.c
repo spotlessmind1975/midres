@@ -1,7 +1,7 @@
 /*****************************************************************************
  * MIDRES Library - an isomorphic gamelib for retrocomputers                 *
  *****************************************************************************
- * Copyright 2020-2021 Marco Spedaletti (asimov@mclink.it)
+ * Copyright 2020 Marco Spedaletti (asimov@mclink.it)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,23 +28,66 @@
  * autorizzazioni e le limitazioni previste dalla medesima.
  ****************************************************************************/
 
-void demo_slideshow();
-void demo_drawing();
-void demo_bitblit();
-void demo_tile();
-void demo_test_card();
-void demo_music();
-void demo_msc1();
+#ifdef __DEMO_MSC1__
 
-void game_air_attack();
-void game_totto();
-void game_alien_storm();
-void game_elevator();
+ /****************************************************************************
+  ** INCLUDE SECTION
+  ****************************************************************************/
 
-void tutorial_mctile();
-void tutorial_protothread1();
-void tutorial_protothread2();
+#include <stdio.h>
 
-void utility_joycheck();
-void utility_imfplayer();
-void utility_benchmarks();
+#include "main.h"
+#include "midres.h"
+#include "rawdata.h"
+
+/****************************************************************************
+** RESIDENT VARIABLES SECTION
+****************************************************************************/
+
+unsigned char* mr_translate_file_user(mr_file _file) {
+
+	switch (_file) {
+	case FILE_ZZINTRO_MS1:
+		return "zzintro.ms1";
+	}
+
+	return 0;
+
+}
+
+void demo_msc1() {
+
+	// Initialize the graphical subsystem.
+	mr_init();
+
+	// Clear all involved screens.
+	mr_clearv();
+
+#ifdef __ATARI__
+
+	mr_start_frame();
+
+	mr_msc1_uncompress_memory(MR_SM(MR_SCREEN_DEFAULT), mr_map_file(FILE_ZZINTRO_MS1, FILE_ZZINTRO_MS1_SIZE));
+
+	mr_end_frame(0);
+
+	mr_wait(2);
+
+#else
+
+	mr_msc1_uncompress_memory(MR_SM(MR_SCREEN_1)-2, mr_map_file(FILE_ZZINTRO_MS1, FILE_ZZINTRO_MS1_SIZE));
+	// Load compressed screen on the auxiliary space
+
+	// Show titles.
+	mr_uncompressv(MR_SCREEN_1);
+
+	mr_end_frame(0);
+
+#endif
+
+	while (1) {
+
+	}
+}
+
+#endif

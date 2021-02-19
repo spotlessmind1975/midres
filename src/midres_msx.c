@@ -308,5 +308,29 @@ void mr_end_frame_hd(unsigned char _jiffies) {
 #endif
 }
 
+void mr_memcpy_filtered(void* dest, const void* src, int count) {
+    while (count) {
+        if (*src != 0xff) {
+            *dest = *src;
+        }
+        ++dest; ++src;
+        --count;
+    }
+}
+
+void mr_memfill4(void* dest, const void* src, int count) {
+    while (count) {
+        *dest = *src;
+        ++dest; ++src;
+        *dest = *src;
+        ++dest; ++src;
+        *dest = *src;
+        ++dest; ++src;
+        *dest = *src;
+        ++dest; ++src;
+        --count;
+        src -= 4;
+    }
+}
 
 #endif

@@ -10,5 +10,5 @@ The list of targets is available [on this page](targets.md).
 
 ## LIST OF DEMOS
 
-- `MUSIC` - 
+- `MSC1` - A demo of `mr_msc1_uncompress_memory`.
 
