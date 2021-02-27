@@ -618,7 +618,7 @@
 	#define mr_circlev(_screen, _x, _y, _radius, _color) _mr_circle(MR_SM(MR_VISIBLE_SCREEN), MR_CM(MR_VISIBLE_SCREEN), _x, _y, _radius, _color);
 
 	// Color a filled rectangle.
-	#define mr_colorfillv(_screen, _x1, _y1, _x2, _y2, _color) _mr_colorfill(MR_CM(_screen), _x1, _y1, _x2, _y2, _color);
+	#define mr_colorfillv(_x1, _y1, _x2, _y2, _color) _mr_colorfill(MR_CM(MR_VISIBLE_SCREEN), _x1, _y1, _x2, _y2, _color);
 
 	/*-----------------------------------------------------------------------
 	 --- DRAWING PRIMITIVES (implicit screen [enabled]) [v1.1]
@@ -1421,13 +1421,31 @@
 
 	unsigned char * mr_map_file(mr_file _file, unsigned int _projected_size);
 
+	#define mr_expansion_get_size() mr_expansion_get_size_hd()
+
+	#define mr_expansion_store(_source, _bank, _address, _size) mr_expansion_store_hd(_source, _bank, _address, _size)
+	#define mr_expansion_load(_bank, _address, _destination, _size) mr_expansion_load_hd(_bank, _address, _destination, _size)
+	#define mr_expansion_load_next(_destination, _size) mr_expansion_load_next_hd(_destination, _size)
+	#define mr_expansion_store_file(_file, _bank, _address, _size) mr_expansion_store_file_hd(_file, _bank, _address, _size);
+	#define mr_expansion_increase_address( b, a, s ) \
+									{ \
+										int x = a; \
+										a += (s); \
+										if (a < x) { \
+											b = b+1; \
+										} \
+									}
+
+	#define mr_expansion_get_address() mr_expansion_get_address_hd()
+	#define mr_expansion_get_bank() mr_expansion_get_bank_hd()
+
 	unsigned char mr_joy(unsigned char _number);
 
 	void mr_end_frame(unsigned char _jiffies);
 
 	#include <stdio.h>
 
-	void mr_msc1_uncompress_memory(unsigned char* _destination, unsigned char *_source);
+	unsigned char* mr_msc1_uncompress_memory(unsigned char* _destination, unsigned char *_source);
 	void mr_msc1_uncompress_file(unsigned char *_destination, FILE *_handle);
 
 	// We include internal function declaration (needed for overlay support)
