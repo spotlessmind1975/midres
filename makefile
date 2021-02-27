@@ -701,7 +701,7 @@ lib/midres.coleco.lib:
 
 .PHONY: midres.MSC1.embedded.coleco midres.MSC1.coleco
 midres.MSC1.embedded.coleco:
-	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aaintro64.msc1 -n zzintro.ms1 -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +coleco $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/coleco/rawdata.o src/rawdata.c
 
 obj/coleco/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -730,7 +730,7 @@ lib/midres.gb.lib:
 
 .PHONY: midres.MSC1.embedded.gb midres.MSC1.gb
 midres.MSC1.embedded.gb:
-	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aaintro64.msc1 -n zzintro.ms1 -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +gb $(CFLAGS) -c $(CFLAGS88)  -o obj/gb/rawdata.o src/rawdata.c
 
 obj/gb/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -759,7 +759,7 @@ lib/midres.lm80c.lib:
 
 .PHONY: midres.MSC1.embedded.lm80c midres.MSC1.lm80c
 midres.MSC1.embedded.lm80c:
-	$(FILE2INCLUDE) -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/tetris.imf -n tetris.imf -i $(DATADIR)/aaintro64.msc1 -n zzintro.ms1 -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +lm80c $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/lm80c/rawdata.o src/rawdata.c
 
 obj/lm80c/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -788,7 +788,7 @@ lib/midres.msx.lib:
 
 .PHONY: midres.MSC1.embedded.msx midres.MSC1.msx
 midres.MSC1.embedded.msx:
-	$(FILE2INCLUDE) -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/tetris.imf -n tetris.imf -i $(DATADIR)/aaintro64.msc1 -n zzintro.ms1 -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +msx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/msx/rawdata.o src/rawdata.c
 
 obj/msx/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -817,7 +817,7 @@ lib/midres.mtx500.lib:
 
 .PHONY: midres.MSC1.embedded.mtx500 midres.MSC1.mtx500
 midres.MSC1.embedded.mtx500:
-	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aaintro64.msc1 -n zzintro.ms1 -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +mtx $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -DFRAME_BUFFER -o obj/mtx500/rawdata.o src/rawdata.c
 
 obj/mtx500/midres_vdp_impl.o:	src/midres_vdp_impl.asm
@@ -954,7 +954,7 @@ lib/midres.svi.lib:
 
 .PHONY: midres.MSC1.embedded.svi midres.MSC1.svi
 midres.MSC1.embedded.svi:
-	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
+	$(FILE2INCLUDE) -i $(DATADIR)/mtiles.bin -n mtiles.bin -i $(DATADIR)/tiles.bin -n tiles.bin -i $(DATADIR)/aaintro64.msc1 -n zzintro.ms1 -i $(DATADIR)/tutorial_mctile.bin -n tutorial_mctile.bin -i $(DATADIR)/zeltiles.bin -n zeltiles.bin -i $(DATADIR)/toccatina.imf -n toccatina.imf -i $(DATADIR)/alice.imf -n alice.imf -i $(DATADIR)/island.imf -n island.imf -i $(DATADIR)/tetris.imf -n tetris.imf -c src/rawdata.c -h src/rawdata.h
 	$(CC88) +svi $(CFLAGS) -c $(CFLAGS88) -DGRAPHIC_MODE_I -o obj/svi/rawdata.o src/rawdata.c
 
 obj/svi/midres_vdp_impl.o:	src/midres_vdp_impl.asm
