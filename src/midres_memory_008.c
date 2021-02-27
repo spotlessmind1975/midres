@@ -39,7 +39,7 @@
 
 #if defined(MIDRES_STANDALONE_MEMORY)
 
-void mr_msc1_uncompress_memory(unsigned char* _destination, unsigned char* _source) {
+unsigned char *mr_msc1_uncompress_memory(unsigned char* _destination, unsigned char* _source) {
 
 	unsigned char token, count, tmp;
 	unsigned int offset;
@@ -69,6 +69,7 @@ void mr_msc1_uncompress_memory(unsigned char* _destination, unsigned char* _sour
 		}
 	} while (token);
 
+	return source;
 }
 
 #endif

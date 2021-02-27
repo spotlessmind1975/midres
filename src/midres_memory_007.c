@@ -46,18 +46,18 @@ void mr_msc1_uncompress_file(unsigned char* _destination, FILE* _source) {
 	unsigned char* start = _destination;
 
 	do {
-		token = fgetc(_source);
+		fread(&token, 1, 1, _source);
 		if (token == 0) {
 
 		}
 		else if ((token & 0x80) == 0x00) {
 			count = token & 0x7f;
-			fgets((unsigned char*)_destination, count, _source);
+			fread((unsigned char*)_destination, count, 1, _source);
 			_destination += count;
 		}
 		else if ((token & 0x80) == 0x80) {
 			count = (token & 0x7f) >> 2;
-			tmp = fgetc(_source);
+			fread(&tmp, 1, 1, _source);
 			offset = tmp | ((token & 0x03) << 8);
 			if (count == 0) count = 32;
 			mr_memfill4(_destination, start + offset, count);
